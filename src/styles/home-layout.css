@@ -1,0 +1,1540 @@
+/* ===================================================================
+ * * HOMEPAGE PORTAL STYLESHEET (REFACTORED)
+ *
+ * =================================================================== */
+
+/* ===================================================================
+ * # Base & Page Layout
+ * =================================================================== */
+
+#main > .content {
+    max-width: 1800px;
+    padding: 3rem 4rem;
+}
+
+/* ===================================================================
+ * # Reusable Typographic Elements
+ * =================================================================== */
+
+/* --- Section Headers --- */
+.home-section-title {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 3.7rem;
+    background: linear-gradient(90deg, #d4ad4a, #fddfde);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0.2rem 0.2rem 0.6rem rgba(0,0,0,0.3);
+    margin: 0 0 2.5rem 0;
+    padding-bottom: 1.5rem;
+
+}
+.home-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #e9c46a 40%, #ffd700 60%, transparent);
+}
+
+/* ===================================================================
+ * # Global Card Styles
+ * =================================================================== */
+
+/* --- Base card appearance on homepage --- */
+.home-portal-page .l-shape-container,
+.home-portal-page .book-card,
+.home-portal-page .article-card {
+    background: transparent;
+    border: 1px solid rgba(196, 179, 145, 0.2);
+    box-shadow: none;
+}
+.home-portal-page .article-card {
+    height: 100%;
+}
+.home-portal-page .book-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* --- Style for cards with a background image --- */
+.book-card.has-bg-image {
+    background-size: cover;
+    background-position: center;
+    color: white;
+
+
+}
+.book-card.has-bg-image::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: linear-gradient(to top, rgba(13, 31, 43, 1) 50%, rgba(13, 31, 43, 0.75) 85%, transparent 100%);
+    z-index: 1;
+}
+.book-card.has-bg-image .book-card-content {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+    min-height: auto;
+}
+
+/* --- Default blockquote inside a generic book card --- */
+.book-card blockquote {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: #fcefdc;
+    opacity: 0.9;
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+/* ===================================================================
+ * # Homepage Layout Grids
+ * =================================================================== */
+.home-today-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: stretch;
+    margin-bottom: 5rem;
+}
+
+/* Make the "Today" grid a single column when the right side is hidden (e.g., on Sundays) */
+.home-today-grid.single-column {
+    grid-template-columns: 1fr;
+}
+
+.home-main-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: flex-start;
+    margin-bottom: 5rem;
+    transition: grid-template-columns 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.latest-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 3rem;
+}
+.augustinians-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    place-items: center; /* This line centers all items in the grid */
+
+}
+.quote-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.bottom-row-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    align-items: start;
+    /* Add a transition for a smooth layout change */
+    transition: grid-template-columns 0.5s ease-in-out;
+    place-items: center;
+}
+
+/* 2. Apply a 2-column layout ONLY on wider screens AND
+      when the Augustinians section is expanded */
+@media (min-width: 769px) {
+    .home-main-layout-grid.left-column-collapsed .bottom-row-grid {
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* ===================================================================
+ * # Component: L-Shape Container
+ * =================================================================== */
+.l-shape-container {
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.l-shape-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.l-shape-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem;
+    flex-grow: 1;
+}
+.l-shape-kinh-sach {
+    border-left: 1px solid rgba(196, 179, 145, 0.2);
+    padding-left: 2.5rem;
+}
+.l-shape-kinh-sach .summary-paragraph {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    line-height: 1.6; /* Matches typical body copy line height */
+    opacity: 0.8;
+    color: #dde;
+}
+.l-shape-kinh-sach .book-card-excerpt {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    opacity: 0.8;
+    margin: 0.8rem 0; /* Adds vertical spacing */
+    color: #d1c6ad;
+}
+
+/* --- L-Shape variant for 'Next Sunday' section --- */
+.home-main-layout-grid .l-shape-container {
+    height: auto;
+}
+.home-main-layout-grid .l-shape-content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+.home-main-layout-grid .l-shape-kinh-sach {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(196, 179, 145, 0.2);
+    padding-top: 2rem;
+    margin-top: 1rem;
+}
+
+/* ===================================================================
+ * # Component: Augustinians Grid Cards (Refactored)
+ * =================================================================== */
+
+/* --- Base styles for quote blockquotes --- */
+.order-doc-shortcut blockquote,
+.confessions-shortcut blockquote {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: left;
+    line-height: 1.7;
+    color: #fcefdc;
+    opacity: 0.9;
+    margin: 0;
+    padding: 2rem 0 0;
+    border-left: none;
+    border-top: 1px solid rgba(212, 173, 74, 0.2);
+    flex-grow: 1;
+    position: relative;
+}
+
+.order-doc-shortcut blockquote::before,
+.confessions-shortcut blockquote::before {
+    content: '“';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: rgba(212, 173, 74, 0.2);
+    position: absolute;
+    top: 0rem;
+    left: -1rem;
+
+    line-height: 1;
+}
+
+/* --- Style for Order Document Cards (Tu Luat, Hien Chuong, Ratio) --- */
+/* Remove the inner border from the order doc cards to avoid a double-border effect */
+.order-doc-shortcut.book-card {
+    border: none;
+}
+.quote-card-wrapper {
+   height:fit-content;
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid rgba(196, 179, 145, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.quote-card-wrapper .book-card-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.order-doc-shortcut,
+.order-doc-shortcut .book-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+}
+.order-doc-shortcut::after,
+.confessions-shortcut::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/db/emblem.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16rem; /* Made slightly larger for the bigger card area */
+    opacity: 0.2;
+    z-index: 0; /* Places the emblem in the card's base layer */
+}
+
+/*
+ * Ensures the card's text content is positioned above the new background layer.
+*/
+.order-doc-shortcut .book-card-content,
+.confessions-shortcut .book-card-content {
+    position: relative;
+    z-index: 1;
+}
+.order-doc-shortcut blockquote {
+    font-style: italic; /* Italic style for these quotes */
+    font-size: 1.5rem;
+}
+
+.order-doc-shortcut .article-card-readmore {
+    margin-top: 1.5rem;
+    align-self: flex-end;
+}
+
+/* --- Style for Confessions Card --- */
+
+.confessions-container {
+    /* MODIFIED: New background and shadow for a "glowing" effect */
+    background: radial-gradient(circle at center, rgba(35, 53, 69, 0.7), rgba(17, 32, 44, 0.8));
+    border: 1px solid rgba(212, 173, 74, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 35px rgba(212, 173, 74, 0.15), inset 0 0 20px rgba(0,0,0,0.4);
+    padding: 1.5rem;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    height: fit-content;
+}
+
+.confessions-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #d4ad4a;
+    text-align: center;
+    flex-shrink: 0;
+    margin: 1rem 0rem 0rem 0rem;
+    padding-bottom: 0.5rem;
+}
+
+.confessions-shortcut.book-card {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.confessions-shortcut .book-card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+    padding: 0;
+}
+
+.confessions-shortcut blockquote {
+    font-style: italic;
+    font-size: 1.6rem; /* Slightly larger font size */
+    padding-bottom: 2rem; /* More space for the closing quote mark */
+}
+
+/* MODIFIED: Added a closing quote mark for typographic balance */
+.confessions-shortcut blockquote::after {
+    content: '”';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: rgba(212, 173, 74, 0.2);
+    position: absolute;
+    bottom: -2rem;
+    right: 1rem;
+    line-height: 1;
+}
+
+.confessions-shortcut .article-card-readmore {
+    margin-top: auto;
+    padding-top: 1rem;
+    align-self: flex-end;
+}
+
+/* ===================================================================
+ * # Components: Lễ Riêng & Next Saint Cards
+ * =================================================================== */
+
+/* --- Right-hand side column container --- */
+#side-content-column {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content;
+    background: rgba(17, 32, 44, 0.5);
+    border: 1px solid rgba(212, 173, 74, 0.3);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 0 25px rgba(212, 173, 74, 0.1);
+}
+.next-saint-container {
+    width: fit-content;
+    display: flex;
+    flex-direction: column; /* Changed for title placement */
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+
+}
+.home-section-title-right {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* --- Lễ Riêng Card Specifics --- */
+.is-le-rieng-card {
+    width: 100%;
+
+    margin-bottom: auto;
+
+
+}
+
+
+.book-card.is-le-rieng-card {
+    border: none;
+}
+.is-le-rieng-card .book-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 1.4rem;
+    opacity: 0.9;
+
+}
+.is-le-rieng-card .summary-paragraph {
+    font-size: 1.4rem;
+    opacity: 0.9;
+}
+.is-le-rieng-card .book-card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.is-le-rieng-card .book-card-author {
+    font-style: normal;
+    opacity: 0.9;
+    line-height: 0;
+    margin-top: 1.4rem;
+}
+.is-le-rieng-card .le-rieng-meta-group {
+    text-align: center;
+    margin: 0.5rem auto 2rem;
+    max-width: 90%;
+    border-top: 1px solid rgba(212, 173, 74, 0.3);
+    border-bottom: 1px solid rgba(212, 173, 74, 0.3);
+}
+.is-le-rieng-card .book-card-excerpt {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+    color: #fcefdc;
+}
+.is-le-rieng-card .article-card-readmore {
+    margin-top: 1.5rem;
+    align-self: flex-end;
+}
+
+
+.next-saint-card .book-card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 1.7rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+.next-saint-card .book-card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem;
+}
+.next-saint-card .book-card-author {
+    opacity: 0.9;
+    line-height: 0;
+    margin-top: 1.4rem;
+}
+
+
+.next-saint-card .article-card-readmore {
+    margin-top: auto;
+    align-self: flex-end;
+    padding-top: 1rem;
+    flex-shrink: 0;
+}
+
+/* ===================================================================
+ * # Global Typographic Overrides
+ * Ensures font consistency across all homepage components.
+ * =================================================================== */
+
+/* --- Headings --- */
+.home-portal-page .home-section-title,
+.home-portal-page .confessions-title {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+}
+/* --- Body & Article Summaries --- */
+.home-portal-page .article-card-summary {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+}
+/* --- UI Text (Author Name, Read More) --- */
+.home-portal-page .book-card-author,
+.home-portal-page .article-card-readmore {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+/* Base author style (overridden by specific cards) */
+.home-portal-page .book-card-author {
+    font-size: 1.4rem;
+    font-style: normal;
+    opacity: 0.8;
+}
+
+/* --- Lễ Riêng Select Box Styles --- */
+#side-content-column .book-selector {
+    margin-top: 0; /* This removes the large space above the select box */
+    margin-bottom: 1.5rem;
+
+}
+
+#side-content-column #le-rieng-select {
+    font-size: 1.4rem;
+    padding: 0.5rem 0.8rem;
+    max-width: 280px; /* Prevents the box from becoming too wide */
+    width: 100%;
+}
+
+/* --- Title for the Next Saint section --- */
+.next-saint-section-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #d4ad4a;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+
+/* --- Component: Feast Day Homily Card --- */
+.is-feast-homily-card {
+    min-height: auto;
+    display: flex;
+    text-decoration: none;
+}
+
+.is-feast-homily-card .book-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content to the bottom */
+    text-align: center;
+    width: 100%;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+}
+
+.is-feast-homily-card .book-card-author {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.3rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.is-feast-homily-card .book-card-excerpt {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 1.2rem;
+}
+
+.is-feast-homily-card .book-card-title {
+    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #e9c46a;
+    margin-bottom: 1.5rem;
+}
+
+.is-feast-homily-card .article-card-readmore {
+    margin-top: 0;
+    align-self: center; /* Center the 'read more' link */
+}
+
+.collapsible-reading {
+    margin-top: 2rem;
+    border: 1px solid rgba(196, 179, 145, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.collapsible-reading .book-selector {
+    margin-bottom: 2.5rem;
+}
+.collapsible-reading-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    background-color: rgba(31, 39, 48, 0.4);
+    border: none;
+    cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #e9c46a;
+    transition: background-color 0.2s ease;
+}
+
+.collapsible-reading-toggle:hover {
+    background-color: rgba(31, 39, 48, 0.8);
+}
+
+.collapsible-reading-toggle .chevron {
+    transition: transform 0.3s ease-in-out;
+}
+
+.collapsible-reading-toggle.is-open .chevron {
+    transform: rotate(-180deg);
+}
+
+/* MODIFICATION START: Smoother transition for content */
+.collapsible-reading-content {
+    background-color: transparent;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 0.5rem; /* Set vertical padding to 0 initially */
+   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease-in-out,
+                padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collapsible-reading-content.is-open {
+    max-height: 1500px;
+    opacity: 1;
+    padding: 1.5rem 0.5rem; /* Apply padding when open */
+}
+/* MODIFICATION END */
+
+/* Ensure the card inside has no external margin */
+.collapsible-reading-content .book-card {
+    margin-bottom: 0;
+}
+
+
+
+/* 1. Styling for the clickable toggle button */
+.collapsible-saint-toggle {
+    /* Layout and Sizing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+   border-radius: 8px;
+    border: none;
+    /* Appearance */
+background-color: rgba(31, 39, 48, 0.4);    border: none;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+
+    /* Interactivity */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+
+
+
+}
+
+
+
+
+
+.collapsible-saint-toggle span {
+    font-size: 1.6rem;
+    color: #d4ad4a;
+    font-weight: bold;
+        font-family: 'Be Vietnam Pro', sans-serif;
+
+}
+
+/* 2. Styling for the chevron arrow indicator */
+.collapsible-saint-toggle .chevron {
+     width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-color: #e9c46a;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.collapsible-saint-toggle.is-open .chevron {
+    transform: rotate(-135deg); /* Points up when open */
+}
+
+/* 3. The smooth collapse/expand transition effect */
+.collapsible-saint-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.collapsible-saint-content.is-open {
+    /* A height large enough to fit the content */
+    max-height: fit-content;
+    transition: max-height 0.5s ease-in;
+}
+
+/* --- Inner Next Saint Card Styling --- */
+.next-saint-card {
+   width: fit-content;
+       padding: 0;
+    overflow: hidden;
+    margin-bottom: 0; /* No margin needed inside the container */
+
+
+}
+
+.next-saint-image {
+   max-width: 30rem;
+    max-height: fit-content; /* KEY: This maintains the image's original aspect ratio */
+    display: block;
+    border-radius: 8px 8px 0 0; /* Round the top corners of the image */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.next-saint-card .book-card-content {
+    padding: 1.5rem;
+    background: #112230; /* Give a solid background to the text area */
+    border-radius: 0 0 8px 8px;
+}
+
+
+/* ===================================================================
+ * # Homepage Calendar Section (Complete & Final)
+ * =================================================================== */
+
+
+
+
+/* in css/home-layout.css */
+
+/* --- Updated Main Calendar Header Alignment --- */
+.calendar-header-main {
+    display: flex;
+    align-items: center; /* Vertically aligns items */
+    margin-bottom: 2rem;
+}
+
+/* This group now stacks its items vertically and centers them */
+.calendar-title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1; /* Pushes the toggle button to the right */
+}
+
+
+.calendar-header-main .home-section-title {
+    margin: 0;
+    padding-bottom: 1.5rem; /* Keeps space for the decorative underline */
+    text-align: center;
+
+}
+
+.calendar-view-button {
+    background-color: transparent;
+    border: 1px solid #d4ad4a;
+    border-radius: 20px;
+    color: #d4ad4a;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    margin-top: -0.5rem; /* Pulls the button up slightly closer to the title */
+}
+
+.calendar-view-button:hover {
+    background-color: #d4ad4a;
+    color: #0d1f2b;
+}
+
+/* --- Consistent Hamburger Toggle Button Style --- */
+
+/* --- FINAL Consistent Hamburger Toggle Button Style --- */
+
+/* 1. Style the shared button container */
+.js-toggle-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 8px;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.js-toggle-button:hover {
+    background-color: #f8f9fa;
+}
+
+/* 2. Style the shared icon bars */
+.js-toggle-button .icon-bar {
+    width: 100%;
+    height: 3px;
+    background-color: #d4ad4a;
+    border-radius: 3px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* 3. Animate the bars into an "X" when the button has the .is-active class */
+.js-toggle-button.is-active .icon-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.js-toggle-button.is-active .icon-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.js-toggle-button.is-active .icon-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.calendar-interactive-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: flex-start;
+    /* REMOVED: Do not transition the grid itself */
+    margin-bottom: 5rem;
+
+}
+.calendar-interactive-layout.sidebar-collapsed {
+    grid-template-columns: 0px 1fr;
+    gap: 0;
+}
+.calendar-interactive-layout.sidebar-collapsed .upcoming-events {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.calendar-sidebar {
+    overflow: hidden;
+    /* Add a transition to gracefully handle the removal of padding/margin */
+    transition: padding 0.35s ease, margin 0.35s ease;
+}
+.calendar-interactive-layout.sidebar-collapsed .calendar-sidebar {
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Left Side: Upcoming Events --- */
+.upcoming-events {
+    background: rgba(17, 32, 44, 0.5);
+    border: 1px solid rgba(212, 173, 74, 0.3);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.upcoming-events h3 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #e9c46a;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+#upcoming-events-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#upcoming-events-list li {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(196, 179, 145, 0.15);
+}
+#upcoming-events-list li:last-child {
+    border-bottom: none;
+}
+#upcoming-events-list .event-date {
+    display: block;
+    font-weight: 600;
+    color: #e9c46a;
+    font-size: 1.5rem;
+}
+
+/* --- Right Side: Monthly Calendar --- */
+.monthly-calendar {
+    max-width: 1000px; /* Constrains width in the default two-column view */
+    margin-left: auto;   /* Aligns the calendar to the right by default */
+    margin-right: 0;
+   transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Keep all other existing .monthly-calendar styles (background, border, padding, etc.) */
+    background: #0d1f2b;
+    border: 1px solid rgba(196, 179, 145, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.calendar-header h3 {
+    font-size: 2.5rem;
+    color: #e9c46a;
+    margin: 0;
+    text-transform: capitalize;
+}
+.month-nav-btn {
+    background: transparent;
+    border: 1px solid rgba(212, 173, 74, 0.4);
+    color: #d4ad4a;
+    border-radius: 50%;
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+.month-nav-btn:hover {
+    background-color: rgba(212, 173, 74, 0.1);
+}
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #d4ad4a;
+    padding-bottom: 0.8rem;
+    transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* --- Day Cell Styles --- */
+.calendar-day {
+    background-color: rgba(31, 39, 48, 0.4);
+    border: 1px solid rgba(196, 179, 145, 0.1);
+    border-radius: 4px;
+    padding: 0.5rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+.calendar-day.is-other-month { opacity: 0.3; }
+.calendar-day.has-events { cursor: pointer; }
+
+.day-number {
+    font-weight: 700;
+    font-size: 3rem;
+    flex-shrink: 0;
+    transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.day-events {
+    margin-top: 0.3rem;
+    font-size: 1.0rem;
+    line-height: 1.2;
+    overflow: hidden;
+    flex-grow: 1;
+    transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Highlight Styles --- */
+.calendar-day.is-today {
+    border: 1px solid #d4ad4a;
+}
+.calendar-day.is-today .day-number,
+.calendar-day.is-today .day-events a {
+    font-weight: 700;
+}
+.calendar-day.is-sunday {
+    border-left: 3px solid #e9c46a;
+}
+.calendar-day.is-sunday .day-number {
+    color: #d4ad4a;
+}
+
+/* --- Unified Link Styles --- */
+.upcoming-events .event-name,
+.day-events a,
+.calendar-tooltip a {
+    display: block;
+    color: #fcefdcc4;
+    text-decoration: none;
+    font-weight: normal;
+    transition: color 0.2s ease;
+    font-size: 1.4rem;
+}
+
+.upcoming-events .event-name:hover,
+.day-events a:hover,
+.calendar-tooltip a:hover {
+    color: #d1b516;
+    text-decoration: none;
+
+}
+.day-events a {
+    margin: 0 0 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#upcoming-events-list .event-name {
+    line-height: 1.5;
+}
+
+/* --- Rank Label Styles --- */
+.calendar-day::before,
+.calendar-tooltip a::before,
+.upcoming-events .event-name::before,
+.legend-label {
+    display: inline-block;
+    vertical-align: baseline;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.calendar-day::before {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.calendar-tooltip a::before,
+.upcoming-events .event-name::before {
+    margin-right: 0.8em;
+    font-size: 0.9em;
+}
+
+/* Rank Label Colors */
+.calendar-day.is-solemn::before, .event-rank-solemn::before, .legend-label.is-solemn {
+    content: 'T';
+    background-color: #d4ad4a;
+    color: #000000;
+}
+.calendar-day.is-feast::before, .event-rank-feast::before, .legend-label.is-feast {
+    content: 'K';
+    background-color: #e2e5e7;
+    color: #081330;
+}
+.calendar-day.is-memorial::before, .event-rank-memorial::before, .legend-label.is-memorial {
+    content: 'M';
+    background-color: #7e7973;
+    color: #ffffff;
+}
+.calendar-day.is-opt-memorial::before, .event-rank-opt-memorial::before, .legend-label.is-opt-memorial {
+    content: 'M-opt';
+    background-color: #473f3f;
+    color: #eeeeee;
+    padding: 0.2em 0.4em;
+    opacity: 0.7;
+}
+
+/* --- Tooltip & Legend Styles --- */
+.calendar-tooltip {
+    position: absolute;
+    background-color: #1a2e3f;
+    border: 1px solid #d4ad4a;
+    border-radius: 8px;
+    padding: 1.2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    width: max-content;
+    max-width: 280px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.calendar-tooltip.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+.calendar-tooltip .tooltip-date {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(212, 173, 74, 0.2);
+}
+.calendar-tooltip a {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin: 0 0 0.5rem 0;
+}
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed rgba(196, 179, 145, 0.2);
+
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    font-size: 1.2rem;
+    color: #fcefdc;
+}
+
+
+.calendar-interactive-layout.sidebar-collapsed .monthly-calendar {
+    max-width: 100%; /* THIS IS THE FIX: Allows the calendar to expand fully */
+    margin: 0;    /* Reset the margin for full-width alignment */
+}
+.calendar-interactive-layout.sidebar-collapsed .calendar-header h3 {
+    font-size: 3rem;
+}
+.calendar-interactive-layout.sidebar-collapsed .calendar-weekdays {
+    font-size: 2rem;
+}
+.calendar-interactive-layout.sidebar-collapsed .day-number {
+    font-size: 2.5rem;
+}
+.calendar-interactive-layout.sidebar-collapsed .day-events {
+    font-size: 1.5rem;
+}
+.calendar-interactive-layout.sidebar-collapsed .calendar-day::before {
+    font-size: 1.5rem;
+}
+.calendar-interactive-layout.sidebar-collapsed .calendar-day.is-today .day-number {
+    font-size: 4rem;
+}
+.calendar-interactive-layout.sidebar-collapsed .legend-label {
+    font-size: 1.2rem;
+}
+
+/* in css/home-layout.css */
+
+
+/* in css/home-layout.css */
+
+/* --- New Legend Group Styling --- */
+.legend-group {
+    display: contents; /* Allows items to flow with the parent flex container */
+    gap: 1rem;
+}
+
+
+/* in css/home-layout.css */
+
+/* in css/home-layout.css */
+
+/* --- SVG Icon Anniversary Labels --- */
+
+/* Base style for all anniversary labels (sets up the mask) */
+.calendar-day.is-patron::before, .event-rank-patron::before, .legend-label.is-patron,
+.calendar-day.is-birthday::before, .event-rank-birthday::before, .legend-label.is-birthday,
+.calendar-day.is-baptism::before, .event-rank-baptism::before, .legend-label.is-baptism,
+.calendar-day.is-first_vow::before, .event-rank-first_vow::before, .legend-label.is-first_vow,
+.calendar-day.is-solemn_vow::before, .event-rank-solemn_vow::before, .legend-label.is-solemn_vow,
+.calendar-day.is-priesthood::before, .event-rank-priesthood::before, .legend-label.is-priesthood {
+    content: ''; /* Remove text content */
+    background-color: #ffffff; /* The color of the icon */
+
+    /* Set dimensions for the icon */
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0;
+    border: none;
+
+    /* Mask properties */
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+.calendar-day.is-first_vow::before, .event-rank-first_vow::before {
+   width: 3em;
+    height: 3em;
+}
+
+.legend-label.is-first_vow {
+
+    width: 3em;
+    height: 3em;
+
+}
+.calendar-day.is-solemn_vow::before, .event-rank-solemn_vow::before {
+   width: 3em;
+    height: 3em;
+    background-color: #fffb00;
+}
+
+.legend-label.is-solemn_vow {
+
+    background-color: #fffb00;
+    width: 3em;
+    height: 3em;
+
+}
+
+
+/* Base style for all anniversary text */
+.event-rank-patron,
+.event-rank-birthday,
+.event-rank-baptism,
+.event-rank-first_vow,
+.event-rank-solemn_vow,
+.event-rank-priesthood {
+    opacity: 0.9;
+
+
+}
+
+/* Specific SVG icon shape for each anniversary type */
+.calendar-day.is-patron::before, .event-rank-patron::before, .legend-label.is-patron {
+    -webkit-mask-image: url("/db/assets/patron.svg");
+    mask-image: url("/db/assets/patron.svg");
+}
+.calendar-day.is-birthday::before, .event-rank-birthday::before, .legend-label.is-birthday {
+    -webkit-mask-image: url("/db/assets/first-birthday.svg");
+    mask-image: url("/db/assets/first-birthday.svg");
+}
+
+.calendar-day.is-baptism::before, .event-rank-baptism::before, .legend-label.is-baptism {
+    -webkit-mask-image: url("/db/assets/baptism.svg");
+    mask-image: url("/db/assets/baptism.svg");
+}
+.calendar-day.is-first_vow::before, .event-rank-first_vow::before, .legend-label.is-first_vow {
+    -webkit-mask-image: url("/db/assets/vow.svg");
+    mask-image: url("/db/assets/vow.svg");
+}
+.calendar-day.is-solemn_vow::before, .event-rank-solemn_vow::before, .legend-label.is-solemn_vow {
+    -webkit-mask-image: url("/db/assets/vow.svg");
+    mask-image: url("/db/assets/vow.svg");
+}
+.calendar-day.is-priesthood::before, .event-rank-priesthood::before, .legend-label.is-priesthood {
+    -webkit-mask-image: url("/db/assets/priesthood.svg");
+    mask-image: url("/db/assets/priesthood.svg");
+}
+
+/* in css/home-layout.css */
+
+/* --- Calendar Cell Image Background Styles --- */
+.calendar-day.has-image {
+    background-size: contain;
+    background-position: center;
+    color: #ffffff; /* Make text white for readability */
+}
+
+/* Dark overlay for text contrast */
+.calendar-day.has-image::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(13, 31, 43, 0.85) 20%, rgba(13, 31, 43, 0.2) 100%);
+    border-radius: 4px; /* Match the cell's border-radius */
+    z-index: 1;
+}
+
+/* Ensure content (numbers, labels, text) is on top of the overlay */
+/* Ensure text content is on top of the overlay */
+.calendar-day.has-image .day-number,
+.calendar-day.has-image .day-events {
+    position: relative; /* Keeps text in the normal flow */
+    z-index: 2;
+}
+
+/* Ensure the corner label is also on top, without changing its position */
+.calendar-day.has-image::before {
+    z-index: 2;
+}
+
+/* Add text shadow for even better readability */
+.calendar-day.has-image .day-number,
+.calendar-day.has-image .day-events a {
+     color: #ffffff;
+     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.calendar-day.is-sunday.has-image {
+    border-left-color: #f5be33; /* Ensure Sunday border is still visible */
+}
+
+/* in css/home-layout.css */
+
+/* --- Hover Effect for Interactive Calendar Cells --- */
+/* This now applies to both <a> and <div> tags that have events */
+.calendar-day.has-events:hover {
+    border-color: #d4ad4a;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+
+
+/* Ensure text inside the cell does not look like a link */
+.calendar-day.has-events .day-events p {
+    color: #fcefdc;
+    font-size: 1rem;
+}
+.calendar-day.has-image .day-events p {
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    font-size: 1rem;
+}
+
+.collapsible-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px dashed #e9c46a;
+    padding: 0.5rem 1.5rem;
+    margin: 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+
+
+.collapsible-toggle h3 {
+    margin: 0;
+    font-size: 2rem;
+    color: #e9c46a;
+            font-family: 'Source Serif 4', serif;
+        }
+
+/* 3. Chevron Arrow Styling */
+.collapsible-toggle .chevron {
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-color: #e9c46a;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Rotate chevron when the section is open */
+.collapsible-toggle.is-open .chevron {
+    transform: rotate(-135deg); /* Points up */
+}
+/* 4. Collapsible Content Area (for animation and scrolling) */
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.collapsible-content.is-open {
+    max-height: 600px; /* This is the visible, scrollable area height */
+    overflow-y: auto;
+}
+
+/* 5. Inner List and List Item Styling */
+#upcoming-events-list {
+    padding: 0 1rem; /* Padding inside the scrollable area */
+    list-style: none;
+    margin: 0;
+}
+
+#upcoming-events-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    padding: 0.8rem 0;
+
+}
+#upcoming-events-list li:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+/* For modern Firefox */
+.collapsible-content.is-open {
+    scrollbar-width:thin;
+    /* Thumb and Track color, aligned with #e9c46a */
+    scrollbar-color: #e9c46a #fdfbf5;
+}
+
+/* For Chrome, Safari, Edge, and other Webkit browsers */
+.collapsible-content.is-open::-webkit-scrollbar {
+    width: 4px;
+}
+
+.collapsible-content.is-open::-webkit-scrollbar-track {
+    /* A very light, warm background to complement the gold thumb */
+    background: #fdfbf5;
+    border-radius: 8px;
+}
+
+.collapsible-content.is-open::-webkit-scrollbar-thumb {
+    /* The requested accent color for the thumb */
+    background-color: #e9c46a;
+    border-radius: 8px;
+    /* Creates a nice padding effect around the thumb */
+    border: 2px solid #fdfbf5;
+}
+
+.collapsible-content.is-open::-webkit-scrollbar-thumb:hover {
+    /* A slightly darker shade for feedback on hover */
+    background-color: #d4b15f;
+}
+
+
+/* Make both the date and the name block-level elements */
+#upcoming-events-list .event-date,
+#upcoming-events-list .event-name {
+    display: block; /* This forces each item onto its own line */
+    width: 100%;    /* Ensure they take up the full width */
+}
+
+
+#upcoming-events-list .event-name {
+    display: inline-block; /* Allows multiple events on the same day to appear correctly */
+}
+
+
+
+/* --- Smoother Transition for the Secondary Main Toggle --- */
+
+/* 1. The main grid container, with a refined transition */
+.home-main-layout-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2.5rem;
+    align-items: start;
+    /* A custom timing function for a more polished animation */
+    transition: grid-template-columns 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+                gap 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+
+}
+
+/* 2. Collapsed state: shrinks the column and removes the gap */
+.home-main-layout-grid.left-column-collapsed {
+    grid-template-columns: 0fr 1fr;
+    gap: 0;
+
+}
+
+/* 3. The column that collapses, now with a transform animation */
+.home-main-layout-grid #main-content-column {
+    opacity: 1;
+    transform: translateX(0);
+    overflow: hidden;
+   transition: opacity 0.3s ease-in-out, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+/* 4. Collapsed state: fade and slide the column out to the left */
+.home-main-layout-grid.left-column-collapsed #main-content-column {
+    opacity: 0;
+    transform: translateX(-50px);
+    max-height: 0;
+}
+.home-main-layout-grid.left-column-collapsed .quote-card-wrapper {
+    height: 100%;
+}
+.home-main-layout-grid.left-column-collapsed .confessions-container {
+    height: 100%;
+}
+
+/* 5. The header container for the title and button */
+.collapsible-column-header {
+    display: grid;
+    /* Create three columns: a flexible space, an auto-sized title, and another flexible space */
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem; /* Adds space between the title and the button */
+    margin-bottom: 1rem;
+}
+
+/* 2. The title sits in the center column and centers its own text */
+.collapsible-column-header .home-section-title {
+    grid-column: 2; /* Place the title in the middle column */
+    text-align: center;
+    margin: 0;
+}
+
+/* 3. The button sits in the right column, aligned to the far right */
+.collapsible-column-header .js-toggle-button {
+    grid-column: 3; /* Place the button in the right-most column */
+    justify-self: end; /* Align the button to the end (right side) of its column */
+}

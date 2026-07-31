@@ -1,0 +1,598 @@
+---
+import { getCollection } from 'astro:content';
+import LibraryMasthead from './LibraryMasthead.astro';
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const getAlphabetLetter = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/Đ/g, 'D')
+    .replace(/đ/g, 'd')
+    .toUpperCase()
+    .match(/[A-Z]/)?.[0] ?? 'Z';
+const entries = (await getCollection('augustine-encyclopedia', ({ data }) => !data.draft))
+  .map((entry) => ({
+    ...entry,
+    letterEn: entry.data.letter,
+    letterVi: getAlphabetLetter(entry.data.titleVi || entry.data.title),
+  }))
+  .sort((a, b) =>
+    a.letterVi.localeCompare(b.letterVi, 'vi')
+    || (a.data.titleVi || a.data.title).localeCompare(b.data.titleVi || b.data.title, 'vi')
+    || a.data.order - b.data.order
+  );
+const groups = alphabet.map((letter) => ({
+  letter,
+  entries: entries.filter((entry) => entry.letterVi === letter),
+}));
+const entryHref = (id: string) => `/thanh-au-tinh/bach-khoa/${id.split('/').at(-1)}/`;
+const entrySlug = (id: string) => id.split('/').at(-1) ?? id;
+const normalizeTitle = (value: string) =>
+  value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('en').replace(/[^a-z0-9]+/g, ' ').trim();
+const referenceAliases = new Map([
+  ['fortunatum acta contra', 'Fortunatum Manicheum, Acta contra'],
+  ['cappadocians', 'The Cappadocians'],
+  ['catechumen catechumenate', 'Catechumens, Catechumenate'],
+  ['origine animae de', 'Origine animae et de sententia Jacobi, De'],
+]);
+const standaloneReferenceDestinations = new Map([
+  ['augustine s life', {
+    href: '/thanh-au-tinh/#tieu-su',
+    label: 'Cuộc Đời Thánh Augustinô',
+  }],
+]);
+const findReferenceEntry = (
+  reference: string,
+  ownSlug = '',
+) => {
+    const rawKey = normalizeTitle(reference);
+    const alias = referenceAliases.get(rawKey);
+    const key = normalizeTitle(alias ?? reference);
+    const exact = entries.find((candidate) =>
+      entrySlug(candidate.id) !== ownSlug
+      && (
+        normalizeTitle(candidate.data.title) === key
+        || (candidate.data.titleVi && normalizeTitle(candidate.data.titleVi) === key)
+      )
+    );
+    if (exact) return exact;
+
+    const partial = entries.filter((candidate) => {
+      if (entrySlug(candidate.id) === ownSlug) return false;
+      const candidateKey = normalizeTitle(candidate.data.title);
+      return candidateKey.startsWith(`${key} `) || key.startsWith(`${candidateKey} `);
+    });
+    if (partial.length === 1) return partial[0];
+  return null;
+};
+const resolveCrossReference = (
+  entry: (typeof entries)[number],
+  visited = new Set<string>(),
+): (typeof entries)[number] | null => {
+  if (entry.data.entryType !== 'cross-reference') return entry;
+  const ownSlug = entrySlug(entry.id);
+  if (visited.has(ownSlug)) return null;
+  visited.add(ownSlug);
+
+  for (const reference of entry.data.seeAlso) {
+    const target = findReferenceEntry(reference, ownSlug);
+    if (!target) continue;
+    if (target.data.entryType !== 'cross-reference') return target;
+    const finalTarget = resolveCrossReference(target, visited);
+    if (finalTarget) return finalTarget;
+  }
+  return null;
+};
+---
+
+<section class="aug-ency" id="thu-vien-bach-khoa" aria-labelledby="aug-ency-title">
+  <LibraryMasthead
+    class="aug-ency-masthead"
+    eyebrow="Augustine Through the Ages"
+    title="Bách Khoa Thánh Augustinô"
+    labelledBy="aug-ency-title"
+    level={2}
+  />
+
+  <div class="aug-ency-tools">
+    <div class="shared-filter-bar shared-filter-bar--search aug-ency-search-deck">
+      <label class="shared-filter-search aug-ency-search">
+        <span class="sr-only">Tìm mục từ theo tiêu đề hoặc tác giả</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+        </svg>
+        <input
+          class="shared-filter-input aug-ency-search-input"
+          type="search"
+          placeholder="Tìm tiêu đề hoặc tác giả…"
+          autocomplete="off"
+        />
+      </label>
+    </div>
+
+    <div class="aug-ency-alphabet-mode" aria-label="Chọn ngôn ngữ sắp xếp alphabet">
+      <span>Alphabet</span>
+      <div>
+        <button type="button" class="is-active" data-ency-alphabet-mode="vi" aria-pressed="true">VI</button>
+        <button type="button" data-ency-alphabet-mode="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+
+    <nav class="aug-ency-alphabet" aria-label="Lọc mục từ theo alphabet">
+      <button class="is-active" type="button" data-ency-letter="all" aria-pressed="true">Tất cả</button>
+      {alphabet.map((letter) => (
+        <button
+          type="button"
+          data-ency-letter={letter}
+          aria-pressed="false"
+          disabled={!entries.some((entry) => entry.letterVi === letter)}
+        >
+          {letter}
+        </button>
+      ))}
+    </nav>
+  </div>
+
+  <div class="shared-index-surface aug-ency-surface">
+    {groups.map((group) => (
+      <section class="aug-ency-group" data-ency-group={group.letter} hidden={group.entries.length === 0}>
+        <header class="idx-section-heading aug-ency-group-heading">
+          <h2>{group.letter}</h2>
+          <span data-ency-group-count>{group.entries.length} mục từ</span>
+        </header>
+
+        <div class="aug-ency-list">
+          {group.entries.map((entry) => {
+            const target = entry.data.entryType === 'cross-reference'
+              ? resolveCrossReference(entry)
+              : null;
+            const standaloneTarget = entry.data.entryType === 'cross-reference'
+              ? standaloneReferenceDestinations.get(normalizeTitle(entry.data.title))
+              : undefined;
+            const slug = entrySlug(entry.id);
+            const targetSlug = target ? entrySlug(target.id) : '';
+            return (
+              <a
+                class:list={['aug-ency-item', entry.data.entryType === 'cross-reference' && 'is-cross-reference']}
+                id={`bach-khoa-entry-${slug}`}
+                href={
+                  target
+                    ? `#bach-khoa-entry-${targetSlug}`
+                    : (standaloneTarget?.href ?? entryHref(entry.id))
+                }
+                data-ency-item
+                data-entry-slug={slug}
+                data-letter-en={entry.letterEn}
+                data-letter-vi={entry.letterVi}
+                data-sort-en={entry.data.title}
+                data-sort-vi={entry.data.titleVi || entry.data.title}
+                data-search={`${entry.data.title} ${entry.data.titleVi} ${entry.data.author}`}
+                data-cross-reference={entry.data.entryType === 'cross-reference' ? 'true' : undefined}
+                data-cross-reference-target={targetSlug || undefined}
+              >
+                <span class="aug-ency-title">
+                  <strong data-ency-title-primary>{entry.data.titleVi || entry.data.title}</strong>
+                  <small
+                    data-ency-title-secondary
+                    lang="en"
+                    hidden={!entry.data.titleVi || entry.data.titleVi === entry.data.title}
+                  >
+                    {entry.data.title}
+                  </small>
+                </span>
+                <span class="aug-ency-meta aug-ency-author">
+                  <small>{entry.data.entryType === 'cross-reference' ? 'Dẫn chiếu' : 'Tác giả'}</small>
+                  <span>
+                    {target
+                      ? `Dẫn đến: ${target.data.titleVi || target.data.title}`
+                      : standaloneTarget
+                        ? `Dẫn đến: ${standaloneTarget.label}`
+                      : (entry.data.author || 'Chưa xác định được mục đích')}
+                  </span>
+                </span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    <div class="aug-ency-empty" hidden>
+      <strong>Không tìm thấy mục từ phù hợp</strong>
+      <span>Thử một tiêu đề tiếng Anh, tiếng Việt hoặc tên tác giả khác.</span>
+    </div>
+  </div>
+
+  <p class="citation-reference aug-ency-source">
+    Nguồn: Allan D. Fitzgerald, ed., <em>Augustine through the Ages: An Encyclopedia</em>.
+    Grand Rapids, MI: William B. Eerdmans Publishing Company, 1999; paperback edition, 2009.
+  </p>
+</section>
+
+<script>
+  type EncyclopediaLibrary = HTMLElement & {
+    encyclopediaController?: AbortController;
+  };
+
+  const initializeEncyclopedia = () => {
+    document.querySelectorAll<EncyclopediaLibrary>('.aug-ency').forEach((library) => {
+    library.encyclopediaController?.abort();
+    const controller = new AbortController();
+    const { signal } = controller;
+    library.encyclopediaController = controller;
+    library.dataset.encyReady = 'true';
+
+    const input = library.querySelector<HTMLInputElement>('.aug-ency-search-input');
+    const buttons = Array.from(library.querySelectorAll<HTMLButtonElement>('[data-ency-letter]'));
+    const modeButtons = Array.from(library.querySelectorAll<HTMLButtonElement>('[data-ency-alphabet-mode]'));
+    const groups = Array.from(library.querySelectorAll<HTMLElement>('[data-ency-group]'));
+    const items = Array.from(library.querySelectorAll<HTMLElement>('[data-ency-item]'));
+    const empty = library.querySelector<HTMLElement>('.aug-ency-empty');
+    let activeLetter = 'all';
+    let alphabetMode: 'vi' | 'en' = 'vi';
+
+    const normalize = (value: string) =>
+      value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[đĐ]/g, 'd')
+        .toLocaleLowerCase('vi')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    const itemLetter = (item: HTMLElement) =>
+      alphabetMode === 'vi' ? item.dataset.letterVi : item.dataset.letterEn;
+
+    const applyFilters = () => {
+      const query = normalize(input?.value ?? '');
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const matchesLetter = activeLetter === 'all' || itemLetter(item) === activeLetter;
+        const matchesSearch = !query || normalize(item.dataset.search ?? '').includes(query);
+        item.hidden = !(matchesLetter && matchesSearch);
+        if (!item.hidden) visibleCount += 1;
+      });
+
+      groups.forEach((group) => {
+        const visibleItems = Array.from(
+          group.querySelectorAll<HTMLElement>('[data-ency-item]'),
+        ).filter((item) => !item.hidden);
+        group.hidden = visibleItems.length === 0;
+        const countLabel = group.querySelector<HTMLElement>('[data-ency-group-count]');
+        if (countLabel) countLabel.textContent = `${visibleItems.length} mục từ`;
+      });
+
+      if (empty) empty.hidden = visibleCount !== 0;
+    };
+
+    const setActiveLetter = (letter: string) => {
+      activeLetter = letter;
+      buttons.forEach((button) => {
+        const active = button.dataset.encyLetter === letter;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    };
+
+    const selectAllEntries = () => {
+      setActiveLetter('all');
+      if (input) input.value = '';
+      applyFilters();
+    };
+
+    const setAlphabetMode = (mode: 'vi' | 'en') => {
+      alphabetMode = mode;
+      const locale = mode === 'vi' ? 'vi' : 'en';
+      const sortedItems = [...items].sort((a, b) =>
+        (mode === 'vi' ? a.dataset.sortVi : a.dataset.sortEn)?.localeCompare(
+          mode === 'vi' ? b.dataset.sortVi ?? '' : b.dataset.sortEn ?? '',
+          locale,
+        ) ?? 0
+      );
+
+      sortedItems.forEach((item) => {
+        const titleEn = item.dataset.sortEn ?? '';
+        const titleVi = item.dataset.sortVi || titleEn;
+        const primaryTitle = mode === 'en' ? titleEn : titleVi;
+        const secondaryTitle = mode === 'en' ? titleVi : titleEn;
+        const primary = item.querySelector<HTMLElement>('[data-ency-title-primary]');
+        const secondary = item.querySelector<HTMLElement>('[data-ency-title-secondary]');
+        if (primary) primary.textContent = primaryTitle;
+        if (secondary) {
+          secondary.textContent = secondaryTitle;
+          secondary.lang = mode === 'en' ? 'vi' : 'en';
+          secondary.hidden = !secondaryTitle || secondaryTitle === primaryTitle;
+        }
+
+        const group = library.querySelector<HTMLElement>(`[data-ency-group="${itemLetter(item)}"]`);
+        group?.querySelector<HTMLElement>('.aug-ency-list')?.append(item);
+      });
+
+      groups.forEach((group) => {
+        const count = group.querySelectorAll('[data-ency-item]').length;
+        const countLabel = group.querySelector<HTMLElement>('[data-ency-group-count]');
+        if (countLabel) countLabel.textContent = `${count} mục từ`;
+      });
+
+      const availableLetters = new Set(items.map((item) => itemLetter(item)));
+      buttons.forEach((button) => {
+        const letter = button.dataset.encyLetter ?? 'all';
+        button.disabled = letter !== 'all' && !availableLetters.has(letter);
+      });
+      modeButtons.forEach((button) => {
+        const active = button.dataset.encyAlphabetMode === mode;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      setActiveLetter('all');
+      applyFilters();
+    };
+
+    const focusHashTarget = () => {
+      const prefix = '#bach-khoa-entry-';
+      if (!window.location.hash.startsWith(prefix)) return;
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (!target || !library.contains(target)) return;
+      selectAllEntries();
+      window.setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.remove('is-jump-target');
+        requestAnimationFrame(() => target.classList.add('is-jump-target'));
+        window.setTimeout(() => target.classList.remove('is-jump-target'), 1800);
+      }, 50);
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        setActiveLetter(button.dataset.encyLetter ?? 'all');
+        applyFilters();
+      }, { signal });
+    });
+
+    modeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const mode = button.dataset.encyAlphabetMode;
+        if (mode === 'vi' || mode === 'en') setAlphabetMode(mode);
+      }, { signal });
+    });
+
+    input?.addEventListener('input', () => {
+      if (input.value.trim()) setActiveLetter('all');
+      applyFilters();
+    }, { signal });
+    window.addEventListener('hashchange', focusHashTarget, { signal });
+    setAlphabetMode('vi');
+    focusHashTarget();
+  });
+  };
+
+  initializeEncyclopedia();
+  document.addEventListener('astro:page-load', initializeEncyclopedia);
+</script>
+
+<style>
+  .aug-ency {
+    width:min(100% - 3rem, 112rem);
+    margin:0 auto;
+    padding:1rem 0 5.5rem;
+  }
+  .aug-ency-masthead { width:min(100%, 92rem); margin:0 auto 2.6rem; }
+  .aug-ency-masthead :global(.lib-masthead-title) { font-size:clamp(3rem, 5vw, 4.6rem); }
+  .aug-ency-tools { display:grid; gap:1rem; margin-bottom:1.3rem; }
+  .aug-ency-search-deck { --shared-filter-justify:center; }
+  .aug-ency-search { position:relative; width:min(100%, 42rem); flex-basis:42rem; }
+  .aug-ency-search > .sr-only {
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0, 0, 0, 0);
+    white-space:nowrap;
+    border:0;
+  }
+  .aug-ency-search svg {
+    position:absolute;
+    z-index:1;
+    top:50%;
+    left:1.1rem;
+    width:1.45rem;
+    translate:0 -50%;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    color:var(--ink-cream-soft);
+    pointer-events:none;
+  }
+  .aug-ency-search .aug-ency-search-input { padding-left:3.25rem; }
+  .aug-ency-alphabet-mode {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.75rem;
+    color:var(--ink-cream-soft);
+    font:600 .88rem/1 var(--font-ui);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .aug-ency-alphabet-mode > div {
+    display:inline-flex;
+    padding:.18rem;
+    border:1px solid rgba(233,193,118,.18);
+    border-radius:999px;
+  }
+  .aug-ency-alphabet-mode button {
+    min-width:3.2rem;
+    border:0;
+    border-radius:999px;
+    padding:.5rem .8rem;
+    background:transparent;
+    color:var(--ink-cream-soft);
+    font:650 .9rem/1 var(--font-ui);
+    cursor:pointer;
+    transition:background-color .16s ease, color .16s ease;
+  }
+  .aug-ency-alphabet-mode button:hover,
+  .aug-ency-alphabet-mode button.is-active {
+    background:rgba(233,193,118,.12);
+    color:var(--gold);
+  }
+  .aug-ency-alphabet {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.15rem;
+    min-width:0;
+    padding:.25rem 0;
+    overflow-x:auto;
+    scrollbar-width:thin;
+  }
+  .aug-ency-alphabet button {
+    display:grid;
+    place-items:center;
+    flex:0 0 auto;
+    min-width:2.65rem;
+    height:2.8rem;
+    border:0;
+    border-radius:.25rem;
+    padding:0 .5rem;
+    background:transparent;
+    color:var(--ink-cream-soft);
+    font:600 1.02rem/1 var(--font-ui);
+    cursor:pointer;
+    transition:background-color .18s ease, color .18s ease;
+  }
+  .aug-ency-alphabet button:first-child { min-width:5.4rem; }
+  .aug-ency-alphabet button:hover:not(:disabled),
+  .aug-ency-alphabet button.is-active {
+    background:rgba(233,193,118,.1);
+    color:var(--gold);
+  }
+  .aug-ency-alphabet button:disabled { opacity:.28; cursor:default; }
+  .aug-ency-surface { margin-top:0; }
+  .aug-ency-group + .aug-ency-group { border-top:1px solid rgba(233,193,118,.14); }
+  .aug-ency-group[hidden],
+  .aug-ency-item[hidden] { display:none !important; }
+  .aug-ency-group-heading { margin:0; padding:1.15rem 1.4rem; }
+  .aug-ency-group-heading h2 { min-width:2rem; }
+  .aug-ency-list { display:grid; }
+  .aug-ency-item {
+    display:grid;
+    grid-template-columns:minmax(22rem, 1.45fr) minmax(17rem, 1fr) 1.5rem;
+    align-items:center;
+    gap:1.5rem;
+    min-width:0;
+    padding:1.3rem 1.5rem;
+    border-top:1px solid rgba(233,193,118,.1);
+    color:inherit;
+    text-decoration:none;
+    transition:background-color .18s ease;
+  }
+  .aug-ency-item:hover { background:rgba(233,193,118,.055); }
+  .aug-ency-item.is-cross-reference .aug-ency-title strong { font-weight:500; }
+  .aug-ency-item.is-jump-target {
+    background:rgba(233,193,118,.13);
+    box-shadow:inset .25rem 0 var(--gold);
+  }
+  .aug-ency-title,
+  .aug-ency-meta { display:grid; gap:.32rem; min-width:0; }
+  .aug-ency-title strong {
+    color:#e2d2a2;
+    font:600 1.46rem/1.35 var(--font-ui);
+    transition:color .18s ease;
+  }
+  .aug-ency-title small {
+    overflow:hidden;
+    color:var(--ink-cream-soft);
+    font:italic 400 1.1rem/1.35 var(--font-body);
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .aug-ency-meta small {
+    color:var(--gold-dim);
+    font:600 .82rem/1 var(--font-ui);
+    letter-spacing:.09em;
+    text-transform:uppercase;
+  }
+  .aug-ency-meta span {
+    overflow:hidden;
+    color:var(--ink-cream-soft);
+    font:500 1.08rem/1.4 var(--font-ui);
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .aug-ency-item > svg {
+    width:1.45rem;
+    fill:none;
+    stroke:var(--gold-dim);
+    stroke-width:1.7;
+    transition:translate .18s ease;
+  }
+  .aug-ency-item:hover .aug-ency-title strong { color:var(--gold); }
+  .aug-ency-item:hover > svg { translate:.2rem 0; }
+  .aug-ency-empty {
+    padding:4rem 1.5rem;
+    color:var(--ink-cream-soft);
+    text-align:center;
+  }
+  .aug-ency-empty strong,
+  .aug-ency-empty span { display:block; }
+  .aug-ency-empty strong { margin-bottom:.45rem; color:var(--ink-cream); font:600 1.3rem/1.3 var(--font-ui); }
+  .aug-ency-empty span { font:400 1.08rem/1.5 var(--font-ui); }
+  .aug-ency-source { width:min(100%, 88rem); margin:2.2rem auto 0; }
+
+  :global(html[data-theme="light"]) .aug-ency-search svg { color:#536457; }
+  :global(html[data-theme="light"]) .aug-ency-alphabet-mode { color:#617066; }
+  :global(html[data-theme="light"]) .aug-ency-alphabet-mode > div { border-color:rgba(26,94,60,.18); }
+  :global(html[data-theme="light"]) .aug-ency-alphabet-mode button { color:#617066; }
+  :global(html[data-theme="light"]) .aug-ency-alphabet-mode button:hover,
+  :global(html[data-theme="light"]) .aug-ency-alphabet-mode button.is-active { background:#edf4ee; color:#1a5e3c; }
+  :global(html[data-theme="light"]) .aug-ency-alphabet button { color:#617066; }
+  :global(html[data-theme="light"]) .aug-ency-alphabet button:hover:not(:disabled),
+  :global(html[data-theme="light"]) .aug-ency-alphabet button.is-active { background:#edf4ee; color:#1a5e3c; }
+  :global(html[data-theme="light"]) .aug-ency-group + .aug-ency-group,
+  :global(html[data-theme="light"]) .aug-ency-item { border-color:rgba(26,94,60,.13); }
+  :global(html[data-theme="light"]) .aug-ency-item:hover { background:#f4f7f1; }
+  :global(html[data-theme="light"]) .aug-ency-item.is-jump-target {
+    background:#e8f1e9;
+    box-shadow:inset .25rem 0 #8f6129;
+  }
+  :global(html[data-theme="light"]) .aug-ency-title strong { color:var(--accent); }
+  :global(html[data-theme="light"]) .aug-ency-empty strong { color:#183d30; }
+  :global(html[data-theme="light"]) .aug-ency-title small,
+  :global(html[data-theme="light"]) .aug-ency-meta span,
+  :global(html[data-theme="light"]) .aug-ency-empty { color:#5c695f; }
+  :global(html[data-theme="light"]) .aug-ency-meta small,
+  :global(html[data-theme="light"]) .aug-ency-item > svg { color:#8f6129; stroke:#8f6129; }
+  :global(html[data-theme="light"]) .aug-ency-item:hover .aug-ency-title strong { color:#8f6129; }
+
+  @media (max-width:760px) {
+    .aug-ency { width:min(100% - 2rem, 60rem); padding-top:.4rem; }
+    .aug-ency-masthead { margin-bottom:1.8rem; }
+    .aug-ency-masthead :global(.lib-masthead-title) { font-size:clamp(2.45rem, 9vw, 3.25rem); }
+    .aug-ency-masthead :global(.lib-masthead-desc) { font-size:1.22rem; }
+    .aug-ency-tools { gap:.7rem; }
+    .aug-ency-alphabet-mode { justify-content:flex-end; padding-right:.15rem; }
+    .aug-ency-alphabet { justify-content:flex-start; padding-bottom:.55rem; }
+    .aug-ency-alphabet button { min-width:2.8rem; }
+    .aug-ency-group-heading { padding:1rem; }
+    .aug-ency-item {
+      grid-template-columns:minmax(0, 1fr) auto;
+      gap:.85rem 1rem;
+      padding:1.2rem 1rem;
+    }
+    .aug-ency-title { grid-column:1; }
+    .aug-ency-author { grid-column:1; }
+    .aug-ency-item > svg { grid-column:2; grid-row:1 / span 2; align-self:center; }
+    .aug-ency-title strong { font-size:1.3rem; }
+    .aug-ency-title small { white-space:normal; }
+    .aug-ency-meta { grid-template-columns:5.4rem minmax(0, 1fr); align-items:baseline; gap:.65rem; }
+    .aug-ency-meta span { white-space:normal; }
+    .aug-ency-source { margin-top:1.6rem; }
+  }
+</style>

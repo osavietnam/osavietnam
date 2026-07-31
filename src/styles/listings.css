@@ -1,0 +1,494 @@
+/* ============================================================================
+   listings.css — thiết kế lại phần content trang Kinh Sách & Sách Thiêng Liêng
+   Hướng: tối giản, dễ đọc. Nền tối navy + nhấn gold, nhiều khoảng thở,
+   ít đường kẻ, kiểu danh sách thay cho bảng dày đặc.
+   ============================================================================ */
+
+.listing {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+/* ---------- Tiêu đề trang ---------- */
+.listing-head {
+  text-align: center;
+  margin: 1rem 0 3rem;
+}
+.listing-head h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.8rem, 2.2rem + 2vw, 3.8rem);
+  color: #e9c46a;
+  background: none;
+  -webkit-text-fill-color: #e9c46a;
+  margin: 0 0 0.6rem;
+  text-align: center;
+}
+.listing-head p {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.5rem;
+  color: #9aa7b2;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---------- Hàng "tab" chọn mùa (Kinh Sách) ---------- */
+/* Layout container — visual do .seg-pills/.seg-tab trong overrides.css lo */
+.season-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2.4rem;
+}
+
+/* ---------- Lọc mùa: bar tab sticky (giống thanh chọn quyển Tự Thuật) ---------- */
+.season-filter {
+  position: sticky;
+  top: 6.58rem;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 2.6rem;
+  padding: 0.7rem 0;
+  background: var(--bg-main);
+}
+.ks-season-bar {
+  display: flex;
+  gap: 0.2rem;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid rgba(233, 193, 118, 0.16);
+  padding: 0 0.4rem;
+}
+.ks-season-bar::-webkit-scrollbar { display: none; }
+.ks-season-tab {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(239, 231, 214, 0.6);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.8rem 1.3rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.ks-season-tab:hover { color: rgba(239, 231, 214, 0.9); }
+.ks-season-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ---------- Thanh công cụ: tìm + lọc ---------- */
+.listing-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.4rem;
+}
+/* Kinh Sách: toolbar tìm/lọc dính ngay dưới bar mùa (chỉ trang có .season-filter) */
+.season-filter ~ .listing-toolbar {
+  position: sticky;
+  top: 11.18rem;
+  z-index: 89;
+  background: var(--bg-main);
+  padding: 0.8rem 0 1rem;
+  margin-bottom: 1.6rem;
+}
+.listing-toolbar .search-box {
+  position: relative;
+  flex: 1 1 32rem;
+  max-width: 42rem;
+}
+.listing-toolbar .search-box input {
+  width: 100%;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.5rem;
+  color: #f3ede1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 173, 74, 0.25);
+  border-radius: 10px;
+  padding: 1rem 1.4rem;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.listing-toolbar .search-box input::placeholder { color: #7e8a94; }
+.listing-toolbar .search-box input:focus {
+  outline: none;
+  border-color: #e9c46a;
+  background: rgba(255, 255, 255, 0.06);
+}
+.listing-toolbar select {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.4rem;
+  color: #b0a89a;
+  background: rgba(22, 34, 61, 0.95);
+  border: 1px solid rgba(212, 173, 74, 0.25);
+  border-radius: 10px;
+  padding: 1rem 3.2rem 1rem 1.2rem;
+  cursor: pointer;
+  flex: 0 1 22rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c5a059' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.1rem center;
+}
+.listing-toolbar select:focus { outline: none; border-color: rgba(212, 173, 74, 0.6); }
+.listing-toolbar select option {
+  background: #16223d;
+  color: #c9bfa9;
+}
+
+/* số kết quả */
+.listing-count {
+  text-align: center;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--ink-cream-soft);
+  margin: 0.8rem 0 1.8rem;
+}
+
+/* ---------- Danh sách kiểu "list" dễ đọc (thay bảng) ---------- */
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(212, 173, 74, 0.14);
+}
+.entry-item {
+  border-bottom: 1px solid rgba(212, 173, 74, 0.14);
+}
+.entry-link {
+  display: block;
+  padding: 1.6rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  transition: background 0.16s ease, padding-left 0.16s ease;
+}
+.entry-link:hover {
+  background: rgba(212, 173, 74, 0.06);
+  padding-left: 1.6rem;
+  text-decoration: none;
+}
+.entry-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #f3ede1;
+  line-height: 1.4;
+  margin: 0 0 0.4rem;
+  transition: color 0.16s ease;
+}
+.entry-link:hover .entry-title { color: #e9c46a; }
+.entry-meta {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.35rem;
+  color: #9aa7b2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+}
+.entry-meta .author { color: #d4ad4a; font-weight: 500; }
+.entry-meta .excerpt { font-style: italic; }
+.entry-meta .sep { color: #4a5a68; }
+
+/* trạng thái rỗng */
+.entry-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #7e8a94;
+  font-family: 'Merriweather', Georgia, serif;
+  font-style: italic;
+  font-size: 1.6rem;
+}
+
+/* gợi ý ban đầu (chưa chọn mùa) */
+.listing-hint {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #8b97a1;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+/* ---------- Nhóm theo tác giả (trang Sách) ---------- */
+.author-block { margin-bottom: 3.2rem; }
+.author-block-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.1rem;
+  color: #e9c46a;
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(212, 173, 74, 0.2);
+  text-align: left;
+}
+
+/* ---------- Bài đọc hôm nay ---------- */
+.today-card { max-width: 44rem; margin: 0 auto 3.2rem; }
+.today-inner {
+  background: var(--bg-card, #16223d);
+  border: 1px solid rgba(233, 196, 106, 0.35);
+  border-radius: 14px;
+  padding: 2rem 2.4rem;
+  position: relative;
+  overflow: hidden;
+}
+.today-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(233, 196, 106, 0.07) 0%, transparent 55%);
+  pointer-events: none;
+}
+.today-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: 1.2rem;
+}
+.today-badge {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07rem;
+  background: #e9c46a;
+  color: #0d1f2b;
+  border-radius: 4px;
+  padding: 0.2rem 0.75rem;
+}
+.today-date {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.3rem;
+  color: var(--ink-cream-soft, #c9bfa9);
+}
+.today-season-label {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.2rem;
+  color: #fff8e8;
+  background: #70541c;
+  border: 1px solid #70541c;
+  border-radius: 999px;
+  padding: 0.15rem 0.9rem;
+}
+.today-cycle-badge {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  color: #fffdf5;
+  background: #70541c;
+  border: 1px solid #70541c;
+  border-radius: 4px;
+  padding: 0.15rem 0.7rem;
+}
+.today-title {
+  display: block;
+  font-family: 'Noto Serif', 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #e9c46a;
+  text-decoration: none;
+  line-height: 1.35;
+  margin-bottom: 0.55rem;
+  transition: color 0.2s;
+}
+.today-title:hover { color: #f2d78e; }
+.today-author {
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.35rem;
+  color: var(--ink-cream-soft, #c9bfa9);
+  margin-bottom: 0.45rem;
+}
+.today-excerpt {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.4rem;
+  color: var(--ink-cream-soft, #c9bfa9);
+  font-style: italic;
+  margin-bottom: 1.4rem;
+}
+/* Layout hai bài đọc trong today-card */
+.today-entries { margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px solid rgba(233, 196, 106, 0.14); }
+.today-entries.has-two {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.today-entry { padding-bottom: 0.4rem; }
+.today-entries.has-two .today-entry + .today-entry {
+  border-top: 1px solid rgba(233, 196, 106, 0.14);
+  padding-top: 1rem;
+}
+.today-entry-label {
+  display: block;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07rem;
+  margin-bottom: 0.7rem;
+}
+.today-entry-label.label-season { color: #e9c46a; }
+.today-entry-label.label-common { color: #90b8f0; }
+
+/* Nút "Đọc" — đồng bộ spec nút outline gold toàn site */
+.today-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-ui);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid rgba(233, 193, 118, 0.28);
+  border-radius: 999px;
+  padding: 0.5rem 1.4rem;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.today-btn:hover {
+  background: rgba(233, 193, 118, 0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .listing { padding: 0 1.2rem 3rem; }
+  .listing-toolbar { flex-direction: column; }
+  .listing-toolbar .search-box,
+  .listing-toolbar select { flex: 1 1 auto; width: 100%; max-width: none; }
+  .entry-title { font-size: 1.7rem; }
+  .today-inner { padding: 1.6rem 1.4rem; }
+  .today-title { font-size: 1.9rem; }
+  .today-entries.has-two { grid-template-columns: 1fr; }
+  .today-entries.has-two .today-entry + .today-entry {
+    border-left: none;
+    border-top: 1px solid rgba(233, 196, 106, 0.14);
+    padding-left: 0;
+    padding-top: 1.4rem;
+    margin-top: 1.2rem;
+  }
+}
+
+/* ---------- Highlight hàng bảng sau khi quay lại từ bài đọc ---------- */
+@keyframes ks-row-flash {
+  0%   { background: rgba(233, 196, 106, 0.24); }
+  100% { background: rgba(233, 196, 106, 0.06); }
+}
+.readings-table tbody tr.row-highlight {
+  animation: ks-row-flash 2.8s ease-out forwards;
+}
+
+/* Hàng tác giả Augustinô / Fulgentius — highlight mặc định */
+.readings-table tbody tr.row-author-hi {
+  background: rgba(233, 196, 106, 0.045);
+  box-shadow: inset 3px 0 0 rgba(233, 193, 118, 0.4);
+}
+.readings-table tbody tr.row-author-hi td:first-child {
+  color: #c5a059;
+  font-weight: 600;
+}
+.readings-table tbody tr.row-author-hi:hover {
+  background: rgba(233, 196, 106, 0.10);
+  box-shadow: inset 3px 0 0 rgba(233, 193, 118, 0.65);
+}
+
+/* Hàng riêng của Thánh Augustinô — điểm nhấn rõ hơn các tác giả Augustinian khác */
+.readings-table tbody tr.row-augustin {
+  background: rgba(233, 193, 118, 0.12);
+  box-shadow: inset 4px 0 0 var(--gold), inset 0 1px 0 rgba(233, 193, 118, 0.2), inset 0 -1px 0 rgba(233, 193, 118, 0.2);
+}
+.readings-table tbody tr.row-augustin td:first-child {
+  color: var(--gold);
+  font-weight: 700;
+}
+.readings-table tbody tr.row-augustin:hover {
+  background: rgba(233, 193, 118, 0.19);
+  box-shadow: inset 4px 0 0 var(--gold), inset 0 1px 0 rgba(233, 193, 118, 0.35), inset 0 -1px 0 rgba(233, 193, 118, 0.35);
+}
+
+/* Bài chưa fill (body rỗng) — mờ + gạch trái vàng */
+.readings-table tbody tr.row-unfilled td {
+  color: rgba(201, 191, 169, 0.5);
+  font-style: italic;
+}
+.readings-table tbody tr.row-unfilled td:first-child {
+  box-shadow: inset 3px 0 0 rgba(233, 193, 118, 0.5);
+}
+/* Entry cần sửa metadata — highlight đỏ */
+.readings-table tbody tr.row-needs-fix,
+.readings-table tbody tr.row-needs-fix.row-unfilled { background: rgba(200, 60, 60, 0.14); }
+.readings-table tbody tr.row-needs-fix td { color: #e78a8a; font-style: normal; }
+.readings-table tbody tr.row-needs-fix td:first-child {
+  box-shadow: inset 3px 0 0 #c83c3c;
+  font-weight: 600;
+}
+.readings-table tbody tr.row-needs-fix:hover { background: rgba(200, 60, 60, 0.22); }
+
+/* Badge "fill tay" (manualFill) — bài fill bằng tay, cần chuẩn hóa sau */
+.tag-manual {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color:#ffffff;
+  background:#2b6570;
+  border:1px solid #2b6570;
+  border-radius: 4px;
+  padding: 0.05rem 0.5rem;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
+
+/* Nút edit trong bảng — chỉ hiện khi admin-server chạy (body[data-ks-admin]) */
+.readings-table tbody td:last-child { position: relative; padding-right: 1.2rem; }
+body[data-ks-admin] .readings-table tbody td:last-child { padding-right: 3.8rem; }
+.row-edit-btn {
+  display: none;
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.6rem;
+  height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--gold);
+  background: rgba(233, 193, 118, 0.1);
+  border: 1px solid rgba(233, 193, 118, 0.35);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+body[data-ks-admin] .row-edit-btn { display: inline-flex; }
+.row-edit-btn:hover { background: rgba(233, 193, 118, 0.22); border-color: var(--gold); }
+.readings-table tbody tr.row-unfilled .row-edit-btn { color: #f0d080; border-color: rgba(233, 193, 118, 0.55); background: rgba(233, 193, 118, 0.16); }
+
+/* Toggle "Chưa fill" trong toolbar */
+.unfilled-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  color: #c8c0b0;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+body[data-ks-admin] .unfilled-toggle { display: inline-flex; }
+.unfilled-toggle input { accent-color: var(--gold); cursor: pointer; }

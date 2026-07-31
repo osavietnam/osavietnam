@@ -1,0 +1,67 @@
+---
+interface Props {
+  quotes: { text: string; cite: string }[];
+}
+const { quotes } = Astro.props;
+---
+<div class="bv-quotes">
+  {quotes.map(q => (
+    <div class="bvq-slide">
+      <p class="bvq-text">{q.text}</p>
+      <cite class="bvq-cite" set:html={q.cite}></cite>
+    </div>
+  ))}
+  {quotes.length > 1 && (
+    <nav class="bvq-dots" aria-label="Chọn câu trích dẫn">
+      {quotes.map((_, i) => (
+        <button class="bvq-dot" data-idx={String(i)} aria-label={`Câu ${i + 1}`}></button>
+      ))}
+    </nav>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.bv-quotes:not([data-bvq-init])').forEach(el => {
+    el.setAttribute('data-bvq-init', '1');
+    const slides = Array.from(el.querySelectorAll<HTMLElement>('.bvq-slide'));
+    const dots   = Array.from(el.querySelectorAll<HTMLElement>('.bvq-dot'));
+    if (!slides.length) return;
+
+    let current = Math.floor(Math.random() * slides.length);
+    let timer: ReturnType<typeof setInterval>;
+
+    const show = (idx: number) => {
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      dots.forEach((d, i)   => d.classList.toggle('active', i === idx));
+      current = idx;
+    };
+
+    const startTimer = () => {
+      clearInterval(timer);
+      timer = setInterval(() => show((current + 1) % slides.length), 8000);
+    };
+
+    show(current);
+    if (slides.length > 1) {
+      dots.forEach(d => d.addEventListener('click', () => {
+        show(+(d.getAttribute('data-idx') ?? '0'));
+        startTimer();
+      }));
+      startTimer();
+    } else {
+      el.querySelector('.bvq-dots')?.remove();
+    }
+
+    // Highlight "Thiên Chúa" / "Chúa" → ALLCAPS + gold
+    el.querySelectorAll('.bvq-text').forEach(t => {
+      t.innerHTML = t.innerHTML.replace(
+        /chính sự khôn ngoan/gi,
+        m => `<span class="bvq-wisdom">${m}</span>`
+      );
+      t.innerHTML = t.innerHTML.replace(
+        /Thiên Chúa Ba Ngôi|Thiên Chúa|Chúa/g,
+        m => `<span class="bvq-lord">${m.toUpperCase()}</span>`
+      );
+    });
+  });
+</script>

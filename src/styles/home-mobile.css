@@ -1,0 +1,143 @@
+/* ===================================================================
+ * * HOMEPAGE - MOBILE OPTIMIZATIONS
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* --- General Layout & Typography --- */
+    #main > .content {
+        padding: 2rem 1.5rem; /* Reduce page padding */
+    }
+
+    .home-section-title {
+        font-size: 3rem; /* Reduce section title font size */
+    }
+
+    /* --- Stack the Main Grids Vertically --- */
+    .home-today-grid,
+    .home-main-layout-grid,
+    .bottom-row-grid {
+        grid-template-columns: 1fr; /* Change all 2-column grids to 1 column */
+        gap: 2.5rem;
+    }
+    .home-main-layout-grid .column-toggle-button {
+        display: none;
+    }
+
+    /* --- Adjust L-Shape Card for Mobile --- */
+    .l-shape-content-grid {
+        grid-template-columns: 1fr; /* Stack the homily and Kinh Sach sections */
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .l-shape-kinh-sach {
+        border-left: none; /* Remove vertical border */
+        padding-left: 0;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(196, 179, 145, 0.2); /* Add a horizontal separator */
+    }
+
+    /* --- Adjust Augustinians Grid & Side Column --- */
+    #side-content-column {
+        padding: 2rem; /* Reduce padding on the side column container */
+    }
+
+
+
+    /* --- Adjust Latest Articles Grid --- */
+    .latest-articles-grid {
+        gap: 2rem;
+    }
+
+    /* --- Fix for Mobile Overflow in Augustinians Grid --- */
+
+.next-saint-image {
+    /* This is the key: It ensures the image scales down to fit its
+       container and never causes a horizontal overflow. */
+   width: 100%;
+
+    max-height: fit-content;
+    /* This maintains the image's aspect ratio as it scales. */
+     aspect-ratio: 2 / 3 ;
+   object-fit:cover;
+    /* This removes any extra space that can sometimes appear below an image. */
+    display: block;
+}
+}
+
+/* --- Mobile Optimizations --- */
+@media screen and (max-width: 768px) {
+    .day-events a {
+        font-size: 0.7rem;
+    }
+    .day-number {
+        font-size: 1.5rem;
+    }
+    .calendar-day.is-today .day-number {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    .calendar-toggle-button {
+        display: none;
+    }
+    .calendar-interactive-layout,
+    .calendar-interactive-layout.sidebar-collapsed {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .calendar-interactive-layout.sidebar-collapsed .calendar-sidebar {
+       display: none;
+    }
+    .monthly-calendar {
+        max-width: 100%;
+        margin: 0;
+    }
+    .calendar-legend {
+        gap: 1rem;
+        justify-content: center;
+        font-size: 0.5rem;
+    }
+    .calendar-day::before {
+        font-size: 0.7rem;
+
+    }
+
+
+        /* in css/home-layout.css */
+
+    /* --- Mobile Tooltip Link Style --- */
+    .calendar-tooltip a {
+        display: block;
+        color: #fcefdc;
+        text-decoration: none;
+    }
+    .calendar-tooltip a:hover {
+        color: #f2d78e;
+        text-decoration: underline;
+    }
+
+
+/* --- Definitive Failsafe for Calendar Sidebar Overflow --- */
+
+
+.calendar-day.is-patron::before, .event-rank-patron::before, .legend-label.is-patron,
+.calendar-day.is-birthday::before, .event-rank-birthday::before, .legend-label.is-birthday,
+.calendar-day.is-baptism::before, .event-rank-baptism::before, .legend-label.is-baptism,
+.calendar-day.is-first_vow::before, .event-rank-first_vow::before, .legend-label.is-first_vow,
+.calendar-day.is-solemn_vow::before, .event-rank-solemn_vow::before, .legend-label.is-solemn_vow,
+.calendar-day.is-priesthood::before, .event-rank-priesthood::before, .legend-label.is-priesthood {
+        /* Set dimensions for the icon */
+    width: 1.5em;
+    height: 1.5em;
+
+}
+
+    .legend-item {
+
+        font-size: 0.9rem;
+    }
+    .legend-label {
+        font-size: 1rem;
+    }
+}

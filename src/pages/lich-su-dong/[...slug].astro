@@ -1,0 +1,115 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('lich-su-dong', ({ data }) => !data.draft);
+  const sorted = [...entries].sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+  return sorted.map((entry, idx) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      prev: sorted[idx - 1] ?? null,
+      next: sorted[idx + 1] ?? null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const hasToc = headings.filter(h => h.depth === 2 || h.depth === 3).length > 2;
+---
+<BaseLayout title={d.title} description={d.excerpt} bodyClass="page-articles no-sidebar" banner="home">
+
+  <nav class="art-back" aria-label="Điều hướng">
+    <a class="art-back-link" href="/lich-su-dong/">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span>Lịch Sử Dòng</span>
+    </a>
+  </nav>
+
+  <header class="lib-masthead">
+    {d.period && <p class="lib-masthead-sub lsd-period-badge">{d.period}</p>}
+    <h1 class="lib-masthead-title">{d.title}</h1>
+    {d.subtitle && <p class="lib-masthead-desc" set:html={d.subtitle} />}
+    {d.sourceNote && (
+      <details class="fn-det">
+        <summary>¹ Về nguồn văn bản</summary>
+        <p class="fn-det-body" set:html={d.sourceNote} />
+      </details>
+    )}
+    <div class="lib-masthead-rule"><span class="lib-masthead-ornament">✦</span></div>
+  </header>
+
+  <div class={`article-shell ${hasToc ? 'has-toc' : ''}`}>
+    {hasToc && <TableOfContents headings={headings} />}
+    <article class="prose"><Content /></article>
+  </div>
+
+  {(prev || next) && (
+    <nav class="art-nav" aria-label="Bài trước và bài sau">
+      {prev ? (
+        <a class="art-nav-link art-nav-prev" href={`/lich-su-dong/${prev.id}/`}>
+          <span class="art-nav-dir">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            Thời kỳ trước
+          </span>
+          <span class="art-nav-title">{prev.data.title}</span>
+        </a>
+      ) : <span class="art-nav-spacer" aria-hidden="true"></span>}
+      {next ? (
+        <a class="art-nav-link art-nav-next" href={`/lich-su-dong/${next.id}/`}>
+          <span class="art-nav-dir">
+            Thời kỳ tiếp
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </span>
+          <span class="art-nav-title">{next.data.title}</span>
+        </a>
+      ) : <span class="art-nav-spacer" aria-hidden="true"></span>}
+    </nav>
+  )}
+</BaseLayout>
+
+<style is:global>
+.lsd-period-badge {
+  font-family: 'Be Vietnam Pro', 'Manrope', system-ui, sans-serif;
+  font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gold) !important;
+}
+[data-theme="light"] .lsd-period-badge { color: var(--gold-dim) !important; }
+
+/* Expandable footnote below masthead */
+.fn-det {
+  margin: 1.2rem 0 0;
+  max-width: 68rem;
+}
+.fn-det summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Be Vietnam Pro', 'Manrope', system-ui, sans-serif;
+  font-size: 1.2rem; font-weight: 500;
+  color: var(--gold-dim, #c5a059);
+  padding: 0.3rem 0;
+  user-select: none;
+  transition: color 0.15s;
+}
+.fn-det summary::-webkit-details-marker { display: none; }
+.fn-det summary::before { content: "▸ "; font-size: 0.85em; }
+.fn-det[open] summary::before { content: "▾ "; }
+.fn-det[open] summary { color: var(--gold); }
+.fn-det-body {
+  margin: 0.8rem 0 0;
+  font-family: 'Merriweather', serif;
+  font-size: 1.3rem; line-height: 1.85;
+  color: var(--ink-cream-soft, #c9bfa9);
+  border-left: 2px solid rgba(233,193,118,0.25);
+  padding-left: 1.4rem;
+}
+[data-theme="light"] .fn-det summary { color: #7a5c1e; }
+[data-theme="light"] .fn-det[open] summary { color: #5a3d0a; }
+[data-theme="light"] .fn-det-body { color: var(--ink-cream-soft); border-left-color: rgba(122,92,30,0.3); }
+</style>

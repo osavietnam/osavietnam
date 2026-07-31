@@ -1,0 +1,1166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const SEASONS = [
+  { key: 'le-chung',        label: 'Lễ Chung' },
+  { key: 'le-rieng',        label: 'Lễ Riêng' },
+  { key: 'trong-kinh-chua', label: 'Lễ Trọng Kính Chúa' },
+  { key: 'mua-thuong-nien', label: 'Mùa Thường Niên' },
+  { key: 'mua-vong',        label: 'Mùa Vọng' },
+  { key: 'mua-giang-sinh',  label: 'Mùa Giáng Sinh' },
+  { key: 'mua-chay',        label: 'Mùa Chay' },
+  { key: 'mua-phuc-sinh',   label: 'Mùa Phục Sinh' },
+];
+---
+<BaseLayout title="Admin" bodyClass="no-sidebar" banner={null}>
+<div class="sb-wrap">
+
+  <!-- HEADER -->
+  <div class="sb-header">
+    <div class="sb-title-row">
+      <h1>Admin</h1>
+      <button class="sb-btn-new" id="btnNew" style="display:none">+ Bài mới</button>
+    </div>
+    <div class="sb-tab-bar">
+      <button class="sb-tab-btn active" data-panel="panelCaiDat">Cài Đặt Trang</button>
+      <button class="sb-tab-btn" data-panel="panelKinhSach">Kinh Sách</button>
+      <button class="sb-tab-btn" data-panel="panelSaints">Thánh Chân Phước</button>
+    </div>
+    <div id="sbAlert" class="sb-alert" style="display:none"></div>
+  </div>
+
+  <!-- PANEL: KINH SÁCH -->
+  <div id="panelKinhSach" class="sb-panel" style="display:none">
+
+  <!-- TRẠNG THÁI KẾT NỐI -->
+  <div id="sbOffline" class="sb-offline" style="display:none">
+    <div class="sb-offline-box">
+      <div class="sb-offline-icon">⚠</div>
+      <h2>Admin Server chưa chạy</h2>
+      <p>Mở một terminal mới trong thư mục dự án và chạy lệnh:</p>
+      <pre>npm run admin</pre>
+      <p>Sau đó tải lại trang này.</p>
+      <button id="btnRetry">Thử lại</button>
+    </div>
+  </div>
+
+  <!-- MAIN UI -->
+  <div id="sbMain" class="sb-main" style="display:none">
+
+    <!-- SIDEBAR DANH SÁCH -->
+    <aside class="sb-sidebar">
+      <div class="sb-sidebar-toolbar">
+        <select id="filterSeason">
+          <option value="">Tất cả mùa</option>
+          {SEASONS.map(s => <option value={s.key}>{s.label}</option>)}
+        </select>
+        <input id="filterSearch" type="search" placeholder="Tìm bài..." />
+        <label class="sb-filter-check">
+          <input type="checkbox" id="filterEmpty" />
+          <span>Chỉ bài chưa có nội dung</span>
+        </label>
+      </div>
+      <div class="sb-count" id="sbCount"></div>
+      <div id="entryList" class="sb-entry-list"></div>
+    </aside>
+
+    <!-- KHU VỰC SOẠN BÀI -->
+    <main class="sb-editor" id="sbEditor">
+      <div class="sb-empty-state" id="editorEmpty">
+        <div class="sb-empty-icon">✍</div>
+        <p>Chọn một bài từ danh sách để chỉnh sửa,<br/>hoặc nhấn <strong>+ Bài mới</strong> để tạo bài.</p>
+      </div>
+
+      <form class="sb-form" id="sbForm" style="display:none" autocomplete="off">
+        <div class="sb-form-header">
+          <h2 id="formTitle">Chỉnh sửa bài</h2>
+          <div class="sb-form-actions-top">
+            <button type="button" class="sb-btn sb-btn-ghost" id="btnCancel">Hủy</button>
+            <button type="button" class="sb-btn sb-btn-danger" id="btnDelete" style="display:none">Xóa</button>
+            <button type="submit" class="sb-btn sb-btn-primary" id="btnSave">Lưu</button>
+          </div>
+        </div>
+
+        <input type="hidden" id="fEditId" />
+
+        <div class="sb-grid-2">
+          <div class="sb-field">
+            <label>Tên bài lễ <span class="req">*</span></label>
+            <input id="fTitle" type="text" placeholder="vd: Lễ Thánh Augustinô, 28 tháng 8" required />
+          </div>
+          <div class="sb-field">
+            <label>Mùa phụng vụ <span class="req">*</span></label>
+            <select id="fSeason">
+              {SEASONS.map(s => <option value={s.key}>{s.label}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="sb-grid-2">
+          <div class="sb-field">
+            <label>Tác giả <small>(source)</small></label>
+            <input id="fSource" type="text" placeholder="vd: Thánh Augustinô, Gm. và Ts." />
+          </div>
+          <div class="sb-field">
+            <label>Trích dẫn tác phẩm <small>(excerpt)</small></label>
+            <input id="fExcerpt" type="text" placeholder="vd: Sermon 47, 1-3" />
+          </div>
+        </div>
+
+        <div class="sb-field">
+          <label>Tên đầy đủ trong bảng <small>(liturgy)</small></label>
+          <input id="fLiturgy" type="text" placeholder="vd: Ngày 28 Tháng 8: Thánh Augustinô, Gm. và Ts." />
+          <span class="sb-hint">Lễ Riêng: bắt đầu bằng "Ngày D Tháng M:" để hiển thị đúng trong Bài đọc hôm nay.</span>
+        </div>
+
+        <div class="sb-grid-3">
+          <div class="sb-field">
+            <label>Thứ tự <small>(order)</small></label>
+            <input id="fOrder" type="number" value="1" min="1" />
+          </div>
+          <div class="sb-field">
+            <label>Cấp bậc <small>(rank)</small></label>
+            <input id="fRank" type="text" placeholder="solemn / feast / ..." />
+          </div>
+          <div class="sb-field sb-field-check sb-field-check-col">
+            <label><input id="fDraft" type="checkbox" /> Lưu nháp (ẩn trên site)</label>
+            <label><input id="fManualFill" type="checkbox" /> Đánh dấu <strong>fill tay</strong> (chuẩn hóa sau)</label>
+          </div>
+        </div>
+
+        <div class="sb-field">
+          <label>Slug (tên file) <span class="req">*</span></label>
+          <div class="sb-slug-row">
+            <span class="sb-slug-pfx" id="slugPfx">kinh-sach/le-chung/</span>
+            <input id="fSlug" type="text" placeholder="ten-bai-doc" pattern="[a-z0-9\-]+" required />
+            <span class="sb-slug-sfx">.md</span>
+          </div>
+          <span class="sb-hint">Chỉ dùng chữ thường, số và dấu gạch nối.</span>
+        </div>
+
+        <div class="sb-field sb-field-body">
+          <label>Nội dung bài đọc <span class="req">*</span></label>
+          <textarea id="fBody" rows="20" placeholder="Nhập nội dung bài đọc ở đây.
+Dùng ## để bắt đầu chương/phần.
+Dùng > để trích dẫn."></textarea>
+        </div>
+
+        <div class="sb-form-footer">
+          <button type="button" class="sb-btn sb-btn-ghost" id="btnCancel2">Hủy</button>
+          <button type="button" class="sb-btn sb-btn-danger" id="btnDelete2" style="display:none">Xóa bài này</button>
+          <button type="submit" class="sb-btn sb-btn-primary">Lưu bài</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  </div>{/* end #panelKinhSach */}
+
+  <!-- PANEL: THÁNH CHÂN PHƯỚC -->
+  <div id="panelSaints" class="sb-panel" style="display:none">
+    <div id="sbMainSaints" class="sb-main">
+      <aside class="sb-sidebar">
+        <div class="sb-sidebar-toolbar">
+          <input id="saintSearch" type="search" placeholder="Tìm theo tên..." />
+          <label class="sb-filter-check">
+            <input type="checkbox" id="saintFilterEmpty" />
+            <span>Chỉ bài chưa có nội dung</span>
+          </label>
+          <label class="sb-filter-check">
+            <input type="checkbox" id="saintFilterManual" />
+            <span>Chỉ đánh dấu fill tay</span>
+          </label>
+        </div>
+        <div class="sb-count" id="saintCount"></div>
+        <div id="saintList" class="sb-entry-list"></div>
+      </aside>
+
+      <main class="sb-editor" id="saintEditorWrap">
+        <div class="sb-empty-state" id="saintEditorEmpty">
+          <div class="sb-empty-icon">✝</div>
+          <p>Chọn một mục từ danh sách để chỉnh sửa.</p>
+        </div>
+
+        <form class="sb-form" id="saintForm" style="display:none" autocomplete="off">
+          <div class="sb-form-header">
+            <h2 id="saintFormTitle">Chỉnh sửa tiểu sử</h2>
+            <div class="sb-form-actions-top">
+              <button type="button" class="sb-btn sb-btn-ghost" id="saintBtnCancel">Hủy</button>
+              <button type="submit" class="sb-btn sb-btn-primary" id="saintBtnSave">Lưu</button>
+            </div>
+          </div>
+
+          <input type="hidden" id="saintEditId" />
+
+          <div class="sb-grid-2">
+            <div class="sb-field">
+              <label>Tên thánh <span class="req">*</span></label>
+              <input id="saintTitle" type="text" required />
+            </div>
+            <div class="sb-field">
+              <label>Phụ đề</label>
+              <input id="saintSubtitle" type="text" />
+            </div>
+          </div>
+
+          <div class="sb-grid-3">
+            <div class="sb-field">
+              <label>Cấp lễ <small>(rank)</small></label>
+              <select id="saintRank">
+                <option value="solemn">Lễ Trọng</option>
+                <option value="feast">Lễ Kính</option>
+                <option value="memorial">Lễ Nhớ</option>
+                <option value="none">Không có</option>
+              </select>
+            </div>
+            <div class="sb-field">
+              <label>Ngày lễ</label>
+              <input id="saintFeastDay" type="number" min="1" max="31" />
+            </div>
+            <div class="sb-field">
+              <label>Tháng lễ</label>
+              <input id="saintFeastMonth" type="number" min="1" max="12" />
+            </div>
+          </div>
+
+          <div class="sb-field">
+            <label>Tên file ảnh <small>(imageFile)</small></label>
+            <input id="saintImageFile" type="text" placeholder="vd: st-augustine-of-hippo.jpg" />
+          </div>
+
+          <div class="sb-grid-2">
+            <div class="sb-field sb-field-check sb-field-check-col">
+              <label><input id="saintDraft" type="checkbox" /> Lưu nháp (ẩn trên site)</label>
+              <label><input id="saintManualFill" type="checkbox" /> Đánh dấu <strong>fill tay</strong></label>
+            </div>
+          </div>
+
+          <div class="sb-field sb-field-body">
+            <label>Nội dung tiểu sử <span class="req">*</span></label>
+            <textarea id="saintBody" rows="20" placeholder="Nhập nội dung tiểu sử ở đây."></textarea>
+          </div>
+
+          <div class="sb-form-footer">
+            <button type="button" class="sb-btn sb-btn-ghost" id="saintBtnCancel2">Hủy</button>
+            <button type="submit" class="sb-btn sb-btn-primary">Lưu</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>{/* end #panelSaints */}
+
+  <!-- PANEL: CÀI ĐẶT TRANG -->
+  <div id="panelCaiDat" class="sb-panel">
+    <div class="cd-wrap">
+      <!-- SIDEBAR: chọn loại → chọn trang -->
+      <aside class="cd-sidebar">
+        <div class="cd-type-bar">
+          <button class="cd-type-btn" data-group="banner">Banner</button>
+          <button class="cd-type-btn" data-group="masthead">Tiêu đề trang</button>
+        </div>
+        <div id="cdPageList" class="cd-page-list"></div>
+      </aside>
+
+      <!-- EDITOR AREA -->
+      <main class="cd-editor" id="cdEditor">
+        <div class="sb-empty-state" id="cdEmpty">
+          <div class="sb-empty-icon">⚙</div>
+          <p>Chọn một trang để chỉnh sửa banner và tiêu đề.</p>
+        </div>
+
+        <div id="cdForm" style="display:none">
+          <div class="cd-form-hd">
+            <h2 id="cdFormTitle">Banner & Tiêu Đề</h2>
+            <div class="sb-form-actions-top">
+              <button type="button" class="sb-btn sb-btn-primary" id="cdSaveBtn">Lưu</button>
+            </div>
+          </div>
+
+          <!-- BANNER SECTION -->
+          <section class="cd-section" id="cdBannerSection">
+            <h3 class="cd-section-title">Banner</h3>
+            <div id="cdBannerNote" class="sb-hint" style="margin-bottom:1.2rem"></div>
+
+            <div id="cdVariants"></div>
+
+            <div class="cd-actions-row">
+              <button type="button" class="sb-btn sb-btn-ghost" id="cdAddVariant" style="display:none">+ Thêm variant</button>
+              <label class="cd-upload-btn" id="cdUploadLabel" title="Tải ảnh lên (jpg/png/webp, tối đa 8MB)">
+                ↑ Tải ảnh lên
+                <input type="file" id="cdUploadInput" accept=".jpg,.jpeg,.png,.webp,.avif,.gif,.svg" style="display:none" />
+              </label>
+              <span class="cd-upload-status" id="cdUploadStatus"></span>
+            </div>
+          </section>
+
+          <!-- MASTHEAD SECTION -->
+          <section class="cd-section" id="cdMastheadSection" style="display:none">
+            <h3 class="cd-section-title">Tiêu Đề Trang (lib-masthead)</h3>
+            <div id="cdMastheadFields"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>{/* end #panelCaiDat */}
+
+</div>
+
+<script define:vars={{ SEASONS }}>
+const API = 'http://localhost:4322';
+
+// ─── State ─────────────────────────────────────────────────────────────────
+let allEntries = {};   // { seasonKey: [entry, ...] }
+let currentId  = null; // id của bài đang mở
+let isNew      = false;
+
+// ─── DOM refs ──────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const els = {
+  offline: $('sbOffline'), main: $('sbMain'), alert: $('sbAlert'),
+  list: $('entryList'), count: $('sbCount'),
+  filterSeason: $('filterSeason'), filterSearch: $('filterSearch'), filterEmpty: $('filterEmpty'),
+  empty: $('editorEmpty'), form: $('sbForm'), formTitle: $('formTitle'),
+  fId: $('fEditId'), fTitle: $('fTitle'), fSeason: $('fSeason'),
+  fSource: $('fSource'), fExcerpt: $('fExcerpt'), fLiturgy: $('fLiturgy'),
+  fOrder: $('fOrder'), fRank: $('fRank'), fDraft: $('fDraft'), fManualFill: $('fManualFill'),
+  fSlug: $('fSlug'), slugPfx: $('slugPfx'), fBody: $('fBody'),
+  btnDelete: $('btnDelete'), btnDelete2: $('btnDelete2'),
+};
+
+// ─── Helpers ───────────────────────────────────────────────────────────────
+function toSlug(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/đ/gi,'d').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+function seasonLabel(key) {
+  return SEASONS.find(s => s.key === key)?.label || key;
+}
+function showAlert(msg, type = 'success') {
+  els.alert.textContent = msg;
+  els.alert.className = 'sb-alert sb-alert-' + type;
+  els.alert.style.display = 'block';
+  setTimeout(() => els.alert.style.display = 'none', 4000);
+}
+async function api(method, path, body) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(API + path, opts);
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error || r.statusText);
+  return d;
+}
+
+// ─── Load entries ──────────────────────────────────────────────────────────
+async function loadEntries() {
+  allEntries = await api('GET', '/api/entries');
+  renderList();
+}
+
+function renderList() {
+  const filterKey   = els.filterSeason.value;
+  const q           = els.filterSearch.value.toLowerCase().trim();
+  const onlyEmpty   = els.filterEmpty.checked;
+  const rows = [];
+  for (const [sk, entries] of Object.entries(allEntries)) {
+    if (filterKey && sk !== filterKey) continue;
+    for (const e of entries) {
+      if (q && !e.title.toLowerCase().includes(q) && !e.author.toLowerCase().includes(q) && !e.liturgy.toLowerCase().includes(q)) continue;
+      if (onlyEmpty && e.hasContent) continue;
+      rows.push({ ...e, seasonKey: sk });
+    }
+  }
+  const totalEmpty = Object.values(allEntries).flat().filter(e => !e.hasContent).length;
+  els.count.textContent = `${rows.length} bài${onlyEmpty ? '' : ` · ${totalEmpty} chưa có nội dung`}`;
+  if (!rows.length) {
+    els.list.innerHTML = '<p class="sb-list-empty">Không có bài nào.</p>';
+    return;
+  }
+  const grouped = {};
+  for (const r of rows) {
+    if (!grouped[r.seasonKey]) grouped[r.seasonKey] = [];
+    grouped[r.seasonKey].push(r);
+  }
+  els.list.innerHTML = Object.entries(grouped).map(([sk, entries]) => `
+    <div class="sb-season-group">
+      <div class="sb-season-label">${seasonLabel(sk)} <span>(${entries.length})</span></div>
+      ${entries.map(e => `
+        <div class="sb-entry-row ${e.id === currentId ? 'active' : ''} ${e.draft ? 'is-draft' : ''} ${!e.hasContent ? 'is-empty' : ''}"
+             data-id="${e.id}">
+          <div class="sb-entry-status" title="${e.hasContent ? 'Có nội dung' : 'Chưa có nội dung'}"></div>
+          <div class="sb-entry-body">
+            <div class="sb-entry-title">${esc(e.title)}</div>
+            <div class="sb-entry-meta">
+              ${e.author ? `<span>${esc(e.author)}</span>` : ''}
+              ${e.draft ? '<span class="sb-tag sb-tag-draft">nháp</span>' : ''}
+              ${!e.hasContent ? '<span class="sb-tag sb-tag-empty">trống</span>' : ''}
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+// ─── Open entry for editing ────────────────────────────────────────────────
+async function openEntry(id) {
+  currentId = id;
+  isNew = false;
+  const data = await api('GET', `/api/entry?id=${encodeURIComponent(id)}`);
+  const fm = data.fm || {};
+  const [sk, ...slugParts] = id.split('/');
+  const slug = slugParts.join('/');
+  els.fId.value        = id;
+  els.fTitle.value     = fm.title   || '';
+  els.fSeason.value    = fm.seasonKey || sk;
+  els.fSource.value    = fm.source  || '';
+  els.fExcerpt.value   = fm.excerpt || '';
+  els.fLiturgy.value   = fm.liturgy || '';
+  els.fOrder.value     = fm.order   ?? 1;
+  els.fRank.value      = fm.rank    || '';
+  els.fDraft.checked   = !!fm.draft;
+  els.fManualFill.checked = !!fm.manualFill;
+  els.fSlug.value      = slug;
+  els.fSlug._manual    = true;
+  els.fBody.value      = data.body  || '';
+  els.slugPfx.textContent = `kinh-sach/${fm.seasonKey || sk}/`;
+  els.formTitle.textContent = 'Chỉnh sửa bài';
+  els.btnDelete.style.display = 'inline-flex';
+  els.btnDelete2.style.display = 'inline-flex';
+  els.empty.style.display = 'none';
+  els.form.style.display  = 'block';
+  renderList();
+}
+
+function openNew() {
+  currentId = null;
+  isNew = true;
+  els.fId.value = '';
+  els.fTitle.value = els.fSource.value = els.fExcerpt.value = els.fLiturgy.value = els.fRank.value = els.fBody.value = '';
+  els.fSeason.value = 'mua-thuong-nien';
+  els.fOrder.value  = 1;
+  els.fDraft.checked = false;
+  els.fManualFill.checked = false;
+  els.fSlug.value = '';
+  els.fSlug._manual = false;
+  els.slugPfx.textContent = 'kinh-sach/mua-thuong-nien/';
+  els.formTitle.textContent = 'Thêm bài mới';
+  els.btnDelete.style.display  = 'none';
+  els.btnDelete2.style.display = 'none';
+  els.empty.style.display = 'none';
+  els.form.style.display  = 'block';
+  els.fTitle.focus();
+}
+
+function closeForm() {
+  currentId = null;
+  els.form.style.display  = 'none';
+  els.empty.style.display = 'block';
+  renderList();
+}
+
+// ─── Form interactions ─────────────────────────────────────────────────────
+els.fTitle.addEventListener('input', () => {
+  if (!els.fSlug._manual) els.fSlug.value = toSlug(els.fTitle.value);
+});
+els.fSlug.addEventListener('input', () => { els.fSlug._manual = true; });
+els.fSeason.addEventListener('change', () => {
+  els.slugPfx.textContent = `kinh-sach/${els.fSeason.value}/`;
+});
+els.filterSeason.addEventListener('change', renderList);
+els.filterSearch.addEventListener('input', renderList);
+els.filterEmpty.addEventListener('change', renderList);
+els.list.addEventListener('click', e => {
+  const row = e.target.closest('.sb-entry-row');
+  if (row) openEntry(row.dataset.id);
+});
+$('btnNew').addEventListener('click', openNew);
+$('btnCancel').addEventListener('click', closeForm);
+$('btnCancel2').addEventListener('click', closeForm);
+
+// Save
+$('sbForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fm = {
+    title:     els.fTitle.value.trim(),
+    season:    seasonLabel(els.fSeason.value),
+    seasonKey: els.fSeason.value,
+    source:    els.fSource.value.trim(),
+    excerpt:   els.fExcerpt.value.trim(),
+    liturgy:   els.fLiturgy.value.trim() || els.fTitle.value.trim(),
+    rank:      els.fRank.value.trim(),
+    order:     parseInt(els.fOrder.value) || 1,
+    draft:     els.fDraft.checked,
+  };
+  // Remove empty optional fields
+  if (!fm.source)  delete fm.source;
+  if (!fm.excerpt) delete fm.excerpt;
+  if (!fm.rank)    fm.rank = '';
+  if (els.fManualFill.checked) fm.manualFill = true;
+
+  const slug = els.fSlug.value.trim() || toSlug(fm.title);
+  const body = els.fBody.value;
+
+  try {
+    if (isNew) {
+      await api('POST', '/api/entry', { seasonKey: fm.seasonKey, slug, fm, body });
+      showAlert(`Đã tạo bài "${fm.title}"`);
+    } else {
+      const oldId = els.fId.value;
+      const [oldSeason, ...oldSlugParts] = oldId.split('/');
+      const oldSlug = oldSlugParts.join('/');
+      const newSlug = slug !== oldSlug ? slug : undefined;
+      const result  = await api('PUT', `/api/entry?id=${encodeURIComponent(oldId)}`, { fm, body, newSlug });
+      currentId = result.id;
+      showAlert(`Đã lưu "${fm.title}"`);
+    }
+    await loadEntries();
+    if (!isNew) openEntry(currentId);
+    else closeForm();
+  } catch (err) {
+    showAlert(err.message, 'error');
+  }
+});
+
+// Delete
+async function doDelete() {
+  if (!currentId) return;
+  const entry = Object.values(allEntries).flat().find(e => e.id === currentId);
+  if (!confirm(`Xóa bài "${entry?.title || currentId}"?\nKhông thể khôi phục.`)) return;
+  try {
+    await api('DELETE', `/api/entry?id=${encodeURIComponent(currentId)}`);
+    showAlert('Đã xóa bài.');
+    closeForm();
+    await loadEntries();
+  } catch (err) {
+    showAlert(err.message, 'error');
+  }
+}
+$('btnDelete').addEventListener('click', doDelete);
+$('btnDelete2').addEventListener('click', doDelete);
+
+// ─── Init ──────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    await fetch(`${API}/api/entries`, { signal: AbortSignal.timeout(3000) });
+    els.offline.style.display = 'none';
+    els.main.style.display    = 'flex';
+    await loadEntries();
+    // Mở sẵn bài theo ?id= (từ nút edit trang Kinh Sách); ?manual=1 → tick sẵn "fill tay"
+    const params = new URLSearchParams(location.search);
+    const openId = params.get('id');
+    if (openId) {
+      try {
+        await openEntry(openId);
+        if (params.get('manual') === '1' && !els.fManualFill.checked) els.fManualFill.checked = true;
+        els.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch { showAlert('Không mở được bài: ' + openId, 'error'); }
+    }
+  } catch {
+    els.offline.style.display = 'flex';
+    els.main.style.display    = 'none';
+  }
+}
+$('btnRetry').addEventListener('click', init);
+init();
+initCaiDat();
+
+// ─── Tab switching ──────────────────────────────────────────────────────────
+document.querySelectorAll('.sb-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sb-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const panelId = btn.dataset.panel;
+    document.querySelectorAll('.sb-panel').forEach(p => p.style.display = 'none');
+    document.getElementById(panelId).style.display = 'block';
+    if (panelId === 'panelKinhSach') {
+      $('btnNew').style.display = '';
+    } else {
+      $('btnNew').style.display = 'none';
+    }
+    if (panelId === 'panelCaiDat') initCaiDat();
+    if (panelId === 'panelSaints') loadSaints();
+  });
+});
+
+// ─── Cài Đặt Trang ─────────────────────────────────────────────────────────
+const BANNER_KEYS = {
+  'home':               'Trang Chủ',
+  'bai-viet':           'Bài Viết',
+  'bai-viet-triet-hoc': 'Triết Học',
+  'bai-viet-than-hoc':  'Thần Học',
+  'readings':           'Kinh Sách',
+  'reader':             'Trang Đọc',
+  'saints':             'Thánh – Chân Phước',
+  'documents':          'Văn Kiện',
+  'tu-luat':            'Tu Luật',
+  'thu-vien':           'Thư Viện',
+  'lich-phung-vu':      'Lịch Phụng Vụ',
+  'tu-thuat':           'Tự Thuật',
+  'thanh-au-tinh':      'Thánh Augustinô',
+  'lich-su-dong':       'Lịch Sử Dòng',
+};
+const MASTHEAD_KEYS = {
+  'bai-viet':     'Bài Viết',
+  'readings':     'Kinh Sách',
+  'saints':       'Thánh – Chân Phước',
+  'thu-vien':     'Thư Viện',
+  'lich-phung-vu':'Lịch Phụng Vụ',
+  'thanh-au-tinh':'Thánh Augustinô',
+  'lich-su-dong': 'Lịch Sử Dòng',
+  'on-goi':       'Ơn Gọi',
+};
+const MASTHEAD_FIELDS = {
+  'bai-viet':     ['title','sub'],
+  'readings':     ['title','sub','desc'],
+  'saints':       ['title','sub'],
+  'thu-vien':     ['title','sub'],
+  'lich-phung-vu':['title','sub'],
+  'thanh-au-tinh':['eyebrow','name','dates','feast'],
+  'lich-su-dong': ['eyebrow','title'],
+  'on-goi':       ['eyebrow','title','quote','cite'],
+};
+const MASTHEAD_LABELS = {
+  title:'Tiêu đề (h1)',sub:'Phụ đề (sub)',desc:'Mô tả (desc)',
+  eyebrow:'Nhãn nhỏ trên (eyebrow)',name:'Tên (h1)',dates:'Năm sinh-mất',feast:'Ngày lễ',
+  quote:'Câu trích dẫn (banner)',cite:'Nguồn trích dẫn',
+};
+
+let bannerData = {};
+let headerData = {};
+let availImages = [];
+let cdCurrentGroup = null; // 'banner' | 'masthead'
+let cdCurrentKey   = null;
+let cdCurrentType  = null; // mirrors cdCurrentGroup when a page is opened
+
+async function initCaiDat() {
+  try {
+    [bannerData, headerData, availImages] = await Promise.all([
+      api('GET','/api/banners'),
+      api('GET','/api/page-headers'),
+      api('GET','/api/banner-images'),
+    ]);
+  } catch { showAlert('Không tải được dữ liệu cài đặt', 'error'); return; }
+  selectGroup('banner');
+}
+
+function selectGroup(group) {
+  cdCurrentGroup = group;
+  cdCurrentKey   = null;
+  cdCurrentType  = null;
+  document.querySelectorAll('.cd-type-btn').forEach(btn =>
+    btn.classList.toggle('active', btn.dataset.group === group));
+  renderPageList();
+  document.getElementById('cdEmpty').style.display = '';
+  document.getElementById('cdForm').style.display = 'none';
+}
+
+function renderPageList() {
+  const list = document.getElementById('cdPageList');
+  if (!cdCurrentGroup) { list.innerHTML = ''; return; }
+  const map = cdCurrentGroup === 'banner' ? BANNER_KEYS : MASTHEAD_KEYS;
+  list.innerHTML = Object.entries(map).map(([k, label]) =>
+    `<div class="cd-page-row ${k === cdCurrentKey ? 'active' : ''}" data-key="${k}">${esc(label)}</div>`
+  ).join('');
+  list.querySelectorAll('.cd-page-row').forEach(r =>
+    r.addEventListener('click', () => openPage(r.dataset.key, cdCurrentGroup)));
+}
+
+document.querySelectorAll('.cd-type-btn').forEach(btn =>
+  btn.addEventListener('click', () => selectGroup(btn.dataset.group)));
+
+function openPage(key, type) {
+  cdCurrentKey = key;
+  cdCurrentType = type;
+  renderPageList();
+  document.getElementById('cdEmpty').style.display = 'none';
+  document.getElementById('cdForm').style.display = 'block';
+  const keyLabel = type === 'banner' ? (BANNER_KEYS[key] || key) : (MASTHEAD_KEYS[key] || key);
+  document.getElementById('cdFormTitle').textContent = keyLabel;
+
+  document.getElementById('cdBannerSection').style.display = type === 'banner' ? '' : 'none';
+  document.getElementById('cdMastheadSection').style.display = type === 'masthead' ? '' : 'none';
+
+  if (type === 'banner') {
+    const isArray = Array.isArray(bannerData[key]);
+    const variants = isArray ? bannerData[key] : bannerData[key] ? [bannerData[key]] : [];
+    document.getElementById('cdBannerNote').textContent =
+      isArray ? `Banner dạng mảng — ${variants.length} variant (hiển thị ngẫu nhiên)` : '';
+    document.getElementById('cdAddVariant').style.display = isArray ? '' : 'none';
+    renderVariants(variants, isArray);
+  } else {
+    renderMasthead(key);
+  }
+}
+
+function imgSelect(val) {
+  const opts = availImages.map(img =>
+    `<option value="${esc(img)}" ${img === val ? 'selected' : ''}>${esc(img.split('/').pop())}</option>`
+  ).join('');
+  return `<select class="cd-img-sel">${opts}</select>`;
+}
+
+function variantHtml(v, idx) {
+  return `
+  <div class="cd-variant" data-idx="${idx}">
+    <div class="cd-variant-hd"><span class="cd-variant-num">Variant ${idx + 1}</span></div>
+    <div class="sb-field">
+      <label>Ảnh banner</label>
+      ${imgSelect(v.imageUrl || '')}
+    </div>
+    <div class="sb-field">
+      <label>Alt text</label>
+      <input type="text" class="cd-alt" value="${esc(v.altText || '')}" />
+    </div>
+    <div class="sb-field">
+      <label>Câu trích dẫn <small>(quoteText — dùng "" bao văn bản)</small></label>
+      <textarea class="cd-qt" rows="3">${esc(v.quoteText || '')}</textarea>
+    </div>
+    <div class="sb-field">
+      <label>Trích nguồn <small>(quoteCite — có thể dùng &lt;em&gt;)</small></label>
+      <input type="text" class="cd-qc" value="${esc(v.quoteCite || '')}" />
+    </div>
+  </div>`;
+}
+
+function renderVariants(variants, isArray) {
+  document.getElementById('cdVariants').innerHTML = variants.map((v, i) => variantHtml(v, i)).join('');
+}
+
+function getVariantsFromDom() {
+  return Array.from(document.querySelectorAll('.cd-variant')).map(el => ({
+    imageUrl:  el.querySelector('.cd-img-sel').value,
+    altText:   el.querySelector('.cd-alt').value.trim(),
+    quoteText: el.querySelector('.cd-qt').value.trim(),
+    quoteCite: el.querySelector('.cd-qc').value.trim(),
+  }));
+}
+
+function renderMasthead(key) {
+  const fields = MASTHEAD_FIELDS[key] || [];
+  const data = headerData[key] || {};
+  document.getElementById('cdMastheadFields').innerHTML = fields.map(f => `
+    <div class="sb-field">
+      <label>${esc(MASTHEAD_LABELS[f] || f)}</label>
+      <input type="text" class="cd-mh-field" data-field="${f}" value="${esc(data[f] || '')}" />
+    </div>`).join('');
+}
+
+document.getElementById('cdAddVariant').addEventListener('click', () => {
+  const key = cdCurrentKey;
+  const arr = Array.isArray(bannerData[key]) ? [...bannerData[key]] : [];
+  arr.push({ imageUrl: availImages[0] || '', altText: '', quoteText: '', quoteCite: '' });
+  document.getElementById('cdVariants').innerHTML += variantHtml(arr[arr.length - 1], arr.length - 1);
+});
+
+// ── Upload ảnh banner ───────────────────────────────────────────────────────
+document.getElementById('cdUploadInput').addEventListener('change', async (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const status = document.getElementById('cdUploadStatus');
+  status.textContent = 'Đang tải…';
+  status.className = 'cd-upload-status';
+  try {
+    const data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+    const result = await api('POST', '/api/banner-images', { filename: file.name, data });
+    availImages.push(result.url);
+    // Cập nhật tất cả select trong cdVariants để thêm option mới
+    document.querySelectorAll('.cd-img-sel').forEach(sel => {
+      const opt = document.createElement('option');
+      opt.value = result.url;
+      opt.textContent = result.url.split('/').pop();
+      opt.selected = true;
+      sel.appendChild(opt);
+      // Bỏ chọn các option khác
+      Array.from(sel.options).forEach(o => { if (o !== opt) o.selected = false; });
+    });
+    status.textContent = `Đã tải: ${file.name}`;
+    status.className = 'cd-upload-status cd-upload-ok';
+  } catch (err) {
+    status.textContent = err.message;
+    status.className = 'cd-upload-status cd-upload-err';
+  }
+  e.target.value = ''; // reset để upload lại cùng file nếu cần
+});
+
+// ─── Thánh Chân Phước ──────────────────────────────────────────────────────
+let allSaints = [];
+let currentSaintId = null;
+
+const $s = id => document.getElementById(id);
+
+async function loadSaints() {
+  allSaints = await api('GET', '/api/saints');
+  renderSaintList();
+}
+
+function renderSaintList() {
+  const q = $s('saintSearch').value.toLowerCase().trim();
+  const onlyEmpty  = $s('saintFilterEmpty').checked;
+  const onlyManual = $s('saintFilterManual').checked;
+  let rows = allSaints.filter(e => {
+    if (q && !e.title.toLowerCase().includes(q)) return false;
+    if (onlyEmpty  && e.hasContent) return false;
+    if (onlyManual && !e.manualFill) return false;
+    return true;
+  });
+  $s('saintCount').textContent = `${rows.length} mục · ${allSaints.filter(e => !e.hasContent).length} chưa có nội dung`;
+  if (!rows.length) {
+    $s('saintList').innerHTML = '<p class="sb-list-empty">Không có mục nào.</p>';
+    return;
+  }
+  $s('saintList').innerHTML = rows.map(e => `
+    <div class="sb-entry-row ${e.id === currentSaintId ? 'active' : ''} ${e.draft ? 'is-draft' : ''} ${!e.hasContent ? 'is-empty' : ''} ${e.manualFill ? 'is-manual' : ''}"
+         data-id="${e.id}">
+      <div class="sb-entry-status" title="${e.hasContent ? 'Có nội dung' : 'Chưa có nội dung'}"></div>
+      <div class="sb-entry-body">
+        <div class="sb-entry-title">${esc(e.title)}</div>
+        <div class="sb-entry-meta">
+          ${e.feastDay ? `<span>${e.feastDay}/${e.feastMonth}</span>` : ''}
+          ${e.draft ? '<span class="sb-tag sb-tag-draft">nháp</span>' : ''}
+          ${!e.hasContent ? '<span class="sb-tag sb-tag-empty">trống</span>' : ''}
+          ${e.manualFill ? '<span class="sb-tag sb-tag-manual">fill tay</span>' : ''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+async function openSaint(id) {
+  currentSaintId = id;
+  const data = await api('GET', `/api/saint?id=${encodeURIComponent(id)}`);
+  const fm = data.fm || {};
+  $s('saintEditId').value    = id;
+  $s('saintTitle').value     = fm.title    || '';
+  $s('saintSubtitle').value  = fm.subtitle || '';
+  $s('saintRank').value      = fm.rank     || 'none';
+  $s('saintFeastDay').value  = fm.feastDay  ?? '';
+  $s('saintFeastMonth').value= fm.feastMonth ?? '';
+  $s('saintImageFile').value = fm.imageFile || '';
+  $s('saintDraft').checked   = !!fm.draft;
+  $s('saintManualFill').checked = !!fm.manualFill;
+  $s('saintBody').value      = data.body   || '';
+  $s('saintFormTitle').textContent = 'Chỉnh sửa: ' + (fm.title || id);
+  $s('saintEditorEmpty').style.display = 'none';
+  $s('saintForm').style.display = 'block';
+  renderSaintList();
+}
+
+function closeSaintForm() {
+  currentSaintId = null;
+  $s('saintForm').style.display  = 'none';
+  $s('saintEditorEmpty').style.display = 'block';
+  renderSaintList();
+}
+
+$s('saintList').addEventListener('click', e => {
+  const row = e.target.closest('.sb-entry-row');
+  if (row) openSaint(row.dataset.id);
+});
+$s('saintSearch').addEventListener('input', renderSaintList);
+$s('saintFilterEmpty').addEventListener('change', renderSaintList);
+$s('saintFilterManual').addEventListener('change', renderSaintList);
+$s('saintBtnCancel').addEventListener('click', closeSaintForm);
+$s('saintBtnCancel2').addEventListener('click', closeSaintForm);
+
+$s('saintForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const id = $s('saintEditId').value;
+  const fm = {
+    title:      $s('saintTitle').value.trim(),
+    subtitle:   $s('saintSubtitle').value.trim() || undefined,
+    rank:       $s('saintRank').value,
+    feastDay:   parseInt($s('saintFeastDay').value) || undefined,
+    feastMonth: parseInt($s('saintFeastMonth').value) || undefined,
+    imageFile:  $s('saintImageFile').value.trim() || undefined,
+    draft:      $s('saintDraft').checked,
+  };
+  if ($s('saintManualFill').checked) fm.manualFill = true;
+  // clean undefined
+  Object.keys(fm).forEach(k => fm[k] === undefined && delete fm[k]);
+  const body = $s('saintBody').value;
+  try {
+    await api('PUT', `/api/saint?id=${encodeURIComponent(id)}`, { fm, body });
+    showAlert(`Đã lưu "${fm.title}"`);
+    await loadSaints();
+    openSaint(id);
+  } catch (err) {
+    showAlert(err.message, 'error');
+  }
+});
+
+document.getElementById('cdSaveBtn').addEventListener('click', async () => {
+  const key = cdCurrentKey;
+  const type = cdCurrentType;
+  if (!key || !type) return;
+  try {
+    if (type === 'banner') {
+      const variants = getVariantsFromDom();
+      const isArray = Array.isArray(bannerData[key]);
+      const newBanner = isArray ? variants : variants[0];
+      await api('PUT', `/api/banners/${encodeURIComponent(key)}`, newBanner);
+      bannerData[key] = newBanner;
+    } else {
+      const newHeader = {};
+      document.querySelectorAll('.cd-mh-field').forEach(inp => {
+        newHeader[inp.dataset.field] = inp.value.trim();
+      });
+      await api('PUT', `/api/page-headers/${encodeURIComponent(key)}`, newHeader);
+      headerData[key] = newHeader;
+    }
+    const labelMap = type === 'banner' ? BANNER_KEYS : MASTHEAD_KEYS;
+    showAlert(`Đã lưu "${labelMap[key] || key}"`);
+  } catch (err) {
+    showAlert(err.message, 'error');
+  }
+});
+</script>
+
+<style is:global>
+.sb-wrap { padding: 2rem 0 6rem; }
+
+/* Tab bar */
+.sb-tab-bar { display: flex; gap: 0; border-bottom: 1px solid rgba(233,196,106,0.16); margin-bottom: 2rem; }
+.sb-tab-btn { font-family: var(--font-ui); font-size: 1.4rem; font-weight: 500; background: transparent; border: none; border-bottom: 2px solid transparent; padding: 0.7rem 1.8rem; color: rgba(239,231,214,0.55); cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+.sb-tab-btn:hover { color: rgba(239,231,214,0.9); }
+.sb-tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Cài Đặt layout */
+.cd-wrap { display: flex; gap: 2.4rem; align-items: flex-start; min-height: 60vh; }
+.cd-sidebar { flex: 0 0 26rem; background: var(--bg-card); border: 1px solid rgba(233,196,106,0.16); border-radius: 12px; overflow: hidden; position: sticky; top: 8rem; max-height: calc(100vh - 10rem); display: flex; flex-direction: column; }
+.cd-type-bar { display: flex; border-bottom: 1px solid rgba(233,196,106,0.14); flex-shrink: 0; }
+.cd-type-btn { flex: 1; font-family: var(--font-ui); font-size: 1.3rem; font-weight: 600; background: transparent; border: none; border-bottom: 2px solid transparent; padding: 1rem 0.5rem; color: rgba(239,231,214,0.5); cursor: pointer; transition: color 0.14s, border-color 0.14s, background 0.14s; }
+.cd-type-btn:hover { color: rgba(239,231,214,0.85); background: rgba(233,196,106,0.04); }
+.cd-type-btn.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(233,196,106,0.06); }
+.cd-page-list { overflow-y: auto; flex: 1; }
+.cd-page-row { padding: 0.9rem 1.2rem; cursor: pointer; border-left: 3px solid transparent; font-family: var(--font-body); font-size: 1.45rem; color: var(--ink-cream); line-height: 1.4; transition: background 0.14s, border-color 0.14s; }
+.cd-page-row:hover { background: rgba(233,196,106,0.07); }
+.cd-page-row.active { background: rgba(233,196,106,0.1); border-left-color: var(--gold); }
+.cd-editor { flex: 1; min-width: 0; }
+.cd-form-hd { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2rem; padding-bottom: 1.4rem; border-bottom: 1px solid rgba(233,196,106,0.12); }
+.cd-form-hd h2 { flex: 1; font-size: 1.9rem; color: var(--gold); margin: 0; }
+.cd-section { background: var(--bg-card); border: 1px solid rgba(233,196,106,0.16); border-radius: 12px; padding: 2rem 2.4rem 2.4rem; margin-bottom: 2rem; }
+.cd-section-title { font-family: var(--font-ui); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07rem; color: var(--gold-dim,#c5a059); margin: 0 0 1.6rem; }
+.cd-variant { border: 1px solid rgba(233,196,106,0.12); border-radius: 8px; padding: 1.4rem; margin-bottom: 1.2rem; }
+.cd-variant-hd { margin-bottom: 1rem; }
+.cd-variant-num { font-family: var(--font-ui); font-size: 1.2rem; font-weight: 700; color: var(--gold-dim,#c5a059); text-transform: uppercase; letter-spacing: 0.05rem; }
+.cd-img-sel { width: 100%; font-family: var(--font-body); font-size: 1.5rem; color: var(--ink-cream); background: #1a2843 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c5a059' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center; border: 1px solid rgba(233,196,106,0.2); border-radius: 8px; padding: 0.9rem 2.8rem 0.9rem 1.1rem; appearance: none; -webkit-appearance: none; }
+.cd-img-sel:focus { outline: none; border-color: rgba(233,196,106,0.55); }
+.cd-img-sel option { background: #16223d; color: var(--ink-cream); }
+.cd-group { border-bottom: 1px solid rgba(233,196,106,0.08); }
+.cd-group:last-child { border-bottom: none; }
+.cd-group-hd { padding: 1rem 1.2rem 0.5rem; font-family: var(--font-ui); font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07rem; color: var(--gold-dim,#c5a059); background: rgba(233,196,106,0.04); border-bottom: 1px solid rgba(233,196,106,0.06); }
+.cd-actions-row { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+.cd-upload-btn { font-family: var(--font-body); font-size: 1.5rem; padding: 0.7rem 1.4rem; background: rgba(233,196,106,0.08); border: 1px dashed rgba(233,196,106,0.45); border-radius: 8px; color: var(--gold); cursor: pointer; transition: background 0.18s, border-color 0.18s; white-space: nowrap; }
+.cd-upload-btn:hover { background: rgba(233,196,106,0.16); border-color: rgba(233,196,106,0.7); }
+.cd-upload-status { font-family: var(--font-ui); font-size: 1.3rem; color: var(--ink-cream-soft); }
+.cd-upload-ok  { color: #7ed3a0; }
+.cd-upload-err { color: #e08080; }
+
+/* Header */
+.sb-title-row { display: flex; align-items: center; gap: 2rem; margin-bottom: 1.2rem; }
+.sb-title-row h1 { flex: 1; font-size: clamp(2.2rem, 2rem + 1vw, 3rem); margin: 0; }
+.sb-btn-new { font-family: var(--font-body); font-size: 1.6rem; font-style: italic; padding: 0.8rem 1.8rem; background: rgba(233,196,106,0.12); border: 1px solid var(--gold); border-radius: 8px; color: var(--gold); cursor: pointer; transition: background 0.18s; }
+.sb-btn-new:hover { background: rgba(233,196,106,0.24); }
+
+/* Alert */
+.sb-alert { padding: 1rem 1.6rem; border-radius: 8px; font-size: 1.6rem; font-family: var(--font-ui); margin-bottom: 1.6rem; }
+.sb-alert-success { background: rgba(100,200,120,0.12); border: 1px solid rgba(100,200,120,0.4); color: #7ed3a0; }
+.sb-alert-error   { background: rgba(220,80,80,0.12); border: 1px solid rgba(220,80,80,0.4); color: #e08080; }
+
+/* Offline */
+.sb-offline { display: flex; align-items: center; justify-content: center; min-height: 40rem; }
+.sb-offline-box { text-align: center; max-width: 50rem; padding: 4rem; background: var(--bg-card); border: 1px solid rgba(233,196,106,0.2); border-radius: 16px; }
+.sb-offline-icon { font-size: 5rem; margin-bottom: 1.6rem; }
+.sb-offline-box h2 { color: var(--gold); font-size: 2.4rem; margin-bottom: 1rem; }
+.sb-offline-box p  { color: var(--ink-cream-soft); font-size: 1.6rem; margin-bottom: 1rem; }
+.sb-offline-box pre { background: rgba(0,0,0,0.3); border: 1px solid rgba(233,196,106,0.2); border-radius: 6px; padding: 1rem 1.6rem; font-size: 1.7rem; color: var(--gold); display: inline-block; margin: 1rem 0 1.6rem; }
+.sb-offline-box button { font-family: var(--font-body); font-size: 1.6rem; padding: 0.8rem 2rem; background: rgba(233,196,106,0.12); border: 1px solid var(--gold); border-radius: 8px; color: var(--gold); cursor: pointer; }
+
+/* Main layout */
+.sb-main { display: flex; gap: 2.4rem; align-items: flex-start; min-height: 70vh; }
+@media (max-width: 860px) { .sb-main { flex-direction: column; } }
+
+/* Sidebar */
+.sb-sidebar { flex: 0 0 30rem; background: var(--bg-card); border: 1px solid rgba(233,196,106,0.16); border-radius: 12px; overflow: hidden; position: sticky; top: 8rem; max-height: calc(100vh - 10rem); display: flex; flex-direction: column; }
+.sb-sidebar-toolbar { padding: 1.2rem; display: flex; flex-direction: column; gap: 0.8rem; border-bottom: 1px solid rgba(233,196,106,0.12); flex-shrink: 0; }
+.sb-sidebar-toolbar select,
+.sb-sidebar-toolbar input { width: 100%; font-family: var(--font-body); font-size: 1.5rem; color: var(--ink-cream); background: #1a2843; border: 1px solid rgba(233,196,106,0.2); border-radius: 7px; padding: 0.7rem 1rem; }
+.sb-sidebar-toolbar select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c5a059' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.8rem; background-color: #1a2843; }
+.sb-sidebar-toolbar select option { background: #16223d; color: var(--ink-cream); }
+.sb-sidebar-toolbar select:focus, .sb-sidebar-toolbar input:focus { outline: none; border-color: rgba(233,196,106,0.5); }
+.sb-filter-check { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-ui); font-size: 1.35rem; color: var(--ink-cream-soft); cursor: pointer; padding: 0.2rem 0; }
+.sb-filter-check input[type="checkbox"] { width: 1.5rem; height: 1.5rem; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
+.sb-filter-check span { user-select: none; }
+.sb-count { padding: 0.7rem 1.2rem; font-family: var(--font-ui); font-size: 1.2rem; color: var(--ink-cream-soft); border-bottom: 1px solid rgba(233,196,106,0.08); flex-shrink: 0; }
+.sb-entry-list { overflow-y: auto; flex: 1; }
+.sb-season-group { padding-bottom: 0.4rem; }
+.sb-season-label { padding: 1rem 1.2rem 0.5rem; font-family: var(--font-ui); font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06rem; color: var(--gold-dim,#c5a059); border-top: 1px solid rgba(233,196,106,0.06); }
+.sb-season-label:first-child { border-top: none; }
+.sb-season-label span { font-weight: 400; opacity: 0.65; }
+.sb-entry-row { padding: 0.75rem 1rem 0.75rem 0.6rem; cursor: pointer; border-left: 3px solid transparent; transition: background 0.14s, border-color 0.14s; display: flex; align-items: flex-start; gap: 0.7rem; }
+.sb-entry-row:hover { background: rgba(233,196,106,0.06); }
+.sb-entry-row.active { background: rgba(233,196,106,0.1); border-left-color: var(--gold); }
+.sb-entry-row.is-draft { opacity: 0.65; }
+.sb-entry-status { flex-shrink: 0; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: rgba(100,200,120,0.7); margin-top: 0.55rem; }
+.sb-entry-row.is-empty .sb-entry-status { background: rgba(220,130,50,0.8); }
+.sb-entry-body { flex: 1; min-width: 0; }
+.sb-entry-title { font-family: var(--font-body); font-size: 1.45rem; color: var(--ink-cream); line-height: 1.45; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-entry-meta { font-family: var(--font-ui); font-size: 1.15rem; color: var(--ink-cream-soft); margin-top: 0.2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.sb-entry-meta span { opacity: 0.8; }
+.sb-tag { display: inline-block; border-radius: 4px; padding: 0.05rem 0.45rem; font-size: 1.05rem; font-weight: 500; border: 1px solid; }
+.sb-tag-draft { background: rgba(200,150,60,0.15); border-color: rgba(200,150,60,0.4); color: #c8963c; }
+.sb-tag-empty { background: rgba(220,120,50,0.15); border-color: rgba(220,120,50,0.45); color: #d88040; }
+.sb-tag-manual { background: rgba(100,160,220,0.15); border-color: rgba(100,160,220,0.4); color: #7ab0d8; }
+.is-manual .sb-entry-status { background: rgba(100,160,220,0.5); }
+.sb-list-empty { text-align: center; padding: 3rem; color: var(--ink-cream-soft); font-style: italic; font-size: 1.5rem; }
+
+/* Editor */
+.sb-editor { flex: 1; min-width: 0; }
+.sb-empty-state { text-align: center; padding: 8rem 2rem; color: var(--ink-cream-soft); }
+.sb-empty-icon { font-size: 5rem; margin-bottom: 1.4rem; opacity: 0.5; }
+.sb-empty-state p { font-size: 1.7rem; line-height: 1.8; }
+.sb-form { background: var(--bg-card); border: 1px solid rgba(233,196,106,0.16); border-radius: 12px; padding: 2.4rem; }
+.sb-form-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2.4rem; padding-bottom: 1.6rem; border-bottom: 1px solid rgba(233,196,106,0.12); }
+.sb-form-header h2 { flex: 1; font-size: 2rem; color: var(--gold); margin: 0; }
+.sb-form-actions-top { display: flex; gap: 0.8rem; }
+.sb-form-footer { display: flex; gap: 0.8rem; justify-content: flex-end; margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid rgba(233,196,106,0.12); }
+
+/* Form fields */
+.sb-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-bottom: 1.6rem; }
+.sb-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.4rem; margin-bottom: 1.6rem; }
+@media (max-width: 700px) { .sb-grid-2, .sb-grid-3 { grid-template-columns: 1fr; } }
+.sb-field { margin-bottom: 1.6rem; }
+.sb-grid-2 .sb-field, .sb-grid-3 .sb-field { margin-bottom: 0; }
+.sb-field label { display: block; font-family: var(--font-ui); font-size: 1.35rem; font-weight: 600; color: var(--ink-cream-soft); margin-bottom: 0.5rem; }
+.sb-field label small { font-weight: 400; opacity: 0.7; }
+.req { color: #e07070; margin-left: 0.2rem; }
+.sb-field input[type="text"], .sb-field input[type="number"],
+.sb-field select, .sb-field textarea {
+  width: 100%; font-family: var(--font-body); font-size: 1.6rem; color: var(--ink-cream);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(233,196,106,0.2);
+  border-radius: 8px; padding: 0.9rem 1.1rem; transition: border-color 0.18s;
+}
+.sb-field input:focus, .sb-field textarea:focus, .sb-field select:focus { outline: none; border-color: rgba(233,196,106,0.55); }
+.sb-field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c5a059' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 3rem; }
+.sb-field-check { display: flex; align-items: flex-end; padding-bottom: 0.2rem; }
+.sb-field-check-col { flex-direction: column; align-items: flex-start; gap: 0.6rem; justify-content: center; }
+.sb-field-check-col strong { color: var(--gold); }
+.sb-field-check label { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; font-size: 1.5rem; color: var(--ink-cream); font-weight: 400; }
+.sb-field-check input[type="checkbox"] { width: 1.7rem; height: 1.7rem; accent-color: var(--gold); cursor: pointer; }
+.sb-field-body textarea { font-size: 1.6rem; line-height: 1.75; resize: vertical; min-height: 22rem; font-family: 'Courier New', monospace; color: #d4c9b5; }
+.sb-hint { display: block; font-family: var(--font-ui); font-size: 1.25rem; color: var(--ink-cream-soft); margin-top: 0.4rem; opacity: 0.75; }
+.sb-slug-row { display: flex; align-items: stretch; }
+.sb-slug-pfx { font-family: 'Courier New', monospace; font-size: 1.3rem; color: var(--ink-cream-soft); background: rgba(255,255,255,0.02); border: 1px solid rgba(233,196,106,0.2); border-right: none; border-radius: 8px 0 0 8px; padding: 0.9rem 0.8rem; white-space: nowrap; display: flex; align-items: center; }
+.sb-slug-row input { border-radius: 0; flex: 1; }
+.sb-slug-sfx { font-family: 'Courier New', monospace; font-size: 1.3rem; color: var(--ink-cream-soft); background: rgba(255,255,255,0.02); border: 1px solid rgba(233,196,106,0.2); border-left: none; border-radius: 0 8px 8px 0; padding: 0.9rem 0.8rem; display: flex; align-items: center; }
+
+/* Buttons */
+.sb-btn { font-family: var(--font-body); font-size: 1.6rem; padding: 0.8rem 1.8rem; border-radius: 8px; cursor: pointer; border: 1px solid; transition: all 0.18s; display: inline-flex; align-items: center; gap: 0.5rem; }
+.sb-btn-ghost   { background: transparent; border-color: rgba(233,196,106,0.3); color: var(--ink-cream-soft); }
+.sb-btn-ghost:hover { background: rgba(233,196,106,0.07); border-color: rgba(233,196,106,0.5); color: var(--ink-cream); }
+.sb-btn-primary { background: rgba(233,196,106,0.15); border-color: var(--gold); color: var(--gold); font-weight: 600; }
+.sb-btn-primary:hover { background: rgba(233,196,106,0.28); }
+.sb-btn-danger  { background: rgba(220,80,80,0.1); border-color: rgba(220,80,80,0.5); color: #e08080; }
+.sb-btn-danger:hover { background: rgba(220,80,80,0.22); }
+
+/* ═══════════════════════════════════════════
+   LIGHT MODE OVERRIDES
+   ══════════════════════════════════════════ */
+
+/* Tab bar */
+[data-theme="light"] .sb-tab-bar { border-bottom-color: rgba(26,94,60,0.16); }
+[data-theme="light"] .sb-tab-btn { color: rgba(28,26,18,0.5); }
+[data-theme="light"] .sb-tab-btn:hover { color: rgba(28,26,18,0.85); }
+[data-theme="light"] .sb-tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Sidebar Kinh Sách */
+[data-theme="light"] .sb-sidebar { border-color: rgba(26,94,60,0.18); }
+[data-theme="light"] .sb-sidebar-toolbar { border-bottom-color: rgba(26,94,60,0.12); }
+[data-theme="light"] .sb-sidebar-toolbar input {
+  background: #f0ebe0; border-color: rgba(26,94,60,0.22); color: var(--ink-cream);
+}
+[data-theme="light"] .sb-sidebar-toolbar select {
+  background: #f0ebe0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a5a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 0.9rem center;
+  border-color: rgba(26,94,60,0.22); color: var(--ink-cream);
+}
+[data-theme="light"] .sb-sidebar-toolbar select option { background: #faf6ee; color: #1c1a12; }
+[data-theme="light"] .sb-sidebar-toolbar select:focus,
+[data-theme="light"] .sb-sidebar-toolbar input:focus { border-color: rgba(26,94,60,0.5); }
+[data-theme="light"] .sb-count { border-bottom-color: rgba(26,94,60,0.08); }
+[data-theme="light"] .sb-filter-check { color: var(--ink-cream-soft); }
+[data-theme="light"] .sb-season-label { color: var(--gold-dim); border-top-color: rgba(26,94,60,0.08); }
+[data-theme="light"] .sb-entry-row:hover { background: rgba(26,94,60,0.05); }
+[data-theme="light"] .sb-entry-row.active { background: rgba(26,94,60,0.09); border-left-color: var(--accent); }
+
+/* Sidebar Cài Đặt */
+[data-theme="light"] .cd-sidebar { border-color: rgba(26,94,60,0.18); }
+[data-theme="light"] .cd-type-bar { border-bottom-color: rgba(26,94,60,0.14); }
+[data-theme="light"] .cd-type-btn { color: rgba(28,26,18,0.45); }
+[data-theme="light"] .cd-type-btn:hover { color: rgba(28,26,18,0.8); background: rgba(26,94,60,0.04); }
+[data-theme="light"] .cd-type-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(26,94,60,0.06); }
+[data-theme="light"] .cd-page-row:hover { background: rgba(26,94,60,0.06); }
+[data-theme="light"] .cd-page-row.active { background: rgba(26,94,60,0.1); border-left-color: var(--accent); }
+
+/* Form chỉnh sửa */
+[data-theme="light"] .sb-form { border-color: rgba(26,94,60,0.16); }
+[data-theme="light"] .sb-form-header { border-bottom-color: rgba(26,94,60,0.12); }
+[data-theme="light"] .sb-form-header h2 { color: var(--accent-deep); }
+[data-theme="light"] .sb-form-footer { border-top-color: rgba(26,94,60,0.12); }
+[data-theme="light"] .sb-field input[type="text"],
+[data-theme="light"] .sb-field input[type="number"],
+[data-theme="light"] .sb-field textarea {
+  background: #f5f0e8; border-color: rgba(26,94,60,0.2); color: var(--ink-cream);
+}
+[data-theme="light"] .sb-field select {
+  background: #f5f0e8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a5a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  border-color: rgba(26,94,60,0.2); color: var(--ink-cream);
+}
+[data-theme="light"] .sb-field select option { background: #faf6ee; color: #1c1a12; }
+[data-theme="light"] .sb-field input:focus,
+[data-theme="light"] .sb-field textarea:focus,
+[data-theme="light"] .sb-field select:focus { border-color: rgba(26,94,60,0.5); }
+[data-theme="light"] .sb-field-body textarea { color: var(--ink-cream); }
+[data-theme="light"] .sb-slug-pfx,
+[data-theme="light"] .sb-slug-sfx { background: #ede8dc; border-color: rgba(26,94,60,0.2); }
+
+/* Cài Đặt sections */
+[data-theme="light"] .cd-section { border-color: rgba(26,94,60,0.16); }
+[data-theme="light"] .cd-section-title { color: var(--gold-dim); }
+[data-theme="light"] .cd-variant { border-color: rgba(26,94,60,0.14); }
+[data-theme="light"] .cd-variant-num { color: var(--gold-dim); }
+[data-theme="light"] .cd-form-hd { border-bottom-color: rgba(26,94,60,0.12); }
+[data-theme="light"] .cd-form-hd h2 { color: var(--accent-deep); }
+[data-theme="light"] .cd-img-sel {
+  background: #f0ebe0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a5a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  border-color: rgba(26,94,60,0.22); color: var(--ink-cream);
+}
+[data-theme="light"] .cd-img-sel option { background: #faf6ee; color: #1c1a12; }
+[data-theme="light"] .cd-img-sel:focus { border-color: rgba(26,94,60,0.5); }
+[data-theme="light"] .cd-upload-btn { background: rgba(26,94,60,0.06); border-color: rgba(26,94,60,0.38); color: var(--accent); }
+[data-theme="light"] .cd-upload-btn:hover { background: rgba(26,94,60,0.13); border-color: rgba(26,94,60,0.6); }
+
+/* Buttons */
+[data-theme="light"] .sb-btn-new { background: rgba(26,94,60,0.08); border-color: var(--accent); color: var(--accent); }
+[data-theme="light"] .sb-btn-new:hover { background: rgba(26,94,60,0.18); }
+[data-theme="light"] .sb-btn-ghost { border-color: rgba(26,94,60,0.28); color: var(--ink-cream-soft); }
+[data-theme="light"] .sb-btn-ghost:hover { background: rgba(26,94,60,0.07); border-color: rgba(26,94,60,0.45); color: var(--ink-cream); }
+[data-theme="light"] .sb-btn-primary { background: rgba(26,94,60,0.1); border-color: var(--accent); color: var(--accent); }
+[data-theme="light"] .sb-btn-primary:hover { background: rgba(26,94,60,0.2); }
+[data-theme="light"] .sb-btn-danger { background: rgba(160,30,30,0.08); border-color: rgba(160,30,30,0.45); color: #a01e1e; }
+[data-theme="light"] .sb-btn-danger:hover { background: rgba(160,30,30,0.16); }
+
+/* Alerts */
+[data-theme="light"] .sb-alert-success { background: rgba(26,94,60,0.08); border-color: rgba(26,94,60,0.32); color: #1a5e3c; }
+[data-theme="light"] .sb-alert-error { background: rgba(160,30,30,0.08); border-color: rgba(160,30,30,0.32); color: #a01e1e; }
+
+/* Offline box */
+[data-theme="light"] .sb-offline-box { border-color: rgba(26,94,60,0.2); }
+[data-theme="light"] .sb-offline-box pre { background: rgba(26,94,60,0.06); border-color: rgba(26,94,60,0.25); color: var(--accent-deep); }
+[data-theme="light"] .sb-offline-box button { background: rgba(26,94,60,0.08); border-color: var(--accent); color: var(--accent); }
+</style>
+</BaseLayout>

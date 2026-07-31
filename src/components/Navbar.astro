@@ -1,0 +1,151 @@
+---
+// Tái hiện navbar gốc (giữ nguyên class để CSS gốc áp dụng).
+// Link đã trỏ sang route Astro mới cho các trang đã migrate; các trang chưa
+// migrate vẫn để link gốc dạng .html (sẽ nối tiếp khi chuyển nốt).
+---
+<nav class="navbar" id="navbar">
+  <div class="navbar-container">
+    <a href="/" class="site-title-link">
+      <img src="/images/emblem.svg" alt="" class="site-emblem" aria-hidden="true" />
+      <div class="title-group">
+        <h1 class="site-title">
+          <span class="st-osa">OSA</span>
+          <span class="st-vn">Việt Nam</span>
+        </h1>
+        <p id="page-title-display" class="page-title-display"></p>
+      </div>
+    </a>
+
+    <button class="nav-toggle" aria-label="toggle navigation menu" aria-expanded="false" aria-controls="main-menu">
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+
+    <ul class="nav-menu" id="main-menu">
+      <li class="nav-item"><a href="/on-goi/">Ơn Gọi</a></li>
+      <li class="nav-item"><a href="/thanh-au-tinh/">Thánh Augustinô</a></li>
+      <li class="nav-item has-dropdown">
+        <a href="#">Augustinians <span class="chevron"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/linh-dao/">Linh Đạo</a></li>
+          <li><a href="/tu-luat/">Tu Luật</a></li>
+          <li><a href="/hien-chuong/">Hiến Chương</a></li>
+          <li><a href="/ratio/">Ratio Institutionis</a></li>
+          <li><a href="/thanh-chan-phuoc/">Thánh - Chân Phước</a></li>
+          <li><a href="/lich-su-dong/">Lịch Sử Dòng</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#">Phụng Vụ <span class="chevron"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/lich-phung-vu/">Lịch Phụng Vụ</a></li>
+          <li><a href="/bai-giang-suy-niem/">Bài Giảng - Suy Niệm</a></li>
+          <li><a href="/kinh-sach/">Bài Đọc Kinh Sách</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#">Chỉ Dẫn <span class="chevron"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/chi-dan/nghi-thuc-khan-dong/">Nghi Thức Khấn Dòng</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#">Bài Viết <span class="chevron"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/tin-tuc/">Tin Tức</a></li>
+          <li><a href="/bai-viet/">Triết – Thần</a></li>
+        </ul>
+      </li>
+      <li class="nav-item nav-featured"><a href="/tu-thuat/">Tự Thuật</a></li>
+      <li class="nav-item"><a href="/chi-muc/">Chỉ Mục</a></li>
+    </ul>
+
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Đổi giao diện sáng/tối" title="Đổi giao diện sáng / tối">
+      <!-- Sun icon: hiện khi đang ở dark mode (click → sang light) -->
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <!-- Moon icon: hiện khi đang ở light mode (click → sang dark) -->
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // Mở/đóng menu trên mobile (giữ hành vi gốc)
+  const navToggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const menu = document.getElementById('main-menu');
+  const mobileNav = window.matchMedia('(max-width: 900px)');
+
+  function setMenuOpen(open: boolean) {
+    menu?.classList.toggle('open', open);
+    navToggle?.classList.toggle('is-active', open);
+    navToggle?.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('nav-open', open);
+  }
+
+  navToggle?.addEventListener('click', () => {
+    setMenuOpen(!menu?.classList.contains('open'));
+  });
+
+  // Dropdowns on touch devices use click instead of desktop hover.
+  menu?.querySelectorAll<HTMLAnchorElement>('.has-dropdown > a').forEach((link) => {
+    const dropdown = link.parentElement?.querySelector<HTMLElement>('.dropdown-menu');
+    link.setAttribute('aria-expanded', 'false');
+    link.addEventListener('click', (event) => {
+      if (!mobileNav.matches || !dropdown) return;
+      event.preventDefault();
+      const open = !dropdown.classList.contains('is-open');
+      menu.querySelectorAll<HTMLElement>('.dropdown-menu.is-open').forEach((item) => item.classList.remove('is-open'));
+      menu.querySelectorAll<HTMLAnchorElement>('.has-dropdown > a.is-open').forEach((item) => {
+        item.classList.remove('is-open');
+        item.setAttribute('aria-expanded', 'false');
+      });
+      dropdown.classList.toggle('is-open', open);
+      link.classList.toggle('is-open', open);
+      link.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  menu?.querySelectorAll<HTMLAnchorElement>('.nav-item:not(.has-dropdown) > a, .dropdown-menu a').forEach((link) => {
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuOpen(false);
+  });
+  document.addEventListener('click', (event) => {
+    if (!mobileNav.matches || !menu?.classList.contains('open')) return;
+    const target = event.target as Node;
+    if (!menu.contains(target) && !navToggle?.contains(target)) setMenuOpen(false);
+  });
+
+  // Theme toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function syncThemeIcon() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const sun = themeBtn?.querySelector('.icon-sun') as HTMLElement | null;
+    const moon = themeBtn?.querySelector('.icon-moon') as HTMLElement | null;
+    if (sun)  sun.style.display  = isLight ? 'none'  : '';
+    if (moon) moon.style.display = isLight ? ''      : 'none';
+  }
+  themeBtn?.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      document.documentElement.removeAttribute('data-theme');
+      try { localStorage.setItem('augusinh-theme-v2', 'dark'); } catch (e) {}
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      try { localStorage.setItem('augusinh-theme-v2', 'light'); } catch (e) {}
+    }
+    syncThemeIcon();
+  });
+  syncThemeIcon();
+</script>

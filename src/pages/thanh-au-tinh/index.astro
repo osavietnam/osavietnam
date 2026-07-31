@@ -1,0 +1,2329 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AugustineLifeLibrary from '../../components/AugustineLifeLibrary.astro';
+import AugustineEncyclopedia from '../../components/AugustineEncyclopedia.astro';
+import pageHeaders from '../../data/page-headers.json';
+const taPh = (pageHeaders as Record<string, Record<string, string>>)['thanh-au-tinh'];
+
+const entry = await getEntry('thanh-chan-phuoc', 'st-augustine-of-hippo');
+if (!entry) return Astro.redirect('/404');
+const { Content } = await render(entry);
+
+interface TlEntry {
+  year: string;
+  aug?: string;
+  world?: string;
+  major?: boolean;
+  era?: string;
+}
+
+const TIMELINE: TlEntry[] = [
+  // ── Thời Thơ Ấu và Học Vấn ────────────────────────────────────
+  { year: '354', aug: 'Sinh tại Thagaste, ngày 13/11. Cha Patricius ngoại giáo, mẹ Monica Kitô hữu', world: 'John Chrysostom ra đời', major: true, era: 'Thời Thơ Ấu và Học Vấn' },
+  { year: '355', aug: 'Học ở Thagaste; bệnh nặng — suýt được rửa tội', world: 'Donatus xứ Capa Negra qua đời' },
+  { year: '356', world: 'Marius Victorinus trở lại Kitô giáo ở Roma; Antôn Ai Cập qua đời' },
+  { year: '361', aug: 'Học tu từ tại Madaura', world: 'Julian Bội Đạo: sắc chiếu bình đẳng tôn giáo; ban hành luật trường học' },
+  { year: '362', world: 'Công đồng Alexandria với Athanasiô và các giám mục Ai Cập' },
+  { year: '364', aug: 'Ngừng học; trở về Thagaste', world: 'Ly giáo Donatist bùng phát ở Bắc Phi' },
+  { year: '365', world: 'Bầu chọn Athanasiô giám mục Roma; bất ổn xã hội' },
+  // ── Hành Trình Tìm Kiếm ───────────────────────────────────────
+  { year: '369/70', aug: 'Đến Carthage học; sống chung với một phụ nữ (bạn đời không hôn nhân)', world: 'Phong trào Priscillian khởi phát ở Tây Ban Nha', era: 'Hành Trình Tìm Kiếm' },
+  { year: '370', world: 'Basil trở thành giám mục Caesarea' },
+  { year: '370/71', aug: 'Cha Patricius qua đời; Adeodatus ra đời', world: 'Gregory Nyssa làm giám mục; Martin làm giám mục Tours' },
+  { year: '371/72', world: 'Gregory Nazianzus làm giám mục; cuộc nổi dậy Firmus ở vùng Berber' },
+  { year: '372', world: 'Athanasiô Alexandrie qua đời; cấm tái rửa tội (CT 16:6.1)' },
+  { year: '373', aug: 'Đọc Hortensius (Cicero); gia nhập phái Manichaean', world: 'Ambrosiô được rửa tội (7/11) và tấn phong giám mục Milan (7/12)', major: true },
+  { year: '374', aug: 'Dạy tu từ ở Thagaste', world: 'Basil xứ Caesarea qua đời' },
+  { year: '375', aug: 'Một người bạn thân qua đời' },
+  { year: '376/77', aug: 'Dạy tu từ ở Carthage' },
+  { year: '379/81', aug: 'Viết De pulchro et apto — bản thảo triết học đầu tay', world: 'Công đồng Constantinople; Theodosiô cấm ngoại giáo' },
+  { year: '380', aug: 'Đọc Phạm Trù luận (Aristotle)', world: 'Chiếu Thessalonika: Kitô giáo thành quốc giáo La Mã' },
+  { year: '382/84', aug: 'Gặp Faustus ở Carthage; dạy học ở Roma', world: 'Symmachus làm tổng trấn Roma; Giáo hoàng Damasus qua đời (384)' },
+  { year: '383', aug: 'Bổ nhiệm Quan Tu Từ hoàng gia ở Milan (mùa thu)', world: 'Symmachus xin phục hồi Bàn thờ Chiến thắng; Ambrosiô phản đối' },
+  { year: '384', aug: 'Diễn văn mừng Bauto; đính hôn; gặp Ambrosiô', world: 'Hierônimô đến Palestine; Priscillian bị hành quyết ở Trier' },
+  { year: '385', aug: 'Monica đến Milan; Diễn văn mừng Valentinianus II', world: 'Tìm thấy hài cốt SS. Gervasius và Protasius (17/7)' },
+  { year: '385/86', aug: 'Đọc các sách Tân Platon (Plotinus, Porphyry)', world: 'Vây hãm vương cung thánh đường ở Milan; truy quét Manichees ở Carthage' },
+  { year: '386', aug: 'Đọc thư Phaolô; Ponticianus kể về Antôn; rút lui Cassiciacum', world: 'Ambrosiô chống lại Hoàng hậu Justina; Maximus xâm lược Ý', major: true },
+  // ── Trở Về và Thánh Hiến ──────────────────────────────────────
+  { year: '387', aug: 'Rửa Tội đêm Vọng Phục Sinh do Ambrosiô; Monica qua đời ở Ostia', major: true, era: 'Trở Về và Thánh Hiến' },
+  { year: '387/88', aug: 'Về Bắc Phi; định cư ở Thagaste; lập cộng đoàn tu trì' },
+  { year: '388/90', aug: 'Adeodatus và Nebridius qua đời' },
+  { year: '390', aug: 'Thụ phong linh mục ở Hippô', world: 'Thảm sát Thessalonika; Theodosiô chịu ép buộc hối tội từ Ambrosiô', major: true },
+  { year: '391', world: 'Aurelius làm giám mục Carthage; sắc chiếu chống ngoại giáo' },
+  { year: '392', aug: 'Tranh luận công khai với Fortunatus ở Hippô' },
+  { year: '393', aug: 'Phát biểu tại Công đồng Hippô (tháng 10)', world: 'Maximian tách khỏi phái Donatist' },
+  { year: '394', aug: 'Phát biểu tại Công đồng Carthage (tháng 6–8)', world: 'Theodosiô đánh bại Eugenius; Paulinus Nola được thụ phong' },
+  { year: '395', aug: 'Tấn phong giám mục phụ tá Hippô; kế vị Valerius', world: 'Theodosiô qua đời — đế quốc chia thành Đông và Tây La Mã', major: true },
+  // ── Giám Mục Hippô ────────────────────────────────────────────
+  { year: '396/97', aug: 'Trở thành giám mục chính tòa; bắt đầu Tự Thuật (Confessiones)', major: true, era: 'Giám Mục Hippô' },
+  { year: '397', world: 'Ambrosiô qua đời (4/4); Simplicianus kế vị' },
+  { year: '398', aug: 'Giảng ở Carthage mùa hè', world: 'Công đồng Carthage; đánh bại Gildo; luật chống Donatist' },
+  { year: '400', aug: 'Hoàn thành Tự Thuật — tự truyện thần học đầu tiên phương Tây', major: true },
+  { year: '403', aug: 'Công đồng Carthage: đề nghị đối thoại chính thức với Donatist' },
+  { year: '405', world: 'Chiếu thống nhất: Donatist bị liệt vào lạc giáo' },
+  { year: '410', aug: 'Bắt đầu Thành Đô Thiên Chúa (De Civitate Dei)', world: 'Alaric và quân Visigoth cướp phá Roma — chấn động toàn cõi', major: true },
+  { year: '411', aug: 'Hội nghị Carthage: đối thoại công khai với Donatist', world: 'Donatist bị lên án bởi quan tòa đế quốc' },
+  { year: '412', aug: 'Bắt đầu chống lạc thuyết Pelagian' },
+  { year: '415', world: 'Tìm thấy hài cốt thánh Stêphanô ở Hippô' },
+  { year: '416', world: 'Công đồng Carthage và Milevis lên án Pelagius và Caelestius' },
+  { year: '417', world: 'Giáo hoàng Innôcentê I lên án Pelagius và Caelestius' },
+  { year: '418', aug: 'Tranh luận với Julian thành Eclanum về ân sủng và tội nguyên tổ', world: 'Công đồng Carthage lên án Pelagius; Caelestius bị trục xuất' },
+  { year: '421', aug: 'Vụ bất phục tùng ở Hippô — tranh chấp kỷ luật cộng đoàn' },
+  { year: '426', aug: 'Hoàn thành Thành Đô Thiên Chúa sau 13 năm viết', major: true },
+  { year: '427', aug: 'Viết Retractationes — tổng kết và điều chỉnh toàn bộ tác phẩm' },
+  { year: '429', world: 'Vandals xâm chiếm Bắc Phi từ Tây Ban Nha' },
+  { year: '430', aug: 'Qua đời ngày 28/8, thọ 76 tuổi — đọc Thánh Vịnh Thống Hối trong nước mắt', world: 'Vandals vây thành Hippô; thành phố thất thủ sau khi ngài qua đời', major: true },
+];
+
+// Verbatim entries from temp_/nb.pdf.
+const PDF_TIMELINE: TlEntry[] = [
+  { year: '354', aug: 'Born at Thagaste, November 13', world: 'Birth of John Chrysostom', major: true, era: 'Early life and education' },
+  { year: '355', world: 'Death of Donatus of Casa Nigra' },
+  { year: '356', world: 'Conversion of Marius Victorinus in Rome; death of Antony of Egypt' },
+  { year: '361', aug: 'In school at Thagaste; serious illness', world: 'Emperor Julian decrees equality of cults; issues laws for schools' },
+  { year: '362', world: 'Council at Alexandria with Athanasius and Egyptian bishops' },
+  { year: '364', world: 'Rogatist schism in Africa' },
+  { year: '366/69', aug: 'In school in Madaura', world: 'Election of Damasus as bishop of Rome; social unrest in Rome' },
+  { year: '369/70', aug: 'Interrupts his studies; returns to Thagaste', world: 'Beginnings of Priscillianism in Spain near 370' },
+  { year: '370', aug: 'Goes to Carthage to study (late fall). Takes a mistress', world: 'Basil became bishop of Caesarea', era: 'Carthage and the Manichees' },
+  { year: '370/71', aug: 'His father, Patricius, dies; Adeodatus is born', world: 'Gregory becomes bishop of Nyssa; Martin becomes bishop of Tours' },
+  { year: '372/73', aug: "Reads Cicero's Hortensius. Becomes a Manichee", world: 'Gregory becomes bishop of Nazianzen; revolt of the Berber chief Firmus' },
+  { year: '373', aug: 'Teaches rhetoric in Thagaste.', world: 'Athanasius of Alexandria dies; rebaptism prohibited (CT 16.6.1)' },
+  { year: '374', aug: 'Death of a friend (375/376)', world: 'Ambrose baptized (November 7) and consecrated bishop of Milan (December 7)' },
+  { year: '376', aug: 'Teaches rhetoric in Carthage' },
+  { year: '379', world: 'Death of Basil of Caesarea' },
+  { year: '380/81', aug: 'Writes De pulchro et apto (conf. 4.15.27)', world: 'Theodosius issues the Edict of Thessalonica (CT 16.1.2)' },
+  { year: '381', aug: 'Reads the Categories of Aristotle', world: 'Council of Constantinople; Theodosius forbids pagan cults' },
+  { year: '382', world: 'Council of Rome' },
+  { year: '383/84', aug: 'Meets Faustus of Milevis in Carthage. Teaches in Rome', world: 'Symmachus, Prefect of Rome; death of Pope Damasus (384)', era: 'Rome, Milan, and conversion' },
+  { year: '384', aug: 'Appointed official Orator in Milan (fall)', world: 'Symmachus petitions Milan for the Altar of Victory; Ambrose responds' },
+  { year: '385', aug: 'Panegyric of Bauto', world: 'Jerome goes to Palestine; Priscillian executed in Trier' },
+  { year: '385', aug: 'Monica arrives in Milan. Panegyric of Valentinian II' },
+  { year: '386', aug: 'Reads some Platonic books', world: 'Finding of relics of Saints Gervasius and Protasius (July 17)' },
+  { year: '386', aug: "Studies Paul's letters. Visited by Ponticianus", world: 'Siege of the basilicas in Milan; purge of Manichees at Carthage' },
+  { year: '386', aug: 'Converts to Christianity; retires to Cassiciacum', world: 'Struggle of Ambrose against the Empress Justina', major: true },
+  { year: '387', aug: 'Returns to Milan. Baptized by Ambrose, April 24. Death of Monica', major: true },
+  { year: '387/88', aug: 'Returns to Rome with Alypius; some anti-Manichean writings', world: 'Maximus invades Italy (autumn)', era: 'Return to Africa' },
+  { year: '388', aug: 'Sails to North Africa and goes to Thagaste' },
+  { year: '389', aug: 'Deaths of Adeodatus and Nebridius (385–90)', world: 'Baptism of Paulinus of Nola' },
+  { year: '391', aug: 'Ordained a priest in Hippo', major: true, era: 'Priest and bishop of Hippo' },
+  { year: '392', aug: 'Debate with Fortunatus in Hippo (August 28–29)' },
+  { year: '393', aug: 'Speaks at the Council of Hippo (October)' },
+  { year: '395/97', aug: 'Succeeds Valerius as bishop of Hippo; studies Paul anew', major: true },
+  { year: '397', aug: 'Participates at Councils of Carthage (June and August)' },
+  { year: '397', aug: 'Preaches at Carthage during the summer' },
+  { year: '401', aug: 'In Milevis for Council on August 7' },
+  { year: '410', aug: 'In Carthage at times between May 19 and September 11', world: 'Alaric enters Rome; many refugees flee to North Africa', era: 'The later controversies' },
+  { year: '411', aug: 'Participates in the Collatio (June 1–8)' },
+  { year: '412', aug: 'Begins the City of God; Synod at Cirta, June 14', major: true },
+  { year: '412', aug: 'September to December: preaches regularly in Carthage' },
+  { year: '413', aug: 'In Carthage: intercedes against the execution of Flavius Marcellinus' },
+  { year: '415', aug: 'At a council at Milevis that condemns Pelagius and Caelestius' },
+  { year: '416', aug: 'At Caesarea in Mauretania, September 20' },
+  { year: '418', aug: 'Beginning of the long confrontation with Julian of Eclanum' },
+  { year: '423', aug: 'Affair of Antonius of Fussala' },
+  { year: '425', aug: 'Scandal at Hippo (Sermons 355 [December 14] and 356 [after Epiphany])' },
+  { year: '426', aug: 'Visits Milevis to regulate succession of Severus' },
+  { year: '426', aug: 'Leaves Hippo in the winter for his health; begins Retractationes' },
+  { year: '429', world: 'Vandals enter Africa', era: 'Final years' },
+  { year: '430', aug: 'Death and burial of Augustine (August 28)', world: 'Vandals lay siege to Hippo', major: true },
+];
+
+// Bản dịch sát nghĩa của từng mục tiếng Anh trích từ nb.pdf.
+const PDF_TIMELINE_VI: Record<string, string> = {
+  'Early life and education': 'Thời thơ ấu và giáo dục',
+  'Carthage and the Manichees': 'Carthage và phái Manichee',
+  'Rome, Milan, and conversion': 'Rôma, Milan và cuộc hoán cải',
+  'Return to Africa': 'Trở về châu Phi',
+  'Priest and bishop of Hippo': 'Linh mục và giám mục thành Hippô',
+  'The later controversies': 'Những cuộc tranh luận về sau',
+  'Final years': 'Những năm cuối đời',
+  'Born at Thagaste, November 13': 'Sinh tại Thagaste, ngày 13 tháng 11',
+  'Birth of John Chrysostom': 'Thánh Gioan Kim Khẩu chào đời',
+  'Death of Donatus of Casa Nigra': 'Donatus thành Casa Nigra qua đời',
+  'Conversion of Marius Victorinus in Rome; death of Antony of Egypt': 'Marius Victorinus trở lại Kitô giáo tại Rôma; thánh Antôn Ai Cập qua đời',
+  'In school at Thagaste; serious illness': 'Đi học tại Thagaste; lâm bệnh nặng',
+  'Emperor Julian decrees equality of cults; issues laws for schools': 'Hoàng đế Julian ban sắc lệnh bình đẳng các tôn giáo; ban hành luật về trường học',
+  'Council at Alexandria with Athanasius and Egyptian bishops': 'Công đồng tại Alexandria với Athanasius và các giám mục Ai Cập',
+  'Rogatist schism in Africa': 'Ly giáo Rogatist tại châu Phi',
+  'In school in Madaura': 'Đi học tại Madaura',
+  'Election of Damasus as bishop of Rome; social unrest in Rome': 'Damasus được bầu làm giám mục Rôma; bất ổn xã hội tại Rôma',
+  'Interrupts his studies; returns to Thagaste': 'Gián đoạn việc học; trở về Thagaste',
+  'Beginnings of Priscillianism in Spain near 370': 'Khởi đầu phong trào Priscillianism tại Tây Ban Nha, khoảng năm 370',
+  'Goes to Carthage to study (late fall). Takes a mistress': 'Đến Carthage học (cuối mùa thu). Chung sống với một người tình',
+  'Basil became bishop of Caesarea': 'Basil trở thành giám mục Caesarea',
+  'His father, Patricius, dies; Adeodatus is born': 'Cha ngài, Patricius, qua đời; Adeodatus chào đời',
+  'Gregory becomes bishop of Nyssa; Martin becomes bishop of Tours': 'Gregory trở thành giám mục Nyssa; Martin trở thành giám mục Tours',
+  "Reads Cicero's Hortensius. Becomes a Manichee": 'Đọc Hortensius của Cicero. Trở thành người theo phái Manichee',
+  'Gregory becomes bishop of Nazianzen; revolt of the Berber chief Firmus': 'Gregory trở thành giám mục Nazianzen; thủ lĩnh Berber Firmus nổi dậy',
+  'Teaches rhetoric in Thagaste.': 'Dạy hùng biện tại Thagaste.',
+  'Athanasius of Alexandria dies; rebaptism prohibited (CT 16.6.1)': 'Athanasius thành Alexandria qua đời; cấm tái rửa tội (CT 16.6.1)',
+  'Death of a friend (375/376)': 'Một người bạn qua đời (375/376)',
+  'Ambrose baptized (November 7) and consecrated bishop of Milan (December 7)': 'Ambrose được rửa tội (7 tháng 11) và tấn phong giám mục Milan (7 tháng 12)',
+  'Teaches rhetoric in Carthage': 'Dạy hùng biện tại Carthage',
+  'Death of Basil of Caesarea': 'Basil thành Caesarea qua đời',
+  'Writes De pulchro et apto (conf. 4.15.27)': 'Viết De pulchro et apto (Tự thuật 4.15.27)',
+  'Theodosius issues the Edict of Thessalonica (CT 16.1.2)': 'Theodosius ban hành Sắc lệnh Thessalonica (CT 16.1.2)',
+  'Reads the Categories of Aristotle': 'Đọc sách Các phạm trù của Aristotle',
+  'Council of Constantinople; Theodosius forbids pagan cults': 'Công đồng Constantinople; Theodosius cấm các nghi lễ ngoại giáo',
+  'Council of Rome': 'Công đồng Rôma',
+  'Meets Faustus of Milevis in Carthage. Teaches in Rome': 'Gặp Faustus thành Milevis tại Carthage. Dạy học tại Rôma',
+  'Symmachus, Prefect of Rome; death of Pope Damasus (384)': 'Symmachus, tổng trấn Rôma; Giáo hoàng Damasus qua đời (384)',
+  'Appointed official Orator in Milan (fall)': 'Được bổ nhiệm làm diễn giả chính thức tại Milan (mùa thu)',
+  'Symmachus petitions Milan for the Altar of Victory; Ambrose responds': 'Symmachus thỉnh cầu Milan khôi phục Bàn thờ Chiến thắng; Ambrose đáp lại',
+  'Panegyric of Bauto': 'Diễn từ ca tụng Bauto',
+  'Jerome goes to Palestine; Priscillian executed in Trier': 'Jerome đến Palestine; Priscillian bị hành quyết tại Trier',
+  'Monica arrives in Milan. Panegyric of Valentinian II': 'Monica đến Milan. Diễn từ ca tụng Valentinian II',
+  'Reads some Platonic books': 'Đọc một số sách Platon',
+  'Finding of relics of Saints Gervasius and Protasius (July 17)': 'Tìm thấy thánh tích của hai thánh Gervasius và Protasius (17 tháng 7)',
+  "Studies Paul's letters. Visited by Ponticianus": 'Nghiên cứu các thư của Phaolô. Được Ponticianus viếng thăm',
+  'Siege of the basilicas in Milan; purge of Manichees at Carthage': 'Cuộc vây hãm các vương cung thánh đường tại Milan; thanh trừng người Manichee tại Carthage',
+  'Converts to Christianity; retires to Cassiciacum': 'Trở lại Kitô giáo; lui về Cassiciacum',
+  'Struggle of Ambrose against the Empress Justina': 'Cuộc đấu tranh của Ambrose chống lại Hoàng hậu Justina',
+  'Returns to Milan. Baptized by Ambrose, April 24. Death of Monica': 'Trở về Milan. Được Ambrose rửa tội ngày 24 tháng 4. Monica qua đời',
+  'Returns to Rome with Alypius; some anti-Manichean writings': 'Trở về Rôma với Alypius; viết một số tác phẩm chống Manichee',
+  'Maximus invades Italy (autumn)': 'Maximus xâm lược Ý (mùa thu)',
+  'Sails to North Africa and goes to Thagaste': 'Đi thuyền sang Bắc Phi và đến Thagaste',
+  'Deaths of Adeodatus and Nebridius (385–90)': 'Adeodatus và Nebridius qua đời (385–90)',
+  'Baptism of Paulinus of Nola': 'Paulinus thành Nola được rửa tội',
+  'Ordained a priest in Hippo': 'Được truyền chức linh mục tại Hippô',
+  'Debate with Fortunatus in Hippo (August 28–29)': 'Tranh luận với Fortunatus tại Hippô (28–29 tháng 8)',
+  'Speaks at the Council of Hippo (October)': 'Phát biểu tại Công đồng Hippô (tháng 10)',
+  'Succeeds Valerius as bishop of Hippo; studies Paul anew': 'Kế nhiệm Valerius làm giám mục Hippô; nghiên cứu Phaolô lại từ đầu',
+  'Participates at Councils of Carthage (June and August)': 'Tham dự các công đồng Carthage (tháng 6 và tháng 8)',
+  'Preaches at Carthage during the summer': 'Giảng tại Carthage trong mùa hè',
+  'In Milevis for Council on August 7': 'Có mặt tại Milevis dự Công đồng ngày 7 tháng 8',
+  'In Carthage at times between May 19 and September 11': 'Có mặt tại Carthage vào nhiều thời điểm từ 19 tháng 5 đến 11 tháng 9',
+  'Alaric enters Rome; many refugees flee to North Africa': 'Alaric tiến vào Rôma; nhiều người tị nạn chạy sang Bắc Phi',
+  'Participates in the Collatio (June 1–8)': 'Tham dự Hội nghị Collatio (1–8 tháng 6)',
+  'Begins the City of God; Synod at Cirta, June 14': 'Bắt đầu viết Thành đô Thiên Chúa; Thượng hội đồng tại Cirta, ngày 14 tháng 6',
+  'September to December: preaches regularly in Carthage': 'Từ tháng 9 đến tháng 12: giảng đều đặn tại Carthage',
+  'In Carthage: intercedes against the execution of Flavius Marcellinus': 'Tại Carthage: can thiệp chống lại việc hành quyết Flavius Marcellinus',
+  'At a council at Milevis that condemns Pelagius and Caelestius': 'Tại một công đồng ở Milevis kết án Pelagius và Caelestius',
+  'At Caesarea in Mauretania, September 20': 'Tại Caesarea thuộc Mauretania, ngày 20 tháng 9',
+  'Beginning of the long confrontation with Julian of Eclanum': 'Bắt đầu cuộc đối đầu lâu dài với Julian thành Eclanum',
+  'Affair of Antonius of Fussala': 'Vụ việc Antonius thành Fussala',
+  'Scandal at Hippo (Sermons 355 [December 14] and 356 [after Epiphany])': 'Vụ bê bối tại Hippô (Bài giảng 355 [14 tháng 12] và 356 [sau Lễ Hiển Linh])',
+  'Visits Milevis to regulate succession of Severus': 'Đến Milevis để điều chỉnh việc kế nhiệm Severus',
+  'Leaves Hippo in the winter for his health; begins Retractationes': 'Rời Hippô vào mùa đông vì sức khỏe; bắt đầu tác phẩm Retractationes',
+  'Vandals enter Africa': 'Người Vandal tiến vào châu Phi',
+  'Death and burial of Augustine (August 28)': 'Augustinô qua đời và được an táng (28 tháng 8)',
+  'Vandals lay siege to Hippo': 'Người Vandal vây hãm Hippô',
+};
+
+const timelineVi = (value?: string) => value ? (PDF_TIMELINE_VI[value] ?? value) : undefined;
+
+interface TlGroup {
+  year: string;
+  era?: string;
+  entries: TlEntry[];
+  major: boolean;
+}
+
+const PDF_TIMELINE_GROUPS = PDF_TIMELINE.reduce<TlGroup[]>((groups, row) => {
+  const current = groups[groups.length - 1];
+  if (current?.year === row.year) {
+    current.entries.push(row);
+    current.major ||= Boolean(row.major);
+    current.era ??= row.era;
+  } else {
+    groups.push({ year: row.year, era: row.era, entries: [row], major: Boolean(row.major) });
+  }
+  return groups;
+}, []);
+
+type WorkEntry = { date: string; abbr: string; latin: string; english: string; vietnamese?: string; pl?: string; note?: string };
+const WORKS: WorkEntry[] = [
+  { date: '386/387', abbr: 'c. Acad.', latin: 'Contra Academicos', english: 'Against the Academics', pl: 'PL 32', note: 'Also called De Academicis. The date may refer to the time of the Cassiciacum dialogues or to when they were written down.' },
+  { date: '386/387', abbr: 'b. vit.', latin: 'De beata vita', english: 'On the Happy Life', pl: 'PL 32' },
+  { date: '386/387', abbr: 'ord.', latin: 'De ordine', english: 'On Order' },
+  { date: '386/387', abbr: 'sol.', latin: 'Soliloquia', english: 'Soliloquies', pl: 'PL 32' },
+  { date: '386/387', abbr: 'imm. an.', latin: 'De immortalitate animae', english: 'On the Immortality of the Soul' },
+  { date: '387/388', abbr: 'quant. an.', latin: 'De animae quantitate', english: 'On the Greatness of the Soul' },
+  { date: '387/391', abbr: 'mus.', latin: 'De musica', english: 'On Music', note: 'Completed in Thagaste. The source notes that the planned Disciplinarum libri also included lost works on arithmetic, dialectic, geometry, grammar, philosophy, and rhetoric.' },
+  { date: '387/388–395', abbr: 'lib. arb.', latin: 'De libero arbitrio', english: 'On Free Will', pl: 'PL 32', note: 'Books 2 and 3 were finished at Hippo between 391 and 395.' },
+  { date: '388/389', abbr: 'Gn. c. Man.', latin: 'De Genesi contra Manichaeos', english: 'On Genesis against the Manichees' },
+  { date: '389/391', abbr: 'ver. rel.', latin: 'De vera religione', english: 'On True Religion' },
+  { date: '387/388', abbr: 'mor.', latin: 'De moribus ecclesiae catholicae et de moribus Manichaeorum', english: 'On the Morals of the Catholic Church and the Manichees', note: 'Finished after Augustine returned to Africa.' },
+  { date: '397/401', abbr: 'conf.', latin: 'Confessiones', english: 'Confessions', pl: 'PL 32', note: 'Date given in the source table: 397–401.' },
+  { date: '396; 426/427', abbr: 'doc. Chr.', latin: 'De doctrina Christiana', english: 'On Christian Teaching', pl: 'PL 34', note: 'Books 1–3 and part of book 4 were composed soon after Augustine became bishop; the remaining portion was completed around the Retractationes.' },
+  { date: '399', abbr: 'cat. rud.', latin: 'De catechizandis rudibus', english: 'On Instructing Beginners in Faith', pl: 'PL 40' },
+  { date: '399–422/426', abbr: 'trin.', latin: 'De Trinitate', english: 'On the Trinity', pl: 'PL 42', note: 'A long work composed over many years; the source table dates it from 399 to 422/426.' },
+  { date: '400/401', abbr: 'bapt.', latin: 'De baptismo', english: 'On Baptism', pl: 'PL 43' },
+  { date: '401/415', abbr: 'Gn. litt.', latin: 'De Genesi ad litteram', english: 'On the Literal Interpretation of Genesis', pl: 'PL 34', note: 'The source table dates the work to 401–415.' },
+  { date: '413/427', abbr: 'civ. Dei', latin: 'De civitate Dei', english: 'City of God', pl: 'PL 41', note: 'Books 1–3 were finished by September 413; books 4–5 by 415. The work was completed by 427.' },
+  { date: 'Spring 415', abbr: 'nat. et grat.', latin: 'De natura et gratia', english: 'On Nature and Grace', note: 'Dated by the source to spring 415.' },
+  { date: '421/422', abbr: 'ench.', latin: 'Enchiridion ad Laurentium', english: 'Handbook on Faith, Hope, and Love', note: 'Written after Jerome’s death in September 420.' },
+  { date: '426/427', abbr: 'gr. et lib. arb.', latin: 'De gratia et libero arbitrio', english: 'On Grace and Free Will' },
+  { date: '426/427', abbr: 'retr.', latin: 'Retractationes', english: 'Retractations' },
+  { date: '428/429', abbr: 'praed. sanct.', latin: 'De praedestinatione sanctorum', english: 'On the Predestination of the Saints' },
+  { date: '428/429', abbr: 'don. pers.', latin: 'De dono perseverantiae', english: 'On the Gift of Perseverance' },
+  { date: 'Oct. 8, 393', abbr: 'fide et symb.', latin: 'De fide et symbolo', english: 'On Faith and the Creed', note: 'Delivered to bishops gathered at the Council of Hippo.' },
+  { date: 'Aug. 28–29, 392', abbr: 'c. Fort.', latin: 'Acta contra Fortunatum Manicheum', english: 'Debate with Fortunatus, a Manichee', note: 'Dated by Possidius, Vita 6; see Retractationes 1.16.1/2.' },
+  { date: '397', abbr: 'c. ep. Man.', latin: 'Contra epistulam Manichaei quam vocant fundamenti', english: 'Against the Foundation Letter of the Manichees', pl: 'PL 42' },
+  { date: '397/399', abbr: 'c. Faust.', latin: 'Contra Faustum Manicheum', english: 'Against Faustus, a Manichee', note: 'The source table dates this anti-Manichean work to 397–399.' },
+  { date: 'Dec. 7/12, 404', abbr: 'c. Fel.', latin: 'Contra Felicem Manicheum', english: 'Against Felix, a Manichee', note: 'The source table records December 404 and notes scholarly discussion of the exact date.' },
+  { date: '400/403', abbr: 'c. litt. Pet.', latin: 'Contra litteras Petiliani', english: 'Against the Letters of Petilian', pl: 'PL 43' },
+  { date: '405/406', abbr: 'c. Cresc.', latin: 'Ad Cresconium grammaticum partis Donati', english: 'To Cresconius, a Donatist Grammarian', pl: 'PL 43', note: 'See Retractationes 2.26; the source table refers to studies of Augustine’s dialectic and gives this date.' },
+  { date: '406/407', abbr: 'in ep. Io.', latin: 'In epistulam Johannis ad Parthos tractatus', english: 'Homilies on the First Letter of John', pl: 'PL 35' },
+  { date: '406/421?', abbr: 'in Io. ev. tr.', latin: 'In Johannis evangelium tractatus', english: 'Tractates on the Gospel of John', pl: 'PL 35', note: 'The source distinguishes several phases: tractates 1–16 in 406/407, further groups later, and 55–124 beginning in 419.' },
+  { date: '392/422', abbr: 'en. Ps.', latin: 'Enarrationes in Psalmos', english: 'Expositions on the Psalms', note: 'Psalm 1–32 are dated to 392; Psalms 119–133 to 406/407; Psalm 118 was treated in 32 sermons in 422.' },
+  { date: '392/430', abbr: 'serm.', latin: 'Sermones', english: 'Sermons', pl: 'PL 38–39' },
+  { date: '396/398', abbr: 'Simpl.', latin: 'Ad Simplicianum', english: 'To Simplicianus', pl: 'PL 40', note: 'Identified in the source as Augustine’s first work as a bishop.' },
+  { date: '399', abbr: 'c. Sec.', latin: 'Contra Secundinum Manicheum', english: 'Against Secundinus, a Manichee', pl: 'PL 42' },
+  { date: '400', abbr: 'inq. Jan.', latin: 'Ad inquisitiones Januarii', english: 'Responses to Januarius', pl: 'PL 33' },
+  { date: '400', abbr: 'fide invis.', latin: 'De fide rerum invisibilium', english: 'On Faith in the Unseen', pl: 'PL 40' },
+  { date: '402/405', abbr: 'unit. eccl.', latin: 'Ad catholicos fratres', english: 'On the Unity of the Church', pl: 'PL 43' },
+  { date: 'Winter 410/411', abbr: 'un. bapt.', latin: 'De unico baptismo contra Petilianum', english: 'On the One Baptism, against Petilian', note: 'The source table dates the work to winter 410/411.' },
+  { date: '411', abbr: 'pecc. mer.', latin: 'De peccatorum meritis et remissione et de baptismo parvulorum', english: 'On the Merits and Forgiveness of Sins and Infant Baptism', pl: 'PL 44' },
+  { date: 'End of 416 or 417', abbr: 'gest. Pel.', latin: 'De gestis Pelagii', english: 'On the Deeds of Pelagius', note: 'The source dates it to the end of 416 or the beginning of 417.' },
+  { date: '418/420', abbr: 'cont.', latin: 'De continentia', english: 'On Continence' },
+  { date: '419/421', abbr: 'nupt. et conc.', latin: 'De nuptiis et concupiscentia', english: 'On Marriage and Concupiscence', pl: 'PL 44', note: 'Book 1 was written in 418/419 and book 2 in 420/421.' },
+  { date: '419/420', abbr: 'adul. coniug.', latin: 'De adulterinis coniugiis', english: 'On Adulterous Marriages', pl: 'PL 40' },
+  { date: '419/420', abbr: 'an. et orig.', latin: 'De anima et eius origine', english: 'On the Soul and Its Origin', pl: 'PL 44', note: 'Also entitled De natura et origine animae in the source table.' },
+  { date: '419/420', abbr: 'c. adv. leg.', latin: 'Contra adversarium legis et prophetarum', english: 'Against an Adversary of the Law and the Prophets', pl: 'PL 42', note: 'The source points to the reference to City of God 14 at 1.14.19.' },
+  { date: '419/420', abbr: 'qu. Hept.', latin: 'Quaestiones in Heptateuchum', english: 'Questions on the Heptateuch', pl: 'PL 34', note: 'Seven books cover questions on Genesis, Exodus, Leviticus, Numbers, Deuteronomy, Joshua, and Judges.' },
+  { date: '393/395', abbr: 's. mon. I–II', latin: 'De sermone Domini in monte', english: 'On the Lord’s Sermon on the Mount', pl: 'PL 34' },
+  { date: '424', abbr: 'oct. Dulc. qu.', latin: 'De octo Dulcitii quaestionibus', english: 'Eight Questions of Dulcitius', pl: 'PL 40' },
+  { date: '425', abbr: 'symb. cat.', latin: 'De symbolo ad catechumenos', english: 'On the Creed, to Catechumens', pl: 'PL 40' },
+  { date: '426/427', abbr: 'corr. et grat.', latin: 'De correptione et gratia', english: 'On Rebuke and Grace', pl: 'PL 44' },
+  { date: '429/430', abbr: 'c. Iul. imp.', latin: 'Contra Julianum opus imperfectum', english: 'Against Julian, an Unfinished Work', pl: 'PL 45' },
+  { date: '394', abbr: 'c. Adim.', latin: 'Contra Adimantum Manichei discipulum', english: 'Against Adimantus, a Disciple of Mani', pl: 'PL 42' },
+  { date: '396', abbr: 'agon. Chr.', latin: 'De agone Christiano', english: 'On the Christian Struggle' },
+  { date: '387', abbr: 'arith.', latin: 'De arithmetica [lost]', english: 'On Arithmetic [lost]' },
+  { date: '401', abbr: 'b. coniug.', latin: 'De bono coniugali', english: 'On the Good of Marriage', pl: 'PL 40' },
+  { date: '414', abbr: 'b. vid.', latin: 'De bono viduitatis', english: 'On the Good of Widowhood', pl: 'PL 40' },
+  { date: 'June 411', abbr: 'brev. coll.', latin: 'Breviculus conlationis cum Donatistis', english: 'A Summary of the Meeting with the Donatists', pl: 'PL 43', note: 'Written before De gratia Testamenti Novi; see ep. 139.3 in the source.' },
+  { date: '419', abbr: 'c. Gaud.', latin: 'Contra Gaudentium', english: 'Against Gaudentius', pl: 'PL 42', note: 'Dated after Augustine’s encounter with Emeritus; the source cites the dating proposed from ep. 23A*.' },
+  { date: '398', abbr: 'disc. Chr.', latin: 'De disciplina Christiana', english: 'On Christian Discipline' },
+  { date: '388/396', abbr: 'div. qu. 83', latin: 'De diversis quaestionibus octoginta tribus', english: 'On Eighty-Three Varied Questions', pl: 'PL 40', note: 'Some questions were written at Thagaste, others while Augustine was in the monastery at Hippo.' },
+  { date: '393/395', abbr: 'c. ep. Don.', latin: 'Contra epistulam Donati heretici [lost]', english: 'Against the Letter of Donatus the Heretic [lost]' },
+  { date: '400', abbr: 'c. Parm.', latin: 'Contra epistulam Parmeniani', english: 'Against the Letter of Parmenian' },
+  { date: '394/395', abbr: 'ex. Gal.', latin: 'Expositio epistulae ad Galatas', english: 'Commentary on the Letter to the Galatians', pl: 'PL 35' },
+  { date: '394/395', abbr: 'ex. prop. Rm.', latin: 'Expositio quarundam propositionum ex epistula Apostoli ad Romanos', english: 'Exposition of Propositions from the Letter to the Romans', pl: 'PL 35' },
+  { date: '413', abbr: 'fide et op.', latin: 'De fide et operibus', english: 'On Faith and Works', pl: 'PL 40' },
+  { date: '387', abbr: 'gramm.', latin: 'De grammatica [lost]', english: 'On Grammar [lost]' },
+  { date: '418', abbr: 'gr. Chr.', latin: 'De gratia Christi et de peccato originali', english: 'On the Grace of Christ and Original Sin', pl: 'PL 44', note: 'The source places its composition in Carthage.' },
+  { date: '428', abbr: 'haer.', latin: 'De haeresibus', english: 'On Heresies', pl: 'PL 42' },
+  { date: '389', abbr: 'mag.', latin: 'De magistro', english: 'On the Teacher', pl: 'PL 32' },
+  { date: '420', abbr: 'c. mend.', latin: 'Contra mendacium', english: 'Against Lying', pl: 'PL 40' },
+  { date: '399', abbr: 'nat. bon.', latin: 'De natura boni', english: 'On the Nature of the Good' },
+  { date: '419', abbr: 'oct. qu. VT', latin: 'De octo quaestionibus ex Veteri Testamento', english: 'Eight Questions from the Old Testament' },
+  { date: '397/399', abbr: 'reg. 1', latin: 'Regula: objurgatio', english: 'The Rule: A Rebuke', note: 'Together with Ordo monasterii and Praeceptum, accepted by the source as authentic after Verheijen and Lawless.' },
+  { date: '399/400', abbr: 'cons. ev.', latin: 'De consensu evangelistarum', english: 'On the Harmony of the Gospels', pl: 'PL 34' },
+  { date: '417', abbr: 'corr. Don.', latin: 'De correctione Donatistarum', english: 'On the Correction of the Donatists' },
+  { date: 'Sept. 20, 418', abbr: 'gest. Emer.', latin: 'Gesta cum Emerito', english: 'Proceedings with Emeritus' },
+  { date: '397/399', abbr: 'reg. 2', latin: 'Regula: ordo monasterii', english: 'The Rule: Monastic Order' },
+  { date: '397/399', abbr: 'reg. 3', latin: 'Regula: praeceptum', english: 'The Rule: Precepts' },
+  { date: '419', abbr: 'c. serm. Ar.', latin: 'Contra sermonem Arianorum', english: 'Against an Arian Sermon' },
+  { date: '418', abbr: 's. Caes.', latin: 'Sermo ad Caesariensis ecclesiae plebem', english: 'A Sermon to the People of the Church of Caesarea' },
+  { date: '391/392', abbr: 'util. cred.', latin: 'De utilitate credendi', english: 'On the Advantage of Believing', pl: 'PL 42' },
+  { date: '406', abbr: 'admon. Don.', latin: 'Admonitio donatistarum de Maximianistis [lost]', english: 'Warning to Donatists about the Maximianists [lost]' },
+  { date: '399', abbr: 'ann. Iob', latin: 'Annotationes in Iob', english: 'Notes on Job' },
+  { date: '421', abbr: 'cur. mort.', latin: 'De cura pro mortuis gerenda', english: 'On the Care to Be Taken for the Dead' },
+  { date: '387', abbr: 'dial.', latin: 'De dialectica', english: 'On Dialectic' },
+  { date: '406', abbr: 'div. daem.', latin: 'De divinatione daemonum', english: 'On the Divination of Demons' },
+  { date: '392/393', abbr: 'duab. an.', latin: 'De duabus animabus', english: 'On the Two Souls', pl: 'PL 42' },
+  { date: '420', abbr: 'c. duas ep. Pel.', latin: 'Contra duas epistulas Pelagianorum', english: 'Against Two Letters of the Pelagians' },
+  { date: '415', abbr: 'orig. an. (ep. 166)', latin: 'De origine animae', english: 'On the Origin of the Soul' },
+  { date: '405', abbr: 'c. Prisc.', latin: 'Contra Priscillianistas et Origenistas', english: 'Against the Priscillianists and Origenists' },
+  { date: '393/394', abbr: 'ps. c. Don.', latin: 'Psalmus contra partem Donati', english: 'Psalm against the Donatists' },
+  { date: '389/400', abbr: 'qu. ev. I–II', latin: 'Quaestiones evangeliorum', english: 'Questions on the Gospels' },
+  { date: '387', abbr: 'rhet.', latin: 'De rhetorica [lost]', english: 'On Rhetoric [lost]' },
+  { date: '413', abbr: 'util. ieiun.', latin: 'De utilitate ieiunii', english: 'On the Benefit of Fasting' },
+  { date: '401', abbr: 's. virg.', latin: 'De sancta virginitate', english: 'On Holy Virginity' },
+  { date: '386/430', abbr: 'ep. (epp.)', latin: 'Epistulae', english: 'Letters', pl: 'PL 33' },
+  { date: '415', abbr: 'ad Emer.', latin: 'Ad Emeritum episcopum Donatistarum post conlationem [lost]', english: 'To Emeritus, Donatist Bishop, after the Conference [lost]' },
+  { date: '398', abbr: 'c. Hil.', latin: 'Contra Hilarum [lost]', english: 'Against Hilary [lost]' },
+  { date: '400/401', abbr: 'op. mon.', latin: 'De opere monachorum', english: 'On the Work of Monks' },
+  { date: '415', abbr: 'perf. iust.', latin: 'De perfectione iustitiae hominis', english: 'On the Perfection of Human Righteousness' },
+  { date: '405', abbr: 'prob. test.', latin: 'Probationum et testimoniorum contra Donatistas [lost]', english: 'Proofs and Testimonies against the Donatists [lost]' },
+  { date: '380/381', abbr: 'pulchr. et apt.', latin: 'De pulchro et apto [lost]', english: 'On the Beautiful and the Fitting [lost]' },
+  { date: '399/400', abbr: 'qu. Matt.', latin: 'Quaestiones XVI in Matthaeum', english: 'Sixteen Questions on Matthew' },
+  { date: '427', abbr: 'spec.', latin: 'Speculum', english: 'The Mirror' },
+  { date: '412', abbr: 'spir. et litt.', latin: 'De spiritu et littera', english: 'On the Spirit and the Letter' },
+  { date: '413', abbr: 'vid. Deo', latin: 'De videndo Deo', english: 'On Seeing God', pl: 'PL 33' },
+  { date: '387', abbr: 'geom.', latin: 'De geometrica [lost]', english: 'On Geometry [lost]', note: 'Listed with the projected Disciplinarum libri; see the source note for De musica.' },
+  { date: '387', abbr: 'philos.', latin: 'De philosophia [lost]', english: 'On Philosophy [lost]', note: 'Listed with the projected Disciplinarum libri; see the source note for De musica.' },
+  { date: '393/394; 426/427', abbr: 'Gn. litt. imp.', latin: 'De Genesi ad litteram imperfectus liber', english: 'Unfinished Literal Commentary on Genesis', pl: 'PL 34', note: 'The source records an early unfinished book and a later revision/completion.' },
+  { date: '405', abbr: 'c. Cent.', latin: 'Contra quod attulit Centurius ad Donatistas [lost]', english: 'Against the Document Brought by Centurius to the Donatists [lost]' },
+  { date: '405', abbr: 'c. Don.', latin: 'Contra Donatistas [lost]', english: 'Against the Donatists [lost]', note: 'Also called Contra partem Donati post gesta; the source places it before De gratia Testamenti Novi.' },
+  { date: '394/395', abbr: 'ep. Rm. incho.', latin: 'Epistulae ad Romanos inchoata expositio', english: 'Unfinished Commentary on the Letter to the Romans', pl: 'PL 35', note: 'The source says this arose from conversations at the First Council of Carthage, 26 June 394.' },
+  { date: '394/395', abbr: 'ex. Iac.', latin: 'Expositio epistulae Iacobi ad duodecim tribus [lost]', english: 'Commentary on the Letter of James to the Twelve Tribes [lost]' },
+  { date: '411/412', abbr: 'gr. T. Nov.', latin: 'De gratia Testamenti Novi (ep. 140)', english: 'On the Grace of the New Testament (Letter 140)', pl: 'PL 33', note: 'The Breviculus was written before this work; the source directs the reader to ep. 139.3.' },
+  { date: '429', abbr: 'c. Iud.', latin: 'Adversus Iudaeos', english: 'Against the Jews', pl: 'PL 42' },
+  { date: '421/422', abbr: 'c. Iul.', latin: 'Contra Julianum', english: 'Against Julian', pl: 'PL 44' },
+  { date: '405', abbr: 'c. Max. Don.', latin: 'De Maximianistis contra Donatistas [lost]', english: 'On the Maximianists against the Donatists [lost]' },
+  { date: '395', abbr: 'mend.', latin: 'De mendacio', english: 'On Lying', pl: 'PL 40' },
+  { date: '419/420', abbr: 'loc. Hept.', latin: 'Locutionum in Heptateuchum libri septem', english: 'Seven Books of Expressions in the Heptateuch', pl: 'PL 34' },
+  { date: '418', abbr: 'pat.', latin: 'De patientia', english: 'On Patience', pl: 'PL 40' },
+  { date: '418', abbr: 'praes. Dei', latin: 'De praesentia Dei (ep. 187)', english: 'On the Presence of God (Letter 187)', pl: 'PL 33' },
+  { date: '408', abbr: 'qu. c. pag.', latin: 'Quaestiones expositae contra paganos VI (ep. 102)', english: 'Six Questions against Pagans (Letter 102)', pl: 'PL 33' },
+  { date: '415', abbr: 'sent. Iac.', latin: 'De sententia Iacobi (ep. 167)', english: 'On the Statement of James (Letter 167)', pl: 'PL 33' },
+  { date: '389/390', abbr: 'vers. mens.', latin: 'Versus in mensa', english: 'Verses for the Table', pl: 'PL 32' },
+  { date: '428', abbr: 'conl. Max.', latin: 'Conlatio cum Maximino Arianorum episcopo', english: 'Debate with Maximus, an Arian Bishop', pl: 'PL 42' },
+  { date: '427/428', abbr: 'c. Max. Ar.', latin: 'Contra Maximinum Arianum', english: 'Against Maximinus, an Arian', pl: 'PL 42' },
+  { date: '405', abbr: 'c. nesc. Don.', latin: 'Contra nescio quem Donatistam [lost]', english: 'Against an Unidentified Donatist [lost]', note: 'The source says the title should refer to the Donatists of Moxor, following the Indiculus of Possidius.' },
+  { date: '410', abbr: 'exc. urb.', latin: 'De excidio urbis Romae', english: 'On the Sack of the City of Rome', pl: 'PL 40' },
+  { date: '—', abbr: 'vers. Nab.', latin: 'Versus de s. Nabore', english: 'Verses on St. Nabor', pl: 'PLS 2, 356f' },
+];
+// Bản dịch tạm; có thể thay từng mục bằng bản dịch chuẩn sau này.
+const WORK_TITLE_VI: Record<string, string> = {
+  'c. Acad.': 'Chống các học phái Hàn lâm', 'b. vit.': 'Về đời sống hạnh phúc', 'ord.': 'Về trật tự',
+  'sol.': 'Độc thoại', 'imm. an.': 'Về sự bất tử của linh hồn', 'quant. an.': 'Về sự cao cả của linh hồn',
+  'mus.': 'Về âm nhạc', 'lib. arb.': 'Về tự do ý chí', 'Gn. c. Man.': 'Về sách Sáng Thế chống phái Manichee',
+  'ver. rel.': 'Về tôn giáo chân thật', 'mor.': 'Về phong hóa của Giáo hội Công giáo và của phái Manichee',
+  'conf.': 'Tự Thuật', 'doc. Chr.': 'Về giáo lý Kitô giáo', 'cat. rud.': 'Về việc dạy giáo lý cho người mới học',
+  'trin.': 'Về Ba Ngôi', 'bapt.': 'Về phép Rửa', 'Gn. litt.': 'Chú giải sách Sáng Thế theo nghĩa đen',
+  'civ. Dei': 'Thành Đô Thiên Chúa', 'nat. et grat.': 'Về bản tính và ân sủng',
+  'ench.': 'Cẩm nang về đức tin, đức cậy và đức mến', 'gr. et lib. arb.': 'Về ân sủng và tự do ý chí',
+  'retr.': 'Đính chính', 'praed. sanct.': 'Về tiền định các thánh', 'don. pers.': 'Về ân huệ bền đỗ',
+  'fide et symb.': 'Về đức tin và Kinh Tin Kính', 'c. Fort.': 'Cuộc tranh luận với Fortunatus, người Manichee',
+  'c. ep. Man.': 'Chống thư Nền tảng của phái Manichee', 'c. Faust.': 'Chống Faustus, người Manichee',
+  'c. Fel.': 'Chống Felix, người Manichee', 'c. litt. Pet.': 'Chống các thư của Petilianus',
+  'c. Cresc.': 'Gửi Cresconius, nhà ngữ pháp phái Donatus', 'in ep. Io.': 'Các bài giảng về Thư thứ nhất của Gioan',
+  'in Io. ev. tr.': 'Các khảo luận về Tin Mừng Gioan', 'en. Ps.': 'Chú giải Thánh vịnh', 'serm.': 'Các bài giảng',
+  'Simpl.': 'Gửi Simplicianus', 'c. Sec.': 'Chống Secundinus, người Manichee', 'inq. Jan.': 'Giải đáp Januarius',
+  'fide invis.': 'Về đức tin nơi những điều vô hình', 'unit. eccl.': 'Về sự hiệp nhất của Giáo hội',
+  'un. bapt.': 'Về phép Rửa duy nhất, chống Petilianus',
+  'pecc. mer.': 'Về công trạng và ơn tha tội cùng phép Rửa cho trẻ nhỏ', 'gest. Pel.': 'Về các hành vi của Pelagius',
+  'cont.': 'Về sự tiết dục', 'nupt. et conc.': 'Về hôn nhân và dục vọng', 'adul. coniug.': 'Về các cuộc hôn nhân ngoại tình',
+  'an. et orig.': 'Về linh hồn và nguồn gốc của linh hồn', 'c. adv. leg.': 'Chống đối thủ của Lề luật và các ngôn sứ',
+  'qu. Hept.': 'Các vấn đề về Ngũ Thư và các sách tiếp theo', 's. mon. I–II': 'Về Bài giảng trên núi của Chúa',
+  'oct. Dulc. qu.': 'Tám vấn đề của Dulcitius', 'symb. cat.': 'Về Kinh Tin Kính, gửi người dự tòng',
+  'corr. et grat.': 'Về sự sửa dạy và ân sủng', 'c. Iul. imp.': 'Chống Julianus, tác phẩm chưa hoàn tất',
+  'c. Adim.': 'Chống Adimantus, môn đệ của Mani', 'agon. Chr.': 'Về cuộc chiến đấu Kitô giáo',
+  'arith.': 'Về số học [thất lạc]', 'b. coniug.': 'Về thiện ích của hôn nhân', 'b. vid.': 'Về thiện ích của đời góa bụa',
+  'brev. coll.': 'Tóm lược cuộc hội nghị với phái Donatus', 'c. Gaud.': 'Chống Gaudentius',
+  'disc. Chr.': 'Về kỷ luật Kitô giáo', 'div. qu. 83': 'Tám mươi ba vấn đề khác nhau',
+  'c. ep. Don.': 'Chống thư của Donatus, kẻ lạc giáo [thất lạc]', 'c. Parm.': 'Chống thư của Parmenianus',
+  'ex. Gal.': 'Chú giải Thư gửi tín hữu Galát', 'ex. prop. Rm.': 'Chú giải một số mệnh đề trong Thư gửi tín hữu Rôma',
+  'fide et op.': 'Về đức tin và việc làm', 'gramm.': 'Về ngữ pháp [thất lạc]',
+  'gr. Chr.': 'Về ân sủng của Đức Kitô và tội nguyên tổ', 'haer.': 'Về các lạc giáo', 'mag.': 'Về người thầy',
+  'c. mend.': 'Chống sự nói dối', 'nat. bon.': 'Về bản tính của điều thiện',
+  'oct. qu. VT': 'Tám vấn đề từ Cựu Ước', 'reg. 1': 'Tu luật: lời khiển trách',
+  'cons. ev.': 'Về sự hòa hợp của các sách Tin Mừng', 'corr. Don.': 'Về việc sửa dạy phái Donatus',
+  'gest. Emer.': 'Biên bản cuộc gặp với Emeritus', 'reg. 2': 'Tu luật: trật tự đan viện', 'reg. 3': 'Tu luật: các giới luật',
+  'c. serm. Ar.': 'Chống một bài giảng của phái Ariô', 's. Caes.': 'Bài giảng cho dân Giáo hội Cêsarê',
+  'util. cred.': 'Về ích lợi của việc tin', 'admon. Don.': 'Lời cảnh báo người Donatus về phái Maximianus [thất lạc]',
+  'ann. Iob': 'Ghi chú về sách Gióp', 'cur. mort.': 'Về việc chăm sóc người đã qua đời', 'dial.': 'Về biện chứng pháp',
+  'div. daem.': 'Về sự bói toán của ma quỷ', 'duab. an.': 'Về hai linh hồn',
+  'c. duas ep. Pel.': 'Chống hai thư của những người Pelagiô', 'orig. an. (ep. 166)': 'Về nguồn gốc của linh hồn',
+  'c. Prisc.': 'Chống phái Priscillianus và phái Origenes', 'ps. c. Don.': 'Thánh vịnh chống phái Donatus',
+  'qu. ev. I–II': 'Các vấn đề về Tin Mừng', 'rhet.': 'Về tu từ học [thất lạc]',
+  'util. ieiun.': 'Về ích lợi của việc ăn chay', 's. virg.': 'Về sự đồng trinh thánh', 'ep. (epp.)': 'Thư từ',
+  'ad Emer.': 'Gửi Emeritus, giám mục phái Donatus, sau hội nghị [thất lạc]', 'c. Hil.': 'Chống Hilary [thất lạc]',
+  'op. mon.': 'Về công việc của các đan sĩ', 'perf. iust.': 'Về sự hoàn thiện của công chính nơi con người',
+  'prob. test.': 'Các chứng cứ và chứng từ chống phái Donatus [thất lạc]',
+  'pulchr. et apt.': 'Về cái đẹp và sự thích hợp [thất lạc]', 'qu. Matt.': 'Mười sáu vấn đề về Mátthêu',
+  'spec.': 'Tấm gương', 'spir. et litt.': 'Về Thần Khí và chữ viết', 'vid. Deo': 'Về việc thấy Thiên Chúa',
+  'geom.': 'Về hình học [thất lạc]', 'philos.': 'Về triết học [thất lạc]',
+  'Gn. litt. imp.': 'Chú giải chưa hoàn tất sách Sáng Thế theo nghĩa đen',
+  'c. Cent.': 'Chống văn kiện do Centurius mang đến cho phái Donatus [thất lạc]',
+  'c. Don.': 'Chống phái Donatus [thất lạc]', 'ep. Rm. incho.': 'Chú giải dang dở Thư gửi tín hữu Rôma',
+  'ex. Iac.': 'Chú giải Thư của Giacôbê gửi mười hai chi tộc [thất lạc]',
+  'gr. T. Nov.': 'Về ân sủng của Tân Ước (Thư 140)', 'c. Iud.': 'Chống người Do Thái',
+  'c. Iul.': 'Chống Julianus', 'c. Max. Don.': 'Về phái Maximianus chống phái Donatus [thất lạc]',
+  'mend.': 'Về sự nói dối', 'loc. Hept.': 'Bảy sách về các cách diễn đạt trong Ngũ Thư và các sách tiếp theo',
+  'pat.': 'Về sự nhẫn nại', 'praes. Dei': 'Về sự hiện diện của Thiên Chúa (Thư 187)',
+  'qu. c. pag.': 'Sáu vấn đề chống người ngoại giáo (Thư 102)', 'sent. Iac.': 'Về lời của Giacôbê (Thư 167)',
+  'vers. mens.': 'Các câu thơ dùng trên bàn ăn', 'conl. Max.': 'Cuộc tranh luận với Maximinus, giám mục phái Ariô',
+  'c. Max. Ar.': 'Chống Maximinus, người Ariô', 'c. nesc. Don.': 'Chống một người Donatus vô danh [thất lạc]',
+  'exc. urb.': 'Về cuộc cướp phá thành Rôma', 'vers. Nab.': 'Các câu thơ về thánh Nabor'
+};
+const WORK_PL_FROM_SOURCE: Record<string, string | undefined> = {
+  'Contra Academicos': 'PL 32',
+  'Contra Adimantum Manichei discipulum': 'PL 42',
+  'Annotationes in Iob': 'PL 34',
+  'Contra adversarium legis et prophetarum': 'PL 42',
+  'De adulterinis coniugiis': 'PL 40',
+  'De agone Christiano': 'PL 40',
+  'De anima et eius origine': 'PL 44',
+  'De animae quantitate': 'PL 32',
+  'De baptismo': 'PL 43',
+  'De beata vita': 'PL 32',
+  'De bono coniugali': 'PL 40',
+  'De bono viduitatis': 'PL 40',
+  'Breviculus conlationis cum Donatistis': 'PL 43',
+  'De catechizandis rudibus': 'PL 40',
+  'Ad catholicos fratres': 'PL 43',
+  'De civitate Dei': 'PL 41',
+  'Confessiones': 'PL 32',
+  'Conlatio cum Maximino Arianorum episcopo': 'PL 42',
+  'De consensu evangelistarum': 'PL 34',
+  'De continentia': 'PL 40',
+  'De correctione Donatistarum': 'PL 33',
+  'De correptione et gratia': 'PL 44',
+  'Ad Cresconium grammaticum partis Donati': 'PL 43',
+  'De cura pro mortuis gerenda': 'PL 40',
+  'De dialectica': 'PL 32',
+  'De disciplina Christiana': 'PL 40',
+  'De diversis quaestionibus octoginta tribus': 'PL 40',
+  'De divinatione daemonum': 'PL 40',
+  'De doctrina Christiana': 'PL 34',
+  'Contra Donatistas [lost]': 'PL 43',
+  'De duabus animabus': 'PL 42',
+  'De octo Dulcitii quaestionibus': 'PL 40',
+  'Gesta cum Emerito': 'PL 43',
+  'Enarrationes in Psalmos': 'PL 36-37',
+  'Enchiridion ad Laurentium': 'PL 40',
+  'Epistulae': 'PL 33',
+  'In epistulam Johannis ad Parthos tractatus': 'PL 35',
+  'Contra epistulam Manichaei quam vocant fundamenti': 'PL 42',
+  'Contra epistulam Parmeniani': 'PL 43',
+  'Contra duas epistulas Pelagianorum': 'PL 40',
+  'Epistulae ad Romanos inchoata expositio': 'PL 35',
+  'Expositio epistulae ad Galatas': 'PL 35',
+  'Expositio quarundam propositionum ex epistula Apostoli ad Romanos': 'PL 35',
+  'Contra Faustum Manicheum': 'PL 42',
+  'Contra Felicem Manicheum': 'PL 42',
+  'De fide et operibus': 'PL 40',
+  'De fide et symbolo': 'PL 40',
+  'De fide rerum invisibilium': 'PL 40',
+  'Acta contra Fortunatum Manicheum': 'PL 42',
+  'Contra Gaudentium': 'PL 43',
+  'De gestis Pelagii': 'PL 44',
+  'De Genesi ad litteram': 'PL 34',
+  'De Genesi ad litteram imperfectus liber': 'PL 34',
+  'De Genesi contra Manichaeos': 'PL 34',
+  'De gratia et libero arbitrio': 'PL 44',
+  'De gratia Christi et de peccato originali': 'PL 44',
+  'De gratia Testamenti Novi (ep. 140)': 'PL 33',
+  'De haeresibus': 'PL 42',
+  'De immortalitate animae': 'PL 32',
+  'Ad inquisitiones Januarii': 'PL 33',
+  'In Johannis evangelium tractatus': 'PL 35',
+  'Adversus Iudaeos': 'PL 42',
+  'Contra Julianum': 'PL 44',
+  'Contra Julianum opus imperfectum': 'PL 45',
+  'De libero arbitrio': 'PL 32',
+  'Contra litteras Petiliani': 'PL 43',
+  'Locutionum in Heptateuchum libri septem': 'PL 34',
+  'De magistro': 'PL 32',
+  'Contra Maximinum Arianum': 'PL 42',
+  'De mendacio': 'PL 40',
+  'Contra mendacium': 'PL 40',
+  'De moribus ecclesiae catholicae et de moribus Manichaeorum': 'PL 32',
+  'De musica': 'PL 32',
+  'De natura boni': 'PL 42',
+  'De natura et gratia': 'PL 44',
+  'De nuptiis et concupiscentia': 'PL 44',
+  'De opere monachorum': 'PL 40',
+  'De ordine': 'PL 32',
+  'De origine animae': 'PL 33',
+  'De patientia': 'PL 40',
+  'De peccatorum meritis et remissione et de baptismo parvulorum': 'PL 44',
+  'De perfectione iustitiae hominis': 'PL 44',
+  'De dono perseverantiae': 'PL 45',
+  'De praedestinatione sanctorum': 'PL 44',
+  'De praesentia Dei (ep. 187)': 'PL 33',
+  'Contra Priscillianistas et Origenistas': 'PL 42',
+  'Psalmus contra partem Donati': 'PL 43',
+  'Quaestiones in Heptateuchum': 'PL 34',
+  'Quaestiones evangeliorum': 'PL 35',
+  'Quaestiones XVI in Matthaeum': 'PL 35',
+  'Quaestiones expositae contra paganos VI (ep. 102)': 'PL 33',
+  'De octo quaestionibus ex Veteri Testamento': 'PLS 2',
+  'Regula: objurgatio': 'PL 32',
+  'Regula: ordo monasterii': 'PL 32',
+  'Regula: praeceptum': 'PL 32',
+  'Retractationes': 'PL 32',
+  'De rhetorica [lost]': 'PL 32',
+  'Contra Secundinum Manicheum': 'PL 42',
+  'De sententia Iacobi (ep. 167)': 'PL 33',
+  'Sermones': 'PL 38-39; PLS 2',
+  'Contra sermonem Arianorum': 'PL 42',
+  'Sermo ad Caesariensis ecclesiae plebem': 'PL 43',
+  'De sermone Domini in monte': 'PL 34',
+  'Ad Simplicianum': 'PL 40',
+  'Soliloquia': 'PL 32',
+  'Speculum': 'PL 34',
+  'De spiritu et littera': 'PL 44',
+  'De symbolo ad catechumenos': 'PL 40',
+  'De Trinitate': 'PL 42',
+  'De unico baptismo contra Petilianum': 'PL 43',
+  'De utilitate credendi': 'PL 42',
+  'De utilitate ieiunii': 'PL 40',
+  'De vera religione': 'PL 34',
+  'Versus in mensa': undefined,
+  'De videndo Deo': 'PL 33',
+  'De sancta virginitate': 'PL 40',
+  'De excidio urbis Romae': 'PL 40',
+  'Versus de s. Nabore': 'PLS 2, 356f'
+};
+
+const WORK_SOURCE_EXPLANATIONS: Record<string, string> = {
+  'Contra Academicos': 'Also called De Academicis; cf. G. Madec, Introduction, 31, 149, 159. The dates for the dialogues could refer to the time of the dialogues or to the time when they were written down. G. Madec, "L historicite des Dialogues de Cassiciacum," REtAug 32 (1986): 207-31, esp. 223-24.',
+  'De animae quantitate': 'Also entitled De quantitate animae.',
+  'De arithmetica [lost]': 'See the note for De musica.',
+  'De geometrica [lost]': 'See the note for De musica.',
+  'De philosophia [lost]': 'See the note for De musica.',
+  'Breviculus conlationis cum Donatistis': 'Written before De gratia Testamenti Novi; see ep. 139.3.',
+  'Ad catholicos fratres': 'Also called De unitate ecclesiae. See M. Moreau, "Saint Augustin et la dialectique," AugLex, 1:808-15.',
+  'De civitate Dei': 'Books 1-3 were finished by September 413; books 4-5 by 415 (ep. 169). In 417 Augustine was working on book 11 (Orosius, hist., prol.). Books 15-16 were written after Quaestiones in Heptateuchum and Locutiones; in 425 he was working on book 18 (ep. 184A.3.5). The work was finished by 427.',
+  'Confessiones': 'Cf. A. Solignac, Confessiones, BA 13, 45-54.',
+  'De continentia': 'Cf. D. Hunter, "The Date and Purpose of Augustine’s De continentia," AugStud 26, no. 2 (1995): 7-24; and M. Rackett, "Anti-Pelagian Polemic in Augustine’s De continentia," AugStud 26, no. 2 (1995): 25-50.',
+  'De correctione Donatistarum': 'Cf. Goldbacher, CSEL 58, p. 47.',
+  'Ad Cresconium grammaticum partis Donati': 'See Retr. 2.26. On Cresconius, see J. Pepin, Saint Augustin et la dialectique (Villanova: Villanova University, 1976); A. C. De Veer, BA 31:48-50.',
+  'De dialectica': 'See the note for De musica. Cf. J. Pinborg, "Das Sprachdenken der Stoa und Augustins Dialektik," Classica et Mediaevalia 23 (1962): 148-77; Augustine, De dialectica, trans. with introduction and notes by B. Darell Jackson; text by J. Pinborg (Dordrecht-Boston, 1975); J. Pepin, Saint Augustin et la dialectique (Villanova, 1976).',
+  'De diversis quaestionibus octoginta tribus': 'Some of these questions were written in Thagaste, others while Augustine was in the monastery in Hippo.',
+  'De doctrina Christiana': 'Cf. G. Madec, Introduction, 161. Books 1-3, 25, and 37 were written just after Augustine was ordained a bishop, perhaps before April 4; the remainder was written at the time of the Retractationes.',
+  'Contra Donatistas [lost]': 'Also called Contra partem Donati post gesta; cf. ep. 139.3; written before De gratia Testamenti Novi.',
+  'De octo Dulcitii quaestionibus': 'Cf. O. Perler and J. L. Maier, Les voyages, 373-78; A. Mutzenbecher, "Zur Datierung von Aug. De octo Dulcitii qq," SE 19 (1969-70): 365-79.',
+  'Gesta cum Emerito': 'G. Madec, "Introduction," 156-57.',
+  'Enarrationes in Psalmos': 'Cf. H. Rondet, "Essais sur la chronologie des Enarrationes in Psalmos," BLE 61 (1960): 111-27. Commentary on Psalms 1-32 is dated to 392; Psalms 119-133 to 406-7. In 415 Augustine wrote on Psalms 67, 71, and 77; in 422 he wrote on Psalm 118 in 32 sermons.',
+  'Enchiridion ad Laurentium': 'Written after Jerome’s death (September 420).',
+  'Epistulae': 'See the separate list for the Epistles. The new Divjak letters have their own enumeration: epp. 1*-29*.',
+  'Contra duas epistulas Pelagianorum': 'Brought to Pope Boniface by Alypius; cf. c. Jul. imp. 1.85; 2.178.',
+  'Epistulae ad Romanos inchoata expositio': 'This work resulted from conversations at the First Council of Carthage (June 26, 394). Cf. Perler-Maier, Les voyages, 162-63.',
+  'Expositio epistulae ad Galatas': 'Written in Hippo after the First Council of Carthage.',
+  'Contra Faustum Manicheum': 'See G. Madec, Introduction, 151-53, for a discussion of the date.',
+  'Contra Felicem Manicheum': 'See the discussion of the difficulties with this date in G. Madec, Introduction.',
+  'De fide et symbolo': 'Delivered to the bishops gathered at the council of Hippo. Cf. Madec, Introduction, 40.',
+  'Acta contra Fortunatum Manicheum': 'Possidius 6; retr. 1.16.1/2.',
+  'Contra Gaudentium': 'Dated by M.-F. Berrouard, arguing from ep. 23A*. Written after Augustine’s encounter with Emeritus; BA 46B:541.',
+  'De gestis Pelagii': 'Written at the end of 416 or beginning of 417: Y.-M. Duval, BA 46B:430ff.',
+  'De grammatica [lost]': 'See the note for De musica. Cf. V. Law, "St. Augustine’s De grammatica: Lost or Found?" RechAug 19 (1984): 155-83, on vestiges in the so-called Ars Augustini pro fratrum mediocritate breviata; cf. U. Pisani, "Gli scritti grammaticali attribuiti a S. Agostino," Augustinianum 25 (1985): 361-83.',
+  'De gratia Christi et de peccato originali': 'Written in Carthage: Perler-Maier, Les voyages, 344.',
+  'Contra Hilarum [lost]': 'Cf. G. Madec, Introduction, 93. Although lost, this work was still known in Mainz in the ninth century: E. Dekkers, "Sur la diffusion au moyen age des oeuvres moins connues d’Augustin," in Homo spiritalis, 446-59.',
+  'In Johannis evangelium tractatus': 'Cf. M. Le Landais, Etudes augustiniennes (Paris, 1953), 9-15; A.-M. La Bonnardiere dates tr. 1-16 to 406/407 with Jo. ep. tr.; D. E. Wright discusses tr. 20-22; M.-F. Berrouard dates tr. 17-19 and 23-54 to 414 and tr. 20-22 to 419/420. Tractates 55-124 were written beginning in 419.',
+  'De libero arbitrio': 'Books 2 and 3 were finished at Hippo between 391 and 395; cf. G. Madec, Introduction, 34, 42, 160.',
+  'Contra litteras Petiliani': 'See B. Quinot, BA 30:17-41.',
+  'De moribus ecclesiae catholicae et de moribus Manichaeorum': 'Finished after returning to Africa; cf. G. Madec, Introduction, 35, 160.',
+  'De musica': 'This work was completed in Thagaste; cf. G. Madec, Introduction, 31-33, 36. The Disciplinarum libri also included De arithmetica, De dialectica, De geometrica, De grammatica, De philosophia, and De rhetorica. Of these latter works, composed in Milan in Lent 387 (14 March-25 April), several have not survived.',
+  'De natura et gratia': 'M.-F. Berrouard, "Les lettres 6* et 19* de s. Augustin," REtAug 27 (1981): 264-67; Y.-M. Duval, BA 46B:511, and "La date du De natura de Pelage," REtAug 36 (1990): 257-83.',
+  'Contra nescio quem Donatistam [lost]': 'Cf. G. Madec, Introduction, 93. The title should be corrected to refer to the Donatists of Moxor, according to the Indiculus of Possidius 6.10; see D. De Bruyne, "Une enigme dans la liste des ecrits d’Augustin redigee par Possidius?" MA 1:317-19.',
+  'De nuptiis et concupiscentia': 'Book 1 in 418/419; book 2 in 420/421. See M.-F. Berrouard, "Un tournant dans la vie de l’Eglise d’Afrique," REtAug 31 (1985): 46-70; "Alypius," AugLex 1:260-65.',
+  'De ordine': 'At Cassiciacum. Perler-Maier, Les voyages, 189-190. See note 2.',
+  'De peccatorum meritis et remissione et de baptismo parvulorum': 'Cf. M. Moreau, "Le dossier Marcellinus dans la Correspondance de St. Augustin," RechAug 9 (1973): 139; E. Refoule, "Datation du premier concile de Carthage," REtAug 1963, 41-49; B. Delaroche, "La datation du De peccatorum meritis et remissione," REtAug 41 (1995): 37-57.',
+  'De perfectione iustitiae hominis': 'Includes the Definitiones of Caelestius.',
+  'De dono perseverantiae': 'With De praedestinatione sanctorum, this is one work; BA 24:437, n. 1.',
+  'De praedestinatione sanctorum': 'With De dono perseverantiae, this is one work; BA 24:437, n. 1.',
+  'Probationum et testimoniorum contra Donatistas [lost]': 'Cf. G. Madec, Introduction, 93. Although lost, this work was still known in Mainz in the ninth century; see E. Dekkers, "Sur la diffusion au moyen age des oeuvres moins connues d’Augustin," in Homo spiritalis, 450.',
+  'Quaestiones in Heptateuchum': 'Qu. Gen. (book 1); Qu. Exod. (book 2); Qu. Lev. (book 3); Qu. Num. (book 4); Qu. Deut. (book 5); Qu. Josh. (book 6); Qu. Judg. (book 7).',
+  'De octo quaestionibus ex Veteri Testamento': 'Authenticity controversial; defended and edited (edition reprinted in CCSL) by D. De Bruyne, MA 2:327-40.',
+  'Regula: objurgatio': 'After L. Verheijen, La Regie de saint Augustin (Paris, 1967), and G. Lawless, Saint Augustine and His Monastic Rule, the ordo monasterii, objurgatio, and praeceptum may be accepted as authentic; critical texts at Verheijen, 1:148-52, 1:105-7, and 1:417-37; reprinted in Lawless, Rule, 74-108.',
+  'Regula: ordo monasterii': 'After L. Verheijen, La Regie de saint Augustin (Paris, 1967), and G. Lawless, Saint Augustine and His Monastic Rule, the ordo monasterii, objurgatio, and praeceptum may be accepted as authentic; critical texts at Verheijen, 1:148-52, 1:105-7, and 1:417-37; reprinted in Lawless, Rule, 74-108.',
+  'Regula: praeceptum': 'After L. Verheijen, La Regie de saint Augustin (Paris, 1967), and G. Lawless, Saint Augustine and His Monastic Rule, the ordo monasterii, objurgatio, and praeceptum may be accepted as authentic; critical texts at Verheijen, 1:148-52, 1:105-7, and 1:417-37; reprinted in Lawless, Rule, 74-108.',
+  'De rhetorica [lost]': 'See the note for De musica. Cf. K. Barwick, "Augustins Schrift de rhetorica und Hermagoras von Temnos," Philologus 105 (1961): 186-218.',
+  'Sermones': 'The Sermones post Maurinos [et post Morinum] reperti are designated by conventional abbreviations, e.g. s. Den., s. Frang., s. Guelf.; most are published in MA 1, 774-89. Others, especially s. Lambot, have appeared in RevBen and REtAug. For details, see Verbraken, supplemented by the list at AugLex 1:xxxix.',
+  'Contra sermonem Arianorum': 'Cf. M.-F. Berrouard, "L’activite de s. Augustin du 11 septembre au 1er decembre 419 d’apres la lettre 23A*," Les lettres de s. Augustin decouvertes par Johannes Divjak (Paris, 1983), 301-27, esp. 310.',
+  'Ad Simplicianum': 'A. Mutzenbecher, CCL 57:xviii and CCL 44:xxx-xxxiii; cf. G. Madec, Introduction, 142-44, 161. This was Augustine’s first work as a bishop.',
+  'Soliloquia': 'See the note for Contra Academicos.',
+  'De Trinitate': 'Cf. G. Madec, Introduction, 78-79, 162.',
+  'De unico baptismo contra Petilianum': 'A. C. De Veer, "La date du De unico baptismo de saint Augustin," REtAug 10 (1964): 35-38.',
+  'De vera religione': 'See G. Madec, "Le De civitate Dei comme De vera religione," in Interiorita e intenzionalita nel De civitate Dei di Sant’Agostino (Rome, 1991), 7-33.'
+};
+
+const MAJOR_WORK_TITLES = new Set([
+  'Contra Academicos', 'De beata vita', 'De ordine', 'Soliloquia', 'De musica', 'De libero arbitrio',
+  'De vera religione', 'De moribus ecclesiae catholicae et de moribus Manichaeorum', 'Confessiones',
+  'De doctrina Christiana', 'De catechizandis rudibus', 'De baptismo', 'De Genesi ad litteram',
+  'De civitate Dei', 'De Trinitate', 'Enchiridion ad Laurentium', 'Retractationes', 'De magistro',
+  'Contra epistulam Manichaei quam vocant fundamenti', 'Contra Faustum Manicheum', 'Contra Felicem Manicheum',
+  'Contra litteras Petiliani', 'Ad Cresconium grammaticum partis Donati', 'Contra Donatistas [lost]',
+  'Enarrationes in Psalmos', 'In epistulam Johannis ad Parthos tractatus', 'In Johannis evangelium tractatus',
+  'De sermone Domini in monte', 'Regula: praeceptum', 'De peccatorum meritis et remissione et de baptismo parvulorum',
+  'De spiritu et littera', 'De natura et gratia', 'De gratia Christi et de peccato originali',
+  'De gratia et libero arbitrio', 'De correptione et gratia', 'De praedestinatione sanctorum',
+  'De dono perseverantiae', 'Contra Julianum', 'Contra Julianum opus imperfectum', 'De nuptiis et concupiscentia'
+]);
+
+const WORKS_BY_DATE = WORKS.map((work) => ({
+  ...work,
+  vietnamese: WORK_TITLE_VI[work.abbr] ?? work.english,
+  pl: Object.prototype.hasOwnProperty.call(WORK_PL_FROM_SOURCE, work.latin) ? WORK_PL_FROM_SOURCE[work.latin] : work.pl,
+  note: WORK_SOURCE_EXPLANATIONS[work.latin] ?? work.note,
+  isMajor: MAJOR_WORK_TITLES.has(work.latin)
+})).sort((a, b) => {
+  const year = (value: string) => Number(value.match(/\d{3,4}/)?.[0] ?? 9999);
+  return year(a.date) - year(b.date) || a.latin.localeCompare(b.latin);
+});
+
+// Bản Latin đã xuất bản tại Augustinus.it, đối chiếu theo chỉ mục editio latina.
+const WORK_TEXT_LATIN_LINKS: Record<string, string> = {
+  'c. Acad.': 'https://www.augustinus.it/latino/contr_acc/index.htm',
+  'b. vit.': 'https://www.augustinus.it/latino/felicita/index.htm',
+  'ord.': 'https://www.augustinus.it/latino/ordine/index.htm',
+  'sol.': 'https://www.augustinus.it/latino/soliloqui/index.htm',
+  'imm. an.': 'https://www.augustinus.it/latino/immortalita_anima/index.htm',
+  'quant. an.': 'https://www.augustinus.it/latino/grandezza_anima/index.htm',
+  'mus.': 'https://www.augustinus.it/latino/musica/index.htm',
+  'lib. arb.': 'https://www.augustinus.it/latino/libero_arbitrio/index.htm',
+  'Gn. c. Man.': 'https://www.augustinus.it/latino/genesi_dcm/index.htm',
+  'ver. rel.': 'https://www.augustinus.it/latino/vera_religione/index.htm',
+  'mor.': 'https://www.augustinus.it/latino/costumi/index.htm',
+  'conf.': 'https://www.augustinus.it/latino/confessioni/index.htm',
+  'doc. Chr.': 'https://www.augustinus.it/latino/dottrina_cristiana/index.htm',
+  'cat. rud.': 'https://www.augustinus.it/latino/catechesi_cristiana/index.htm',
+  'trin.': 'https://www.augustinus.it/latino/trinita/index.htm',
+  'bapt.': 'https://www.augustinus.it/latino/sul_battesimo/index.htm',
+  'Gn. litt.': 'https://www.augustinus.it/latino/genesi_lettera/index.htm',
+  'civ. Dei': 'https://www.augustinus.it/latino/cdd/index.htm',
+  'nat. et grat.': 'https://www.augustinus.it/latino/natura_grazia/index.htm',
+  'ench.': 'https://www.augustinus.it/latino/enchiridion/index.htm',
+  'gr. et lib. arb.': 'https://www.augustinus.it/latino/grazia_libero_arbitrio/index.htm',
+  'retr.': 'https://www.augustinus.it/latino/ritrattazioni/index.htm',
+  'don. pers.': 'https://www.augustinus.it/latino/dono_perseveranza/index.htm',
+  'praed. sanct.': 'https://www.augustinus.it/latino/predestinazione_santi/index.htm',
+  'fide et symb.': 'https://www.augustinus.it/latino/fede_simbolo/index.htm',
+  'c. Fort.': 'https://www.augustinus.it/latino/contro_fortunato/index.htm',
+  'c. ep. Man.': 'https://www.augustinus.it/latino/contro_lettera_mani/index.htm',
+  'c. Faust.': 'https://www.augustinus.it/latino/contro_fausto/index.htm',
+  'c. Fel.': 'https://www.augustinus.it/latino/contro_felice/index.htm',
+  'c. litt. Pet.': 'https://www.augustinus.it/latino/contro_petiliano/index.htm',
+  'c. Cresc.': 'https://www.augustinus.it/latino/contro_cresconio/index.htm',
+  'Simpl.': 'https://www.augustinus.it/latino/questioni_simpliciano/index.htm',
+  'c. Sec.': 'https://www.augustinus.it/latino/contro_secondino/index.htm',
+  'inq. Jan.': 'https://www.augustinus.it/latino/lettere/index.htm',
+  'fide invis.': 'https://www.augustinus.it/latino/fede_nelle_cose/index.htm',
+  'unit. eccl.': 'https://www.augustinus.it/latino/lettera_cattolici/index.htm',
+  'en. Ps.': 'https://www.augustinus.it/latino/esposizioni_salmi/index.htm',
+  'serm.': 'https://www.augustinus.it/latino/discorsi/index.htm',
+  'un. bapt.': 'https://www.augustinus.it/latino/unicita_battesimo/index.htm',
+  'pecc. mer.': 'https://www.augustinus.it/latino/castigo_perdono/index.htm',
+  'gest. Pel.': 'https://www.augustinus.it/latino/atti_pelagio/index.htm',
+  'cont.': 'https://www.augustinus.it/latino/continenza/index.htm',
+  'nupt. et conc.': 'https://www.augustinus.it/latino/nozze_concupiscenza/index.htm',
+  'adul. coniug.': 'https://www.augustinus.it/latino/connubi_adulterini/index.htm',
+  'an. et orig.': 'https://www.augustinus.it/latino/anima_origine/index.htm',
+  'c. adv. leg.': 'https://www.augustinus.it/latino/contro_avversario/index.htm',
+  'qu. Hept.': 'https://www.augustinus.it/latino/questioni_ettateuco/index.htm',
+  's. mon. I–II': 'https://www.augustinus.it/latino/montagna/index.htm',
+  'oct. Dulc. qu.': 'https://www.augustinus.it/latino/questioni_dulcizio/index.htm',
+  'symb. cat.': 'https://www.augustinus.it/latino/simbolo_catecumeni/index.htm',
+  'corr. et grat.': 'https://www.augustinus.it/latino/correzione_grazia/index.htm',
+  'c. Iul.': 'https://www.augustinus.it/latino/contro_giuliano/index.htm',
+  'c. Iul. imp.': 'https://www.augustinus.it/latino/incompiuta_giuliano/index.htm',
+  'c. Adim.': 'https://www.augustinus.it/latino/contro_adimanto/index.htm',
+  'agon. Chr.': 'https://www.augustinus.it/latino/agone_cristiano/index.htm',
+  'b. coniug.': 'https://www.augustinus.it/latino/dignita_matrimonio/index.htm',
+  'b. vid.': 'https://www.augustinus.it/latino/dignita_vedovile/index.htm',
+  'brev. coll.': 'https://www.augustinus.it/latino/sommario_conferenza/index.htm',
+  'c. Gaud.': 'https://www.augustinus.it/latino/contro_gaudenzio/index.htm',
+  'c. Parm.': 'https://www.augustinus.it/latino/contro_parmeniano/index.htm',
+  'disc. Chr.': 'https://www.augustinus.it/latino/disciplina_cristiana/index.htm',
+  'div. qu. 83': 'https://www.augustinus.it/latino/ottantatre_questioni/index.htm',
+  'ex. Gal.': 'https://www.augustinus.it/latino/esposizione_galati/index.htm',
+  'ex. prop. Rm.': 'https://www.augustinus.it/latino/esposizione_romani/index.htm',
+  'fide et op.': 'https://www.augustinus.it/latino/fede_opere/index.htm',
+  'gr. Chr.': 'https://www.augustinus.it/latino/grazia_cristo/index.htm',
+  'haer.': 'https://www.augustinus.it/latino/eresie/index.htm',
+  'mag.': 'https://www.augustinus.it/latino/maestro/index.htm',
+  'c. mend.': 'https://www.augustinus.it/latino/contro_menzogna/index.htm',
+  'nat. bon.': 'https://www.augustinus.it/latino/natura_bene/index.htm',
+  'oct. qu. VT': 'https://www.augustinus.it/latino/questioni_at/index.htm',
+  'cons. ev.': 'https://www.augustinus.it/latino/consenso_evangelisti/index.htm',
+  'c. serm. Ar.': 'https://www.augustinus.it/latino/contro_sermone_ariani/index.htm',
+  'util. cred.': 'https://www.augustinus.it/latino/utilita_credere/index.htm',
+  'ann. Iob': 'https://www.augustinus.it/latino/annotazioni_giobbe/index.htm',
+  'cur. mort.': 'https://www.augustinus.it/latino/cura_morti/index.htm',
+  'div. daem.': 'https://www.augustinus.it/latino/potere_divinatorio/index.htm',
+  'duab. an.': 'https://www.augustinus.it/latino/due_anime/index.htm',
+  'ps. c. Don.': 'https://www.augustinus.it/latino/salmo_contro_donato/index.htm',
+  'util. ieiun.': 'https://www.augustinus.it/latino/utilita_digiuno/index.htm',
+  's. virg.': 'https://www.augustinus.it/latino/santa_verginita/index.htm',
+  'op. mon.': 'https://www.augustinus.it/latino/lavoro_monaci/index.htm',
+  'spir. et litt.': 'https://www.augustinus.it/latino/spirito_lettera/index.htm',
+  'Gn. litt. imp.': 'https://www.augustinus.it/latino/genesi_incompiuto/index.htm',
+  'ep. Rm. incho.': 'https://www.augustinus.it/latino/incompleta_romani/index.htm',
+  'c. Iud.': 'https://www.augustinus.it/latino/contro_giudei/index.htm',
+  'mend.': 'https://www.augustinus.it/latino/menzogna/index.htm',
+  'loc. Hept.': 'https://www.augustinus.it/latino/locuzioni_ettateuco/index.htm',
+  'pat.': 'https://www.augustinus.it/latino/pazienza/index.htm',
+  'sent. Iac.': 'https://www.augustinus.it/latino/lettere/index.htm',
+  'ep. (epp.)': 'https://www.augustinus.it/latino/lettere/index.htm',
+  'conl. Max.': 'https://www.augustinus.it/latino/conferenza_massimino/index.htm',
+  'c. Max. Ar.': 'https://www.augustinus.it/latino/contro_massimino/index.htm',
+  'exc. urb.': 'https://www.augustinus.it/latino/rovina_roma/index.htm',
+  'gest. Emer.': 'https://www.augustinus.it/latino/confronto_emerito/index.htm',
+  'reg. 3': 'https://www.augustinus.it/latino/regola/index.htm',
+  's. Caes.': 'https://www.augustinus.it/latino/discorso_cesarea/index.htm',
+  'c. duas ep. Pel.': 'https://www.augustinus.it/latino/contro_lettere_pelagiani/index.htm',
+  'qu. ev. I–II': 'https://www.augustinus.it/latino/questioni_vangeli/index.htm',
+  'perf. iust.': 'https://www.augustinus.it/latino/perfezione_giustizia/index.htm',
+  'spec.': 'https://www.augustinus.it/latino/speculum/index.htm',
+  'in ep. Io.': 'https://www.augustinus.it/latino/commento_lsg/index.htm',
+  'in Io. ev. tr.': 'https://www.augustinus.it/latino/commento_vsg/index.htm',
+  'gramm.': 'https://www.augustinus.it/latino/grammatica/index.htm',
+  'corr. Don.': 'https://www.augustinus.it/latino/lettere/lettera_189_testo.htm',
+  'dial.': 'https://www.augustinus.it/latino/dialettica/index.htm',
+  'orig. an. (ep. 166)': 'https://www.augustinus.it/latino/lettere/index.htm',
+  'c. Prisc.': 'https://www.augustinus.it/latino/orosio/index.htm',
+  'rhet.': 'https://www.augustinus.it/latino/retorica/index.htm',
+  'qu. Matt.': 'https://www.augustinus.it/latino/questioni_matteo/index.htm',
+  'vid. Deo': 'https://www.augustinus.it/latino/lettere/lettera_148_testo.htm',
+  'gr. T. Nov.': 'https://www.augustinus.it/latino/lettere/index.htm',
+  'praes. Dei': 'https://www.augustinus.it/latino/lettere/index.htm',
+  'qu. c. pag.': 'https://www.augustinus.it/latino/lettere/index.htm',
+};
+
+// Các bản văn Việt đã xuất bản trên trang; bổ sung dần khi có nội dung.
+const WORK_TEXT_VI_LINKS: Record<string, string> = {
+  'conf.': '/tu-thuat/',
+};
+
+// Các chênh lệch với chỉ mục Latin của Augustinus.it; giữ nguyên PL nguồn chính trong bảng.
+const AUGUSTINUS_PL_NOTES: Record<string, string> = {
+  'en. Ps.': 'Augustinus.it: PL 36',
+  'serm.': 'Augustinus.it: PL 38',
+  'oct. qu. VT': 'Augustinus.it: PL 35',
+  'c. duas ep. Pel.': 'Augustinus.it: PL 44',
+};
+---
+
+<BaseLayout
+  title="Thánh Augustinô thành Hippô"
+  banner="thanh-au-tinh"
+  bodyClass="no-sidebar page-thanh-au-tinh"
+  type="article"
+  description="Tiểu sử và niên biểu Thánh Augustinô thành Hippô — Tổ Phụ Dòng Augustinô, Giám Mục, Tiến Sĩ Hội Thánh."
+>
+
+<!-- ── Hero ── -->
+<div class="aug-hero">
+  <div class="aug-hero-text">
+    <p class="aug-eyebrow" data-oe-target="ph" data-oe="eyebrow">{taPh.eyebrow}</p>
+    <h1 class="aug-name" data-oe-target="ph" data-oe="name" data-oe-html="true" set:html={taPh.name.replace('\n','<br>')}></h1>
+    <div class="aug-rule" aria-hidden="true"><span class="aug-rule-ornament">✦</span></div>
+    <div class="aug-meta">
+      <span class="aug-dates" data-oe-target="ph" data-oe="dates">{taPh.dates}</span>
+      <span class="aug-sep" aria-hidden="true">·</span>
+      <span class="rank-badge rank-solemn aug-feast" data-oe-target="ph" data-oe="feast">{taPh.feast}</span>
+    </div>
+    <blockquote class="aug-motto">
+      <span data-oe-target="ph" data-oe="motto">{taPh.motto}</span>
+      <cite data-oe-target="ph" data-oe="mottoCite" data-oe-html="true" set:html={taPh.mottoCite}></cite>
+    </blockquote>
+  </div>
+  <figure class="aug-portrait" aria-label="Chân dung Thánh Augustinô">
+    <div class="aug-arch-frame">
+      <img src="/db/saints/images/st-augustine-of-hippo.jpg" alt="Thánh Augustinô thành Hippô" loading="eager" decoding="async" />
+    </div>
+    <figcaption>Giám Mục · Tiến Sĩ Hội Thánh</figcaption>
+  </figure>
+</div>
+
+<!-- ── Tab bar ── -->
+<div class="aug-tab-bar shared-tab-bar" role="tablist" aria-label="Nội dung trang">
+  <button class="aug-tab-btn shared-tab-btn active" role="tab" id="tab-tieu-su-btn"
+    aria-controls="panel-tieu-su" aria-selected="true" data-tab="tieu-su">
+    TIỂU SỬ
+  </button>
+  <button class="aug-tab-btn shared-tab-btn" role="tab" id="tab-nien-bieu-btn"
+    aria-controls="panel-nien-bieu" aria-selected="false" data-tab="nien-bieu">
+    NIÊN BIỂU
+  </button>
+  <button class="aug-tab-btn shared-tab-btn" role="tab" id="tab-tac-pham-btn"
+    aria-controls="panel-tac-pham" aria-selected="false" data-tab="tac-pham">
+    TÁC PHẨM
+  </button>
+  <button class="aug-tab-btn shared-tab-btn" role="tab" id="tab-bach-khoa-btn"
+    aria-controls="panel-bach-khoa" aria-selected="false" data-tab="bach-khoa">
+    BÁCH KHOA TOÀN THƯ
+  </button>
+</div>
+
+<!-- ── Panel 1: Tiểu Sử ── -->
+<div class="aug-panel" id="panel-tieu-su" role="tabpanel" aria-labelledby="tab-tieu-su-btn">
+  <div class="article-shell" id="aug-bio-overview">
+    <article class="prose"><Content /></article>
+  </div>
+  <AugustineLifeLibrary />
+</div>
+
+<!-- ── Panel 2: Niên Biểu ── -->
+<div class="aug-panel timeline-vietnamese" id="panel-nien-bieu" role="tabpanel" aria-labelledby="tab-nien-bieu-btn" hidden>
+  <div class="tl-toolbar" aria-label="Tùy chọn niên biểu">
+    <button id="timeline-life-filter" class="tl-life-filter" type="button" aria-label="Ẩn các sự kiện khác" title="Ẩn các sự kiện khác" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-6.2 7.1v4.6l-3.6 1.8v-6.4z" /></svg>
+    </button>
+    <button id="timeline-language-toggle" class="tl-language-switch" type="button" aria-label="Đổi ngôn ngữ niên biểu" aria-pressed="true">
+      <span>EN</span><i aria-hidden="true"></i><span>VN</span>
+    </button>
+  </div>
+
+  <div class="tl-wrap">
+    <svg class="tl-flow" viewBox="0 0 10 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M5 0 V100" pathLength="100" />
+    </svg>
+    {PDF_TIMELINE_GROUPS.map((group, i) => {
+      const showEra = group.era && (i === 0 || group.era !== PDF_TIMELINE_GROUPS[i - 1].era);
+      const augEntries = group.entries.filter((row) => row.aug);
+      const worldEntries = group.entries.filter((row) => row.world);
+      return (
+        <>
+          {showEra && (
+            <div class="tl-era">
+              <span><span class="tl-en">{group.era}</span><span class="tl-vi">{timelineVi(group.era)}</span></span>
+              <button class="tl-era-toggle" type="button" aria-label="Thu gọn giai đoạn" aria-expanded="true">−</button>
+            </div>
+          )}
+          <div
+            class={`tl-row${group.major ? ' tl-major' : ''}${group.entries.length > 1 ? ' tl-row-branched' : ''}`}
+            data-has-aug={augEntries.length ? 'true' : 'false'}
+            data-has-world={worldEntries.length ? 'true' : 'false'}
+          >
+            <!-- Left: Augustine -->
+            <div class="tl-side tl-left">
+              <div class="tl-branch-list">
+                {augEntries.map((row) => <p class="tl-text tl-text-aug"><span class="tl-en">{row.aug}</span><span class="tl-vi">{timelineVi(row.aug)}</span></p>)}
+              </div>
+            </div>
+
+            <!-- Center: year pill + node -->
+            <div class="tl-center">
+              <div class={`tl-node${group.major ? ' tl-node-major' : ''}`}></div>
+              <span class="tl-year">{group.year}</span>
+            </div>
+
+            <!-- Right: World -->
+            <div class="tl-side tl-right">
+              <div class="tl-branch-list">
+                {worldEntries.map((row) => <p class="tl-text tl-text-world"><span class="tl-en">{row.world}</span><span class="tl-vi">{timelineVi(row.world)}</span></p>)}
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    })}
+  </div>
+
+  <p class="tl-source citation-reference">
+    Markus, Robert A. "Life, Culture, and Controversies of Augustine." In <em>Augustine through the Ages: An Encyclopedia</em>, edited by A. D. Fitzgerald, 498–504. Grand Rapids, MI: Eerdmans, 1999.
+  </p>
+</div>
+
+<!-- ── Panel 3: Tác phẩm ── -->
+<div class="aug-panel works-panel" id="panel-tac-pham" role="tabpanel" aria-labelledby="tab-tac-pham-btn" hidden>
+  <div id="aug-works-overview" class="aug-works-overview">
+  <div class="works-head">
+    <div class="works-copy">
+      <p>DANH MỤC TÁC PHẨM</p>
+    </div>
+    <div class="works-controls shared-filter-bar">
+      <label class="works-filter shared-filter-control" for="works-filter"><span>Hiển thị</span><select id="works-filter" aria-label="Hiển thị tác phẩm"><option value="major">Tác phẩm chính</option><option value="all">Hiển thị tất cả</option></select></label>
+      <label class="works-sort shared-filter-control" for="works-sort"><span>Sắp xếp</span><select id="works-sort" aria-label="Sắp xếp tác phẩm"><option value="year">Năm</option><option value="name">Tên Latin</option><option value="pl">Trích PL</option></select></label>
+    </div>
+  </div>
+  <div class="works-list shared-index-surface shared-index-surface--works" id="works-list" role="list">
+    <div class="work-row work-row-head" aria-hidden="true">
+      <span>STT</span><span>NĂM</span><span>TÁC PHẨM</span><span>VIẾT TẮT</span><span>TRÍCH PL</span><span>BẢN VĂN</span>
+    </div>
+    {WORKS_BY_DATE.map((work, index) => (
+      <article class="work-row" role="listitem" data-work-major={work.isMajor ? 'true' : 'false'} data-work-date={work.date} data-work-latin={work.latin} data-work-pl={work.pl ?? ''}>
+        <span class="work-no">{String(index + 1).padStart(2, '0')}</span>
+        <div class="work-date">{work.date}</div>
+        <div class="work-main"><em data-work-full={work.latin} title={work.latin} tabindex="0">{work.latin}</em><span class="work-title-en" data-work-full={work.english} title={work.english} tabindex="0">{work.english}</span><span class="work-title-vi" data-work-full={work.vietnamese} title={work.vietnamese} tabindex="0">{work.vietnamese}</span></div>
+        <code>{work.abbr}</code>
+        <span class="work-pl" title="Patrologia Latina">
+          <span>{work.pl ?? 'PL —'}</span>
+          {AUGUSTINUS_PL_NOTES[work.abbr] && <small class="work-pl-note" title="Theo chỉ mục Latin của Augustinus.it">{AUGUSTINUS_PL_NOTES[work.abbr]}</small>}
+        </span>
+        <div class="work-text-menu">
+          <button class="work-text-trigger" type="button" aria-expanded="false" aria-label={`Chọn bản văn của ${work.latin}`}>
+            <span>BẢN VĂN</span>
+            <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true"><path d="m1 1 4.5 4.5L10 1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="work-links" aria-label={`Bản văn của ${work.latin}`}>
+            {WORK_TEXT_LATIN_LINKS[work.abbr]
+              ? <a class="work-link-lat" href={WORK_TEXT_LATIN_LINKS[work.abbr]} target="_blank" rel="noopener noreferrer" title={`Đọc ${work.latin} bằng tiếng Latin trên Augustinus.it`}>LAT</a>
+              : <button class="work-link-lat" disabled title="Chưa có bản văn Latin tại Augustinus.it">LAT</button>}
+            <button class="work-link-eng" disabled title="Sẽ thêm liên kết English">ENG</button>
+            {WORK_TEXT_VI_LINKS[work.abbr]
+              ? <a class="work-link-vi" href={WORK_TEXT_VI_LINKS[work.abbr]} title={`Đọc ${work.vietnamese} bằng tiếng Việt`}>VN</a>
+              : <button class="work-link-vi" disabled title="Sẽ thêm bản văn tiếng Việt">VN</button>}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+  <p class="tl-source citation-reference works-sources">Fitzgerald, Allan D., and John C. Cavadini, eds. <em>Augustine Through the Ages: An Encyclopedia</em>. Grand Rapids, MI: Eerdmans, 1999.</p>
+  </div>
+  <AugustineLifeLibrary kind="works" />
+</div>
+
+<!-- ── Panel 4: Bách Khoa Toàn Thư ── -->
+<div class="aug-panel" id="panel-bach-khoa" role="tabpanel" aria-labelledby="tab-bach-khoa-btn" hidden>
+  <AugustineEncyclopedia />
+</div>
+
+  <!-- INLINE EDIT TOOLBAR -->
+  <div id="oe-bar" class="oe-bar" hidden>
+    <button id="oe-edit-btn" class="oe-bar-btn">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793z"/>
+        <path d="M11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+      </svg>
+      Chỉnh sửa
+    </button>
+    <div id="oe-save-row" class="oe-save-row" hidden>
+      <span id="oe-msg" class="oe-msg"></span>
+      <button id="oe-cancel-btn" class="oe-bar-btn oe-bar-cancel">Huỷ</button>
+      <button id="oe-save-btn" class="oe-bar-btn oe-bar-save">Lưu</button>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style is:global>
+/* ── Hero: dark mode ── */
+body.page-thanh-au-tinh .aug-eyebrow { color: #edc77c; }
+body.page-thanh-au-tinh.oe-editing [data-oe-target="ph"] { caret-color: #edc77c; }
+
+/* ── Light mode: hero ── */
+[data-theme="light"] body.page-thanh-au-tinh .aug-eyebrow { color: #76531f; }
+[data-theme="light"] body.page-thanh-au-tinh .aug-rule::before,
+[data-theme="light"] body.page-thanh-au-tinh .aug-rule::after { background: linear-gradient(to right, transparent, rgba(122,90,26,0.3), transparent); }
+[data-theme="light"] body.page-thanh-au-tinh .aug-rule-ornament { color: var(--gold-dim); opacity: 0.55; }
+[data-theme="light"] body.page-thanh-au-tinh .aug-dates { color: var(--gold); }
+[data-theme="light"] body.page-thanh-au-tinh .aug-sep { color: var(--gold-dim); opacity: 0.5; }
+[data-theme="light"] body.page-thanh-au-tinh .aug-feast { color: #efe7d6; }
+[data-theme="light"] body.page-thanh-au-tinh .aug-motto {
+  color: #3d4a42;
+  border-left-color: rgba(38,116,84,.46);
+}
+[data-theme="light"] body.page-thanh-au-tinh .aug-motto cite { color: #2b7255; }
+[data-theme="light"] body.page-thanh-au-tinh.oe-editing [data-oe-target="ph"] { caret-color: #1a5e3c; outline-color: rgba(26,94,60,.58); }
+[data-theme="light"] body.page-thanh-au-tinh.oe-editing [data-oe-target="ph"]:focus { outline-color: #1a5e3c; background: rgba(26,94,60,.07); }
+
+body.page-thanh-au-tinh .toc a { font-size: 1.4rem; }
+</style>
+
+<style>
+/* ── Hero ────────────────────────────────────── */
+.aug-hero {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 92rem;
+  margin: 0 auto 3.6rem;
+  padding: 2rem 2rem 0;
+}
+.aug-hero-text { flex: 1; min-width: 0; }
+
+.aug-eyebrow {
+  /* lib-masthead-sub */
+  font-family: 'Montserrat', 'Manrope', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 1.1rem;
+}
+.aug-name {
+  /* lib-masthead-title — gradient từ global h1 rule tự áp, chỉ đè font+size */
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(3rem, 4.5vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+.aug-latin {
+  /* lib-masthead-subtitle từ bio page */
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--ink-cream-soft);
+  margin: 0 0 1.4rem;
+}
+.aug-rule {
+  /* lib-masthead-rule */
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.aug-rule::before,
+.aug-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--deco-rule), transparent);
+}
+.aug-rule-ornament {
+  color: var(--deco-gem);
+  font-size: 1.1rem;
+}
+.aug-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 2rem;
+}
+.aug-dates {
+  font-family: var(--font-ui);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+.aug-sep { color: var(--deco-gem); font-size: 1.2rem; }
+.aug-feast {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  color: var(--ink-cream-soft);
+  margin-bottom: 0;
+}
+.aug-motto {
+  max-width: 60rem;
+  padding: .3rem 0 .35rem 1.55rem;
+  border-left: 2px solid rgba(233,193,118,.5);
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1.55rem, 1.25rem + .4vw, 1.78rem);
+  font-weight: 400;
+  line-height: 1.72;
+  color: #e4d8c6;
+  margin: 1.8rem 0 0;
+  text-wrap: pretty;
+}
+.aug-motto > span { display: block; }
+.aug-motto cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  margin-top: .75rem;
+  color: #d9b76e;
+  opacity: 1;
+}
+
+/* ── Portrait ───────────────────────────────── */
+.aug-portrait { flex-shrink: 0; text-align: center; }
+.aug-arch-frame {
+  width: clamp(14rem, 18vw, 20rem);
+  border-radius: 50% 50% 8px 8px / 38% 38% 8px 8px;
+  overflow: hidden;
+  border: 1px solid rgba(233,193,118,0.28);
+  box-shadow: 0 16px 52px rgba(0,0,0,0.55), 0 0 0 3px rgba(233,193,118,0.06);
+  transition: box-shadow 0.4s;
+}
+.aug-arch-frame:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.65), 0 0 0 3px rgba(233,193,118,0.14);
+}
+.aug-arch-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.88);
+  transition: filter 0.4s, transform 0.5s;
+}
+.aug-arch-frame:hover img { filter: saturate(1.05); transform: scale(1.03); }
+.aug-portrait figcaption {
+  font-family: var(--font-ui);
+  font-size: 1.2rem;
+  color: rgba(201,191,169,0.55);
+  margin-top: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+/* ── Tab bar ─────────────────────────────────── */
+.aug-tab-bar {
+  display: flex;
+  max-width: 92rem;
+  margin: 0 auto 3.2rem;
+  padding: 0 2rem;
+  border-bottom: 1px solid rgba(233,193,118,0.14);
+  gap: 0.4rem;
+}
+.aug-tab-btn {
+  font-family: var(--font-ui);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(233,193,118,.68);
+  background: none;
+  border: none;
+  padding: 1.2rem 2.6rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+.aug-tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.aug-tab-btn.active { color: var(--gold); }
+.aug-tab-btn.active::after { transform: scaleX(1); }
+.aug-tab-btn:hover:not(.active) { color: #f0cf93; }
+
+/* ── Panels ──────────────────────────────────── */
+.aug-panel[hidden] { display: none; }
+#panel-tieu-su .article-shell { padding-top:1.8rem; }
+/* ── Timeline language / heading ── */
+.tl-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+  max-width: 112rem;
+  margin: 0 auto 1.6rem;
+  padding: 0 2rem 1.2rem;
+  border-bottom: 1px solid rgba(123,167,188,.24);
+}
+.tl-kicker {
+  margin: 0;
+  color: #91adb4;
+  font: 700 1.18rem/1 var(--font-ui);
+  letter-spacing: .14em;
+}
+.tl-language {
+  display: inline-flex;
+  padding: .25rem;
+  border-radius: 999px;
+  background: rgba(123,167,188,.11);
+}
+.tl-language-btn {
+  min-width: 3.8rem;
+  padding: .5rem .8rem;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: transparent;
+  color: #9fc6d8;
+  font: 700 1.1rem/1 var(--font-ui);
+  letter-spacing: .08em;
+  transition: background .18s ease, color .18s ease;
+}
+.tl-language-btn.active { color: #102233; background: #9fc6d8; }
+.tl-vi { display: none; }
+#panel-nien-bieu.timeline-vietnamese .tl-en { display: none; }
+#panel-nien-bieu.timeline-vietnamese .tl-vi { display: inline; }
+
+/* ── Source citation ─────────────────────────── */
+.tl-source {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 2.4rem 2rem 4rem;
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  line-height: 1.7;
+  color: var(--ink-cream-soft);
+  border-top: 1px solid rgba(233,193,118,0.18);
+}
+/* light mode handled in is:global block */
+
+/* ── Era label ───────────────────────────────── */
+.tl-era {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  max-width: 100rem;
+  margin: 3.2rem auto 1.6rem;
+  padding: 0 2rem;
+}
+.tl-era::before,
+.tl-era::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(233,193,118,0.12);
+}
+.tl-era span {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(233,193,118,0.4);
+  white-space: nowrap;
+}
+
+/* ── Timeline wrap ───────────────────────────── */
+.tl-wrap {
+  position: relative;
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+/* ── Row ─────────────────────────────────────── */
+.tl-row {
+  display: grid;
+  grid-template-columns: 1fr 9rem 1fr;
+  align-items: start;
+  padding: 0.55rem 0;
+  gap: 0;
+}
+.tl-row[hidden] { display: none; }
+
+/* ── Center: node + year ─────────────────────── */
+.tl-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 0.2rem;
+  position: relative;
+  z-index: 1;
+}
+.tl-node {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 1.5px solid rgba(233,193,118,0.35);
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+.tl-node-major {
+  width: 1.1rem;
+  height: 1.1rem;
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(233,193,118,0.45);
+}
+.tl-year {
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(201,191,169,0.65);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.tl-major .tl-year {
+  color: var(--gold);
+  font-size: 1.35rem;
+}
+
+/* ── Event sides ─────────────────────────────── */
+.tl-side { padding: 0 1.8rem; }
+.tl-left { text-align: right; }
+.tl-right { text-align: left; }
+.tl-side[hidden] { visibility: hidden; }
+
+.tl-text {
+  font-family: var(--font-body);
+  font-size: 1.55rem;
+  line-height: 1.75;
+  margin: 0;
+  padding: 0.1rem 0 0.8rem;
+}
+.tl-text-aug {
+  color: var(--ink-cream-soft);
+  border-right: 2px solid rgba(233,193,118,0.2);
+  padding-right: 1.4rem;
+}
+.tl-major .tl-text-aug {
+  color: var(--ink-cream);
+  border-right-color: rgba(233,193,118,0.45);
+}
+.tl-text-world {
+  color: rgba(123,167,188,0.75);
+  border-left: 2px solid rgba(123,167,188,0.2);
+  padding-left: 1.4rem;
+}
+.tl-major .tl-text-world {
+  color: #91adb4;
+  border-left-color: rgba(123,167,188,0.4);
+}
+
+/* ── Light mode hero — chuyển sang <style is:global> bên dưới để tránh Astro
+   scope nhầm [data-theme="light"] (html không mang cid → rule không áp dụng) ── */
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .aug-hero { flex-direction: column-reverse; gap: 2rem; padding-top: 1rem; }
+  .aug-arch-frame { width: clamp(12rem, 50vw, 16rem); }
+  .aug-name { font-size: 2.8rem; }
+  .aug-motto { margin-top: 1.45rem; padding-left: 1.15rem; line-height: 1.65; }
+  .aug-motto cite { margin-top: .6rem; font-size: .98rem; }
+  .tl-col-headers { display: none; }
+  .tl-row {
+    grid-template-columns: 6rem 1fr;
+    grid-template-areas: 'center aug' 'center world';
+  }
+  .tl-left { grid-area: world; text-align: left; padding: 0; }
+  .tl-center { grid-area: center; }
+  .tl-right { grid-area: aug; padding: 0; }
+  .tl-text-aug { border-right: none; padding-right: 0; border-left: 2px solid rgba(233,193,118,0.2); padding-left: 1rem; }
+  .tl-major .tl-text-aug { border-left-color: rgba(233,193,118,0.45); }
+}
+
+/* Timeline refinement: a quiet vertical spine with compact, readable events. */
+.tl-wrap { max-width: 112rem; padding: 1rem 2rem 6rem; }
+.tl-flow {
+  position: absolute;
+  overflow: visible;
+  top: 0;
+  left: 50%;
+  width: 12px;
+  height: calc(100% - 4rem);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+.tl-flow path {
+  fill: none;
+  stroke: rgba(123,167,188,.9);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 4 5;
+  animation: timeline-flow 2.8s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(123,167,188,.6));
+}
+.tl-row, .tl-era { position: relative; z-index: 1; }
+.tl-wrap.timeline-reveal .tl-row,
+.tl-wrap.timeline-reveal .tl-era {
+  opacity: 0;
+  transition: opacity .5s ease, transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.tl-wrap.timeline-reveal .tl-left { transform: translateX(-1.8rem); transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+.tl-wrap.timeline-reveal .tl-right { transform: translateX(1.8rem); transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+.tl-wrap.timeline-reveal .tl-center { transform: scale(.78); transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+.tl-wrap.timeline-reveal .tl-era { transform: translateY(1rem); }
+.tl-wrap.timeline-reveal .is-visible { opacity: 1; transform: none; }
+.tl-wrap.timeline-reveal .tl-row.is-visible .tl-left,
+.tl-wrap.timeline-reveal .tl-row.is-visible .tl-right { transform: translateX(0); }
+.tl-wrap.timeline-reveal .tl-row.is-visible .tl-center { transform: scale(1); }
+.tl-row { grid-template-columns: minmax(0,1fr) 8.5rem minmax(0,1fr); padding: .8rem 0; }
+.tl-center { gap: .45rem; }
+.tl-node { width: .65rem; height: .65rem; background: var(--bg-main); border-color: rgba(233,193,118,.55); box-shadow: 0 0 0 4px var(--bg-main); }
+.tl-node-major { width: 1rem; height: 1rem; box-shadow: 0 0 0 4px var(--bg-main), 0 0 14px rgba(233,193,118,.42); }
+.tl-year { font-size: 1.22rem; color: var(--ink-cream-soft); }
+.tl-major .tl-year { font-size: 1.4rem; }
+.tl-text { max-width: 44rem; font-size: 1.43rem; line-height: 1.62; padding: .75rem 1.3rem; }
+.tl-left { justify-self: end; }
+.tl-right { justify-self: start; }
+.tl-text-aug, .tl-text-world { border: 0; border-radius: .35rem; background: rgba(233,193,118,.045); }
+.tl-text-aug { border-right: 2px solid rgba(233,193,118,.38); }
+.tl-text-world { border-left: 2px solid rgba(123,167,188,.38); background: rgba(123,167,188,.045); }
+.tl-major .tl-text-aug, .tl-major .tl-text-world { background: rgba(233,193,118,.08); }
+.tl-era { margin-top: 3.8rem; margin-bottom: 1.8rem; }
+.tl-era span { color: var(--gold); font-size: 1.18rem; }
+[data-theme="light"] .tl-flow path { stroke: rgba(47,94,125,.48); filter: drop-shadow(0 0 2px rgba(47,94,125,.22)); }
+[data-theme="light"] .tl-node { background: #f7f2e8; border-color: rgba(122,90,26,.52); box-shadow: 0 0 0 4px #f7f2e8; }
+[data-theme="light"] .tl-node-major { background: #9c6a2e; border-color: #9c6a2e; box-shadow: 0 0 0 4px #f7f2e8, 0 0 12px rgba(122,90,26,.3); }
+[data-theme="light"] .tl-text-aug { background: rgba(122,90,26,.045); border-right-color: rgba(122,90,26,.35); }
+[data-theme="light"] .tl-text-world { background: rgba(47,94,125,.045); border-left-color: rgba(47,94,125,.35); }
+@media (max-width: 640px) {
+  .aug-tab-bar { margin-bottom: 2.2rem; padding: 0 1rem; }
+  .aug-tab-btn { padding: 1rem 1.3rem; font-size: 1.25rem; }
+  #panel-tieu-su .article-shell { padding-top:1.2rem; }
+  .aug-works-overview { width:100%; }
+  .tl-toolbar { margin-bottom: 1rem; padding: 0 1rem 1rem; }
+  .tl-kicker { font-size: 1rem; letter-spacing: .1em; }
+  .tl-wrap { padding: .5rem 1rem 4rem; }
+  .tl-flow { left: 2.9rem; }
+  .tl-row { grid-template-columns: 5.8rem minmax(0,1fr); padding: .65rem 0; }
+  .tl-center { align-items: center; }
+  .tl-left { justify-self: stretch; }
+  .tl-right { justify-self: stretch; }
+  .tl-text { max-width: none; font-size: 1.32rem; text-align: left; }
+  .tl-text-aug, .tl-text-world { border-left: 2px solid rgba(233,193,118,.35); border-right: 0; padding: .55rem .8rem; }
+}
+/* ── Modern chronology redesign ─────────────────────────────────────── */
+.tl-toolbar {
+  max-width: 116rem;
+  margin-bottom: 0;
+  padding: 1.6rem 2.6rem;
+  border: 1px solid rgba(123,167,188,.2);
+  border-bottom: 0;
+  background: linear-gradient(115deg, rgba(36,73,100,.22), rgba(11,20,36,.12));
+}
+.tl-kicker { color: #b8d8e8; font-size: 1.12rem; }
+.tl-wrap {
+  max-width: 116rem;
+  margin-bottom: 3rem;
+  padding: 3.5rem 2.6rem 5rem;
+  border: 1px solid rgba(123,167,188,.2);
+  background:
+    radial-gradient(circle at 50% 14%, rgba(78,137,170,.13), transparent 31rem),
+    linear-gradient(180deg, rgba(16,34,54,.8), rgba(9,19,34,.58));
+  box-shadow: 0 2.4rem 6rem rgba(0,0,0,.16);
+}
+.tl-flow { width: 16px; height: calc(100% - 5rem); }
+.tl-flow path { stroke: #91adb4; stroke-width: 1.25; stroke-dasharray: 3 4; opacity: .88; }
+.tl-row { grid-template-columns: minmax(0,1fr) 9.6rem minmax(0,1fr); padding: .95rem 0; align-items: center; }
+.tl-center { gap: .65rem; }
+.tl-node {
+  width: .8rem;
+  height: .8rem;
+  border: 2px solid #90c1d8;
+  background: #10263b;
+  box-shadow: 0 0 0 5px #10263b, 0 0 1.6rem rgba(123,167,188,.38);
+}
+.tl-node-major { width: 1.35rem; height: 1.35rem; border-color: #f0c97d; background: #e9c176; box-shadow: 0 0 0 5px #10263b, 0 0 2.2rem rgba(233,193,118,.65); }
+.tl-year { min-width: 5.9rem; padding: .42rem .55rem; border: 1px solid rgba(123,167,188,.3); border-radius: 100px; background: rgba(7,18,31,.66); color: #c4dce7; font-size: 1.13rem; text-align: center; letter-spacing: .06em; }
+.tl-major .tl-year { border-color: rgba(233,193,118,.55); color: #f0cf93; font-size: 1.18rem; }
+.tl-side { width: 100%; padding: 0 1.2rem; }
+.tl-text { position: relative; max-width: 43rem; padding: 1.35rem 1.55rem 1.25rem; border: 1px solid; border-radius: .75rem; font-size: 1.42rem; line-height: 1.65; box-shadow: 0 1.2rem 2.8rem rgba(0,0,0,.12); }
+.tl-text::before { display: block; margin-bottom: .6rem; font: 700 .92rem/1 var(--font-ui); letter-spacing: .13em; opacity: .8; }
+.tl-text-aug { border-color: rgba(233,193,118,.28); border-right: 3px solid #d7aa5a; background: linear-gradient(135deg, rgba(233,193,118,.11), rgba(233,193,118,.025)); color: #f0e5d0; }
+.tl-text-aug::before { content: 'AUGUSTINE'; color: #edc77c; }
+.tl-text-world { border-color: rgba(123,167,188,.28); border-left: 3px solid #79b2ce; background: linear-gradient(225deg, rgba(123,167,188,.13), rgba(123,167,188,.025)); color: #bdd6e1; }
+.tl-text-world::before { content: 'WORLD'; color: #8fc6df; }
+.tl-major .tl-text-aug, .tl-major .tl-text-world { border-color: rgba(233,193,118,.52); background: linear-gradient(135deg, rgba(233,193,118,.18), rgba(72,117,142,.09)); }
+.tl-era { margin: 4.4rem auto 1.8rem; }
+.tl-era:first-child { margin-top: .4rem; }
+.tl-era span { padding: .6rem 1.2rem; border: 1px solid rgba(233,193,118,.35); border-radius: 100px; background: #10263b; color: #edc77c; font-size: 1rem; letter-spacing: .15em; }
+.tl-source { max-width: 116rem; margin-top: -3rem; padding: 2rem 2.6rem 3rem; border: 1px solid rgba(123,167,188,.2); border-top: 0; background: rgba(8,18,31,.62); }
+[data-theme="light"] .tl-toolbar { border-color: rgba(47,94,125,.2); background: linear-gradient(115deg, rgba(84,139,170,.14), rgba(255,255,255,.28)); }
+[data-theme="light"] .tl-wrap { border-color: rgba(47,94,125,.2); background: radial-gradient(circle at 50% 14%, rgba(84,139,170,.14), transparent 31rem), #f7f2e8; box-shadow: 0 2rem 4.5rem rgba(48,68,84,.1); }
+[data-theme="light"] .tl-node { background: #f7f2e8; box-shadow: 0 0 0 5px #f7f2e8, 0 0 1.2rem rgba(47,94,125,.24); }
+[data-theme="light"] .tl-node-major { background: #b67e37; box-shadow: 0 0 0 5px #f7f2e8, 0 0 1.6rem rgba(182,126,55,.28); }
+[data-theme="light"] .tl-year { background: rgba(255,255,255,.72); color: #315e86; }
+[data-theme="light"] .tl-text-aug { color: #4b3822; background: linear-gradient(135deg, rgba(194,151,81,.13), rgba(255,255,255,.55)); }
+[data-theme="light"] .tl-text-world { color: #234b66; background: linear-gradient(225deg, rgba(84,139,170,.13), rgba(255,255,255,.55)); }
+[data-theme="light"] .tl-source { border-color: rgba(47,94,125,.2); background: rgba(255,255,255,.48); }
+@media (max-width: 640px) {
+  .tl-toolbar { margin: 0 1rem; padding: 1.2rem 1.3rem; border-bottom: 1px solid rgba(123,167,188,.2); }
+  .tl-wrap { margin: 0 1rem 2.4rem; padding: 2.1rem 1.15rem 3rem; border-top: 0; }
+  .tl-flow { left: 3.3rem; width: 14px; }
+  .tl-row { grid-template-columns: 4.4rem minmax(0,1fr); grid-template-areas: 'center aug' 'center world'; padding: .65rem 0; }
+  .tl-center { padding-top: .75rem; }
+  .tl-year { min-width: 4rem; padding: .34rem .2rem; font-size: 1rem; }
+  .tl-side { padding: 0; }
+  .tl-text { padding: 1rem 1.05rem .95rem; border-radius: .55rem; font-size: 1.27rem; }
+  .tl-text::before { font-size: .82rem; }
+  .tl-left { margin-top: .45rem; }
+  .tl-right { margin-bottom: .35rem; }
+  .tl-text-aug, .tl-text-world { border-left: 3px solid; border-right: 1px solid; }
+  .tl-text-aug { border-left-color: #d7aa5a; }
+  .tl-text-world { border-left-color: #79b2ce; }
+  .tl-era { margin: 3.2rem auto 1.2rem; padding: 0; }
+  .tl-era span { font-size: .88rem; }
+  .tl-source { margin: -2.4rem 1rem 0; padding: 1.6rem 1.2rem 2.2rem; border-top: 0; }
+}
+
+/* ── Return to the quiet original timeline layout; color is theme-specific. */
+.tl-toolbar { max-width: 112rem; margin: 0 auto 1.6rem; padding: 0 2rem 1.2rem; border: 0; border-bottom: 1px solid rgba(123,167,188,.24); background: none; }
+.tl-kicker { color: #8fc6df; font-size: 1.18rem; }
+.tl-wrap { max-width: 112rem; margin: 0 auto; padding: 1rem 2rem 6rem; border: 0; background: none; box-shadow: none; }
+.tl-flow { width: 12px; height: calc(100% - 4rem); }
+.tl-flow path { stroke: rgba(123,167,188,.88); stroke-width: 1.45; stroke-dasharray: 2.5 4.5; animation: timeline-flow 1.9s linear infinite; }
+.tl-row { grid-template-columns: minmax(0,1fr) 8.5rem minmax(0,1fr); padding: .8rem 0; align-items: start; }
+.tl-center { gap: .45rem; }
+.tl-node { width: .68rem; height: .68rem; border: 1.5px solid #8fc6df; background: var(--bg-main); box-shadow: 0 0 0 4px var(--bg-main), 0 0 1rem rgba(123,167,188,.24); }
+.tl-node-major { width: 1rem; height: 1rem; border-color: #edc77c; background: #edc77c; box-shadow: 0 0 0 4px var(--bg-main), 0 0 1.4rem rgba(233,193,118,.42); }
+.tl-year { min-width: auto; padding: 0; border: 0; border-radius: 0; background: none; color: #a9c4d1; font-size: 1.22rem; letter-spacing: .03em; }
+.tl-major .tl-year { color: #edc77c; font-size: 1.4rem; }
+.tl-side { padding: 0 1.8rem; }
+.tl-text { max-width: 44rem; padding: .65rem 1.3rem; border: 0; border-radius: .35rem; font-size: 1.43rem; line-height: 1.62; box-shadow: none; }
+.tl-text::before { display: none; content: none; }
+.tl-text-aug { border-right: 2px solid rgba(233,193,118,.42); background: rgba(233,193,118,.05); color: #e4d8c6; }
+.tl-text-world { border-left: 2px solid rgba(123,167,188,.45); background: rgba(123,167,188,.06); color: #b8c3ad; }
+.tl-major .tl-text-aug, .tl-major .tl-text-world { border-color: rgba(233,193,118,.6); background: rgba(233,193,118,.1); }
+.tl-era { margin: 3.8rem auto 1.8rem; }
+.tl-era:first-child { margin-top: 3.8rem; }
+.tl-era span { padding: 0; border: 0; border-radius: 0; background: none; color: #edc77c; font-size: 1.18rem; }
+.tl-source { max-width: 100rem; margin: 0 auto; padding: 2.4rem 2rem 4rem; border: 0; background: none; }
+[data-theme="light"] .tl-toolbar { border-bottom-color: rgba(47,94,125,.23); background: none; }
+[data-theme="light"] .tl-kicker { color: #315e86; }
+[data-theme="light"] .tl-wrap { border: 0; background: none; box-shadow: none; }
+[data-theme="light"] .tl-flow path { stroke: rgba(47,94,125,.62); }
+[data-theme="light"] .tl-node { background: #f7f2e8; border-color: #477c9e; box-shadow: 0 0 0 4px #f7f2e8, 0 0 .8rem rgba(47,94,125,.15); }
+[data-theme="light"] .tl-node-major { background: #a77334; border-color: #a77334; box-shadow: 0 0 0 4px #f7f2e8, 0 0 1rem rgba(167,115,52,.22); }
+[data-theme="light"] .tl-year { color: #416f8e; }
+[data-theme="light"] .tl-major .tl-year { color: #8e5c21; }
+[data-theme="light"] .tl-text-aug { color: #4f3820; border-right-color: #b18042; background: rgba(190,146,77,.075); }
+[data-theme="light"] .tl-text-world { color: #224b68; border-left-color: #4b83a5; background: rgba(75,131,165,.075); }
+[data-theme="light"] .tl-major .tl-text-aug, [data-theme="light"] .tl-major .tl-text-world { background: rgba(190,146,77,.11); }
+[data-theme="light"] .tl-source { border: 0; background: none; }
+@media (max-width: 640px) {
+  .tl-toolbar { margin: 0 auto 1rem; padding: 0 1rem 1rem; border-bottom: 1px solid rgba(123,167,188,.24); }
+  .tl-wrap { margin: 0 auto; padding: .5rem 1rem 4rem; border: 0; background: none; }
+  .tl-flow { left: 2.9rem; width: 12px; }
+  .tl-row { grid-template-columns: 5.8rem minmax(0,1fr); padding: .65rem 0; }
+  .tl-center { padding-top: 0; }
+  .tl-year { font-size: 1.08rem; }
+  .tl-side { padding: 0; }
+  .tl-text { padding: .55rem .8rem; border-left: 2px solid; border-right: 0; border-radius: .35rem; font-size: 1.32rem; }
+  .tl-text-aug { border-left-color: rgba(233,193,118,.5); }
+  .tl-text-world { border-left-color: rgba(123,167,188,.56); }
+  .tl-era { margin: 3.2rem auto 1.4rem; }
+  .tl-source { margin: 0 auto; padding: 2rem 1rem 3rem; border: 0; }
+}
+
+/* A deliberately quiet center spine: it guides the eye without competing with text. */
+.tl-flow { width: 8px; }
+.tl-flow path {
+  stroke: rgba(201,191,169,.34);
+  stroke-width: .9;
+  stroke-dasharray: 1.25 5.75;
+  animation: timeline-flow 4.2s linear infinite;
+  filter: none;
+}
+.tl-node { border-color: rgba(201,191,169,.62); box-shadow: 0 0 0 3px var(--bg-main); }
+.tl-node-major { box-shadow: 0 0 0 3px var(--bg-main); }
+[data-theme="light"] .tl-flow path { stroke: rgba(47,94,125,.46); filter: none; }
+[data-theme="light"] .tl-node { border-color: rgba(47,94,125,.64); box-shadow: 0 0 0 3px #f7f2e8; }
+[data-theme="light"] .tl-node-major { box-shadow: 0 0 0 3px #f7f2e8; }
+@media (max-width: 640px) { .tl-flow { left: 2.9rem; width: 8px; } }
+
+/* Let the text lead: larger type, no card shading. */
+.tl-text,
+.tl-text-aug,
+.tl-text-world,
+.tl-major .tl-text-aug,
+.tl-major .tl-text-world { background: transparent; box-shadow: none; }
+.tl-text { font-size: 1.62rem; line-height: 1.68; }
+@media (max-width: 640px) { .tl-text { font-size: 1.46rem; line-height: 1.65; } }
+.tl-text-aug .tl-en { color: #eadcc7; }
+.tl-text-world .tl-en { color: #b8c3ad; }
+.tl-text-world { font-size: 1.38rem; line-height: 1.62; opacity: .88; }
+.tl-life-filter {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 11.4rem;
+  z-index: 1002;
+  padding: .75rem 1rem;
+  border: 1px solid rgba(201,191,169,.28);
+  border-radius: 100px;
+  cursor: pointer;
+  background: var(--bg-main);
+  color: rgba(201,191,169,.82);
+  font: 700 .95rem/1 var(--font-ui);
+  letter-spacing: .08em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(.8rem);
+  transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease;
+}
+.tl-life-filter.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.tl-life-filter[aria-pressed="true"] { border-color: var(--gold); background: var(--gold); color: #102233; }
+#panel-nien-bieu.timeline-life-only .tl-right { display: none; }
+#panel-nien-bieu.timeline-life-only .tl-row[data-has-aug="false"] { display: none; }
+@media (max-width: 640px) {
+  .tl-text-world { font-size: 1.25rem; }
+  .tl-life-filter { right: 1.35rem; bottom: max(11rem, calc(env(safe-area-inset-bottom) + 9.9rem)); }
+}
+
+/* Center chronology system: one restrained line, compact date labels, clear milestones. */
+.tl-flow { width: 10px; }
+.tl-flow path { stroke-width: 1.35; stroke-linecap: round; stroke-dasharray: 1.6 5.4; animation: timeline-flow 5.6s linear infinite; }
+.tl-center { gap: .5rem; }
+.tl-node {
+  width: .72rem;
+  height: .72rem;
+  border: 1.5px solid rgba(233,193,118,.78);
+  background: var(--bg-main);
+  box-shadow: 0 0 0 3px var(--bg-main);
+}
+.tl-node-major {
+  width: 1.05rem;
+  height: 1.05rem;
+  border-color: var(--gold);
+  background: var(--gold);
+  box-shadow: 0 0 0 3px var(--bg-main);
+}
+.tl-year {
+  padding: .18rem .45rem;
+  border: 1px solid rgba(233,193,118,.18);
+  border-radius: .25rem;
+  background: rgba(13,31,43,.36);
+  color: rgba(233,193,118,.82);
+  font-size: 1.34rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  font-variant-numeric: tabular-nums;
+}
+.tl-major .tl-year { border-color: rgba(233,193,118,.42); color: var(--gold); font-size: 1.42rem; }
+@media (max-width: 640px) {
+  .tl-flow { left: 2.9rem; width: 10px; }
+  .tl-year { padding: .15rem .22rem; font-size: 1.14rem; letter-spacing: .03em; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .tl-row { transition: opacity .22s ease, filter .22s ease; }
+  .tl-text { transition: transform .26s cubic-bezier(.22,1,.36,1), color .22s ease; }
+  .tl-wrap:has(.tl-year:hover) .tl-row { opacity: .3; filter: saturate(.45); }
+  .tl-wrap:has(.tl-year:hover) .tl-row:has(.tl-year:hover) { opacity: 1; filter: none; }
+  .tl-row:has(.tl-year:hover) .tl-year { border-color: var(--gold); background: rgba(233,193,118,.14); color: var(--gold); box-shadow: 0 0 .9rem rgba(233,193,118,.18); }
+  .tl-row:has(.tl-year:hover) .tl-node { border-color: var(--gold); box-shadow: 0 0 0 3px var(--bg-main), 0 0 1rem rgba(233,193,118,.45); }
+  .tl-row:has(.tl-year:hover) .tl-side { position: relative; z-index: 2; }
+  .tl-row:has(.tl-year:hover) .tl-text { color: var(--ink-cream); transform: scale(1.065); }
+  .tl-row:has(.tl-year:hover) .tl-left .tl-text { transform-origin: right center; }
+  .tl-row:has(.tl-year:hover) .tl-right .tl-text { transform-origin: left center; }
+  [data-theme="light"] .tl-row:has(.tl-year:hover) .tl-year { color: #8e5c21; border-color: #a77334; background: rgba(167,115,52,.12); }
+  [data-theme="light"] .tl-row:has(.tl-year:hover) .tl-text-world { color: #224b68; }
+}
+
+/* Keep language selection visible without extra divider lines. */
+.tl-toolbar { justify-content: flex-end; border-bottom: 0; }
+.tl-language-switch {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 7.4rem;
+  height: 3rem;
+  padding: .3rem;
+  border: 1px solid rgba(201,191,169,.26);
+  border-radius: 100px;
+  cursor: pointer;
+  overflow: hidden;
+  background: transparent;
+  color: rgba(201,191,169,.8);
+  font: 700 1rem/1 var(--font-ui);
+  letter-spacing: .06em;
+}
+.tl-language-switch span { position: relative; z-index: 1; text-align: center; }
+.tl-language-switch i { position: absolute; inset: .3rem auto .3rem .3rem; width: calc(50% - .3rem); border-radius: 100px; background: var(--gold); transition: transform .24s ease; }
+.tl-language-switch[aria-pressed="true"] i { transform: translateX(3.4rem); }
+.tl-language-switch[aria-pressed="true"] { color: rgba(201,191,169,.64); }
+.tl-language-switch[aria-pressed="false"] span:first-child,
+.tl-language-switch[aria-pressed="true"] span:last-child { color: #102233; }
+.tl-language { border: 1px solid rgba(201,191,169,.22); background: transparent; }
+.tl-language-btn { min-width: 4.1rem; color: rgba(201,191,169,.78); }
+.tl-language-btn.active { color: #102233; background: var(--gold); }
+.tl-era::before, .tl-era::after { display: none; }
+.tl-era { justify-content: center; }
+[data-theme="light"] .tl-language { border-color: rgba(45,112,87,.28); }
+[data-theme="light"] .tl-language-btn { color: #2d7057; }
+[data-theme="light"] .tl-language-btn.active { color: #fff; background: #2d7057; }
+[data-theme="light"] .tl-language-switch { border-color: rgba(45,112,87,.32); color: rgba(45,112,87,.76); }
+[data-theme="light"] .tl-language-switch i { background: #2d7057; }
+[data-theme="light"] .tl-language-switch[aria-pressed="false"] span:first-child,
+[data-theme="light"] .tl-language-switch[aria-pressed="true"] span:last-child { color: #fff; }
+/* Larger, higher-contrast language control. */
+.tl-language-switch { width: 9rem; height: 3.7rem; font-size: 1.14rem; }
+.tl-language-switch i { width: calc(50% - .3rem); }
+.tl-language-switch[aria-pressed="true"] i { transform: translateX(4.2rem); }
+[data-theme="light"] .tl-language-switch { border-color: #4f8a70; color: #1c654a; background: rgba(38,116,84,.06); }
+[data-theme="light"] .tl-language-switch i { background: #1c654a; box-shadow: 0 1px 4px rgba(24,100,72,.2); }
+/* Keep the two timeline filters inside one compact floating toggle. */
+.tl-toolbar {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 6.8rem;
+  z-index: 1002;
+  display: block;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(.8rem);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.tl-toolbar.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.tl-options-toggle {
+  display: grid;
+  width: 3.8rem;
+  height: 3.8rem;
+  place-items: center;
+  border: 1px solid rgba(233,193,118,.32);
+  border-radius: .45rem;
+  padding: 0;
+  background: rgba(16,34,51,.94);
+  color: var(--gold);
+  cursor: pointer;
+  box-shadow: 0 .45rem 1.25rem rgba(0,0,0,.18);
+}
+.tl-options-toggle svg { width: 1.75rem; height: 1.75rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.tl-options-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + .65rem);
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+  padding: .4rem;
+  border: 1px solid rgba(233,193,118,.26);
+  border-radius: .55rem;
+  background: rgba(16,34,51,.97);
+  box-shadow: 0 .75rem 1.75rem rgba(0,0,0,.22);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(.35rem);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+.tl-toolbar.is-open .tl-options-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+.tl-options-panel .tl-life-filter {
+  display: inline-flex;
+  width: auto;
+  min-height: 2.7rem;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  padding: .4rem .55rem;
+  border-radius: .42rem;
+  font-size: .72rem;
+  letter-spacing: .045em;
+  white-space: nowrap;
+}
+.tl-options-panel #timeline-language-toggle {
+  width: 7.4rem;
+  height: 2.7rem;
+  padding: .24rem;
+  font-size: .85rem;
+  letter-spacing: .045em;
+}
+.tl-options-panel #timeline-language-toggle i { inset: .24rem auto .24rem .24rem; width: calc(50% - .24rem); }
+.tl-options-panel #timeline-language-toggle[aria-pressed="true"] i { transform: translateX(3.46rem); }
+.tl-life-filter,
+#timeline-language-toggle {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+#timeline-language-toggle {
+  transition: background .2s ease, color .2s ease;
+}
+/* Two independent controls: a compact filter icon and the language switch. */
+.tl-toolbar { display: flex; align-items: center; gap: .5rem; }
+.tl-life-filter {
+  display: grid;
+  width: 3.35rem;
+  min-height: 3.35rem;
+  place-items: center;
+  padding: 0;
+  border-radius: .45rem;
+}
+.tl-life-filter svg { width: 1.55rem; height: 1.55rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+#timeline-language-toggle {
+  width: 7.2rem;
+  height: 3.35rem;
+  padding: .27rem;
+  background: #183247;
+  font-size: .9rem;
+  letter-spacing: .05em;
+}
+#timeline-language-toggle i { inset: .27rem auto .27rem .27rem; width: calc(50% - .27rem); }
+#timeline-language-toggle[aria-pressed="true"] i { transform: translateX(3.33rem); }
+@media (max-width: 640px) {
+  .tl-toolbar { right: 1.35rem; bottom: max(6.3rem, calc(env(safe-area-inset-bottom) + 5.2rem)); }
+}
+@media (max-width: 640px) { .tl-toolbar { justify-content: flex-end; } }
+
+/* Works catalogue */
+.works-panel { width:100%; max-width:none; margin:0 auto; padding:0 0 5rem; }
+.aug-works-overview { width:min(100% - 4rem, 108rem); margin:0 auto; }
+.works-head { display:flex; justify-content:flex-start; gap:1.5rem; align-items:center; padding:1.4rem 0 1.8rem; }
+.works-copy { display:flex; align-items:center; gap:.9rem; }.works-head p { display:flex; align-items:center; gap:.85rem; margin:0; color:var(--gold-dim); font:700 1.05rem/1.2 var(--font-ui); letter-spacing:.15em; }
+.works-head p::before { content:''; width:2.4rem; height:1px; background:currentColor; opacity:.72; }
+.works-copy > span { max-width:68rem; color:var(--ink-cream-soft); font:1.2rem/1.5 var(--font-body); }
+.works-controls { margin-left:auto; }
+.works-list { --works-grid: 3.2rem 8.5rem minmax(0,1fr) 11rem minmax(11rem,12rem) 6.6rem; --works-meta-size:1.25rem; margin-top:1.5rem; }
+.works-list:not(.show-all) [data-work-major="false"] { display:none; }
+.work-row { display:grid; grid-template-columns:var(--works-grid); gap:1.4rem; align-items:center; width:100%; padding:1.15rem .4rem; border-bottom:1px solid rgba(201,191,169,.12); }
+.work-row > * { min-width:0; }
+.work-row-head { padding:.8rem .4rem; border-bottom:1px solid rgba(233,193,118,.38); color:var(--gold-dim); font:700 1.08rem/1 var(--font-ui); letter-spacing:.08em; }.work-row-head > *{text-align:center}.work-row-head > :nth-child(3){text-align:left}
+.work-no { color:rgba(201,191,169,.45); font:700 var(--works-meta-size)/1 var(--font-ui); text-align:center; }
+.work-date { justify-self:center; display:grid; width:100%; max-width:7rem; min-height:3rem; box-sizing:border-box; place-items:center; padding:.35rem .5rem; border:1px solid rgba(233,193,118,.34); border-radius:.38rem; background:rgba(233,193,118,.08); color:var(--gold); font:700 1.2rem/1.18 var(--font-ui); letter-spacing:.025em; text-align:center; }
+.work-main { display:grid; justify-items:start; gap:.22rem; text-align:left; }.work-main em { color:var(--ink-cream); font:1.55rem/1.3 var(--font-body); }.work-main span { color:var(--ink-cream-soft); font:1.22rem/1.4 var(--font-body); }.work-main .work-title-vi { color:rgba(201,191,169,.72); font-size:1.14rem; }
+.work-row code { justify-self:center; color:#b8c3ad; font:600 var(--works-meta-size)/1.3 var(--font-ui); }.work-pl { justify-self:center; display:grid; min-height:2.45rem; box-sizing:border-box; place-items:center; gap:.2rem; padding:.3rem .5rem; border:1px solid rgba(233,193,118,.24); border-radius:.38rem; background:rgba(233,193,118,.045); color:var(--gold-dim); font:600 var(--works-meta-size)/1.2 var(--font-ui); text-align:center; white-space:normal; overflow-wrap:anywhere; }.work-pl-note { color:rgba(201,191,169,.68); font:600 .9rem/1.1 var(--font-ui); white-space:nowrap; }.work-links { display:grid; grid-template-columns:minmax(0,1fr); justify-self:center; width:6.4rem; gap:.35rem; }.work-links button,.work-links a { display:grid; min-width:0; min-height:2.35rem; place-items:center; border:1px solid rgba(201,191,169,.18); border-radius:.38rem; padding:.3rem; background:transparent; color:rgba(201,191,169,.38); font:700 1rem/1 var(--font-ui); letter-spacing:.04em; text-decoration:none; white-space:nowrap; }.work-links a { color:var(--gold); border-color:rgba(233,193,118,.48); }.work-links a:hover { background:rgba(233,193,118,.1); }
+
+/* Bản văn gộp trong một menu nổi, giữ cột index gọn. */
+.work-text-menu { position:relative; display:grid; place-self:center; margin-block:auto; width:7.3rem; }
+.work-text-trigger { display:grid; grid-template-columns:auto auto; place-content:center; align-items:center; width:100%; height:2.45rem; gap:.45rem; padding:0 .55rem; border:1px solid rgba(233,193,118,.34); border-radius:.38rem; background:rgba(233,193,118,.05); color:var(--gold-dim); font:700 .92rem/1 var(--font-ui); letter-spacing:.055em; line-height:1; text-align:center; white-space:nowrap; cursor:pointer; }
+.work-text-trigger > span { display:block; line-height:1; }
+.work-text-trigger svg { transition:transform .18s ease; }
+.work-text-menu:hover .work-text-trigger,.work-text-menu:focus-within .work-text-trigger,.work-text-menu.is-open .work-text-trigger,.work-text-menu.is-hover-open .work-text-trigger { border-color:rgba(233,193,118,.68); background:rgba(233,193,118,.1); color:var(--gold); }
+.work-text-menu:focus-within .work-text-trigger svg,.work-text-menu.is-open .work-text-trigger svg,.work-text-menu.is-hover-open .work-text-trigger svg { transform:rotate(180deg); }
+.work-text-trigger:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+.work-text-menu .work-links { position:absolute; z-index:20; top:100%; right:0; display:grid; width:7.3rem; padding:.35rem; gap:.3rem; border:1px solid rgba(233,193,118,.24); border-radius:.48rem; background:var(--bg-card); box-shadow:0 .65rem 1.4rem rgba(0,0,0,.24); opacity:0; visibility:hidden; transform:translateY(-.1rem); pointer-events:none; transition:opacity .16s ease,transform .16s ease,visibility 0s linear .16s; }
+.work-text-menu:hover .work-links,.work-text-menu:focus-within .work-links,.work-text-menu.is-open .work-links,.work-text-menu.is-hover-open .work-links { opacity:1; visibility:visible; transform:translateY(0); pointer-events:auto; transition-delay:0s; }
+
+/* One date can now branch to several events without repeating the year. */
+.tl-text { font-weight: 500; }
+.tl-major .tl-text { font-weight: 650; }
+.tl-text-aug,
+.tl-text-world { border-left: 0; border-right: 0; }
+.tl-text-world {
+  font-family: var(--font-ui);
+  font-size: 1.16rem;
+  font-weight: 600;
+  line-height: 1.48;
+  letter-spacing: .015em;
+}
+.tl-era-toggle {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: 700 1.45rem/1 var(--font-ui);
+  cursor: pointer;
+  opacity: .76;
+}
+.tl-era-toggle:hover { opacity: 1; }
+.tl-row.tl-era-collapsed { display: none; }
+.tl-source { text-align: center; }
+.tl-row-branched { align-items: center; }
+.tl-row-branched .tl-side { align-self: center; }
+.tl-branch-list { display: grid; gap: .85rem; }
+.tl-branch-list:has(.tl-text + .tl-text) { position: relative; }
+.tl-left .tl-branch-list:has(.tl-text + .tl-text)::before,
+.tl-right .tl-branch-list:has(.tl-text + .tl-text)::before {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  width: 1px;
+  background: rgba(201,191,169,.34);
+}
+.tl-left .tl-branch-list:has(.tl-text + .tl-text)::before { right: 0; }
+.tl-right .tl-branch-list:has(.tl-text + .tl-text)::before { left: 0; }
+@media (max-width:640px) {
+  .tl-branch-list { gap: .7rem; }
+  .tl-left .tl-branch-list:has(.tl-text + .tl-text)::before,
+  .tl-right .tl-branch-list:has(.tl-text + .tl-text)::before { left: 0; right: auto; }
+}
+
+/* One CSS dash spine keeps desktop and mobile aligned when a year branches. */
+.tl-flow { display: none; }
+.tl-wrap { position: relative; }
+.tl-era { position: relative; z-index: 1; background: var(--bg-main); }
+.tl-row { position: relative; }
+.tl-row::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  left: calc(50% - .5px);
+  top: -.8rem;
+  bottom: -.8rem;
+  width: 1px;
+  --tl-spine-color: rgba(201,191,169,.42);
+  background: repeating-linear-gradient(to bottom, var(--tl-spine-color) 0 2px, transparent 2px 9px);
+  background-size: 1px 11px;
+  animation: mobile-timeline-spine 1s linear infinite;
+}
+.tl-era + .tl-row::before { top: -3.8rem; }
+.tl-center { z-index: 1; align-self: stretch; justify-content: flex-start; }
+.tl-row-branched .tl-center { justify-content: center; }
+@media (max-width:640px) {
+  .tl-row { grid-template-columns: 5.8rem minmax(0,1fr); }
+  .tl-row::before { left:2.15rem; }
+  .tl-center { position:relative; left:-.75rem; }
+  .tl-left { grid-area: aug; }
+  .tl-right { grid-area: world; }
+  .tl-text-world { font-size: 1.02rem; line-height: 1.45; }
+  .tl-era { margin: 3rem 0 1.35rem 5.8rem; padding: 0; justify-content: center; }
+  .tl-era-toggle { flex:0 0 2rem; width:2rem; min-width:2rem; height:2rem; aspect-ratio:1; box-sizing:border-box; font-size:1.3rem; }
+  #panel-nien-bieu.timeline-vietnamese .tl-text { text-align: center; }
+  #panel-nien-bieu.timeline-vietnamese .tl-text .tl-vi { display: block; }
+}
+@keyframes mobile-timeline-spine { to { background-position: 0 11px; } }
+@media (max-width:640px) { .works-panel{padding:0 1rem 4rem}.works-head{align-items:flex-start;flex-wrap:wrap;padding-top:.5rem;gap:.9rem}.works-copy{gap:.65rem}.works-head p{font-size:.98rem}.works-head p::before{width:1.8rem}.works-copy > span{font-size:1.1rem}.works-controls{width:auto;margin-left:auto;justify-content:flex-end;gap:.65rem}.works-filter,.works-sort{font-size:.9rem}.works-filter select,.works-sort select{min-width:9.2rem;padding:.62rem 2rem .62rem .65rem;font-size:.92rem}.works-list{--works-meta-size:1.12rem}.work-row{grid-template-columns:2.6rem 5.8rem minmax(0,1fr);gap:.5rem 1rem;padding:1.1rem 0}.work-row-head{display:none}.work-date{max-width:5.8rem;min-height:2.7rem;font-size:1.04rem}.work-row code,.work-pl{grid-column:3;justify-self:center}.work-pl{min-height:2.25rem;text-align:center}.work-links{grid-column:3;grid-template-columns:repeat(3,minmax(0,1fr));justify-self:center;width:12.4rem;gap:.3rem;margin-top:.1rem}.work-links button,.work-links a{min-height:2.25rem;padding:.25rem;font-size:.9rem}.work-main em{font-size:1.4rem}.work-main .work-title-vi{font-size:1.06rem} }
+
+@media (max-width:640px) {
+  .works-panel { padding-right:.45rem; padding-left:.45rem; }
+  .works-list { width:calc(100% + .6rem); margin-left:-.3rem; }
+  .work-row { grid-template-columns:2.3rem minmax(0,1fr) auto 6.55rem; align-items:start; gap:.55rem .5rem; padding:1rem .25rem; }
+  .work-no { grid-column:1; grid-row:1 / span 3; align-self:start; padding-top:.45rem; }
+  .work-date { grid-column:2; grid-row:1; justify-self:start; width:auto; max-width:none; min-height:0; padding:.28rem 0; border:0; border-radius:0; background:transparent; color:var(--gold-dim); font-size:.94rem; font-weight:650; letter-spacing:.04em; text-align:left; }
+  .work-main { width: 100%; min-width: 0; }
+  .work-main { grid-column:2 / -1; grid-row:2; }
+  .work-main em,
+  .work-main .work-title-en,
+  .work-main .work-title-vi { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .work-row code { grid-column:2; grid-row:3; justify-self:start; align-self:center; }
+  .work-pl { grid-column:3; grid-row:1; justify-self:end; align-self:start; width:max-content; max-width:100%; min-height:2.15rem; padding:.25rem .45rem; }
+  .work-text-menu { grid-column:4; grid-row:1; align-self:start; width:6.55rem; margin:0; }
+  .work-text-trigger { display:grid; height:2.3rem; gap:.32rem; padding:0 .4rem; font-size:.78rem; letter-spacing:.04em; }
+  .work-text-menu .work-links { top:calc(100% + .45rem); right:0; width:min(14.5rem,calc(100vw - 1.25rem)); grid-template-columns:repeat(3,minmax(0,1fr)); padding:.45rem; gap:.35rem; border-radius:.55rem; }
+  .work-text-menu .work-links button,.work-text-menu .work-links a { min-height:2.35rem; font-size:.88rem; }
+  .work-text-menu:hover .work-links,.work-text-menu:focus-within .work-links,.work-text-menu.is-hover-open:not(.is-open) .work-links { opacity:0; visibility:hidden; transform:translateY(-.1rem); pointer-events:none; }
+  .work-text-menu.is-open .work-links { opacity:1; visibility:visible; transform:translateY(0); pointer-events:auto; }
+  .work-main [data-work-full] { position: relative; cursor: pointer; }
+  .work-main [data-work-full].show-work-tooltip { overflow: visible; white-space: normal; z-index: 4; }
+  .work-main [data-work-full].show-work-tooltip::after {
+    content: attr(data-work-full);
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    top: calc(100% + .3rem);
+    width: max-content;
+    max-width: min(28rem, calc(100vw - 3rem));
+    padding: .6rem .75rem;
+    border: 1px solid rgba(233,193,118,.34);
+    border-radius: .35rem;
+    background: var(--bg-card);
+    color: var(--ink-cream);
+    font: 500 1.05rem/1.45 var(--font-body);
+    text-align: left;
+    box-shadow: 0 .65rem 1.4rem rgba(0,0,0,.2);
+  }
+}
+
+@keyframes timeline-flow { to { stroke-dashoffset: -28; } }
+@media (prefers-reduced-motion: reduce) {
+  .tl-flow path { animation: none; }
+  .tl-wrap.timeline-reveal .tl-row, .tl-wrap.timeline-reveal .tl-era { opacity: 1; transition: none; transform: none; }
+}
+</style>
+
+<style is:global>
+/* Single unscoped theme layer for the timeline and works index. */
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-flow path { stroke: rgba(201,191,169,.34); }
+
+html[data-theme="light"] body.page-thanh-au-tinh .aug-tab-btn { color: #2d7057; }
+html[data-theme="light"] body.page-thanh-au-tinh .aug-tab-btn.active,
+html[data-theme="light"] body.page-thanh-au-tinh .aug-tab-btn:hover { color: #174b38; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-world { border-left-color: #4b83a5; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-aug { border-color: #b18042; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-text-aug {
+  color: #1f5139;
+  border-color: #2f7657;
+  font-weight: 550;
+}
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-text-aug .tl-en,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-text-aug .tl-vi { color: #1f5139; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-aug .tl-en,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-aug .tl-vi { color: #345846; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-world,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-world .tl-en,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-text-world .tl-vi { color: #2a5874; opacity: 1; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-world,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-world .tl-en,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-world .tl-vi { color: #5d668e; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-text-world,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-text-world .tl-en,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-text-world .tl-vi { color: #4e587f; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-branch-list:has(.tl-text + .tl-text)::before { background: rgba(47,94,125,.36); }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-row::before { --tl-spine-color: rgba(47,94,125,.48); }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-options-toggle,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-options-panel { border-color: #8cb59f; background: #f1f7f2; color: #245f49; box-shadow: 0 .55rem 1.3rem rgba(31,91,69,.13); }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-text-aug,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-text-aug .tl-en,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-text-aug .tl-vi { color: #e7dccb; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-text-world,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-text-world .tl-en,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-text-world .tl-vi { color: #cbd7e2; opacity: 1; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug .tl-en,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug .tl-vi { color: #d6ccbd; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-major .tl-text-world,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-major .tl-text-world .tl-en,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-major .tl-text-world .tl-vi { color: #c0c6de; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-world,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-world .tl-en,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-world .tl-vi { color: #aeb6cf; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-flow path { stroke: rgba(47,94,125,.58); filter: none; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-node { background: #f7f2e8; border-color: rgba(47,94,125,.64); box-shadow: 0 0 0 3px #f7f2e8; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-node-major { background: #a77334; border-color: #a77334; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-year { border-color: #9ab9a8; background: #fbf7ee; color: #2f6d55; box-shadow: none; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-major .tl-year { border-color: #bd8d4e; background: #fff3df; color: #865b2b; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-era::before,
+html[data-theme="light"] body.page-thanh-au-tinh .tl-era::after { background: var(--deco-rule); }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-era span { color: #765625; letter-spacing: .14em; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-toolbar { border-color: rgba(47,94,125,.22); }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-kicker { color: #315e86; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-language { background: rgba(47,94,125,.08); }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-language-btn { color: #315e86; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-language-btn.active { color: #fff; background: #315e86; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-source { color: var(--ink-cream-soft); border-top-color: var(--deco-rule); }
+html[data-theme="light"] body.page-thanh-au-tinh #timeline-language-toggle { border-color: #4f8a70; color: #1c654a; background: #edf5ef; }
+html[data-theme="light"] body.page-thanh-au-tinh #timeline-language-toggle i { background: #1c654a; box-shadow: 0 1px 5px rgba(31,91,69,.2); }
+html[data-theme="light"] body.page-thanh-au-tinh #timeline-language-toggle[aria-pressed="false"] span:first-child,
+html[data-theme="light"] body.page-thanh-au-tinh #timeline-language-toggle[aria-pressed="true"] span:last-child { color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-life-filter { border-color: #8cb59f; background: #f1f7f2; color: #245f49; }
+html[data-theme="light"] body.page-thanh-au-tinh .tl-life-filter[aria-pressed="true"] { border-color: #2f7657; background: #2f7657; color: #fff; }
+/* Language markers use the same solid hierarchy as the global liturgical badges. */
+html body.page-thanh-au-tinh .work-links .work-link-lat { background: #8b2020; border-color: #8b2020; color: #efe7d6; }
+html body.page-thanh-au-tinh .work-links .work-link-eng { background: #e9c176; border-color: #e9c176; color: #0d1f2b; }
+html body.page-thanh-au-tinh .work-links .work-link-vi { background: #72c49a; border-color: #72c49a; color: #0d1f2b; }
+html body.page-thanh-au-tinh .work-links a:not(:disabled):hover { filter: none; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .work-links .work-link-lat:not(:disabled):hover,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .work-links .work-link-lat:not(:disabled):focus-visible { background: #a92a2a; border-color: #c14840; color: #fff5e3; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .work-links .work-link-eng:not(:disabled):hover,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .work-links .work-link-eng:not(:disabled):focus-visible { background: #f2d485; border-color: #f9dfa4; color: #0d1f2b; }
+html:not([data-theme="light"]) body.page-thanh-au-tinh .work-links .work-link-vi:not(:disabled):hover,
+html:not([data-theme="light"]) body.page-thanh-au-tinh .work-links .work-link-vi:not(:disabled):focus-visible { background: #8ad8b1; border-color: #a0e6c2; color: #0d1f2b; }
+html body.page-thanh-au-tinh .work-links button:disabled { opacity: .5; cursor: not-allowed; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-lat { background: #9b2020; border-color: #9b2020; color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-eng { background: #c8963e; border-color: #c8963e; color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-vi { background: #1a5e3c; border-color: #1a5e3c; color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-lat:not(:disabled):hover,
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-lat:not(:disabled):focus-visible { background: #b32b2b; border-color: #b32b2b; color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-eng:not(:disabled):hover,
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-eng:not(:disabled):focus-visible { background: #a87325; border-color: #a87325; color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-vi:not(:disabled):hover,
+html[data-theme="light"] body.page-thanh-au-tinh .work-links .work-link-vi:not(:disabled):focus-visible { background: #237a50; border-color: #237a50; color: #fff; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-text-trigger { border-color: rgba(26,94,60,.34); background: #f4f8f4; color: #246347; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-text-menu:hover .work-text-trigger, html[data-theme="light"] body.page-thanh-au-tinh .work-text-menu:focus-within .work-text-trigger, html[data-theme="light"] body.page-thanh-au-tinh .work-text-menu.is-open .work-text-trigger { border-color: #2f7657; background: #edf5ef; color: #174b38; }
+html[data-theme="light"] body.page-thanh-au-tinh .work-text-menu .work-links { border-color: rgba(26,94,60,.24); background: #fbfaf6; box-shadow: 0 .65rem 1.4rem rgba(28,68,48,.16); }
+html body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug,
+html body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug .tl-en,
+html body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug .tl-vi {
+  font-weight: 400;
+}
+html body.page-thanh-au-tinh .tl-source.citation-reference { margin-left: auto; margin-right: auto; overflow: visible; text-align: left; white-space: normal; }
+</style>
+
+<script define:vars={{ phJson: taPh }}>
+document.getElementById('backBtn')?.remove();
+
+// Tab switching
+const tabBtns = document.querySelectorAll('.aug-tab-btn');
+const panels = document.querySelectorAll('.aug-panel');
+const timelineWrap = document.querySelector('.tl-wrap');
+let timelineObserver;
+
+function revealTimeline() {
+  if (!timelineWrap || timelineWrap.classList.contains('timeline-reveal')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  timelineWrap.classList.add('timeline-reveal');
+  timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('is-visible', entry.isIntersecting);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: .08 });
+  timelineWrap.querySelectorAll('.tl-row, .tl-era').forEach(item => timelineObserver.observe(item));
+}
+
+function activateTab(tab, updateUrl = false) {
+  const button = Array.from(tabBtns).find(item => item.dataset.tab === tab);
+  const panel = document.getElementById(`panel-${tab}`);
+  if (!button || !panel) return;
+  tabBtns.forEach(item => {
+    item.classList.toggle('active', item === button);
+    item.setAttribute('aria-selected', String(item === button));
+  });
+  panels.forEach(item => { item.hidden = item !== panel; });
+  if (updateUrl && window.location.hash !== `#${tab}`) history.pushState(null, '', `#${tab}`);
+  requestAnimationFrame(() => {
+    const tabBar = button.closest('.aug-tab-bar');
+    if (!tabBar || tabBar.scrollWidth <= tabBar.clientWidth) return;
+    const barRect = tabBar.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+    let left = tabBar.scrollLeft;
+    if (buttonRect.left < barRect.left) left -= barRect.left - buttonRect.left;
+    if (buttonRect.right > barRect.right) left += buttonRect.right - barRect.right;
+    tabBar.scrollTo({ left: Math.max(0, left), behavior: updateUrl ? 'smooth' : 'auto' });
+  });
+  if (tab === 'nien-bieu') requestAnimationFrame(revealTimeline);
+}
+
+tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab, true)));
+const tabFromHash = () => {
+  const hash = window.location.hash.slice(1);
+  if (hash === 'thu-vien-tieu-su') return 'tieu-su';
+  if (hash === 'thu-vien-tac-pham') return 'tac-pham';
+  if (hash === 'thu-vien-bach-khoa') return 'bach-khoa';
+  if (hash.startsWith('bach-khoa-entry-')) return 'bach-khoa';
+  return hash;
+};
+const requestedTab = tabFromHash();
+if (requestedTab === 'tieu-su' || requestedTab === 'nien-bieu' || requestedTab === 'tac-pham' || requestedTab === 'bach-khoa') activateTab(requestedTab);
+else history.replaceState(null, '', '#tieu-su');
+window.addEventListener('popstate', () => activateTab(tabFromHash() || 'tieu-su'));
+window.addEventListener('hashchange', () => activateTab(tabFromHash() || 'tieu-su'));
+
+const worksFilter = document.getElementById('works-filter');
+const worksList = document.getElementById('works-list');
+const worksSort = document.getElementById('works-sort');
+const resetWorksNumbering = (showAll = worksList?.classList.contains('show-all') ?? false) => {
+  let current = 0;
+  const rows = worksList ? worksList.querySelectorAll('[data-work-major]') : [];
+  rows.forEach((row) => {
+    if (!showAll && row.getAttribute('data-work-major') === 'false') return;
+    const number = row.querySelector('.work-no');
+    if (number) number.textContent = String(++current).padStart(2, '0');
+  });
+};
+resetWorksNumbering();
+const workFullLabels = document.querySelectorAll('.work-main [data-work-full]');
+const closeWorkTooltips = () => workFullLabels.forEach((item) => item.classList.remove('show-work-tooltip'));
+workFullLabels.forEach((item) => {
+  const toggleTooltip = () => {
+    if (item.scrollWidth <= item.clientWidth) return;
+    const opening = !item.classList.contains('show-work-tooltip');
+    closeWorkTooltips();
+    item.classList.toggle('show-work-tooltip', opening);
+  };
+  item.addEventListener('click', toggleTooltip);
+  item.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleTooltip();
+    }
+  });
+});
+document.addEventListener('click', (event) => {
+  if (!(event.target instanceof Element) || !event.target.closest('.work-main [data-work-full]')) closeWorkTooltips();
+});
+const workTextMenus = document.querySelectorAll('.work-text-menu');
+const closeWorkTextMenus = () => workTextMenus.forEach((menu) => {
+  menu.classList.remove('is-open', 'is-hover-open');
+  menu.querySelector('.work-text-trigger')?.setAttribute('aria-expanded', 'false');
+});
+workTextMenus.forEach((menu) => {
+  const trigger = menu.querySelector('.work-text-trigger');
+  const links = menu.querySelector('.work-links');
+  let hoverCloseTimer;
+  const keepHoverMenuOpen = () => {
+    clearTimeout(hoverCloseTimer);
+    menu.classList.add('is-hover-open');
+  };
+  menu.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'touch') return;
+    keepHoverMenuOpen();
+  });
+  menu.addEventListener('pointerleave', (event) => {
+    if (event.pointerType === 'touch') return;
+    hoverCloseTimer = setTimeout(() => menu.classList.remove('is-hover-open'), 700);
+  });
+  links?.addEventListener('pointerenter', keepHoverMenuOpen);
+  trigger?.addEventListener('click', () => {
+    const opening = !menu.classList.contains('is-open');
+    closeWorkTextMenus();
+    clearTimeout(hoverCloseTimer);
+    menu.classList.remove('is-hover-open');
+    menu.classList.toggle('is-open', opening);
+    trigger.setAttribute('aria-expanded', String(opening));
+    if (!opening) trigger.blur();
+  });
+});
+document.addEventListener('click', (event) => {
+  if (!(event.target instanceof Element) || !event.target.closest('.work-text-menu')) closeWorkTextMenus();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeWorkTextMenus();
+});
+worksFilter?.addEventListener('change', () => {
+  if (!worksList || !(worksFilter instanceof HTMLSelectElement)) return;
+  const showAll = worksFilter.value === 'all';
+  worksList.classList.toggle('show-all', showAll);
+  resetWorksNumbering(showAll);
+});
+worksSort?.addEventListener('change', () => {
+  if (!worksList || !(worksSort instanceof HTMLSelectElement)) return;
+  const rows = Array.from(worksList.querySelectorAll('[data-work-major]'));
+  const mode = worksSort.value;
+  const year = (row) => Number(row.getAttribute('data-work-date')?.match(/\d{3,4}/)?.[0] ?? 9999);
+  const pl = (row) => Number(row.getAttribute('data-work-pl')?.match(/\d+/)?.[0] ?? 9999);
+  rows.sort((a, b) => {
+    if (mode === 'name') return (a.getAttribute('data-work-latin') ?? '').localeCompare(b.getAttribute('data-work-latin') ?? '');
+    if (mode === 'pl') return pl(a) - pl(b) || (a.getAttribute('data-work-latin') ?? '').localeCompare(b.getAttribute('data-work-latin') ?? '');
+    return year(a) - year(b) || (a.getAttribute('data-work-latin') ?? '').localeCompare(b.getAttribute('data-work-latin') ?? '');
+  });
+  rows.forEach((row) => worksList.appendChild(row));
+  resetWorksNumbering();
+});
+
+// ── Inline edit ───────────────────────────────────────────────────
+const timelinePanel = document.getElementById('panel-nien-bieu');
+const timelineToolbar = document.querySelector('.tl-toolbar');
+const syncTimelineOptions = () => timelineToolbar?.classList.toggle('show', window.scrollY > 500);
+window.addEventListener('scroll', syncTimelineOptions, { passive: true });
+syncTimelineOptions();
+const timelineLanguageToggle = document.getElementById('timeline-language-toggle');
+timelineLanguageToggle?.addEventListener('click', () => {
+  const vietnamese = timelinePanel?.classList.toggle('timeline-vietnamese') ?? false;
+  timelineLanguageToggle.setAttribute('aria-pressed', String(vietnamese));
+});
+document.querySelectorAll('.tl-era-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    const era = button.closest('.tl-era');
+    const rows = [];
+    let item = era?.nextElementSibling;
+    while (item && !item.classList.contains('tl-era')) {
+      if (item.classList.contains('tl-row')) rows.push(item);
+      item = item.nextElementSibling;
+    }
+    const collapsed = !rows[0]?.classList.contains('tl-era-collapsed');
+    rows.forEach((row) => row.classList.toggle('tl-era-collapsed', collapsed));
+    button.setAttribute('aria-expanded', String(!collapsed));
+    button.setAttribute('aria-label', collapsed ? 'Mở rộng giai đoạn' : 'Thu gọn giai đoạn');
+    button.textContent = collapsed ? '+' : '−';
+  });
+});
+const timelineLifeFilter = document.getElementById('timeline-life-filter');
+timelineLifeFilter?.addEventListener('click', () => {
+  const lifeOnly = timelinePanel?.classList.toggle('timeline-life-only') ?? false;
+  timelineLifeFilter.setAttribute('aria-pressed', String(lifeOnly));
+  timelineLifeFilter.setAttribute('aria-label', lifeOnly ? 'Hiện lại các sự kiện khác' : 'Ẩn các sự kiện khác');
+  timelineLifeFilter.setAttribute('title', lifeOnly ? 'Hiện lại các sự kiện khác' : 'Ẩn các sự kiện khác');
+  document.querySelectorAll('.tl-right').forEach(item => {
+    item.setAttribute('aria-hidden', String(lifeOnly));
+    item.toggleAttribute('hidden', lifeOnly);
+  });
+  document.querySelectorAll('.tl-row[data-has-aug="false"]').forEach(item => item.toggleAttribute('hidden', lifeOnly));
+});
+
+const ADMIN = 'http://localhost:4322';
+const oeBar      = document.getElementById('oe-bar');
+const oeEditBtn  = document.getElementById('oe-edit-btn');
+const oeSaveRow  = document.getElementById('oe-save-row');
+const oeCancelBtn = document.getElementById('oe-cancel-btn');
+const oeSaveBtn   = document.getElementById('oe-save-btn');
+const oeMsg       = document.getElementById('oe-msg');
+
+fetch(ADMIN + '/api/page-headers').then(r => {
+  if (r.ok && oeBar) oeBar.removeAttribute('hidden');
+}).catch(() => {});
+
+let editing = false;
+
+function enterEditMode() {
+  editing = true;
+  document.body.classList.add('oe-editing');
+  document.querySelectorAll('[data-oe]').forEach(el => {
+    el.setAttribute('contenteditable', 'true');
+    el.dataset.oeOrig = el.dataset.oeHtml ? el.innerHTML : el.textContent;
+  });
+  oeEditBtn?.setAttribute('hidden', '');
+  oeSaveRow?.removeAttribute('hidden');
+  if (oeMsg) oeMsg.textContent = '';
+}
+
+function exitEditMode() {
+  editing = false;
+  document.body.classList.remove('oe-editing');
+  document.querySelectorAll('[data-oe]').forEach(el => el.removeAttribute('contenteditable'));
+  oeEditBtn?.removeAttribute('hidden');
+  oeSaveRow?.setAttribute('hidden', '');
+}
+
+function cancelEdit() {
+  document.querySelectorAll('[data-oe]').forEach(el => {
+    const orig = el.dataset.oeOrig;
+    if (orig !== undefined) {
+      if (el.dataset.oeHtml) el.innerHTML = orig;
+      else el.textContent = orig;
+    }
+  });
+  exitEditMode();
+}
+
+async function saveEdit() {
+  if (oeMsg) oeMsg.textContent = 'Đang lưu…';
+  const data = Object.assign({}, phJson);
+  document.querySelectorAll('[data-oe-target="ph"][data-oe]').forEach(el => {
+    data[el.dataset.oe] = el.dataset.oeHtml ? el.innerHTML.trim() : el.textContent.trim();
+  });
+  try {
+    const r = await fetch(ADMIN + '/api/page-headers/thanh-au-tinh', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (r.ok) { if (oeMsg) oeMsg.textContent = 'Đã lưu!'; setTimeout(exitEditMode, 900); }
+    else if (oeMsg) oeMsg.textContent = 'Lỗi khi lưu';
+  } catch { if (oeMsg) oeMsg.textContent = 'Không kết nối được admin server'; }
+}
+
+oeEditBtn  ?.addEventListener('click', enterEditMode);
+oeCancelBtn?.addEventListener('click', cancelEdit);
+oeSaveBtn  ?.addEventListener('click', saveEdit);
+
+</script>

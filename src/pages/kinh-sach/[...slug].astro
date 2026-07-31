@@ -1,0 +1,205 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { siteBase } from '../../lib/site-path';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const all = await getCollection('kinh-sach', ({ data }) => !data.draft);
+  return all.map((entry) => {
+    const season = entry.data.seasonKey ?? entry.id.split('/')[0];
+    const currentOrder = typeof entry.data.order === 'number' ? entry.data.order : null;
+    const related = all
+      .filter((candidate) => candidate.id !== entry.id && (candidate.data.seasonKey ?? candidate.id.split('/')[0]) === season)
+      .sort((a, b) => {
+        if (currentOrder === null) return a.id.localeCompare(b.id);
+        const aOrder = typeof a.data.order === 'number' ? a.data.order : Number.POSITIVE_INFINITY;
+        const bOrder = typeof b.data.order === 'number' ? b.data.order : Number.POSITIVE_INFINITY;
+        return Math.abs(aOrder - currentOrder) - Math.abs(bOrder - currentOrder) || a.id.localeCompare(b.id);
+      })
+      .slice(0, 4)
+      .map((candidate) => ({
+        id: candidate.id,
+        title: candidate.data.title,
+        excerpt: candidate.data.excerpt,
+        season: candidate.data.season,
+      }));
+    return { params: { slug: entry.id }, props: { entry, related } };
+  });
+}
+const { entry, related = [] } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const hasToc = headings.filter((h) => h.depth === 2 || h.depth === 3).length > 2;
+const seasonKey = d.seasonKey ?? entry.id.split('/')[0];
+const backUrl = `/kinh-sach/?category=${seasonKey}`;
+const RANK_LABELS: Record<string, string> = {
+  solemn: 'Lễ Trọng',
+  feast: 'Lễ Kính',
+  memorial: 'Lễ Nhớ Buộc',
+  'opt-memorial': 'Lễ Nhớ Tùy Chọn',
+};
+const rankKey = d.rank && d.rank !== 'none' ? d.rank : null;
+const rankLabel = rankKey ? RANK_LABELS[rankKey] : null;
+const showSeasonBadge = d.season && !((seasonKey === 'le-rieng' || seasonKey === 'trong-kinh-chua') && rankLabel);
+
+// Đồng bộ với bảng index: mở rộng viết tắt phẩm trật + bỏ danh hiệu sau tên tác giả
+const RANK_FULL: Record<string, string> = { Gm:'Giám mục', Lm:'Linh mục', Vp:'Viện phụ', 'Tđ':'Tử đạo', Ts:'Tiến sĩ', Gh:'Giáo hoàng', Tn:'Trinh nữ', Nt:'Nữ tu' };
+const expandRanks = (s: string) => s
+  .replace(/(^|[\s,(])(Gm|Lm|Vp|Tđ|Ts|Gh|Tn|Nt)\./gu, (_, pre, ab) => pre + RANK_FULL[ab])
+  .replace(/(Giám mục|Linh mục|Viện phụ|Tử đạo|Tiến sĩ|Giáo hoàng|Trinh nữ|Nữ tu)(\s*,\s*\1)+/gu, '$1');
+const stripTitles = (s: string) => s.replace(/\s*,[\s\S]*$/, '').trim();
+
+const descStr = [d.source ? stripTitles(d.source) : '', d.excerpt].filter(Boolean).join(' — ');
+
+// Tách tiền tố ngày tháng ("Ngày D Tháng M:") ở đầu tiêu đề (thường ở Lễ Riêng)
+let workTitle = d.title;
+let dateLabel: string | null = null;
+const dateMatch = workTitle.match(/^\s*(Ngày\s+\d+\s+Tháng\s+\d+)\s*:\s*(.+)$/i);
+if (dateMatch) { dateLabel = dateMatch[1].trim(); workTitle = dateMatch[2].trim(); }
+
+// Tách phần trong ngoặc () ở cuối tiêu đề
+let parenSub: string | null = null;
+const parenMatch = workTitle.match(/^(.*?)\s*(\(.*\))\s*$/);
+if (parenMatch && parenMatch[1].trim()) {
+  workTitle = parenMatch[1].trim();
+  const paren = parenMatch[2].trim();
+  const opens = (paren.match(/\(/g) || []).length;
+  parenSub = opens === 1 ? paren.replace(/^\(|\)$/g, '').trim() : paren;
+}
+
+// Tách viết tắt phẩm trật ở cuối (Gm., Tđ., Ts., Lm., Tn., Gh., Nt., Vp....) → subtitle.
+// Chỉ tách khi tiêu đề có MỘT thánh; nhiều thánh (phẩm trật xen kẽ) thì giữ nguyên h1.
+let rankSub: string | null = null;
+const saintCount = (workTitle.match(/Thánh|Chân\s*[Pp]hước|Á\s*Thánh/gu) || []).length;
+if (saintCount <= 1) {
+  const abbrMatch = workTitle.match(/^(.*?)\s*,\s*((?:[A-ZĐ][A-Za-zđ]{0,2}\.(?:\s*(?:,|và)\s*)?)+)\s*$/);
+  if (abbrMatch && abbrMatch[1].trim()) {
+    workTitle = abbrMatch[1].trim();
+    rankSub = abbrMatch[2].trim();
+  }
+}
+
+const mainTitle = workTitle;
+const titleSub = [rankSub ? expandRanks(rankSub) : null, parenSub].filter(Boolean).join(' — ') || null;
+---
+<BaseLayout title={d.title} description={d.source ? `Trích: ${d.source}` : d.title}
+  type="article" bodyClass="page-kinh-sach no-sidebar" banner="readings">
+  <div class="ks-masthead" id="reading-header">
+    <p class="ks-back"><a href={backUrl} class="back-link">← Về danh mục {d.season}</a></p>
+    <PageHeader title={mainTitle} sub={dateLabel} subtitle={titleSub} desc={descStr}>
+      {(showSeasonBadge || rankLabel) && (
+        <span slot="sub" class="ks-badges">
+          {showSeasonBadge && <span class={`season-badge season-${seasonKey}`}>{d.season}</span>}
+          {rankLabel && <span class={`rank-badge rank-${rankKey}`}>{rankLabel}</span>}
+        </span>
+      )}
+    </PageHeader>
+  </div>
+  <div class={`article-shell ${hasToc ? 'has-toc' : ''}`} id="reading-content">
+    {hasToc && <TableOfContents headings={headings} />}
+    <article class="prose"><Content /></article>
+  </div>
+
+  {related.length > 0 && (
+    <section class="ks-related" aria-labelledby="ks-related-title">
+      <h2 id="ks-related-title">Xem thêm</h2>
+      <div class="ks-related-grid">
+        {related.map((item) => (
+          <a class="ks-related-card" href={`/kinh-sach/${item.id}/`}>
+            <span class="ks-related-title">{item.title}</span>
+            {item.season && <span class="ks-related-meta">{item.season}</span>}
+            {item.excerpt && <span class="ks-related-excerpt">{item.excerpt}</span>}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <script define:vars={{ backUrl, siteBase }}>
+    const withBase = (path) => !path || !path.startsWith('/') || path.startsWith('//') || !siteBase || path === siteBase || path.startsWith(siteBase + '/') ? path : siteBase + path;
+    // Ghi nhớ URL bài đọc hiện tại để trang index biết nơi cần highlight khi quay lại
+    sessionStorage.setItem('ks-last', location.pathname.endsWith('/') ? location.pathname : location.pathname + '/');
+    // Nếu đến từ lịch phụng vụ → back về lịch thay vì về danh mục
+    const from = sessionStorage.getItem('ks-from');
+    const resolvedBackUrl = withBase(from === 'lich-phung-vu' ? '/lich-phung-vu/' : backUrl);
+    const resolvedBackText = from === 'lich-phung-vu' ? '← Về Lịch Phụng Vụ' : null;
+    if (from === 'lich-phung-vu') sessionStorage.removeItem('ks-from');
+    const backLink = document.querySelector('.back-link');
+    if (backLink && resolvedBackUrl !== backUrl) {
+      backLink.setAttribute('href', resolvedBackUrl);
+      if (resolvedBackText) backLink.textContent = resolvedBackText;
+    }
+    // Nút back nổi → cùng logic
+    const floatBack = document.getElementById('backBtn');
+    if (floatBack) floatBack.dataset.href = resolvedBackUrl;
+  </script>
+
+<style>
+/* Badge mùa + bậc lễ trong master header — căn giữa & align đều */
+.ks-badges {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+.ks-badges .season-badge,
+.ks-badges .rank-badge {
+  margin: 0;
+  vertical-align: middle;
+  line-height: 1.15;
+}
+/* Ngày tháng tách khỏi h1 → eyebrow gold có ✦ (tham khảo header thánh chân phước) */
+.ks-masthead :global(.lib-masthead-sub) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  color: var(--gold);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0.9rem 0 0;
+}
+.ks-masthead :global(.lib-masthead-sub)::before,
+.ks-masthead :global(.lib-masthead-sub)::after {
+  content: '✦';
+  font-size: 0.8rem;
+  color: rgba(233, 193, 118, 0.5);
+}
+/* Phần () tách khỏi tiêu đề → subtitle */
+.ks-masthead :global(.lib-masthead-subtitle) {
+  font-family: var(--font-body);
+  font-size: 1.55rem;
+  font-style: italic;
+  color: var(--ink-cream-soft);
+  margin: 0.3rem 0 0;
+  line-height: 1.5;
+}
+/* Back link — text-link đơn giản, đặt trên đầu (breadcrumb) */
+.ks-back { text-align: left; margin: 0 0 -1rem; padding-top: 1.6rem; }
+.ks-back .back-link {
+  border: none;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-cream-soft);
+  gap: 0.35rem;
+  transition: color 0.18s;
+}
+.ks-back .back-link:hover {
+  background: none;
+  color: var(--gold);
+}
+
+</style>
+
+</BaseLayout>

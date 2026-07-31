@@ -1,0 +1,1292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import indexData from '../data/kinh-sach-index.json';
+import saintIndexRaw from '../../saintIndex.json';
+import pageHeaders from '../data/page-headers.json';
+import { siteBase } from '../lib/site-path';
+const ph = (pageHeaders as Record<string, Record<string, string>>)['lich-phung-vu'];
+
+const leRiengEntries = (indexData as Record<string, unknown[]>)['le-rieng'] || [];
+
+// Build lookup: liturgy text → { url, rank } — bao phủ cả 8 season categories
+// Thêm cả key phụ = phần trước dấu '(' để match calendar JSON
+// (calendar dùng text ngắn, index dùng text đầy đủ kèm mô tả trong ngoặc)
+const liturgyToEntry: Record<string, { url: string; rank: string }> = {};
+for (const entries of Object.values(indexData as Record<string, any[]>)) {
+  for (const e of entries as any[]) {
+    if (e.liturgy && e.url) {
+      const entry = { url: e.url, rank: e.rank || '' };
+      liturgyToEntry[e.liturgy] = entry;
+      // Key phụ: cắt trước '(' và trim '*' trailing
+      const pi = (e.liturgy as string).indexOf('(');
+      if (pi > 0) {
+        const prefix = (e.liturgy as string).slice(0, pi).trim().replace(/\*\s*$/, '').trim();
+        if (prefix && !liturgyToEntry[prefix]) liturgyToEntry[prefix] = entry;
+      }
+    }
+  }
+}
+
+// Pre-process tại build time: map "MM-DD" → [ { name, rank, bioFile } ]
+const saintByDate: Record<string, { name: string; rank: string; bioFile: string }[]> = {};
+for (const month of (saintIndexRaw as any).months) {
+  for (const saint of month.saints) {
+    const key = `${String(month.monthNumber).padStart(2,'0')}-${String(saint.day).padStart(2,'0')}`;
+    if (!saintByDate[key]) saintByDate[key] = [];
+    saintByDate[key].push({ name: saint.name, rank: saint.rank, bioFile: saint.bioFile ?? '' });
+  }
+}
+---
+
+<BaseLayout title="Lịch Phụng Vụ" banner="lich-phung-vu" bodyClass="no-sidebar page-lich-phung-vu">
+
+<div class="lpv-wrap">
+  <PageHeader
+    title={ph.title}
+    sub={ph.sub}
+  />
+
+  <!-- Hàng trên: switch chế độ | panel hôm nay -->
+  <div class="lpv-top">
+    <div class="lpv-modes">
+      <div class="lpv-switch seg-switch">
+        <button class="lpv-tab seg-tab active" data-mode="chung">Lịch Chung</button>
+        <button class="lpv-tab seg-tab" data-mode="nha-dong">Lịch Nhà Dòng</button>
+      </div>
+    </div>
+    <div class="lpv-today-card" id="lpvToday">
+      <div class="ltc-loading">Đang tải…</div>
+    </div>
+  </div>
+
+  <!-- Hàng dưới: lịch + lễ sắp tới -->
+  <div class="lpv-body" id="lpvBody">
+    <div class="lpv-cal-section">
+      <div class="lpv-nav">
+        <button class="lpv-nav-btn" id="prevMonth" aria-label="Tháng trước">&#8249;</button>
+        <span class="lpv-month-label" id="calMonthLabel"></span>
+        <button class="lpv-nav-btn" id="nextMonth" aria-label="Tháng sau">&#8250;</button>
+        <button class="lpv-today-btn" id="goToday">Hôm Nay</button>
+        <button class="lpv-expand-btn" id="expandBtn" title="Mở rộng lịch" aria-expanded="false">
+          <svg id="expandIcon" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1h4M1 1v4M14 1h-4M14 1v4M1 14h4M1 14v-4M14 14h-4M14 14v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="lpv-grid" id="lpvGrid"></div>
+      <div class="lpv-legend" id="lpvLegend"></div>
+    </div>
+
+    <aside class="lpv-aside" id="lpvAside">
+      <div class="lpv-upcoming" id="lpvUpcoming">
+        <div class="ltc-loading">Đang tải…</div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style is:global>
+/* ===== LỊCH PHỤNG VỤ ===== */
+.lpv-wrap { max-width: 130rem; margin: 0 auto; }
+
+/* Hàng trên: switch chế độ bên trái, panel hôm nay bên phải */
+.lpv-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 2.4rem;
+}
+.lpv-modes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Switch chế độ — phẳng, đơn giản: 2 tab chữ, active gạch chân gold
+   (đè hộp segmented của .seg-switch/.seg-tab global) */
+.lpv-modes .lpv-switch {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  gap: 0.6rem;
+  border-bottom: 1px solid rgba(233,193,118,0.16);
+}
+.lpv-modes .lpv-tab {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0.6rem 1.3rem;
+  color: var(--ink-cream-soft);
+  position: relative;
+}
+.lpv-modes .lpv-tab.active {
+  background: none;
+  color: var(--gold);
+  box-shadow: none;
+}
+.lpv-modes .lpv-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 1.3rem; right: 1.3rem; bottom: -1px;
+  height: 2px;
+  background: var(--gold);
+}
+.lpv-modes .lpv-tab:not(.active):hover {
+  background: none;
+  color: var(--ink-cream);
+}
+
+/* Body layout */
+.lpv-body { display: flex; gap: 2rem; align-items: flex-start; }
+.lpv-body.expanded .lpv-aside { display: none; }
+
+.lpv-cal-section {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid rgba(233,193,118,0.2);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+/* Nav */
+.lpv-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid rgba(233,193,118,0.1);
+}
+.lpv-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(233,193,118,0.28);
+  color: var(--gold);
+  width: 3.4rem; height: 3.4rem;
+  border-radius: 50%;
+  font-size: 2.4rem;
+  line-height: 0.9;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.lpv-nav-btn:hover { background: rgba(233,193,118,0.12); border-color: var(--gold); color: var(--gold); }
+.lpv-month-label {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--gold);
+  flex: 1;
+  text-align: center;
+  /* override global h/gradient — this is a span, not h2 */
+}
+.lpv-today-btn {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  padding: 0.35rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(233,193,118,0.28);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.lpv-today-btn:hover { background: rgba(233,193,118,0.12); border-color: var(--gold); color: var(--gold); }
+.lpv-expand-btn {
+  background: transparent;
+  border: 1px solid rgba(233,193,118,0.28);
+  color: var(--gold);
+  width: 3rem; height: 3rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.lpv-expand-btn:hover { background: rgba(233,193,118,0.12); border-color: var(--gold); color: var(--gold); }
+
+/* Calendar grid */
+.lpv-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+
+.lpv-cell-header {
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink-cream-soft);
+  background: rgba(255,255,255,0.025);
+  border-bottom: 2px solid rgba(233,193,118,0.13);
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+.lpv-cell-header.is-sunday-col {
+  color: var(--gold-dim);
+  background: rgba(233,193,118,0.06);
+}
+
+
+.lpv-cell {
+  min-height: 10rem;
+  padding: 0.6rem 0.65rem 0.5rem;
+  border-right: 1px solid rgba(233,193,118,0.07);
+  border-bottom: 1px solid rgba(233,193,118,0.07);
+  border-left: 1px solid rgba(233,193,118,0.07);
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.lpv-cell:hover { background: rgba(233,193,118,0.06); }
+.lpv-cell.other-month { opacity: 0.3; pointer-events: none; }
+.lpv-cell.is-sunday {
+  background: rgba(233,193,118,0.09);
+  border-top: 2px solid rgba(233,193,118,0.28);
+}
+.lpv-cell.is-sunday:hover { background: rgba(233,193,118,0.15); }
+.lpv-cell.today { background: rgba(233,193,118,0.12); }
+.lpv-cell.selected { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+/* Số ngày — Playfair Display, góc trên phải */
+.lpv-day-num {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(239,231,214,0.62);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+  text-align: right;
+}
+/* Chúa Nhật: gold đầy đủ, số to hơn */
+.lpv-cell.is-sunday .lpv-day-num { color: var(--gold); font-size: 2.3rem; }
+.lpv-cell.is-sunday .lpv-event-name { color: var(--ink-cream-soft); }
+/* Hôm nay: vòng tròn vàng */
+.lpv-today-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  background: var(--gold);
+  color: #0d1f2b;
+  border-radius: 50%;
+  font-size: 1.55rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Tên lễ Chúa Nhật (lịch chung) */
+.lpv-day-sunday {
+  font-family: var(--font-ui);
+  font-size: 1.2rem;
+  color: rgba(239,231,214,0.72);
+  line-height: 1.3;
+  margin-top: 0.14rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+/* Tên lễ ngày thường (le-rieng, le-chung từ lịch phụng vụ chung) */
+.lpv-day-feast {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  color: rgba(233,193,118,0.55);
+  line-height: 1.3;
+  margin-top: 0.14rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Hàng sự kiện: chip bậc lễ + tên */
+.lpv-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.28rem;
+  margin-top: 0.2rem;
+}
+.lpv-rank-chip {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 0 0.4rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  letter-spacing: 0.01rem;
+}
+.chip-T { background: #8b2020; color: #efe7d6; }
+.chip-K { background: #e9c176; color: #0d1f2b; }
+.chip-N { background: #ccc8c0; color: #0d1f2b; }
+.chip-n { background: #a8a4a0; color: #0d1f2b; }
+.lpv-event-name {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  color: rgba(201,191,169,0.7);
+  line-height: 1.35;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Today card trong lpv-top: căn giữa, rộng vừa phải dưới switch */
+.lpv-top .lpv-today-card { width: 100%; max-width: 42rem; }
+
+/* Aside (chỉ còn upcoming) */
+.lpv-aside { width: 30rem; flex-shrink: 0; }
+
+/* Today card — accent gold top, tách biệt khỏi grid */
+.lpv-today-card {
+  background: #0e1830;
+  border: 1px solid rgba(233,193,118,0.28);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.lpv-today-card-inner {
+  padding: 1.4rem 1.8rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 9rem;
+}
+/* Thanh màu mùa phụng vụ trên đầu today card */
+.ltc-season-stripe {
+  height: 4px;
+  width: 100%;
+  transition: background 0.4s;
+}
+.ltc-loading { color: var(--ink-cream-soft); font-family: var(--font-ui); font-size: 1.45rem; padding: 1.4rem 1.8rem; }
+/* Token chung cho nhãn section (panel + lịch) */
+.ltc-header {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--gold-dim);
+  margin-bottom: 0.3rem;
+}
+.ltc-date {
+  font-family: var(--font-ui);
+  font-size: 1.75rem;
+  color: #d4ad4a;
+  margin-bottom: 0.9rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.ltc-badges { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.8rem; align-items: center; }
+.ltc-season-pill {
+  display: inline-block;
+  padding: 0.22rem 1rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 0.65rem;
+}
+/* Cycle năm — inline trong ltc-date */
+.ltc-cycle {
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ink-cream-soft);
+}
+/* Thanh bài đọc — căn phải dưới cùng panel */
+.ltc-read-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.9rem;
+}
+/* Select chọn bài khi có nhiều lựa chọn */
+.ltc-reading-select {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(233,193,118,0.22);
+  border-radius: 8px;
+  color: var(--ink-cream-soft);
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  padding: 0.45rem 2.4rem 0.45rem 0.75rem;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23c5a059' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  min-width: 0;
+}
+.ltc-reading-select:focus { border-color: rgba(233,193,118,0.5); }
+.ltc-reading-select option { background: #1a2a4a; color: var(--ink-cream); }
+/* Nút đọc — icon arrow tròn */
+.ltc-read-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid rgba(233,193,118,0.28);
+  background: transparent;
+  color: var(--gold);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.ltc-read-btn:hover { background: rgba(233,193,118,0.12); border-color: var(--gold); color: var(--gold); }
+.ltc-liturgy {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: var(--ink-cream);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.ltc-liturgy.ltc-muted { color: var(--ink-cream-soft); font-size: 1.4rem; }
+.ltc-link {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  color: var(--gold);
+  text-decoration: none;
+  display: block;
+  margin-top: 0.4rem;
+}
+.ltc-link:hover { text-decoration: underline; }
+.ltc-no-feast {
+  font-family: var(--font-ui);
+  font-size: 1.45rem;
+  color: var(--ink-cream-soft);
+  font-style: italic;
+  margin: 0.4rem 0 0.8rem;
+}
+.ltc-alt-feast {
+  margin-top: 0.8rem;
+  font-family: var(--font-ui);
+  font-size: 1.35rem;
+  color: var(--ink-cream-soft);
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(233,193,118,0.08);
+}
+/* Chip + nhãn bậc lễ trong panel */
+.ltc-chip-row { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.6rem; }
+.ltc-rank-label { font-family: var(--font-ui); font-size: 1.3rem; color: var(--ink-cream-soft); font-weight: 600; }
+/* Lễ riêng cố định trong Lịch Chung panel */
+.ltc-feast-entry { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.7rem; margin-top: -0.3rem; }
+.ltc-feast-name { font-family: var(--font-ui); font-size: 1.35rem; color: var(--ink-cream-soft); line-height: 1.4; }
+
+/* Back button — ẩn ở trang lịch */
+#backBtn { display: none; }
+
+/* Upcoming — tông tối hơn grid, border phân biệt rõ */
+.lpv-upcoming {
+  background: #0e1830;
+  border: 1px solid rgba(233,193,118,0.28);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.lupv-header {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--gold-dim);
+  padding: 1.2rem 1.6rem 1rem;
+  border-bottom: 1px solid rgba(233,193,118,0.12);
+}
+.lupv-body { padding: 0.4rem 1.6rem 1.2rem; }
+.lupv-item {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(233,193,118,0.06);
+}
+.lupv-item:last-child { border-bottom: none; }
+.lupv-item-date { font-family: var(--font-ui); font-size: 1.15rem; color: var(--gold-dim); font-weight: 700; margin-bottom: 0.28rem; }
+.lupv-event-row { display: flex; align-items: flex-start; gap: 0.5rem; margin-top: 0.18rem; }
+.lupv-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 0.45rem; }
+.lupv-item-text { font-family: var(--font-ui); font-size: 1.3rem; color: var(--ink-cream-soft); line-height: 1.4; }
+
+/* Legend */
+.lpv-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem 1.8rem;
+  padding: 0.9rem 1.4rem;
+  border-top: 1px solid rgba(233,193,118,0.08);
+  background: rgba(255,255,255,0.015);
+  min-height: 3.6rem;
+}
+.lpv-legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-ui); font-size: 1.3rem; color: var(--ink-cream-soft); }
+.lpv-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .lpv-top { flex-direction: column; }
+  .lpv-top .lpv-today-card { width: 100%; }
+  .lpv-body { flex-direction: column; }
+  .lpv-aside { width: 100%; }
+}
+@media (max-width: 640px) {
+  .lpv-wrap { width:calc(100% - 2.4rem); }
+  /* Mobile: panel Lễ Sắp Tới phải luôn nhìn thấy, kể cả khi desktop đã bật mở rộng. */
+  .lpv-body { display:flex; flex-direction:column; gap:1.25rem; }
+  .lpv-body.expanded .lpv-aside { display:block; }
+  .lpv-aside { order:-1; width:100%; min-width:0; }
+  .lpv-cal-section { order:0; width:100%; }
+  .lpv-upcoming { width:100%; }
+  .lupv-header { padding:1rem 1.1rem .85rem; }
+  .lupv-body {
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(16rem, 78vw);
+    gap:.75rem;
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    scroll-snap-type:x proximity;
+    padding:.8rem 1rem 1rem;
+    scrollbar-width:thin;
+  }
+  .lupv-item {
+    scroll-snap-align:start;
+    min-height:100%;
+    padding:.8rem .9rem;
+    border:1px solid rgba(233,193,118,.12);
+    border-radius:10px;
+    background:rgba(255,255,255,.025);
+  }
+  .lupv-item:last-child { border-bottom:1px solid rgba(233,193,118,.12); }
+  .lupv-item-date { font-size:1.08rem; }
+  .lupv-item-text { font-size:1.2rem; }
+  .lpv-top { gap:1.2rem; margin-bottom:1.6rem; }
+  .lpv-modes, .lpv-modes .lpv-switch { width:100%; }
+  .lpv-modes .lpv-tab { flex:1; min-height:4.2rem; padding:.65rem .7rem; }
+  .lpv-top .lpv-today-card { max-width:none; }
+  .lpv-today-card-inner { padding:1.2rem 1.25rem 1.1rem; }
+  .lpv-nav { display:grid; grid-template-columns:3.4rem minmax(0,1fr) 3.4rem; gap:.55rem; padding:.8rem .75rem; }
+  .lpv-nav-btn { grid-row:1; width:3.4rem; height:3.4rem; }
+  #prevMonth { grid-column:1; }
+  .lpv-month-label { grid-column:2; min-width:0; font-size:1.5rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #nextMonth { grid-column:3; }
+  .lpv-today-btn { grid-column:1 / span 2; grid-row:2; min-height:3.8rem; }
+  .lpv-expand-btn { grid-column:3; grid-row:2; min-height:3.8rem; }
+  /* Grid tháng mobile: gọn, đều hàng và vẫn giữ vùng chạm đủ lớn. */
+  .lpv-cal-section { border-radius:10px; }
+  .lpv-grid { grid-template-columns:repeat(7, minmax(0, 1fr)); }
+  .lpv-cell {
+    min-width:0;
+    min-height:clamp(4.8rem, 14vw, 5.7rem);
+    padding:.35rem .15rem .28rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    overflow:hidden;
+    touch-action:manipulation;
+  }
+  .lpv-cell.is-sunday { border-top-width:1px; }
+  .lpv-day-sunday, .lpv-day-feast, .lpv-event-name { display:none; }
+  .lpv-day-num,
+  .lpv-cell.is-sunday .lpv-day-num {
+    width:100%;
+    margin:0 0 .28rem;
+    text-align:center;
+    font-size:clamp(1.3rem, 4vw, 1.55rem);
+    line-height:1.1;
+  }
+  .lpv-today-circle {
+    width:2.15rem;
+    height:2.15rem;
+    font-size:1.2rem;
+  }
+  .lpv-event {
+    width:auto;
+    max-width:100%;
+    margin:.08rem auto 0;
+    gap:0;
+    justify-content:center;
+  }
+  .lpv-event:nth-of-type(n+4) { display:none; }
+  .lpv-rank-chip {
+    min-width:1.55rem;
+    padding:0 .28rem;
+    font-size:.86rem;
+    line-height:1.45;
+    text-align:center;
+    border-radius:999px;
+  }
+  .lpv-cell-header {
+    min-width:0;
+    font-size:.92rem;
+    padding:.5rem .05rem;
+    letter-spacing:0;
+  }
+  .lpv-legend { gap:.55rem .8rem; padding:.7rem .65rem; }
+  .lpv-legend-item { font-size:1rem; gap:.4rem; }
+  .lpv-legend .lpv-rank-chip { min-width:1.7rem; font-size:.9rem; }
+}
+@media (max-width: 390px) {
+  .lpv-wrap { width:calc(100% - 1.2rem); }
+  .lpv-nav { padding:.7rem .55rem; gap:.4rem; }
+  .lpv-cell { min-height:4.7rem; padding:.3rem .08rem .22rem; }
+  .lpv-day-num,
+  .lpv-cell.is-sunday .lpv-day-num { font-size:1.25rem; margin-bottom:.2rem; }
+  .lpv-today-circle { width:1.95rem; height:1.95rem; font-size:1.08rem; }
+  .lpv-rank-chip { min-width:1.4rem; padding:0 .2rem; font-size:.78rem; }
+  .lpv-cell-header { font-size:.84rem; padding:.45rem 0; }
+}
+
+/* Mobile layout pass: use the viewport efficiently and keep controls/card rhythm stable. */
+@media (max-width: 640px) {
+  body.page-lich-phung-vu #main > main.content { padding:2.2rem 1.35rem 5.5rem; }
+  body.page-lich-phung-vu .banner-container { padding:.9rem 1.35rem 1.15rem; }
+  body.page-lich-phung-vu .banner-container .banner-variant img { max-height:18rem !important; border-radius:1rem; }
+  body.page-lich-phung-vu .banner-quote { max-width:35rem; margin-top:.8rem; padding-inline:.3rem; }
+  body.page-lich-phung-vu .banner-quote .bvq-text { margin:0; font-size:1.5rem; line-height:1.55; }
+  body.page-lich-phung-vu .banner-quote .bvq-cite { margin-top:.55rem; font-size:.86rem; line-height:1.45; }
+  body.page-lich-phung-vu .lpv-wrap { width:100%; max-width:none; margin-inline:auto; }
+  body.page-lich-phung-vu .lib-masthead { width:100%; margin-bottom:1.6rem; padding:1.8rem 0 2rem; }
+  body.page-lich-phung-vu .lib-masthead-sub { margin-bottom:1rem; }
+  body.page-lich-phung-vu .lib-masthead-title { font-size:clamp(3.2rem, 10vw, 4rem); line-height:1.08; }
+  body.page-lich-phung-vu .lib-masthead-desc { margin-top:.8rem; font-size:1.35rem; line-height:1.45; }
+  body.page-lich-phung-vu .lib-masthead-rule { margin-top:1.5rem; }
+
+  body.page-lich-phung-vu .lpv-top { gap:1rem; margin-bottom:1.25rem; }
+  body.page-lich-phung-vu .lpv-modes .lpv-switch { min-height:4rem; gap:0; }
+  body.page-lich-phung-vu .lpv-modes .lpv-tab { min-height:4rem; padding:.65rem .8rem; font-size:1.3rem; }
+  body.page-lich-phung-vu .lpv-modes .lpv-tab.active::after { right:.8rem; left:.8rem; background:var(--gold); }
+
+  body.page-lich-phung-vu .lpv-today-card,
+  body.page-lich-phung-vu .lpv-upcoming,
+  body.page-lich-phung-vu .lpv-cal-section { border-radius:1.15rem; box-shadow:0 .35rem 1.4rem rgba(0,0,0,.2); }
+  body.page-lich-phung-vu .lpv-today-card-inner { position:relative; min-height:0; padding:1.05rem 1.25rem 1.15rem; }
+  body.page-lich-phung-vu .ltc-header { margin-bottom:.25rem; font-size:1rem; }
+  body.page-lich-phung-vu .ltc-date { margin-bottom:.55rem; padding-right:3.5rem; font-size:1.55rem; line-height:1.3; }
+  body.page-lich-phung-vu .ltc-cycle { font-size:1.12rem; }
+  body.page-lich-phung-vu .ltc-liturgy { margin-bottom:.35rem; padding-right:3.5rem; font-size:1.4rem; line-height:1.45; }
+  body.page-lich-phung-vu .ltc-chip-row,
+  body.page-lich-phung-vu .ltc-feast-entry { margin-bottom:.45rem; }
+  body.page-lich-phung-vu .ltc-read-bar { margin-top:.5rem; padding-top:.35rem; }
+  body.page-lich-phung-vu .ltc-read-bar:not(:has(.ltc-reading-select)) { position:absolute; right:1.15rem; bottom:1.1rem; margin:0; padding:0; }
+  body.page-lich-phung-vu .ltc-read-btn { width:3.4rem; height:3.4rem; }
+  body.page-lich-phung-vu .ltc-reading-select { min-height:3.8rem; font-size:1.15rem; }
+
+  body.page-lich-phung-vu .lpv-body { gap:1.1rem; }
+  body.page-lich-phung-vu .lupv-header { padding:.85rem 1.15rem .7rem; font-size:1rem; }
+  body.page-lich-phung-vu .lupv-body { grid-auto-columns:minmax(17.5rem, 68vw); gap:.7rem; padding:.7rem 1rem .9rem; }
+  body.page-lich-phung-vu .lupv-item { padding:.7rem .8rem; border-radius:.8rem; }
+  body.page-lich-phung-vu .lupv-item-date { font-size:1.04rem; }
+  body.page-lich-phung-vu .lupv-item-text { font-size:1.15rem; line-height:1.38; }
+
+  body.page-lich-phung-vu .lpv-nav { grid-template-columns:4rem minmax(0,1fr) 4rem; gap:.55rem; padding:.75rem .8rem .8rem; }
+  body.page-lich-phung-vu .lpv-nav-btn { width:4rem; height:4rem; min-height:4rem; }
+  body.page-lich-phung-vu .lpv-month-label { font-size:1.65rem; font-weight:600; }
+  body.page-lich-phung-vu .lpv-today-btn { grid-column:1 / -1; min-height:3.6rem; font-size:1.25rem; }
+  body.page-lich-phung-vu .lpv-expand-btn { display:none; }
+
+  body.page-lich-phung-vu .lpv-cell { min-height:clamp(5rem, 14vw, 5.8rem); padding:.4rem .12rem .3rem; }
+  body.page-lich-phung-vu .lpv-cell-header { padding:.55rem .04rem; font-size:.9rem; }
+  body.page-lich-phung-vu .lpv-day-num,
+  body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-day-num { margin-bottom:.3rem; font-size:1.4rem; }
+  body.page-lich-phung-vu .lpv-today-circle { width:2.25rem; height:2.25rem; font-size:1.2rem; }
+  body.page-lich-phung-vu .lpv-rank-chip { min-width:1.55rem; font-size:.82rem; }
+  body.page-lich-phung-vu .lpv-legend { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem .8rem; padding:.8rem 1rem; }
+  body.page-lich-phung-vu .lpv-legend-item { min-width:0; font-size:1.02rem; }
+}
+
+@media (max-width: 360px) {
+  body.page-lich-phung-vu #main > main.content { padding-inline:.8rem; }
+  body.page-lich-phung-vu .lpv-cell { min-height:4.8rem; }
+  body.page-lich-phung-vu .lpv-day-num,
+  body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-day-num { font-size:1.28rem; }
+  body.page-lich-phung-vu .lpv-rank-chip { min-width:1.42rem; padding-inline:.2rem; font-size:.76rem; }
+}
+</style>
+
+<script define:vars={{ leRiengEntries, saintByDate, liturgyToEntry, siteBase }}>
+function withBase(path) {
+  if (!path || !path.startsWith('/') || path.startsWith('//') || !siteBase) return path;
+  if (path === siteBase || path.startsWith(siteBase + '/')) return path;
+  return siteBase + path;
+}
+
+// ===== CONSTANTS =====
+const SEASON_COLORS = {
+  'mua-vong':        '#b499d8',
+  'mua-giang-sinh':  '#e9c176',
+  'mua-thuong-nien': '#72c49a',
+  'mua-chay':        '#a882c8',
+  'mua-phuc-sinh':   '#f2d960',
+  'le-chung':        '#d0c9be',
+  'le-rieng':        '#e08888',
+  'trong-kinh-chua': '#8b2020',
+};
+const SEASON_DARK_TEXT = new Set(['mua-giang-sinh','mua-chay','mua-phuc-sinh','le-chung','le-rieng']);
+const SEASON_LABELS = {
+  'mua-vong':        'Mùa Vọng',
+  'mua-giang-sinh':  'Mùa Giáng Sinh',
+  'mua-thuong-nien': 'Thường Niên',
+  'mua-chay':        'Mùa Chay',
+  'mua-phuc-sinh':   'Mùa Phục Sinh',
+  'le-chung':        'Lễ Chung',
+  'le-rieng':        'Lễ Riêng',
+  'trong-kinh-chua': 'Lễ Trọng Kính Chúa',
+};
+const RANK_COLORS = {
+  'solemn':      { bg: '#8b2020', text: '#efe7d6' },
+  'feast':       { bg: '#e9c176', text: '#0d1f2b' },
+  'memorial':    { bg: '#ccc8c0', text: '#0d1f2b' },
+  'opt-memorial':{ bg: '#a8a4a0', text: '#0d1f2b' },
+};
+const RANK_LABELS = {
+  'solemn':       'Lễ Trọng',
+  'feast':        'Lễ Kính',
+  'memorial':     'Lễ Nhớ Buộc',
+  'opt-memorial': 'Lễ Nhớ Tùy Chọn',
+};
+const RANK_ORDER = { solemn: 0, feast: 1, memorial: 2, 'opt-memorial': 3 };
+const RANK_CHIPS = {
+  solemn:       { label: 'T', cls: 'chip-T' },
+  feast:        { label: 'K', cls: 'chip-K' },
+  memorial:     { label: 'N', cls: 'chip-N' },
+  'opt-memorial': { label: 'n', cls: 'chip-n' },
+};
+const DAY_HEADERS = ['T2','T3','T4','T5','T6','T7','CN'];
+const MONTH_NAMES = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+const DAY_NAMES = ['Chúa Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+
+// ===== DATA =====
+// Lịch Chung: le-rieng lookup "MM-DD" → entries[]
+const LR_BY_DATE = {};
+for (const e of leRiengEntries) {
+  const m = (e.liturgy || '').match(/Ng[àa]y\s+(\d+)\s+Th[áa]ng\s+(\d+)/i);
+  if (!m) continue;
+  const key = `${String(parseInt(m[2])).padStart(2,'0')}-${String(parseInt(m[1])).padStart(2,'0')}`;
+  if (!LR_BY_DATE[key]) LR_BY_DATE[key] = [];
+  LR_BY_DATE[key].push(e);
+}
+
+// Lịch Nhà Dòng: pre-processed ở build time, truyền qua define:vars
+const SAINT_BY_DATE = saintByDate;
+
+// Lookup liturgy text → { url, rank } bao phủ 626 bài Kinh Sách
+const LITURGY_TO_ENTRY = liturgyToEntry;
+
+function bioSlug(bioFile) {
+  if (!bioFile) return null;
+  return bioFile.split('/').pop().replace('.json', '');
+}
+function bioHref(slug) {
+  return withBase(slug === 'st-augustine-of-hippo'
+    ? '/thanh-au-tinh/#tieu-su'
+    : `/thanh-chan-phuoc/${slug}/`);
+}
+
+function expandAbbrev(text) {
+  if (!text) return text;
+  return text
+    .replace(/\bGh\./g, 'Giáo Hoàng')
+    .replace(/\bGm\./g, 'Giám Mục')
+    .replace(/\bLm\./g, 'Linh Mục')
+    .replace(/\bVp\./g, 'Viện Phụ')
+    .replace(/\bTs\./g, 'Tiến Sĩ')
+    .replace(/\bTđ\./g, 'Tử Đạo')
+    .replace(/\bTn\./g, 'Trinh Nữ')
+    .replace(/\bNt\./g, 'Nữ Tu');
+}
+
+// Rank mặc định cho thánh-chân phước khi không có rank hoặc không hợp lệ
+function saintRank(r) { return RANK_CHIPS[r] ? r : 'opt-memorial'; }
+
+const calCache = {};
+
+async function loadYear(year) {
+  if (calCache[year] !== undefined) return calCache[year];
+  calCache[year] = null; // mark as attempted
+  try {
+    const r = await fetch(withBase(`/data/calendar/${year}.json`));
+    if (r.ok) calCache[year] = await r.json();
+  } catch (_) {}
+  return calCache[year];
+}
+
+function getDayInfo(dateStr) {
+  const year = parseInt(dateStr.slice(0, 4));
+  for (const y of [year, year + 1]) {
+    const data = calCache[y];
+    if (data && data.days && data.days[dateStr]) {
+      return { ...data.days[dateStr], cycle: data.cycle };
+    }
+  }
+  return null;
+}
+
+// ===== STATE =====
+const todayDate = new Date();
+const todayStr = fmtDate(todayDate);
+let mode = 'chung';
+let viewYear = todayDate.getFullYear();
+let viewMonth = todayDate.getMonth();
+let expanded = false;
+let selectedDateStr = todayStr;
+
+// ===== HELPERS =====
+function fmtDate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function bestEntry(entries) {
+  return entries.reduce((a,b) => (RANK_ORDER[a.rank]??99) <= (RANK_ORDER[b.rank]??99) ? a : b);
+}
+
+function seasonTextColor(sk) {
+  if (sk === 'mua-vong' || sk === 'mua-thuong-nien') return '#ffffff';
+  return SEASON_DARK_TEXT.has(sk) ? '#0d1f2b' : '#efe7d6';
+}
+
+function mmddKey(date) {
+  return `${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+
+function makeEventDiv(rankKey, nameText) {
+  const div = document.createElement('div');
+  div.className = 'lpv-event';
+  const chip = RANK_CHIPS[rankKey];
+  const chipHtml = chip ? `<span class="lpv-rank-chip ${chip.cls}">${chip.label}</span>` : '';
+  div.innerHTML = `${chipHtml}<span class="lpv-event-name">${expandAbbrev(nameText)}</span>`;
+  return div;
+}
+
+// ===== RENDER: NAV =====
+function renderNav() {
+  document.getElementById('calMonthLabel').textContent =
+    `${MONTH_NAMES[viewMonth]}, ${viewYear}`;
+
+}
+
+// ===== RENDER: GRID =====
+function renderGrid() {
+  const grid = document.getElementById('lpvGrid');
+  const frag = document.createDocumentFragment();
+
+  // Headers
+  DAY_HEADERS.forEach((label, i) => {
+    const h = document.createElement('div');
+    h.className = 'lpv-cell-header' + (i === 6 ? ' is-sunday-col' : '');
+    h.textContent = label;
+    frag.appendChild(h);
+  });
+
+  const firstDay = new Date(viewYear, viewMonth, 1);
+  const lastDate = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const startOffset = (firstDay.getDay() + 6) % 7; // Mon = 0
+
+  // Padding before
+  for (let i = startOffset - 1; i >= 0; i--) {
+    const d = new Date(viewYear, viewMonth, -i);
+    frag.appendChild(makeCell(d, true));
+  }
+
+  // Days of month
+  for (let d = 1; d <= lastDate; d++) {
+    frag.appendChild(makeCell(new Date(viewYear, viewMonth, d), false));
+  }
+
+  // Padding after
+  const total = startOffset + lastDate;
+  const remainder = total % 7;
+  if (remainder > 0) {
+    for (let i = 1; i <= 7 - remainder; i++) {
+      frag.appendChild(makeCell(new Date(viewYear, viewMonth + 1, i), true));
+    }
+  }
+
+  grid.replaceChildren(frag);
+}
+
+function makeCell(date, otherMonth) {
+  const ds = fmtDate(date);
+  const info = getDayInfo(ds);
+  const key = mmddKey(date);
+  const lr = LR_BY_DATE[key];
+  const saints = SAINT_BY_DATE[key];
+  const isSunday = date.getDay() === 0;
+  const isToday = ds === todayStr;
+  const isSelected = ds === selectedDateStr;
+
+  const cell = document.createElement('div');
+  cell.className = [
+    'lpv-cell',
+    otherMonth ? 'other-month' : '',
+    isToday   ? 'today'      : '',
+    isSunday  ? 'is-sunday'  : '',
+    isSelected && !otherMonth ? 'selected' : '',
+  ].filter(Boolean).join(' ');
+
+  // Nhà Dòng: rank tint từ thánh-chân phước (chỉ background, không border-left)
+  if (mode === 'nha-dong' && saints && saints.length > 0) {
+    const best = bestEntry(saints);
+    const rc = RANK_COLORS[saintRank(best.rank)];
+    if (rc) cell.style.background = hexToRgba(rc.bg, 0.1);
+  }
+
+  // Day number
+  const num = document.createElement('span');
+  num.className = 'lpv-day-num';
+  if (isToday) {
+    const circle = document.createElement('span');
+    circle.className = 'lpv-today-circle';
+    circle.textContent = String(date.getDate());
+    num.appendChild(circle);
+  } else {
+    num.textContent = String(date.getDate());
+  }
+  cell.appendChild(num);
+
+  const FEAST_SEASONS = new Set(['le-rieng','le-chung','trong-kinh-chua']);
+
+  if (mode === 'chung') {
+    // Chúa Nhật: tên lễ từ lịch phụng vụ chung
+    if (isSunday && info?.l) {
+      const txt = document.createElement('div');
+      txt.className = 'lpv-day-sunday';
+      txt.textContent = info.l;
+      cell.appendChild(txt);
+    }
+    // Lễ Chung / Lễ Trọng Kính Chúa: hiện badge bậc lễ (không bị chặn bởi lr)
+    if (!isSunday && info?.l && (info.s === 'le-chung' || info.s === 'trong-kinh-chua')) {
+      const entry = LITURGY_TO_ENTRY[info.l];
+      if (entry?.rank && RANK_CHIPS[entry.rank]) {
+        cell.appendChild(makeEventDiv(entry.rank, info.l));
+      } else {
+        const txt = document.createElement('div');
+        txt.className = 'lpv-day-feast';
+        txt.textContent = info.l;
+        cell.appendChild(txt);
+      }
+    }
+    // Lễ riêng cố định: ẩn khi trùng Chúa Nhật (Chúa Nhật được ưu tiên), hiện tất cả
+    if (!isSunday && lr && lr.length > 0) {
+      for (const e of lr) {
+        const ci = (e.liturgy || '').indexOf(':');
+        const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : e.liturgy;
+        cell.appendChild(makeEventDiv(e.rank, fname));
+      }
+    }
+  } else {
+    // Nhà Dòng: thánh-chân phước — hiện tất cả
+    if (saints && saints.length > 0) {
+      for (const s of saints) {
+        cell.appendChild(makeEventDiv(saintRank(s.rank), s.name));
+      }
+    }
+  }
+
+  if (!otherMonth) {
+    cell.addEventListener('click', () => {
+      selectedDateStr = ds;
+      document.querySelectorAll('.lpv-cell.selected').forEach(c => c.classList.remove('selected'));
+      cell.classList.add('selected');
+      renderSidebar(date, info, lr, saints);
+    });
+  }
+
+  return cell;
+}
+
+// ===== RENDER: LEGEND =====
+function renderLegend() {
+  const legend = document.getElementById('lpvLegend');
+  const frag = document.createDocumentFragment();
+
+  const CHIP_LEGEND = [
+    { chip: 'T', cls: 'chip-T', label: 'Lễ Trọng' },
+    { chip: 'K', cls: 'chip-K', label: 'Lễ Kính' },
+    { chip: 'N', cls: 'chip-N', label: 'Lễ Nhớ Buộc' },
+    { chip: 'n', cls: 'chip-n', label: 'Lễ Nhớ Tùy Chọn' },
+  ];
+  for (const { chip, cls, label } of CHIP_LEGEND) {
+    const item = document.createElement('div');
+    item.className = 'lpv-legend-item';
+    item.innerHTML = `<span class="lpv-rank-chip ${cls}">${chip}</span><span>${label}</span>`;
+    frag.appendChild(item);
+  }
+
+  legend.replaceChildren(frag);
+}
+
+// ===== RENDER: SIDEBAR =====
+function renderSidebar(date, info, lr, saints) {
+  const ds = fmtDate(date);
+  const isActualToday = ds === todayStr;
+  const isSun = date.getDay() === 0;
+  const dayLabel = `${DAY_NAMES[date.getDay()]}, ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+  const stripeColor = info ? (SEASON_COLORS[info.s] || '#e9c176') : '#e9c176';
+  const effectiveLr = isSun ? null : lr;
+  const FEAST_SEASONS = new Set(['le-rieng','le-chung','trong-kinh-chua']);
+
+  let html = `<div class="ltc-season-stripe" style="background:${stripeColor}"></div>`;
+  html += `<div class="lpv-today-card-inner">`;
+  html += `<div class="ltc-header">${isActualToday ? 'Hôm Nay' : 'Ngày Được Chọn'}</div>`;
+  html += `<div class="ltc-date">${dayLabel}${info?.cycle ? `<span class="ltc-cycle"> · Năm ${info.cycle}</span>` : ''}</div>`;
+
+  if (mode === 'chung') {
+    if (info) {
+      const slabel = SEASON_LABELS[info.s] || info.s;
+      const mainEntry = LITURGY_TO_ENTRY[info.l];
+      const mainUrl = withBase(mainEntry?.url || `/kinh-sach/?category=${info.s}`);
+
+      // Badge bậc lễ cho Lễ Chung / Lễ Trọng Kính Chúa
+      if ((info.s === 'le-chung' || info.s === 'trong-kinh-chua') && mainEntry?.rank && RANK_CHIPS[mainEntry.rank]) {
+        const chip = RANK_CHIPS[mainEntry.rank];
+        html += `<div class="ltc-chip-row"><span class="lpv-rank-chip ${chip.cls}">${chip.label}</span><span class="ltc-rank-label">${RANK_LABELS[mainEntry.rank] || ''}</span></div>`;
+      }
+
+      // Tên lễ / mùa — luôn hiển thị
+      html += `<div class="ltc-liturgy">${info.l}</div>`;
+
+      // Lễ riêng cố định (ẩn khi Chúa Nhật) — hiện tất cả
+      if (effectiveLr && effectiveLr.length > 0) {
+        for (const e of effectiveLr) {
+          const chip = RANK_CHIPS[e.rank];
+          const ci = (e.liturgy || '').indexOf(':');
+          const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : e.liturgy;
+          html += `<div class="ltc-feast-entry">${chip ? `<span class="lpv-rank-chip ${chip.cls}">${chip.label}</span>` : ''}<span class="ltc-feast-name">${expandAbbrev(fname)}</span></div>`;
+        }
+      }
+
+      // Bài đọc: select + button icon căn phải dưới
+      const READ_ICON = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const readings = [{ label: info.l, url: mainUrl }];
+      if (effectiveLr && effectiveLr.length > 0) {
+        for (const e of effectiveLr) {
+          const ci = (e.liturgy || '').indexOf(':');
+          const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : (e.liturgy || '');
+          const chip = RANK_CHIPS[e.rank];
+          readings.push({ label: `${chip ? `[${chip.label}] ` : ''}${fname}`, url: withBase(e.url || `/kinh-sach/?category=le-rieng`) });
+        }
+      }
+      html += `<div class="ltc-read-bar">`;
+      if (readings.length > 1) {
+        html += `<select class="ltc-reading-select" id="ltcReadingSelect">`;
+        readings.forEach(r => { html += `<option value="${r.url}">${r.label}</option>`; });
+        html += `</select>`;
+        html += `<a href="${readings[0].url}" class="ltc-read-btn" id="ltcReadingLink" title="Đọc Kinh Sách">${READ_ICON}</a>`;
+      } else {
+        html += `<a href="${readings[0].url}" class="ltc-read-btn" title="Đọc Kinh Sách">${READ_ICON}</a>`;
+      }
+      html += `</div>`;
+    } else {
+      html += `<p class="ltc-no-feast">Chưa có dữ liệu lịch.</p>`;
+    }
+  } else {
+    // Nhà Dòng: thánh-chân phước
+    if (saints && saints.length > 0) {
+      const best = bestEntry(saints);
+      const chip = RANK_CHIPS[saintRank(best.rank)];
+      const rl = RANK_LABELS[saintRank(best.rank)];
+      html += `<div class="ltc-chip-row">${chip ? `<span class="lpv-rank-chip ${chip.cls}">${chip.label}</span>` : ''}<span class="ltc-rank-label">${rl || ''}</span></div>`;
+      html += `<div class="ltc-liturgy">${expandAbbrev(best.name)}</div>`;
+      if (saints.length > 1) {
+        saints.slice(1).forEach(s => {
+          const chip2 = RANK_CHIPS[saintRank(s.rank)];
+          const sl2 = bioSlug(s.bioFile);
+          const sname2 = expandAbbrev(s.name);
+          html += `<div class="ltc-alt-feast">${chip2 ? `<span class="lpv-rank-chip ${chip2.cls}" style="font-size:0.9rem">${chip2.label}</span> ` : ''}${sl2 ? `<a href="${bioHref(sl2)}" style="color:var(--ink-cream-soft);text-decoration:none">${sname2}</a>` : sname2}</div>`;
+        });
+      }
+      const slug = bioSlug(best.bioFile);
+      const bioUrl = slug ? bioHref(slug) : null;
+      if (info) {
+        const slabel2 = SEASON_LABELS[info.s] || '';
+        html += `<div class="ltc-liturgy ltc-muted" style="font-size:1.2rem;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid rgba(233,193,118,.1)">${slabel2} — ${info.l}</div>`;
+      }
+      // Lịch Nhà Dòng chỉ dẫn tới tiểu sử Thánh–Chân phước; không thêm
+      // shortcut Kinh Sách vào panel Hôm Nay.
+      if (bioUrl) {
+        const READ_ICON2 = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        html += `<div class="ltc-read-bar"><a href="${bioUrl}" class="ltc-read-btn" title="Đọc tiểu sử Thánh – Chân phước">${READ_ICON2}</a></div>`;
+      }
+    } else {
+      // Không có lễ: không ghi thông báo
+      if (info) {
+        html += `<div class="ltc-liturgy ltc-muted">${info.l}</div>`;
+      }
+    }
+  }
+
+  html += `</div>`; // close lpv-today-card-inner
+  document.getElementById('lpvToday').innerHTML = html;
+
+  // Wire up select box nếu có nhiều bài
+  const sel = document.getElementById('ltcReadingSelect');
+  const lnk = document.getElementById('ltcReadingLink');
+  if (sel && lnk) {
+    sel.addEventListener('change', () => { lnk.href = sel.value; });
+  }
+  // Đánh dấu nguồn điều hướng để trang đọc biết back về lịch
+  document.getElementById('lpvToday').querySelectorAll('.ltc-read-btn').forEach(btn => {
+    btn.addEventListener('click', () => sessionStorage.setItem('ks-from', 'lich-phung-vu'));
+  });
+}
+
+// ===== RENDER: UPCOMING =====
+function renderUpcoming() {
+  const el = document.getElementById('lpvUpcoming');
+  let html = `<div class="lupv-header">Lễ Sắp Tới</div><div class="lupv-body">`;
+
+  const FEAST_SEASONS = new Set(['le-rieng','le-chung','trong-kinh-chua']);
+  const d = new Date(todayDate);
+  d.setDate(d.getDate() + 1);
+  let count = 0, tries = 0;
+
+  while (count < 8 && tries < 90) {
+    tries++;
+    const ds = fmtDate(d);
+    const key = mmddKey(d);
+    const info = getDayInfo(ds);
+    const isSun = d.getDay() === 0;
+    const saints = SAINT_BY_DATE[key];
+    const lr = LR_BY_DATE[key];
+
+    // Lễ riêng không hiển thị khi trùng Chúa Nhật
+    const effectiveLr = isSun ? null : lr;
+    const hasCalFeast = info && (isSun || FEAST_SEASONS.has(info.s));
+    const hasSaint = saints && saints.length > 0;
+    const hasLr = effectiveLr && effectiveLr.length > 0;
+
+    if (hasCalFeast || hasSaint || hasLr) {
+      const label = `${DAY_NAMES[d.getDay()]}, ${d.getDate()}/${d.getMonth()+1}`;
+      let itemHtml = `<div class="lupv-item"><div class="lupv-item-date">${label}</div>`;
+
+      // Hàng lịch chung: mùa/tên lễ
+      if (hasCalFeast) {
+        const color = SEASON_COLORS[info.s] || 'var(--gold)';
+        itemHtml += `<div class="lupv-event-row">
+          <span class="lupv-dot" style="background:${color}"></span>
+          <span class="lupv-item-text">${info.l}</span>
+        </div>`;
+      }
+
+      // Lễ riêng cố định (kinh sách index) — đã ẩn khi isSun, hiện tất cả
+      if (hasLr) {
+        for (const e of effectiveLr) {
+          const chip = RANK_CHIPS[e.rank];
+          const ci = (e.liturgy || '').indexOf(':');
+          const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : e.liturgy;
+          itemHtml += `<div class="lupv-event-row">
+            ${chip ? `<span class="lpv-rank-chip ${chip.cls}" style="font-size:0.85rem;line-height:1.6">${chip.label}</span>` : ''}
+            <span class="lupv-item-text">${expandAbbrev(fname)}</span>
+          </div>`;
+        }
+      }
+
+      // Thánh-Chân phước (Nhà Dòng) — hiện tất cả
+      if (hasSaint) {
+        for (const s of saints) {
+          const chip = RANK_CHIPS[saintRank(s.rank)];
+          itemHtml += `<div class="lupv-event-row">
+            ${chip ? `<span class="lpv-rank-chip ${chip.cls}" style="font-size:0.85rem;line-height:1.6">${chip.label}</span>` : ''}
+            <span class="lupv-item-text">${expandAbbrev(s.name)}</span>
+          </div>`;
+        }
+      }
+
+      itemHtml += `</div>`;
+      html += itemHtml;
+      count++;
+    }
+
+    d.setDate(d.getDate() + 1);
+  }
+
+  html += `</div>`; // close lupv-body
+  el.innerHTML = html;
+}
+
+// ===== FULL RENDER =====
+function renderAll() {
+  renderNav();
+  renderGrid();
+  renderLegend();
+  const selDate = new Date(selectedDateStr + 'T00:00:00');
+  const selInfo = getDayInfo(selectedDateStr);
+  const selKey = mmddKey(selDate);
+  renderSidebar(selDate, selInfo, LR_BY_DATE[selKey], SAINT_BY_DATE[selKey]);
+  renderUpcoming();
+}
+
+// ===== INIT =====
+(async () => {
+  await Promise.all([
+    loadYear(viewYear - 1),
+    loadYear(viewYear),
+    loadYear(viewYear + 1),
+  ]);
+  renderAll();
+})();
+
+// ===== EVENTS =====
+document.getElementById('prevMonth').addEventListener('click', () => {
+  viewMonth--;
+  if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+  loadYear(viewYear).then(renderAll);
+});
+document.getElementById('nextMonth').addEventListener('click', () => {
+  viewMonth++;
+  if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+  loadYear(viewYear + 1).then(renderAll);
+});
+document.getElementById('goToday').addEventListener('click', () => {
+  viewYear = todayDate.getFullYear();
+  viewMonth = todayDate.getMonth();
+  selectedDateStr = todayStr;
+  renderAll();
+});
+
+const expandBtn = document.getElementById('expandBtn');
+expandBtn.addEventListener('click', () => {
+  expanded = !expanded;
+  document.getElementById('lpvBody').classList.toggle('expanded', expanded);
+  expandBtn.setAttribute('aria-expanded', String(expanded));
+  expandBtn.title = expanded ? 'Thu gọn lịch' : 'Mở rộng lịch';
+  expandBtn.innerHTML = expanded
+    ? `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 1H1v4M10 1h4v4M5 14H1v-4M10 14h4v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`
+    : `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h4M1 1v4M14 1h-4M14 1v4M1 14h4M1 14v-4M14 14h-4M14 14v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+});
+
+document.querySelectorAll('.lpv-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    mode = btn.dataset.mode;
+    document.querySelectorAll('.lpv-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderAll();
+  });
+});
+</script>
+
+</BaseLayout>

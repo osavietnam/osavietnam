@@ -1,0 +1,14 @@
+---
+import VocationTail from './VocationTail.astro';
+const { showVocationTail = true } = Astro.props;
+const currentYear = new Date().getFullYear();
+// Footer gốc (giữ nguyên class). Nội dung là chuỗi tin cậy của site, không
+// phải dữ liệu người dùng — nên set:html ở đây an toàn.
+---
+<footer class="main-footer">
+  {showVocationTail && <VocationTail />}
+  <div class="footer-content">
+    <p class="footer-copyright">&copy; Augusinh {currentYear} — Nhân dịp Lễ Đức Mẹ Chỉ Bảo Đàng Lành 2024</p>
+    <p class="footer-quote">Yêu <span class="highlight-word">Chúa</span>, rồi làm điều bạn muốn.</p>
+  </div>
+</footer>

@@ -1,0 +1,687 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { articleCategoryTone, articleCategoryVariant, isAugustineAuthor } from '../utils/article-category';
+import type { ArticleCategoryTone } from '../utils/article-category';
+
+interface GalleryArticle {
+  id: string;
+  title: string;
+  href: string;
+  excerpt?: string;
+  author?: string;
+  date?: Date;
+  image?: ImageMetadata | string;
+}
+
+interface GalleryGroup {
+  category: string;
+  articles: GalleryArticle[];
+}
+
+interface Props {
+  groups: GalleryGroup[];
+  emptyText?: string;
+  showTitles?: boolean;
+  showFilters?: boolean;
+  idPrefix?: string;
+  rowTitle?: string;
+  categoryTone?: ArticleCategoryTone;
+  showAuthors?: boolean;
+  showCategories?: boolean;
+  showAuthorFilters?: boolean;
+}
+
+const {
+  groups,
+  emptyText = 'Các bài thuộc chuyên mục này sẽ được cập nhật.',
+  showTitles = false,
+  showFilters = true,
+  idPrefix = 'spirit-category',
+  rowTitle,
+  categoryTone,
+  showAuthors = true,
+  showCategories = true,
+  showAuthorFilters = true,
+} = Astro.props;
+
+const combinedArticles = groups.flatMap(({ category, articles }) =>
+  articles.map((article) => ({ ...article, category })),
+);
+const authors = [...new Set(combinedArticles.map((article) => article.author?.trim()).filter(Boolean))] as string[];
+const formatDate = (date?: Date) => date
+  ? new Intl.DateTimeFormat('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric' }).format(date)
+  : '';
+---
+
+<div class:list={['spirit-library', { 'show-titles': showTitles }]} data-category-gallery>
+  {(showFilters || (showAuthorFilters && authors.length > 0)) && <div class="spirit-filter-deck">
+    {showFilters && <div class="spirit-filter-list" aria-label="Ẩn hoặc hiện các chủ đề">
+      <button
+        type="button"
+        class="spirit-filter-all"
+        data-spirit-toggle-all
+        aria-pressed="true"
+      >
+        TẤT CẢ
+      </button>
+      {groups.map(({ category }) => (
+        <button
+          type="button"
+          class:list={['is-active', 'article-category-badge', { 'is-long': category.length > 18 }]}
+          data-spirit-category-toggle={category}
+          data-category-tone={categoryTone ?? articleCategoryTone(category)}
+          data-category-variant={articleCategoryVariant(category)}
+          aria-pressed="true"
+        >
+          <span>{category}</span>
+        </button>
+      ))}
+    </div>}
+    {showAuthorFilters && authors.length > 0 && (
+      <label class="spirit-author-filter-list shared-filter-control">
+        <span>Tác giả</span>
+        <select class="shared-filter-select" data-spirit-author-select aria-label="Lọc bài viết theo tác giả">
+          <option value="">Tất cả</option>
+          {authors.map((author) => <option value={author}>{author}</option>)}
+        </select>
+      </label>
+    )}
+  </div>}
+
+  <div class="spirit-category-stack">
+    {rowTitle ? (
+      <section
+        class="spirit-category spirit-category-combined"
+        data-spirit-combined
+        aria-labelledby={`${idPrefix}-row`}
+      >
+        <header class="spirit-category-heading">
+          <div class="idx-section-heading">
+            <h2 id={`${idPrefix}-row`}>{rowTitle}</h2>
+          </div>
+          {combinedArticles.length > 0 && (
+            <div class="spirit-shift-controls" aria-label={`Dịch chuyển gallery ${rowTitle}`}>
+              <button type="button" data-spirit-shift="prev" aria-label="Xem bài phía trước">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+              </button>
+              <button type="button" data-spirit-shift="next" aria-label="Xem bài tiếp theo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+              </button>
+            </div>
+          )}
+        </header>
+
+        {combinedArticles.length > 0 ? (
+          <div class="spirit-rail-frame">
+            <div class="spirit-rail" data-spirit-rail tabindex="0">
+              {combinedArticles.map((article, articleIndex) => (
+                <article
+                  class="spirit-gallery-card"
+                  data-spirit-card-category={article.category}
+                  data-spirit-card-author={article.author ?? ''}
+                >
+                  <a href={article.href} aria-label={`Đọc ${article.title}`}>
+                    <span class:list={['spirit-gallery-thumb', 'article-meta-media', { 'is-placeholder': !article.image }]}>
+                      {article.image
+                        ? typeof article.image === 'string'
+                          ? (
+                            <img
+                              src={article.image}
+                              alt={article.title}
+                              width="832"
+                              height="468"
+                              loading={articleIndex < 2 ? 'eager' : 'lazy'}
+                            />
+                          )
+                          : (
+                          <Image
+                            src={article.image}
+                            alt={article.title}
+                            width={832}
+                            height={468}
+                            loading={articleIndex < 2 ? 'eager' : 'lazy'}
+                          />
+                        )
+                        : (
+                          <span aria-hidden="true">
+                            <i>A</i>
+                            <strong>{article.title}</strong>
+                            <b>{String(articleIndex + 1).padStart(2, '0')}</b>
+                          </span>
+                        )}
+                      {showCategories && <small
+                        class:list={['article-category-badge', { 'is-long': article.category.length > 18 }]}
+                        data-category-tone={categoryTone ?? articleCategoryTone(article.category)}
+                        data-category-variant={articleCategoryVariant(article.category)}
+                        data-category-filter-trigger={article.category}
+                      >
+                        {article.category}
+                      </small>}
+                      {article.date && (
+                        <time class="article-card-date" datetime={article.date.toISOString()}>{formatDate(article.date)}</time>
+                      )}
+                      {showAuthors && article.author && (
+                        <small class="article-author-badge" data-author-filter-trigger data-author-augustine={isAugustineAuthor(article.author) ? '' : undefined} title={article.author}>{article.author}</small>
+                      )}
+                    </span>
+                    <span class="spirit-gallery-copy">
+                      {showTitles && <h3>{article.title}</h3>}
+                      <p>{article.excerpt ?? 'Bài viết đang được biên tập nội dung giới thiệu.'}</p>
+                      <span class="spirit-gallery-open">
+                        Đọc bài
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" /></svg>
+                      </span>
+                    </span>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </section>
+    ) : groups.map(({ category, articles }, categoryIndex) => (
+      <section
+        class="spirit-category"
+        data-spirit-category={category}
+        aria-labelledby={`${idPrefix}-${categoryIndex}`}
+      >
+        <header class="spirit-category-heading">
+          <div class="idx-section-heading">
+            <h2 id={`${idPrefix}-${categoryIndex}`}>{category}</h2>
+          </div>
+          {articles.length > 0 && (
+            <div class="spirit-shift-controls" aria-label={`Dịch chuyển gallery ${category}`}>
+              <button type="button" data-spirit-shift="prev" aria-label="Xem bài phía trước">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+              </button>
+              <button type="button" data-spirit-shift="next" aria-label="Xem bài tiếp theo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+              </button>
+            </div>
+          )}
+        </header>
+
+        {articles.length > 0 ? (
+          <div class="spirit-rail-frame">
+            <div class="spirit-rail" data-spirit-rail tabindex="0">
+              {articles.map((article, articleIndex) => (
+                <article
+                  class="spirit-gallery-card"
+                  data-spirit-card-category={category}
+                  data-spirit-card-author={article.author ?? ''}
+                >
+                  <a href={article.href} aria-label={`Đọc ${article.title}`}>
+                    <span class:list={['spirit-gallery-thumb', 'article-meta-media', { 'is-placeholder': !article.image }]}>
+                      {article.image
+                        ? typeof article.image === 'string'
+                          ? (
+                            <img
+                              src={article.image}
+                              alt={article.title}
+                              width="832"
+                              height="468"
+                              loading={categoryIndex === 0 && articleIndex < 2 ? 'eager' : 'lazy'}
+                            />
+                          )
+                          : (
+                          <Image
+                            src={article.image}
+                            alt={article.title}
+                            width={832}
+                            height={468}
+                            loading={categoryIndex === 0 && articleIndex < 2 ? 'eager' : 'lazy'}
+                          />
+                        )
+                        : (
+                          <span aria-hidden="true">
+                            <i>A</i>
+                            <strong>{article.title}</strong>
+                            <b>{String(articleIndex + 1).padStart(2, '0')}</b>
+                          </span>
+                        )}
+                      {showCategories && <small
+                        class:list={['article-category-badge', { 'is-long': category.length > 18 }]}
+                        data-category-tone={categoryTone ?? articleCategoryTone(category)}
+                        data-category-variant={articleCategoryVariant(category)}
+                        data-category-filter-trigger={category}
+                      >
+                        {category}
+                      </small>}
+                      {article.date && (
+                        <time class="article-card-date" datetime={article.date.toISOString()}>{formatDate(article.date)}</time>
+                      )}
+                      {showAuthors && article.author && (
+                        <small class="article-author-badge" data-author-filter-trigger data-author-augustine={isAugustineAuthor(article.author) ? '' : undefined} title={article.author}>{article.author}</small>
+                      )}
+                    </span>
+                    <span class="spirit-gallery-copy">
+                      {showTitles && <h3>{article.title}</h3>}
+                      <p>{article.excerpt ?? 'Bài viết đang được biên tập nội dung giới thiệu.'}</p>
+                      <span class="spirit-gallery-open">
+                        Đọc bài
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" /></svg>
+                      </span>
+                    </span>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </section>
+    ))}
+  </div>
+
+  <div class="spirit-all-hidden" data-spirit-all-hidden hidden>
+    <strong>Chưa có chủ đề nào được chọn.</strong>
+    <button type="button" data-spirit-show-all>Hiện lại tất cả</button>
+  </div>
+</div>
+
+<script>
+  const initializeCategoryGallery = (gallery: HTMLElement) => {
+    if (gallery.dataset.categoryGalleryReady === 'true') return;
+    gallery.dataset.categoryGalleryReady = 'true';
+
+    const toggles = Array.from(
+      gallery.querySelectorAll<HTMLButtonElement>('[data-spirit-category-toggle]'),
+    );
+    const showAllButtons = Array.from(
+      gallery.querySelectorAll<HTMLButtonElement>('[data-spirit-show-all]'),
+    );
+    const toggleAllButtons = Array.from(
+      gallery.querySelectorAll<HTMLButtonElement>('[data-spirit-toggle-all]'),
+    );
+    const authorSelect = gallery.querySelector<HTMLSelectElement>('[data-spirit-author-select]');
+    const filterDeck = gallery.querySelector<HTMLElement>('.spirit-filter-deck');
+    const sections = Array.from(
+      gallery.querySelectorAll<HTMLElement>('[data-spirit-category]'),
+    );
+    const combinedSection = gallery.querySelector<HTMLElement>('[data-spirit-combined]');
+    const combinedCards = Array.from(
+      gallery.querySelectorAll<HTMLElement>('[data-spirit-card-category]'),
+    );
+    const allHidden = gallery.querySelector<HTMLElement>('[data-spirit-all-hidden]');
+
+    const scrollToFilters = () => {
+      if (!filterDeck) return;
+      requestAnimationFrame(() => {
+        filterDeck.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+      });
+    };
+
+    const updateCategories = () => {
+      const visibleCategories = new Set(
+        toggles
+          .filter((button) => button.getAttribute('aria-pressed') === 'true')
+          .map((button) => button.dataset.spiritCategoryToggle),
+      );
+      const activeAuthor = authorSelect?.value || undefined;
+      const categoryIsVisible = (category?: string) =>
+        toggles.length === 0 || visibleCategories.has(category);
+      const authorIsVisible = (author?: string) =>
+        !activeAuthor || author === activeAuthor;
+
+      let visibleItemCount = 0;
+      if (combinedSection) {
+        combinedCards.forEach((card) => {
+          card.hidden = !categoryIsVisible(card.dataset.spiritCardCategory)
+            || !authorIsVisible(card.dataset.spiritCardAuthor);
+          if (!card.hidden) visibleItemCount += 1;
+        });
+        combinedSection.hidden = visibleItemCount === 0;
+        const rail = combinedSection.querySelector<HTMLElement>('[data-spirit-rail]');
+        if (rail) {
+          rail.scrollLeft = 0;
+          requestAnimationFrame(() => rail.dispatchEvent(new Event('scroll')));
+        }
+      } else {
+        sections.forEach((section) => {
+          const cards = Array.from(section.querySelectorAll<HTMLElement>('.spirit-gallery-card'));
+          let visibleCards = 0;
+          cards.forEach((card) => {
+            card.hidden = !authorIsVisible(card.dataset.spiritCardAuthor);
+            if (!card.hidden) visibleCards += 1;
+          });
+          const categoryVisible = categoryIsVisible(section.dataset.spiritCategory);
+          section.hidden = !categoryVisible || (cards.length > 0 && visibleCards === 0) || (cards.length === 0 && Boolean(activeAuthor));
+          if (!section.hidden) visibleItemCount += visibleCards;
+        });
+      }
+      if (allHidden) allHidden.hidden = visibleItemCount !== 0;
+      const allCategoriesVisible = toggles.length === 0 || visibleCategories.size === toggles.length;
+      toggleAllButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(allCategoriesVisible));
+        button.classList.toggle('is-complete', allCategoriesVisible);
+      });
+    };
+
+    toggles.forEach((button) => {
+      button.addEventListener('click', () => {
+        const active = button.getAttribute('aria-pressed') !== 'true';
+        button.setAttribute('aria-pressed', String(active));
+        button.classList.toggle('is-active', active);
+        updateCategories();
+      });
+    });
+
+    authorSelect?.addEventListener('change', updateCategories);
+
+    const categoryValues = new Set(
+      toggles.map((toggle) => toggle.dataset.spiritCategoryToggle).filter(Boolean),
+    );
+    document.querySelectorAll<HTMLElement>('[data-category-filter-trigger]').forEach((badge) => {
+      if (badge.dataset.categoryFilterReady === 'true') return;
+      const category = badge.dataset.categoryFilterTrigger ?? '';
+      if (!categoryValues.has(category)) return;
+
+      badge.dataset.categoryFilterReady = 'true';
+      badge.setAttribute('role', 'button');
+      badge.setAttribute('tabindex', '0');
+      badge.setAttribute('aria-label', `Lọc bài viết thuộc ${category}`);
+
+      const filterByCategory = (event: Event) => {
+        const currentCategory = badge.dataset.categoryFilterTrigger ?? '';
+        if (!categoryValues.has(currentCategory)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        toggles.forEach((toggle) => {
+          const active = toggle.dataset.spiritCategoryToggle === currentCategory;
+          toggle.setAttribute('aria-pressed', String(active));
+          toggle.classList.toggle('is-active', active);
+        });
+        if (authorSelect) authorSelect.value = '';
+        updateCategories();
+        scrollToFilters();
+      };
+
+      badge.addEventListener('click', filterByCategory);
+      badge.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        filterByCategory(event);
+      });
+    });
+
+    if (authorSelect) {
+      const authorOptions = new Set(
+        Array.from(authorSelect.options).map((option) => option.value).filter(Boolean),
+      );
+      document.querySelectorAll<HTMLElement>('[data-author-filter-trigger]').forEach((badge) => {
+        if (badge.dataset.authorFilterReady === 'true') return;
+        const author = badge.textContent?.trim() ?? '';
+        if (!authorOptions.has(author)) return;
+
+        badge.dataset.authorFilterReady = 'true';
+        badge.setAttribute('role', 'button');
+        badge.setAttribute('tabindex', '0');
+        badge.setAttribute('aria-label', `Lọc bài viết của ${author}`);
+
+        const filterByAuthor = (event: Event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const currentAuthor = badge.textContent?.trim() ?? '';
+          if (!authorOptions.has(currentAuthor)) return;
+          authorSelect.value = currentAuthor;
+          updateCategories();
+          scrollToFilters();
+        };
+
+        badge.addEventListener('click', filterByAuthor);
+        badge.addEventListener('keydown', (event) => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          filterByAuthor(event);
+        });
+      });
+    }
+
+    toggleAllButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const allCategoriesVisible = toggles.every(
+          (toggle) => toggle.getAttribute('aria-pressed') === 'true',
+        );
+        const nextState = !allCategoriesVisible;
+        toggles.forEach((toggle) => {
+          toggle.setAttribute('aria-pressed', String(nextState));
+          toggle.classList.toggle('is-active', nextState);
+        });
+        if (authorSelect) authorSelect.value = '';
+        updateCategories();
+      });
+    });
+
+    showAllButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        toggles.forEach((toggle) => {
+          toggle.setAttribute('aria-pressed', 'true');
+          toggle.classList.add('is-active');
+        });
+        if (authorSelect) authorSelect.value = '';
+        updateCategories();
+      });
+    });
+
+    const railSections = combinedSection ? [combinedSection] : sections;
+    railSections.forEach((section) => {
+      const rail = section.querySelector<HTMLElement>('[data-spirit-rail]');
+      const previous = section.querySelector<HTMLButtonElement>('[data-spirit-shift="prev"]');
+      const next = section.querySelector<HTMLButtonElement>('[data-spirit-shift="next"]');
+      if (!rail || !previous || !next) return;
+
+      const updateShiftButtons = () => {
+        const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+        previous.disabled = rail.scrollLeft <= 3;
+        next.disabled = rail.scrollLeft >= maxScroll - 3;
+      };
+      const shift = (direction: number) => {
+        if (window.matchMedia('(max-width: 760px)').matches) {
+          const cards = Array.from(
+            rail.querySelectorAll<HTMLElement>('.spirit-gallery-card:not([hidden])'),
+          );
+          if (cards.length === 0) return;
+
+          const currentLeft = rail.scrollLeft;
+          const targetCard = direction > 0
+            ? cards.find((card) => card.offsetLeft > currentLeft + 4) ?? cards[cards.length - 1]
+            : [...cards].reverse().find((card) => card.offsetLeft < currentLeft - 4) ?? cards[0];
+          const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+
+          rail.scrollTo({
+            left: Math.min(maxScroll, Math.max(0, targetCard.offsetLeft)),
+            behavior: 'smooth',
+          });
+          return;
+        }
+
+        rail.scrollBy({
+          left: direction * Math.max(280, rail.clientWidth * 0.78),
+          behavior: 'smooth',
+        });
+      };
+
+      previous.addEventListener('click', () => shift(-1));
+      next.addEventListener('click', () => shift(1));
+      rail.addEventListener('scroll', updateShiftButtons, { passive: true });
+      window.addEventListener('resize', updateShiftButtons, { passive: true });
+      updateShiftButtons();
+    });
+
+    updateCategories();
+  };
+
+  const initializeCategoryGalleries = () => {
+    document.querySelectorAll<HTMLElement>('[data-category-gallery]').forEach(initializeCategoryGallery);
+  };
+
+  initializeCategoryGalleries();
+  document.addEventListener('astro:page-load', initializeCategoryGalleries);
+</script>
+
+<style>
+  .spirit-library { width:min(100% - 3rem,112rem); margin:0 auto; padding-bottom:7rem; }
+  .spirit-filter-deck { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem 1.8rem; margin-bottom:4rem; scroll-margin-top:clamp(7rem,12vh,10rem); }
+  .spirit-filter-list { display:flex; min-width:0; align-items:center; justify-content:flex-start; flex:1 1 auto; flex-wrap:wrap; gap:.48rem; }
+  .spirit-filter-list button { display:inline-flex; align-items:center; gap:.55rem; min-height:3.7rem; padding:.75rem 1.1rem; border:0; border-radius:.42rem; color:var(--ink-cream-soft); background:transparent; font:600 1.05rem/1 var(--font-ui); cursor:pointer; transition:color .18s ease,background-color .18s ease; }
+  .spirit-filter-list button.is-active { color:var(--accent); background:var(--bg-card-img); }
+  .spirit-filter-list button.article-category-badge,
+  .spirit-filter-list button.article-category-badge.is-active {
+    width:fit-content !important;
+    max-width:none !important;
+    min-height:2.5rem;
+    padding:.42rem .8rem;
+    color:var(--category-ink);
+    background:var(--category-bg);
+    font-size:1rem !important;
+    font-weight:500;
+    line-height:1.2;
+    overflow-wrap:normal;
+    white-space:nowrap !important;
+  }
+  .spirit-filter-list button.article-category-badge[aria-pressed='false'] {
+    border:1px solid var(--category-border,var(--category-bg));
+    color:color-mix(in srgb,var(--category-idle,var(--category-bg)) 65%,#fff);
+    background:var(--bg-main);
+    opacity:1;
+  }
+  :global([data-theme="light"]) .spirit-filter-list button.article-category-badge[aria-pressed='false'] {
+    color:color-mix(in srgb,var(--category-idle,var(--category-bg)) 56%,#000);
+    background:#fffdf8;
+  }
+  .spirit-filter-list button.article-category-badge span { line-height:1.25; white-space:nowrap; }
+  .spirit-filter-list button.article-category-badge.is-long {
+    width:fit-content !important;
+    max-width:none !important;
+    min-height:2.5rem !important;
+    padding:.42rem .8rem !important;
+    overflow-wrap:normal;
+    white-space:nowrap !important;
+  }
+  .spirit-filter-list button:hover { color:var(--accent); background:var(--bg-card-img); }
+  .spirit-filter-list button.article-category-badge:hover {
+    color:var(--category-ink);
+    background:var(--category-bg);
+  }
+  .spirit-filter-list button:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  .spirit-filter-list .spirit-filter-all,
+  .spirit-filter-list .spirit-filter-all.is-complete {
+    min-height:2.5rem;
+    margin-inline-end:.7rem;
+    padding:.42rem .8rem;
+    color:var(--ink-cream);
+    background:var(--bg-card-img);
+  }
+  .spirit-author-filter-list { flex:0 1 28rem; min-width:min(100%,25rem); margin-left:auto; column-gap:1rem; }
+  .spirit-author-filter-list > span {
+    color:var(--ink-cream-soft);
+    font-weight:500;
+    letter-spacing:.025em;
+    text-transform:none;
+  }
+  .spirit-author-filter-list select {
+    width:min(19rem,50vw);
+    min-height:3.7rem;
+    border:0 !important;
+    border-radius:.42rem;
+    color:var(--ink-cream);
+    background-color:var(--bg-card-img) !important;
+    font-size:1.05rem;
+  }
+  :global([data-theme="light"]) .spirit-filter-list .spirit-filter-all,
+  :global([data-theme="light"]) .spirit-filter-list .spirit-filter-all.is-complete,
+  :global([data-theme="light"]) .spirit-author-filter-list select {
+    color:#294838;
+    background-color:#e1e8e1 !important;
+  }
+  :global([data-theme="light"]) .spirit-author-filter-list > span { color:#52665b; }
+  .spirit-category-stack { display:grid; min-width:0; gap:6rem; }
+  .spirit-category { min-width:0; }
+  .spirit-category[hidden] { display:none; }
+  .spirit-category-heading { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; margin-bottom:1.5rem; }
+  .spirit-category-heading .idx-section-heading { margin-bottom:0; }
+  .spirit-shift-controls { display:flex; gap:.4rem; }
+  .spirit-shift-controls button { display:grid; width:3.8rem; height:3.8rem; place-items:center; padding:0; border:0; border-radius:50%; color:var(--accent); background:var(--bg-card); cursor:pointer; }
+  .spirit-shift-controls button:hover:not(:disabled) { color:var(--accent); background:var(--bg-card-img); }
+  :global([data-theme="light"]) .spirit-shift-controls button {
+    color:#fff;
+    background:color-mix(in srgb,var(--accent-deep) 28%,transparent);
+    backdrop-filter:blur(3px);
+  }
+  :global([data-theme="light"]) .spirit-shift-controls button:hover:not(:disabled),
+  :global([data-theme="light"]) .spirit-shift-controls button:focus-visible:not(:disabled) {
+    color:#fff;
+    background:color-mix(in srgb,var(--accent-deep) 42%,transparent);
+  }
+  .spirit-shift-controls button:disabled { opacity:.25; cursor:default; }
+  .spirit-shift-controls svg { width:1.65rem; fill:none; stroke:currentColor; stroke-width:1.7; }
+  .spirit-rail-frame { position:relative; min-width:0; }
+  .spirit-rail { display:grid; min-width:0; grid-auto-flow:column; grid-auto-columns:clamp(40rem,44vw,52rem); gap:1.4rem; overflow-x:auto; overflow-y:hidden; padding:.2rem .1rem 1rem; scroll-behavior:smooth; scroll-snap-type:x mandatory; scrollbar-width:thin; scrollbar-color:var(--border-subtle) transparent; }
+  .spirit-rail:focus-visible { outline:2px solid var(--border-accent); outline-offset:.35rem; }
+  .spirit-gallery-card { position:relative; scroll-snap-align:start; scroll-snap-stop:always; }
+  .spirit-gallery-card > a { display:flex; height:100%; min-height:38rem; flex-direction:column; overflow:hidden; border-radius:.48rem; color:inherit; background:var(--bg-card); text-decoration:none; transition:transform .22s ease; }
+  .spirit-gallery-thumb { position:relative; display:block; flex:0 0 auto; aspect-ratio:16/9; overflow:hidden; background:var(--bg-card-img); }
+  .spirit-gallery-thumb img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .38s ease; }
+  .spirit-gallery-thumb.is-placeholder { background:var(--bg-card-img); }
+  .spirit-gallery-thumb.is-placeholder > span { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:1.5rem 2rem; }
+  .spirit-gallery-thumb.is-placeholder i { color:var(--deco-num); font:italic 700 clamp(5rem,10vw,8rem)/1 var(--font-display); }
+  .spirit-gallery-thumb.is-placeholder strong { position:absolute; z-index:1; right:2rem; left:2rem; color:var(--ink-cream); font:600 clamp(1.45rem,1.15rem + .45vw,1.85rem)/1.3 var(--font-display); text-align:center; text-wrap:balance; }
+  .spirit-gallery-thumb.is-placeholder b { position:absolute; right:1rem; bottom:.75rem; color:var(--gold-dim); font:700 .72rem/1 var(--font-ui); letter-spacing:.12em; }
+  .spirit-gallery-copy { display:flex; min-height:0; flex:1; flex-direction:column; padding:1.55rem 1.7rem 1.6rem; }
+  .spirit-gallery-copy > h3 {
+    display:-webkit-box;
+    margin:0 0 .75rem;
+    overflow:hidden;
+    color:var(--ink-cream);
+    font:600 1.55rem/1.35 var(--font-display);
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+  .spirit-gallery-copy > p { display:-webkit-box; margin:0 0 1.5rem; overflow:hidden; color:var(--ink-cream-soft); font:400 1.45rem/1.65 var(--font-body); -webkit-box-orient:vertical; -webkit-line-clamp:3; }
+  :global([data-theme="light"]) .show-titles .spirit-gallery-copy > h3 { color:var(--accent); }
+  .spirit-gallery-open { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:auto; color:var(--accent); font:650 1.02rem/1 var(--font-ui); letter-spacing:.07em; text-transform:uppercase; }
+  .spirit-gallery-open svg { width:1.55rem; fill:none; stroke:currentColor; stroke-width:1.6; transition:transform .2s ease; }
+  .spirit-gallery-card > a:hover { transform:translateY(-.2rem); }
+  .spirit-gallery-card > a:hover img { transform:scale(1.035); }
+  .spirit-gallery-card > a:hover .spirit-gallery-open svg { transform:translateX(.25rem); }
+  .spirit-all-hidden { padding:4rem 1rem; color:var(--ink-cream-soft); text-align:center; }
+  .spirit-all-hidden strong { display:block; margin-bottom:1rem; font:600 1.25rem var(--font-display); }
+  .spirit-all-hidden button { padding:.7rem 1rem; border:0; border-radius:.35rem; color:var(--accent); background:var(--bg-card-img); font:600 .82rem var(--font-ui); cursor:pointer; }
+  @media (max-width:760px) {
+    .spirit-library { width:min(100% - 1.5rem,112rem); padding-bottom:5rem; }
+    .spirit-filter-deck { align-items:stretch; flex-direction:column; flex-wrap:nowrap; gap:1.2rem; margin-bottom:3rem; }
+    .spirit-filter-list {
+      justify-content:flex-start;
+      flex-wrap:wrap;
+      gap:.55rem;
+      overflow:visible;
+      padding:.1rem 0 .25rem;
+    }
+    .spirit-filter-list button { flex:0 0 auto; }
+    .spirit-author-filter-list { width:100%; min-width:0; flex:none; margin-left:0; }
+    .spirit-author-filter-list select { width:100%; }
+    .spirit-category-stack { gap:4rem; }
+    .spirit-category-heading { align-items:flex-start; gap:1rem; }
+    .spirit-category-heading > div { flex:1; min-width:0; }
+    .spirit-shift-controls button { width:3.45rem; height:3.45rem; }
+    .spirit-rail-frame { margin-right:-.75rem; }
+    .spirit-rail { grid-auto-columns:84vw; gap:.9rem; padding-right:.75rem; }
+    .spirit-gallery-card > a { min-height:33.5rem; }
+    .spirit-gallery-copy { padding:1.3rem 1.45rem 1.35rem; }
+    .spirit-gallery-copy { min-width:0; overflow:hidden; }
+    .spirit-gallery-copy > p {
+      max-width:100%;
+      max-height:3.3em;
+      overflow:hidden;
+      overflow-wrap:anywhere;
+      font-size:1.42rem;
+      margin-bottom:1rem;
+      -webkit-line-clamp:2;
+    }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .spirit-rail { scroll-behavior:auto; }
+    .spirit-gallery-card > a,.spirit-gallery-thumb img,.spirit-gallery-open svg { transition:none; }
+  }
+</style>

@@ -1,0 +1,439 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Banner from '../components/Banner.astro';
+import ProseImageLightbox from '../components/ProseImageLightbox.astro';
+import { withBase } from '../lib/site-path';
+
+// Nạp NGUYÊN BẢN css gốc để giữ đúng thiết kế cũ
+import '../styles/base.css';
+import '../styles/layout.css';
+import '../styles/components.css';
+import '../styles/home-layout.css';
+import '../styles/nav-mobile.css';
+import '../styles/listings.css';
+import '../styles/articles.css';
+// Lớp mỏng chỉ để style phần thân Markdown cho khớp giao diện gốc
+import '../styles/reader.css';
+// Đồng bộ hoá toàn site (nạp SAU CÙNG để thắng mọi luật trên)
+import '../styles/overrides.css';
+
+const {
+  title,
+  description = 'Thư viện số về Thánh Augustinô và Dòng Augustinian — sách, bài viết thần học, triết học và linh đạo Công giáo.',
+  image,
+  type = 'website',
+  bodyClass = 'no-sidebar',
+  banner = null,
+} = Astro.props;
+
+const pageTitle = title ? `OSA Việt Nam | ${title}` : 'OSA Việt Nam | Trang Chủ';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site) : undefined;
+const showVocationTail = title !== 'Admin';
+---
+<!doctype html>
+<html lang="vi" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Khởi tạo theme trước khi render để tránh flash (chạy đồng bộ) -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('augusinh-theme-v2');
+          if (t === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }());
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- ====== SEO: Open Graph + Twitter (mới thêm) ====== -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="OSA Việt Nam" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+
+    <!-- ====== SEO: dữ liệu có cấu trúc JSON-LD ====== -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': type === 'article' ? 'Article' : 'WebSite',
+      name: pageTitle,
+      headline: title ?? 'OSA Việt Nam',
+      description,
+      url: canonical.toString(),
+      inLanguage: 'vi',
+      ...(ogImage ? { image: ogImage.toString() } : {}),
+    })} />
+
+    <!-- ====== Font ======
+         Be Vietnam Pro  → CHỈ dùng ở thanh menu
+         Playfair Display → tiêu đề (heading), hỗ trợ dấu tiếng Việt tốt
+         Merriweather     → thân bài (body), tối ưu đọc dài tiếng Việt
+         Montserrat       → câu trích trong banner (giữ như gốc) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@400;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..700;1,18..144,300..700&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body class={bodyClass}>
+    <div class="site-wrapper">
+      <div id="main">
+        <Navbar />
+        {banner && <Banner config={banner} />}
+        <slot name="full-bleed" />
+        <main class="content">
+          <slot />
+        </main>
+        <Footer showVocationTail={showVocationTail} />
+      </div>
+    </div>
+    <ProseImageLightbox />
+    {bodyClass.includes('page-news-detail') && <button id="newsBackToggle" class="news-back-float" type="button" aria-label="Quay lại trang Tin tức">←</button>}
+    <button id="topBtn" type="button" aria-label="Lên đầu trang">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6.5 10.5 12 5l5.5 5.5M12 5v14" />
+      </svg>
+    </button>
+
+    <script>
+      import { withBase } from '../lib/site-path';
+
+      const topBtn = document.getElementById('topBtn');
+      window.addEventListener('scroll', () => {
+        topBtn?.classList.toggle('show', window.scrollY > 500);
+        document.getElementById('newsBackToggle')?.classList.toggle('show', window.scrollY > 500);
+      });
+      topBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'auto' }));
+      document.getElementById('newsBackToggle')?.addEventListener('click', () => { window.location.href = withBase('/tin-tuc/'); });
+    </script>
+
+    <script>
+      // TOC luôn bắt đầu ở trạng thái thu gọn, kể cả khi trình duyệt khôi phục DOM từ bfcache.
+      (() => {
+        const collapseAllTocs = () => {
+          document.querySelectorAll('.article-shell.toc-open').forEach((shell) => shell.classList.remove('toc-open'));
+          document.querySelectorAll('.toc-trigger[aria-expanded="true"]').forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+          document.querySelectorAll('#dftPanel.open, #bftPanel.open').forEach((panel) => panel.classList.remove('open'));
+          document.querySelectorAll('#dftBtn[aria-expanded="true"], #bftBtn[aria-expanded="true"]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+        };
+        collapseAllTocs();
+        window.addEventListener('pageshow', collapseAllTocs);
+      })();
+    </script>
+
+    <script>
+      // Select trong filter chung: click/chạm xong không giữ viền focus; keyboard vẫn giữ focus-visible.
+      (() => {
+        let pointerSelect: HTMLSelectElement | null = null;
+        const selector = '.shared-filter-control select, .shared-filter-select';
+        document.addEventListener('pointerdown', (event) => {
+          const target = event.target instanceof Element ? event.target.closest(selector) : null;
+          pointerSelect = target instanceof HTMLSelectElement ? target : null;
+        });
+        document.addEventListener('change', (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLSelectElement) || target !== pointerSelect) return;
+          requestAnimationFrame(() => target.blur());
+          pointerSelect = null;
+        });
+      })();
+    </script>
+
+    <!-- Scroll qua banner: article-header cho trang đọc, main.content cho trang còn lại -->
+    <script>
+      (function () {
+        // Global: back/forward → để trình duyệt tự khôi phục vị trí cũ (scrollRestoration = auto).
+        if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+        const header  = document.querySelector('.article-header, .ks-masthead');
+        const content = document.querySelector('main.content');
+        const target  = header || content;
+        if (!target) return;
+        function isBackForward() {
+          const nav = performance.getEntriesByType('navigation')[0];
+          return !!(nav && nav.type === 'back_forward');
+        }
+        function go() {
+          const navH = 64;
+          const y = target.getBoundingClientRect().top + window.scrollY - navH - (header ? 12 : 0);
+          if (Math.abs(window.scrollY - y) > 8) window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        }
+        function schedule() {
+          // Back/forward → bỏ qua auto-scroll, giữ nguyên vị trí trình duyệt khôi phục.
+          if (isBackForward()) return;
+          // News article pages open on their full-bleed hero instead of skipping it.
+          if (document.body.classList.contains('page-news-detail')) return;
+          // Trang tự quản lý scroll (vd: on-goi với banner full-bleed) → bỏ qua.
+          if (document.body.dataset.noAutoscroll) return;
+          requestAnimationFrame(function () { setTimeout(go, 80); });
+        }
+        if (document.readyState === 'complete') schedule();
+        else window.addEventListener('load', schedule);
+        // bfcache: đã được trình duyệt khôi phục vị trí → không auto-scroll.
+        window.addEventListener('pageshow', function (e) { if (!e.persisted) schedule(); });
+      })();
+
+      // Back-link trong header: dùng history.back() để khôi phục scroll position
+      document.querySelectorAll('.back-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          if (history.length > 1) {
+            e.preventDefault();
+            history.back();
+          }
+        });
+      });
+    </script>
+
+    <!-- Điều hướng footnote toàn site: cuộn có trừ chiều cao navbar + highlight 2 chiều -->
+    <script>
+      (function () {
+        var _cleanup = null;
+        function clearFlash() { if (_cleanup) { _cleanup(); _cleanup = null; } }
+
+        // Offset = navbar + toàn bộ sticky stack của trang (book bar + spacer) + đệm.
+        // Trước đây chỉ tính .tt-book-nav nên footnote bị dừng phía sau spacer của Tự Thuật.
+        function navOffset() {
+          if (typeof window.__ttScrollOffset === 'function') return window.__ttScrollOffset();
+          var navbar = document.querySelector('.navbar');
+          var navbarRect = navbar && navbar.getBoundingClientRect();
+          var off = Math.max(0, navbarRect ? navbarRect.bottom : 112);
+          var stickyStack = document.querySelector('.tt-book-sticky');
+          if (stickyStack) {
+            var stackRect = stickyStack.getBoundingClientRect();
+            off += stackRect.height;
+          } else {
+            var sub = document.querySelector('.tt-book-nav');
+            if (sub) off += sub.getBoundingClientRect().height;
+          }
+          return Math.ceil(off + 14);
+        }
+
+        function scrollToTarget(el) {
+          function align() {
+            var top = el.getBoundingClientRect().top + window.scrollY - navOffset();
+            window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+          }
+          // Căn hai lần: lần đầu sau layout, lần hai sau sticky/font ổn định.
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              align();
+              setTimeout(align, 120);
+            });
+          });
+        }
+
+        // Nháy đúng số [^n] khi ↩ về thân bài
+        function flashRef(target) {
+          clearFlash();
+          var el = target.tagName === 'A' ? target : (target.querySelector('a') || target);
+          el.classList.remove('fnref-flash');
+          void el.offsetWidth;
+          el.classList.add('fnref-flash');
+          var t = setTimeout(function () { el.classList.remove('fnref-flash'); }, 2600);
+          _cleanup = function () { clearTimeout(t); el.classList.remove('fnref-flash'); };
+        }
+
+        // Nháy định nghĩa footnote khi bấm số [^n] nhảy xuống
+        function flashDef(target) {
+          clearFlash();
+          var li = target.tagName === 'LI' ? target : target.closest('li');
+          if (!li) return;
+          li.classList.remove('fn-target-flash');
+          void li.offsetWidth;
+          li.classList.add('fn-target-flash');
+          var t = setTimeout(function () { li.classList.remove('fn-target-flash'); }, 2600);
+          _cleanup = function () { clearTimeout(t); li.classList.remove('fn-target-flash'); };
+        }
+
+        function isFootnoteId(id) {
+          return /^(?:user-content-)?fn(?:ref)?(?:-|$)/.test(id);
+        }
+
+        function isReferenceId(id) {
+          return /^(?:user-content-)?fnref(?:-|$)/.test(id);
+        }
+
+        document.addEventListener('click', function (e) {
+          var link = e.target.closest && e.target.closest([
+            'a[data-footnote-ref]',
+            'a[data-footnote-backref]',
+            'a[href^="#user-content-fn"]',
+            'a[href^="#fn-"]',
+            'a[href^="#fnref-"]'
+          ].join(','));
+          if (!link) return;
+          var id = decodeURIComponent(link.getAttribute('href').slice(1));
+          if (!isFootnoteId(id)) return;
+          var target = document.getElementById(id);
+          if (!target) return;
+          e.preventDefault();
+          scrollToTarget(target);
+          history.replaceState(null, '', '#' + id);
+          if (isReferenceId(id)) flashRef(target);
+          else flashDef(target);
+        });
+
+
+        function handleFootnoteHash() {
+          var id = decodeURIComponent(location.hash.replace(/^#/, ''));
+          if (!id || !isFootnoteId(id)) return;
+          var target = document.getElementById(id);
+          if (!target) return;
+          scrollToTarget(target);
+          if (isReferenceId(id)) flashRef(target);
+          else flashDef(target);
+        }
+        window.addEventListener('hashchange', handleFootnoteHash);
+        window.addEventListener('load', function () { setTimeout(handleFootnoteHash, 140); }, { once: true });
+      })();
+    </script>
+
+    <!-- ── Banner inline-edit (explicit admin preview only) ── -->
+    <div id="banner-oe-bar" hidden style="position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.8rem;background:rgba(16,27,51,0.97);border:1px solid rgba(233,193,118,0.35);border-radius:10px;padding:.55rem 1.1rem;box-shadow:0 4px 20px rgba(0,0,0,.5);font-family:'Be Vietnam Pro',system-ui,sans-serif;font-size:1.2rem;">
+      <span style="color:rgba(233,193,118,.7);letter-spacing:.06em;text-transform:uppercase;">Banner</span>
+      <button id="banner-oe-edit" style="background:rgba(233,193,118,.12);border:1px solid rgba(233,193,118,.3);border-radius:6px;color:#e9c176;padding:.3rem .85rem;cursor:pointer;">Sửa</button>
+      <span id="banner-oe-actions" hidden style="display:flex;gap:.6rem;align-items:center;">
+        <button id="banner-oe-save"   style="background:#1a5e3c;border:none;border-radius:6px;color:#fff;padding:.3rem .85rem;cursor:pointer;">Lưu</button>
+        <button id="banner-oe-cancel" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#c9bfa9;padding:.3rem .85rem;cursor:pointer;">Huỷ</button>
+        <span id="banner-oe-msg" style="color:#e9c176;min-width:4rem;"></span>
+      </span>
+    </div>
+    <script>
+    (function () {
+      const ADMIN = 'http://localhost:4322';
+      const bar     = document.getElementById('banner-oe-bar') as HTMLElement | null;
+      const editBtn = document.getElementById('banner-oe-edit') as HTMLButtonElement | null;
+      const actions = document.getElementById('banner-oe-actions') as HTMLElement | null;
+      const saveBtn = document.getElementById('banner-oe-save') as HTMLButtonElement | null;
+      const cancelBtn = document.getElementById('banner-oe-cancel') as HTMLButtonElement | null;
+      const msg     = document.getElementById('banner-oe-msg') as HTMLElement | null;
+      const bc      = document.querySelector<HTMLElement>('.banner-container[data-banner-key]');
+      // Never expose editing controls to ordinary visitors. Admin preview is
+      // opt-in via ?admin=1, so merely running the local admin API is not
+      // enough to make the toolbar appear in a normal browsing session.
+      const adminMode = new URLSearchParams(window.location.search).get('admin') === '1';
+      if (!adminMode) { bar?.remove(); return; }
+      if (!bc) return; // trang không có banner chuẩn → bỏ qua
+
+      const bannerKey = bc.dataset.bannerKey!;
+
+      // Phát hiện admin server
+      fetch(ADMIN + '/api/banners').then(r => {
+        if (r.ok && bar) bar.removeAttribute('hidden');
+      }).catch(() => {});
+
+      const origValues = new Map<HTMLElement, string>();
+
+      function enterEdit() {
+        document.querySelectorAll<HTMLElement>('[data-banner-field]').forEach(el => {
+          origValues.set(el, el.innerHTML);
+          el.setAttribute('contenteditable', 'true');
+          el.style.outline = '1.5px dashed rgba(233,193,118,0.5)';
+          el.style.minWidth = '4rem';
+        });
+        editBtn?.setAttribute('hidden', '');
+        actions?.removeAttribute('hidden');
+        if (msg) msg.textContent = '';
+      }
+
+      function exitEdit() {
+        document.querySelectorAll<HTMLElement>('[data-banner-field]').forEach(el => {
+          el.removeAttribute('contenteditable');
+          el.style.outline = '';
+          el.style.minWidth = '';
+        });
+        editBtn?.removeAttribute('hidden');
+        actions?.setAttribute('hidden', '');
+      }
+
+      function cancelEdit() {
+        document.querySelectorAll<HTMLElement>('[data-banner-field]').forEach(el => {
+          const orig = origValues.get(el);
+          if (orig !== undefined) el.innerHTML = orig;
+        });
+        exitEdit();
+      }
+
+      async function saveEdit() {
+        if (msg) msg.textContent = 'Đang lưu…';
+        try {
+          const r0 = await fetch(ADMIN + '/api/banners');
+          if (!r0.ok) throw new Error();
+          const allBanners = await r0.json();
+
+          // Xây lại dữ liệu cho bannerKey
+          const variants: { quoteText: string; quoteCite: string }[] = [];
+          document.querySelectorAll<HTMLElement>('[data-banner-field="quoteText"]').forEach(el => {
+            const vi = +(el.dataset.bannerVi ?? 0);
+            if (!variants[vi]) variants[vi] = { quoteText: '', quoteCite: '' };
+            variants[vi].quoteText = el.textContent?.trim() ?? '';
+          });
+          document.querySelectorAll<HTMLElement>('[data-banner-field="quoteCite"]').forEach(el => {
+            const vi = +(el.dataset.bannerVi ?? 0);
+            if (!variants[vi]) variants[vi] = { quoteText: '', quoteCite: '' };
+            variants[vi].quoteCite = el.innerHTML.trim();
+          });
+
+          // Merge vào allBanners giữ nguyên imageUrl/altText
+          const existing = allBanners[bannerKey];
+          if (Array.isArray(existing)) {
+            variants.forEach((v, i) => {
+              if (existing[i]) { existing[i].quoteText = v.quoteText; existing[i].quoteCite = v.quoteCite; }
+            });
+          } else if (existing) {
+            existing.quoteText = variants[0]?.quoteText ?? existing.quoteText;
+            existing.quoteCite = variants[0]?.quoteCite ?? existing.quoteCite;
+          }
+
+          const r1 = await fetch(ADMIN + '/api/banners', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(allBanners),
+          });
+          if (r1.ok) {
+            if (msg) msg.textContent = 'Đã lưu!';
+            origValues.clear();
+            setTimeout(exitEdit, 900);
+          } else throw new Error();
+        } catch {
+          if (msg) msg.textContent = 'Lỗi lưu';
+        }
+      }
+
+      editBtn?.addEventListener('click', enterEdit);
+      cancelBtn?.addEventListener('click', cancelEdit);
+      saveBtn?.addEventListener('click', saveEdit);
+    })();
+    </script>
+
+    <!-- Swap emblem SVG ↔ transparent color emblem theo theme; CSS giữ khung cố định -->
+    <script is:inline define:vars={{ emblemSvg: withBase('/images/emblem.svg'), emblemColor: withBase('/images/emblem-color-transparent.png') }}>
+      (function () {
+        var SVG   = emblemSvg;
+        var COLOR = emblemColor;
+        function syncEmblems() {
+          var light = document.documentElement.getAttribute('data-theme') === 'light';
+          document.querySelectorAll('[data-emblem]').forEach(function (img) {
+            img.setAttribute('src', light ? COLOR : SVG);
+          });
+        }
+        syncEmblems();
+        new MutationObserver(syncEmblems).observe(document.documentElement, {
+          attributes: true, attributeFilter: ['data-theme']
+        });
+      })();
+    </script>
+  </body>
+</html>

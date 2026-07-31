@@ -1,0 +1,265 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import ArticleProseMeta from '../../components/ArticleProseMeta.astro';
+import { articleCategoryTone, articleCategoryVariant } from '../../utils/article-category';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const articles = await getCollection(
+    'bai-viet',
+    ({ id, data }) =>
+      (id.startsWith('triet-hoc/') || id.startsWith('than-hoc/'))
+      && !data.draft,
+  );
+
+  return articles.map((entry) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      related: articles
+        .filter((article) => article.id !== entry.id)
+        .sort((a, b) => {
+          const sameSubcategory = Number(b.data.subcategory === entry.data.subcategory)
+            - Number(a.data.subcategory === entry.data.subcategory);
+          if (sameSubcategory !== 0) return sameSubcategory;
+          const sameDomain = Number(b.data.category === entry.data.category)
+            - Number(a.data.category === entry.data.category);
+          if (sameDomain !== 0) return sameDomain;
+          return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+        })
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { entry, related } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const cover = d.image ?? d.heroImage;
+const socialImage = cover
+  ? (await getImage({ src: cover, width: 1200, height: 630, fit: 'cover' })).src
+  : undefined;
+const articleHref = (id: string) => `/bai-viet/${id}/`;
+const domainKey = entry.id.split('/')[0];
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.excerpt}
+  image={socialImage}
+  type="article"
+  bodyClass="no-sidebar page-spirit-article page-scholar-article"
+>
+  <main class="spirit-reader scholar-reader">
+    <ArticleHero
+      title={d.title}
+      category={d.subcategory ?? d.category ?? 'Triết – Thần'}
+      subtitle={d.subtitle}
+      author={d.author}
+      image={cover}
+    />
+
+    <nav class="spirit-breadcrumb" aria-label="Đường dẫn">
+      <a href="/bai-viet/">Triết – Thần</a>
+      <span aria-hidden="true">/</span>
+      <a href={`/bai-viet/#${domainKey}`}>{d.category}</a>
+      <span aria-hidden="true">/</span>
+      <span
+        class:list={['article-category-badge', { 'is-long': (d.subcategory ?? d.category ?? '').length > 18 }]}
+        data-category-tone={articleCategoryTone(d.subcategory ?? d.category)}
+        data-category-variant={articleCategoryVariant(d.subcategory ?? d.category)}
+      >
+        {d.subcategory ?? d.category}
+      </span>
+    </nav>
+
+    <div class="article-shell spirit-reader-shell">
+      <article class="prose spirit-reader-prose">
+        <ArticleProseMeta author={d.author} />
+        <Content />
+      </article>
+    </div>
+
+    {related.length > 0 && (
+      <section class="spirit-related" aria-labelledby="spirit-related-title">
+        <header class="idx-section-heading">
+          <h2 id="spirit-related-title">Đọc Tiếp</h2>
+        </header>
+        <div>
+          {related.map((article) => (
+            <a href={articleHref(article.id)} aria-label={`Đọc ${article.data.title}`}>
+              {(article.data.image || article.data.heroImage) ? (
+                <figure>
+                  <Image
+                    src={article.data.image ?? article.data.heroImage!}
+                    alt=""
+                    width={720}
+                    height={405}
+                    loading="lazy"
+                  />
+                </figure>
+              ) : (
+                <figure class="is-placeholder" aria-hidden="true"><span>A</span></figure>
+              )}
+              <small
+                class:list={['article-category-badge', { 'is-long': (article.data.subcategory ?? article.data.category ?? '').length > 18 }]}
+                data-category-tone={articleCategoryTone(article.data.subcategory ?? article.data.category)}
+                data-category-variant={articleCategoryVariant(article.data.subcategory ?? article.data.category)}
+              >
+                {article.data.subcategory ?? article.data.category}
+              </small>
+              <h3>{article.data.title}</h3>
+              <span>
+                {article.data.author ?? 'Ban Biên Tập'}
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m7 4 6 6-6 6"></path>
+                </svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>
+
+<style>
+  .spirit-reader {
+    width:min(100% - 3rem,112rem);
+    margin:0 auto;
+    padding:0 0 7rem;
+  }
+  .spirit-breadcrumb {
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:.8rem;
+    margin:0 0 3rem;
+    color:var(--ink-cream-soft);
+    font:500 1.2rem/1.45 var(--font-ui);
+  }
+  .spirit-breadcrumb a {
+    color:inherit;
+    text-decoration:none;
+  }
+  .spirit-breadcrumb a:hover {
+    color:var(--gold);
+  }
+  .spirit-breadcrumb .article-category-badge {
+    font-size:1.02rem;
+  }
+  .spirit-reader-shell {
+    margin:0 auto;
+    padding-top:.5rem;
+  }
+  .spirit-related {
+    width:min(100%,106rem);
+    margin:6rem auto 0;
+  }
+  .spirit-related > .idx-section-heading {
+    margin-bottom:1.7rem;
+  }
+  .spirit-related > div {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(1.2rem,2vw,2rem);
+  }
+  .spirit-related a {
+    display:flex;
+    min-width:0;
+    flex-direction:column;
+    color:inherit;
+    text-decoration:none;
+  }
+  .spirit-related figure {
+    display:grid;
+    aspect-ratio:16/9;
+    place-items:center;
+    margin:0 0 1.2rem;
+    overflow:hidden;
+    background:var(--bg-card);
+  }
+  .spirit-related figure :global(img) {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .28s ease,opacity .28s ease;
+  }
+  .spirit-related figure.is-placeholder span {
+    color:var(--deco-num);
+    font:700 4rem/1 var(--font-display);
+  }
+  .spirit-related a:hover figure :global(img) {
+    opacity:.86;
+    transform:scale(1.025);
+  }
+  .spirit-related small {
+    margin-bottom:.85rem;
+  }
+  .spirit-related h3 {
+    margin:0;
+    color:var(--ink-cream);
+    font:600 1.55rem/1.38 var(--font-display);
+  }
+  .spirit-related a > span {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    margin-top:.9rem;
+    color:var(--ink-cream-soft);
+    font:500 1.05rem/1.35 var(--font-ui);
+  }
+  .spirit-related svg {
+    width:1.45rem;
+    height:1.45rem;
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  :global(html[data-theme='light']) .spirit-breadcrumb {
+    color:#5f6c64;
+  }
+  :global(html[data-theme='light']) .spirit-breadcrumb a:hover {
+    color:var(--accent);
+  }
+  :global(html[data-theme='light']) .spirit-related h3 {
+    color:var(--accent);
+  }
+  :global(html[data-theme='light']) .spirit-related a > span {
+    color:#68736c;
+  }
+  @media (max-width:700px) {
+    .spirit-reader {
+      width:min(100% - 1.5rem,112rem);
+    }
+    .spirit-breadcrumb {
+      gap:.6rem;
+      margin-bottom:2.4rem;
+      font-size:1.05rem;
+    }
+    .spirit-breadcrumb .article-category-badge {
+      padding:.3rem .55rem;
+      font-size:.9rem;
+    }
+    .spirit-related {
+      margin-top:4rem;
+    }
+    .spirit-related > .idx-section-heading {
+      margin-bottom:1.35rem;
+    }
+    .spirit-related > div {
+      grid-template-columns:1fr;
+    }
+    .spirit-related a + a {
+      margin-top:.8rem;
+    }
+  }
+</style>

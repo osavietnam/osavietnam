@@ -1,0 +1,98 @@
+---
+import { BANNERS, type BannerConfig, type BannerVariant } from '../lib/banners';
+
+const { config } = Astro.props as { config?: string | BannerConfig };
+const bannerKey = typeof config === 'string' ? config : '';
+const raw: BannerConfig | undefined =
+  typeof config === 'string' ? BANNERS[config] : config;
+
+const variants: BannerVariant[] = !raw ? [] : Array.isArray(raw) ? raw : [raw];
+const multi = variants.length > 1;
+---
+{variants.length > 0 && (
+  <section class="banner-container" aria-label="Ảnh biểu ngữ và câu trích dẫn"
+           data-multi={multi ? '' : undefined}
+           data-banner-key={bannerKey}>
+    {variants.map((v, i) => (
+      <div class="banner-variant" data-vi={i} data-default={i === 0 ? '' : undefined}>
+        <img src={v.imageUrl} alt={v.altText ?? ''} loading="lazy" />
+        {v.quoteText && (
+          <div class="banner-quote">
+            <p class="bvq-text" data-banner-field="quoteText" data-banner-vi={i}>{v.quoteText}</p>
+            <cite class="bvq-cite" data-banner-field="quoteCite" data-banner-vi={i} set:html={v.quoteCite ?? ''}></cite>
+          </div>
+        )}
+      </div>
+    ))}
+
+    {multi && (
+      <nav class="banner-nav" aria-label="Chuyển banner">
+        <button class="banner-prev" aria-label="Banner trước">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="banner-dots">
+          {variants.map((_, i) => (
+            <button class="banner-dot" data-vi={i} aria-label={`Banner ${i + 1}`}></button>
+          ))}
+        </div>
+        <button class="banner-next" aria-label="Banner tiếp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </nav>
+    )}
+  </section>
+)}
+
+{variants.length > 0 && (
+  <script is:inline>
+    (function () {
+      document.querySelectorAll('.banner-quote .bvq-text').forEach(function(el) {
+        el.innerHTML = el.innerHTML.replace(
+          /chính sự khôn ngoan/gi,
+          function(m) { return '<span class="bvq-wisdom">' + m + '</span>'; }
+        );
+        el.innerHTML = el.innerHTML.replace(
+          /Thiên Chúa Ba Ngôi|Thiên Chúa|Chúa/g,
+          function(m) { return '<span class="bvq-lord">' + m.toUpperCase() + '</span>'; }
+        );
+      });
+    })();
+  </script>
+)}
+
+{multi && (
+  <script is:inline>
+    (function () {
+      var bc = document.querySelector('.banner-container[data-multi]');
+      if (!bc) return;
+      var vs   = Array.from(bc.querySelectorAll('.banner-variant'));
+      var dots = Array.from(bc.querySelectorAll('.banner-dot'));
+      if (vs.length < 2) return;
+
+      var current = Math.floor(Math.random() * vs.length);
+
+      function show(idx) {
+        vs.forEach(function(v)   { v.removeAttribute('data-default'); });
+        dots.forEach(function(d) { d.removeAttribute('data-active'); });
+        vs[idx].setAttribute('data-default', '');
+        dots[idx].setAttribute('data-active', '');
+        current = idx;
+      }
+
+      show(current);
+
+      dots.forEach(function(d) {
+        d.addEventListener('click', function() { show(+d.getAttribute('data-vi')); });
+      });
+
+      var prevBtn = bc.querySelector('.banner-prev');
+      var nextBtn = bc.querySelector('.banner-next');
+      if (prevBtn) prevBtn.addEventListener('click', function() {
+        show((current - 1 + vs.length) % vs.length);
+      });
+      if (nextBtn) nextBtn.addEventListener('click', function() {
+        show((current + 1) % vs.length);
+      });
+    })();
+  </script>
+)}

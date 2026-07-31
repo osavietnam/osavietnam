@@ -1,0 +1,45 @@
+{
+  "bai-viet": {
+    "title": "Bài Viết",
+    "sub": "Thần Học · Triết Học · Linh Đạo"
+  },
+  "bai-giang-suy-niem": {
+    "title": "Bài Giảng – Suy Niệm",
+    "sub": "Theo Năm Phụng Vụ"
+  },
+  "readings": {
+    "title": "Bài Đọc Kinh Sách",
+    "sub": "Giờ Kinh Phụng Vụ",
+    "desc": "Bản dịch Nhóm Phiên Dịch Các Giờ Kinh Phụng Vụ"
+  },
+  "saints": {
+    "title": "Thánh – Chân Phước",
+    "sub": "Dòng Augustinô Việt Nam"
+  },
+  "thu-vien": {
+    "title": "Thư Viện",
+    "sub": "Bibliotheca Augustiniana"
+  },
+  "lich-phung-vu": {
+    "title": "Lịch Phụng Vụ",
+    "sub": "Năm Phụng Vụ"
+  },
+  "thanh-au-tinh": {
+    "eyebrow": "Tổ Phụ Dòng",
+    "name": "Thánh Augustinô\nthành Hippô",
+    "dates": "354 – 430",
+    "feast": "Lễ Trọng · 28 tháng 8",
+    "motto": "\"Cor nostrum inquietum est, donec requiescat in Te.\"",
+    "mottoCite": "— <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>"
+  },
+  "lich-su-dong": {
+    "eyebrow": "Ordo Sancti Augustini",
+    "title": "Lịch Sử Dòng Thánh Augustinô"
+  },
+  "on-goi": {
+    "eyebrow": "Dòng Thánh Augustinô — OSA<br>Cộng Đoàn Việt Nam",
+    "title": "Ơn Gọi",
+    "quote": "\"Mục đích chính yếu mà anh em quy tụ cùng nhau là để sống hòa hợp dưới một mái nhà, và đồng tâm nhất trí với nhau hướng về THIÊN CHÚA.\"",
+    "cite": "Thánh Augustinô · <em>Tu Luật</em>, 3"
+  }
+}

@@ -1,0 +1,756 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import {
+  articleCategoryBadgeLabel,
+  articleCategoryTone,
+  articleCategoryVariant,
+  isAugustineAuthor,
+} from '../utils/article-category';
+
+interface ArticleSummary {
+  id: string;
+  title: string;
+  href: string;
+  category?: string;
+  excerpt?: string;
+  author?: string;
+  image?: ImageMetadata | string;
+  date?: Date;
+}
+
+interface Props {
+  featured?: ArticleSummary;
+  tabs?: ArticleSummary[];
+  latest?: ArticleSummary[];
+  showTitles?: boolean;
+  showLatestTitles?: boolean;
+  showCategories?: boolean;
+  showAuthors?: boolean;
+}
+
+const {
+  featured,
+  tabs = [],
+  latest = [],
+  showTitles = false,
+  showLatestTitles = false,
+  showCategories = true,
+  showAuthors = true,
+} = Astro.props;
+
+const imageUrl = (image?: ImageMetadata | string) =>
+  typeof image === 'string' ? image : image?.src ?? '';
+
+const formatDate = (date?: Date) => date
+  ? new Intl.DateTimeFormat('vi-VN', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }).format(date)
+  : '';
+---
+
+{featured && (
+  <section class:list={['content-feature', { 'show-titles': showTitles, 'show-latest-titles': showLatestTitles }]} aria-labelledby="content-feature-title">
+    <div class="content-feature-column">
+      <header class="idx-section-heading">
+        <h2 id="content-feature-title">Bài Viết Nổi Bật</h2>
+      </header>
+
+      <div class="content-feature-primary-frame">
+        <a
+          class="content-feature-primary"
+          href={featured.href}
+          aria-label={`Đọc ${featured.title}`}
+          data-feature-primary
+          data-active-article={featured.id}
+        >
+          <span class:list={['content-feature-media', 'article-meta-media', { 'is-placeholder': !featured.image }]}>
+            {featured.image
+              ? typeof featured.image === 'string'
+                ? <img data-feature-image src={featured.image} alt="" width="1200" height="675" loading="eager" />
+                : <Image data-feature-image src={featured.image} alt="" width={1200} height={675} loading="eager" />
+              : <span aria-hidden="true">A</span>}
+            {featured.date && <time class="article-card-date" data-feature-date datetime={featured.date.toISOString()}>{formatDate(featured.date)}</time>}
+            {showAuthors && (
+              <span
+                class="article-author-badge"
+                data-feature-author
+                data-author-filter-trigger
+                data-author-augustine={isAugustineAuthor(featured.author) ? '' : undefined}
+                title={featured.author}
+                hidden={!featured.author}
+              >
+                {featured.author ?? ''}
+              </span>
+            )}
+          </span>
+          <span class="content-feature-copy">
+            <span class="content-feature-meta">
+              {showCategories && featured.category && (
+                <span
+                  class:list={['article-category-badge', { 'is-long': featured.category.length > 18 }]}
+                  data-category-tone={articleCategoryTone(featured.category)}
+                  data-category-variant={articleCategoryVariant(featured.category)}
+                  data-category-filter-trigger={featured.category}
+                  data-feature-category
+                  title={featured.category}
+                >
+                  {articleCategoryBadgeLabel(featured.category)}
+                </span>
+              )}
+            </span>
+            {showTitles && <h3 data-feature-title>{featured.title}</h3>}
+            <p data-feature-excerpt hidden={!featured.excerpt}>{featured.excerpt ?? ''}</p>
+            <span class="content-feature-open">
+              Đọc bài
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </span>
+          </span>
+        </a>
+
+        {tabs.length > 1 && (
+          <div class="content-feature-preview-controls" aria-label="Chuyển bài nổi bật">
+            <button type="button" data-feature-preview-shift="prev" aria-label="Bài nổi bật trước">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+            </button>
+            <button type="button" data-feature-preview-shift="next" aria-label="Bài nổi bật tiếp theo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </button>
+          </div>
+        )}
+      </div>
+
+      {tabs.length > 1 && (
+        <div class="content-feature-tab-shell">
+          <button
+            class="content-feature-tab-shift is-prev"
+            type="button"
+            data-feature-tab-shift="prev"
+            aria-label="Xem bài nổi bật phía trước"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+          </button>
+          <div class="content-feature-tabs" data-feature-tabs role="tablist" aria-label="Các bài nổi bật" tabindex="0">
+            {tabs.map((article) => (
+              <button
+                class:list={['content-feature-tab', { 'is-active': article.id === featured.id }]}
+                type="button"
+                role="tab"
+                aria-selected={String(article.id === featured.id)}
+                aria-label={article.title}
+                data-feature-tab
+                data-article-id={article.id}
+                data-article-href={article.href}
+                data-article-title={article.title}
+                data-article-category={article.category ?? ''}
+                data-article-category-tone={articleCategoryTone(article.category)}
+                data-article-category-variant={articleCategoryVariant(article.category)}
+                data-article-author={article.author ?? ''}
+                data-article-excerpt={article.excerpt ?? ''}
+                data-article-date={article.date ? formatDate(article.date) : ''}
+                data-article-datetime={article.date?.toISOString() ?? ''}
+                data-article-image={imageUrl(article.image)}
+              >
+                <span class:list={['content-feature-tab-media', { 'is-placeholder': !article.image }]}>
+                  {article.image
+                    ? typeof article.image === 'string'
+                      ? <img src={article.image} alt="" width="320" height="180" loading="lazy" />
+                      : <Image src={article.image} alt="" width={320} height={180} loading="lazy" />
+                    : <span aria-hidden="true">A</span>}
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            class="content-feature-tab-shift is-next"
+            type="button"
+            data-feature-tab-shift="next"
+            aria-label="Xem bài nổi bật tiếp theo"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+          </button>
+        </div>
+      )}
+    </div>
+
+    <aside class="content-latest" aria-labelledby="content-latest-title">
+      <header class="idx-section-heading">
+        <h2 id="content-latest-title">Mới Nhất</h2>
+      </header>
+
+      <div class="content-latest-list">
+        {latest.map((article) => (
+          <a class="content-latest-item" href={article.href} aria-label={`Đọc ${article.title}`}>
+            <span class:list={['content-latest-media', 'article-meta-media', { 'is-placeholder': !article.image }]}>
+              {article.image
+                ? typeof article.image === 'string'
+                  ? <img src={article.image} alt="" width="416" height="234" loading="lazy" />
+                  : <Image src={article.image} alt="" width={416} height={234} loading="lazy" />
+                : <span aria-hidden="true">A</span>}
+              {showCategories && article.category && (
+                <small
+                  class:list={['article-category-badge', { 'is-long': article.category.length > 18 }]}
+                  data-category-tone={articleCategoryTone(article.category)}
+                  data-category-variant={articleCategoryVariant(article.category)}
+                  data-category-filter-trigger={article.category}
+                  title={article.category}
+                >
+                  {articleCategoryBadgeLabel(article.category)}
+                </small>
+              )}
+              {article.date && <time class="article-card-date" datetime={article.date.toISOString()}>{formatDate(article.date)}</time>}
+              {article.author && (showAuthors
+                ? <small class="article-author-badge" data-author-filter-trigger data-author-augustine={isAugustineAuthor(article.author) ? '' : undefined} title={article.author}>{article.author}</small>
+                : <small class="content-latest-author-text">{article.author}</small>)}
+            </span>
+            <span class="content-latest-copy">
+              {showLatestTitles && <strong class="content-latest-title">{article.title}</strong>}
+            </span>
+          </a>
+        ))}
+        {latest.length === 0 && <p class="content-latest-empty">Các bài mới sẽ được cập nhật tại đây.</p>}
+      </div>
+    </aside>
+  </section>
+)}
+
+<style>
+  .content-feature {
+    display:grid;
+    align-items:start;
+    width:min(100% - 3rem,112rem);
+    grid-template-columns:minmax(0,2fr) minmax(28rem,.68fr);
+    gap:1.4rem;
+    margin:0 auto 6rem;
+  }
+  .content-feature-column,.content-latest { min-width:0; }
+  .content-feature-column { align-self:start; }
+  .content-feature-primary-frame { position:relative; min-width:0; }
+  .content-feature-primary {
+    display:flex;
+    min-height:0;
+    flex-direction:column;
+    overflow:hidden;
+    border-radius:.5rem;
+    color:inherit;
+    background:var(--bg-card);
+    text-decoration:none;
+    transition:transform .2s ease;
+  }
+  .content-feature-primary:hover { transform:translateY(-.2rem); }
+  .content-feature-media,.content-latest-media {
+    position:relative;
+    display:block;
+    overflow:hidden;
+    background:var(--bg-card-img);
+  }
+  .content-feature-media { flex:0 0 auto; aspect-ratio:16/9; }
+  .content-feature-media img,.content-latest-media img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .35s ease;
+  }
+  .content-feature-primary:hover img,.content-latest-item:hover img { transform:scale(1.025); }
+  .content-feature-preview-controls {
+    position:absolute;
+    z-index:3;
+    top:0;
+    right:0;
+    left:0;
+    display:flex;
+    aspect-ratio:16/9;
+    pointer-events:none;
+  }
+  .content-feature-preview-controls button {
+    position:absolute;
+    top:50%;
+    display:grid;
+    width:4rem;
+    height:4rem;
+    place-items:center;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    color:var(--accent);
+    background:color-mix(in srgb,var(--bg-card) 82%,transparent);
+    cursor:pointer;
+    pointer-events:auto;
+    backdrop-filter:blur(4px);
+    transform:translateY(-50%);
+    transition:background-color .2s ease,transform .2s ease;
+  }
+  .content-feature-preview-controls button:first-child { left:-1.8rem; }
+  .content-feature-preview-controls button:last-child { right:-1.8rem; }
+  .content-feature-preview-controls button:hover,.content-feature-preview-controls button:focus-visible {
+    color:var(--bg-page);
+    background:var(--accent);
+    outline:0;
+    transform:translateY(-50%) scale(1.05);
+  }
+  .content-feature-preview-controls svg {
+    width:1.65rem;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+  }
+  :global([data-theme="light"]) .content-feature-preview-controls button {
+    border:0;
+    color:#fff;
+    background:color-mix(in srgb,var(--accent-deep) 28%,transparent);
+    backdrop-filter:blur(3px);
+  }
+  :global([data-theme="light"]) .content-feature-preview-controls button:hover,
+  :global([data-theme="light"]) .content-feature-preview-controls button:focus-visible {
+    color:#fff;
+    background:color-mix(in srgb,var(--accent-deep) 42%,transparent);
+  }
+  .content-feature-media.is-placeholder > span[aria-hidden="true"],
+  .content-latest-media.is-placeholder > span[aria-hidden="true"] {
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:var(--deco-num);
+    font:700 5rem/1 var(--font-display);
+  }
+  .content-feature-copy {
+    display:flex;
+    min-width:0;
+    flex-direction:column;
+    min-height:18rem;
+    padding:2rem;
+  }
+  .content-feature-meta {
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:.6rem 1rem;
+    color:var(--gold-dim);
+    font:600 1rem/1.35 var(--font-ui);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .content-feature-meta .article-category-badge {
+    max-width:14rem;
+  }
+  .content-feature-copy > p {
+    display:-webkit-box;
+    margin:1.2rem 0 0;
+    overflow:hidden;
+    color:var(--ink-cream-soft);
+    font:400 1.5rem/1.7 var(--font-body);
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:5;
+  }
+  .content-feature-copy > h3 {
+    margin:.8rem 0 0;
+    color:var(--ink-cream);
+    font:600 clamp(1.65rem,1.35rem + .45vw,2.1rem)/1.3 var(--font-display);
+  }
+  .content-feature-open {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    margin-top:auto;
+    padding-top:1.5rem;
+    color:var(--accent);
+    font:650 1rem/1 var(--font-ui);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .content-feature-open svg {
+    width:1.15rem;
+    fill:none;
+    stroke:currentColor;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-width:1.7;
+  }
+  .content-feature-tab-shell {
+    position:relative;
+    min-width:0;
+    margin-top:.7rem;
+  }
+  .content-feature-tabs {
+    display:grid;
+    min-width:0;
+    grid-auto-flow:column;
+    grid-auto-columns:clamp(9.5rem,11vw,13rem);
+    justify-content:start;
+    gap:.6rem;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:1.1rem .85rem;
+    border-radius:.5rem;
+    background:var(--bg-card);
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .content-feature-tabs::-webkit-scrollbar { display:none; }
+  .content-feature-tabs:focus-visible { outline:2px solid var(--border-accent); outline-offset:.2rem; }
+  .content-feature-tab {
+    min-width:0;
+    padding:.65rem;
+    border:0;
+    border-radius:.35rem;
+    color:inherit;
+    background:var(--bg-card-img);
+    cursor:pointer;
+    scroll-snap-align:start;
+    transition:background-color .2s ease,transform .2s ease;
+  }
+  .content-feature-tab-media {
+    position:relative;
+    display:block;
+    overflow:hidden;
+    aspect-ratio:16/9;
+    border-radius:.2rem;
+    background:var(--bg-card);
+  }
+  .content-feature-tab-media img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:.72;
+    filter:saturate(.82);
+    transition:opacity .25s ease,transform .35s ease,filter .25s ease;
+  }
+  .content-feature-tab-media.is-placeholder > span {
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:var(--deco-num);
+    font:700 2rem/1 var(--font-display);
+  }
+  .content-feature-tab.is-active {
+    background:color-mix(in srgb,var(--accent) 14%,var(--bg-card-img));
+  }
+  .content-feature-tab.is-active img { opacity:1; filter:none; }
+  .content-feature-tab:hover,.content-feature-tab:focus-visible {
+    outline:0;
+    background:color-mix(in srgb,var(--accent) 10%,var(--bg-card-img));
+    transform:translateY(-.15rem);
+  }
+  .content-feature-tab:hover img,.content-feature-tab:focus-visible img {
+    opacity:1;
+    filter:none;
+    transform:scale(1.025);
+  }
+  .content-feature-tab-shift {
+    position:absolute;
+    z-index:2;
+    top:50%;
+    display:grid;
+    width:3.25rem;
+    height:3.25rem;
+    place-items:center;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    color:var(--accent);
+    background:var(--bg-card-img);
+    cursor:pointer;
+    transform:translateY(-50%);
+  }
+  .content-feature-tab-shift[hidden] { display:none; }
+  .content-feature-tab-shift.is-prev { left:-1.25rem; }
+  .content-feature-tab-shift.is-next { right:-1.25rem; }
+  .content-feature-tab-shift:disabled { opacity:.28; cursor:default; }
+  .content-feature-tab-shift:hover:not(:disabled),.content-feature-tab-shift:focus-visible:not(:disabled) {
+    color:var(--accent);
+    background:var(--bg-card);
+    outline:0;
+  }
+  .content-feature-tab-shift svg {
+    width:1.45rem;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+  }
+  :global([data-theme="light"]) .content-feature-tab-shift {
+    border:0;
+    color:#fff;
+    background:color-mix(in srgb,var(--accent-deep) 28%,transparent);
+    backdrop-filter:blur(3px);
+  }
+  :global([data-theme="light"]) .content-feature-tab-shift:hover:not(:disabled),
+  :global([data-theme="light"]) .content-feature-tab-shift:focus-visible:not(:disabled) {
+    color:#fff;
+    background:color-mix(in srgb,var(--accent-deep) 42%,transparent);
+  }
+  .content-latest {
+    display:flex;
+    min-height:0;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .content-latest-list {
+    --latest-visible:4;
+    display:grid;
+    grid-auto-rows:calc(100% / var(--latest-visible));
+    min-height:0;
+    flex:1;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    padding:.15rem .5rem;
+    border-radius:.5rem;
+    background:var(--bg-card);
+    scrollbar-color:rgba(201,191,169,.28) transparent;
+    scrollbar-width:thin;
+  }
+  .content-latest-list::-webkit-scrollbar { width:.3rem; }
+  .content-latest-list::-webkit-scrollbar-track { background:transparent; }
+  .content-latest-list::-webkit-scrollbar-thumb { border-radius:0; background:rgba(201,191,169,.28); }
+  :global([data-theme="light"]) .content-latest-list {
+    scrollbar-color:rgba(26,94,60,.24) transparent;
+  }
+  :global([data-theme="light"]) .content-latest-list::-webkit-scrollbar-thumb {
+    background:rgba(26,94,60,.24);
+  }
+  .content-latest-item {
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"media";
+    gap:.4rem .65rem;
+    align-items:center;
+    padding:.15rem 0;
+    color:inherit;
+    text-decoration:none;
+    transform-origin:center;
+    transition:transform .2s ease,background-color .2s ease;
+  }
+  .content-feature.show-latest-titles .content-latest-item {
+    grid-template-areas:
+      "media"
+      "copy";
+    grid-template-rows:minmax(0,1fr) auto;
+  }
+  .content-latest-item + .content-latest-item { border-top:1px solid var(--border-light); }
+  .content-latest-media { grid-area:media; width:100%; aspect-ratio:16/9; border-radius:.3rem; }
+  .content-latest-copy { display:flex; min-width:0; flex-direction:column; gap:.3rem; }
+  .content-feature:not(.show-latest-titles) .content-latest-copy { display:none; }
+  .content-feature.show-latest-titles .content-latest-copy { grid-area:copy; }
+  .content-latest-copy > span { display:flex; align-items:flex-start; flex-wrap:wrap; gap:.35rem .7rem; }
+  .content-latest-title {
+    display:block;
+    overflow:hidden;
+    color:var(--ink-cream);
+    font:600 1.12rem/1.35 var(--font-ui);
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  :global([data-theme="light"]) .show-titles .content-feature-copy > h3 {
+    color:var(--accent);
+  }
+  :global([data-theme="light"]) .content-latest-title { color:var(--accent); }
+  .content-latest-empty {
+    display:grid;
+    min-height:10rem;
+    place-items:center;
+    margin:0;
+    color:var(--ink-cream-soft);
+    font:italic 400 1.3rem/1.5 var(--font-body);
+    text-align:center;
+  }
+  @media (max-width:900px) {
+    .content-feature { grid-template-columns:1fr; }
+    .content-latest { overflow:visible; }
+    .content-latest-list {
+      display:block;
+      max-height:60rem;
+      min-height:0;
+      overflow-y:auto;
+    }
+  }
+  @media (max-width:760px) {
+    .content-feature { width:min(100% - 1.5rem,112rem); gap:3rem; margin-bottom:5rem; }
+    .content-feature-primary { min-height:0; }
+    .content-feature-copy { min-height:20rem; padding:1.5rem; }
+    .content-feature-copy > p { margin-top:.9rem; font-size:1.42rem; }
+    .content-feature-preview-controls button:first-child { left:-1.55rem; }
+    .content-feature-preview-controls button:last-child { right:-1.55rem; }
+    .content-feature-preview-controls button { width:3.15rem; height:3.15rem; }
+    .content-feature-tabs { grid-auto-columns:8.5rem; gap:.45rem; padding:.5rem; }
+    .content-feature-tab { padding:.32rem; }
+    .content-feature-tab-shift { display:none !important; }
+    .content-latest-list { padding:.15rem .5rem; }
+    .content-latest-item { grid-template-columns:minmax(0,1fr); gap:.4rem; }
+  }
+  @media (hover:hover) and (pointer:fine) {
+    .content-latest-item:hover,.content-latest-item:focus-visible {
+      z-index:1;
+      background:var(--bg-card-img);
+      outline:0;
+      transform:scale(1.025);
+    }
+    .content-latest-item:hover img,.content-latest-item:focus-visible img { transform:scale(1.06); }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .content-feature-primary,.content-feature-media img,.content-feature-tabs,.content-feature-tab,.content-feature-tab-media img,.content-latest-item,.content-latest-media img { transition:none; scroll-behavior:auto; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.content-feature-column').forEach((column) => {
+    const feature = column.closest<HTMLElement>('.content-feature');
+    const latest = feature?.querySelector<HTMLElement>('.content-latest');
+    const desktopLayout = window.matchMedia('(min-width: 901px)');
+    const syncLatestHeight = () => {
+      if (!latest) return;
+      if (!desktopLayout.matches) {
+        latest.style.removeProperty('height');
+        latest.style.removeProperty('max-height');
+        return;
+      }
+      const columnHeight = Math.ceil(column.getBoundingClientRect().height);
+      latest.style.height = `${columnHeight}px`;
+      latest.style.maxHeight = `${columnHeight}px`;
+    };
+    const columnResizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(syncLatestHeight)
+      : null;
+    columnResizeObserver?.observe(column);
+    desktopLayout.addEventListener('change', syncLatestHeight);
+    requestAnimationFrame(syncLatestHeight);
+
+    const primary = column.querySelector<HTMLAnchorElement>('[data-feature-primary]');
+    const previewImage = column.querySelector<HTMLImageElement>('[data-feature-image]');
+    const category = column.querySelector<HTMLElement>('[data-feature-category]');
+    const author = column.querySelector<HTMLElement>('[data-feature-author]');
+    const date = column.querySelector<HTMLTimeElement>('[data-feature-date]');
+    const title = column.querySelector<HTMLElement>('[data-feature-title]');
+    const excerpt = column.querySelector<HTMLElement>('[data-feature-excerpt]');
+    const tabs = Array.from(column.querySelectorAll<HTMLButtonElement>('[data-feature-tab]'));
+    const tabRail = column.querySelector<HTMLElement>('[data-feature-tabs]');
+    const previous = column.querySelector<HTMLButtonElement>('[data-feature-tab-shift="prev"]');
+    const next = column.querySelector<HTMLButtonElement>('[data-feature-tab-shift="next"]');
+    const previewPrevious = column.querySelector<HTMLButtonElement>('[data-feature-preview-shift="prev"]');
+    const previewNext = column.querySelector<HTMLButtonElement>('[data-feature-preview-shift="next"]');
+    if (!primary || tabs.length === 0) return;
+
+    const selectTab = (tab: HTMLButtonElement) => {
+      const articleId = tab.dataset.articleId ?? '';
+      if (!articleId || primary.dataset.activeArticle === articleId) return;
+
+      primary.dataset.activeArticle = articleId;
+      primary.href = tab.dataset.articleHref ?? primary.href;
+      primary.setAttribute('aria-label', `Đọc ${tab.dataset.articleTitle ?? ''}`);
+
+      const fullImage = tab.dataset.articleImage ?? '';
+      if (previewImage && fullImage) {
+        previewImage.removeAttribute('srcset');
+        previewImage.removeAttribute('sizes');
+        previewImage.src = fullImage;
+      }
+      if (category) {
+        const categoryText = tab.dataset.articleCategory ?? '';
+        category.textContent = categoryText;
+        category.title = categoryText;
+        category.dataset.categoryFilterTrigger = categoryText;
+        category.dataset.categoryTone = tab.dataset.articleCategoryTone ?? 'neutral';
+        category.dataset.categoryVariant = tab.dataset.articleCategoryVariant ?? '0';
+        category.classList.toggle('is-long', categoryText.length > 18);
+      }
+      if (author) {
+        const authorText = tab.dataset.articleAuthor ?? '';
+        author.textContent = authorText;
+        author.title = authorText;
+        author.hidden = !authorText;
+        author.toggleAttribute('data-author-augustine', authorText.toLocaleLowerCase('vi').includes('thánh augustinô'));
+      }
+      if (date) {
+        date.textContent = tab.dataset.articleDate ?? '';
+        date.dateTime = tab.dataset.articleDatetime ?? '';
+      }
+      if (title) title.textContent = tab.dataset.articleTitle ?? '';
+      if (excerpt) {
+        const text = tab.dataset.articleExcerpt ?? '';
+        excerpt.textContent = text;
+        excerpt.hidden = !text;
+      }
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('pointerenter', () => {
+        if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) selectTab(tab);
+      });
+      tab.addEventListener('focus', () => selectTab(tab));
+      tab.addEventListener('click', () => selectTab(tab));
+    });
+
+    const centerTabInRail = (tab: HTMLButtonElement, behavior: ScrollBehavior = 'smooth') => {
+      if (!tabRail) return;
+      const maxScroll = Math.max(0, tabRail.scrollWidth - tabRail.clientWidth);
+      const target = Math.min(
+        maxScroll,
+        Math.max(0, tab.offsetLeft - (tabRail.clientWidth - tab.offsetWidth) / 2),
+      );
+      tabRail.scrollTo({ left: target, behavior });
+    };
+
+    const shiftPreview = (direction: number) => {
+      const activeId = primary.dataset.activeArticle ?? '';
+      const activeIndex = tabs.findIndex((tab) => tab.dataset.articleId === activeId);
+      const nextIndex = ((activeIndex < 0 ? 0 : activeIndex) + direction + tabs.length) % tabs.length;
+      const nextTab = tabs[nextIndex];
+      selectTab(nextTab);
+      centerTabInRail(nextTab);
+    };
+    previewPrevious?.addEventListener('click', () => shiftPreview(-1));
+    previewNext?.addEventListener('click', () => shiftPreview(1));
+
+    if (tabRail && previous && next) {
+      const updateShiftButtons = () => {
+        const maxScroll = Math.max(0, tabRail.scrollWidth - tabRail.clientWidth);
+        const hasOverflow = maxScroll > 4;
+        previous.hidden = !hasOverflow;
+        next.hidden = !hasOverflow;
+        previous.disabled = tabRail.scrollLeft <= 3;
+        next.disabled = tabRail.scrollLeft >= maxScroll - 3;
+      };
+      const shift = (direction: number) => {
+        const firstTab = tabs[0];
+        const gap = Number.parseFloat(getComputedStyle(tabRail).columnGap) || 0;
+        const tabWidth = firstTab?.getBoundingClientRect().width ?? 0;
+        const visibleCount = tabWidth > 0
+          ? Math.max(1, Math.floor((tabRail.clientWidth + gap) / (tabWidth + gap)))
+          : 1;
+        const railCenter = tabRail.scrollLeft + tabRail.clientWidth / 2;
+        const currentIndex = tabs.reduce((closest, tab, index) => {
+          const tabCenter = tab.offsetLeft + tab.offsetWidth / 2;
+          const closestCenter = tabs[closest].offsetLeft + tabs[closest].offsetWidth / 2;
+          return Math.abs(tabCenter - railCenter) < Math.abs(closestCenter - railCenter)
+            ? index
+            : closest;
+        }, 0);
+        const targetIndex = Math.min(
+          tabs.length - 1,
+          Math.max(0, currentIndex + direction * Math.max(1, visibleCount - 1)),
+        );
+        centerTabInRail(tabs[targetIndex]);
+      };
+
+      previous.addEventListener('click', () => shift(-1));
+      next.addEventListener('click', () => shift(1));
+      tabRail.addEventListener('scroll', updateShiftButtons, { passive: true });
+      window.addEventListener('resize', updateShiftButtons, { passive: true });
+      requestAnimationFrame(updateShiftButtons);
+    }
+  });
+</script>

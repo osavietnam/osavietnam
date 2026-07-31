@@ -1,0 +1,867 @@
+
+.prose {
+  --prose-surface: rgba(11, 20, 36, .78);
+  --prose-surface-inset-block: -3rem;
+  --prose-surface-inset-inline: -3.2rem;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  width: min(112rem, 100%);
+  max-width: 112rem;
+  margin: 0 auto;
+  padding: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.805rem;
+  line-height: 1.95;
+  letter-spacing: 0.012rem;
+  color: var(--ink-cream-soft);
+  text-rendering: optimizeLegibility;
+}
+.prose::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: var(--prose-surface-inset-block) var(--prose-surface-inset-inline);
+  background: var(--prose-surface);
+  pointer-events: none;
+}
+[data-theme="light"] .prose { --prose-surface: #f4efe5; }
+.prose > * + * { margin-top: 1.8rem; }
+
+/* Drop-cap cho đoạn mở đầu của mọi nội dung prose. */
+.prose > p:first-of-type:not(.news-reading-intro),
+.prose > .news-reading-intro + p {
+  /* Giữ float drop-cap trong chính đoạn mở đầu để không lấn sang
+     blockquote/heading kế tiếp khi đoạn văn quá ngắn. */
+  display: flow-root;
+}
+.prose > p:first-of-type:not(.news-reading-intro)::first-letter,
+.prose > .news-reading-intro + p::first-letter {
+  float: left;
+  margin: .35rem .85rem 0 0;
+  color: var(--gold);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4.8em;
+  font-weight: 700;
+  line-height: .72;
+}
+[data-theme="light"] .prose > p:first-of-type:not(.news-reading-intro)::first-letter,
+[data-theme="light"] .prose > .news-reading-intro + p::first-letter { color: #9c6a2e; }
+
+/* Offset anchor scroll để heading không bị che sau navbar (64px) */
+.prose h2, .prose h3, .prose h4 { scroll-margin-top: calc(6.58rem + 1.6rem); }
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  /* Chặn gradient toàn site (overrides.css h1,h2) — h2 kem sáng + gạch vàng ngắn */
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: var(--ink-cream);
+  color: var(--ink-cream);
+  line-height: 1.3;
+  text-align: left;
+  margin: 3.4rem 0 1.5rem;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.prose h2::after {
+  content: ''; display: block;
+  width: 3.2rem; height: 2px; margin-top: .9rem;
+  background: linear-gradient(to right, var(--gold), rgba(233, 193, 118, 0.12));
+  border-radius: 2px;
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  /* Gold ấm — phân cấp rõ với h2 (kem) và h4 (kem mờ); đồng bộ h3 amber ở light */
+  color: #f2d78e;
+  line-height: 1.4;
+  margin: 3.2rem 0 1rem;
+}
+.prose h4 {
+  font-family: var(--font-display);
+  font-size: 1.96rem;
+  font-weight: 500;               /* bỏ bold — nhẹ hơn h3 */
+  color: var(--gold-dim);         /* warm mờ — dưới h3 gold */
+  margin: 2.4rem 0 0.7rem;
+}
+.prose h5 {
+  font-family: var(--font-ui);
+  font-size: 1.54rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-cream-soft);   /* nhãn nhỏ, quiet nhất */
+  margin: 2rem 0 0.6rem;
+}
+.prose p { text-align: justify; color: var(--ink-cream-soft); font-size: 1.805rem; }
+.prose em { font-style: italic; color: var(--gold); }
+.prose strong { font-weight: 700; color: var(--ink-cream); }
+
+
+/* Liên kết nội bộ */
+.prose a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  padding: .03em .12em;
+  margin-inline: -.02em;
+  border-radius: .24em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+.prose a:hover {
+  color: #ffe3a0;
+  background: rgba(233, 193, 118, 0.11);
+}
+.prose a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Trích dẫn */
+.prose blockquote {
+  position: relative;
+  margin: 3.2rem 0 3.2rem 0.5rem;
+  padding: 1rem 1.6rem 1rem 3.6rem;
+  border: none;
+  border-left: 3px solid var(--gold);
+  background: rgba(233, 193, 118, 0.075);
+  border-radius: 0 8px 8px 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.691rem;
+  color: var(--ink-cream);
+  line-height: 1.85;
+}
+/* Dấu nháy mở trang trí */
+.prose blockquote::before {
+  content: '\201C';
+  position: absolute;
+  left: 0.8rem;
+  top: 0.6rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3.8rem;
+  line-height: 1;
+  color: rgba(233, 193, 118, 0.4);
+  pointer-events: none;
+}
+.prose blockquote p { text-align: left; margin: 0 0 1rem 0; color: var(--ink-cream); }
+.prose blockquote em { color: var(--ink-cream); }
+.prose blockquote cite {
+  display: block;
+  margin-top: .2rem;
+  color: var(--gold-dim);
+  font: 600 1.08rem/1.45 var(--font-ui);
+  letter-spacing: .035em;
+  text-align: right;
+}
+.prose blockquote p:has(> cite:only-child) {
+  margin: .2rem 0 0;
+}
+
+/* Dòng ghi nguồn trong blockquote (— Tác giả, *Tác phẩm*, …) → trích dẫn chuẩn.
+   Gắn class .bq-cite bằng JS ở trang đọc (nhận diện dòng mở đầu bằng —/–). */
+.prose blockquote p.bq-cite {
+  margin: 1.4rem 0 0;
+  text-align: right;
+  font-style: normal;
+  font-size: 1.359rem;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: var(--gold);
+}
+.prose blockquote p.bq-cite em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* Khối ghi nguồn (JS dựng từ "Nguồn:" / "Trích dịch từ …" trong .md) —
+   tách khỏi thân bài bằng đường kẻ trên, kiểu ghi chú tham khảo học thuật. */
+.prose-source {
+  margin: 3rem 0 .8rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(233, 193, 118, 0.16);
+}
+.prose-source-tag {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: .5rem;
+  opacity: .92;
+}
+.prose-source-text {
+  font-family: var(--font-body);
+  font-size: 1.18rem;
+  line-height: 1.62;
+  color: var(--ink-cream-soft);
+  margin: 0;
+  font-style: normal;
+  opacity: .9;
+}
+.prose-source-text em { font-style: italic; color: inherit; }
+
+.prose ul, .prose ol { padding-left: 3rem; }
+.prose li { margin-bottom: 0.7rem; }
+
+/* Bullet tuỳ biến — chấm vàng thay vì dấu tròn mặc định */
+.prose ul { list-style: none; padding-left: 2.8rem; }
+.prose ul > li { position: relative; }
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.7rem;
+  top: 0.86em;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--gold);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+/* Danh sách có thứ tự — số vàng đậm */
+.prose ol { list-style: decimal; }
+.prose ol > li::marker { color: var(--gold); font-weight: 700; }
+
+/* Đường phân cách (--- trong .md) — mảnh, mờ dần hai bên */
+.prose hr {
+  border: none;
+  height: 1px;
+  width: 60%;
+  margin: 3.8rem auto;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+}
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  max-height: 72rem;
+  width: auto; height: auto;
+  margin: 3rem auto;
+  border-radius: 0;
+  cursor: zoom-in;
+  transition: opacity .2s;
+}
+.prose img:hover { opacity: .88; }
+
+/* Khung đọc chung trên mobile: không thêm lề/padding ngoài container của từng trang. */
+@media (max-width: 768px) {
+  .prose {
+    --prose-surface-inset-block: -1.4rem;
+    --prose-surface-inset-inline: -2rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Bảng — card hiện đại: bo góc, header vàng, kẻ ngang mảnh, sọc zebra + hover.
+   JS bọc mỗi <table> trong .prose-table-wrap để cuộn ngang trên màn hẹp. */
+.prose-table-wrap {
+  margin: 3rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(233, 193, 118, 0.3) transparent;
+}
+.prose-table-wrap::-webkit-scrollbar { height: 6px; }
+.prose-table-wrap::-webkit-scrollbar-thumb { background: rgba(233, 193, 118, 0.3); border-radius: 3px; }
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 1.463rem;
+  line-height: 1.55;
+  background: var(--bg-card);
+}
+/* Bảng không nằm trong wrap (fallback trước khi JS chạy) vẫn gọn gàng */
+.prose > table { margin: 3rem 0; border-radius: 10px; overflow: hidden; }
+
+.prose thead th {
+  background: rgba(233, 193, 118, 0.12);
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.273rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 1.25rem 1.6rem;
+  border-bottom: 1px solid var(--border-accent);
+  white-space: nowrap;
+}
+.prose tbody td {
+  padding: 1.15rem 1.6rem;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--ink-cream-soft);
+  vertical-align: top;
+}
+.prose tbody tr:last-child td { border-bottom: none; }
+.prose tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.022); }
+.prose tbody tr:hover { background: rgba(233, 193, 118, 0.06); }
+/* Cột đầu nổi bật nhẹ (thường là nhãn/tiêu chí) */
+.prose tbody td:first-child { color: var(--ink-cream); font-weight: 600; }
+
+/* Chú thích (footnotes) */
+.prose .footnotes {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(233, 193, 118, 0.3);
+  font-size: 1.416rem;
+  line-height: 1.7;
+  color: var(--ink-cream-soft);
+}
+.prose .footnotes h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0 0 1rem;
+}
+.prose .footnotes h2::after { display: none; }
+/* Danh mục tham khảo cuối bài — thụt lề treo (hanging indent) chuẩn khoa học */
+.prose .footnotes ol { padding-left: 2.4rem; }
+.prose .footnotes li {
+  margin-bottom: 0.9rem;
+  padding-left: 0.4rem;
+  text-indent: 0;
+  scroll-margin-top: calc(6.58rem + 2.4rem);
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+.prose .footnotes li p { margin: 0; }
+/* Tên tác phẩm trong nguồn giữ in nghiêng, tông vàng dịu để nhận diện */
+.prose .footnotes em { font-style: italic; color: var(--gold-dim); }
+.prose .footnotes li::marker { color: var(--gold); }
+.prose .footnotes a { color: var(--gold); }
+
+/* Highlight khi jump đến footnote */
+@keyframes fn-highlight {
+  0%   { background-color: rgba(233, 193, 118, 0.22); }
+  70%  { background-color: rgba(233, 193, 118, 0.10); }
+  100% { background-color: transparent; }
+}
+.prose .footnotes li:target {
+  animation: fn-highlight 2.4s ease-out forwards;
+}
+
+/* Inline ref target (nút ↩ nhảy về): scroll-margin để không bị navbar che */
+.prose sup a[id] {
+  scroll-margin-top: calc(6.58rem + 2.4rem);
+}
+/* Số đoạn: badge gold nền đặc, chữ tối */
+.prose .article-num {
+  display: inline-block;
+  background: #e9c176;
+  color: #1a1408;
+  font-size: 0.74em;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.5;
+  padding: 0.05em 0.42em;
+  border-radius: 4px;
+  margin-right: 0.38em;
+  vertical-align: baseline;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+/* Flash sáng hơn khi ↩ nhảy về */
+.prose .article-num.flash {
+  background: #ffd27a;
+  color: #1a1408;
+  text-shadow: none;
+  box-shadow: 0 0 8px rgba(233, 193, 118, 0.55);
+}
+
+/* Highlight paragraph khi ↩ nhảy về */
+.prose .ref-back-highlighted {
+  background-color: rgba(233, 193, 118, 0.28);
+  border-left: 4px solid var(--gold);
+  padding-left: 1rem;
+  margin-left: -1rem;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 2.5s ease-out, border-left-color 2.5s ease-out;
+}
+
+/* Flash chính xác số tham chiếu [^n] khi ↩ nhảy về (đủ đặc hiệu, không cần !important) */
+.prose sup a.fnref-flash {
+  background: #ffd27a;
+  color: #1a1408;
+  border-radius: 3px;
+  padding: 0 0.3rem;
+  box-shadow: 0 0 10px rgba(233, 193, 118, 0.75);
+  transition: background-color 2.4s ease-out, box-shadow 2.4s ease-out;
+}
+
+/* Flash định nghĩa footnote khi bấm số [^n] nhảy xuống */
+.prose .footnotes li.fn-target-flash {
+  background-color: rgba(233, 193, 118, 0.28);
+  border-left: 4px solid var(--gold);
+  padding-left: 1rem;
+  margin-left: -1rem;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 2.5s ease-out, border-left-color 2.5s ease-out;
+}
+
+/* Light mode: highlight footnote đậm hơn để nổi trên nền kem sáng */
+[data-theme="light"] .prose sup a.fnref-flash {
+  background: #eab13a;
+  color: #1a1408;
+  box-shadow: 0 0 0 2px rgba(156, 106, 46, 0.6), 0 0 8px rgba(200, 150, 62, 0.5);
+}
+[data-theme="light"] .prose .footnotes li.fn-target-flash {
+  background-color: rgba(200, 150, 62, 0.24);
+  border-left-color: #9c6a2e;
+}
+
+/* số tham chiếu [^1] trên dòng */
+.prose sup {
+  font-size: 0.72em;
+}
+.prose sup a {
+  border-bottom: none;
+  color: var(--gold);
+  font-weight: 600;
+  padding: 0 0.1rem;
+  text-decoration: none;
+}
+.prose sup a:hover { color: #f2d78e; }
+
+/* ---- Meta tác giả/ngày bên dưới ornament rule ---- */
+.lib-masthead-article-meta {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  color: var(--ink-cream-soft);
+  margin-top: 1.4rem;
+}
+.article-hero {
+  display: block; width: 100%; max-width: 74rem;
+  aspect-ratio: 16 / 9; height: auto; object-fit: cover;
+  border-radius: 6px; margin: 0 auto 3rem;
+  border: 1px solid rgba(233,193,118,.16);
+  box-shadow: 0 16px 40px rgba(0,0,0,.34);
+}
+
+/* ══════════════════════════════════════════════════════
+   HERO TRANG ĐỌC BÀI VIẾT — full-bleed, ảnh nền + tiêu đề chồng
+   Nền tối trong cả hai mode (banner ảnh) nên chữ luôn sáng.
+   ══════════════════════════════════════════════════════ */
+.art-hero {
+  position: relative;
+  width: 100%;
+  /* Huỷ padding-top 6.93rem của #main → ảnh nền chạm navbar, full-bleed thật sự */
+  margin-top: -6.58rem;
+  min-height: clamp(42rem, 52vw, 58rem);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  isolation: isolate;
+  margin-bottom: 4.5rem;
+}
+.art-hero-bg { position: absolute; inset: 0; z-index: -2; }
+.art-hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.art-hero-fallback {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(130% 92% at 50% -22%, rgba(233,193,118,0.18), transparent 55%),
+    linear-gradient(158deg, #17253f 0%, #0d1628 58%, #0a1120 100%);
+}
+.art-hero-fallback::after {
+  content: ''; position: absolute; inset: 0;
+  background: url('/images/emblem.svg') center 42% / 24rem no-repeat;
+  opacity: 0.06;
+}
+.art-hero-scrim {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(
+      to top,
+      rgba(5,8,16,0.97) 0%,
+      rgba(5,8,16,0.82) 26%,
+      rgba(5,8,16,0.42) 54%,
+      rgba(5,8,16,0.16) 78%,
+      rgba(5,8,16,0.55) 100%
+    ),
+    /* làm dịu vùng ảnh giữa để chữ nổi bất kể ảnh sáng/tối */
+    linear-gradient(to top, rgba(5,8,16,0.25) 0%, transparent 45%);
+}
+
+.art-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 132rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: clamp(8rem, 6.58rem + 5vh, 11rem) clamp(2.4rem, 6vw, 7rem) 6rem;
+}
+
+.art-hero-back {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-ui);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: rgba(239,231,214,0.85);
+  text-decoration: none;
+  padding: 0.55rem 1.2rem 0.55rem 0.9rem;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 100px;
+  background: rgba(8,13,26,0.38);
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.art-hero-back svg { transition: transform 0.2s; }
+.art-hero-back:hover {
+  background: rgba(8,13,26,0.7);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.art-hero-back:hover svg { transform: translateX(-3px); }
+
+/* Text block đẩy xuống bottom của hero */
+.art-hero-text {
+  margin-top: auto;
+  max-width: 90rem;
+}
+
+/* Kicker: line ngắn + nhãn chuyên mục */
+.art-hero-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.1rem;
+  font-family: var(--font-ui);
+  font-size: 1.16rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+  transition: color 0.2s;
+}
+.art-hero-cat::before {
+  content: '';
+  width: 3rem; height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+.art-hero-cat:hover { color: #f2d78e; }
+.art-hero-cat[data-cat="than-hoc"]  { color: #c9b0f0; }
+.art-hero-cat[data-cat="triet-hoc"] { color: #a6d4e8; }
+.art-hero-cat[data-cat="linh-dao"]  { color: #9ad9b6; }
+
+.art-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 5.8vw, 6.2rem);
+  font-weight: 800;
+  line-height: 1.07;
+  letter-spacing: -0.012em;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 3px 22px rgba(0,0,0,0.65);
+}
+.art-hero-sub {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.78rem;
+  line-height: 1.62;
+  color: rgba(239,231,214,0.88);
+  margin: 2rem 0 0;
+  max-width: 62rem;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+}
+.art-hero-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.6rem;
+  font-family: var(--font-ui);
+  font-size: 1.38rem;
+  color: rgba(239,231,214,0.72);
+  margin: 3rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(239,231,214,0.2);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+@media (max-width: 600px) {
+  .art-hero { min-height: 38rem; }
+  .art-hero-inner { padding: clamp(6.5rem, 14vh, 8.5rem) 2rem 4rem; }
+  .art-hero-title { font-size: clamp(2.8rem, 8.5vw, 3.8rem); letter-spacing: -0.008em; }
+  .art-hero-sub { font-size: 1.56rem; margin-top: 1.4rem; }
+  .art-hero-meta { margin-top: 2rem; padding-top: 1.4rem; font-size: 1.28rem; }
+  .art-hero-cat { margin-bottom: 1.4rem; font-size: 1.1rem; }
+}
+
+/* ---- Dịch giả + ghi chú dịch thuật ---- */
+.article-header .translator {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 1.35rem;
+  color: var(--ink-cream-soft);
+}
+.article-header .translator-name {
+  display: block;
+  color: var(--ink-cream);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.article-header .translator-note {
+  display: block;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+.article-header .translator-note a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(233, 193, 118, 0.5);
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+.article-header .translator-note a:hover {
+  color: #f2d78e;
+  border-bottom-color: #f2d78e;
+}
+
+/* Trang đọc Kinh Sách: h2 đầu tiên trong prose lặp lại tiêu đề từ article-header → ẩn đi */
+.page-kinh-sach .prose > h2:first-child { display: none; }
+
+/* ---- TOC — pill trigger bên trái, click toggle → drawer mở, đẩy prose phải ---- */
+.article-shell { display: block; }
+@media (min-width: 1100px) {
+  .article-shell.has-toc {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr;
+    gap: 0 2rem;
+    align-items: start;
+    max-width: calc(100% - 4rem);
+    margin: 0 auto;
+    overflow: visible;
+    /* Không transition grid — tránh re-layout toàn trang trên mỗi frame */
+  }
+  .article-shell.has-toc.toc-open {
+    grid-template-columns: 26rem 1fr;
+  }
+  .article-shell.has-toc .prose { margin: 0; padding: 0; max-width: none; }
+  /* TOC dùng chung: chạm mép trái vùng đọc như Tự thuật, không bị grid cắt. */
+  .article-shell.has-toc .toc { margin-left: -6rem; }
+  /* Nền prose của mọi trang có TOC: đệm hai bên bằng nhau và dừng trước cột TOC. */
+  .article-shell.has-toc .prose::before {
+    inset-block: var(--prose-surface-inset-block);
+    inset-inline: -1.8rem;
+  }
+}
+
+/* .toc là grid item, sticky, flex column: trigger → drawer */
+.toc {
+  position: sticky;
+  top: calc(6.58rem + 2rem);
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: clip;
+  z-index: 50;
+}
+
+/* Nút TOC dùng chung cho mọi trang reader. */
+.toc-trigger {
+  width: 100%;
+  min-height: 3.7rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .75rem 1.25rem;
+  background: linear-gradient(135deg, rgba(28,45,77,.98), rgba(15,27,50,.98));
+  border: 1px solid rgba(233,193,118,.3);
+  border-radius: 0;
+  color: var(--gold);
+  font-family: var(--font-ui);
+  white-space: nowrap; overflow: hidden;
+  box-shadow: 0 .7rem 1.8rem rgba(3,9,22,.24);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: transform .18s ease, color .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.toc-trigger::after,
+.toc-section-name {
+  content: 'Mục lục';
+  font-family: var(--font-ui);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.toc-trigger:has(.toc-section-name)::after { display: none; }
+.toc-trigger:hover {
+  transform: translateY(-1px);
+  color: #fff0cb;
+  background: linear-gradient(135deg, rgba(45,68,108,.99), rgba(23,41,74,.99));
+  border-color: rgba(233,193,118,.62);
+  box-shadow: 0 .9rem 2.1rem rgba(3,9,22,.32);
+}
+.toc-trigger:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.article-shell.toc-open .toc-trigger {
+  color: var(--gold);
+  background: linear-gradient(135deg, rgba(39,60,96,.99), rgba(20,36,66,.99));
+  border-color: rgba(233,193,118,.48);
+  border-radius: 0;
+  border-bottom-color: transparent;
+}
+.article-shell:not(.toc-open) .toc-trigger {
+  width: 3.7rem;
+  padding-inline: 0;
+  justify-content: center;
+  border-radius: 0;
+}
+.article-shell:not(.toc-open) .toc-trigger::after,
+.article-shell:not(.toc-open) .toc-section-name { display: none; }
+.toc-chevron { flex-shrink: 0; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.article-shell.toc-open .toc-chevron { transform: rotate(180deg); }
+
+/* Drawer: full column width, bên dưới trigger */
+.toc-drawer {
+  width: 100%;
+  min-width: 0;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  background: rgba(11,17,34,0.97);
+  border: 1px solid rgba(233,193,118,0.22);
+  border-top: none;
+  border-radius: 0;
+  padding: 1.8rem 1.6rem 2.2rem 1.4rem;
+  box-shadow: 6px 8px 32px rgba(0,0,0,0.45);
+  opacity: 0;
+  pointer-events: none;
+  /* transform-only animation — GPU-accelerated, không re-layout */
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(233,193,118,0.28) transparent;
+}
+.article-shell.toc-open .toc-drawer {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.toc-drawer::-webkit-scrollbar { width: 4px; }
+.toc-drawer::-webkit-scrollbar-track { background: transparent; }
+.toc-drawer::-webkit-scrollbar-thumb { background: rgba(233,193,118,0.28); border-radius: 4px; }
+
+/* Header row: title trái + lang switch phải */
+.toc-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  margin-bottom: 1.4rem;
+}
+.toc-drawer-head:not(:has(.toc-lang-row)) { display: none; }
+.toc-drawer-head:has(.toc-lang-row) { justify-content: flex-end; }
+.toc-lang-row {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Nhãn "Mục lục" */
+.toc-title {
+  font-family: var(--font-ui); font-size: 1.1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.22em;
+  color: var(--gold); opacity: .85;
+  display: flex; align-items: center; gap: .6rem;
+  margin: 0;
+  white-space: nowrap;
+}
+.toc-drawer .toc-title { display: none; }
+.toc-title::before {
+  content: ''; width: 1.4rem; height: 1px; flex-shrink: 0;
+  background: var(--gold); opacity: .7;
+}
+
+/* Rail dọc + links */
+.toc ul {
+  list-style: none; padding: 0; margin: 0;
+  border-left: 1px solid rgba(233,193,118,0.15);
+}
+.toc li { margin: 0; }
+.toc a {
+  font-family: var(--font-ui); font-size: 1.35rem; line-height: 1.4;
+  color: var(--ink-cream-soft); text-decoration: none;
+  display: block; padding: .5rem 0 .5rem 1.4rem;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  white-space: normal;
+  transition: color .18s, border-color .18s, padding-left .18s;
+}
+.toc a:hover { color: var(--gold); padding-left: 1.7rem; }
+.toc a.active { color: var(--gold); font-weight: 600; border-left-color: var(--gold); }
+.toc .toc-depth-3 a { padding-left: 2.8rem; font-size: 1.25rem; }
+.toc .toc-depth-3 a:hover { padding-left: 3.1rem; }
+
+.toc-lang {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .35rem 1rem;
+  border-radius: 20px;
+  font-family: var(--font-ui); font-size: 1.25rem; font-weight: 700;
+  letter-spacing: .04rem;
+  border: 1px solid rgba(233,193,118,0.3);
+  background: transparent;
+  color: var(--ink-cream-soft);
+  cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+.toc-lang.current { background: rgba(233,193,118,0.12); color: var(--gold); cursor: default; }
+.toc-lang:not(.current):hover { background: rgba(233,193,118,0.1); border-color: var(--gold); color: var(--gold); }
+
+@media (max-width: 1099px) { .toc { display: none; } }
+
+/* ---- Lưới sách (trang danh sách Tác Phẩm) ---- */
+.author-group { margin: 0 3rem 4rem; }
+.author-group > h2 {
+  font-size: 2.6rem; text-align: left; margin-bottom: 1.5rem;
+}
+
+/* ---- Link quay lại danh mục ---- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-ui);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 0.5rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(233, 193, 118, 0.28);
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.back-link:hover { background: rgba(233, 193, 118, 0.12); border-color: var(--gold); color: var(--gold); }

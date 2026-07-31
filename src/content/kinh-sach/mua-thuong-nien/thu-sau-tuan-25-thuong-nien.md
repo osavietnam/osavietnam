@@ -1,0 +1,19 @@
+---
+title: "Thứ Sáu, Tuần 25 Thường Niên"
+season: "Mùa Thường Niên"
+seasonKey: "mua-thuong-nien"
+source: "Thánh Augustinô, Gm. và Ts."
+excerpt: "Sermon 46, On Pastors, 29-30"
+liturgy: "Thứ Sáu, Tuần 25 Thường Niên"
+order: 174
+---
+
+*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+
+Chúa Ki-tô chăn dắt bạn theo lẽ chính trực, Người phân biệt chiên của mình với chiên không phải của mình. Người nói : Chiên của tôi thì nghe tiếng tôi và theo tôi. Ở đây, tôi thấy mọi mục tử đều tốt, đều ở trong một mục tử duy nhất. Không thiếu các mục tử tốt, nhưng họ ở trong một vị duy nhất. Có chia rẽ, họ mới thành ra nhiều. Chỉ một mình Người được người ta rao giảng, vì mọi người phải nên một. Quả thế, khi không nói đến các mục tử, mà nói đến Vị Mục Tử duy nhất, thì không phải là Chúa chẳng gặp được ai để trao phó chiên của mình. Quả thật, Người đã trao chiên cho ông Phê-rô. Hơn nữa, chính ông Phê-rô đã muôùn mọi người nên một. Lúc ấy có nhiều tông đồ, thế mà Người lại nói với một vị Hãy chăn dắt chiên của Thầy. Ước gì không thiếu các mục tử tốt, ước gì chúng ta không thiếu các vị đó, xin Chúa xót thương đừng bỏ không gầy dựng và không lập nên các vị. Tất nhiên, chiên tốt thì mục tử cũng tốt, vì từ những chiên tốt phát xuất ra các mục tử tốt. Nhưng mọi mục tử tốt đều ở trong một mục tử, họ chỉ là một mà thôi. Họ chăn dắt là Chúa Ki-tô chăn dắt. Các bạn của Tân Lang không nói tiếng nói của mình, nhưng vui mừng hoan hỉ vì Tân Lang lên tiếng. Vậy, khi họ chăn dắt là chính Người chăn dắt ; và Người nói : Chính Thầy chăn dắt, vì các mục tử nói là Người nói, các vị thương yêu là Người thương yêu. Ngay cả với Phê-rô, khi Người trao chiên của Người cho ông, như người này trao cho người kia, thì Người cũng muốn ông nên một với Người. Và như thế, Người trao chiên cho ông, để chính người là đầu, còn ông tượng trưng cho thân thể Người là Hội Thánh, và để cả hai nên một thân mình như tân lang và tân nương.
+
+Bởi thế, Người nói gì với ông Phê-rô trước khi trao chiên cho ông, kẻo trao cho ông mà như thể trao cho người nào đó khác với chính mình : Anh Phê-rô, anh có yêu mến Thầy không ? Và ông đáp : Con yêu mến Thầy. Người lại hỏi : Anh có yêu mến Thầy không ? Ông trả lời : Con yêu mến Thầy. Và lần thứ ba : Anh có yêu mến Thầy không ? Ông thưa : Con yêu mến Thầy. Người tăng cường lòng mến để củng cố sự hiệp nhất. Vậy một mình Người chăn dắt trong các mục tử, và các mục tử chăn dắt trong một mình Người.
+
+Các mục tử không được nói tới, nhưng thật ra họ được nói tới. Các mục tử được tự hào, nhưng ai tự hào thì hãy tự hào trong Chúa. Đó là chính Chúa Ki-tô chăn dắt, đó là chăn dắt cho Chúa Ki-tô, đó là chăn dắt trong Chúa Ki-tô ; ngoài Chúa Ki-tô, không có chuyện chăn dắt cho mình. Người đã nói : Chính Ta sẽ chăn dắt chiên của Ta, vì không có ai để trao phó. Thật ra, Người nói câu này không phải vì thiếu mục tử, như thể là vị ngôn sứ đã có ý nói về thời đại xấu xa phải đến này. Ngay khi chính ông Phê-rô và các tông đồ còn sống ở trần gian này, thì vẫn một mình Chúa nói : Tôi còn có những chiên khác, không thuộc ràn này. Tôi cũng phải đưa chúng về, để chỉ có một đoàn chiên và một mục tử ; Người nói thế, vì nơi một mình người, tất cả chỉ là một.
+
+Vậy tất cả các mục tử đều hãy ở trong Vị Mục Tử duy nhất, hãy nói lên một tiếng nói duy nhất của Vị Mục Tử đó, để đàn chiên nghe và đi theo Vị Mục Tử của mình, không phải theo người này hay kẻ kia, mà theo một Vị Mục Tử duy nhất. Ước gì nơi Vị Mục Tử duy nhất này, mọi người chỉ nói một tiếng nói, chứ không nói những tiếng khác nhau : Thưa anh em, tôi khuyên tất cả anh em hãy nhất trí với nhau trong lời ăn tiếng nói, và đừng có sự chia rẽ giữa anh em. Ước gì tiếng nói này, một khi đã được gạn lọc khỏi mọi chia rẽ và tẩy sạch mọi tà thuyết, thì được các chiên nghe mà đi theo Vị Mục Tử của mình, như Người nói : Chiên của tôi thì nghe tiếng tôi và theo tôi.

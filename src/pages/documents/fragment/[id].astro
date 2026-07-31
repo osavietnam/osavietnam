@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('documents', (e) => !e.data.draft);
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<html lang={d.lang ?? 'vi'}>
+<head><meta charset="UTF-8" /></head>
+<body>
+<div
+  class="doc-fragment"
+  data-title={d.title}
+  data-subtitle={d.subtitle ?? ''}
+>
+  <div class="doc-fragment-translator">
+    {d.translator && (
+      <span class="translator">
+        <span class="translator-name">{d.translator}</span>
+        {d.translatorNote && <span class="translator-note" set:html={d.translatorNote} />}
+      </span>
+    )}
+  </div>
+  <div class="doc-fragment-content"><Content /></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleHero from '../../components/ArticleHero.astro';
+import ArticleLectionaryMeta from '../../components/ArticleLectionaryMeta.astro';
+import ArticleProseMeta from '../../components/ArticleProseMeta.astro';
+import { articleCategoryTone, articleCategoryVariant } from '../../utils/article-category';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const articles = await getCollection(
+    'bai-viet',
+    ({ id, data }) => id.startsWith('bai-giang-suy-niem/') && !data.draft,
+  );
+
+  return articles.map((entry) => ({
+    params: { slug: entry.id.replace(/^bai-giang-suy-niem\//, '') },
+    props: {
+      entry,
+      related: articles
+        .filter((article) => article.id !== entry.id)
+        .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { entry, related } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const cover = d.image ?? d.heroImage;
+const socialImage = cover
+  ? (await getImage({ src: cover, width: 1200, height: 630, fit: 'cover' })).src
+  : undefined;
+const articleHref = (id: string) => `/bai-giang-suy-niem/${id.replace(/^bai-giang-suy-niem\//, '')}/`;
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.excerpt}
+  image={socialImage}
+  type="article"
+  bodyClass="no-sidebar page-spirit-article page-sermon-article"
+>
+  <main class="sermon-reader">
+    <ArticleHero
+      title={d.title}
+      category={d.category ?? 'Bài Giảng – Suy Niệm'}
+      subtitle={d.subtitle}
+      author={d.author}
+      image={cover}
+    />
+
+    <nav class="sermon-breadcrumb" aria-label="Đường dẫn">
+      <a href="/bai-giang-suy-niem/">Bài Giảng – Suy Niệm</a>
+      <span aria-hidden="true">/</span>
+      <span
+        class="article-category-badge"
+        data-category-tone={articleCategoryTone(d.category)}
+        data-category-variant={articleCategoryVariant(d.category)}
+      >{d.category}</span>
+    </nav>
+
+    <div class="article-shell sermon-reader-shell">
+      <article class="prose spirit-reader-prose">
+        <ArticleProseMeta author={d.author} details={d.authorDetails} />
+        <ArticleLectionaryMeta readings={d.readings} />
+        <Content />
+      </article>
+    </div>
+
+    {related.length > 0 && (
+      <section class="sermon-related" aria-labelledby="sermon-related-title">
+        <header class="idx-section-heading"><h2 id="sermon-related-title">Đọc Tiếp</h2></header>
+        <div>
+          {related.map((article) => (
+            <a href={articleHref(article.id)}>
+              {(article.data.image || article.data.heroImage) && (
+                <figure>
+                  <Image src={article.data.image ?? article.data.heroImage!} alt="" width={720} height={405} loading="lazy" />
+                </figure>
+              )}
+              <small
+                class="article-category-badge"
+                data-category-tone={articleCategoryTone(article.data.category)}
+                data-category-variant={articleCategoryVariant(article.data.category)}
+              >{article.data.category}</small>
+              <h3>{article.data.title}</h3>
+              <span>{article.data.author}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>
+
+<style>
+  .sermon-reader { width:min(100% - 3rem,112rem); margin:0 auto; padding:0 0 7rem; }
+  .sermon-breadcrumb { display:flex; align-items:center; flex-wrap:wrap; gap:.8rem; margin:0 0 3rem; color:var(--ink-cream-soft); font:500 1.2rem/1.45 var(--font-ui); }
+  .sermon-breadcrumb a { color:inherit; text-decoration:none; }
+  .sermon-breadcrumb a:hover { color:var(--gold); }
+  .sermon-reader-shell { margin:0 auto; padding-top:.5rem; }
+  .sermon-related { width:min(100%,106rem); margin:6rem auto 0; }
+  .sermon-related > .idx-section-heading { margin-bottom:1.7rem; }
+  .sermon-related > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1.2rem,2vw,2rem); }
+  .sermon-related a { display:flex; min-width:0; flex-direction:column; color:inherit; text-decoration:none; }
+  .sermon-related figure { aspect-ratio:16/9; margin:0 0 1.2rem; overflow:hidden; background:var(--bg-card); }
+  .sermon-related figure :global(img) { display:block; width:100%; height:100%; object-fit:cover; transition:transform .28s ease,opacity .28s ease; }
+  .sermon-related a:hover figure :global(img) { opacity:.86; transform:scale(1.025); }
+  .sermon-related small { margin-bottom:.85rem; }
+  .sermon-related h3 { margin:0; color:var(--ink-cream); font:600 1.55rem/1.38 var(--font-display); }
+  .sermon-related a > span { margin-top:.75rem; color:var(--ink-cream-soft); font:500 1.02rem/1.4 var(--font-ui); }
+  :global(html[data-theme='light']) .sermon-breadcrumb { color:#5f6c64; }
+  :global(html[data-theme='light']) .sermon-breadcrumb a:hover,
+  :global(html[data-theme='light']) .sermon-related h3 { color:var(--accent); }
+  @media (max-width:700px) {
+    .sermon-reader { width:min(100% - 1.5rem,112rem); }
+    .sermon-breadcrumb { gap:.6rem; margin-bottom:2.4rem; font-size:1.05rem; }
+    .sermon-related { margin-top:4rem; }
+    .sermon-related > div { grid-template-columns:1fr; }
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  sub?: string;
+  subtitle?: string;
+  desc?: string;
+  ornament?: string;
+}
+const { title, sub, subtitle, desc, ornament = '✦' } = Astro.props;
+---
+<header class="lib-masthead">
+  <slot name="sub" />
+  {sub && <p class="lib-masthead-sub">{sub}</p>}
+  <h1 class="lib-masthead-title">{title}</h1>
+  {subtitle && <p class="lib-masthead-subtitle">{subtitle}</p>}
+  {desc && <p class="lib-masthead-desc" set:html={desc}></p>}
+  <div class="lib-masthead-rule">
+    <span class="lib-masthead-ornament">{ornament}</span>
+  </div>
+</header>

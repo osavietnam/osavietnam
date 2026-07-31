@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import LibraryMasthead from './LibraryMasthead.astro';
+
+interface Props {
+  title: string;
+  category?: string;
+  subtitle?: string;
+  author?: string;
+  image?: ImageMetadata;
+}
+
+const {
+  title,
+  category,
+  subtitle,
+  image,
+} = Astro.props;
+---
+
+{image ? (
+  <header class="article-hero">
+    <Image src={image} alt="" width={1920} height={1080} loading="eager" />
+    <h1 class="article-hero-a11y">{title}</h1>
+  </header>
+) : (
+  <LibraryMasthead
+    class="article-hero-fallback"
+    eyebrow={category}
+    title={title}
+    description={subtitle}
+  />
+)}
+
+<style>
+  .article-hero {
+    position:relative;
+    left:50%;
+    width:min(94vw,160rem);
+    max-width:160rem;
+    height:auto;
+    aspect-ratio:16/9;
+    margin:0 0 1.8rem;
+    overflow:hidden;
+    border:0;
+    border-radius:0;
+    background:var(--bg-card);
+    box-shadow:none;
+    transform:translateX(-50%);
+    isolation:isolate;
+  }
+  .article-hero > img {
+    position:absolute;
+    inset:0;
+    z-index:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+  .article-hero-a11y {
+    position:absolute;
+    width:1px;
+    height:1px;
+    margin:-1px;
+    padding:0;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+  .article-hero-fallback { max-width:92rem; margin:0 auto 3rem; }
+  @media (max-width:700px) {
+    .article-hero {
+      width:100vw;
+      max-width:none;
+      height:auto;
+      aspect-ratio:16/9;
+      margin-bottom:1.3rem;
+    }
+    .article-hero > img { object-position:center; }
+  }
+</style>

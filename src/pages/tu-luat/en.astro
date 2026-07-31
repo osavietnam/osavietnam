@@ -1,0 +1,10 @@
+---
+import { getEntry } from 'astro:content';
+import DocumentReader from '../../components/DocumentReader.astro';
+const entry = await getEntry('documents', 'tu-luat-en');
+if (!entry) return Astro.redirect('/404');
+---
+<DocumentReader entry={entry} langs={[
+  { label: 'Tiếng Việt', href: '/tu-luat/', current: false, id: 'tu-luat-vi' },
+  { label: 'English', href: '/tu-luat/en/', current: true, id: 'tu-luat-en' },
+]} />

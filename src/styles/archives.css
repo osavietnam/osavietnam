@@ -1,0 +1,495 @@
+/* --- CSS for Archives Page ("Scriptorium Timeline") --- */
+
+/* --- 1. Page-wide Styles & Filter Controls --- */
+.page-archives .content {
+    padding-top: 4rem;
+}
+
+.archive-controls {
+    max-width: 1000px;
+    margin: 0 auto 4rem auto;
+    padding: 2rem;
+    background: rgba(13, 31, 43, 0.7);
+
+    border-radius: 8px;
+}
+
+.archive-title {
+    text-align: center;
+    font-size: 3.7rem;
+    color: #fcefdc;
+    margin-bottom: 1rem;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.filter-bar .search-input {
+    min-width: 250px;
+    flex-grow: 1;
+}
+
+/* --- 2. Timeline Structure --- */
+.timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem 0;
+}
+
+/* The central timeline bar */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: rgba(168, 139, 92, 0.2);
+}
+
+.timeline-year-marker {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: #a88b5c;
+    text-align: center;
+    margin: 3rem 0;
+    background-color: #0d1f2b; /* Matches page background to create a break in the line */
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 2rem;
+    z-index: 1;
+}
+
+.timeline-entry {
+    position: relative;
+    width: 50%;
+    padding: 0 4rem; /* Changed padding to remove top/bottom spacing */
+    margin-bottom: 4rem;
+    box-sizing: border-box;
+}
+
+.timeline-entry-left { left: 0; }
+.timeline-entry-right { left: 50%; }
+
+.timeline-node {
+    position: absolute;
+    top: 1.5rem; /* Aligns with the center of the seal */
+    width: 40px;
+    height: 40px;
+    background: #112230;
+    border: 2px solid rgba(168, 139, 92, 0.4);
+    border-radius: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.timeline-entry-left .timeline-node { right: -21px; }
+.timeline-entry-right .timeline-node { left: -21px; }
+
+
+/* --- 3. The "Sealed Letter" Card Component --- */
+.letter-card {
+    position: relative;
+    background: #102433; /* Darker base for texture */
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+
+    /* CSS-only parchment texture; avoids a fragile external asset dependency. */
+    background-image:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.035), transparent 24%),
+        radial-gradient(circle at 78% 68%, rgba(0,0,0,0.12), transparent 30%),
+        linear-gradient(135deg, rgba(168,139,92,0.045), transparent 42%);
+    box-shadow:
+        inset 0 0 0 1px rgba(168, 139, 92, 0.2),
+        inset 0 0 15px rgba(0,0,0,0.6),
+        0 5px 15px rgba(0,0,0,0.3);
+
+    /* A subtle hint of a folded edge */
+    border-left: 2px solid rgba(168, 139, 92, 0.1);
+
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.letter-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        inset 0 0 0 1px rgba(168, 139, 92, 0.4),
+        inset 0 0 20px rgba(0,0,0,0.7),
+        0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* In css/archives.css */
+
+/* A more simple and beautiful wax seal */
+.letter-seal {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+
+    /* Subtle gradient for a richer color */
+
+
+    /* Organic, hand-pressed shape */
+    border-radius: 55% 45% 48% 52% / 50% 52% 48% 50%;
+
+    /* Clean, soft shadow */
+    box-shadow: 2px 3px 6px rgba(0,0,0,0.4);
+
+    /* Emblem as a mask for a sharp, gold icon */
+    -webkit-mask-image: url('/db/emblem.svg');
+    mask-image: url('/db/emblem.svg');
+    -webkit-mask-size: 60%;
+    mask-size: 60%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: #a88b5c; /* Antique gold color for the emblem */
+}
+
+/* Header for metadata */
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(168, 139, 92, 0.3);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.3rem;
+    color: #a88b5c;
+}
+
+/* Main content body */
+.letter-title {
+    font-family: 'Lora', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fcefdc;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+.letter-summary {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+}
+
+.letter-read-link {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    color: #a88b5c;
+    text-decoration: none;
+    font-size: 1.4rem;
+    transition: color 0.2s ease;
+}
+
+.letter-read-link:hover {
+    color: #d4ad4a;
+    text-decoration: underline;
+}
+
+/* --- 4. Reading View --- */
+.archive-back-button {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.6rem;
+    color: #a88b5c;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 3rem;
+   padding: 3rem;
+}
+.archive-back-button:hover { color: #d4ad4a; }
+
+.archive-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(168, 139, 92, 0.2);
+}
+
+.archive-header h1 { font-size: 4rem; }
+.archive-header .archive-meta {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.6rem;
+    color: #a88b5c;
+    margin-top: 1rem;
+}
+
+#reading-content-body .subpara:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 7.5rem;
+    color: #a88b5c;
+    float: left;
+    line-height: 0.8;
+    padding-right: 1.5rem;
+    font-weight: 700;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #9ab;
+    margin-top: 4rem;
+}
+
+/* --- 5. Mobile Responsive Styles --- */
+@media screen and (max-width: 768px) {
+
+    .timeline-container::before {
+        left: 20px;
+    }
+    .timeline-entry {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 1rem;
+    }
+    .timeline-entry-right {
+        left: 0;
+    }
+    .timeline-node {
+        left: 0;
+    }
+    .filter-bar {
+        flex-direction: column;
+    }
+    .filter-bar .search-input,
+    .filter-bar .custom-select-wrapper {
+        width: 65%;
+    }
+    .filter-bar .custom-select-wrapper select {
+    width: 100%; /* Ensures the select box fills its container */
+}
+}
+
+/* In css/archives.css */
+
+/* --- 6. Immersive Letter Reading View (Optimized) --- */
+
+/* Add these fonts to your main HTML head if you haven't already */
+/* @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap'); */
+
+.letter-paper {
+    position: relative;
+    overflow: hidden;
+
+    /* A subtle gradient and texture for a more realistic paper feel */
+    background-color: #f8f5f0; /* Base vellum color */
+    background-image:
+        radial-gradient(circle at 16% 18%, rgba(116, 91, 58, 0.035) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 72% 64%, rgba(116, 91, 58, 0.025) 0 1px, transparent 1.5px),
+        linear-gradient(to bottom, rgba(253, 250, 245, 1), rgba(248, 245, 240, 1));
+    background-size: 17px 19px, 23px 29px, auto;
+    background-blend-mode: multiply;
+
+    color: #3a352f;
+    max-width: 80ch;
+    margin: 4rem auto;
+    padding: 5rem 6rem;
+    border-radius: 3px;
+
+    /* Softer, more realistic multi-layered shadow */
+    box-shadow:
+        inset 0 0 2px rgba(139, 115, 82, 0.2),  /* Subtle inner edge */
+        0 3px 8px rgba(0,0,0,0.15),              /* Close, soft shadow */
+        0 25px 50px -12px rgba(0,0,0,0.4);      /* Diffuse ambient shadow */
+}
+
+
+
+.letter-header-meta {
+    text-align: right;
+    font-style: italic;
+    font-family: 'Lora', serif;
+    color: #5c554f;
+    margin-bottom: 4rem;
+}
+
+.letter-salutation {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+
+
+/* Override default dark-theme text styles inside the letter */
+.letter-paper h1, .letter-paper h2, .letter-paper h3,
+.letter-paper h4, .letter-paper p, .letter-paper .subpara {
+    color: #3a352f;
+}
+
+.letter-paper .subpara {
+    font-size: 1.7rem;
+    line-height: 1.8;
+}
+
+.letter-closing {
+    margin-top: 4rem;
+}
+
+.letter-signature {
+    font-family: 'Caveat', cursive;
+    font-size: 2.8rem;
+    color: #5c554f;
+    margin: 0;
+}
+
+.letter-signature-title {
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.letter-footer-seal {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 4rem;
+    width: 60px;
+    height: 60px;
+    opacity: 0.8;
+
+    /* Use the new, simpler seal design */
+    background: radial-gradient(circle at 70% 30%, #a13a3a, #8c2a2a 90%);
+    border-radius: 55% 45% 48% 52% / 50% 52% 48% 50%;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
+    -webkit-mask-image: url('/db/emblem.svg');
+    mask-image: url('/db/emblem.svg');
+    -webkit-mask-size: 60%;
+    mask-size: 60%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: #a88b5c;
+}
+
+/* In css/archives.css */
+
+/* --- 7. Letter Content Section Overrides --- */
+/*
+    This code specifically targets sections inside the letter paper
+    and removes the default dark-theme box styling.
+*/
+
+/* Reset the wrapper's margin and display properties */
+.letter-paper .section-wrapper {
+    margin: 0;
+    display: block !important; /* Ensure it's always visible */
+    padding-top: 2.5rem; /* Add space above the new section */
+    margin-top: 2.5rem; /* Add more space */
+
+    /* Add a simple, elegant horizontal line as a separator */
+    border-top: 1px solid rgba(139, 115, 82, 0.2);
+}
+
+/* Completely remove the default box, border, and shadow from the container */
+.letter-paper .section-container {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* Style the section title (h3) to be a clean subheading within the letter */
+.letter-paper .section-container h3 {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: left;
+    color: #3a352f; /* Match the main ink color */
+    margin-bottom: 2rem;
+}
+
+
+/* In css/archives.css */
+
+/* --- 8. PDF Link Styles --- */
+
+/* Container for the action links on the letter card */
+.letter-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+/* Style for the small PDF link on the timeline card */
+.letter-pdf-link {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #a88b5c;
+    text-decoration: none;
+    border: 1px solid rgba(168, 139, 92, 0.4);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.letter-pdf-link:hover {
+    background-color: rgba(168, 139, 92, 0.1);
+    border-color: #a88b5c;
+    color: #d4ad4a;
+}
+
+/* Style for the "View Original" button in the reading view header */
+.archive-pdf-button {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #a88b5c;
+    background-color: transparent;
+    border: 1px solid #a88b5c;
+    border-radius: 50px;
+    padding: 0.8rem 2.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block; /* Makes it a block-level element for positioning */
+    margin-bottom: 2rem;
+}
+
+.archive-pdf-button:hover {
+    background-color: #a88b5c;
+    color: #0d1f2b;
+}
+
+/* New container for the PDF button in the letter view */
+.letter-actions-header {
+    text-align: right;
+    margin-bottom: -2rem; /* Pulls it up into the top padding */
+}
+
+/* Adjust the generic header to have the button on the right */
+.archive-header {
+    position: relative;
+}
+.archive-header .archive-pdf-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

@@ -1,0 +1,338 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LibraryMasthead from '../../../components/LibraryMasthead.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('augustine-encyclopedia', ({ data }) => !data.draft))
+    .filter((entry) => entry.data.entryType !== 'cross-reference')
+    .sort((a, b) =>
+      a.data.letter.localeCompare(b.data.letter, 'en')
+      || a.data.title.localeCompare(b.data.title, 'en')
+      || a.data.order - b.data.order
+    );
+
+  return entries.map((entry) => ({
+    params: { slug: entry.id.split('/').at(-1) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const {
+  title,
+  titleVi,
+  author,
+  bibliography,
+  translationStatus,
+} = entry.data;
+const tocHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const hasToc = tocHeadings.length > 0;
+const displayTitle = titleVi || title;
+---
+
+<BaseLayout
+  title={`${displayTitle} — Bách Khoa Thánh Augustinô`}
+  description={`${title}${author ? `, do ${author} biên soạn` : ''} — Augustine through the Ages.`}
+  bodyClass="no-sidebar page-thanh-au-tinh page-augustine-encyclopedia-entry"
+  type="article"
+>
+  <main class="aug-ency-reader">
+    <nav class="aug-ency-breadcrumb" aria-label="Đường dẫn">
+      <a href="/thanh-au-tinh/#bach-khoa">Thánh Augustinô</a>
+      <span aria-hidden="true">/</span>
+      <a href="/thanh-au-tinh/#thu-vien-bach-khoa">Bách khoa</a>
+      <span aria-hidden="true">/</span>
+      <span>{entry.data.letter}</span>
+    </nav>
+
+    <LibraryMasthead
+      class="aug-ency-entry-masthead"
+      eyebrow={author || 'Mục dẫn chiếu'}
+      title={displayTitle}
+      description={titleVi && titleVi !== title ? title : undefined}
+      level={1}
+    />
+
+    {hasToc && (
+      <nav class="aug-ency-inline-toc" aria-label="Mục lục bài viết">
+        <p>Mục lục</p>
+        <ul>
+          {tocHeadings.map((heading) => (
+            <li class={`toc-depth-${heading.depth}`}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="article-shell aug-ency-article-shell">
+      <article class="prose aug-ency-prose">
+        {translationStatus !== 'placeholder' && <Content />}
+
+        {bibliography.length > 0 && (
+          <details class="prose-source aug-ency-bibliography">
+            <summary>
+              <span class="prose-source-tag">Thư mục</span>
+              <span class="aug-ency-bibliography-toggle">
+                <span class="aug-ency-bibliography-open">Mở rộng</span>
+                <span class="aug-ency-bibliography-close">Thu gọn</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m7 10 5 5 5-5" />
+                </svg>
+              </span>
+            </summary>
+            <div class="prose-source-text aug-ency-bibliography-list">
+              {bibliography.map((citation) => <p>{citation}</p>)}
+            </div>
+          </details>
+        )}
+      </article>
+    </div>
+  </main>
+
+  {hasToc && (
+    <div id="docFloatToc" class="aug-ency-float-toc">
+      <div id="dftPanel">
+        <p class="ffp-label">Mục Lục</p>
+        <nav id="dftNav" aria-label="Mục lục nhanh">
+          {tocHeadings.map((heading) => (
+            <a
+              href={`#${heading.slug}`}
+              class={`bft-link bft-depth-${heading.depth}`}
+              data-slug={heading.slug}
+            >
+              {heading.text}
+            </a>
+          ))}
+        </nav>
+      </div>
+      <button
+        id="dftBtn"
+        type="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="Mục lục"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="16" y2="12" />
+          <line x1="3" y1="18" x2="11" y2="18" />
+        </svg>
+        <span>Mục Lục</span>
+      </button>
+    </div>
+  )}
+
+  <script>
+    const inlineToc = document.querySelector<HTMLElement>('.aug-ency-inline-toc');
+    const floatToc = document.querySelector<HTMLElement>('.aug-ency-float-toc');
+    const floatPanel = floatToc?.querySelector<HTMLElement>('#dftPanel');
+    const floatButton = floatToc?.querySelector<HTMLButtonElement>('#dftBtn');
+    const tocLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('.aug-ency-inline-toc a, .aug-ency-float-toc .bft-link')
+    );
+
+    const setPanelOpen = (open: boolean) => {
+      floatPanel?.classList.toggle('open', open);
+      floatButton?.setAttribute('aria-expanded', String(open));
+    };
+
+    const updateFloatVisibility = () => {
+      if (!inlineToc || !floatToc) return;
+      const show = inlineToc.getBoundingClientRect().bottom <= 86;
+      floatToc.classList.toggle('show', show);
+      if (!show) setPanelOpen(false);
+    };
+
+    floatButton?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setPanelOpen(!floatPanel?.classList.contains('open'));
+    });
+
+    floatPanel?.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setPanelOpen(false);
+      else event.stopPropagation();
+    });
+
+    document.addEventListener('click', () => setPanelOpen(false));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setPanelOpen(false);
+    });
+    window.addEventListener('scroll', updateFloatVisibility, { passive: true });
+    window.addEventListener('resize', updateFloatVisibility);
+    updateFloatVisibility();
+
+    if (tocLinks.length) {
+      const linksById = new Map<string, HTMLAnchorElement[]>();
+      tocLinks.forEach((link) => {
+        const id = link.hash.slice(1);
+        if (!id) return;
+        linksById.set(id, [...(linksById.get(id) ?? []), link]);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          tocLinks.forEach((link) => link.classList.remove('active'));
+          linksById.get(entry.target.id)?.forEach((link) => link.classList.add('active'));
+        });
+      }, { rootMargin: '-90px 0px -68% 0px' });
+
+      linksById.forEach((_, id) => {
+        const heading = document.getElementById(id);
+        if (heading) observer.observe(heading);
+      });
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .aug-ency-reader { width:min(100% - 3rem, 112rem); margin:0 auto; padding:2.4rem 0 5rem; }
+  .aug-ency-breadcrumb {
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:.65rem;
+    margin:0 auto 2.6rem;
+    color:var(--ink-cream-soft);
+    font:500 1.08rem/1.4 var(--font-ui);
+  }
+  .aug-ency-breadcrumb a { color:inherit; text-decoration:none; transition:color .18s ease; }
+  .aug-ency-breadcrumb a:hover,
+  .aug-ency-breadcrumb > span:last-child { color:var(--gold); }
+  .aug-ency-entry-masthead { width:min(100%, 92rem); margin:0 auto 1.2rem; }
+  .aug-ency-entry-masthead :global(.lib-masthead-title) { font-size:clamp(3.2rem, 6vw, 5rem); }
+  .aug-ency-inline-toc {
+    width:min(100%, 92rem);
+    margin:.4rem auto 3rem;
+    padding:.45rem 0 1.4rem;
+    border-bottom:1px solid rgba(233,193,118,.12);
+  }
+  .aug-ency-inline-toc > p {
+    margin:0 0 .8rem;
+    color:var(--gold-dim);
+    font:700 .92rem/1 var(--font-ui);
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+  .aug-ency-inline-toc ul {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.14rem;
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  .aug-ency-inline-toc li { min-width:0; }
+  .aug-ency-inline-toc a {
+    display:block;
+    padding:.48rem 0;
+    color:var(--ink-cream-soft);
+    font:500 1.26rem/1.45 var(--font-ui);
+    text-decoration:none;
+    transition:color .16s ease;
+  }
+  .aug-ency-inline-toc a:hover,
+  .aug-ency-inline-toc a.active { color:var(--gold); }
+  .aug-ency-inline-toc .toc-depth-3 a {
+    padding-left:1.2rem;
+    color:rgba(201,191,169,.72);
+    font-size:1.14rem;
+  }
+  .aug-ency-inline-toc .toc-depth-3 a:hover,
+  .aug-ency-inline-toc .toc-depth-3 a.active { color:var(--gold); }
+  .aug-ency-article-shell { width:min(100%, 112rem); margin:0 auto; }
+  .aug-ency-bibliography { margin-top:3.2rem; }
+  .aug-ency-bibliography summary {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding:.1rem 0 .35rem;
+    cursor:pointer;
+    list-style:none;
+  }
+  .aug-ency-bibliography summary::-webkit-details-marker { display:none; }
+  .aug-ency-bibliography summary .prose-source-tag { margin:0; }
+  .aug-ency-bibliography-toggle {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.45rem;
+    color:var(--ink-cream-soft);
+    font:600 .92rem/1 var(--font-ui);
+    letter-spacing:.04em;
+    transition:color .18s ease;
+  }
+  .aug-ency-bibliography-toggle svg {
+    width:1.15rem;
+    height:1.15rem;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    transition:transform .18s ease;
+  }
+  .aug-ency-bibliography summary:hover .aug-ency-bibliography-toggle { color:var(--gold); }
+  .aug-ency-bibliography-close { display:none; }
+  .aug-ency-bibliography[open] .aug-ency-bibliography-open { display:none; }
+  .aug-ency-bibliography[open] .aug-ency-bibliography-close { display:inline; }
+  .aug-ency-bibliography[open] .aug-ency-bibliography-toggle svg { transform:rotate(180deg); }
+  .aug-ency-bibliography-list {
+    display:grid;
+    gap:.45rem;
+    margin:.65rem 0 0;
+    padding:.75rem .2rem .2rem;
+    font-size:1.08rem !important;
+    line-height:1.54;
+    opacity:.78;
+  }
+  .aug-ency-bibliography-list p {
+    margin:0;
+    font-size:inherit !important;
+    line-height:inherit !important;
+  }
+
+  :global(html[data-theme="light"]) .aug-ency-breadcrumb,
+  :global(html[data-theme="light"]) .aug-ency-breadcrumb { color:#5d665d; }
+  :global(html[data-theme="light"]) .aug-ency-bibliography-toggle { color:#5d665d; }
+  :global(html[data-theme="light"]) .aug-ency-breadcrumb > span:last-child,
+  :global(html[data-theme="light"]) .aug-ency-bibliography summary:hover .aug-ency-bibliography-toggle { color:#8f6129; }
+  :global(html[data-theme="light"]) .aug-ency-inline-toc { border-bottom-color:rgba(26,94,60,.12); }
+  :global(html[data-theme="light"]) .aug-ency-inline-toc > p { color:#8f6129; }
+  :global(html[data-theme="light"]) .aug-ency-inline-toc a { color:#4d5b51; }
+  :global(html[data-theme="light"]) .aug-ency-inline-toc .toc-depth-3 a { color:#68746b; }
+  :global(html[data-theme="light"]) .aug-ency-inline-toc a:hover,
+  :global(html[data-theme="light"]) .aug-ency-inline-toc a.active,
+  :global(html[data-theme="light"]) .aug-ency-inline-toc .toc-depth-3 a:hover,
+  :global(html[data-theme="light"]) .aug-ency-inline-toc .toc-depth-3 a.active { color:#1a5e3c; }
+
+  @media (max-width:640px) {
+    .aug-ency-reader { width:min(100% - 2rem, 60rem); padding-top:1.4rem; }
+    .aug-ency-breadcrumb { margin-bottom:2rem; font-size:.98rem; }
+    .aug-ency-entry-masthead { margin-bottom:.8rem; }
+    .aug-ency-entry-masthead :global(.lib-masthead-title) { font-size:clamp(2.6rem, 10vw, 3.5rem); }
+    .aug-ency-inline-toc { margin-top:.1rem; margin-bottom:2.2rem; padding:.35rem 0 1.1rem; }
+    .aug-ency-inline-toc ul { gap:.08rem; }
+    .aug-ency-inline-toc a { padding:.42rem 0; font-size:1.14rem; }
+    .aug-ency-inline-toc .toc-depth-3 a { font-size:1.06rem; }
+    .aug-ency-bibliography { margin-top:2.5rem; }
+    .aug-ency-bibliography-list { padding:.65rem .1rem .1rem; font-size:1.02rem !important; line-height:1.5; }
+  }
+</style>

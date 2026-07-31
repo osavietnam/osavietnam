@@ -1,0 +1,10 @@
+---
+import { getEntry } from 'astro:content';
+import DocumentReader from '../../components/DocumentReader.astro';
+const entry = await getEntry('documents', 'hien-chuong-en');
+if (!entry) return Astro.redirect('/404');
+---
+<DocumentReader entry={entry} langs={[
+  { label: 'Tiếng Việt', href: '/hien-chuong/', current: false, id: 'hien-chuong-vi' },
+  { label: 'English', href: '/hien-chuong/en/', current: true, id: 'hien-chuong-en' },
+]} />

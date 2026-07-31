@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import AugustineLifeLibrary from '../../components/AugustineLifeLibrary.astro';
+import pageHeaders from '../../data/page-headers.json';
+const lsdPh = (pageHeaders as Record<string, Record<string, string>>)['lich-su-dong'];
+
+const headings = [
+  { depth: 2, slug: 'nguon-goc-dan-tu-tai-bac-phi',   text: 'Nguồn Gốc Đan Tu tại Bắc Phi' },
+  { depth: 2, slug: 'the-ky-xiii-thanh-lap-dong',      text: 'Thế Kỷ XIII — Thành Lập Dòng' },
+  { depth: 2, slug: 'dai-lien-ket-1256',               text: 'Đại Liên Kết 1256' },
+  { depth: 2, slug: 'hai-nen-tang-can-tinh',           text: 'Hai Nền Tảng' },
+];
+---
+<BaseLayout title="Lịch Sử Dòng" bodyClass="no-sidebar" banner="lich-su-dong">
+
+  <header class="lsd-head">
+    <p class="lsd-eyebrow" data-oe-target="ph" data-oe="eyebrow">{lsdPh.eyebrow}</p>
+    <h1 class="lsd-title" data-oe-target="ph" data-oe="title">{lsdPh.title}</h1>
+    <div class="lsd-rule">
+      <span class="lsd-emblem-frame" aria-hidden="true">
+        <img src="/images/emblem.svg" alt="" class="lsd-emblem lsd-emblem-dark" />
+        <img src="/images/emblem-color-transparent.png" alt="" class="lsd-emblem lsd-emblem-light" />
+      </span>
+    </div>
+  </header>
+
+  <section class="lsd-primary">
+  <!-- ── Tab bar ── -->
+  <div class="lsd-tab-bar shared-tab-bar shared-tab-bar-compact" role="tablist" aria-label="Giai đoạn lịch sử">
+    <button class="lsd-tab-btn shared-tab-btn active" role="tab" id="tab-nguon-goc-btn"
+      aria-controls="panel-nguon-goc" aria-selected="true" data-tab="nguon-goc">
+      Thế kỷ IV – 1256
+    </button>
+  </div>
+
+  <!-- ── Panel ── -->
+  <div class="lsd-panel" id="panel-nguon-goc" role="tabpanel" aria-labelledby="tab-nguon-goc-btn">
+    <div class="article-shell has-toc" id="lsd-history-overview">
+      <TableOfContents headings={headings} />
+      <article class="prose">
+        <h2 id="nguon-goc-dan-tu-tai-bac-phi">Nguồn Gốc Đan Tu tại Bắc Phi</h2>
+        <p>Lịch sử Dòng Ẩn Tu Thánh Augustinô bắt nguồn từ cuộc đời và giáo huấn của Thánh Augustinô thành Hippô (354–430), và được Giáo Hội chính thức cơ cấu hóa vào thế kỷ XIII.</p>
+        <p>Dòng nhìn nhận Thánh Augustinô là cha, thầy và người hướng dẫn tâm linh. Được truyền cảm hứng từ cộng đoàn Kitô hữu tiên khởi tại Giêrusalem, ngài thiết lập một hình thức đời sống tu trì đặc trưng bởi sự hiệp thông và chia sẻ của cải. Ngài sống lý tưởng này trước tiên với tư cách giáo dân tại Tagaste, rồi sau đó với tư cách linh mục và giám mục tại Hippô. Lối sống này, được ghi lại trong <em>Tu Luật</em> và các tác phẩm của ngài, lan rộng khắp Bắc Phi thời La Mã và được lưu truyền qua nhiều thế kỷ.</p>
+
+        <h2 id="the-ky-xiii-thanh-lap-dong">Thế Kỷ XIII — Thành Lập Dòng</h2>
+        <p>Ngày 16 tháng 12 năm 1243, Đức Giáo Hoàng Innocent IV ban sắc chỉ <em>Incumbit nobis</em>, kêu gọi các cộng đoàn ẩn tu tại Tuscany (Italia) hợp nhất thành một Dòng tu duy nhất theo Tu Luật và lối sống của Thánh Augustinô. Tháng 3 năm 1244, các tu sĩ ẩn tu tổ chức tổng tu nghị thành lập tại Roma dưới sự chủ trì của Hồng Y Richard Annibaldi và chính thức thực hiện cuộc hợp nhất. Đây là điểm khởi đầu của lịch sử Dòng Thánh Augustinô.</p>
+        <p>Đức Giáo Hoàng chỉ thị cho các tu sĩ ẩn tu Tuscany bầu một Bề Trên Tổng Quyền và soạn thảo Hiến Pháp. Từ đó, họ được biết đến với tên gọi <strong>Dòng Ẩn Tu Thánh Augustinô</strong> (<em>Ordo Sancti Augustini</em>).</p>
+
+        <h2 id="dai-lien-ket-1256">Đại Liên Kết 1256</h2>
+        <p>Bước phát triển tiếp theo diễn ra ngày 9 tháng 4 năm 1256 với sắc chỉ <em>Licet Ecclesiae Catholicae</em> của Đức Giáo Hoàng Alexanđê IV. Đức Giáo Hoàng phê chuẩn việc sáp nhập các Ẩn Tu Thánh Gioan Người Tốt Lành, các Ẩn Tu Thánh Guilherme, các Ẩn Tu Brettino, các Ẩn Tu Monte Favale và nhiều tu đoàn nhỏ khác vào cùng "một lời khấn và quy luật sống của Dòng Ẩn Tu Thánh Augustinô."</p>
+        <p>Đại Liên Kết được thực hiện tại nền nhà <em>Santa Maria del Popolo</em> ở Roma, một lần nữa dưới sự chủ trì của Hồng Y Annibaldi, với đại diện từ mỗi tu viện. Lanfranc Septala người Milan, nguyên Bề Trên của các Ẩn Tu Thánh Gioan, trở thành Bề Trên Tổng Quyền đầu tiên của Dòng với hơn <strong>180 cộng đoàn</strong> tại Italia, Áo, Đức, Thụy Sĩ, các vùng đất thấp, Pháp, Tây Ban Nha, Bồ Đào Nha, Hungary, Bohemia và Anh.</p>
+        <p>Đại Liên Kết 1256 là bước ngoặt quan trọng trong cuộc cải cách đời sống thánh hiến của Giáo Hội. Mục đích của Đức Giáo Hoàng là chấm dứt sự phân tán do quá nhiều nhóm nhỏ và khai thác sức mạnh tâm linh của họ cho việc giảng thuyết và chăm sóc mục vụ tại các thành phố đang phát triển ở châu Âu. Các tu sĩ Augustinô bước vào hàng ngũ các Dòng Khất Sĩ bên cạnh Dòng Đaminh, Dòng Phanxicô và tiếp theo sau là Dòng Cát Minh.</p>
+
+        <h2 id="hai-nen-tang-can-tinh">Hai Nền Tảng</h2>
+        <p>Căn tính thiêng liêng của Dòng được xây dựng trên hai nền tảng. Thứ nhất là chính bản thân Thánh Augustinô — từ ngài, Dòng nhận lãnh quan niệm về đời sống tu trì, đặc biệt là tầm quan trọng của việc tìm kiếm Thiên Chúa trong nội tâm và đời sống cộng đoàn. Thứ hai là Phong Trào Khất Sĩ — nhờ đó Dòng Thánh Augustinô trở thành một huynh đoàn tông đồ, được sai đến rao giảng cho các tầng lớp thị dân đang lớn mạnh và mang linh đạo Tin Mừng đến với đời sống của người dân.</p>
+      </article>
+    </div>
+  </div>
+  </section>
+
+  <AugustineLifeLibrary kind="history" />
+
+  <!-- OE toolbar -->
+  <div id="oe-bar" class="oe-bar" hidden>
+    <button id="oe-edit-btn" class="oe-bar-btn">✏ Chỉnh sửa</button>
+    <div id="oe-save-row" class="oe-save-row" hidden>
+      <span id="oe-msg" class="oe-msg"></span>
+      <button id="oe-cancel-btn" class="oe-bar-btn oe-bar-cancel">Huỷ</button>
+      <button id="oe-save-btn" class="oe-bar-btn oe-bar-save">Lưu</button>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+/* ── Header ── */
+.lsd-head {
+  text-align: center;
+  padding: 6rem 2rem 3rem;
+  max-width: 92rem;
+  margin: 0 auto;
+}
+.lsd-eyebrow {
+  font-family: 'Be Vietnam Pro', 'Manrope', system-ui, sans-serif;
+  font-size: 1.05rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold-dim, #c5a059);
+  margin: 0 0 1.2rem;
+}
+.lsd-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.6rem, 3.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+  margin: 0 0 1.4rem;
+}
+.lsd-rule {
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 0.8rem;
+}
+.lsd-emblem {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  max-width: 100%; max-height: 100%;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  opacity: 1;
+  filter: none;
+}
+.lsd-emblem-frame {
+  position: relative;
+  display: block;
+  width: 10.89rem;
+  height: 10.89rem;
+  min-width: 10.89rem;
+  min-height: 10.89rem;
+  flex: 0 0 10.89rem;
+  contain: size layout;
+  overflow: visible;
+}
+.lsd-emblem-light { display: none; }
+
+/* ── Tab bar — full width, sticky dưới navbar, đè lên TOC (z 60 > toc z 50) ── */
+.lsd-tab-bar {
+  --shared-tab-margin: 2rem auto 0;
+  position: sticky;
+  top: 6.58rem;
+  z-index: 60;
+  background: var(--bg-main, #101b33);
+}
+.lsd-tab-btn {
+  min-height: 4.4rem;
+}
+.lsd-primary {
+  position: relative;
+}
+
+/* ── Panel ── */
+.lsd-panel[hidden] { display: none; }
+.lsd-panel-head {
+  max-width: 92rem; margin: 0 auto;
+  padding: 2.4rem 2rem 0;
+}
+.lsd-article-sub {
+  font-family: 'Merriweather', serif;
+  font-size: 1.5rem; font-style: italic;
+  color: var(--gold-dim, #c5a059); margin: 0;
+}
+
+/* ── Article shell — không override max-width để đồng bộ với trang khác ── */
+.lsd-panel .article-shell {
+  /* Giữ khe 2rem cố định giữa tab bar và vùng đọc. */
+  margin-top: 2rem;
+  margin-bottom: 8rem;
+}
+
+.lsd-panel #lsd-history-overview { margin-top: 0; }
+.lsd-panel .prose h2,
+.lsd-panel .prose h3,
+.lsd-panel .prose h4 {
+  scroll-margin-top: calc(6.58rem + 4.4rem + 1.6rem);
+}
+
+/* Dự phòng chiều cao TOC ở cuối bài để sticky không bị đẩy lên khi chạm footer. */
+@media (min-width: 1100px) {
+  .lsd-panel .article-shell.has-toc { padding-bottom: 24rem; }
+}
+
+/* ── Light mode ── */
+:global([data-theme="light"]) .lsd-eyebrow { color: var(--gold-dim); }
+:global([data-theme="light"]) .lsd-tab-bar { background: var(--bg-main); }
+@media (max-width: 640px) {
+  .lsd-head { width:100%; padding:4.4rem 1.35rem 2.2rem; }
+  .lsd-title { white-space:normal; overflow-wrap:anywhere; font-size:clamp(2.35rem, 9vw, 3.25rem); line-height:1.18; }
+  .lsd-eyebrow { font-size:.9rem; letter-spacing:.14em; }
+  .lsd-emblem-frame { width:8.6rem; height:8.6rem; min-width:8.6rem; min-height:8.6rem; flex-basis:8.6rem; }
+}
+</style>
+
+<script define:vars={{ phJson: lsdPh }}>
+const tabBtns = document.querySelectorAll('.lsd-tab-btn');
+const panels  = document.querySelectorAll('.lsd-panel');
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    panels.forEach(p => { p.hidden = true; });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    const panel = document.getElementById(`panel-${tab}`);
+    if (panel) panel.hidden = false;
+  });
+});
+
+// ── Inline editing ──
+const oeBar     = document.getElementById('oe-bar');
+const oeEditBtn = document.getElementById('oe-edit-btn');
+const oeSaveRow = document.getElementById('oe-save-row');
+const oeSaveBtn = document.getElementById('oe-save-btn');
+const oeCancelBtn = document.getElementById('oe-cancel-btn');
+const oeMsg     = document.getElementById('oe-msg');
+const oeFields  = document.querySelectorAll('[data-oe]');
+
+fetch('http://localhost:4322/api/page-headers')
+  .then(r => { if (r.ok) oeBar.removeAttribute('hidden'); })
+  .catch(() => {});
+
+let snapshot = {};
+
+function enterEdit() {
+  snapshot = {};
+  oeFields.forEach(el => {
+    snapshot[el.dataset.oe] = el.innerHTML;
+    el.contentEditable = 'true';
+  });
+  document.body.classList.add('oe-editing');
+  oeEditBtn.hidden = true;
+  oeSaveRow.removeAttribute('hidden');
+}
+
+function cancelEdit() {
+  oeFields.forEach(el => {
+    el.innerHTML = snapshot[el.dataset.oe] || el.innerHTML;
+    el.contentEditable = 'false';
+  });
+  document.body.classList.remove('oe-editing');
+  oeEditBtn.hidden = false;
+  oeSaveRow.setAttribute('hidden', '');
+  oeMsg.textContent = '';
+}
+
+async function saveEdit() {
+  const ph = Object.assign({}, phJson);
+  oeFields.forEach(el => {
+    const key = el.dataset.oe;
+    if (el.dataset.oeHtml) ph[key] = el.innerHTML.trim();
+    else ph[key] = el.textContent.trim();
+  });
+
+  oeMsg.textContent = 'Đang lưu…';
+  try {
+    const res = await fetch('http://localhost:4322/api/page-headers/lich-su-dong', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ph),
+    });
+    if (!res.ok) throw new Error(await res.text());
+    oeMsg.textContent = 'Đã lưu ✓';
+    oeFields.forEach(el => { el.contentEditable = 'false'; });
+    document.body.classList.remove('oe-editing');
+    oeEditBtn.hidden = false;
+    oeSaveRow.setAttribute('hidden', '');
+    setTimeout(() => { oeMsg.textContent = ''; }, 2000);
+  } catch (e) {
+    oeMsg.textContent = 'Lỗi: ' + e.message;
+  }
+}
+
+oeEditBtn.addEventListener('click', enterEdit);
+oeCancelBtn.addEventListener('click', cancelEdit);
+oeSaveBtn.addEventListener('click', saveEdit);
+</script>

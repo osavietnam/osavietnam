@@ -1,0 +1,131 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('augnet-history', ({ data }) => !data.draft);
+  const ordered = [...entries].sort((a, b) => a.data.order - b.data.order);
+  return ordered.map((entry) => {
+    const categoryEntries = ordered.filter((item) => item.data.categorySlug === entry.data.categorySlug);
+    const index = categoryEntries.findIndex((item) => item.id === entry.id);
+    return {
+      params: { slug: entry.id.split('/').at(-1) },
+      props: {
+        entry,
+        previous: index > 0 ? categoryEntries[index - 1] : null,
+        next: index < categoryEntries.length - 1 ? categoryEntries[index + 1] : null,
+      },
+    };
+  });
+}
+
+const { entry, previous, next } = Astro.props;
+const { Content } = await render(entry);
+const { code, titleEn, titleVi, category, categorySlug, sourceUrl, translationStatus } = entry.data;
+const categoryVi: Record<string, string> = {
+  general: 'Lịch Sử Tổng Quát',
+  'regional-history': 'Lịch Sử theo Khu Vực',
+  places: 'Địa Điểm',
+  people: 'Nhân Vật',
+};
+const displayCategory = categoryVi[categorySlug] ?? category;
+const displayTitle = titleVi || titleEn;
+const articleHref = (item: typeof entry) => `/lich-su-dong/augnet/${item.id.split('/').at(-1)}/`;
+const statusLabel = { placeholder: 'Chưa dịch', draft: 'Đang dịch', translated: 'Đã dịch' }[translationStatus];
+---
+
+<BaseLayout
+  title={`${code} ${displayTitle}`}
+  description={`${code} ${titleEn} — History of the Augustinian Order, Augnet.`}
+  bodyClass="no-sidebar page-augnet-history"
+  type="article"
+>
+  <main class="aug-history-reader">
+    <nav class="aug-history-breadcrumb" aria-label="Đường dẫn">
+      <a href="/lich-su-dong/">Lịch Sử Dòng</a><span aria-hidden="true">/</span>
+      <a href="/lich-su-dong/#thu-vien-lich-su-augnet">Augnet</a><span aria-hidden="true">/</span>
+      <span>{code}</span>
+    </nav>
+
+    <header class="aug-history-masthead lib-masthead">
+      <div class="aug-history-meta lib-masthead-sub">
+        <span class="aug-history-code">{code}</span>
+        <span>{displayCategory}</span>
+        <span class={`aug-history-status is-${translationStatus}`}>{statusLabel}</span>
+      </div>
+      <h1 class="lib-masthead-title">{displayTitle}</h1>
+      <div class="lib-masthead-rule" aria-hidden="true"><span class="lib-masthead-ornament">✦</span></div>
+      <a class="aug-history-source" href={sourceUrl} target="_blank" rel="noopener noreferrer">
+        <span>Đọc bài gốc trên Augnet</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-8 8M19 13v6H5V5h6" /></svg>
+      </a>
+    </header>
+
+    <div class="article-shell aug-history-article-shell">
+      <article class={`prose aug-history-prose${translationStatus === 'placeholder' ? ' is-placeholder' : ''}`}><Content /></article>
+    </div>
+
+    <section class="aug-history-footer" aria-label="Điều hướng bài lịch sử">
+      <a class="aug-history-all" href="/lich-su-dong/#thu-vien-lich-su-augnet">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <span>Tất cả bài lịch sử Augnet</span>
+      </a>
+      <nav class="aug-history-pager" aria-label="Bài liền kề trong chủ đề">
+        {previous ? <a href={articleHref(previous)} rel="prev"><small>← Bài trước</small><strong><span>{previous.data.code}</span> {previous.data.titleVi || previous.data.titleEn}</strong></a> : <span></span>}
+        {next && <a href={articleHref(next)} rel="next"><small>Bài sau →</small><strong><span>{next.data.code}</span> {next.data.titleVi || next.data.titleEn}</strong></a>}
+      </nav>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .aug-history-reader { width:min(100% - 3rem,112rem); margin:0 auto; padding:2.4rem 0 5rem; }
+  .aug-history-breadcrumb { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; margin:0 0 3.4rem; color:var(--ink-cream-soft); font:500 1.08rem/1.4 var(--font-ui); }
+  .aug-history-breadcrumb a { color:inherit; text-decoration:none; }
+  .aug-history-breadcrumb a:hover, .aug-history-breadcrumb > span:last-child { color:var(--gold); }
+  .aug-history-masthead { max-width:92rem; margin:0 auto 4.6rem; }
+  .aug-history-meta { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.75rem; margin-bottom:1.2rem; color:var(--ink-cream-soft); font:600 1.02rem/1 var(--font-ui); letter-spacing:.06em; }
+  .aug-history-meta > span + span::before { content:'·'; margin-right:.75rem; color:rgba(233,193,118,.45); }
+  .aug-history-code { color:var(--gold); font-weight:800; letter-spacing:.12em; }
+  .aug-history-status { padding:.4rem .65rem; border-radius:999px; color:rgba(201,191,169,.8); background:rgba(201,191,169,.08); letter-spacing:.02em; }
+  .aug-history-status.is-draft { color:#e7c77c; background:rgba(231,199,124,.11); }
+  .aug-history-status.is-translated { color:#83c6a8; background:rgba(79,158,119,.13); }
+  .aug-history-source { display:inline-flex; align-items:center; gap:.55rem; margin-top:2rem; padding:.65rem .9rem; border-radius:.45rem; color:var(--gold); background:rgba(233,193,118,.075); font:600 1.08rem/1 var(--font-ui); text-decoration:none; }
+  .aug-history-source:hover { color:#f1d394; background:rgba(233,193,118,.13); }
+  .aug-history-source svg { width:1.35rem; fill:none; stroke:currentColor; stroke-width:1.7; }
+  .aug-history-article-shell { width:min(100%,112rem); margin:0 auto; }
+  .aug-history-prose.is-placeholder { min-height:0; padding:3.2rem 0; text-align:center; }
+  .aug-history-prose.is-placeholder :global(p:first-of-type) { max-width:56rem; margin:0 auto; padding:0; border:0; background:transparent; color:rgba(201,191,169,.72); font:italic 400 1.42rem/1.65 var(--font-body); text-align:center; }
+  .aug-history-prose.is-placeholder :global(p:first-of-type::first-letter) { float:none; margin:0; color:inherit; font:inherit; }
+  .aug-history-footer { width:min(100%,92rem); margin:4.4rem auto 0; padding-top:2rem; border-top:1px solid rgba(233,193,118,.18); }
+  .aug-history-all { display:inline-flex; align-items:center; gap:.6rem; color:var(--gold); font:600 1.12rem/1 var(--font-ui); text-decoration:none; }
+  .aug-history-all svg { width:1.5rem; fill:none; stroke:currentColor; stroke-width:1.7; }
+  .aug-history-pager { display:grid; grid-template-columns:1fr 1fr; gap:2.4rem; margin-top:2.2rem; }
+  .aug-history-pager a { display:grid; gap:.4rem; min-width:0; padding:.7rem 0; color:inherit; text-decoration:none; }
+  .aug-history-pager a:last-child { text-align:right; }
+  .aug-history-pager a:hover strong { color:var(--gold); }
+  .aug-history-pager small { color:var(--ink-cream-soft); font:500 .95rem/1 var(--font-ui); text-transform:uppercase; letter-spacing:.07em; }
+  .aug-history-pager strong { overflow:hidden; color:var(--ink-cream); font:600 1.18rem/1.45 var(--font-ui); text-overflow:ellipsis; white-space:nowrap; }
+  .aug-history-pager strong span { margin-right:.35rem; color:var(--gold); font-size:1rem; }
+  :global([data-theme="light"]) .aug-history-breadcrumb,
+  :global([data-theme="light"]) .aug-history-meta,
+  :global([data-theme="light"]) .aug-history-pager small { color:#5d665d; }
+  :global([data-theme="light"]) .aug-history-code,
+  :global([data-theme="light"]) .aug-history-source,
+  :global([data-theme="light"]) .aug-history-all,
+  :global([data-theme="light"]) .aug-history-pager strong span { color:#8f6129; }
+  :global([data-theme="light"]) .aug-history-pager strong { color:var(--accent); }
+  :global([data-theme="light"]) .aug-history-prose.is-placeholder :global(p:first-of-type) { color:#6b6e65; }
+  @media (max-width:640px) {
+    .aug-history-reader { width:min(100% - 2rem,60rem); padding-top:1.4rem; }
+    .aug-history-breadcrumb { margin-bottom:2.5rem; font-size:.98rem; }
+    .aug-history-masthead { margin-bottom:3.4rem; }
+    .aug-history-meta { gap:.55rem; font-size:.92rem; }
+    .aug-history-pager { grid-template-columns:1fr; }
+    .aug-history-pager > span:empty { display:none; }
+    .aug-history-pager a:last-child { text-align:left; }
+    .aug-history-pager strong { white-space:normal; }
+  }
+</style>

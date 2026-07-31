@@ -1,0 +1,79 @@
+---
+interface Props {
+  author?: string | null;
+  details?: string[] | null;
+}
+
+const author = Astro.props.author?.trim();
+const details = (Astro.props.details ?? []).map((detail) => detail.trim()).filter(Boolean);
+const isAugustine = Boolean(author && /august(?:inô|ine)/i.test(author));
+---
+
+{author && (
+  <div class:list={['article-prose-meta', { 'is-augustine': isAugustine }]} aria-label={`Tác giả: ${author}`}>
+    <span>Tác giả</span>
+    <i aria-hidden="true">·</i>
+    <strong>{author}</strong>
+    {details.length > 0 && (
+      <span class="article-prose-author-details">
+        {details.map((detail) => <small>{detail}</small>)}
+      </span>
+    )}
+  </div>
+)}
+
+<style>
+  .article-prose-meta {
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:.65rem;
+    width:min(100%,92rem);
+    margin:1.4rem auto 2.8rem;
+    color:var(--ink-cream-soft);
+    font-family:var(--font-ui);
+    line-height:1.4;
+  }
+  .article-prose-meta::before {
+    content:'';
+    width:2.4rem;
+    height:1px;
+    flex:0 0 auto;
+    background:var(--gold-dim);
+  }
+  .article-prose-meta span {
+    color:var(--gold-dim);
+    font-size:.92rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .article-prose-meta i { color:var(--gold-dim); font-size:1rem; font-style:normal; opacity:.72; }
+  .article-prose-meta strong { color:inherit; font-family:var(--font-body); font-size:1.45rem; font-weight:500; letter-spacing:.01em; }
+  .article-prose-author-details {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.3rem .8rem;
+    width:100%;
+    margin-left:3.05rem;
+    color:var(--ink-cream-soft);
+    letter-spacing:0;
+    text-transform:none;
+  }
+  .article-prose-author-details small {
+    font:400 .98rem/1.45 var(--font-ui);
+  }
+  .article-prose-meta.is-augustine strong { color:var(--gold); font-weight:600; }
+  :global(html[data-theme='light']) .article-prose-meta { color:#526158; }
+  :global(html[data-theme='light']) .article-prose-meta span,
+  :global(html[data-theme='light']) .article-prose-meta i { color:#765625; }
+  :global(html[data-theme='light']) .article-prose-meta.is-augustine strong { color:#246247; }
+  :global(html[data-theme='light']) .article-prose-author-details { color:#68736c; }
+  @media (max-width:640px) {
+    .article-prose-meta { margin:1.2rem auto 2.2rem; }
+    .article-prose-meta::before { width:1.6rem; }
+    .article-prose-meta span { font-size:.84rem; }
+    .article-prose-meta strong { font-size:1.75rem; }
+    .article-prose-author-details { margin-left:0; }
+  }
+</style>

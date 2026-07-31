@@ -1,0 +1,172 @@
+/* ===================================================================
+ * # Mobile Navigation Styles (Updated)
+ * =================================================================== */
+
+@media screen and (max-width: 900px) {
+
+    /* --- General Adjustments --- */
+    .navbar-container {
+        /* Ensure there's enough space for the title and button */
+        padding: 0 1.43rem;
+    }
+
+    .site-title {
+        font-size: 2.57rem; /* Slightly smaller title on mobile */
+    }
+
+    /* --- Hide Desktop Menu / Style Mobile Menu Container --- */
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 6.58rem; /* Position below the navbar */
+        left: 0;
+        width: 100%;
+        background: var(--bg-main);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border-subtle);
+        box-shadow: 0 1.2rem 2.6rem rgba(0,0,0,.28);
+        padding: 1rem 0;
+        z-index: 999;
+    }
+
+    body.nav-open { overflow: hidden; }
+
+    /* --- This class is toggled by JS to show the menu --- */
+    .nav-menu--visible,
+    .nav-menu.open {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        max-height: calc(100dvh - 6.58rem);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .nav-menu .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu .nav-item > a {
+        padding: 0.9rem;
+        font-size: 1.54rem;
+    }
+
+  /* --- Mobile dropdown styles --- */
+.nav-menu .has-dropdown > a .chevron {
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-menu .has-dropdown > a.is-open .chevron {
+    transform: rotate(-180deg);
+}
+
+  .nav-menu .dropdown-menu {
+    position: static;
+    width: 100%;
+    border: none;
+    background: rgba(0,0,0,0.2);
+    padding: 0;
+    margin-top: 0.5rem;
+
+    /* Use max-height for the main slide-down animation */
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out; /* MODIFIED: Smoother timing */
+
+    /* These are needed to override desktop styles */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  /* Keep the expanded mobile submenu visually continuous with the navbar.
+     The light-theme desktop dropdown border otherwise shows up as stray rules. */
+  [data-theme="light"] .nav-menu .dropdown-menu,
+  [data-theme="light"] .nav-menu .dropdown-menu li,
+  [data-theme="light"] .nav-menu .dropdown-menu a {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  [data-theme="light"] .nav-menu .dropdown-menu {
+    margin-top: 0;
+    background: rgba(15, 61, 36, 0.3);
+  }
+
+  [data-theme="light"] .nav-menu .dropdown-menu a:hover {
+    padding-left: 0.95rem;
+  }
+
+    .nav-menu .dropdown-menu.is-open {
+        max-height: 500px;
+    }
+
+/* MODIFIED: Add animation to the individual list items */
+.nav-menu .dropdown-menu li {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* When the menu is open, fade and slide in the list items */
+.nav-menu .dropdown-menu.is-open li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MODIFIED: Add a staggered delay for a cascading effect */
+.nav-menu .dropdown-menu.is-open li:nth-child(1) { transition-delay: 0.05s; }
+.nav-menu .dropdown-menu.is-open li:nth-child(2) { transition-delay: 0.1s; }
+.nav-menu .dropdown-menu.is-open li:nth-child(3) { transition-delay: 0.15s; }
+.nav-menu .dropdown-menu.is-open li:nth-child(4) { transition-delay: 0.2s; }
+.nav-menu .dropdown-menu.is-open li:nth-child(5) { transition-delay: 0.25s; }
+.nav-menu .dropdown-menu.is-open li:nth-child(6) { transition-delay: 0.3s; }
+
+
+.nav-menu .dropdown-menu a {
+    padding: 0.95rem;
+    font-size: 1.52rem;
+}
+
+    /* --- Hamburger Toggle Button --- */
+    .nav-toggle {
+        display: flex; /* Show the hamburger button */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 28.5px;
+        height: 22.8px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1050;
+    }
+
+    .nav-toggle-line {
+        width: 28.5px;
+        height: 2px;
+        background-color: #fcefdc;
+        border-radius: 2px;
+        transition: all 0.25s ease-in-out;
+    }
+
+    /* --- Hamburger to 'X' Animation --- */
+    .nav-toggle.is-active .nav-toggle-line:nth-child(1) {
+        transform: translateY(7.6px) rotate(45deg);
+    }
+    .nav-toggle.is-active .nav-toggle-line:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle.is-active .nav-toggle-line:nth-child(3) {
+        transform: translateY(-7.6px) rotate(-45deg);
+    }
+    /* --- NEW: Landscape Mode Optimization --- */
+    @media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+        .nav-menu .dropdown-menu a {
+            font-size: 1rem; /* Reduce font size in landscape */
+            padding: 0.8rem 1rem; /* Reduce padding for a more compact menu */
+        }
+    }
+}

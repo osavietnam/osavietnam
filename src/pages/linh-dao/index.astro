@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AugustineLifeLibrary from '../../components/AugustineLifeLibrary.astro';
+import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
+import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+
+const articles = (await getCollection(
+  'bai-viet',
+  ({ id, data }) => id.startsWith('linh-dao/') && !data.draft,
+)).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+});
+
+const categories = [
+  'Chung',
+  'Chú Giải Thánh Vịnh',
+  'Bài Giảng',
+];
+const articleHref = (id: string) => `/linh-dao/bai-viet/${id.replace(/^linh-dao\//, '')}/`;
+const visibleArticles = articles.filter((article) => categories.includes(article.data.category ?? ''));
+const featuredEntry = visibleArticles.find((article) => article.data.featured) ?? visibleArticles[0];
+const articleSummary = (article: typeof articles[number]) => ({
+  id: article.id,
+  title: article.data.title,
+  href: articleHref(article.id),
+  category: article.data.category,
+  excerpt: article.data.excerpt,
+  author: article.data.author,
+  image: article.data.image ?? article.data.heroImage,
+  date: article.data.date,
+});
+const featuredArticle = featuredEntry ? articleSummary(featuredEntry) : undefined;
+const featuredTabs = visibleArticles
+  .slice(0, 10)
+  .map(articleSummary);
+const latestArticles = visibleArticles
+  .filter((article) => article.id !== featuredEntry?.id)
+  .map(articleSummary);
+const categoryGroups = categories.map((category) => ({
+  category,
+  articles: articles
+    .filter((article) => article.data.category === category)
+    .map((article) => ({
+      id: article.id,
+      title: article.data.title,
+      href: articleHref(article.id),
+      excerpt: article.data.excerpt,
+      author: article.data.author,
+      date: article.data.date,
+      image: article.data.image ?? article.data.heroImage,
+      featured: article.data.featured,
+    })),
+}));
+---
+
+<BaseLayout
+  title="Linh Đạo"
+  description="Các bài viết về đời sống nội tâm, cầu nguyện, cộng đoàn và truyền thống linh đạo Augustinô."
+  bodyClass="no-sidebar page-linh-dao"
+  banner="thu-vien"
+>
+  <ArticleLibraryLanding
+    class="linh-dao-index"
+    eyebrow="Dòng Thánh Augustinô"
+    title="Linh Đạo"
+    labelledBy="spirit-library-title"
+    featured={featuredArticle}
+    tabs={featuredTabs}
+    latest={latestArticles}
+    showAuthors
+  >
+
+    <section id="bai-viet-linh-dao" aria-labelledby="spirit-library-title">
+      <CategoryArticleGallery groups={categoryGroups} showAuthors />
+    </section>
+
+    <AugustineLifeLibrary kind="community" />
+  </ArticleLibraryLanding>
+</BaseLayout>

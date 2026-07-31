@@ -1,0 +1,153 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
+import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+
+const domains = [
+  {
+    key: 'triet-hoc',
+    label: 'Triết Học',
+    tone: 'philosophy',
+    subcategoryOrder: ['Tri Luận', 'Siêu Hình Học', 'Đạo Đức', 'Nhân Học'],
+  },
+  {
+    key: 'than-hoc',
+    label: 'Thần Học',
+    tone: 'theology',
+    subcategoryOrder: [
+      'Kinh Thánh',
+      'Thần Học Nền Tảng',
+      'Luân Lý Kitô Giáo',
+      'Giáo Hội Học',
+      'Kitô Học',
+    ],
+  },
+] as const;
+
+const articles = (await getCollection(
+  'bai-viet',
+  ({ id, data }) =>
+    (id.startsWith('triet-hoc/') || id.startsWith('than-hoc/'))
+    && !data.draft,
+)).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+});
+
+const articleHref = (id: string) => `/bai-viet/${id}/`;
+const articleSummary = (article: typeof articles[number]) => ({
+  id: article.id,
+  title: article.data.title,
+  href: articleHref(article.id),
+  category: article.data.subcategory ?? article.data.category,
+  excerpt: article.data.excerpt,
+  author: article.data.author,
+  image: article.data.image ?? article.data.heroImage,
+  date: article.data.date,
+});
+
+const featuredEntry = articles.find((article) => article.data.featured) ?? articles[0];
+const featuredArticle = featuredEntry ? articleSummary(featuredEntry) : undefined;
+const featuredTabs = articles.slice(0, 10).map(articleSummary);
+const latestArticles = articles.map(articleSummary);
+
+const domainLibraries = domains.map((domain) => {
+  const domainArticles = articles.filter((article) => article.id.startsWith(`${domain.key}/`));
+  const orderedSubcategories: readonly string[] = domain.subcategoryOrder;
+  const subcategories = [...orderedSubcategories];
+
+  return {
+    ...domain,
+    groups: subcategories.map((subcategory) => ({
+      category: subcategory,
+      articles: domainArticles
+        .filter((article) => (article.data.subcategory ?? domain.label) === subcategory)
+        .map((article) => ({
+          id: article.id,
+          title: article.data.title,
+          href: articleHref(article.id),
+          excerpt: article.data.excerpt,
+          author: article.data.author,
+          date: article.data.date,
+          image: article.data.image ?? article.data.heroImage,
+        })),
+    })),
+  };
+});
+---
+
+<BaseLayout
+  title="Triết – Thần"
+  description="Bài viết nghiên cứu triết học và thần học trong truyền thống Kitô giáo và tư tưởng Thánh Augustinô."
+  bodyClass="no-sidebar page-bai-viet page-scholar-library"
+  banner="bai-viet-than-hoc"
+>
+  <ArticleLibraryLanding
+    class="scholar-index"
+    eyebrow="Bài Viết"
+    title="Triết – Thần"
+    labelledBy="scholar-library-title"
+    featured={featuredArticle}
+    tabs={featuredTabs}
+    latest={latestArticles}
+    showTitles
+  >
+
+    <section
+      id="thu-vien-triet-than"
+      class="scholar-library"
+      aria-labelledby="scholar-library-title"
+    >
+      <div class="scholar-domain-stack">
+        {domainLibraries.map((domain) => (
+          <section
+            id={domain.key}
+            class="scholar-domain"
+            aria-labelledby={`${domain.key}-category-row`}
+          >
+            <CategoryArticleGallery
+              groups={domain.groups}
+              showTitles={true}
+              idPrefix={`${domain.key}-category`}
+              rowTitle={domain.label}
+              categoryTone={domain.tone}
+            />
+          </section>
+        ))}
+      </div>
+    </section>
+  </ArticleLibraryLanding>
+</BaseLayout>
+
+<style>
+  .scholar-library {
+    width:100%;
+    min-width:0;
+    margin-top:1rem;
+  }
+  .scholar-domain-stack {
+    display:grid;
+    width:100%;
+    min-width:0;
+    gap:0;
+  }
+  .scholar-domain { width:100%; min-width:0; }
+  .scholar-domain + .scholar-domain {
+    margin-top:3rem;
+  }
+  .scholar-domain :global(.spirit-library) {
+    padding-bottom:4.5rem;
+  }
+  @media (max-width:760px) {
+    .scholar-domain-stack {
+      gap:0;
+    }
+    .scholar-domain + .scholar-domain {
+      margin-top:2rem;
+    }
+    .scholar-domain :global(.spirit-library) {
+      padding-bottom:4rem;
+    }
+  }
+</style>

@@ -1,0 +1,79 @@
+# ============================================================================
+# Cấu hình Decap CMS — biến 2 dạng bài thành FORM điền sẵn.
+# Người soạn vào /admin/, đăng nhập, điền form, bấm "Publish". Hệ thống tự
+# tạo file Markdown đúng cấu trúc và commit lên Git → site tự build lại.
+#
+# backend: dùng git-gateway (Netlify) HOẶC github trực tiếp. Đổi cho hợp hạ tầng.
+# ============================================================================
+
+backend:
+  name: git-gateway        # Netlify Identity. Nếu deploy GitHub Pages, dùng name: github + repo
+  branch: main
+
+# Tải ảnh lên: lưu vào src/assets, hiển thị từ đường dẫn công khai
+media_folder: "src/assets/uploads"
+public_folder: "/src/assets/uploads"
+
+locale: "vi"
+
+collections:
+  # -------------------------------------------------------------------------
+  # BÀI VIẾT (article)
+  # -------------------------------------------------------------------------
+  - name: "bai-viet"
+    label: "Bài Viết"
+    label_singular: "bài viết"
+    folder: "src/content/bai-viet"
+    create: true
+    nested: { depth: 2 }       # cho phép thư mục con: than-hoc/, triet-hoc/
+    slug: "{{slug}}"
+    preview_path: "bai-viet/{{dirname}}/{{slug}}"
+    fields:
+      - { name: "title", label: "Tiêu đề", widget: "string" }
+      - { name: "subtitle", label: "Phụ đề / tên gốc", widget: "string", required: false }
+      - name: "category"
+        label: "Chuyên mục"
+        widget: "select"
+        options: ["Thần Học", "Triết Học", "Linh Đạo"]
+      - { name: "author", label: "Tác giả", widget: "string", required: false }
+      - { name: "date", label: "Ngày đăng", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { name: "excerpt", label: "Tóm tắt (hiện ở thẻ bài)", widget: "text", required: false }
+      - { name: "image", label: "Ảnh thu nhỏ (thumbnail)", widget: "image", required: false }
+      - { name: "heroImage", label: "Ảnh lớn đầu bài", widget: "image", required: false }
+      - { name: "featured", label: "Bài nổi bật?", widget: "boolean", default: false }
+      - { name: "draft", label: "Bản nháp (chưa đăng)?", widget: "boolean", default: false }
+      - name: "body"
+        label: "Nội dung"
+        widget: "markdown"
+        hint: "Dùng thanh công cụ để in nghiêng, chèn trích dẫn, ảnh, tiêu đề. Tiêu đề '##' tự thành mục lục."
+
+  # -------------------------------------------------------------------------
+  # SÁCH (book)
+  # -------------------------------------------------------------------------
+  - name: "sach"
+    label: "Tác Phẩm / Sách"
+    label_singular: "cuốn sách"
+    folder: "src/content/sach"
+    create: true
+    nested: { depth: 2 }       # thư mục theo tác giả: st-augustine/, st-thomas/
+    slug: "{{slug}}"
+    fields:
+      - { name: "title", label: "Tên sách", widget: "string" }
+      - { name: "subtitle", label: "Tên gốc (Latinh...)", widget: "string", required: false }
+      - { name: "author", label: "Tác giả", widget: "string" }
+      - { name: "translator", label: "Người dịch", widget: "string", required: false }
+      - name: "bookType"
+        label: "Loại sách"
+        widget: "select"
+        options:
+          - { label: "Sách Thiêng Liêng", value: "spiritual" }
+          - { label: "Sách Triết Học", value: "philosophy" }
+      - { name: "publishYear", label: "Năm xuất bản", widget: "string", required: false }
+      - { name: "order", label: "Thứ tự (trong danh sách tác giả)", widget: "number", required: false, default: 1 }
+      - { name: "excerpt", label: "Giới thiệu ngắn", widget: "text", required: false }
+      - { name: "image", label: "Ảnh bìa", widget: "image", required: false }
+      - { name: "draft", label: "Bản nháp?", widget: "boolean", default: false }
+      - name: "body"
+        label: "Nội dung sách"
+        widget: "markdown"
+        hint: "Mỗi chương dùng tiêu đề '## Tên chương'. Mục nhỏ dùng '### '."

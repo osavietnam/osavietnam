@@ -1,0 +1,41 @@
+{
+  "name": "osavietnam",
+  "version": "1.0.0",
+  "description": "Website OSA Việt Nam — Astro 5, deployable to GitHub Pages",
+  "private": true,
+  "homepage": "https://osavietnam.github.io/osavietnam/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osavietnam/osavietnam.git"
+  },
+  "author": "osavietnam",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "node scripts/build-github-pages.mjs",
+    "build:github": "node scripts/build-github-pages.mjs",
+    "build:server": "astro build --config astro.config.mjs",
+    "preview": "astro preview --config astro.config.github.mjs --host 0.0.0.0",
+    "start": "npm run build:server && node ./dist/server/entry.mjs",
+    "admin": "node scripts/admin-server.mjs",
+    "audit:source": "node scripts/audit-deploy-source.mjs",
+    "test": "npm run audit:source"
+  },
+  "engines": {
+    "node": ">=22.12.0 <25",
+    "npm": ">=10 <12"
+  },
+  "packageManager": "npm@10.9.2",
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.14",
+    "@astrojs/node": "^9.5.5",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^5.18.2",
+    "sharp": "^0.35.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  },
+  "keywords": []
+}

@@ -1,0 +1,2023 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import scriptureBooks from '../../data/confessions-scripture-index';
+import keywordData from '../../data/confessions-keyword-index.json';
+
+const romanValues: Record<string, number> = {
+  I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7,
+  VIII: 8, IX: 9, X: 10, XI: 11, XII: 12, XIII: 13,
+};
+const confessionChapterMax: Record<number, number> = {
+  1: 20, 2: 10, 3: 12, 4: 16, 5: 14, 6: 16, 7: 21,
+  8: 12, 9: 13, 10: 43, 11: 31, 12: 32, 13: 38,
+};
+
+const confessionLink = (reference: string) => {
+  const normalized = reference.replace(/\s+/g, '').replace(/^([IVX]+)\./i, '$1,');
+  // The printed index uses this one range to cover the infancy narrative
+  // across the I.6/I.7 chapter boundary. Link to the first paragraph in the
+  // range instead of the non-existent I.7(7) anchor.
+  if (/^I,7\(7[-–—]12\)$/i.test(normalized)) {
+    return '/tu-thuat/?book=quyen-1#chi-muc-6-7';
+  }
+  const match = normalized.match(/^([IVX]+),(\d+)(?:[,\(](\d+))?/i);
+  if (!match) return '/tu-thuat/';
+  const book = romanValues[match[1].toUpperCase()];
+  if (!book) return '/tu-thuat/';
+  const chapter = Number(match[2]);
+  const paragraph = Number(match[3] ?? match[2]);
+  if (chapter > confessionChapterMax[book]) return `/tu-thuat/?book=quyen-${book}`;
+  return `/tu-thuat/?book=quyen-${book}#chi-muc-${chapter}-${paragraph}`;
+};
+
+const scriptureReferenceCount = scriptureBooks.reduce((total, book) => total + book.entries.length, 0);
+const scriptureColumns = (
+  booksForWork: typeof scriptureBooks,
+  testament: 'Cựu Ước' | 'Tân Ước',
+) => {
+  const books = booksForWork.filter((book) => book.testament === testament);
+  const midpoint = Math.ceil(books.length / 2);
+  return [books.slice(0, midpoint), books.slice(midpoint)];
+};
+const keywordEntries = keywordData.entries as Array<{
+  id: string;
+  headword: string;
+  text: string;
+  page: number;
+  confidence: number;
+  references: string[];
+  hasExplicitChildren: boolean;
+  subentryCount: number;
+  lines: Array<{
+    sequence: number;
+    page: number;
+    column: 'left' | 'right';
+    indent: number;
+    level: number;
+    text: string;
+    displayText?: string;
+    tabbedText: string;
+    kind: 'main' | 'subkeyword' | 'continuation';
+    references: string[];
+  }>;
+  directContinuations: Array<{
+    text: string;
+    displayText?: string;
+  }>;
+  subentries: Array<{
+    text: string;
+    lines: Array<{
+      text: string;
+      displayText?: string;
+      indent: number;
+    }>;
+  }>;
+}>;
+
+const keywordReferencePattern = /\b(?:XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|IV|V|III|II|I)[:,.]\s*\d+(?:\s*\([\d,.\s–—-]+\))?/gi;
+const normalizeKeywordName = (value: string) => value
+  .normalize('NFD')
+  .replace(/\p{M}/gu, '')
+  .replace(/\bsaint\b/gi, '')
+  .replace(/[^a-z0-9]+/gi, ' ')
+  .trim()
+  .toLowerCase();
+
+const buildKeywordTargetIds = (entries: typeof keywordEntries) => {
+  const targets = new Map<string, string>();
+  for (const entry of entries) {
+    const canonical = entry.headword
+      .replace(/,\s*see\b.*$/i, '')
+      .replace(/\s*,\s*(?:XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|IV|V|III|II|I)(?:\s*-\s*(?:XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|IV|V|III|II|I))?(?:\s+passim)?$/i, '')
+      .replace(/\s*,?\s*\b(?:XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|IV|V|III|II|I)(?:\s*[-:.,]\s*\d.*)?$/i, '')
+      .trim();
+    const commaParts = canonical.split(',').map((part) => part.trim()).filter(Boolean);
+    const semicolonParts = canonical.split(';').map((part) => part.trim()).filter(Boolean);
+    const slashMatch = canonical.match(/\b([^/\s]+)\/([^,\s]+)\b/);
+    const aliases = [
+      canonical,
+      canonical.replace(/\s*\([^)]*\)/g, ''),
+      canonical.split('(')[0],
+      canonical.split(':')[0],
+      canonical.split('.')[0],
+      canonical.split('/')[0],
+      commaParts[0],
+      ...(commaParts.length === 2 ? [`${commaParts[1]} ${commaParts[0]}`] : []),
+      ...(semicolonParts.length > 1 ? semicolonParts : []),
+      ...(slashMatch ? [
+        canonical.replace(slashMatch[0], slashMatch[1]),
+        canonical.replace(slashMatch[0], slashMatch[2]),
+      ] : []),
+    ];
+    for (const alias of aliases) {
+      const normalized = normalizeKeywordName(alias);
+      if (normalized && !targets.has(normalized)) targets.set(normalized, entry.id);
+    }
+  }
+  return targets;
+};
+
+const resolveKeywordTarget = (label: string, targets: Map<string, string>) => {
+  const cleaned = label
+    .replace(/\bp\s*\d+\b/gi, '')
+    .replace(/^(?:also\s+)?under\s+/i, '')
+    .replace(/[.,\s]+$/, '');
+  const candidates = [
+    cleaned,
+    cleaned.replace(/\s*\([^)]*\)/g, ''),
+    cleaned.split(':')[0],
+    cleaned.split('.')[0],
+    cleaned.replace(/,\s*below\b.*$/i, ''),
+  ];
+  const aliases: Record<string, string> = {
+    bible: 'bible', scriptures: 'bible', scripture: 'bible',
+    'new testament': 'bible', 'old testament': 'bible',
+    'pagan gods': 'gods',
+    human: 'human', humans: 'human', mankind: 'human', men: 'human',
+    soul: 'soul', lying: 'lie lying',
+  };
+  for (const candidate of candidates) {
+    const normalized = normalizeKeywordName(candidate);
+    const singular = normalized.endsWith('s') ? normalized.slice(0, -1) : normalized;
+    const target = targets.get(normalized)
+      ?? targets.get(singular)
+      ?? targets.get(aliases[normalized] ?? '');
+    if (target) return target;
+  }
+  return null;
+};
+
+type KeywordPart = {
+  text: string;
+  href?: string;
+  type?: 'reference' | 'see' | 'see-search';
+  query?: string;
+};
+const keywordLineParts = (
+  text: string,
+  keywordTargets: Map<string, string>,
+  linkReferences: boolean,
+): KeywordPart[] => {
+  const links: Array<{
+    start: number;
+    end: number;
+    href: string;
+    type: 'reference' | 'see' | 'see-search';
+    query?: string;
+  }> = [];
+  for (const match of text.matchAll(keywordReferencePattern)) {
+    const start = match.index ?? 0;
+    links.push({
+      start,
+      end: start + match[0].length,
+      href: linkReferences ? confessionLink(match[0]) : '',
+      type: 'reference',
+    });
+  }
+
+  const seeMatch = text.match(/\bsee(?:\s+also)?\s+(.+)$/i);
+  const seePrefix = seeMatch?.index != null ? text.slice(0, seeMatch.index).trimEnd() : '';
+  const isSeeDirective = Boolean(seeMatch?.index != null && (!seePrefix || seePrefix.endsWith(',')));
+  if (seeMatch?.index != null && isSeeDirective) {
+    const tail = seeMatch[1];
+    const tailStart = seeMatch.index + seeMatch[0].indexOf(tail);
+    for (const chunkMatch of tail.matchAll(/[^;]+/g)) {
+      let chunk = chunkMatch[0];
+      const colonIndex = chunk.indexOf(':');
+      if (colonIndex >= 0) chunk = chunk.slice(0, colonIndex);
+      const leading = chunk.match(/^\s*/)?.[0].length ?? 0;
+      let cleaned = chunk.slice(leading);
+      let cleanedOffset = leading;
+      const underMatch = cleaned.match(/^(?:also\s+)?under\s+/i);
+      if (underMatch) {
+        cleanedOffset += underMatch[0].length;
+        cleaned = cleaned.slice(underMatch[0].length);
+      }
+      cleaned = cleaned
+        .replace(/\s+p\s*\d+\b.*$/i, '')
+        .replace(/[.,\s]+$/, '');
+      const exampleMatch = cleaned.match(/\be\.\s*g\.\s*[,.:]*\s*/i);
+      if (exampleMatch?.index != null) {
+        cleanedOffset += exampleMatch.index + exampleMatch[0].length;
+        cleaned = cleaned.slice(exampleMatch.index + exampleMatch[0].length).trim();
+      }
+      const targetId = resolveKeywordTarget(cleaned, keywordTargets);
+      if (!cleaned) continue;
+      if (!targetId && /^(?:specific|individual)\b/i.test(cleaned)) continue;
+      const start = tailStart + (chunkMatch.index ?? 0) + cleanedOffset;
+      links.push(targetId
+        ? { start, end: start + cleaned.length, href: `#${targetId}`, type: 'see' }
+        : { start, end: start + cleaned.length, href: '#tu-khoa', type: 'see-search', query: cleaned });
+    }
+  }
+
+  links.sort((left, right) => left.start - right.start || right.end - left.end);
+  const parts: KeywordPart[] = [];
+  let cursor = 0;
+  for (const link of links) {
+    if (link.start < cursor) continue;
+    if (link.start > cursor) parts.push({ text: text.slice(cursor, link.start) });
+    parts.push({ text: text.slice(link.start, link.end), href: link.href, type: link.type, query: link.query });
+    cursor = link.end;
+  }
+  if (cursor < text.length) parts.push({ text: text.slice(cursor) });
+  return parts;
+};
+
+const indexWorks = [
+  {
+    id: 'confessions',
+    title: 'Tự Thuật',
+    titleEn: 'Confessiones',
+    scriptureBooks,
+    keywordEntries,
+    keywordTargets: buildKeywordTargetIds(keywordEntries),
+    linkReferences: true,
+  },
+];
+
+const joinKeywordLines = (lines: Array<{ text: string; displayText?: string }>) => lines
+  .map((line) => line.displayText ?? line.text)
+  .join(' ')
+  .replace(/([A-Za-z])-\s+([a-z])/g, '$1$2')
+  // These two citations are split immediately before the parenthesis in the
+  // scanned source, so line-level OCR cannot validate them until they join.
+  .replace(/\bXII,19\s+\(25\)/g, 'XIII,19(25)')
+  .replace(/\bXII,18\s+\(23\)/g, 'XIII,18(23)')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const startsWithReference = (text: string) => /^(?:XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|IV|V|III|II|I)[:,.]\s*\d/i.test(text.trim());
+const containsReference = (text: string) => /\b(?:XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|IV|V|III|II|I)[:,.]\s*\d/i.test(text);
+const keywordRows = (entry: typeof keywordEntries[number]) => {
+  const rows: Array<{ depth: 0 | 1 | 2; lines: typeof entry.lines; text?: string }> = [];
+  let nestedParentIndent: number | null = null;
+  let nestedChildSeen = false;
+
+  const appendLine = (line: typeof entry.lines[number]) => {
+    if (!rows.length) rows.push({ depth: 0, lines: [line] });
+    else rows[rows.length - 1].lines.push(line);
+  };
+
+  for (const [index, line] of entry.lines.entries()) {
+    const text = line.displayText ?? line.text;
+    if (index === 0) {
+      rows.push({ depth: 0, lines: [line] });
+      continue;
+    }
+
+    if (nestedParentIndent != null) {
+      const nearParentIndent = line.level === 1 && line.indent <= nestedParentIndent + 12;
+      const returnsToFirstLevel = line.level === 1
+        && (line.indent < nestedParentIndent - 8 || (nestedChildSeen && nearParentIndent));
+      if (!returnsToFirstLevel) {
+        if (startsWithReference(text)) appendLine(line);
+        else {
+          rows.push({ depth: 2, lines: [line] });
+          nestedChildSeen = true;
+        }
+        continue;
+      }
+      nestedParentIndent = null;
+      nestedChildSeen = false;
+    }
+
+    if (line.level === 1 && !startsWithReference(text)) {
+      const previous = rows.at(-1);
+      const previousText = previous ? joinKeywordLines(previous.lines) : '';
+      const previousNeedsContinuation = previous?.depth === 1
+        && !/(?:^|,\s*)see(?:\s+also)?\b/i.test(previousText)
+        && !containsReference(previousText)
+        && !/[:,.;!?]\s*$/.test(previousText);
+      if (previousNeedsContinuation) {
+        appendLine(line);
+        continue;
+      }
+      rows.push({ depth: 1, lines: [line] });
+      if (text.trimEnd().endsWith(':')) {
+        nestedParentIndent = line.indent;
+        nestedChildSeen = false;
+      }
+    } else {
+      appendLine(line);
+    }
+  }
+
+  return rows.map((row) => ({ ...row, text: joinKeywordLines(row.lines) }));
+};
+---
+
+<BaseLayout
+  title="Chỉ Mục"
+  description="Tra cứu Kinh Thánh và từ khóa trong các tác phẩm của Thánh Augustinô."
+  bodyClass="no-sidebar page-chi-muc"
+  banner="tu-thuat"
+>
+  <header class="lib-masthead idx-masthead">
+    <p class="lib-masthead-sub">Công cụ tra cứu</p>
+    <h1 class="lib-masthead-title">Chỉ Mục</h1>
+    <div class="lib-masthead-rule" aria-hidden="true"><span class="lib-masthead-ornament">✦</span></div>
+    <p class="lib-masthead-desc">Kinh Thánh và từ khóa trong các tác phẩm của Thánh Augustinô</p>
+  </header>
+
+  <main class="idx-shell">
+    <section class="idx-control-deck" aria-label="Chọn tác phẩm và loại chỉ mục">
+      <label class="idx-work-select" for="idx-work-select-input">
+        <span class="idx-control-label">Tác phẩm</span>
+        <span class="idx-work-field">
+          <select id="idx-work-select-input" aria-label="Chọn tác phẩm">
+            {indexWorks.map((work) => (
+              <option value={work.id}>{work.title} — {work.titleEn}</option>
+            ))}
+          </select>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4" /></svg>
+        </span>
+      </label>
+
+      <div class="idx-mode-switch" role="tablist" aria-label="Loại chỉ mục">
+        <button class="idx-mode-button is-active" type="button" role="tab" aria-selected="true" aria-controls="idx-scripture" data-index-mode="scripture">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Zm16 0A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"/></svg>
+          <span>Kinh Thánh</span>
+        </button>
+        <button class="idx-mode-button" type="button" role="tab" aria-selected="false" aria-controls="idx-keywords" data-index-mode="keywords">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10.7 13.3-1.4-1.4 5.6-5.6a3 3 0 1 1 4.2 4.2l-3.4 3.4a3 3 0 0 1-4.2 0l-.8-.8m2.6-2.4 1.4 1.4-5.6 5.6a3 3 0 1 1-4.2-4.2l3.4-3.4a3 3 0 0 1 4.2 0l.8.8"/></svg>
+          <span>Từ Khóa</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="idx-toolbar" aria-label="Tìm và lọc chỉ mục">
+      <label class="idx-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="idx-search" type="search" autocomplete="off" aria-label="Tìm trong chỉ mục" placeholder="Tìm sách hoặc câu Kinh Thánh…" />
+        <kbd>Esc</kbd>
+      </label>
+      <p class="idx-result-line" aria-live="polite"><strong id="idx-result-count">{scriptureReferenceCount}</strong> mục tham chiếu</p>
+    </section>
+
+    {indexWorks.map((work, workIndex) => (
+    <div data-index-work-panel={work.id} hidden={workIndex !== 0}>
+    <section id={`${work.id}-idx-scripture`} class="idx-panel" role="tabpanel" data-index-panel="scripture">
+      <div class="idx-subfilters" role="group" aria-label="Lọc theo phần Kinh Thánh">
+        <button type="button" class="idx-chip is-active" data-testament="all">Tất cả</button>
+        <button type="button" class="idx-chip" data-testament="Cựu Ước">Cựu Ước</button>
+        <button type="button" class="idx-chip" data-testament="Tân Ước">Tân Ước</button>
+      </div>
+
+      <div class="idx-scripture-groups">
+        {(['Cựu Ước', 'Tân Ước'] as const).map((testament) => (
+          <section class="idx-testament" data-testament-group={testament}>
+            <header class="idx-section-heading">
+              <h2>{testament}</h2>
+            </header>
+            <div class="idx-book-grid">
+              {scriptureColumns(work.scriptureBooks, testament).map((column) => (
+                <div class="idx-book-column">
+                  {column.map((book) => (
+                    <article
+                      class="idx-book"
+                      data-scripture-item
+                      data-search={`${book.abbreviation} ${book.book} ${book.bookEn} ${book.entries.map(([reference]) => reference).join(' ')}`.toLocaleLowerCase('vi')}
+                    >
+                      <button class="idx-book-heading idx-book-toggle" type="button" aria-expanded="false">
+                        <span class="idx-book-abbr">{book.abbreviation}</span>
+                        <span>
+                          <h3>{book.book}</h3>
+                          <small>{book.bookEn}</small>
+                        </span>
+                        <em>{book.entries.length}</em>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4" /></svg>
+                      </button>
+                      <div class="idx-book-rows" hidden>
+                        {book.entries.map(([bibleReference, confessions]) => (
+                          <div
+                            class="idx-scripture-row"
+                            data-scripture-row
+                            data-book-abbreviation={book.abbreviation}
+                            data-bible-reference={bibleReference}
+                            data-search={`${book.abbreviation} ${book.book} ${book.bookEn} ${bibleReference} ${confessions.join(' ')}`.toLocaleLowerCase('vi')}
+                          >
+                            <strong class="idx-bible-reference">
+                              <span class="idx-bible-book-code">{book.abbreviation}</span>
+                              <span class="idx-bible-verse">{bibleReference}</span>
+                            </strong>
+                            <span class="idx-ref-arrow" aria-hidden="true">→</span>
+                            <span class="idx-confession-links">
+                              {confessions.map((reference) => (
+                                <a class="idx-citation-badge" href={confessionLink(reference)} title={`Mở Tự Thuật ${reference}`}>{reference}</a>
+                              ))}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+      <p class="idx-empty" data-empty="scripture" hidden>Không tìm thấy câu Kinh Thánh phù hợp.</p>
+    </section>
+
+    <section id={`${work.id}-idx-keywords`} class="idx-panel" role="tabpanel" data-index-panel="keywords" hidden>
+      <div class="idx-alphabet" aria-label="Lọc từ khóa theo chữ cái">
+        <button type="button" class="is-active" data-letter="all">Tất cả</button>
+        {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter) => (
+          <button type="button" data-letter={letter}>{letter}</button>
+        ))}
+      </div>
+
+      <div class="idx-keyword-list">
+        {work.keywordEntries.map((entry) => (
+          <article
+            class:list={['idx-keyword-entry', { 'has-explicit-children': entry.hasExplicitChildren }]}
+            id={entry.id}
+            data-keyword-item
+            data-letter={entry.headword.charAt(0).toUpperCase()}
+            data-search={`${entry.headword} ${entry.text} ${entry.references.join(' ')}`.toLowerCase()}
+          >
+            <div class="idx-keyword-main">
+              {keywordRows(entry).map((row) => (
+                <div
+                  class:list={['idx-keyword-line', `is-depth-${row.depth}`]}
+                >
+                  {keywordLineParts(row.text ?? '', work.keywordTargets, work.linkReferences).map((part) => (
+                    part.type === 'reference' && !work.linkReferences
+                      ? <span class="idx-inline-reference idx-citation-badge is-static">{part.text}</span>
+                      : part.href
+                      ? <a
+                          class:list={[
+                            'idx-inline-reference',
+                            {
+                              'idx-citation-badge': part.type === 'reference',
+                              'idx-see-link': part.type === 'see' || part.type === 'see-search',
+                            },
+                          ]}
+                          href={part.href}
+                          data-keyword-see={part.type === 'see' || part.type === 'see-search' ? '' : undefined}
+                          data-keyword-search={part.type === 'see-search' ? part.query : undefined}
+                          data-keyword-work={work.id}
+                          title={part.type === 'see' || part.type === 'see-search' ? `Đi đến từ khóa ${part.text}` : `Mở Tự Thuật ${part.text}`}
+                        >{part.text}</a>
+                      : <span>{part.text}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="idx-empty" data-empty="keywords" hidden>Không tìm thấy từ khóa phù hợp.</p>
+    </section>
+    </div>
+    ))}
+
+    <p class="idx-source-note citation-reference" data-index-source="confessions">
+      Thánh Augustinô, <cite>The Confessions</cite>, Maria Boulding, O.S.B. dịch, dẫn nhập và chú thích;
+      John E. Rotelle, O.S.A. chủ biên, <cite>The Works of Saint Augustine</cite>, tập I/1,
+      New City Press, Hyde Park, New York. <cite>Index of Scripture</cite> do Michael Dolan biên soạn;
+      <cite>Index</cite> do Joseph Sprung biên soạn.
+    </p>
+  </main>
+
+  <script>
+    const workSelect = document.getElementById('idx-work-select-input') as HTMLSelectElement | null;
+    const workPanels = Array.from(document.querySelectorAll<HTMLElement>('[data-index-work-panel]'));
+    const sourceNotes = Array.from(document.querySelectorAll<HTMLElement>('[data-index-source]'));
+    const modeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-index-mode]'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-index-panel]'));
+    const search = document.getElementById('idx-search') as HTMLInputElement | null;
+    const resultCount = document.getElementById('idx-result-count');
+    const testamentButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-testament]'));
+    const letterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.idx-alphabet button[data-letter]'));
+    const bookToggles = Array.from(document.querySelectorAll<HTMLButtonElement>('.idx-book-toggle'));
+    const keywordSeeLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-keyword-see]'));
+    let work = 'confessions';
+    let mode = 'scripture';
+    let testament = 'all';
+    let letter = 'all';
+    let highlightedKeyword: HTMLElement | null = null;
+    let keywordHighlightTimer = 0;
+
+    const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const currentWorkPanel = () => workPanels.find((panel) => panel.dataset.indexWorkPanel === work) ?? null;
+    const updateLocation = (hash = mode === 'keywords' ? '#tu-khoa' : '#kinh-thanh') => {
+      const url = new URL(location.href);
+      if (work === 'confessions') url.searchParams.delete('work');
+      else url.searchParams.set('work', work);
+      url.hash = hash;
+      history.replaceState(history.state, '', `${url.pathname}${url.search}${url.hash}`);
+    };
+
+    function filterCurrentPanel() {
+      const workPanel = currentWorkPanel();
+      if (!workPanel) return;
+      const query = normalize(search?.value ?? '');
+      const queryTerms = query.split(/\s+/).filter(Boolean);
+      const exactScripture = query.match(/^(.+?)\s+(\d[\d,().-]*)$/);
+      const matchesQuery = (value: string) => {
+        const haystack = normalize(value);
+        return queryTerms.length === 0 || queryTerms.every((term) => haystack.includes(term));
+      };
+      let visible = 0;
+      if (mode === 'scripture') {
+        workPanel.querySelectorAll<HTMLElement>('[data-testament-group]').forEach((group) => {
+          const testamentMatch = testament === 'all' || group.dataset.testamentGroup === testament;
+          let groupVisible = 0;
+          group.querySelectorAll<HTMLElement>('[data-scripture-item]').forEach((book) => {
+            let bookVisible = 0;
+            book.querySelectorAll<HTMLElement>('[data-scripture-row]').forEach((row) => {
+              const queryMatch = exactScripture
+                ? normalize(row.dataset.bookAbbreviation ?? '') === exactScripture[1]
+                  && normalize(row.dataset.bibleReference ?? '') === exactScripture[2]
+                : matchesQuery(row.dataset.search ?? '');
+              const match = testamentMatch && queryMatch;
+              row.hidden = !match;
+              if (match) { bookVisible += 1; visible += 1; }
+            });
+            book.hidden = bookVisible === 0;
+            const rows = book.querySelector<HTMLElement>('.idx-book-rows');
+            const toggle = book.querySelector<HTMLButtonElement>('.idx-book-toggle');
+            const open = Boolean(query) || book.dataset.expanded === 'true';
+            if (rows) rows.hidden = bookVisible === 0 || !open;
+            book.classList.toggle('is-open', bookVisible > 0 && open);
+            toggle?.setAttribute('aria-expanded', String(bookVisible > 0 && open));
+            if (bookVisible) groupVisible += bookVisible;
+          });
+          group.querySelectorAll<HTMLElement>('.idx-book-column').forEach((column) => {
+            column.hidden = !Array.from(column.querySelectorAll<HTMLElement>('[data-scripture-item]'))
+              .some((book) => !book.hidden);
+          });
+          group.hidden = groupVisible === 0;
+        });
+      } else {
+        workPanel.querySelectorAll<HTMLElement>('[data-keyword-item]').forEach((item) => {
+          const letterMatch = letter === 'all' || item.dataset.letter === letter;
+          const match = letterMatch && matchesQuery(item.dataset.search ?? '');
+          item.hidden = !match;
+          if (match) visible += 1;
+        });
+      }
+      if (resultCount) resultCount.textContent = String(visible);
+      const empty = workPanel.querySelector<HTMLElement>(`[data-empty="${mode}"]`);
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    function setMode(nextMode: string, updateHash = true) {
+      mode = nextMode === 'keywords' ? 'keywords' : 'scripture';
+      modeButtons.forEach((button) => {
+        const active = button.dataset.indexMode === mode;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach((panel) => {
+        const panelWork = panel.closest<HTMLElement>('[data-index-work-panel]')?.dataset.indexWorkPanel;
+        panel.hidden = panelWork !== work || panel.dataset.indexPanel !== mode;
+      });
+      if (search) {
+        search.value = '';
+        search.placeholder = mode === 'scripture' ? 'Tìm sách hoặc câu Kinh Thánh…' : 'Tìm từ khóa hoặc trích dẫn…';
+      }
+      if (updateHash) updateLocation();
+      filterCurrentPanel();
+    }
+
+    function setWork(nextWork: string, updateUrl = true) {
+      work = 'confessions';
+      if (workSelect) workSelect.value = work;
+      workPanels.forEach((panel) => {
+        panel.hidden = panel.dataset.indexWorkPanel !== work;
+      });
+      sourceNotes.forEach((note) => {
+        note.hidden = note.dataset.indexSource !== work;
+      });
+      testament = 'all';
+      letter = 'all';
+      testamentButtons.forEach((button) => {
+        const buttonWork = button.closest<HTMLElement>('[data-index-work-panel]')?.dataset.indexWorkPanel;
+        button.classList.toggle('is-active', buttonWork === work && button.dataset.testament === 'all');
+      });
+      letterButtons.forEach((button) => {
+        const buttonWork = button.closest<HTMLElement>('[data-index-work-panel]')?.dataset.indexWorkPanel;
+        button.classList.toggle('is-active', buttonWork === work && button.dataset.letter === 'all');
+      });
+      if (search) search.value = '';
+      setMode(mode, false);
+      if (updateUrl) updateLocation();
+    }
+
+    function revealKeywordTarget(target: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+      highlightedKeyword?.classList.remove('is-jump-target');
+      window.clearTimeout(keywordHighlightTimer);
+      highlightedKeyword = target;
+      target.classList.add('is-jump-target');
+
+      const align = (nextBehavior: ScrollBehavior) => {
+        const navbar = document.querySelector<HTMLElement>('.navbar');
+        const offset = Math.ceil((navbar?.getBoundingClientRect().bottom ?? 105) + 18);
+        const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+        window.scrollTo({ top, behavior: nextBehavior });
+      };
+
+      requestAnimationFrame(() => {
+        align(behavior);
+        window.setTimeout(() => align('instant'), 260);
+        window.setTimeout(() => align('instant'), 700);
+      });
+      keywordHighlightTimer = window.setTimeout(() => {
+        target.classList.remove('is-jump-target');
+        if (highlightedKeyword === target) highlightedKeyword = null;
+      }, 2600);
+    }
+
+    workSelect?.addEventListener('change', () => setWork(workSelect.value));
+    modeButtons.forEach((button) => button.addEventListener('click', () => setMode(button.dataset.indexMode ?? 'scripture')));
+    bookToggles.forEach((toggle) => toggle.addEventListener('click', () => {
+      const book = toggle.closest<HTMLElement>('[data-scripture-item]');
+      const rows = book?.querySelector<HTMLElement>('.idx-book-rows');
+      if (!book || !rows) return;
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      book.dataset.expanded = String(open);
+      book.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      rows.hidden = !open;
+    }));
+    testamentButtons.forEach((button) => button.addEventListener('click', () => {
+      testament = button.dataset.testament ?? 'all';
+      const panel = button.closest<HTMLElement>('[data-index-work-panel]');
+      panel?.querySelectorAll<HTMLButtonElement>('[data-testament]')
+        .forEach((item) => item.classList.toggle('is-active', item === button));
+      filterCurrentPanel();
+    }));
+    letterButtons.forEach((button) => button.addEventListener('click', () => {
+      letter = button.dataset.letter ?? 'all';
+      const panel = button.closest<HTMLElement>('[data-index-work-panel]');
+      panel?.querySelectorAll<HTMLButtonElement>('.idx-alphabet button[data-letter]')
+        .forEach((item) => item.classList.toggle('is-active', item === button));
+      filterCurrentPanel();
+    }));
+    search?.addEventListener('input', filterCurrentPanel);
+    search?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { search.value = ''; search.blur(); filterCurrentPanel(); }
+    });
+    keywordSeeLinks.forEach((link) => link.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const keywordSearch = link.dataset.keywordSearch;
+      const targetWork = link.dataset.keywordWork ?? 'confessions';
+      setWork(targetWork, false);
+      const workPanel = currentWorkPanel();
+      if (keywordSearch) {
+        event.preventDefault();
+        letter = 'all';
+        workPanel?.querySelectorAll<HTMLButtonElement>('.idx-alphabet button[data-letter]')
+          .forEach((button) => button.classList.toggle('is-active', button.dataset.letter === 'all'));
+        setMode('keywords', false);
+        if (search) search.value = keywordSearch;
+        filterCurrentPanel();
+        updateLocation('#tu-khoa');
+        const firstMatch = Array.from(workPanel?.querySelectorAll<HTMLElement>('[data-keyword-item]') ?? [])
+          .find((item) => !item.hidden);
+        if (firstMatch) revealKeywordTarget(firstMatch);
+        else requestAnimationFrame(() => workPanel?.querySelector<HTMLElement>('[data-index-panel="keywords"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        return;
+      }
+      const targetId = link.hash.slice(1);
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      event.preventDefault();
+      letter = 'all';
+      workPanel?.querySelectorAll<HTMLButtonElement>('.idx-alphabet button[data-letter]')
+        .forEach((button) => button.classList.toggle('is-active', button.dataset.letter === 'all'));
+      setMode('keywords', false);
+      updateLocation(`#${targetId}`);
+      revealKeywordTarget(target);
+    }));
+    const initialKeywordTarget = /^#kw-\d+$/.test(location.hash);
+    setWork('confessions', false);
+    setMode(location.hash === '#tu-khoa' || initialKeywordTarget ? 'keywords' : 'scripture', false);
+    if (initialKeywordTarget) {
+      const initialTarget = document.querySelector<HTMLElement>(location.hash);
+      if (initialTarget) revealKeywordTarget(initialTarget, 'instant');
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .idx-masthead { margin-bottom: 2.2rem; }
+  .idx-shell {
+    width: min(118rem, calc(100% - 4rem));
+    margin: 0 auto 7rem;
+    color: #efe6d6;
+  }
+  .idx-control-deck {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 1rem;
+    border: 1px solid rgba(214,185,110,.2);
+    border-radius: 1.4rem;
+    background: rgba(18,26,22,.72);
+    box-shadow: 0 1.6rem 4rem rgba(0,0,0,.12);
+  }
+  .idx-work-select { display: flex; align-items: center; gap: 1.2rem; padding: .2rem .8rem; }
+  .idx-control-label {
+    color: #a99f90; font: 700 1.05rem/1 'Manrope', system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .idx-work-current { display: flex; flex-direction: column; padding-left: 1.2rem; border-left: 1px solid rgba(214,185,110,.25); }
+  .idx-work-current > span { color: #f0dca7; font: 600 1.55rem/1.25 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-work-current small { color: #978e80; font: italic 1.2rem/1.35 Georgia, serif; }
+  .idx-mode-switch { display: grid; grid-template-columns: repeat(2, minmax(14rem, 1fr)); gap: .5rem; }
+  .idx-mode-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: .8rem;
+    min-height: 4.6rem; padding: .8rem 1.5rem; border: 0; border-radius: 1rem;
+    color: #b8b0a4; background: transparent; cursor: pointer;
+    font: 650 1.35rem/1 'Be Vietnam Pro', system-ui, sans-serif;
+  }
+  .idx-mode-button svg { width: 1.8rem; height: 1.8rem; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+  .idx-mode-button:hover { color: #f1dcaa; background: rgba(214,185,110,.08); }
+  .idx-mode-button.is-active { color: #171b18; background: #d6b96e; box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.2); }
+
+  .idx-toolbar { display: flex; align-items: center; gap: 1.5rem; margin: 1.8rem 0 1.4rem; }
+  .idx-search {
+    flex: 1; display: flex; align-items: center; min-height: 5.2rem; padding: 0 1.6rem;
+    border-radius: 1.1rem; background: rgba(255,255,255,.045); color: #a9a195;
+    box-shadow: inset 0 0 0 1px rgba(214,185,110,.13);
+  }
+  .idx-search:focus-within { box-shadow: inset 0 0 0 1px rgba(214,185,110,.46), 0 0 0 3px rgba(214,185,110,.07); }
+  .idx-search svg { width: 2rem; height: 2rem; margin-right: 1.1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+  .idx-search input { min-width: 0; flex: 1; border: 0; outline: 0; color: #f1ece4; background: transparent; font: 500 1.45rem/1.2 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-search input::placeholder { color: #817b72; }
+  .idx-search kbd { padding: .35rem .6rem; border: 1px solid rgba(255,255,255,.11); border-radius: .5rem; color: #8d867b; font: 600 1rem/1 'Manrope', sans-serif; }
+  .idx-result-line { flex: 0 0 auto; margin: 0; color: #958d82; font: 500 1.25rem/1.2 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-result-line strong { color: #dfc789; font-size: 1.5rem; }
+
+  .idx-subfilters { display: flex; justify-content: center; gap: .6rem; margin: 0 0 2.5rem; }
+  .idx-chip, .idx-alphabet button {
+    border: 0; border-radius: 999px; color: #a9a196; background: rgba(255,255,255,.045);
+    cursor: pointer; font: 500 1.2rem/1 'Be Vietnam Pro', system-ui, sans-serif;
+  }
+  .idx-chip { min-height: 3.8rem; padding: .8rem 1.5rem; }
+  .idx-chip:hover, .idx-chip.is-active, .idx-alphabet button:hover, .idx-alphabet button.is-active { color: #f0d99f; background: rgba(214,185,110,.13); }
+
+  .idx-testament + .idx-testament { margin-top: 4.5rem; }
+  .idx-section-heading {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+    width: fit-content;
+    margin: 0 0 1.45rem;
+    padding: .62rem .9rem;
+    border: 0;
+    border-radius: .65rem;
+    background: rgba(214,185,110,.055);
+    box-shadow: inset 0 0 0 1px rgba(214,185,110,.1);
+  }
+  .idx-section-heading::after { content: none; }
+  .idx-section-heading h2 { order: -1; margin: 0; font: 550 clamp(2rem, 3vw, 2.55rem)/1.15 'Cormorant Garamond', Georgia, serif; }
+  .idx-section-heading span { padding-left: .9rem; border-left: 1px solid rgba(214,185,110,.18); color: #79756d; font: 600 1rem/1.2 'Be Vietnam Pro', system-ui, sans-serif; letter-spacing: .075em; text-transform: uppercase; }
+  .idx-book-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.3rem; align-items: start; }
+  .idx-book-column { min-width: 0; }
+  .idx-book { overflow: hidden; border: 1px solid rgba(214,185,110,.13); border-radius: 1.2rem; background: rgba(255,255,255,.025); }
+  .idx-book-heading { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 1.1rem; width: 100%; padding: 1.05rem 1.25rem; border: 0; color: inherit; background: rgba(214,185,110,.045); text-align: left; cursor: pointer; }
+  .idx-book-heading:hover { background: rgba(214,185,110,.085); }
+  .idx-book-heading:focus-visible { outline: 2px solid rgba(214,185,110,.62); outline-offset: -2px; }
+  .idx-book-heading > svg { width: 1.8rem; height: 1.8rem; fill: none; stroke: #92866d; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s ease; }
+  .idx-book.is-open .idx-book-heading > svg { transform: rotate(180deg); }
+  .idx-book-abbr { display: grid; place-items: center; min-width: 4.2rem; min-height: 3.6rem; border-radius: .7rem; color: #1c211d; background: #c9ad68; font: 750 1.25rem/1 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-book-heading h3 { margin: 0; color: #eee5d7; font: 600 1.55rem/1.2 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-book-heading small { color: #827c72; font: italic 1.12rem/1.2 Georgia, serif; }
+  .idx-book-heading em { display: grid; place-items: center; min-width: 2.7rem; height: 2.7rem; border-radius: 999px; color: #8e877c; background: rgba(255,255,255,.045); font: 650 1.05rem/1 'Manrope', sans-serif; font-style: normal; }
+  .idx-book-rows { padding: .35rem 0; }
+  .idx-scripture-row { display: grid; grid-template-columns: minmax(10.5rem, .65fr) 2.2rem minmax(0, 1fr); align-items: center; min-height: 4.3rem; padding: .65rem 1.4rem; }
+  .idx-scripture-row + .idx-scripture-row { border-top: 1px solid rgba(255,255,255,.045); }
+  .idx-scripture-row:hover { background: rgba(214,185,110,.045); }
+  .idx-bible-reference { color: #d8d2c8; font: 600 1.35rem/1.3 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-ref-arrow { color: #59594f; text-align: center; }
+  .idx-confession-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; }
+  .idx-confession-links a, .idx-keyword-refs a {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 2.8rem; padding: .35rem .75rem;
+    border-radius: .55rem; color: #ddc47f; background: rgba(214,185,110,.075); text-decoration: none;
+    font: 650 1.12rem/1 'Manrope', system-ui, sans-serif; letter-spacing: .015em;
+  }
+  .idx-confession-links a:hover, .idx-keyword-refs a:hover { color: #161b17; background: #d6b96e; }
+
+  .idx-alphabet { display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem; margin-bottom: 1.6rem; }
+  .idx-keyword-edition {
+    margin: 0 0 1.2rem;
+    color: #8f897f;
+    font: 400 1.13rem/1.55 'Be Vietnam Pro', system-ui, sans-serif;
+    text-align: center;
+  }
+  .idx-keyword-edition cite { color: #c5b277; font-family: Georgia, serif; }
+  .idx-alphabet button { min-width: 3.2rem; min-height: 3.2rem; padding: .4rem .7rem; }
+  .idx-alphabet button:first-child { padding-inline: 1.2rem; }
+  .idx-keyword-list { overflow: hidden; border: 1px solid rgba(214,185,110,.14); border-radius: 1.3rem; background: rgba(255,255,255,.02); }
+  .idx-keyword-entry { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, auto); align-items: center; gap: 2rem; padding: 1.35rem 1.6rem; }
+  .idx-keyword-entry + .idx-keyword-entry { border-top: 1px solid rgba(255,255,255,.055); }
+  .idx-keyword-entry:hover { background: rgba(214,185,110,.035); }
+  .idx-keyword-main h3 { margin: 0 0 .35rem; color: #e1ca89; font: 600 1.55rem/1.25 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-keyword-main p { margin: 0; color: #aaa397; font: 400 1.27rem/1.55 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-keyword-refs { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: .45rem; }
+  .idx-source-page { margin-left: .3rem; color: #67645e; font: 500 1.05rem/1 'Manrope', sans-serif; }
+  .idx-empty { padding: 5rem 2rem; color: #928b80; text-align: center; font: 500 1.4rem/1.5 'Be Vietnam Pro', system-ui, sans-serif; }
+  .idx-source-note { margin-inline: auto !important; }
+  [hidden] { display: none !important; }
+
+  :global([data-theme='light']) .idx-shell { color: #20382d; }
+  :global([data-theme='light']) .idx-control-deck { border-color: rgba(25,83,55,.17); background: rgba(255,255,255,.78); box-shadow: 0 1.5rem 3.5rem rgba(34,57,45,.08); }
+  :global([data-theme='light']) .idx-control-label { color: #66766d; }
+  :global([data-theme='light']) .idx-work-current { border-left-color: rgba(25,83,55,.18); }
+  :global([data-theme='light']) .idx-work-current > span { color: #174f34; }
+  :global([data-theme='light']) .idx-work-current small { color: #7b766d; }
+  :global([data-theme='light']) .idx-mode-button { color: #53675c; }
+  :global([data-theme='light']) .idx-mode-button:hover { color: #164d33; background: rgba(25,83,55,.07); }
+  :global([data-theme='light']) .idx-mode-button.is-active { color: #fffaf0; background: #1d6342; box-shadow: 0 .5rem 1.4rem rgba(25,83,55,.2); }
+  :global([data-theme='light']) .idx-search { color: #607369; background: rgba(255,255,255,.72); box-shadow: inset 0 0 0 1px rgba(25,83,55,.16); }
+  :global([data-theme='light']) .idx-search:focus-within { box-shadow: inset 0 0 0 1px rgba(25,83,55,.48), 0 0 0 3px rgba(25,83,55,.07); }
+  :global([data-theme='light']) .idx-search input { color: #173c2a; }
+  :global([data-theme='light']) .idx-search input::placeholder { color: #7a8880; }
+  :global([data-theme='light']) .idx-search kbd { border-color: rgba(25,83,55,.13); color: #78847d; }
+  :global([data-theme='light']) .idx-result-line { color: #6d7972; }
+  :global([data-theme='light']) .idx-result-line strong { color: #1c6543; }
+  :global([data-theme='light']) .idx-chip, :global([data-theme='light']) .idx-alphabet button { color: #5d6c63; background: rgba(25,83,55,.055); }
+  :global([data-theme='light']) .idx-keyword-edition { color: #69786f; }
+  :global([data-theme='light']) .idx-keyword-edition cite { color: #1b5e3e; }
+  :global([data-theme='light']) .idx-chip:hover, :global([data-theme='light']) .idx-chip.is-active,
+  :global([data-theme='light']) .idx-alphabet button:hover, :global([data-theme='light']) .idx-alphabet button.is-active { color: #fff; background: #256a49; }
+  :global([data-theme='light']) .idx-section-heading { background: rgba(25,83,55,.065); box-shadow: inset 0 0 0 1px rgba(25,83,55,.11); }
+  :global([data-theme='light']) .idx-section-heading span { border-left-color: rgba(25,83,55,.2); color: #607369; }
+  :global([data-theme='light']) .idx-book, :global([data-theme='light']) .idx-keyword-list { border-color: rgba(25,83,55,.14); background: rgba(255,255,255,.62); }
+  :global([data-theme='light']) .idx-book-heading { background: rgba(25,83,55,.04); }
+  :global([data-theme='light']) .idx-book-heading:hover { background: rgba(25,83,55,.075); }
+  :global([data-theme='light']) .idx-book-abbr { color: #fff; background: #256a49; }
+  :global([data-theme='light']) .idx-book-heading h3 { color: #215b40; }
+  :global([data-theme='light']) .idx-book-heading small, :global([data-theme='light']) .idx-book-heading em { color: #748178; }
+  :global([data-theme='light']) .idx-book-heading em { background: rgba(25,83,55,.055); }
+  :global([data-theme='light']) .idx-book-heading > svg { stroke: #638071; }
+  :global([data-theme='light']) .idx-scripture-row + .idx-scripture-row, :global([data-theme='light']) .idx-keyword-entry + .idx-keyword-entry { border-top-color: rgba(25,83,55,.075); }
+  :global([data-theme='light']) .idx-scripture-row:hover, :global([data-theme='light']) .idx-keyword-entry:hover { background: rgba(25,83,55,.04); }
+  :global([data-theme='light']) .idx-bible-reference { color: #40594c; }
+  :global([data-theme='light']) .idx-ref-arrow { color: #9ba69f; }
+  :global([data-theme='light']) .idx-confession-links a, :global([data-theme='light']) .idx-keyword-refs a { color: #18613f; background: rgba(25,83,55,.075); }
+  :global([data-theme='light']) .idx-confession-links a:hover, :global([data-theme='light']) .idx-keyword-refs a:hover { color: #fff; background: #1f6744; }
+  :global([data-theme='light']) .idx-keyword-main h3 { color: #1b5d3e; }
+  :global([data-theme='light']) .idx-keyword-main p { color: #54665c; }
+  :global([data-theme='light']) .idx-source-page { color: #78847d; }
+
+  @media (max-width: 760px) {
+    .idx-masthead { margin-bottom: 1.4rem; }
+    .idx-shell { width: min(100% - 2.2rem, 56rem); margin-bottom: 5rem; }
+    .idx-control-deck { flex-direction: column; gap: .9rem; padding: .9rem; }
+    .idx-work-select { justify-content: center; min-height: 4.6rem; }
+    .idx-mode-switch { grid-template-columns: repeat(2, 1fr); }
+    .idx-mode-button { min-width: 0; min-height: 4.4rem; padding-inline: .8rem; }
+    .idx-toolbar { flex-wrap: wrap; margin-top: 1.2rem; }
+    .idx-search { flex-basis: 100%; min-height: 4.8rem; }
+    .idx-search kbd { display: none; }
+    .idx-result-line { width: 100%; text-align: center; }
+    .idx-subfilters { margin-bottom: 1.8rem; }
+    .idx-chip { min-height: 3.6rem; padding-inline: 1.2rem; }
+    .idx-book-grid { grid-template-columns: 1fr; }
+    .idx-testament + .idx-testament { margin-top: 3.2rem; }
+    .idx-section-heading { justify-content: center; }
+    .idx-book-heading { padding: 1.05rem 1.1rem; }
+    .idx-scripture-row { grid-template-columns: minmax(8.7rem, .7fr) 1.5rem minmax(0, 1fr); min-height: 4.5rem; padding: .65rem 1.1rem; }
+    .idx-bible-reference { font-size: 1.25rem; }
+    .idx-confession-links { gap: .35rem; }
+    .idx-confession-links a { min-height: 2.7rem; padding-inline: .6rem; font-size: 1.04rem; }
+    .idx-alphabet { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-inline: -.2rem; padding: .2rem .2rem .8rem; scrollbar-width: none; }
+    .idx-alphabet::-webkit-scrollbar { display: none; }
+    .idx-alphabet button { flex: 0 0 auto; }
+    .idx-keyword-entry { grid-template-columns: 1fr; gap: .9rem; padding: 1.25rem 1.2rem; }
+    .idx-keyword-main h3 { font-size: 1.42rem; }
+    .idx-keyword-main p { font-size: 1.19rem; line-height: 1.55; }
+    .idx-keyword-refs { justify-content: flex-start; }
+  }
+
+  @media (max-width: 380px) {
+    .idx-control-label { display: none; }
+    .idx-work-current { padding-left: 0; border-left: 0; text-align: center; }
+    .idx-mode-button { gap: .55rem; font-size: 1.22rem; }
+    .idx-scripture-row { grid-template-columns: 1fr; gap: .55rem; }
+    .idx-ref-arrow { display: none; }
+    .idx-confession-links { justify-content: flex-start; }
+  }
+
+  /* ── Minimal index treatment ────────────────────────────────────── */
+  .idx-masthead { margin-bottom: 1.5rem; }
+  .idx-shell { width: min(108rem, calc(100% - 4rem)); }
+  .idx-control-deck {
+    align-items: center;
+    padding: 0 0 1.2rem;
+    border: 0;
+    border-bottom: 1px solid rgba(214,185,110,.18);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .idx-work-select { padding: 0; }
+  .idx-work-current { padding-left: 1rem; }
+  .idx-work-current > span { font-size: 1.4rem; }
+  .idx-work-current small { font-size: 1.05rem; }
+  .idx-mode-switch { gap: 1.8rem; }
+  .idx-mode-button {
+    min-height: 4rem;
+    padding: .6rem .15rem;
+    border-radius: 0;
+    color: #9f988d;
+    background: transparent;
+    box-shadow: none;
+  }
+  .idx-mode-button:hover { color: #ddc47f; background: transparent; }
+  .idx-mode-button.is-active {
+    color: #e2ca89;
+    background: transparent;
+    box-shadow: inset 0 -2px 0 #c8aa61;
+  }
+  .idx-toolbar { margin: 1rem 0 1.2rem; }
+  .idx-search {
+    min-height: 4.6rem;
+    padding: 0 .2rem;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: inset 0 -1px 0 rgba(214,185,110,.18);
+  }
+  .idx-search:focus-within { box-shadow: inset 0 -1px 0 rgba(214,185,110,.72); }
+  .idx-search input { font-size: 1.35rem; }
+  .idx-search kbd { border: 0; background: transparent; }
+  .idx-result-line { font-size: 1.15rem; }
+  .idx-result-line strong { font-size: 1.3rem; }
+  .idx-subfilters { justify-content: flex-start; gap: 1.4rem; margin: 0 0 2rem; }
+  .idx-chip,
+  .idx-alphabet button {
+    min-height: 3.2rem;
+    padding: .5rem .1rem;
+    border-radius: 0;
+    color: #8f8a81;
+    background: transparent;
+  }
+  .idx-chip:hover,
+  .idx-chip.is-active,
+  .idx-alphabet button:hover,
+  .idx-alphabet button.is-active {
+    color: #dec783;
+    background: transparent;
+    box-shadow: inset 0 -1px 0 currentColor;
+  }
+  .idx-section-heading { margin-bottom: 1rem; }
+  .idx-section-heading h2 { font-size: 2.2rem; }
+  .idx-book-grid { gap: 0 2.4rem; }
+  .idx-book {
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,.075);
+    border-radius: 0;
+    background: transparent;
+  }
+  .idx-book-heading {
+    min-height: 5.2rem;
+    padding: .75rem .15rem;
+    background: transparent;
+  }
+  .idx-book-heading:hover { background: transparent; }
+  .idx-book-abbr {
+    display: block;
+    min-width: 3.8rem;
+    min-height: 0;
+    border-radius: 0;
+    color: #cdb36e;
+    background: transparent;
+    text-align: center;
+  }
+  .idx-book-heading h3 { font-size: 1.42rem; font-weight: 550; }
+  .idx-book-heading small { font-size: 1.02rem; }
+  .idx-book-heading em {
+    display: block;
+    min-width: 2rem;
+    height: auto;
+    border-radius: 0;
+    color: #77736c;
+    background: transparent;
+    text-align: right;
+  }
+  .idx-book-heading > svg { width: 1.6rem; height: 1.6rem; }
+  .idx-book-rows { padding: 0 0 .5rem 4rem; }
+  .idx-scripture-row {
+    grid-template-columns: minmax(9.5rem, .65fr) 1.6rem minmax(0, 1fr);
+    min-height: 3.8rem;
+    padding: .45rem .2rem;
+  }
+  .idx-scripture-row + .idx-scripture-row { border-top-color: rgba(255,255,255,.045); }
+  .idx-scripture-row:hover { background: transparent; }
+  .idx-bible-reference { font-size: 1.25rem; font-weight: 550; }
+  .idx-confession-links a,
+  .idx-keyword-refs a {
+    min-height: 2.5rem;
+    padding: .25rem .35rem;
+    border-radius: 0;
+    color: #cbb574;
+    background: transparent;
+    box-shadow: inset 0 -1px 0 rgba(203,181,116,.22);
+  }
+  .idx-confession-links a:hover,
+  .idx-keyword-refs a:hover {
+    color: #f0db9e;
+    background: transparent;
+    box-shadow: inset 0 -1px 0 currentColor;
+  }
+  .idx-alphabet { justify-content: flex-start; gap: 1rem; margin-bottom: 1rem; }
+  .idx-alphabet button { min-width: 2.3rem; }
+  .idx-keyword-list {
+    border: 0;
+    border-top: 1px solid rgba(214,185,110,.15);
+    border-radius: 0;
+    background: transparent;
+  }
+  .idx-keyword-entry {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, auto);
+    gap: 1.5rem;
+    padding: 1.1rem .2rem;
+  }
+  .idx-keyword-entry:hover { background: transparent; }
+  .idx-keyword-entry.is-jump-target { animation: idxKeywordJumpDark 2.5s ease-out both; }
+  .idx-keyword-main h3 { margin-bottom: .25rem; font-size: 1.42rem; font-weight: 550; }
+  .idx-keyword-main p { font-size: 1.2rem; }
+  .idx-keyword-entry {
+    display: block;
+    padding-block: .35rem;
+    scroll-margin-top: calc(6.58rem + 2rem);
+  }
+  .idx-keyword-main { min-width: 0; }
+  .idx-keyword-line {
+    min-width: 0;
+    padding: .55rem .2rem;
+    color: #aaa397;
+    font: 400 1.2rem/1.58 'Be Vietnam Pro', system-ui, sans-serif;
+    overflow-wrap: anywhere;
+  }
+  .idx-keyword-line + .idx-keyword-line { border-top: 1px solid rgba(255,255,255,.035); }
+  .idx-keyword-line.is-depth-0 {
+    color: #dfc982;
+    font-size: 1.4rem;
+    font-weight: 570;
+    line-height: 1.45;
+  }
+  .idx-keyword-line.is-depth-1 {
+    padding-left: 2rem;
+    color: #bbb4a8;
+  }
+  .idx-keyword-line.is-depth-2 {
+    position: relative;
+    padding-left: 4rem;
+    color: #918b82;
+    font-size: 1.14rem;
+  }
+  .idx-keyword-line.is-depth-2::before {
+    position: absolute;
+    left: 2.25rem;
+    color: #625e56;
+    content: '↳';
+  }
+  .idx-inline-reference {
+    color: #cbb574;
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 rgba(203,181,116,.25);
+  }
+  .idx-inline-reference:hover {
+    color: #f0db9e;
+    box-shadow: inset 0 -1px 0 currentColor;
+  }
+  .idx-see-link {
+    color: #c7aa64;
+    font-weight: 550;
+    box-shadow: inset 0 -1px 0 rgba(199,170,100,.35);
+  }
+
+  :global([data-theme='light']) .idx-control-deck { border-bottom-color: rgba(25,83,55,.18); background: transparent; box-shadow: none; }
+  :global([data-theme='light']) .idx-mode-button { color: #65736b; background: transparent; }
+  :global([data-theme='light']) .idx-mode-button:hover { color: #195b3c; background: transparent; }
+  :global([data-theme='light']) .idx-mode-button.is-active { color: #185c3c; background: transparent; box-shadow: inset 0 -2px 0 #236b49; }
+  :global([data-theme='light']) .idx-search { background: transparent; box-shadow: inset 0 -1px 0 rgba(25,83,55,.2); }
+  :global([data-theme='light']) .idx-search:focus-within { box-shadow: inset 0 -1px 0 rgba(25,83,55,.7); }
+  :global([data-theme='light']) .idx-chip,
+  :global([data-theme='light']) .idx-alphabet button { color: #6d7972; background: transparent; }
+  :global([data-theme='light']) .idx-chip:hover,
+  :global([data-theme='light']) .idx-chip.is-active,
+  :global([data-theme='light']) .idx-alphabet button:hover,
+  :global([data-theme='light']) .idx-alphabet button.is-active { color: #1c6241; background: transparent; box-shadow: inset 0 -1px 0 currentColor; }
+  :global([data-theme='light']) .idx-book,
+  :global([data-theme='light']) .idx-keyword-list { border-color: rgba(25,83,55,.12); background: transparent; }
+  :global([data-theme='light']) .idx-book-heading,
+  :global([data-theme='light']) .idx-book-heading:hover { background: transparent; }
+  :global([data-theme='light']) .idx-book-abbr { color: #1f6745; background: transparent; }
+  :global([data-theme='light']) .idx-book-heading em { color: #829087; background: transparent; }
+  :global([data-theme='light']) .idx-scripture-row:hover,
+  :global([data-theme='light']) .idx-keyword-entry:hover { background: transparent; }
+  :global([data-theme='light']) .idx-confession-links a,
+  :global([data-theme='light']) .idx-keyword-refs a { color: #1d6443; background: transparent; box-shadow: inset 0 -1px 0 rgba(29,100,67,.2); }
+  :global([data-theme='light']) .idx-confession-links a:hover,
+  :global([data-theme='light']) .idx-keyword-refs a:hover { color: #164f35; background: transparent; box-shadow: inset 0 -1px 0 currentColor; }
+  :global([data-theme='light']) .idx-keyword-line { color: #52655a; }
+  :global([data-theme='light']) .idx-keyword-line.is-depth-0 { color: #185b3c; }
+  :global([data-theme='light']) .idx-keyword-line.is-depth-1 { color: #405a4b; }
+  :global([data-theme='light']) .idx-keyword-line.is-depth-2 { color: #68796f; }
+  :global([data-theme='light']) .idx-keyword-line.is-depth-2::before { color: #92a097; }
+  :global([data-theme='light']) .idx-keyword-line + .idx-keyword-line { border-top-color: rgba(25,83,55,.045); }
+  :global([data-theme='light']) .idx-keyword-entry.is-jump-target { animation-name: idxKeywordJumpLight; }
+  :global([data-theme='light']) .idx-inline-reference { color: #1d6443; box-shadow: inset 0 -1px 0 rgba(29,100,67,.22); }
+  :global([data-theme='light']) .idx-inline-reference:hover { color: #123f2b; box-shadow: inset 0 -1px 0 currentColor; }
+  :global([data-theme='light']) .idx-see-link { color: #855f16; box-shadow: inset 0 -1px 0 rgba(133,95,22,.28); }
+
+  @keyframes idxKeywordJumpDark {
+    0%, 28% { background: rgba(214,185,110,.16); box-shadow: inset 0 0 0 1px rgba(214,185,110,.22); }
+    100% { background: transparent; box-shadow: inset 0 0 0 1px transparent; }
+  }
+  @keyframes idxKeywordJumpLight {
+    0%, 28% { background: rgba(31,103,68,.13); box-shadow: inset 0 0 0 1px rgba(31,103,68,.2); }
+    100% { background: transparent; box-shadow: inset 0 0 0 1px transparent; }
+  }
+
+  @media (max-width: 760px) {
+    .idx-shell { width: min(100% - 2.6rem, 56rem); }
+    .idx-control-deck { gap: .35rem; padding: 0 0 1rem; }
+    .idx-work-select { min-height: 3.8rem; }
+    .idx-mode-switch { width: 100%; gap: 0; }
+    .idx-mode-button { min-height: 3.8rem; }
+    .idx-toolbar { gap: .7rem; margin-top: .7rem; }
+    .idx-search { min-height: 4.2rem; }
+    .idx-result-line { margin-top: -.1rem; }
+    .idx-subfilters { justify-content: center; margin-bottom: 1.3rem; }
+    .idx-section-heading { justify-content: flex-start; }
+    .idx-book-grid { gap: 0; }
+    .idx-book-heading { min-height: 4.8rem; padding-inline: 0; }
+    .idx-book-rows { padding-left: 3.5rem; }
+    .idx-scripture-row { padding-inline: 0; }
+    .idx-keyword-entry { padding-inline: 0; }
+    .idx-keyword-line { font-size: 1.14rem; line-height: 1.58; }
+    .idx-keyword-line.is-depth-0 { font-size: 1.32rem; }
+    .idx-keyword-line.is-depth-1 { padding-left: 1.2rem; }
+    .idx-keyword-line.is-depth-2 { padding-left: 2.55rem; font-size: 1.08rem; }
+    .idx-keyword-line.is-depth-2::before { left: 1.15rem; }
+  }
+
+  /* Balanced index system */
+  .idx-shell {
+    --idx-accent: #c9ae69;
+    --idx-accent-strong: #e0c77f;
+    --idx-text: #d9d4ca;
+    --idx-text-strong: #eee8dd;
+    --idx-muted: #918d85;
+    --idx-muted-soft: #716f6a;
+    --idx-line: rgba(214,185,110,.12);
+    --idx-surface: rgba(255,255,255,.025);
+    --idx-surface-hover: rgba(214,185,110,.045);
+
+    /* Citation badge — dark mode default. */
+    --idx-citation-bg: #26344b;
+    --idx-citation-border: #34445f;
+    --idx-citation-text: #f0d99f;
+    --idx-citation-hover-bg: #c9ae69;
+    --idx-citation-hover-border: #e0c77f;
+    --idx-citation-hover-text: #171b18;
+    --idx-citation-shadow: inset 0 1px 0 rgba(255,255,255,.055);
+    --idx-citation-hover-shadow: 0 .35rem .9rem rgba(2,8,20,.24);
+
+    width: min(112rem, calc(100% - 3.2rem));
+  }
+
+  .idx-masthead { margin-bottom: 1.2rem; }
+
+  .idx-control-deck {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .idx-work-select {
+    gap: 1rem;
+    width: fit-content;
+    min-width: 0;
+    min-height: 4.2rem;
+    padding: .35rem 1.05rem;
+    border: 1px solid var(--idx-line);
+    border-radius: .85rem;
+    background: var(--idx-surface);
+  }
+
+  .idx-control-label {
+    color: var(--idx-muted-soft);
+    font-size: .98rem;
+    letter-spacing: .12em;
+  }
+
+  .idx-work-current {
+    min-width: 0;
+    padding-left: 1rem;
+    border-left-color: var(--idx-line);
+  }
+
+  .idx-work-current > span {
+    color: var(--idx-text-strong);
+    font-size: 1.38rem;
+    font-weight: 500;
+  }
+
+  .idx-work-current small {
+    color: var(--idx-muted);
+    font-size: 1.05rem;
+  }
+
+  .idx-mode-switch {
+    grid-template-columns: repeat(2, minmax(12rem, 1fr));
+    gap: .35rem;
+    padding: .3rem;
+    border-radius: .8rem;
+    background: rgba(255,255,255,.025);
+  }
+
+  .idx-mode-button {
+    min-height: 3.9rem;
+    padding: .65rem 1.2rem;
+    border-radius: .62rem;
+    color: var(--idx-muted);
+    font-size: 1.24rem;
+    box-shadow: none;
+  }
+
+  .idx-mode-button:hover {
+    color: var(--idx-text);
+    background: rgba(255,255,255,.035);
+  }
+
+  .idx-mode-button.is-active {
+    color: var(--idx-accent-strong);
+    background: rgba(214,185,110,.1);
+    box-shadow: none;
+  }
+
+  .idx-mode-button svg {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .idx-toolbar {
+    gap: 1.2rem;
+    margin: 1rem 0 1.15rem;
+  }
+
+  .idx-search {
+    min-height: 4.5rem;
+    padding: 0 1.2rem;
+    border: 1px solid var(--idx-line);
+    border-radius: .9rem;
+    color: var(--idx-muted);
+    background: var(--idx-surface);
+    box-shadow: none;
+  }
+
+  .idx-search:focus-within {
+    border-color: rgba(214,185,110,.36);
+    box-shadow: 0 0 0 3px rgba(214,185,110,.055);
+  }
+
+  .idx-search svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: .9rem;
+  }
+
+  .idx-search input {
+    color: var(--idx-text);
+    font-size: 1.3rem;
+    font-weight: 450;
+  }
+
+  .idx-search input::placeholder { color: var(--idx-muted-soft); }
+
+  .idx-search kbd {
+    padding: .25rem .5rem;
+    border: 0;
+    color: var(--idx-muted-soft);
+    background: transparent;
+  }
+
+  .idx-result-line {
+    color: var(--idx-muted);
+    font-size: 1.12rem;
+  }
+
+  .idx-result-line strong {
+    color: var(--idx-accent);
+    font-size: 1.28rem;
+  }
+
+  .idx-subfilters {
+    justify-content: flex-start;
+    gap: .35rem;
+    margin: 0 0 1.6rem;
+  }
+
+  .idx-chip,
+  .idx-alphabet button {
+    min-height: 3.2rem;
+    padding: .55rem 1.05rem;
+    border-radius: .65rem;
+    color: var(--idx-muted);
+    background: transparent;
+    font-size: 1.12rem;
+  }
+
+  .idx-chip:hover,
+  .idx-chip.is-active,
+  .idx-alphabet button:hover,
+  .idx-alphabet button.is-active {
+    color: var(--idx-accent-strong);
+    background: rgba(214,185,110,.085);
+    box-shadow: none;
+  }
+
+  .idx-testament + .idx-testament { margin-top: 3.2rem; }
+  .idx-testament[hidden] + .idx-testament { margin-top: 0; }
+
+  .idx-section-heading {
+    gap: .85rem;
+    margin: 0 0 1.05rem;
+    padding: .1rem 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .idx-section-heading h2 {
+    font: 650 1.65rem/1.2 'Be Vietnam Pro', system-ui, sans-serif;
+    letter-spacing: .01em;
+  }
+
+  .idx-book-grid {
+    gap: 1rem;
+  }
+
+  .idx-book-column {
+    overflow: hidden;
+    border: 1px solid var(--idx-line);
+    border-radius: 1rem;
+    background: var(--idx-surface);
+  }
+
+  .idx-book {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .idx-book + .idx-book { border-top: 1px solid var(--idx-line); }
+
+  .idx-book-heading {
+    min-height: 5.1rem;
+    padding: .75rem 1.05rem;
+    background: transparent;
+  }
+
+  .idx-book-heading:hover { background: var(--idx-surface-hover); }
+
+  .idx-book-abbr {
+    display: grid;
+    place-items: center;
+    min-width: 3.7rem;
+    min-height: 2.8rem;
+    border-radius: .55rem;
+    color: var(--idx-accent-strong);
+    background: rgba(214,185,110,.075);
+    font-size: 1.12rem;
+    text-align: center;
+  }
+
+  .idx-book-heading h3 {
+    color: var(--idx-text-strong);
+    font-size: 1.38rem;
+    font-weight: 560;
+  }
+
+  .idx-book-heading small {
+    color: var(--idx-muted);
+    font-size: 1rem;
+  }
+
+  .idx-book-heading em {
+    display: block;
+    min-width: 2rem;
+    height: auto;
+    color: var(--idx-muted-soft);
+    background: transparent;
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  .idx-book-heading > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: var(--idx-muted-soft);
+  }
+
+  .idx-book-rows {
+    padding: .25rem .9rem .7rem 4.8rem;
+    background: rgba(0,0,0,.055);
+  }
+
+  .idx-scripture-row {
+    grid-template-columns: minmax(9rem, .62fr) 1.5rem minmax(0, 1fr);
+    min-height: 3.8rem;
+    padding: .45rem .2rem;
+  }
+
+  .idx-scripture-row + .idx-scripture-row { border-top-color: var(--idx-line); }
+  .idx-scripture-row:hover { background: transparent; }
+
+  .idx-bible-reference {
+    font-size: 1.2rem;
+    font-weight: 520;
+  }
+  .idx-bible-book-code { color: #c8c5bd; }
+  .idx-bible-verse { color: #c8c5bd; }
+
+  .idx-ref-arrow { color: var(--idx-muted-soft); }
+
+  .idx-confession-links a,
+  .idx-keyword-refs a {
+    min-height: 2.5rem;
+    padding: .3rem .55rem;
+    border-radius: .5rem;
+    color: var(--idx-accent);
+    background: rgba(214,185,110,.065);
+    box-shadow: none;
+    font-size: 1.04rem;
+    font-weight: 500;
+  }
+
+  .idx-confession-links a:hover,
+  .idx-keyword-refs a:hover {
+    color: #171b18;
+    background: var(--idx-accent);
+    box-shadow: none;
+  }
+
+  .idx-alphabet {
+    justify-content: center;
+    gap: .25rem;
+    margin-bottom: 1.2rem;
+    padding: .3rem;
+  }
+
+  .idx-alphabet button {
+    min-width: 2.8rem;
+    padding-inline: .65rem;
+  }
+
+  .idx-keyword-list {
+    overflow: hidden;
+    border: 1px solid var(--idx-line);
+    border-radius: 1rem;
+    background: var(--idx-surface);
+  }
+
+  .idx-keyword-entry {
+    display: block;
+    padding: .45rem 1.2rem;
+  }
+
+  .idx-keyword-entry + .idx-keyword-entry { border-top-color: var(--idx-line); }
+  .idx-keyword-entry:hover { background: var(--idx-surface-hover); }
+
+  .idx-keyword-line {
+    padding: .52rem .1rem;
+    color: var(--idx-text);
+    font-size: 1.18rem;
+    line-height: 1.55;
+  }
+
+  .idx-keyword-line + .idx-keyword-line { border-top-color: rgba(255,255,255,.025); }
+
+  .idx-keyword-line.is-depth-0 {
+    color: var(--idx-accent-strong);
+    font-size: 1.34rem;
+    font-weight: 580;
+  }
+
+  .idx-keyword-line.is-depth-1 {
+    padding-left: 1.8rem;
+    color: #b5afa5;
+  }
+
+  .idx-keyword-line.is-depth-2 {
+    padding-left: 3.6rem;
+    color: var(--idx-muted);
+    font-size: 1.12rem;
+  }
+
+  .idx-keyword-line.is-depth-2::before {
+    left: 2rem;
+    color: var(--idx-muted-soft);
+    content: '↳';
+  }
+
+  .idx-inline-reference:not(.idx-citation-badge) {
+    color: var(--idx-accent);
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 rgba(201,174,105,.24);
+  }
+
+  .idx-inline-reference:not(.idx-citation-badge):hover {
+    color: var(--idx-accent-strong);
+    box-shadow: inset 0 -1px 0 currentColor;
+  }
+
+  .idx-citation-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    margin: .12rem .1rem;
+    padding: .3rem .58rem;
+    border: 1px solid var(--idx-citation-border);
+    border-radius: .5rem;
+    color: var(--idx-citation-text);
+    background: var(--idx-citation-bg);
+    box-shadow: var(--idx-citation-shadow);
+    font-size: 1.04rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color .16s ease, background-color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+  }
+
+  a.idx-citation-badge:not(.is-static):hover {
+    border-color: var(--idx-citation-hover-border);
+    color: var(--idx-citation-hover-text);
+    background: var(--idx-citation-hover-bg);
+    box-shadow: var(--idx-citation-hover-shadow);
+    transform: translateY(-1px);
+  }
+
+  a.idx-citation-badge:not(.is-static):focus-visible {
+    outline: 2px solid var(--idx-citation-hover-border);
+    outline-offset: 2px;
+  }
+
+  .idx-see-link {
+    color: #c39d58;
+    font-weight: 560;
+  }
+
+  .idx-empty {
+    padding: 4rem 1.5rem;
+    color: var(--idx-muted);
+  }
+
+  .idx-source-note {
+    width: min(100%, 76rem);
+    margin: 3.2rem auto 1.5rem !important;
+  }
+
+  :global(html:not([data-theme='light'])) .idx-shell {
+    --idx-line: #283248;
+    --idx-surface: var(--bg-card);
+    --idx-surface-hover: #16233b;
+  }
+
+  :global(html:not([data-theme='light'])) .idx-control-deck,
+  :global(html:not([data-theme='light'])) .idx-search,
+  :global(html:not([data-theme='light'])) .idx-book-column,
+  :global(html:not([data-theme='light'])) .idx-keyword-list {
+    border-color: var(--idx-line);
+    background: var(--idx-surface);
+    box-shadow: none;
+  }
+  :global(html:not([data-theme='light'])) .idx-book-heading h3 { font-weight: 400; }
+
+  :global(html:not([data-theme='light'])) .idx-mode-switch { background: var(--bg-main); }
+  :global(html:not([data-theme='light'])) .idx-mode-button:hover { background: var(--idx-surface-hover); }
+  :global(html:not([data-theme='light'])) .idx-mode-button.is-active {
+    color: var(--idx-accent-strong);
+    background: #253047;
+    box-shadow: none;
+  }
+
+  :global(html:not([data-theme='light'])) .idx-chip:hover,
+  :global(html:not([data-theme='light'])) .idx-chip.is-active,
+  :global(html:not([data-theme='light'])) .idx-alphabet button:hover,
+  :global(html:not([data-theme='light'])) .idx-alphabet button.is-active {
+    background: #202b40;
+  }
+
+  :global(html:not([data-theme='light'])) .idx-book-heading:hover,
+  :global(html:not([data-theme='light'])) .idx-keyword-entry:hover { background: var(--idx-surface-hover); }
+  :global(html:not([data-theme='light'])) .idx-book-abbr { background: #232e43; }
+  :global(html:not([data-theme='light'])) .idx-book-rows { background: var(--bg-main); }
+  :global(html:not([data-theme='light'])) .idx-confession-links a,
+  :global(html:not([data-theme='light'])) .idx-keyword-refs a { background: #222d42; }
+  :global(html:not([data-theme='light'])) .idx-control-deck {
+    border: 0;
+    background: transparent;
+  }
+  :global(html:not([data-theme='light'])) .idx-work-select {
+    border-color: var(--idx-line);
+    background: var(--idx-surface);
+  }
+
+  :global(html[data-theme='light']) .idx-shell {
+    --idx-accent: #236545;
+    --idx-accent-strong: #184f36;
+    --idx-text: #40574a;
+    --idx-text-strong: #213d2e;
+    --idx-muted: #6d7a72;
+    --idx-muted-soft: #8a958e;
+    --idx-line: rgba(30,89,60,.12);
+    --idx-surface: rgba(255,255,255,.54);
+    --idx-surface-hover: rgba(30,89,60,.045);
+  }
+
+  :global(html[data-theme='light']) .idx-control-deck,
+  :global(html[data-theme='light']) .idx-search,
+  :global(html[data-theme='light']) .idx-book-column,
+  :global(html[data-theme='light']) .idx-keyword-list {
+    border-color: var(--idx-line);
+    background: var(--idx-surface);
+    box-shadow: none;
+  }
+  :global(html[data-theme='light']) .idx-control-deck {
+    border: 0;
+    background: transparent;
+  }
+  :global(html[data-theme='light']) .idx-work-select {
+    border-color: var(--idx-line);
+    background: #fffdf8;
+  }
+
+  :global(html[data-theme='light']) .idx-work-current { border-left-color: var(--idx-line); }
+  :global(html[data-theme='light']) .idx-work-current > span { color: #236545; }
+  :global(html[data-theme='light']) .idx-work-current small,
+  :global(html[data-theme='light']) .idx-control-label { color: var(--idx-muted); }
+
+  :global(html[data-theme='light']) .idx-mode-switch { background: rgba(30,89,60,.035); }
+  :global(html[data-theme='light']) .idx-mode-button { color: var(--idx-muted); background: transparent; box-shadow: none; }
+  :global(html[data-theme='light']) .idx-mode-button:hover { color: var(--idx-text-strong); background: rgba(30,89,60,.045); }
+  :global(html[data-theme='light']) .idx-mode-button.is-active { color: #fff; background: #246446; box-shadow: none; }
+
+  :global(html[data-theme='light']) .idx-search { color: var(--idx-muted); }
+  :global(html[data-theme='light']) .idx-search:focus-within {
+    border-color: rgba(30,89,60,.34);
+    box-shadow: 0 0 0 3px rgba(30,89,60,.055);
+  }
+  :global(html[data-theme='light']) .idx-search input { color: var(--idx-text-strong); }
+  :global(html[data-theme='light']) .idx-search input::placeholder,
+  :global(html[data-theme='light']) .idx-search kbd { color: var(--idx-muted-soft); }
+  :global(html[data-theme='light']) .idx-result-line { color: var(--idx-muted); }
+  :global(html[data-theme='light']) .idx-result-line strong { color: var(--idx-accent); }
+
+  :global(html[data-theme='light']) .idx-chip,
+  :global(html[data-theme='light']) .idx-alphabet button { color: var(--idx-muted); background: transparent; box-shadow: none; }
+  :global(html[data-theme='light']) .idx-chip:hover,
+  :global(html[data-theme='light']) .idx-chip.is-active,
+  :global(html[data-theme='light']) .idx-alphabet button:hover,
+  :global(html[data-theme='light']) .idx-alphabet button.is-active {
+    color: var(--idx-accent-strong);
+    background: rgba(30,89,60,.075);
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='light']) .idx-section-heading {
+    background: transparent;
+    box-shadow: none;
+  }
+  :global(html[data-theme='light']) .idx-book,
+  :global(html[data-theme='light']) .idx-book-heading,
+  :global(html[data-theme='light']) .idx-keyword-list { background: transparent; }
+  :global(html[data-theme='light']) .idx-book + .idx-book,
+  :global(html[data-theme='light']) .idx-scripture-row + .idx-scripture-row,
+  :global(html[data-theme='light']) .idx-keyword-entry + .idx-keyword-entry { border-color: var(--idx-line); }
+  :global(html[data-theme='light']) .idx-book-heading:hover,
+  :global(html[data-theme='light']) .idx-keyword-entry:hover { background: var(--idx-surface-hover); }
+  :global(html[data-theme='light']) .idx-book-abbr { color: var(--idx-accent-strong); background: rgba(30,89,60,.07); }
+  :global(html[data-theme='light']) .idx-book-heading h3 { color: #86631f; }
+  :global(html[data-theme='light']) .idx-book-heading small,
+  :global(html[data-theme='light']) .idx-book-heading em { color: var(--idx-muted); background: transparent; }
+  :global(html[data-theme='light']) .idx-book-heading > svg { stroke: var(--idx-muted); }
+  :global(html[data-theme='light']) .idx-book-rows { background: rgba(30,89,60,.025); }
+  :global(html[data-theme='light']) .idx-bible-book-code { color: #236545; }
+  :global(html[data-theme='light']) .idx-bible-verse { color: #236545; }
+  :global(html[data-theme='light']) .idx-ref-arrow { color: var(--idx-muted-soft); }
+  :global(html[data-theme='light']) .idx-confession-links a,
+  :global(html[data-theme='light']) .idx-keyword-refs a {
+    color: var(--idx-accent-strong);
+    background: rgba(35,101,69,.075);
+    border-color: rgba(35,101,69,.16);
+    box-shadow: none;
+  }
+  :global(html[data-theme='light']) .idx-confession-links a:hover,
+  :global(html[data-theme='light']) .idx-keyword-refs a:hover {
+    color: #fff;
+    background: var(--idx-accent);
+    border-color: var(--idx-accent);
+  }
+  :global(html[data-theme='light']) .idx-shell {
+    /* Light mode uses the site's green as the resting state. */
+    --idx-citation-bg: #236545;
+    --idx-citation-border: #236545;
+    --idx-citation-text: #ffffff;
+    --idx-citation-hover-bg: #0f3d24;
+    --idx-citation-hover-border: #0f3d24;
+    --idx-citation-hover-text: #ffffff;
+    --idx-citation-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+    --idx-citation-hover-shadow: 0 .35rem .9rem rgba(15,61,36,.2);
+  }
+  :global(html[data-theme='light']) .idx-keyword-line { color: var(--idx-text); }
+  :global(html[data-theme='light']) .idx-keyword-line.is-depth-0 { color: var(--idx-accent-strong); }
+  :global(html[data-theme='light']) .idx-keyword-line.is-depth-1 { color: #405a4b; }
+  :global(html[data-theme='light']) .idx-keyword-line.is-depth-2 { color: var(--idx-muted); }
+  :global(html[data-theme='light']) .idx-keyword-line.is-depth-2::before { color: var(--idx-muted-soft); }
+  :global(html[data-theme='light']) .idx-inline-reference:not(.idx-citation-badge) { color: var(--idx-accent); box-shadow: inset 0 -1px 0 rgba(35,101,69,.22); }
+  :global(html[data-theme='light']) .idx-inline-reference:not(.idx-citation-badge):hover { color: var(--idx-accent-strong); box-shadow: inset 0 -1px 0 currentColor; }
+  :global(html[data-theme='light']) .idx-see-link { color: #805f1d; }
+
+  @media (max-width: 760px) {
+    :global(body.page-chi-muc main.content) { padding-inline: 1.2rem; }
+    .idx-shell { width: min(100%, 56rem); }
+    .idx-masthead { margin-bottom: .8rem; }
+
+    .idx-control-deck {
+      grid-template-columns: 1fr;
+      gap: .65rem;
+      padding: 0;
+    }
+
+    .idx-work-select {
+      justify-content: center;
+      width: 100%;
+      min-height: 4.2rem;
+      padding: .35rem .8rem;
+    }
+
+    .idx-mode-switch { width: 100%; }
+    .idx-mode-button { min-height: 3.8rem; }
+
+    .idx-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: .6rem .8rem;
+      margin-top: .75rem;
+    }
+
+    .idx-search {
+      grid-column: 1 / -1;
+      min-height: 4.3rem;
+    }
+
+    .idx-result-line {
+      grid-column: 1 / -1;
+      width: auto;
+      margin: 0 .25rem;
+      text-align: right;
+    }
+
+    .idx-subfilters {
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .idx-section-heading { justify-content: flex-start; }
+    .idx-section-heading h2 { font-size: 1.55rem; }
+    .idx-book-grid { gap: .8rem; }
+    .idx-book-heading { padding-inline: .8rem; }
+    .idx-book-rows { padding: .25rem .8rem .65rem; }
+
+    .idx-scripture-row {
+      grid-template-columns: minmax(8.5rem, auto) minmax(0, 1fr);
+      gap: .75rem;
+      padding: .55rem .25rem;
+    }
+
+    .idx-ref-arrow { display: none; }
+    .idx-confession-links { justify-content: flex-start; }
+
+    .idx-alphabet {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      margin-inline: -.2rem;
+      padding: .25rem .2rem .7rem;
+      scrollbar-width: none;
+    }
+
+    .idx-alphabet::-webkit-scrollbar { display: none; }
+    .idx-alphabet button { flex: 0 0 auto; }
+    .idx-keyword-entry { padding-inline: .85rem; }
+    .idx-keyword-line { font-size: 1.14rem; }
+    .idx-keyword-line.is-depth-0 { font-size: 1.28rem; }
+    .idx-keyword-line.is-depth-1 { padding-left: 1.2rem; }
+    .idx-keyword-line.is-depth-2 { padding-left: 2.5rem; font-size: 1.08rem; }
+    .idx-keyword-line.is-depth-2::before { left: 1.15rem; }
+  }
+
+  @media (max-width: 380px) {
+    .idx-shell { width: calc(100% - 1.4rem); }
+    .idx-control-label { display: none; }
+    .idx-work-current { padding-left: 0; border-left: 0; }
+    .idx-mode-button { gap: .5rem; padding-inline: .55rem; font-size: 1.16rem; }
+    .idx-section-heading { gap: .55rem; }
+    .idx-section-heading h2 { font-size: 1.48rem; }
+    .idx-book-heading { grid-template-columns: auto minmax(0, 1fr) auto auto; gap: .7rem; }
+    .idx-book-heading small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  }
+
+  /* Simple work selector: one quiet line that can accept more works later. */
+  .idx-work-select {
+    min-width: 0;
+    gap: 1.25rem;
+    padding: .15rem .35rem;
+  }
+  .idx-work-select .idx-control-label {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 10rem;
+    min-width:10rem;
+    min-height:3.2rem;
+    padding:.45rem .8rem;
+    border-radius:.45rem;
+    background:#222d42;
+    color:#bdb3a1;
+    font-family:'Be Vietnam Pro',system-ui,sans-serif;
+    font-size:1rem;
+    font-weight:650;
+    letter-spacing:.1em;
+    text-align:center;
+    white-space:nowrap;
+  }
+
+  .idx-work-field {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+  }
+  .idx-work-field select {
+    width: 100%;
+    min-width: 0;
+    min-height: 4.5rem;
+    padding: .65rem 3rem .65rem .25rem;
+    border: 0;
+    outline: 0;
+    color: #dfc789;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
+    font: 600 1.58rem/1.25 'Playfair Display', Georgia, serif;
+    letter-spacing:.015em;
+  }
+  .idx-work-field svg {
+    width: 1.65rem;
+    margin-left: -2.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    pointer-events: none;
+  }
+
+  .idx-citation-badge {
+    min-height: 2.5rem;
+    padding: .3rem .65rem;
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .idx-citation-badge.is-static {
+    cursor: default;
+    user-select: text;
+  }
+
+  .idx-citation-badge.is-static:hover {
+    border-color: var(--idx-citation-border);
+    color: var(--idx-citation-text);
+    background: var(--idx-citation-bg);
+    box-shadow: var(--idx-citation-shadow);
+    transform: none;
+  }
+
+  :global(html[data-theme='light']) .idx-work-field {
+    background: transparent;
+  }
+
+  :global(html[data-theme='light']) .idx-work-field select { color:#246446; }
+  :global(html[data-theme='light']) .idx-work-select .idx-control-label {
+    background:#e1e9e3;
+    color:#315f4a;
+  }
+
+  /*
+   * Citation badges appear in both the Scripture index and keyword lines.
+   * Keep this final, higher-specificity block as their single visual source
+   * of truth so container link rules cannot make the two sections diverge.
+   */
+  .idx-shell .idx-confession-links a.idx-citation-badge,
+  .idx-shell .idx-keyword-line .idx-citation-badge,
+  .idx-shell .idx-keyword-refs a.idx-citation-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    margin: .12rem .1rem;
+    padding: .3rem .65rem;
+    border: 1px solid var(--idx-citation-border);
+    border-radius: .5rem;
+    color: var(--idx-citation-text);
+    background: var(--idx-citation-bg);
+    box-shadow: var(--idx-citation-shadow);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: color .16s ease, background-color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+  }
+
+  .idx-shell .idx-confession-links a.idx-citation-badge:not(.is-static),
+  .idx-shell .idx-keyword-line a.idx-citation-badge:not(.is-static),
+  .idx-shell .idx-keyword-refs a.idx-citation-badge:not(.is-static) {
+    cursor: pointer;
+  }
+
+  .idx-shell .idx-confession-links a.idx-citation-badge:not(.is-static):hover,
+  .idx-shell .idx-keyword-line a.idx-citation-badge:not(.is-static):hover,
+  .idx-shell .idx-keyword-refs a.idx-citation-badge:not(.is-static):hover {
+    border-color: var(--idx-citation-hover-border);
+    color: var(--idx-citation-hover-text);
+    background: var(--idx-citation-hover-bg);
+    box-shadow: var(--idx-citation-hover-shadow);
+    transform: translateY(-1px);
+  }
+
+  .idx-shell .idx-confession-links a.idx-citation-badge:not(.is-static):focus-visible,
+  .idx-shell .idx-keyword-line a.idx-citation-badge:not(.is-static):focus-visible,
+  .idx-shell .idx-keyword-refs a.idx-citation-badge:not(.is-static):focus-visible {
+    outline: 2px solid var(--idx-citation-hover-border);
+    outline-offset: 2px;
+  }
+
+  .idx-shell .idx-keyword-line .idx-citation-badge.is-static,
+  .idx-shell .idx-keyword-line .idx-citation-badge.is-static:hover,
+  .idx-shell .idx-keyword-refs .idx-citation-badge.is-static,
+  .idx-shell .idx-keyword-refs .idx-citation-badge.is-static:hover {
+    border-color: var(--idx-citation-border);
+    color: var(--idx-citation-text);
+    background: var(--idx-citation-bg);
+    box-shadow: var(--idx-citation-shadow);
+    transform: none;
+    cursor: default;
+    user-select: text;
+  }
+
+
+  @media (min-width: 761px) {
+    .idx-control-deck {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .idx-work-select {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
+    .idx-work-field {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .idx-work-select {
+      flex-direction: row;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .idx-work-select .idx-control-label { flex-basis:8.5rem; min-width:8.5rem; text-align:left; }
+    .idx-work-field { min-width:0; width:auto; }
+    .idx-work-field select { min-height:4.8rem; font-size:1.48rem; }
+  }
+</style>

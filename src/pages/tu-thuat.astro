@@ -1,0 +1,1203 @@
+---
+import { getEntry, getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Metadata từ sach collection
+const meta = await getEntry('sach', 'st-augustine/tu-thuat');
+if (!meta) return Astro.redirect('/404');
+
+// Bio pre-render server-side (hiển thị mặc định)
+const bioEntry = await getEntry('tu-thuat', 'bio');
+if (!bioEntry) return Astro.redirect('/404');
+const { Content: DefaultContent } = await render(bioEntry);
+
+// Danh sách 13 quyển để render tabs + fragment slugs
+const allChapters = (await getCollection('tu-thuat', (e) => !e.data.draft && e.id !== 'bio'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout
+  title={meta.data.title}
+  description={meta.data.excerpt}
+  type="article"
+  banner="tu-thuat"
+  bodyClass="no-sidebar page-tu-thuat"
+>
+<script is:inline>
+  if (new URLSearchParams(location.search).has('book') && location.hash) {
+    document.body.dataset.noAutoscroll = '1';
+  }
+</script>
+
+<!-- ── Masthead ── -->
+<header class="lib-masthead">
+  <p class="lib-masthead-sub">{meta.data.author} · Confessiones · 397–400</p>
+  <h1 class="lib-masthead-title">{meta.data.title}</h1>
+  <div class="lib-masthead-rule"><span class="lib-masthead-ornament">✦</span></div>
+  <p class="lib-masthead-article-meta">
+    {meta.data.translator && <span>Dịch: {meta.data.translator}</span>}
+  </p>
+</header>
+
+<!-- ── Book selector + fixed visual gap (sticky below navbar) ── -->
+<div class="tt-book-sticky">
+<nav class="tt-book-nav shared-tab-bar" aria-label="Chọn quyển">
+  <div class="tt-book-nav-inner">
+    {allChapters.map((ch, i) => (
+      <button
+        type="button"
+        class="tt-book-tab shared-tab-btn"
+        data-fragment-slug={ch.id}
+      >
+        {`Quyển ${i + 1}`}
+      </button>
+    ))}
+    {allChapters.length < 13 && Array.from({length: 13 - allChapters.length}, (_, i) => (
+      <span class="tt-book-tab shared-tab-btn tt-book-tab--empty" aria-disabled="true">
+        {`Quyển ${allChapters.length + i + 1}`}
+      </span>
+    ))}
+  </div>
+</nav>
+<div class="tt-book-gap" aria-hidden="true"></div>
+</div>
+
+<!-- ── Reading progress bar ── -->
+<div id="tt-progress" aria-hidden="true"><div id="tt-progress-bar"></div></div>
+
+<!-- ── Content ── -->
+<div class="article-shell has-toc">
+  <nav class="toc" aria-label="Mục lục">
+    <button class="toc-trigger" type="button" aria-expanded="false" aria-label="Mục lục" title="Mục lục">
+      <svg class="toc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+    <div class="toc-drawer">
+      <div class="toc-drawer-head">
+        <p class="toc-title">Mục lục</p>
+      </div>
+      <ul id="tt-toc-list"></ul>
+    </div>
+  </nav>
+  <div id="tt-chapter-wrap">
+    <article id="tt-chapter-content" class="prose tt-prose" data-content-slug="bio">
+      <DefaultContent />
+    </article>
+    <div id="tt-chapter-loading" hidden aria-live="polite">
+      <span class="tt-loading-dot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOC list toggle (mục lục nhanh) ── -->
+<div id="ttFloatControls">
+<div id="docFloatToc">
+  <div id="dftPanel">
+    <p class="ffp-label">Mục Lục</p>
+    <nav id="dftNav" aria-label="Mục lục chương"></nav>
+  </div>
+  <button id="dftBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Mục lục">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="16" y2="12"/>
+      <line x1="3" y1="18" x2="11" y2="18"/>
+    </svg>
+    <span id="dftLabel">Mục Lục</span>
+  </button>
+</div>
+
+<!-- ── Filter Quyển → Chương → Đoạn ── -->
+<div id="ttFilter">
+  <div id="ttFilterPanel">
+    <p class="ffp-label">Quyển</p>
+    <select id="ttSelQuyen" class="tt-filter-sel" aria-label="Chọn quyển"></select>
+    <p class="ffp-label">Đoạn</p>
+    <select id="ttSelDoan" class="tt-filter-sel" aria-label="Chọn đoạn"></select>
+    <p class="ffp-label">Số đoạn</p>
+    <select id="ttSelSo" class="tt-filter-sel" aria-label="Chọn số đoạn"></select>
+  </div>
+  <button id="ttFilterBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Lọc Quyển / Chương / Đoạn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="4" y1="6" x2="20" y2="6"/>
+      <line x1="7" y1="12" x2="17" y2="12"/>
+      <line x1="10" y1="18" x2="14" y2="18"/>
+    </svg>
+    <span>Lọc đoạn</span>
+  </button>
+</div>
+</div>
+
+</BaseLayout>
+
+<style>
+/* ── Sticky stack: menubar → select book bar → fixed breathing space ── */
+.tt-book-sticky {
+  position: sticky;
+  top: var(--tt-navbar-height, 6.58rem);
+  z-index: 100;
+  margin-left: -4rem;
+  margin-right: -4rem;
+  background: var(--bg-main);
+  isolation: isolate;
+}
+
+.tt-book-nav {
+  --shared-tab-max-width: none;
+  --shared-tab-margin: 0;
+  --shared-tab-padding: 0;
+  position: relative;
+  top: auto;
+  z-index: 2;
+  height: var(--tt-bookbar-height, 4.4rem);
+  min-height: var(--tt-bookbar-height, 4.4rem);
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-top: 1px solid rgba(233, 193, 118, .14);
+  border-bottom-color: rgba(233, 193, 118, .3);
+  background: #111e31;
+}
+.tt-book-nav::-webkit-scrollbar { display: none; }
+.tt-book-nav-inner {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0;
+  width: 100%;
+  max-width: 146rem;
+  height: 100%;
+  margin-inline: auto;
+  padding: 0 clamp(1.6rem, 3vw, 4.8rem);
+}
+.tt-book-nav-inner::after {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.tt-book-tab {
+  height: 100%;
+  min-height: 0;
+}
+.tt-book-tab--empty {
+  opacity: .34;
+  cursor: default;
+  pointer-events: none;
+}
+.tt-book-tab--empty::after { display: none; }
+
+@media (min-width: 769px) {
+  .tt-book-nav.shared-tab-bar .tt-book-tab.shared-tab-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: .65rem;
+    font-size: clamp(1.08rem, .9vw, 1.22rem);
+    letter-spacing: .055em;
+  }
+  .tt-book-nav.shared-tab-bar .tt-book-tab.shared-tab-btn:hover:not(.active) {
+    background: #172740;
+  }
+  .tt-book-nav.shared-tab-bar .tt-book-tab.shared-tab-btn.active {
+    background: #1b2d48;
+  }
+}
+
+/* Phần spacer nằm trong chính sticky stack, nên khoảng trống vẫn hiện khi scroll. */
+.tt-book-gap {
+  position: relative;
+  z-index: 1;
+  height: var(--tt-content-gap, 6.4rem);
+  background: var(--bg-main);
+  pointer-events: none;
+}
+
+/* TOC + prose là một group và bắt đầu ngay sau sticky stack. */
+.article-shell {
+  margin-top: 0;
+  scroll-margin-top: calc(var(--tt-navbar-height, 6.58rem) + var(--tt-bookbar-height, 4.4rem) + var(--tt-content-gap, 6.4rem));
+}
+
+/* Không để browser scroll anchoring tự kéo trang khi thay nội dung quyển. */
+.tt-book-sticky,
+.article-shell,
+#tt-chapter-wrap,
+#tt-chapter-content {
+  overflow-anchor: none;
+}
+
+/* ── Chapter content transition ── */
+#tt-chapter-content {
+  /* Giữ tiêu đề quyển cách mép sticky bar cả khi nội dung vừa được thay bằng JS. */
+  padding-top: 3.8rem;
+  transition: opacity 0.2s ease;
+}
+#tt-chapter-loading:not([hidden]) {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+.tt-loading-dot {
+  width: 2.4rem; height: 2.4rem;
+  border-radius: 50%;
+  border: 2px solid rgba(233,193,118,0.18);
+  border-top-color: var(--gold);
+  animation: tt-spin 0.8s linear infinite;
+}
+@keyframes tt-spin { to { transform: rotate(360deg); } }
+</style>
+
+
+<style is:global>
+body.page-tu-thuat {
+  --tt-navbar-height: 6.58rem;
+  --tt-bookbar-height: 5.2rem;
+  --tt-content-gap: 1.6rem;
+  --tt-toc-offset: 0rem;
+}
+
+/* Một công thức duy nhất cho TOC ở dev và production build. */
+body.page-tu-thuat .toc {
+  top: calc(var(--tt-navbar-height) + var(--tt-bookbar-height) + var(--tt-content-gap)) !important;
+  box-sizing: border-box;
+  margin-top: 0;
+  padding-top: 0;
+}
+@media (min-width: 1100px) {
+  /* Đưa TOC sát mép cột trái và không cho nền prose lấn sang drawer. */
+  body.page-tu-thuat .article-shell.has-toc .toc { margin-left: -6rem; }
+  body.page-tu-thuat .article-shell.has-toc .tt-prose::before {
+    inset-block: var(--prose-surface-inset-block);
+    inset-inline-start: -1.8rem;
+    inset-inline-end: -1.8rem;
+  }
+}
+
+/* TOC visual styling is centralized in src/styles/overrides.css. */
+
+/* ── Light mode ── */
+[data-theme="light"] body.page-tu-thuat .tt-book-nav {
+  background: #f4f0e7;
+  border-top-color: rgba(26,94,60,.15);
+  border-bottom-color: rgba(26,94,60,.34);
+  box-shadow: 0 .35rem 1rem rgba(33,62,46,.1);
+}
+@media (min-width: 769px) {
+  [data-theme="light"] body.page-tu-thuat .tt-book-nav.shared-tab-bar .tt-book-tab.shared-tab-btn:hover:not(.active) {
+    background: #e8efe8;
+  }
+  [data-theme="light"] body.page-tu-thuat .tt-book-nav.shared-tab-bar .tt-book-tab.shared-tab-btn.active {
+    background: #dfeadf;
+  }
+}
+[data-theme="light"] body.page-tu-thuat .tt-loading-dot {
+  border-color: rgba(26,94,60,0.15);
+  border-top-color: #1a5e3c;
+}
+/* Chữ đậm hơn để dễ đọc trên nền sáng (trước đây 0.52 quá mờ) */
+
+/* ── Filter widget: Quyển / Đoạn / Số đoạn (nổi trên nút Mục Lục) ── */
+#ttFloatControls {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 7.6rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .3rem;
+}
+#ttFloatControls #ttFilter {
+  order: 1;
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+}
+#ttFloatControls #docFloatToc {
+  order: 2;
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+}
+#ttFilter {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 11rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+#ttFilter.show { opacity: 1; pointer-events: auto; }
+#ttFilterBtn {
+  display: flex; align-items: center; gap: .45rem;
+  padding: .5rem 1.1rem;
+  background: rgba(16,27,51,0.94);
+  border: 1px solid rgba(233,196,106,0.35);
+  border-radius: 20px;
+  color: #e9c176;
+  font-family: var(--font-ui);
+  font-size: 1.25rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+  box-shadow: 0 .4rem 1rem rgba(0,0,0,.35);
+  transition: background .18s, border-color .18s, box-shadow .18s;
+}
+#ttFilterBtn:hover,
+#ttFilterBtn[aria-expanded="true"] {
+  background: rgba(16,27,51,0.98);
+  border-color: rgba(233,196,106,0.7);
+  box-shadow: 0 .6rem 1.4rem rgba(0,0,0,.4);
+}
+#ttFilterPanel {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  bottom: calc(100% + .8rem);
+  right: 0;
+  width: 24rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: rgba(16,24,45,0.97);
+  border: 1px solid rgba(233,193,118,0.18);
+  border-radius: 12px;
+  box-shadow: 0 .8rem 2.4rem rgba(0,0,0,.5);
+  padding-bottom: .8rem;
+}
+#ttFilterPanel.open { display: flex; }
+.tt-filter-sel {
+  width: calc(100% - 2.4rem);
+  margin: 0 1.2rem .8rem;
+  padding: .5rem .6rem;
+  background: rgba(22,34,61,0.95);
+  border: 1px solid rgba(233,196,106,0.22);
+  border-radius: 6px;
+  color: #efe7d6;
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.tt-filter-sel:focus { outline: none; border-color: rgba(233,196,106,0.5); }
+
+[data-theme="light"] #ttFilterBtn {
+  background: rgba(250,246,238,0.96);
+  border-color: rgba(26,94,60,0.35);
+  color: #1a5e3c;
+  box-shadow: 0 .4rem 1rem rgba(0,0,0,.15);
+}
+[data-theme="light"] #ttFilterBtn:hover,
+[data-theme="light"] #ttFilterBtn[aria-expanded="true"] {
+  background: rgba(240,250,244,0.98);
+  border-color: #1a5e3c;
+}
+[data-theme="light"] #ttFilterPanel {
+  background: rgba(250,246,238,0.98);
+  border-color: rgba(26,94,60,0.22);
+  box-shadow: 0 .6rem 2rem rgba(0,0,0,.18);
+}
+[data-theme="light"] .tt-filter-sel {
+  background: #ffffff;
+  border-color: rgba(26,94,60,0.22);
+  color: #1c1a12;
+}
+[data-theme="light"] .tt-filter-sel:focus { border-color: rgba(26,94,60,0.5); }
+
+/* ── Reading progress bar ── */
+#tt-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 200;
+  background: transparent;
+  pointer-events: none;
+}
+#tt-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), rgba(233,193,118,0.6));
+  transition: width 0.1s linear;
+}
+[data-theme="light"] body.page-tu-thuat #tt-progress-bar {
+  background: linear-gradient(90deg, #1a5e3c, #c8963e);
+}
+
+/* ── Prose container: width tối ưu cho đọc dài ── */
+body.page-tu-thuat .tt-prose {
+  font-size: 1.9rem;
+  line-height: 2.0;
+}
+
+/* ── Căn đỉnh panel "Mục lục" ngang hàng với dòng đầu nội dung ──
+   Phần tử đầu (h2 "QUYỂN …") có margin-top 5rem đẩy nội dung xuống, còn .toc bắt đầu
+   ở đỉnh cột grid → bỏ margin-top phần tử đầu. Đặt trong is:global vì nội dung do JS
+   nạp bằng innerHTML (không có data-astro-cid nên rule scoped không áp dụng). */
+body.page-tu-thuat #tt-chapter-content > :first-child { margin-top: 0; }
+
+/* ── Scroll offset: tính cả site navbar (7rem) + thanh select book (~3rem) ── */
+body.page-tu-thuat .tt-prose h2,
+body.page-tu-thuat .tt-prose h3,
+body.page-tu-thuat .tt-prose h4,
+body.page-tu-thuat .tt-prose [id^="user-content-fn"],
+body.page-tu-thuat .tt-prose .footnotes li,
+body.page-tu-thuat .tt-prose sup a[id^="user-content-fnref-"] {
+  scroll-margin-top: calc(var(--tt-navbar-height) + var(--tt-bookbar-height) + var(--tt-content-gap) + 1.2rem);
+}
+
+/* ── H2: đầu quyển/phần lớn — centered, có ornament ── */
+body.page-tu-thuat .tt-prose h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ink-cream);
+  -webkit-text-fill-color: var(--ink-cream);
+  background: none;
+  border-bottom: none;
+  margin: 5rem 0 2.4rem;
+  padding-bottom: 0;
+  position: relative;
+}
+body.page-tu-thuat .tt-prose h2::before {
+  content: '✦';
+  display: block;
+  font-size: 1rem;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.5em;
+}
+body.page-tu-thuat .tt-prose h2::after {
+  content: '';
+  display: block;
+  width: 6rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(233,193,118,0.35), transparent);
+  margin: 1.4rem auto 0;
+}
+
+/* ── H3: tiêu đề chương — gold, left ── */
+body.page-tu-thuat .tt-prose h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.15rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 3.6rem 0 1.2rem;
+  padding-left: 1.4rem;
+  border-left: 3px solid rgba(233,193,118,0.4);
+}
+
+/* ── H4: tiêu đề nhỏ ── */
+body.page-tu-thuat .tt-prose h4 {
+  font-size: 1.85rem;
+  color: var(--ink-cream-soft);
+  margin: 2.8rem 0 1rem;
+  font-style: italic;
+}
+
+/* ── Blockquote: treatment đặc biệt cho trích dẫn ── */
+body.page-tu-thuat .tt-prose blockquote {
+  margin: 3.2rem 0;
+  padding: 2.4rem 2.8rem;
+  border-left: none;
+  border-top: 1px solid rgba(233,193,118,0.2);
+  border-bottom: 1px solid rgba(233,193,118,0.2);
+  background: rgba(233,193,118,0.04);
+  border-radius: 0;
+  font-size: 1.85rem;
+  line-height: 1.9;
+  color: var(--ink-cream);
+  font-style: italic;
+  position: relative;
+}
+body.page-tu-thuat .tt-prose blockquote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.5rem;
+  left: 1.6rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 7rem;
+  line-height: 1;
+  color: rgba(233,193,118,0.18);
+  font-style: normal;
+}
+body.page-tu-thuat .tt-prose blockquote p {
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+body.page-tu-thuat .tt-prose blockquote cite,
+body.page-tu-thuat .tt-prose blockquote p:last-child:not(:first-child) {
+  display: block;
+  font-size: 1.5rem;
+  font-style: normal;
+  color: var(--gold);
+  margin-top: 1rem;
+  text-align: right;
+  opacity: 0.8;
+}
+
+/* ── Drop cap: đầu mỗi h2 section ── */
+body.page-tu-thuat .tt-prose[data-content-slug="bio"] h2 + p::first-letter,
+body.page-tu-thuat .tt-prose[data-content-slug="bio"] > p:first-of-type::first-letter {
+  float: left;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4.8em;
+  line-height: 0.82;
+  padding: 0.04em 0.14em 0 0;
+  color: var(--gold);
+  text-shadow: 0 0 28px rgba(233,193,118,0.18);
+}
+
+/* ── Light mode overrides cho content ── */
+[data-theme="light"] body.page-tu-thuat .tt-prose h2 {
+  color: #1a5e3c;
+  -webkit-text-fill-color: #1a5e3c;
+}
+[data-theme="light"] body.page-tu-thuat .tt-prose h2::before { color: #c8963e; }
+[data-theme="light"] body.page-tu-thuat .tt-prose h2::after {
+  background: linear-gradient(to right, transparent, rgba(26,94,60,0.3), transparent);
+}
+[data-theme="light"] body.page-tu-thuat .tt-prose h3 {
+  color: #9c6a2e;
+  border-left-color: rgba(156,106,46,0.45);
+}
+[data-theme="light"] body.page-tu-thuat .tt-prose h4 { color: #4a3828; }
+[data-theme="light"] body.page-tu-thuat .tt-prose blockquote {
+  background: rgba(26,94,60,0.04);
+  border-top-color: rgba(26,94,60,0.18);
+  border-bottom-color: rgba(26,94,60,0.18);
+  color: #2a1e10;
+}
+[data-theme="light"] body.page-tu-thuat .tt-prose blockquote::before { color: rgba(26,94,60,0.1); }
+[data-theme="light"] body.page-tu-thuat .tt-prose blockquote cite,
+[data-theme="light"] body.page-tu-thuat .tt-prose blockquote p:last-child:not(:first-child) { color: #9c6a2e; }
+[data-theme="light"] body.page-tu-thuat .tt-prose[data-content-slug="bio"] h2 + p::first-letter,
+[data-theme="light"] body.page-tu-thuat .tt-prose[data-content-slug="bio"] > p:first-of-type::first-letter { color: #9c6a2e; }
+
+/* ── Mobile: book selector is a stable full-width scroll strip ── */
+@media (max-width: 768px) {
+  /* Mobile: biến nền prose thành một mảng full-bleed, không còn mép sát chữ. */
+  body.page-tu-thuat .tt-prose::before { inset-inline: -4rem; }
+  body.page-tu-thuat #tt-chapter-content { padding-top: 3rem; }
+  body.page-tu-thuat {
+    --tt-bookbar-height: 4.6rem;
+    --tt-content-gap: 1.1rem;
+    --tt-toc-offset: 0rem;
+  }
+  body.page-tu-thuat .tt-book-sticky {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+  body.page-tu-thuat .tt-book-nav {
+    width: 100%;
+    max-width: 100%;
+    height: var(--tt-bookbar-height, 4.6rem);
+    min-height: var(--tt-bookbar-height, 4.6rem);
+    box-shadow: 0 .45rem 1.2rem rgba(0,0,0,.22);
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  body.page-tu-thuat .tt-book-nav-inner {
+    width: max-content;
+    min-width: 100%;
+    justify-content: flex-start;
+    gap: .1rem;
+    padding: 0 .85rem;
+  }
+  body.page-tu-thuat .tt-book-tab { min-height: 0; }
+  body.page-tu-thuat .article-shell { width: 100%; max-width: 100%; margin-top: 0; }
+  body.page-tu-thuat .tt-prose { width: 100%; max-width: 100%; padding-inline: 0; }
+  /* Hai control nổi xếp thành một cột có khoảng cách cố định, không overlap. */
+  body.page-tu-thuat #ttFloatControls {
+    right: 1rem;
+    bottom: max(5.8rem, calc(env(safe-area-inset-bottom) + 4.8rem));
+  }
+  body.page-tu-thuat #docFloatToc {
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+  body.page-tu-thuat #ttFilter {
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+  #docFloatToc #dftBtn,
+  #ttFilterBtn {
+    max-width: calc(100vw - 2.2rem);
+  }
+  #ttFilterPanel {
+    right: 0;
+    width: min(28rem, calc(100vw - 2.2rem));
+    max-height: 52svh;
+  }
+  body.page-tu-thuat #ttFilterPanel { left: auto; right: 0; }
+}
+
+
+</style>
+
+<script>
+import { withBase } from '../lib/site-path';
+
+document.getElementById('backBtn')?.remove();
+
+// Chiều cao thực tế của toàn bộ sticky stack: navbar + book bar + spacer.
+// Dùng chung cho TOC, filter và footnote để mọi anchor dừng đúng vị trí.
+function getTuThuatScrollOffset() {
+  const bodyStyle = getComputedStyle(document.body);
+  const navbar = document.querySelector<HTMLElement>('.navbar');
+  const sticky = document.querySelector<HTMLElement>('.tt-book-sticky');
+  const cssNavbar = Number.parseFloat(bodyStyle.getPropertyValue('--tt-navbar-height')) || 0;
+  const cssBookbar = Number.parseFloat(bodyStyle.getPropertyValue('--tt-bookbar-height')) || 0;
+  const cssGap = Number.parseFloat(bodyStyle.getPropertyValue('--tt-content-gap')) || 0;
+  const measuredNavbar = navbar?.getBoundingClientRect().height || 0;
+  const measuredSticky = sticky?.getBoundingClientRect().height || 0;
+  const navbarHeight = Math.max(cssNavbar, measuredNavbar, 64);
+  const stickyHeight = Math.max(cssBookbar + cssGap, measuredSticky);
+  return Math.ceil(navbarHeight + stickyHeight);
+}
+(window as any).__ttScrollOffset = getTuThuatScrollOffset;
+
+// Trên mobile, xếp hai floating controls dựa trên chiều cao thật để không overlap
+// kể cả khi font hệ thống, zoom hoặc production CSS làm nút cao hơn dự kiến.
+(function syncTuThuatFloatingControls() {
+  const tocWidget = document.getElementById('docFloatToc') as HTMLElement | null;
+  const filterWidget = document.getElementById('ttFilter') as HTMLElement | null;
+  if (!tocWidget || !filterWidget) return;
+  const mobile = window.matchMedia('(max-width: 768px)');
+  const sync = () => {
+    if (!mobile.matches) {
+      tocWidget.style.removeProperty('left');
+      tocWidget.style.removeProperty('right');
+      tocWidget.style.removeProperty('bottom');
+      filterWidget.style.removeProperty('left');
+      filterWidget.style.removeProperty('right');
+      filterWidget.style.removeProperty('bottom');
+      return;
+    }
+    // Hai nút nằm ở hai mép viewport, cùng baseline, nên không thể overlap.
+    tocWidget.style.removeProperty('right');
+    tocWidget.style.removeProperty('left');
+    tocWidget.style.removeProperty('bottom');
+    filterWidget.style.removeProperty('right');
+    filterWidget.style.removeProperty('left');
+    filterWidget.style.removeProperty('bottom');
+  };
+  sync();
+  window.addEventListener('resize', sync, { passive: true });
+  mobile.addEventListener?.('change', sync);
+})();
+
+// ── Article number formatter ──
+function processArticleNums(container: Element) {
+  container.querySelectorAll<HTMLParagraphElement>('p').forEach((p) => {
+    if (p.closest('.footnotes')) return;
+    const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+    const first = walker.nextNode() as Text | null;
+    if (!first) return;
+    const m = first.textContent?.match(/^(\d+\.?\s)/);
+    if (!m) return;
+    const span = document.createElement('span');
+    span.className = 'article-num';
+    span.textContent = m[1];
+    const rest = document.createTextNode((first.textContent ?? '').slice(m[1].length));
+    first.parentNode?.replaceChild(span, first);
+    span.after(rest);
+  });
+}
+
+// ── Lazy chapter loader ──
+(function () {
+  const tabs    = document.querySelectorAll<HTMLButtonElement>('.tt-book-tab[data-fragment-slug]');
+  const content = document.getElementById('tt-chapter-content') as HTMLElement;
+  const loading = document.getElementById('tt-chapter-loading') as HTMLElement;
+  const nav     = document.querySelector<HTMLElement>('.tt-book-nav');
+  const sticky  = document.querySelector<HTMLElement>('.tt-book-sticky');
+  if (!tabs.length || !content) return;
+
+  const BASE = withBase('/tu-thuat/fragment/');
+  const cache = new Map<string, string>();
+  // A horizontal drag on the book strip must not become a click that loads
+  // another book and scrolls the document vertically when the finger lifts.
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let suppressBookClickUntil = 0;
+  nav?.addEventListener('pointerdown', (event) => {
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+  }, { passive: true });
+  nav?.addEventListener('pointerup', (event) => {
+    const horizontal = Math.abs(event.clientX - dragStartX);
+    const vertical = Math.abs(event.clientY - dragStartY);
+    if (horizontal > 8 && horizontal > vertical) suppressBookClickUntil = Date.now() + 320;
+  }, { passive: true });
+  nav?.addEventListener('click', (event) => {
+    if (Date.now() < suppressBookClickUntil) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
+  // Pre-cache bio (default content already in DOM)
+  cache.set('bio', content.innerHTML);
+
+  // Process article nums in initial content
+  processArticleNums(content);
+
+  let loadVersion = 0;
+  let activeRequest: AbortController | null = null;
+  let pendingDeepLinkAnchor = '';
+
+  const shell = document.querySelector<HTMLElement>('.article-shell');
+  const navbar = document.querySelector<HTMLElement>('.navbar');
+
+  function syncStickyMetrics() {
+    const navbarHeight = navbar?.getBoundingClientRect().height ?? 65.8;
+    document.body.style.setProperty('--tt-navbar-height', `${navbarHeight}px`);
+  }
+
+  syncStickyMetrics();
+  document.fonts?.ready.then(syncStickyMetrics).catch(() => {});
+  window.addEventListener('load', syncStickyMetrics, { once: true });
+  window.addEventListener('resize', syncStickyMetrics, { passive: true });
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(syncStickyMetrics);
+    if (navbar) observer.observe(navbar);
+    if (sticky) observer.observe(sticky);
+  }
+
+  function scrollToChapterStart() {
+    // Đưa cả group TOC + prose về đúng vị trí dưới sticky book bar.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        syncStickyMetrics();
+        const target = shell ?? content;
+        const offset = getTuThuatScrollOffset();
+        const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+        window.scrollTo({ top, behavior: 'instant' });
+        requestAnimationFrame(() => {
+          const navbarBottom = navbar?.getBoundingClientRect().bottom ?? 0;
+          const stickyTop = sticky?.getBoundingClientRect().top ?? navbarBottom;
+          const correction = stickyTop - navbarBottom;
+          if (correction > 0.5) window.scrollBy({ top: correction, behavior: 'instant' });
+        });
+      });
+    });
+  }
+
+  function scrollToContentAnchor(anchor: string) {
+    syncStickyMetrics();
+    let target: HTMLElement | null = document.getElementById(anchor);
+    // Links from /chi-muc/ use a stable chapter/paragraph key because the
+    // translated heading slug may change whenever its title is edited.
+    const indexMatch = anchor.match(/^chi-muc-(\d+)-(\d+)$/);
+    if (!target && indexMatch) {
+      const chapterNumber = Number(indexMatch[1]);
+      const paragraphNumber = Number(indexMatch[2]);
+      const romanValues: Record<string, number> = {
+        I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7,
+        VIII: 8, IX: 9, X: 10, XI: 11, XII: 12, XIII: 13,
+        XIV: 14, XV: 15, XVI: 16, XVII: 17, XVIII: 18, XIX: 19,
+        XX: 20, XXI: 21, XXII: 22, XXIII: 23, XXIV: 24, XXV: 25,
+        XXVI: 26, XXVII: 27, XXVIII: 28, XXIX: 29, XXX: 30,
+        XXXI: 31, XXXII: 32, XXXIII: 33, XXXIV: 34, XXXV: 35,
+        XXXVI: 36, XXXVII: 37, XXXVIII: 38, XXXIX: 39, XL: 40,
+        XLI: 41, XLII: 42, XLIII: 43,
+      };
+      const chapterHeading = Array.from(content.querySelectorAll<HTMLElement>('h4')).find((heading) => {
+        const match = heading.textContent?.trim().match(/^(?:Đoạn|Chương)\s+([IVXLCDM]+)/i);
+        return match ? romanValues[match[1].toUpperCase()] === chapterNumber : false;
+      });
+      target = chapterHeading ?? null;
+      if (chapterHeading) {
+        let sibling = chapterHeading.nextElementSibling as HTMLElement | null;
+        while (sibling && sibling.tagName !== 'H4') {
+          const articleNumber = sibling.querySelector<HTMLElement>('.article-num')?.textContent?.match(/\d+/)?.[0];
+          if (Number(articleNumber) === paragraphNumber) {
+            target = sibling;
+            break;
+          }
+          sibling = sibling.nextElementSibling as HTMLElement | null;
+        }
+      }
+    }
+    if (!target) return;
+    const top = Math.max(
+      0,
+      target.getBoundingClientRect().top + window.scrollY - getTuThuatScrollOffset() - 12,
+    );
+    window.scrollTo({ top, behavior: 'instant' });
+  }
+
+  function revealBookTab(tab: HTMLButtonElement) {
+    if (!nav) return;
+    const navRect = nav.getBoundingClientRect();
+    const tabRect = tab.getBoundingClientRect();
+    const safeInset = 16;
+    let nextLeft = nav.scrollLeft;
+
+    if (tabRect.left < navRect.left + safeInset) {
+      nextLeft -= navRect.left + safeInset - tabRect.left;
+    } else if (tabRect.right > navRect.right - safeInset) {
+      nextLeft += tabRect.right - (navRect.right - safeInset);
+    }
+
+    if (nextLeft !== nav.scrollLeft) {
+      nav.scrollTo({ left: nextLeft, behavior: 'smooth' });
+    }
+  }
+
+  function finishChapterLayout() {
+    content.style.opacity = '';
+    loading.hidden = true;
+    const deepLinkAnchor = pendingDeepLinkAnchor;
+    if (!deepLinkAnchor) scrollToChapterStart();
+    requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+      content.style.minHeight = '';
+      if (!deepLinkAnchor) return;
+      scrollToContentAnchor(deepLinkAnchor);
+      pendingDeepLinkAnchor = '';
+      history.replaceState(history.state, '', `${window.location.pathname}${window.location.search}#${encodeURIComponent(deepLinkAnchor)}`);
+    })));
+    (window as any).__ttBuildToc?.();
+    (window as any).__ttBuildFilters?.();
+  }
+
+  async function loadChapter(slug: string) {
+    const thisLoad = ++loadVersion;
+    activeRequest?.abort();
+    activeRequest = null;
+
+    loading.hidden = false;
+    content.style.minHeight = `${Math.ceil(content.getBoundingClientRect().height)}px`;
+    content.style.opacity = '0.35';
+
+    if (cache.has(slug)) {
+      content.innerHTML = cache.get(slug)!;
+      content.dataset.contentSlug = slug;
+      processArticleNums(content);
+      finishChapterLayout();
+      return;
+    }
+
+    const controller = new AbortController();
+    activeRequest = controller;
+
+    try {
+      const resp = await fetch(`${BASE}${slug}/`, { signal: controller.signal });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const html = await resp.text();
+      if (thisLoad !== loadVersion) return;
+
+      const doc  = new DOMParser().parseFromString(html, 'text/html');
+      const frag = doc.querySelector('.tt-fragment-content')?.innerHTML ?? '<p>Đang cập nhật…</p>';
+      cache.set(slug, frag);
+      content.innerHTML = frag;
+      content.dataset.contentSlug = slug;
+      processArticleNums(content);
+    } catch (error) {
+      if (controller.signal.aborted || thisLoad !== loadVersion) return;
+      content.innerHTML = '<p style="color:var(--ink-cream-soft);text-align:center;padding:4rem">Không thể tải nội dung. Vui lòng thử lại.</p>';
+    } finally {
+      if (thisLoad !== loadVersion) return;
+      activeRequest = null;
+      finishChapterLayout();
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('active')) return;
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      revealBookTab(tab); // chỉ cuộn ngang, tuyệt đối không làm trang nhảy dọc
+      loadChapter(tab.dataset.fragmentSlug!);
+    });
+  });
+
+  // Deep links can open a lazily loaded book and land on its exact section.
+  const requestedBook = new URLSearchParams(window.location.search).get('book');
+  const requestedTab = requestedBook
+    ? Array.from(tabs).find((tab) => tab.dataset.fragmentSlug === requestedBook)
+    : null;
+  if (requestedTab) {
+    try { pendingDeepLinkAnchor = decodeURIComponent(window.location.hash.slice(1)); }
+    catch { pendingDeepLinkAnchor = window.location.hash.slice(1); }
+    // Remove the hash while the fragment is loading so the browser cannot
+    // perform a second automatic anchor jump after the content is inserted.
+    if (pendingDeepLinkAnchor) {
+      history.replaceState(history.state, '', `${window.location.pathname}${window.location.search}`);
+    }
+    tabs.forEach((tab) => tab.classList.toggle('active', tab === requestedTab));
+    revealBookTab(requestedTab);
+    loadChapter(requestedBook!);
+  }
+})();
+
+// ── TOC list toggle (mục lục Quyển/Chương/Đoạn) ──
+(function () {
+  const widget = document.getElementById('docFloatToc');
+  const panel  = document.getElementById('dftPanel') as HTMLElement;
+  const btn    = document.getElementById('dftBtn') as HTMLButtonElement;
+  const nav    = document.querySelector<HTMLElement>('.tt-book-nav');
+  if (!widget || !panel || !btn) return;
+
+  function openPanel(open: boolean) {
+    panel.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) {
+      document.getElementById('ttFilterPanel')?.classList.remove('open');
+      document.getElementById('ttFilterBtn')?.setAttribute('aria-expanded', 'false');
+    }
+  }
+  function buildToc() {
+    const content  = document.getElementById('tt-chapter-content');
+    const dftNav   = document.getElementById('dftNav');
+    const tocList  = document.getElementById('tt-toc-list');
+    if (!content || !dftNav) return;
+    const headings = content.querySelectorAll<HTMLElement>('h2, h3, h4');
+    dftNav.innerHTML = '';
+    if (tocList) tocList.innerHTML = '';
+    const depthOf = (tag: string) => (tag === 'H4' ? 4 : tag === 'H3' ? 3 : 2);
+    headings.forEach((h, idx) => {
+      if (!h.id) h.id = `tt-h-${idx}`;
+      // Float TOC panel link
+      const a = document.createElement('a');
+      a.href = `#${h.id}`;
+      a.textContent = h.textContent ?? '';
+      a.className = `bft-link bft-depth-${depthOf(h.tagName)}`;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        openPanel(false);
+        const offset = getTuThuatScrollOffset();
+        const top = h.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'instant' });
+      });
+      dftNav.appendChild(a);
+      // Sidebar TOC list item
+      if (tocList) {
+        const li = document.createElement('li');
+        li.className = `toc-depth-${depthOf(h.tagName)}`;
+        const la = document.createElement('a');
+        la.href = `#${h.id}`;
+        la.textContent = h.textContent ?? '';
+        la.addEventListener('click', (e) => {
+          e.preventDefault();
+          const offset = getTuThuatScrollOffset();
+          const top = h.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'instant' });
+        });
+        li.appendChild(la);
+        tocList.appendChild(li);
+      }
+    });
+  }
+  // ── Dynamic label: cập nhật tên mục đang đọc ──
+  const dftLabel = document.getElementById('dftLabel');
+  let headingObserver: IntersectionObserver | null = null;
+
+  function updateDynamicLabel(headings: NodeListOf<HTMLElement>) {
+    if (headingObserver) headingObserver.disconnect();
+    if (!dftLabel) return;
+    let activeText = 'Mục Lục';
+    headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.boundingClientRect.top < 180) {
+          activeText = (entry.target.textContent ?? '').trim();
+          const short = activeText.length > 28 ? activeText.slice(0, 26) + '…' : activeText;
+          dftLabel.textContent = short || 'Mục Lục';
+        }
+      });
+    }, { rootMargin: '-10px 0px -80% 0px', threshold: 0 });
+    headings.forEach((h) => headingObserver!.observe(h));
+  }
+
+  function buildTocAndLabel() {
+    buildToc();
+    const content = document.getElementById('tt-chapter-content');
+    if (content) {
+      const hs = content.querySelectorAll<HTMLElement>('h2, h3, h4');
+      updateDynamicLabel(hs);
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    const opening = !panel.classList.contains('open');
+    openPanel(opening);
+    if (opening) buildToc();
+  });
+
+  widget.classList.add('show');
+  (window as any).__ttBuildToc = buildTocAndLabel;
+  buildTocAndLabel();
+})();
+
+// ── Filter: Quyển → Đoạn (h4) → Số đoạn (số paragraph) ──
+(function () {
+  const widget   = document.getElementById('ttFilter');
+  const panel    = document.getElementById('ttFilterPanel') as HTMLElement;
+  const btn      = document.getElementById('ttFilterBtn') as HTMLButtonElement;
+  const nav      = document.querySelector<HTMLElement>('.tt-book-nav');
+  const selQuyen = document.getElementById('ttSelQuyen') as HTMLSelectElement;
+  const selDoan  = document.getElementById('ttSelDoan') as HTMLSelectElement;
+  const selSo    = document.getElementById('ttSelSo') as HTMLSelectElement;
+  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.tt-book-tab[data-fragment-slug]'));
+  if (!widget || !panel || !btn || !selQuyen || !selDoan || !selSo) return;
+
+  function openPanel(open: boolean) {
+    panel.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) {
+      document.getElementById('dftPanel')?.classList.remove('open');
+      document.getElementById('dftBtn')?.setAttribute('aria-expanded', 'false');
+    }
+  }
+  function scrollToId(id: string) {
+    const el = id ? document.getElementById(id) : null;
+    if (!el) return;
+    const offset = getTuThuatScrollOffset();
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'instant' });
+  }
+
+  // Quyển: lấy từ danh sách tab
+  selQuyen.innerHTML = '<option value="">— Chọn quyển —</option>' +
+    tabs.map(t => `<option value="${t.dataset.fragmentSlug}">${(t.textContent ?? '').trim()}</option>`).join('');
+
+  type Para = { id: string; num: string };
+  type Doan = { id: string; text: string; paras: Para[] };
+  let doans: Doan[] = [];
+
+  function fillSo(list: Para[]) {
+    selSo.innerHTML = '<option value="">— Số đoạn —</option>' +
+      list.map(p => `<option value="${p.id}">${p.num}</option>`).join('');
+  }
+
+  // Dựng lại Đoạn (h4) + Số đoạn (paragraph có .article-num) theo thứ tự DOM
+  function buildFilters() {
+    const content = document.getElementById('tt-chapter-content');
+    if (!content) return;
+    doans = [];
+    let cur: Doan | null = null;
+    let hi = 0, pi = 0;
+    content.querySelectorAll<HTMLElement>('h4, p').forEach((el) => {
+      if (el.tagName === 'H4') {
+        if (!el.id) el.id = `tt-h4-${hi++}`;
+        cur = { id: el.id, text: (el.textContent ?? '').trim(), paras: [] };
+        doans.push(cur);
+      } else {
+        const numSpan = el.querySelector('.article-num');
+        if (!numSpan) return;
+        if (!el.id) el.id = `tt-p-${pi++}`;
+        const num = (numSpan.textContent ?? '').trim().replace(/\.$/, '');
+        if (!cur) { cur = { id: '', text: 'Khác', paras: [] }; doans.push(cur); }
+        cur.paras.push({ id: el.id, num });
+      }
+    });
+    selDoan.innerHTML = '<option value="">— Đoạn —</option>' +
+      doans.filter(d => d.id).map(d => `<option value="${d.id}">${d.text}</option>`).join('');
+    fillSo(doans.flatMap(d => d.paras));
+    const active = tabs.find(t => t.classList.contains('active'));
+    selQuyen.value = active?.dataset.fragmentSlug ?? '';
+  }
+
+  // Đổi Quyển → nạp nội dung qua tab (giữ panel mở)
+  selQuyen.addEventListener('change', () => {
+    const tab = tabs.find(t => t.dataset.fragmentSlug === selQuyen.value);
+    if (tab && !tab.classList.contains('active')) tab.click();
+  });
+  // Đổi Đoạn → cuộn tới, lọc Số đoạn theo đoạn (giữ panel mở)
+  selDoan.addEventListener('change', () => {
+    const id = selDoan.value;
+    if (!id) { fillSo(doans.flatMap(d => d.paras)); return; }
+    const d = doans.find(x => x.id === id);
+    fillSo(d ? d.paras : []);
+    scrollToId(id);
+  });
+  // Đổi Số đoạn → cuộn tới rồi đóng panel
+  selSo.addEventListener('change', () => {
+    scrollToId(selSo.value);
+    openPanel(false);
+  });
+
+  btn.addEventListener('click', () => {
+    const opening = !panel.classList.contains('open');
+    openPanel(opening);
+    if (opening) buildFilters();
+  });
+  document.addEventListener('click', (e) => {
+    if (!widget.contains(e.target as Node)) openPanel(false);
+  }, { capture: true });
+
+  widget.classList.add('show');
+  (window as any).__ttBuildFilters = buildFilters;
+  buildFilters();
+})();
+
+// ── Reading progress bar ──
+const progressBar = document.getElementById('tt-progress-bar');
+if (progressBar) {
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = docHeight > 0 ? `${(scrollTop / docHeight) * 100}%` : '0%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+}
+
+// Điều hướng footnote (offset nav + highlight 2 chiều) đã chuyển sang BaseLayout — dùng chung toàn site.
+
+// ── Sliding TOC toggle ──
+(function () {
+  const shell   = document.querySelector<HTMLElement>('.article-shell.has-toc');
+  const trigger = document.querySelector<HTMLButtonElement>('.toc-trigger');
+  if (!shell || !trigger) return;
+
+  function setOpen(open: boolean) {
+    shell.classList.toggle('toc-open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+  }
+
+  trigger.addEventListener('click', () => {
+    setOpen(!shell.classList.contains('toc-open'));
+  });
+
+  // Active link highlight via IntersectionObserver (rebuild after each chapter load)
+  let observer: IntersectionObserver | null = null;
+  function observeHeadings() {
+    observer?.disconnect();
+    const tocList = document.getElementById('tt-toc-list');
+    if (!tocList) return;
+    const links = Array.from(tocList.querySelectorAll<HTMLAnchorElement>('a'));
+    if (!links.length) return;
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === `#${id}`));
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+    links.forEach(l => {
+      const id = l.getAttribute('href')?.slice(1);
+      if (id) { const el = document.getElementById(id); if (el) observer!.observe(el); }
+    });
+  }
+
+  // Attach after initial buildToc
+  setTimeout(observeHeadings, 100);
+  const origBuildToc = (window as any).__ttBuildToc;
+  (window as any).__ttBuildToc = function () {
+    origBuildToc?.();
+    setTimeout(observeHeadings, 100);
+  };
+})();
+
+</script>

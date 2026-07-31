@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
+import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+
+const seasons = [
+  'Mùa Vọng',
+  'Mùa Giáng Sinh',
+  'Mùa Chay',
+  'Mùa Phục Sinh',
+  'Mùa Thường Niên',
+  'Lễ Trọng',
+  'Lễ Kính',
+  'Lễ Nhớ',
+] as const;
+
+const articles = (await getCollection(
+  'bai-viet',
+  ({ id, data }) => id.startsWith('bai-giang-suy-niem/') && !data.draft,
+)).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+});
+
+const articleHref = (id: string) => `/bai-giang-suy-niem/${id.replace(/^bai-giang-suy-niem\//, '')}/`;
+const articleSummary = (article: typeof articles[number]) => ({
+  id: article.id,
+  title: article.data.title,
+  href: articleHref(article.id),
+  category: article.data.subcategory ?? article.data.category,
+  excerpt: article.data.excerpt,
+  author: article.data.author,
+  image: article.data.image ?? article.data.heroImage,
+  date: article.data.date,
+});
+
+const featuredEntry = articles.find((article) => article.data.featured) ?? articles[0];
+const featuredArticle = featuredEntry ? articleSummary(featuredEntry) : undefined;
+const featuredTabs = articles.slice(0, 10).map(articleSummary);
+const latestArticles = articles.map(articleSummary);
+
+const seasonGroups = seasons.map((season) => ({
+  category: season,
+  articles: articles
+    .filter((article) => (article.data.subcategory ?? article.data.category) === season)
+    .map((article) => ({
+      id: article.id,
+      title: article.data.title,
+      href: articleHref(article.id),
+      excerpt: article.data.excerpt,
+      author: article.data.author,
+      date: article.data.date,
+      image: article.data.image ?? article.data.heroImage,
+    })),
+}));
+---
+
+<BaseLayout
+  title="Bài Giảng – Suy Niệm"
+  description="Các bài giảng và suy niệm được sắp xếp theo các mùa trong năm phụng vụ."
+  bodyClass="no-sidebar page-bai-viet page-sermon-library"
+  banner="bai-giang-suy-niem"
+>
+  <ArticleLibraryLanding
+    class="sermon-index"
+    eyebrow="Phụng Vụ"
+    title="Bài Giảng – Suy Niệm"
+    labelledBy="sermon-library-title"
+    featured={featuredArticle}
+    tabs={featuredTabs}
+    latest={latestArticles}
+    showTitles
+    showLatestTitles
+  >
+    <section
+      id="thu-vien-bai-giang"
+      class="sermon-library"
+      aria-labelledby="sermon-library-title"
+    >
+      <CategoryArticleGallery
+        groups={seasonGroups}
+        showTitles={true}
+        idPrefix="sermon-season"
+        rowTitle="Năm Phụng Vụ"
+        categoryTone="liturgy"
+      />
+    </section>
+  </ArticleLibraryLanding>
+</BaseLayout>
+
+<style>
+  .sermon-library {
+    width:100%;
+    min-width:0;
+    margin-top:1rem;
+  }
+  .sermon-library :global(.spirit-library) {
+    padding-bottom:4.5rem;
+  }
+  @media (max-width:760px) {
+    .sermon-library :global(.spirit-library) {
+      padding-bottom:4rem;
+    }
+  }
+</style>

@@ -1,0 +1,631 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import saintData from '../../../saintIndex.json';
+import pageHeaders from '../../data/page-headers.json';
+import { withBase } from '../../lib/site-path';
+const ph = (pageHeaders as Record<string, Record<string, string>>)['saints'];
+
+const RANK_LABEL: Record<string, string> = {
+  solemn:   'Lễ Trọng',
+  feast:    'Lễ Kính',
+  memorial: 'Lễ Nhớ',
+  none:     '',
+};
+const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const bioPosts = await getCollection('thanh-chan-phuoc', e => !e.data.draft);
+const bioSlugs = new Set(bioPosts.map(p => p.id));
+const bioSubtitles = Object.fromEntries(bioPosts.map(p => [p.id, p.data.subtitle ?? '']));
+
+function getBioSlug(bioFile: string | undefined): string | null {
+  if (!bioFile) return null;
+  const s = bioFile.split('/').pop()?.replace('.json', '') ?? null;
+  return s && bioSlugs.has(s) ? s : null;
+}
+function getBioHref(slug: string): string {
+  return withBase(slug === 'st-augustine-of-hippo'
+    ? '/thanh-au-tinh/#tieu-su'
+    : `/thanh-chan-phuoc/${slug}/`);
+}
+function hasImg(f: string | undefined): boolean {
+  return !!f && !f.endsWith('/') && !f.endsWith('.json') && f.length > 4;
+}
+function inferSubtitle(name: string): string {
+  const n = name.toLocaleLowerCase('vi');
+  if (n.includes('giám mục')) return 'Giám mục';
+  if (n.includes('linh mục')) return 'Linh mục';
+  if (n.includes('trinh nữ')) return 'Trinh nữ';
+  if (n.includes('tu sĩ') || n.includes('tu huynh') || n.includes('ẩn sĩ')) return 'Tu sĩ';
+  if (n.includes('tử đạo')) return 'Tử đạo';
+  if (n.includes('đức mẹ')) return 'Đức Maria';
+  return '';
+}
+
+const months = saintData.months;
+---
+<BaseLayout
+  title="Thánh-Chân Phước"
+  banner="saints"
+  bodyClass="no-sidebar"
+  description="Lịch kính các Thánh và Chân Phước Dòng Augustinô (Âu-Tinh) theo tháng và ngày lễ."
+>
+
+<div class="sp-wrap">
+
+  <!-- Tiêu đề -->
+  <PageHeader
+    title={ph.title}
+    sub={ph.sub}
+  />
+
+  <!-- ── Mừng lễ hôm nay + sắp tới (JS điền) ── -->
+  <div id="upcomingSection" style="display:none">
+    <div class="sp-section-title"><span>Mừng Lễ Sắp Tới</span></div>
+    <div class="uc-wrapper">
+      <button class="uc-nav-btn uc-nav-left" id="ucLeft" aria-label="Trước">&#8249;</button>
+      <div class="uc-viewport">
+        <div class="uc-track" id="ucTrack"></div>
+      </div>
+      <button class="uc-nav-btn uc-nav-right" id="ucRight" aria-label="Sau">&#8250;</button>
+    </div>
+    <hr class="sp-divider">
+  </div>
+
+  <!-- Danh sách theo tháng -->
+  <div class="sp-months">
+    {months.map((month) => (
+      <section class="sp-month" id={`thang-${month.monthNumber}`}>
+        <div class="sp-month-title"><span>{month.monthName}</span></div>
+        <div class="saints-grid">
+          {month.saints.map((saint) => {
+            const badge    = RANK_LABEL[saint.rank] || '';
+            const rankCls  = `rank-${saint.rank}`;
+            const slug     = getBioSlug(saint.bioFile);
+            const subtitle = slug ? (bioSubtitles[slug] || inferSubtitle(saint.name)) : ((saint as any).subtitle || inferSubtitle(saint.name));
+            const imgOk    = hasImg(saint.imageFile);
+            const mAbbr    = MONTH_ABBR[month.monthNumber - 1];
+            const isPatron = month.monthNumber === 8
+                             && ((saint.day === 28 && (saint.bioFile ?? '').includes('st-augustine-of-hippo'))
+                              || (saint.day === 27 && (saint.bioFile ?? '').includes('monica')));
+            const extra    = [slug ? 'has-bio' : '', isPatron ? 'is-patron' : ''].filter(Boolean).join(' ');
+            const inner = <>
+              <div class="sc-img"></div>
+              <div class="sc-overlay"></div>
+              {badge && <span class="sc-badge">{badge}</span>}
+              <div class="sc-body">
+                <div class="sc-date">{saint.day} {mAbbr}</div>
+                <h4 class="sc-name">{saint.name}</h4>
+                {subtitle && <p class="sc-subtitle">{subtitle}</p>}
+                {slug && <span class="sc-readmore">Đọc tiểu sử →</span>}
+              </div>
+            </>;
+            if (slug) {
+              return (
+                <a href={getBioHref(slug)}
+                   class={`saint-card ${rankCls} ${extra}`}
+                   {...(imgOk ? { style: `--sc-bg:url('${withBase(saint.imageFile)}')` } : {})}
+                   aria-label={saint.name}>
+                  {inner}
+                </a>
+              );
+            }
+            return (
+              <div class={`saint-card ${rankCls} ${extra}`}
+                   {...(imgOk ? { style: `--sc-bg:url('${withBase(saint.imageFile)}')` } : {})}
+                   aria-label={saint.name}>
+                {inner}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
+
+</div>
+
+<script set:html={`
+window.__SAINTS__=${JSON.stringify(saintData)};
+window.__BIO_SLUGS__=${JSON.stringify([...bioSlugs])};
+window.__BIO_SUBTITLES__=${JSON.stringify(bioSubtitles)};
+`}></script>
+<script>
+import { withBase } from '../../lib/site-path';
+
+const DATA      = window.__SAINTS__;
+const BIO_SLUGS = new Set(window.__BIO_SLUGS__);
+const BIO_SUBTITLES = window.__BIO_SUBTITLES__;
+function inferSubtitle(name) {
+  const n = String(name || '').toLocaleLowerCase('vi');
+  if (n.includes('giám mục')) return 'Giám mục';
+  if (n.includes('linh mục')) return 'Linh mục';
+  if (n.includes('trinh nữ')) return 'Trinh nữ';
+  if (n.includes('tu sĩ') || n.includes('tu huynh') || n.includes('ẩn sĩ')) return 'Tu sĩ';
+  if (n.includes('tử đạo')) return 'Tử đạo';
+  if (n.includes('đức mẹ')) return 'Đức Maria';
+  return '';
+}
+const MONTH_VI   = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
+                    'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const RANK_LABEL = { solemn:'Lễ Trọng', feast:'Lễ Kính', memorial:'Lễ Nhớ', none:'' };
+
+function todayVN() {
+  const s = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Ho_Chi_Minh'}).format(new Date());
+  const [,m,d] = s.split('-').map(Number);
+  return { m, d };
+}
+function getBioSlug(bioFile) {
+  if (!bioFile) return null;
+  const s = bioFile.split('/').pop()?.replace('.json','') ?? null;
+  return s && BIO_SLUGS.has(s) ? s : null;
+}
+function getBioHref(slug) {
+  return withBase(slug === 'st-augustine-of-hippo'
+    ? '/thanh-au-tinh/#tieu-su'
+    : `/thanh-chan-phuoc/${slug}/`);
+}
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ── Scroller nav helpers ── */
+function smoothScrollTo(el, targetLeft, duration) {
+  const start    = el.scrollLeft;
+  const change   = targetLeft - start;
+  const startTime = performance.now();
+  function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
+  function step(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    el.scrollLeft = start + change * ease(t);
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ── Scroller: lễ hôm nay (nếu có) đứng đầu + highlight, rồi tới các lễ sắp tới ── */
+function buildUpcoming() {
+  const { m: todayM, d: todayD } = todayVN();
+  const all = DATA.months.flatMap(mo => mo.saints.map(s => ({ ...s, monthNumber: mo.monthNumber })));
+  const isTodaySaint = s => s.monthNumber === todayM && s.day === todayD;
+  const todaySaints = all.filter(isTodaySaint);
+  const rest        = all.filter(s => !isTodaySaint(s));
+  const future = rest.filter(s => s.monthNumber > todayM || (s.monthNumber === todayM && s.day > todayD));
+  const past   = rest.filter(s => s.monthNumber < todayM || (s.monthNumber === todayM && s.day < todayD));
+  /* Hôm nay lên đầu, kế đó là các lễ sắp tới (vòng qua đầu năm nếu cần) */
+  const sorted = [...todaySaints, ...future, ...past].slice(0, 8);
+
+  const html = sorted.map((s, i) => {
+    const isToday  = isTodaySaint(s);
+    const isNext   = !todaySaints.length && i === 0;
+    const isPatron = s.monthNumber === 8
+                  && ((s.day === 28 && (s.bioFile||'').includes('st-augustine-of-hippo'))
+                   || (s.day === 27 && (s.bioFile||'').includes('monica')));
+    const slug     = getBioSlug(s.bioFile);
+    const subtitle = slug ? (BIO_SUBTITLES[slug] || inferSubtitle(s.name)) : (s.subtitle || inferSubtitle(s.name));
+    const imgOk    = s.imageFile && !s.imageFile.endsWith('/') && !s.imageFile.endsWith('.json');
+    const bgAttr   = imgOk ? ` style="--sc-bg:url('${withBase(s.imageFile)}')"` : '';
+    const badge    = RANK_LABEL[s.rank] || '';
+    const mAbbr    = MONTH_ABBR[s.monthNumber - 1];
+    const inner    = `
+      <div class="sc-img"></div>
+      <div class="sc-overlay"></div>
+      ${isToday ? `<span class="sc-today-tag">Hôm Nay</span>` : ''}
+      ${badge ? `<span class="sc-badge">${badge}</span>` : ''}
+      <div class="sc-body">
+        <div class="sc-date">${s.day} ${mAbbr}</div>
+        <h4 class="sc-name">${esc(s.name)}</h4>
+        ${subtitle ? `<p class="sc-subtitle">${esc(subtitle)}</p>` : ''}
+        ${slug ? `<span class="sc-readmore">Đọc tiểu sử →</span>` : ''}
+      </div>`;
+    const cls = `saint-card rank-${s.rank}${isToday ? ' is-today' : ''}${isNext ? ' is-next' : ''}${isPatron ? ' is-patron' : ''}${slug ? ' has-bio' : ''}`;
+    return slug
+      ? `<a href="${getBioHref(slug)}" class="${cls}"${bgAttr} aria-label="${esc(s.name)}">${inner}</a>`
+      : `<div class="${cls}"${bgAttr} aria-label="${esc(s.name)}">${inner}</div>`;
+  }).join('');
+
+  document.getElementById('ucTrack').innerHTML = html;
+  document.getElementById('upcomingSection').style.display = '';
+}
+
+/* ── Sync card width: scroller card = grid card ── */
+function syncCardWidth() {
+  const wrapper = document.querySelector('.uc-wrapper');
+  if (!wrapper) return;
+  /* Lấy một card bất kỳ trong grid tĩnh bên dưới */
+  const ref = document.querySelector('.saints-grid .saint-card');
+  if (!ref) return;
+  const w = ref.getBoundingClientRect().width;
+  if (w > 0) wrapper.style.setProperty('--uc-card-w', w + 'px');
+}
+
+/* ── Nav buttons ── */
+function setupScroller() {
+  const track = document.getElementById('ucTrack');
+  const left  = document.getElementById('ucLeft');
+  const right = document.getElementById('ucRight');
+  if (!track) return;
+
+  const CARD_W = () => {
+    const c = track.querySelector('.saint-card');
+    if (!c) return 200;
+    const style = getComputedStyle(track);
+    return c.getBoundingClientRect().width + parseFloat(style.gap || '16');
+  };
+
+  const update = () => {
+    const overflow = track.scrollWidth > track.clientWidth + 4;
+    left.classList.toggle('visible',  overflow && track.scrollLeft > 8);
+    right.classList.toggle('visible', overflow && track.scrollWidth - track.scrollLeft - track.clientWidth > 8);
+  };
+
+  left.addEventListener('click', () => {
+    const cw = CARD_W();
+    smoothScrollTo(track, Math.max(0, track.scrollLeft - cw * 2), 300);
+  });
+  right.addEventListener('click', () => {
+    const cw = CARD_W();
+    const max = track.scrollWidth - track.clientWidth;
+    smoothScrollTo(track, Math.min(max, track.scrollLeft + cw * 2), 300);
+  });
+
+  track.addEventListener('scroll', update, { passive: true });
+  new ResizeObserver(update).observe(track);
+  setTimeout(update, 120);
+}
+
+buildUpcoming();
+/* Sync width sau khi layout settle (1 rAF đủ vì grid đã SSR) */
+requestAnimationFrame(() => {
+  syncCardWidth();
+  setupScroller();
+  /* Cập nhật lại khi resize */
+  const grid = document.querySelector('.saints-grid');
+  if (grid) new ResizeObserver(syncCardWidth).observe(grid);
+});
+</script>
+
+<style is:global>
+/* ═══════════════════════════════════════════
+   Thánh-Chân Phước — index
+   (is:global vì cards được JS inject innerHTML,
+    không có data-astro-cid attribute)
+   ═══════════════════════════════════════════ */
+
+.sp-wrap {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 2.4rem 5rem;
+}
+
+/* ── Tiêu đề trang — dùng .listing-head từ listings.css ── */
+.listing-head { margin: 1rem 0 3rem; }
+.sp-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.6rem; font-style: italic;
+  color: var(--ink-cream-soft);
+  margin: .6rem 0 0;
+}
+
+/* ── Section title — h2 style ── */
+.sp-section-title { margin: 0 0 2rem; }
+.sp-section-title span {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.4rem; font-weight: 700;
+  /* Gradient vàng đối xứng — hài hòa mọi độ dài (đồng bộ .lib-masthead-title) */
+  background: linear-gradient(90deg, #d9a94e 0%, #f4d98f 50%, #d9a94e 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[data-theme="light"] .sp-section-title span {
+  background: none;
+  -webkit-text-fill-color: #1a5e3c;
+  color: #1a5e3c;
+}
+
+/* ── Divider ── */
+.sp-divider {
+  height: .1rem; border: none;
+  background: linear-gradient(to right, transparent, rgba(233,193,118,.35) 40%, rgba(233,193,118,.35) 60%, transparent);
+  margin: 3rem 0;
+}
+
+/* ═══════════════════════════════════════════════
+   UPCOMING SCROLLER
+   Card portrait giống grid, scroll ngang,
+   nav button glassmorphism bên cạnh viewport
+   ═══════════════════════════════════════════════ */
+
+/* Giới hạn bề ngang section "Mừng Lễ Sắp Tới" cho gọn, căn giữa */
+#upcomingSection {
+  max-width: 88rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Bỏ đường gradient hai bên tiêu đề "Sắp Tới" (trùng với divider phía trên) */
+#upcomingSection .sp-section-title { justify-content: center; }
+#upcomingSection .sp-section-title::before,
+#upcomingSection .sp-section-title::after { display: none; }
+
+/* Wrapper chứa viewport + 2 nút bên ngoài */
+.uc-wrapper {
+  position: relative;
+  margin: 0 2.25rem;
+}
+
+/* Viewport: clip ngang, không clip dọc (để nút visible) */
+.uc-viewport {
+  overflow: hidden;
+}
+
+/* Track: cuộn ngang, ẩn scrollbar */
+.uc-track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  overflow-x: scroll;
+  scroll-behavior: auto;   /* JS tự easing */
+  padding: .6rem .2rem 1.4rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.uc-track::-webkit-scrollbar { display: none; }
+
+/* Card scroller — JS set --uc-card-w để khớp đúng grid card */
+.uc-track .saint-card {
+  flex: 0 0 var(--uc-card-w, 20rem);
+  scroll-snap-align: start;
+}
+/* Card sắp tới gần nhất — highlight nổi bật (quầng gold), như card hôm nay */
+.uc-track .saint-card.is-next {
+  filter: grayscale(0%) brightness(1.15);
+  border-color: rgba(233,193,118,.7);
+  box-shadow: 0 0 0 1px rgba(233,193,118,.35), 0 8px 30px rgba(0,0,0,.55);
+}
+.uc-track .saint-card.is-next:hover {
+  border-color: rgba(233,193,118,.9);
+  box-shadow: 0 0 0 1px rgba(233,193,118,.5), 0 12px 36px rgba(0,0,0,.65);
+}
+
+/* Card HÔM NAY — to hơn + highlight mạnh nhất */
+.uc-track .saint-card.is-today {
+  flex-basis: calc(var(--uc-card-w, 20rem) * 1.16);
+  filter: grayscale(0%) brightness(1.18);
+  border-color: rgba(233,193,118,.85);
+  box-shadow: 0 0 0 2px rgba(233,193,118,.5), 0 10px 38px rgba(0,0,0,.6);
+}
+.uc-track .saint-card.is-today:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(233,193,118,.7), 0 14px 44px rgba(0,0,0,.7);
+}
+/* Badge "Hôm Nay" — góc trên phải, vàng đặc */
+.sc-today-tag {
+  position: absolute; top: .8rem; right: .8rem; z-index: 5;
+  font-family: var(--font-ui); font-size: .82rem; font-weight: 500;
+  letter-spacing: .05rem; text-transform: uppercase;
+  color: #0d1f2b; background: var(--gold);
+  border-radius: 4px; padding: .2rem .7rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+
+/* Nav buttons — glassmorphism, trái/phải ngoài viewport */
+.uc-nav-btn {
+  position: absolute; top: 50%; transform: translateY(-60%); z-index: 15;
+  width: 4.4rem; height: 4.4rem; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(16, 27, 51, .82);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(233,193,118,.3);
+  color: var(--gold);
+  font-size: 2.4rem; font-weight: 300; line-height: 1;
+  cursor: pointer;
+  opacity: .8;
+  transition: background .2s, border-color .2s, opacity .2s, transform .2s;
+}
+.uc-nav-btn.visible { display: flex; }
+.uc-nav-btn:hover {
+  background: rgba(233,193,118,.2);
+  border-color: var(--gold);
+  opacity: 1;
+  transform: translateY(-60%) scale(1.1);
+}
+.uc-nav-left  { left:  -2.25rem; }
+.uc-nav-right { right: -2.25rem; }
+
+/* ── Hôm nay mừng lễ ── */
+.today-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 0 .2rem .4rem;
+}
+.today-grid .saint-card {
+  flex: 0 0 clamp(18rem, 22rem, 45%);
+  filter: grayscale(0%) brightness(1.05);
+  border-color: rgba(233,193,118,.6);
+  box-shadow: 0 0 0 1px rgba(233,193,118,.22), 0 8px 32px rgba(0,0,0,.5);
+}
+.today-grid .saint-card:hover {
+  filter: grayscale(0%) brightness(1.3);
+  border-color: rgba(233,193,118,.85);
+  box-shadow: 0 0 0 1px rgba(233,193,118,.4), 0 12px 36px rgba(0,0,0,.6);
+}
+
+/* ── Tháng & grid ── */
+.sp-months { display: flex; flex-direction: column; gap: 4rem; }
+.sp-month { scroll-margin-top: 8rem; }
+.sp-month-title {
+  margin: 0 0 1.8rem;
+}
+.sp-month-title span {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem; font-weight: 600;
+  color: var(--ink-cream);
+  background: none; -webkit-text-fill-color: var(--ink-cream);
+}
+[data-theme="light"] .sp-month-title span {
+  color: #1a5e3c;
+  -webkit-text-fill-color: #1a5e3c;
+}
+.saints-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 2rem;
+}
+
+/* ══════════════════════════
+   PORTRAIT CARD — dùng chung
+   cho cả grid lẫn scroller
+   ══════════════════════════ */
+.saint-card {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(233,193,118,.2);
+  cursor: default; user-select: none; text-decoration: none;
+  transition:
+    transform .25s cubic-bezier(.25,.1,.25,1),
+    box-shadow .25s,
+    border-color .25s,
+    filter .25s;
+  filter: grayscale(30%) brightness(.8);
+}
+.saint-card.has-bio { cursor: pointer; }
+.saint-card:hover,
+.saint-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  filter: grayscale(0%) brightness(1.2);
+  border-color: rgba(233,193,118,.45);
+  outline: none;
+}
+
+/* Gradient nền theo bậc */
+.saint-card.rank-solemn   { background: linear-gradient(160deg, #2a1a00, #150d00); }
+.saint-card.rank-feast    { background: linear-gradient(160deg, #1f1800, #0e1000); }
+.saint-card.rank-memorial { background: linear-gradient(160deg, #0e1929, #08111e); }
+.saint-card.rank-none     { background: linear-gradient(160deg, #111b30, #090e1c); }
+
+/* Lễ Trọng/Kính — filter như hover (full color) */
+.saint-card.rank-solemn {
+  filter: grayscale(0%) brightness(1.1);
+  border-color: rgba(233,193,118,.38);
+}
+.saint-card.rank-feast {
+  filter: grayscale(0%) brightness(1.05);
+  border-color: rgba(233,193,118,.28);
+}
+
+/* ── Patron: Thánh Augustinô 28/8 — nổi bật nhất (= hover mạnh nhất) ── */
+.saint-card.is-patron {
+  filter: grayscale(0%) brightness(1.2);
+  border-color: rgba(233,193,118,.55);
+  box-shadow: 0 0 0 1px rgba(233,193,118,.3), 0 8px 28px rgba(0,0,0,.5);
+}
+.saint-card.is-patron:hover {
+  filter: grayscale(0%) brightness(1.3);
+  border-color: rgba(233,193,118,.75);
+  box-shadow: 0 0 0 1px rgba(233,193,118,.5), 0 12px 36px rgba(0,0,0,.65);
+}
+
+/* Ảnh nền */
+.sc-img {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: var(--sc-bg, none);
+  background-size: cover; background-position: center top;
+}
+
+/* Overlay gradient — đủ dày để chữ luôn đọc được kể cả ảnh rất sáng */
+.sc-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top,
+    rgba(5,8,20,1)    0%,
+    rgba(5,8,20,.88)  35%,
+    rgba(5,8,20,.45)  58%,
+    rgba(5,8,20,.12)  80%,
+    rgba(5,8,20,.04) 100%);
+}
+
+/* Badge bậc lễ — solid color, đồng bộ với global rank convention */
+.sc-badge {
+  position: absolute; top: .8rem; left: .8rem; z-index: 4;
+  font-family: var(--font-ui); font-size: .78rem; font-weight: 500;
+  letter-spacing: .05rem; text-transform: uppercase;
+  border-radius: 4px; padding: .2rem .8rem;
+  white-space: nowrap;
+}
+/* Lễ Trọng — đỏ đô (= global .rank-badge.rank-solemn) */
+.rank-solemn .sc-badge  { background: #8b2020; color: #efe7d6; }
+/* Lễ Kính — vàng (= global feast) */
+.rank-feast .sc-badge   { background: #e9c176; color: #0d1f2b; }
+/* Lễ Nhớ — kem xám (= global memorial) */
+.rank-memorial .sc-badge { background: #ccc8c0; color: #0d1f2b; }
+.rank-none .sc-badge { display: none; }
+
+/* Text — bottom overlay */
+.sc-body {
+  position: relative; z-index: 2;
+  padding: 1rem 1.2rem 1.3rem;
+}
+.sc-date {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.8rem; font-weight: 700; line-height: 1;
+  color: var(--ink-cream);
+  background: none; -webkit-text-fill-color: var(--ink-cream);
+  text-shadow: 0 1px 6px rgba(0,0,0,.8);
+}
+.rank-solemn .sc-date { color: var(--gold); -webkit-text-fill-color: var(--gold); }
+.rank-feast  .sc-date { color: var(--gold-dim); -webkit-text-fill-color: var(--gold-dim); }
+
+.sc-name {
+  font-family: var(--font-ui);
+  font-size: 1.35rem; font-weight: 400; font-style: normal; line-height: 1.4;
+  color: var(--ink-cream); margin: .35rem 0 0;
+  text-shadow: 0 1px 5px rgba(0,0,0,.9);
+}
+
+.sc-subtitle {
+  margin: .3rem 0 0;
+  font-family: var(--font-ui); font-size: .88rem; line-height: 1.4;
+  color: var(--gold-dim); text-shadow: 0 1px 5px rgba(0,0,0,.9);
+}
+
+.sc-readmore {
+  display: block;
+  font-family: var(--font-ui); font-size: 1rem; font-weight: 600;
+  color: var(--gold); margin-top: .4rem;
+  opacity: 0; transition: opacity .16s;
+}
+.saint-card.has-bio:hover .sc-readmore,
+.saint-card.has-bio:focus-visible .sc-readmore { opacity: 1; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .saints-grid { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.6rem; }
+}
+@media (max-width: 640px) {
+  .sp-wrap        { padding: 0 1.2rem 4rem; }
+  .sp-head h1     { font-size: 2.8rem; }
+  .sp-month       { scroll-margin-top: 7rem; }
+  .sp-month-title { font-size: 2rem; }
+  .saints-grid    { grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 1.2rem; }
+  .today-grid .saint-card { flex: 0 0 clamp(15rem, 80vw, 22rem); }
+  .uc-wrapper     { margin: 0 1.8rem; }
+  .uc-nav-btn     { width: 3.6rem; height: 3.6rem; font-size: 2rem; }
+  .uc-nav-left    { left:  -1.8rem; }
+  .uc-nav-right   { right: -1.8rem; }
+  .sc-date { font-size: 2.4rem; }
+  .sc-name { font-size: 1.15rem; }
+}
+@media (max-width: 420px) {
+  .saints-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+</BaseLayout>

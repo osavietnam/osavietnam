@@ -1,0 +1,464 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from './PageHeader.astro';
+import TableOfContents from './TableOfContents.astro';
+import { withBase } from '../lib/site-path';
+
+interface LangOption {
+  label: string;
+  href: string;
+  current: boolean;
+  id: string;
+}
+
+interface Props {
+  entry: CollectionEntry<'documents'>;
+  langs: LangOption[];
+  banner?: string;
+}
+
+const { entry, langs, banner = 'documents' } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const hasToc = tocHeadings.length > 1;
+const shortLabels: Record<string, string> = { 'Tiếng Việt': 'VI', 'English': 'EN' };
+
+// Tính hasToc cho từng lang để embed vào data-has-toc (dùng khi switch)
+const langTocMap: Record<string, boolean> = {};
+await Promise.all(langs.map(async (l) => {
+  if (l.current) { langTocMap[l.id] = hasToc; return; }
+  try {
+    const e = await getEntry('documents', l.id as any);
+    if (!e) { langTocMap[l.id] = false; return; }
+    const { headings: h } = await render(e);
+    langTocMap[l.id] = h.filter((x) => x.depth === 2 || x.depth === 3).length > 1;
+  } catch { langTocMap[l.id] = false; }
+}));
+---
+<BaseLayout
+  title={d.title}
+  description={d.subtitle}
+  banner={banner}
+  type="article"
+  bodyClass={`no-sidebar page-document-reader${banner === 'tu-luat' ? ' page-tu-luat' : ''}`}
+>
+  <div class="content-watermark" aria-hidden="true">
+    <img src="/images/emblem.svg" alt="" />
+  </div>
+  <PageHeader title={d.title} sub={d.docType} desc={d.subtitle} />
+  <div class="doc-meta-row">
+    <div class="doc-lang-bar" role="tablist" aria-label="Chọn ngôn ngữ">
+      {langs.map((l) => (
+        <button
+          type="button"
+          role="tab"
+          class={`doc-lang-tab dls-tab ${l.current ? 'active' : ''}`}
+          aria-selected={l.current ? 'true' : 'false'}
+          data-doc-id={l.id}
+          data-href={withBase(l.href)}
+          data-has-toc={langTocMap[l.id] ? 'true' : 'false'}
+        >{l.label}</button>
+      ))}
+    </div>
+    <div class="doc-translator-slot">
+      {d.translator && (
+        <span class="translator">
+          <span class="translator-name">{d.translator}</span>
+          {d.translatorNote && <span class="translator-note" set:html={d.translatorNote} />}
+        </span>
+      )}
+    </div>
+  </div>
+  <div class={`article-shell ${hasToc ? 'has-toc' : ''}`}>
+    {hasToc && <TableOfContents headings={headings} langs={langs} />}
+    <article class="prose"><Content /></article>
+  </div>
+</BaseLayout>
+
+<!-- Floating widget: TOC nav + lang switcher (góc phải bên dưới) -->
+<div id="docFloatToc">
+  <div id="dftPanel">
+    {hasToc && <p class="ffp-label">Mục Lục</p>}
+    <nav id="dftNav" aria-label="Mục l���c nhanh" style={hasToc ? '' : 'display:none'}>
+      {tocHeadings.map((h) => (
+        <a href={`#${h.slug}`} class={`bft-link bft-depth-${h.depth}`} data-slug={h.slug}>
+          {h.text}
+        </a>
+      ))}
+    </nav>
+    <div class="dft-lang-row" class:list={[!hasToc && 'no-toc']}>
+      {langs.map((l) => (
+        <button
+          type="button"
+          class={`dft-lang ${l.current ? 'current' : ''}`}
+          data-doc-id={l.id}
+          data-href={withBase(l.href)}
+          data-has-toc={langTocMap[l.id] ? 'true' : 'false'}
+        >{shortLabels[l.label] ?? l.label}</button>
+      ))}
+    </div>
+  </div>
+  <button id="dftBtn" type="button" aria-haspopup="true" aria-expanded="false"
+    aria-label={hasToc ? 'Mục lục' : 'Chọn ngôn ngữ'}>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      {hasToc ? (
+        <>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="16" y2="12"/>
+          <line x1="3" y1="18" x2="11" y2="18"/>
+        </>
+      ) : (
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      )}
+    </svg>
+    <span id="dftLabel">{hasToc ? 'Mục Lục' : 'Ngôn Ngữ'}</span>
+  </button>
+</div>
+
+<style is:global>
+/* ---- Metadata row bên dưới PageHeader ---- */
+.doc-meta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: -1.6rem auto 3rem;
+  text-align: center;
+}
+.doc-meta-row .translator {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  color: var(--ink-cream-soft);
+}
+.doc-meta-row .translator-name {
+  display: block;
+  color: var(--ink-cream);
+  font-weight: 600;
+  margin-bottom: .3rem;
+}
+.doc-meta-row .translator-note {
+  display: block;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+.doc-meta-row .translator-note a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(233,193,118,.35);
+  transition: color .2s, border-bottom-color .2s;
+}
+.doc-meta-row .translator-note a:hover { color: #f2d78e; border-bottom-color: #f2d78e; }
+
+/* ---- Lang tab bar (kiểu ks-season-tab) ---- */
+.doc-lang-bar {
+  display: inline-flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(233, 193, 118, 0.16);
+}
+.doc-lang-tab {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(239, 231, 214, 0.6);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.7rem 1.6rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.doc-lang-tab:hover { color: rgba(239, 231, 214, 0.9); }
+.doc-lang-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+/* light mode → overrides.css */
+
+/* ---- Lang row trong docFloatToc panel ---- */
+.dft-lang-row {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  padding: .8rem 1.2rem 1rem;
+  border-top: 1px solid rgba(233,193,118,0.12);
+  flex-shrink: 0;
+}
+.dft-lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .35rem 1rem;
+  border-radius: 20px;
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: .04rem;
+  border: 1px solid rgba(233,193,118,0.3);
+  background: transparent;
+  color: var(--ink-cream-soft);
+  cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+.dft-lang.current { background: rgba(233,193,118,0.12); color: var(--gold); cursor: default; }
+.dft-lang:not(.current):hover { background: rgba(233,193,118,0.1); border-color: var(--gold); color: var(--gold); }
+/* light mode → overrides.css */
+</style>
+
+<script>
+import { withBase } from '../lib/site-path';
+
+// Ẩn #backBtn mặc định, dùng floating lang switcher thay thế
+document.getElementById('backBtn')?.remove();
+
+const FRAG_BASE = withBase('/documents/fragment/');
+
+const proseEl    = document.querySelector<HTMLElement>('.prose')!;
+const mastheadEl = document.querySelector<HTMLElement>('.lib-masthead');
+const metaRowEl  = document.querySelector<HTMLElement>('.doc-meta-row');
+const dftLabel   = document.getElementById('dftLabel');
+
+interface DocData { contentHTML: string; title: string; subtitle: string; translatorHTML: string; }
+const cache = new Map<string, DocData>();
+const translatorSlot = document.querySelector<HTMLElement>('.doc-translator-slot');
+let currentId = document.querySelector<HTMLElement>('.dls-tab.active')?.dataset.docId ?? '';
+
+// ── Đánh số đoạn (N. ) đầu <p>, bỏ qua .footnotes ──
+function processArticleNums(container: Element) {
+  container.querySelectorAll<HTMLParagraphElement>('p').forEach((p) => {
+    if (p.closest('.footnotes')) return;
+    if (p.querySelector('.article-num')) return;
+    const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+    const first = walker.nextNode() as Text | null;
+    if (!first) return;
+    const m = first.textContent?.match(/^(\d+\.?\s)/);
+    if (!m) return;
+    const span = document.createElement('span');
+    span.className = 'article-num';
+    span.textContent = m[1];
+    const rest = document.createTextNode((first.textContent ?? '').slice(m[1].length));
+    first.parentNode?.replaceChild(span, first);
+    span.after(rest);
+  });
+}
+processArticleNums(proseEl);
+
+// Pre-cache nội dung ngôn ngữ hiện tại (đã có sẵn trong DOM)
+cache.set(currentId, {
+  contentHTML: proseEl.innerHTML,
+  title: mastheadEl?.querySelector('.lib-masthead-title')?.textContent ?? '',
+  subtitle: mastheadEl?.querySelector('.lib-masthead-desc')?.innerHTML ?? '',
+  translatorHTML: translatorSlot?.innerHTML ?? '',
+});
+
+// ── Cập nhật tiêu đề / phụ đề / dịch giả khi đổi ngôn ngữ ──
+function updateHeader(data: DocData) {
+  const t = mastheadEl?.querySelector<HTMLElement>('.lib-masthead-title');
+  if (t) t.textContent = data.title;
+
+  let desc = mastheadEl?.querySelector<HTMLElement>('.lib-masthead-desc');
+  if (data.subtitle) {
+    if (!desc && mastheadEl) {
+      desc = document.createElement('p');
+      desc.className = 'lib-masthead-desc';
+      mastheadEl.querySelector('.lib-masthead-rule')?.before(desc);
+    }
+    if (desc) desc.innerHTML = data.subtitle;
+  } else if (desc) { desc.remove(); }
+
+  if (translatorSlot) translatorSlot.innerHTML = data.translatorHTML;
+}
+
+// ── Observer active-link cho sidebar TOC và floating TOC ──
+let tocObserver: IntersectionObserver | null = null;
+function setupTocObserver() {
+  if (tocObserver) tocObserver.disconnect();
+  const sideMap  = new Map<string, Element>();
+  const floatMap = new Map<string, Element>();
+  const labelEl  = document.querySelector<HTMLElement>('.toc-section-name');
+  document.querySelectorAll('.toc a').forEach((a) => {
+    const id = a.getAttribute('href')?.slice(1); if (id) sideMap.set(id, a);
+  });
+  document.querySelectorAll<HTMLElement>('.bft-link').forEach((a) => {
+    if (a.dataset.slug) floatMap.set(a.dataset.slug, a);
+  });
+  const heads = proseEl.querySelectorAll<HTMLElement>('h2[id], h3[id]');
+  if (!heads.length) return;
+  tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      sideMap.forEach((a) => a.classList.remove('active'));
+      floatMap.forEach((a) => a.classList.remove('active'));
+      const active = sideMap.get(e.target.id);
+      if (active) {
+        active.classList.add('active');
+        if (labelEl) {
+          const txt = active.textContent?.trim() ?? '';
+          labelEl.textContent = txt.length > 26 ? txt.slice(0, 26) + '…' : txt;
+        }
+      }
+      const fl = floatMap.get(e.target.id);
+      if (fl) {
+        fl.classList.add('active');
+        if (dftLabel) {
+          const txt = fl.textContent?.trim() ?? '';
+          dftLabel.textContent = txt.length > 22 ? txt.slice(0, 22) + '…' : txt;
+        }
+      }
+    });
+  }, { rootMargin: '-80px 0px -70% 0px' });
+  heads.forEach((h) => tocObserver!.observe(h));
+}
+
+// ── Dựng lại cả 2 mục lục từ nội dung mới ──
+function rebuildTocs() {
+  const heads = Array.from(proseEl.querySelectorAll<HTMLElement>('h2[id], h3[id]'));
+  const hasTocNow = heads.length > 1;
+  const shell = document.querySelector<HTMLElement>('.article-shell');
+  const wasOpen = shell?.classList.contains('toc-open') ?? false;
+
+  // ── Sidebar TOC ──
+  let sideNav = document.querySelector<HTMLElement>('.toc');
+  if (hasTocNow) {
+    if (!sideNav && shell) {
+      const nav = document.createElement('nav');
+      nav.className = 'toc';
+      nav.setAttribute('aria-label', 'Mục lục');
+      const svg = '<svg class="toc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
+      nav.innerHTML = `<button class="toc-trigger" type="button" aria-expanded="false" aria-label="Mục lục" title="Mục lục">${svg}<span class="toc-section-name">Mục lục</span></button><div class="toc-drawer"><div class="toc-drawer-head"><p class="toc-title">Mục lục</p></div><ul></ul></div>`;
+      shell.insertBefore(nav, proseEl);
+      shell.classList.add('has-toc');
+      // The initial server-rendered TOC gets its handler from
+      // TableOfContents.astro. Rebuilt TOCs (e.g. Ratio after VN/EN switch)
+      // need the same toggle handler attached here.
+      nav.querySelector<HTMLButtonElement>('.toc-trigger')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = shell.classList.toggle('toc-open');
+        (e.currentTarget as HTMLButtonElement).setAttribute('aria-expanded', String(open));
+      });
+      sideNav = nav;
+    }
+    // Preserve the current state when switching language. A newly created
+    // reader TOC starts collapsed because wasOpen is false without a prior TOC.
+    shell?.classList.add('has-toc');
+    shell?.classList.toggle('toc-open', wasOpen);
+    sideNav?.querySelector<HTMLButtonElement>('.toc-trigger')?.setAttribute('aria-expanded', String(wasOpen));
+    const ul = sideNav?.querySelector('.toc-drawer ul');
+    if (ul) ul.innerHTML = heads.map((h) =>
+      `<li class="toc-depth-${h.tagName === 'H3' ? 3 : 2}"><a href="#${h.id}">${h.textContent ?? ''}</a></li>`
+    ).join('');
+    const sectionLabel = sideNav?.querySelector<HTMLElement>('.toc-section-name');
+    if (sectionLabel) sectionLabel.textContent = 'Mục lục';
+  } else if (sideNav) {
+    sideNav.remove();
+    shell?.classList.remove('has-toc', 'toc-open');
+  }
+
+  // ── Floating TOC ──
+  const dftNav = document.getElementById('dftNav');
+  if (dftNav) {
+    dftNav.innerHTML = hasTocNow ? heads.map((h) =>
+      `<a href="#${h.id}" class="bft-link bft-depth-${h.tagName === 'H3' ? 3 : 2}" data-slug="${h.id}">${h.textContent ?? ''}</a>`
+    ).join('') : '';
+    dftNav.style.display = hasTocNow ? '' : 'none';
+  }
+  if (dftLabel) dftLabel.textContent = hasTocNow ? 'Mục Lục' : 'Ngôn Ngữ';
+  setupTocObserver();
+}
+
+// ── Trạng thái active của mọi nút chuyển ngôn ngữ ──
+function setActive(id: string) {
+  document.querySelectorAll<HTMLElement>('[data-doc-id]').forEach((el) => {
+    const on = el.dataset.docId === id;
+    const isSeg = el.classList.contains('dls-tab');
+    el.classList.toggle('active', on && isSeg);
+    el.classList.toggle('current', on && !isSeg);
+    if (el.hasAttribute('aria-selected')) el.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+}
+
+// ── Lazy switch ngôn ngữ (giống trang Tự Thuật) ──
+async function switchLang(id: string, href: string | null, push = true, _targetHasToc?: boolean) {
+  if (!id || id === currentId) return;
+  setActive(id);
+  let data = cache.get(id);
+  if (!data) {
+    proseEl.style.opacity = '0.35';
+    try {
+      const resp = await fetch(FRAG_BASE + id + '/');
+      if (!resp.ok) throw new Error(String(resp.status));
+      const html = await resp.text();
+      const doc  = new DOMParser().parseFromString(html, 'text/html');
+      const frag = doc.querySelector('.doc-fragment');
+      data = {
+        contentHTML: frag?.querySelector('.doc-fragment-content')?.innerHTML ?? '<p>Đang cập nhật…</p>',
+        title: frag?.getAttribute('data-title') ?? '',
+        subtitle: frag?.getAttribute('data-subtitle') ?? '',
+        translatorHTML: frag?.querySelector('.doc-fragment-translator')?.innerHTML ?? '',
+      };
+      cache.set(id, data);
+    } catch {
+      proseEl.style.opacity = '';
+      setActive(currentId);
+      // Static hosting fallback: navigate to the fully prerendered language page
+      // instead of leaving the control looking unresponsive.
+      if (push && href) window.location.assign(href);
+      return;
+    }
+  }
+  proseEl.innerHTML = data.contentHTML;
+  proseEl.style.opacity = '';
+  processArticleNums(proseEl);
+  updateHeader(data);
+  rebuildTocs();
+  currentId = id;
+  document.documentElement.lang = id.endsWith('-en') ? 'en' : 'vi';
+  if (push && href) history.pushState({ docId: id }, '', href);
+  const anchor = mastheadEl ?? metaRowEl ?? proseEl;
+  const top = anchor.getBoundingClientRect().top + window.scrollY - 90;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'instant' as ScrollBehavior });
+}
+
+// Click bất kỳ nút [data-doc-id] (tab chính, floating, mini)
+document.addEventListener('click', (e) => {
+  const ctl = (e.target as HTMLElement).closest<HTMLElement>('[data-doc-id]');
+  if (!ctl) return;
+  e.preventDefault();
+  const targetHasToc = ctl.dataset.hasToc === 'true';
+  switchLang(ctl.dataset.docId ?? '', ctl.dataset.href ?? null, true, targetHasToc);
+});
+
+// Back / Forward
+if (currentId) history.replaceState({ docId: currentId }, '', location.href);
+window.addEventListener('popstate', (e) => {
+  const id = (e.state as { docId?: string } | null)?.docId;
+  if (id) switchLang(id, null, false);
+});
+
+
+// ── Floating TOC: đóng/mở panel ──
+(function () {
+  const widget = document.getElementById('docFloatToc');
+  if (!widget) return;
+  const panel = document.getElementById('dftPanel') as HTMLElement;
+  const btn   = document.getElementById('dftBtn') as HTMLButtonElement;
+  function openPanel(open: boolean) {
+    panel.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+  }
+  btn.addEventListener('click', () => openPanel(!panel.classList.contains('open')));
+  document.getElementById('dftNav')?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) openPanel(false);
+  });
+  window.addEventListener('scroll', () => {
+    widget.classList.toggle('show', window.scrollY > 300);
+  });
+})();
+
+// Khởi tạo observer cho nội dung ban đầu
+setupTocObserver();
+
+// Điều hướng footnote (offset nav + highlight 2 chiều) đã chuyển sang BaseLayout — dùng chung toàn site.
+</script>

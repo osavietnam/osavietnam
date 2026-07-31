@@ -1,0 +1,1319 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import indexData from '../../data/kinh-sach-index.json';
+import pageHeaders from '../../data/page-headers.json';
+const ph = (pageHeaders as Record<string, Record<string, string>>)['readings'];
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+// Trạng thái fill (build-time): body .md rỗng ⇒ chưa fill
+const KS_DIR = join(process.cwd(), 'src', 'content', 'kinh-sach');
+function readEntry(id: string): { filled: boolean; manualFill: boolean } {
+  const p = join(KS_DIR, ...id.split('/')) + '.md';
+  if (!existsSync(p)) return { filled: false, manualFill: false };
+  const raw = readFileSync(p, 'utf-8');
+  const parts = raw.split(/^---\s*$/m);
+  const fm = parts.length >= 2 ? parts[1] : '';
+  const body = parts.length >= 3 ? parts.slice(2).join('---') : '';
+  return {
+    filled: body.trim().length > 20,
+    manualFill: /^manualFill:\s*true\s*$/m.test(fm),
+  };
+}
+// Entry cần sửa metadata (highlight đỏ)
+const NEEDS_FIX = new Set<string>([
+  'mua-giang-sinh/tu-ngay-2-thang-1-den-le-hien-linh-thu-bay',
+]);
+for (const key of Object.keys(indexData as Record<string, any[]>)) {
+  for (const e of (indexData as Record<string, any[]>)[key]) {
+    const st = readEntry(e.id);
+    e.filled = st.filled;
+    if (st.manualFill) e.manualFill = true;
+    if (NEEDS_FIX.has(e.id)) e.needsFix = true;
+  }
+}
+
+const SEASONS = [
+  { key: 'le-chung', label: 'Lễ Chung' },
+  { key: 'le-rieng', label: 'Lễ Riêng' },
+  { key: 'trong-kinh-chua', label: 'Lễ Trọng Kính Chúa' },
+  { key: 'mua-thuong-nien', label: 'Mùa Thường Niên' },
+  { key: 'mua-vong', label: 'Mùa Vọng' },
+  { key: 'mua-giang-sinh', label: 'Mùa Giáng Sinh' },
+  { key: 'mua-chay', label: 'Mùa Chay' },
+  { key: 'mua-phuc-sinh', label: 'Mùa Phục Sinh' },
+];
+const present = SEASONS.filter((s) => (indexData[s.key] || []).length > 0);
+const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
+---
+<BaseLayout title="Bài Đọc Kinh Sách" bodyClass="no-sidebar page-kinh-sach" banner="readings">
+  <script is:inline>document.body.dataset.noAutoscroll='1';</script>
+  <div class="listing">
+    <PageHeader
+      title={ph.title}
+      sub={ph.sub}
+      desc={ph.desc}
+    />
+
+    <!-- Bài đọc hôm nay (JS điền nội dung) -->
+    <div class="today-card" id="todayCard" style="display:none;"></div>
+
+    <!-- Chọn mùa — bar tab (giống thanh chọn quyển Tự Thuật) -->
+    <div class="season-filter" id="season-filter">
+      <div class="ks-season-bar shared-tab-bar shared-tab-bar-compact" id="season-tabs" role="tablist" aria-label="Mùa phụng vụ">
+        <button type="button" class="ks-season-tab shared-tab-btn" data-key="__all__">Tất Cả</button>
+        {present.map((s) => (<button type="button" class="ks-season-tab shared-tab-btn" data-key={s.key}>{s.label}</button>))}
+      </div>
+    </div>
+
+    <div id="floatFilterWidget">
+      <div id="floatFilterPanel">
+        <p class="ffp-label">Mùa</p>
+        <select id="floatSeasonSel"></select>
+        <div id="ffpWeekRow" class="ffp-week-hidden">
+          <p class="ffp-label">Tuần</p>
+          <select id="floatWeekSel"></select>
+        </div>
+        <p class="ffp-label">Tác Giả</p>
+        <select id="floatAuthorSel"></select>
+        <label class="ffp-augustin-toggle">
+          <input type="checkbox" id="floatAugustinOnly" />
+          <span>Chỉ Thánh Augustinô</span>
+        </label>
+      </div>
+      <button id="floatFilterBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Bộ lọc">
+        <svg class="filter-state-icon" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+          <path class="filter-icon-empty" d="M3 4h18l-7 8.5V20l-4-2V12.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          <path class="filter-icon-filled" d="M3 4h18l-7 8.5V20l-4-2V12.5Z" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Tìm + lọc tác giả -->
+    <div class="listing-toolbar shared-filter-bar shared-filter-bar--search" id="toolbar" style="display:none;">
+      <div class="search-box shared-filter-search">
+        <input type="search" id="searchInput" class="shared-filter-input" placeholder="Tìm theo bài lễ, tác giả, trích đoạn..." />
+      </div>
+      <select id="authorSelect" class="shared-filter-select" aria-label="Lọc theo tác giả"></select>
+      <label class="shared-filter-toggle augustin-only-toggle"><input type="checkbox" id="augustinOnlyToggle" /> Thánh Augustinô</label>
+      <label class="unfilled-toggle shared-filter-toggle"><input type="checkbox" id="unfilledToggle" /> Chưa fill</label>
+    </div>
+
+    <p class="listing-count" id="count" style="display:none;"></p>
+
+    <!-- BẢNG INDEX giống bản gốc -->
+    <div id="tableWrap" class="shared-index-surface" style="display:none; overflow-x:auto;">
+      <table class="shared-index-table">
+        <thead>
+          <tr><th>Tác Giả</th><th>Trích Đoạn</th><th>Phụng Vụ</th></tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <p class="listing-hint" id="hint">Hãy chọn một mùa phụng vụ ở trên để xem bảng các bài đọc.</p>
+  </div>
+
+  <script set:html={`window.__KS_INDEX__ = ${JSON.stringify(indexData)}; window.__KS_SEASON_LABELS__ = ${JSON.stringify(SEASON_LABELS)}; window.__KS_SEASONS__ = ${JSON.stringify(present)};`}></script>
+  <script>
+    import { withBase } from '../../lib/site-path';
+
+    const INDEX = window.__KS_INDEX__ || {};
+    Object.values(INDEX).flat().forEach((entry: any) => { if (entry?.url) entry.url = withBase(entry.url); });
+    const SEASON_LABELS = window.__KS_SEASON_LABELS__ || {};
+    const els = {
+      season:  document.getElementById('season-tabs'),
+      filterBar: document.getElementById('season-filter'),
+      toolbar: document.getElementById('toolbar'),
+      search:  document.getElementById('searchInput'),
+      author:  document.getElementById('authorSelect'),
+      wrap:    document.getElementById('tableWrap'),
+      body:    document.getElementById('tableBody'),
+      hint:    document.getElementById('hint'),
+      count:   document.getElementById('count'),
+      today:   document.getElementById('todayCard'),
+      augustin: document.getElementById('augustinOnlyToggle'),
+      unfilled: document.getElementById('unfilledToggle'),
+    };
+    const floatWidget    = document.getElementById('floatFilterWidget');
+    const floatPanel     = document.getElementById('floatFilterPanel');
+    const floatSeasonSel = document.getElementById('floatSeasonSel');
+    const floatWeekSel   = document.getElementById('floatWeekSel');
+    const floatAuthorSel = document.getElementById('floatAuthorSel');
+    const floatAugustin  = document.getElementById('floatAugustinOnly');
+    const floatBtn       = document.getElementById('floatFilterBtn');
+    const SEASONS_LIST   = window.__KS_SEASONS__ || [];
+    const SEASONS_WITH_WEEKS = new Set(['mua-thuong-nien','mua-vong','mua-chay','mua-phuc-sinh']);
+    let current = null;
+    let weekFilter = 'all';
+    let isAdmin = false;
+    const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    // Bỏ phẩm trật/mô tả sau tên tác giả (Gm., Lm., Tđ., Ts. Hội Thánh, Giáo phụ, Vp....)
+    // Tên = phần trước dấu phẩy đầu tiên; mọi thứ sau đó là danh hiệu → bỏ.
+    const stripRankAbbr = (s) => String(s ?? '').replace(/\s*,[\s\S]*$/, '').trim();
+    // Viết đầy đủ các viết tắt phẩm trật trong cột Phụng Vụ
+    const RANK_FULL = { Gm:'Giám mục', Lm:'Linh mục', Vp:'Viện phụ', 'Tđ':'Tử đạo', Ts:'Tiến sĩ', Gh:'Giáo hoàng', Tn:'Trinh nữ', Nt:'Nữ tu' };
+    const expandRanks = (s) => String(s ?? '')
+      .replace(/(^|[\s,(])(Gm|Lm|Vp|Tđ|Ts|Gh|Tn|Nt)\./gu, (_, pre, ab) => pre + RANK_FULL[ab])
+      .replace(/(Giám mục|Linh mục|Viện phụ|Tử đạo|Tiến sĩ|Giáo hoàng|Trinh nữ|Nữ tu)(\s*,\s*\1)+/gu, '$1');
+    function extractWeek(liturgy) {
+      const s = liturgy || '';
+      if (/Tuần Bát Nhật/i.test(s)) return 'Tuần Bát Nhật';
+      if (/Lễ Tro/i.test(s)) return 'Lễ Tro';
+      const m1 = s.match(/Tuần\s+(\d+)/i);
+      if (m1) return `Tuần ${m1[1]}`;
+      const m2 = s.match(/Chúa Nhật\s+(\d+)/i);
+      if (m2) return `Tuần ${m2[1]}`;
+      return null;
+    }
+    function getWeeksForSeason(key) {
+      if (!key || key === '__all__' || !SEASONS_WITH_WEEKS.has(key)) return [];
+      const rows = INDEX[key] || [];
+      const seen = {};
+      rows.forEach(r => {
+        const w = extractWeek(r.liturgy || '');
+        if (w && !(w in seen)) {
+          const n = w.match(/\d+/);
+          seen[w] = n ? parseInt(n[0]) : (w.includes('Bát Nhật') ? 0 : -1);
+        }
+      });
+      return Object.keys(seen).sort((a, b) => seen[a] - seen[b]);
+    }
+
+    // ---- Floating filter helpers ----
+    function setFloatLabel() {
+      const parts = [];
+      if (current && current !== '__all__') {
+        const lbl = SEASON_LABELS[current] || current;
+        parts.push(lbl.split(' ').slice(0, 2).join(' '));
+      }
+      if (weekFilter && weekFilter !== 'all') {
+        parts.push(weekFilter.replace(/^Tuần (\d+)$/, 'T.$1').replace('Tuần Bát Nhật', 'Bát Nhật'));
+      }
+      const auth = els.author.value;
+      if (auth && auth !== 'all') {
+        const ws = auth.trim().split(/\s+/);
+        const s = ws[ws.length - 1];
+        parts.push(s.length > 10 ? s.slice(0, 10) + '…' : s);
+      }
+      if (els.augustin?.checked) parts.push('Augustinô');
+      const filterSummary = parts.length ? parts.join(' · ') : 'Lọc';
+      floatBtn.setAttribute('aria-label', parts.length ? `Bộ lọc đang áp dụng: ${filterSummary}` : 'Bộ lọc');
+      floatBtn.classList.toggle('filtered', parts.length > 0);
+    }
+    function populateFloatSeasons() {
+      floatSeasonSel.innerHTML = [{ key: '__all__', label: 'Tất Cả' }, ...SEASONS_LIST]
+        .map(({ key, label }) => `<option value="${esc(key)}">${esc(label)}</option>`)
+        .join('');
+      floatSeasonSel.value = current || '__all__';
+    }
+    function populateFloatWeeks() {
+      const weekRow = document.getElementById('ffpWeekRow');
+      const weeks = getWeeksForSeason(current);
+      if (weeks.length === 0) {
+        weekRow.classList.add('ffp-week-hidden');
+        weekFilter = 'all';
+        floatWeekSel.innerHTML = '';
+        return;
+      }
+      weekRow.classList.remove('ffp-week-hidden');
+      floatWeekSel.innerHTML = `<option value="all">Tất cả tuần</option>` +
+        weeks.map(w => `<option value="${esc(w)}">${esc(w)}</option>`).join('');
+      floatWeekSel.value = weekFilter !== 'all' && weeks.includes(weekFilter) ? weekFilter : 'all';
+    }
+    function populateFloatAuthors() {
+      let rows = current === '__all__' ? getAllRows() : (INDEX[current] || []);
+      if (weekFilter && weekFilter !== 'all') rows = rows.filter(r => extractWeek(r.liturgy || '') === weekFilter);
+      const authors = [...new Set(rows.map((r) => stripRankAbbr(r.author)).filter(Boolean))].sort();
+      floatAuthorSel.innerHTML = `<option value="all">Tất cả tác giả</option>` +
+        authors.map((a) => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+      floatAuthorSel.value = els.author.value || 'all';
+    }
+    function openPanel(open) {
+      if (open) {
+        populateFloatSeasons();
+        populateFloatWeeks();
+        populateFloatAuthors();
+        floatAugustin.checked = Boolean(els.augustin?.checked);
+      }
+      floatPanel.classList.toggle('open', open);
+      floatBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    // ---- Bài đọc hôm nay ----
+    // Build lookup: season → { liturgy_text → entry }
+    const LIT_MAP = {};
+    for (const [sk, entries] of Object.entries(INDEX)) {
+      LIT_MAP[sk] = Object.fromEntries(entries.map(e => [e.liturgy, e]));
+    }
+
+    async function getTodayEntry() {
+      const now = new Date();
+      const key = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      const y   = now.getFullYear();
+      for (const ly of [y, y+1, y-1]) {
+        if (ly < 2020 || ly > 2100) continue;
+        try {
+          const r = await fetch(withBase(`/data/calendar/${ly}.json`));
+          if (!r.ok) continue;
+          const data = await r.json();
+          if (!data.days?.[key]) continue;
+          const dayData = data.days[key];
+          // Exact match bằng liturgy text
+          const entry = LIT_MAP[dayData.s]?.[dayData.l];
+          return { entry: entry || null, season: dayData.s, liturgy: dayData.l, cycle: data.cycle };
+        } catch { continue; }
+      }
+      return null;
+    }
+
+    async function renderTodayCard() {
+      const now    = new Date();
+      const todayD = now.getDate(), todayM = now.getMonth() + 1;
+      const todayFeasts = (INDEX['le-rieng'] || []).filter(e => {
+        const prefix = (e.liturgy || '').split(':')[0];
+        const nums = prefix.match(/\d+/g) || [];
+        return nums.length >= 2 && +nums[0] === todayD && +nums[1] === todayM;
+      });
+
+      const calData     = await getTodayEntry();
+      const primary     = calData?.entry || null;
+      const cycleLetter = calData?.cycle || '?';
+      if (!calData && !todayFeasts.length) return;
+
+      const SEASON_COLORS = {
+        'mua-vong':'#b499d8','mua-giang-sinh':'#e9c176','mua-thuong-nien':'#72c49a',
+        'mua-chay':'#a882c8','mua-phuc-sinh':'#f2d960','le-chung':'#d0c9be',
+        'le-rieng':'#e08888','trong-kinh-chua':'#8b2020',
+      };
+      const RANK_CHIPS = {
+        solemn:        { label:'T', cls:'td-chip td-chip-solemn' },
+        feast:         { label:'K', cls:'td-chip td-chip-feast' },
+        memorial:      { label:'N', cls:'td-chip td-chip-memorial' },
+        'opt-memorial':{ label:'n', cls:'td-chip td-chip-opt-memorial' },
+      };
+      const RANK_LABELS = {
+        solemn:'Lễ Trọng', feast:'Lễ Kính', memorial:'Lễ Nhớ Buộc', 'opt-memorial':'Lễ Nhớ Tùy Chọn',
+      };
+
+      const stripeColor = SEASON_COLORS[calData?.season] || '#e9c176';
+      const dateStr = now.toLocaleDateString('vi-VN', { weekday:'long', day:'numeric', month:'long' });
+
+      // Chip bậc lễ bài chính (chỉ hiện khi trong-kinh-chua / le-chung có rank)
+      let chipRowHtml = '';
+      if (primary?.rank && RANK_CHIPS[primary.rank] &&
+          (calData?.season === 'trong-kinh-chua' || calData?.season === 'le-chung')) {
+        const chip = RANK_CHIPS[primary.rank];
+        chipRowHtml = `<div class="td-chip-row"><span class="${chip.cls}">${chip.label}</span><span class="td-rank-label">${RANK_LABELS[primary.rank]}</span></div>`;
+      }
+
+      // Bài chính: liturgy text (từ entry hoặc từ calendar nếu chưa có entry)
+      const liturgyText = primary?.liturgy || calData?.liturgy || '';
+      const primaryUrl  = primary?.url || null;
+
+      // Lễ riêng: từng hàng compact (chip + tên), tất cả lễ trong ngày
+      let feastsHtml = '';
+      const readings = [];
+      if (primaryUrl) readings.push({ label: liturgyText, url: primaryUrl });
+      for (const e of todayFeasts) {
+        const ci = (e.liturgy || '').indexOf(':');
+        const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : e.liturgy;
+        const chip = RANK_CHIPS[e.rank];
+        feastsHtml += `<div class="td-feast-row">${chip ? `<span class="${chip.cls}">${chip.label}</span>` : ''}<span class="td-feast-name">${esc(fname)}</span></div>`;
+        readings.push({ label: (chip ? `[${chip.label}] ` : '') + fname, url: e.url || withBase('/kinh-sach/?category=le-rieng') });
+      }
+
+      // Nút đọc — góc phải dưới
+      const ARROW = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      let readBarHtml = '';
+      if (readings.length > 1) {
+        const opts = readings.map(r => `<option value="${esc(r.url)}">${esc(r.label)}</option>`).join('');
+        readBarHtml = `<select class="td-select" id="todaySelect">${opts}</select><a href="${esc(readings[0].url)}" class="td-read-btn" id="todayReadLink" title="Đọc Kinh Sách">${ARROW}</a>`;
+      } else if (readings.length === 1) {
+        readBarHtml = `<a href="${esc(readings[0].url)}" class="td-read-btn" title="Đọc Kinh Sách">${ARROW}</a>`;
+      }
+
+      els.today.innerHTML = `
+        <div class="today-inner">
+          <div class="td-stripe" style="background:${stripeColor}"></div>
+          <div class="td-body">
+            <div class="td-header-label">Hôm Nay</div>
+            <div class="td-date">${esc(dateStr)}<span class="td-cycle"> · Năm ${esc(cycleLetter)}</span></div>
+            ${chipRowHtml}
+            ${liturgyText ? `<div class="td-liturgy">${esc(liturgyText)}</div>` : ''}
+            ${feastsHtml}
+            <div class="td-read-bar${readings.length === 1 ? ' td-read-bar-single' : readings.length > 1 ? ' td-read-bar-multi' : ''}">${readBarHtml}</div>
+          </div>
+        </div>`;
+      els.today.style.display = 'block';
+
+      const sel = document.getElementById('todaySelect');
+      const lnk = document.getElementById('todayReadLink');
+      if (sel && lnk) sel.addEventListener('change', () => { lnk.href = sel.value; });
+    }
+    const _todayReady = renderTodayCard(); // giữ promise để scroll đợi layout ổn định
+
+    // ---- Bảng index ----
+    function render(rows) {
+      if (!rows.length) {
+        els.body.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:3rem;color:var(--ink-cream-soft);font-style:italic;">Không tìm thấy bài nào phù hợp.</td></tr>';
+        els.count.textContent = '';
+        return;
+      }
+      els.count.textContent = `${rows.length} bài đọc`;
+      const HIGHLIGHT_AUTHORS = /augustin|fulgentius/i;
+      const VALID_RANKS = new Set(['solemn','feast','memorial','opt-memorial']);
+      const nUnfilled = rows.filter((r) => !r.filled).length;
+      if (isAdmin && nUnfilled) els.count.textContent = `${rows.length} bài đọc · ${nUnfilled} chưa fill`;
+      els.body.innerHTML = rows.map((r) => {
+        const authorText = r.author || '';
+        const hiAuthor = HIGHLIGHT_AUTHORS.test(authorText);
+        const isAugustin = /augustin/i.test(authorText);
+        const rankCls = VALID_RANKS.has(r.rank) ? ` rank-${r.rank}` : '';
+        const cls = [
+          hiAuthor ? 'row-author-hi' : '',
+          isAugustin ? 'row-augustin' : '',
+          isAdmin && r.needsFix ? 'row-needs-fix' : '',
+          isAdmin && !r.filled ? 'row-unfilled' : '',
+          rankCls.trim(),
+        ].filter(Boolean).join(' ');
+        const manualTag = isAdmin && r.manualFill ? ' <span class="tag-manual">fill tay</span>' : '';
+        return `<tr data-url="${r.url}" data-id="${r.id}"${cls ? ` class="${cls}"` : ''} role="link" tabindex="0" title="Mở bài đọc — Ctrl/Cmd-click để mở tab mới">
+          <td data-label="Tác giả"><span class="ks-author-txt">${esc(stripRankAbbr(r.author))}</span></td>
+          <td data-label="Trích đoạn"><span class="ks-excerpt-txt">${esc(r.excerpt)}</span></td>
+          <td data-label="Phụng vụ"><span class="ks-liturgy-txt">${esc(expandRanks(r.liturgy))}</span>${manualTag}<button type="button" class="row-edit-btn" data-id="${r.id}" title="Sửa / fill tay">✎</button></td>
+        </tr>`;
+      }).join('');
+    }
+    function populateAuthors(rows) {
+      const authors = [...new Set(rows.map((r) => stripRankAbbr(r.author)).filter(Boolean))].sort();
+      els.author.innerHTML = '<option value="all">Tất cả tác giả</option>' +
+        authors.map((a) => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+    }
+    function getAllRows() {
+      return Object.values(INDEX).flat();
+    }
+    function apply() {
+      let rows = current === '__all__' ? getAllRows() : (INDEX[current] || []);
+      if (weekFilter && weekFilter !== 'all') rows = rows.filter(r => extractWeek(r.liturgy || '') === weekFilter);
+      const a = els.author.value;
+      if (a && a !== 'all') rows = rows.filter((r) => stripRankAbbr(r.author) === a);
+      if (els.augustin?.checked) rows = rows.filter((r) => /augustin/i.test(r.author || ''));
+      const t = (els.search.value || '').toLowerCase().trim();
+      if (t) rows = rows.filter((r) =>
+        (r.author||'').toLowerCase().includes(t) ||
+        (r.excerpt||'').toLowerCase().includes(t) ||
+        (r.liturgy||'').toLowerCase().includes(t));
+      if (isAdmin && els.unfilled && els.unfilled.checked) rows = rows.filter((r) => !r.filled || r.needsFix);
+      render(rows);
+    }
+    function selectSeason(cat, push = true) {
+      current = cat;
+      if (els.season) els.season.querySelectorAll('.ks-season-tab').forEach((b) => b.classList.toggle('active', b.dataset.key === cat));
+      els.toolbar.style.display = 'flex';
+      els.count.style.display = 'block';
+      els.wrap.style.display = 'block';
+      els.hint.style.display = 'none';
+      weekFilter = 'all';
+      populateAuthors(cat === '__all__' ? getAllRows() : (INDEX[cat] || []));
+      els.author.value = 'all';
+      els.search.value = '';
+      apply();
+      setFloatLabel();
+      if (push) {
+        const url = new URL(location.href);
+        url.searchParams.set('category', cat);
+        url.searchParams.delete('author');
+        history.pushState({ category: cat }, '', url.toString());
+      }
+    }
+    function scrollToTable() {
+      // Ưu tiên today panel (nếu đã render); fallback về season-tabs
+      const todayEl = document.getElementById('todayCard');
+      const target = (todayEl && todayEl.style.display !== 'none')
+        ? todayEl
+        : document.getElementById('season-filter');
+      if (!target) return;
+      const navH = 64;
+      const y = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+    }
+    els.season.addEventListener('click', (e) => {
+      const tab = e.target.closest('.ks-season-tab');
+      if (!tab) return;
+      selectSeason(tab.dataset.key);
+      openPanel(false);
+      // Mobile giữ thanh mùa ổn định trong viewport; không tự nhảy xuống bảng kết quả.
+      if (window.matchMedia('(max-width: 640px)').matches) {
+        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        return;
+      }
+      // View ngay tại dòng đầu tiên của mùa: đưa đầu khối kết quả về ngay dưới cụm sticky
+      const sf = document.getElementById('season-filter');
+      const tb = document.getElementById('toolbar');
+      const count = document.getElementById('count');
+      const tableWrap = document.getElementById('tableWrap');
+      const target = (count && count.style.display !== 'none') ? count : tableWrap;
+      if (!target) return;
+      const stack = 70 + (sf?.offsetHeight || 0) + (tb?.offsetHeight || 0);
+      const y = target.getBoundingClientRect().top + window.scrollY - stack - 6;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+    });
+    els.author.addEventListener('change', () => {
+      if (els.author.value !== 'all' && els.augustin?.checked) {
+        els.augustin.checked = false;
+        floatAugustin.checked = false;
+      }
+      setFloatLabel();
+      apply();
+      const url = new URL(location.href);
+      if (els.author.value !== 'all') url.searchParams.set('author', els.author.value);
+      else url.searchParams.delete('author');
+      history.replaceState({}, '', url.toString());
+    });
+    els.search.addEventListener('input', () => {
+      apply();
+      setFloatLabel();
+    });
+    if (els.unfilled) els.unfilled.addEventListener('change', apply);
+    function syncAugustinParam() {
+      const url = new URL(location.href);
+      if (els.augustin?.checked) url.searchParams.set('augustin', '1');
+      else url.searchParams.delete('augustin');
+      history.replaceState({}, '', url.toString());
+    }
+    if (els.augustin) els.augustin.addEventListener('change', () => {
+      floatAugustin.checked = els.augustin.checked;
+      if (els.augustin.checked) {
+        els.author.value = 'all';
+        floatAuthorSel.value = 'all';
+      }
+      apply();
+      setFloatLabel();
+      syncAugustinParam();
+    });
+    function openReading(tr, newTab = false) {
+      if (!tr?.dataset.url) return;
+      if (newTab) {
+        window.open(tr.dataset.url, '_blank', 'noopener');
+        return;
+      }
+      sessionStorage.setItem('ks-last', tr.dataset.url);
+      sessionStorage.setItem('ks-scroll', String(window.scrollY));
+      window.location.href = tr.dataset.url;
+    }
+    els.body.addEventListener('click', (e) => {
+      const editBtn = e.target.closest('.row-edit-btn');
+      if (editBtn) {
+        e.stopPropagation();
+        const id = editBtn.dataset.id;
+        window.open(withBase(`/admin/?id=${encodeURIComponent(id)}&manual=1`), '_blank');
+        return;
+      }
+      const tr = e.target.closest('tr');
+      if (tr && tr.dataset.url) {
+        openReading(tr, e.ctrlKey || e.metaKey || e.shiftKey);
+      }
+    });
+    els.body.addEventListener('auxclick', (e) => {
+      if (e.button !== 1 || e.target.closest('.row-edit-btn')) return;
+      const tr = e.target.closest('tr[data-url]');
+      if (!tr) return;
+      e.preventDefault();
+      openReading(tr, true);
+    });
+    els.body.addEventListener('keydown', (e) => {
+      if (e.target.closest('.row-edit-btn') || !['Enter', ' '].includes(e.key)) return;
+      const tr = e.target.closest('tr[data-url]');
+      if (!tr) return;
+      e.preventDefault();
+      openReading(tr, e.ctrlKey || e.metaKey || e.shiftKey);
+    });
+
+    // Nút edit chỉ hiện khi admin-server (localhost:4322) đang chạy
+    fetch('http://localhost:4322/api/entries', { signal: AbortSignal.timeout(2000) })
+      .then((r) => {
+        if (r.ok) {
+          isAdmin = true;
+          document.body.dataset.ksAdmin = '1';
+          if (current) apply();
+        }
+      })
+      .catch(() => {});
+
+    // ---- Float filter events ----
+    floatBtn.addEventListener('click', () => openPanel(!floatPanel.classList.contains('open')));
+    document.addEventListener('click', (e) => {
+      if (!floatWidget.contains(e.target)) openPanel(false);
+    }, { capture: true });
+    floatSeasonSel.addEventListener('change', () => {
+      const key = floatSeasonSel.value;
+      if (key !== current) selectSeason(key); // selectSeason resets weekFilter
+      populateFloatWeeks();
+      populateFloatAuthors();
+    });
+    floatWeekSel.addEventListener('change', () => {
+      weekFilter = floatWeekSel.value;
+      els.author.value = 'all';
+      populateFloatAuthors();
+      apply();
+      setFloatLabel();
+    });
+    floatAuthorSel.addEventListener('change', () => {
+      els.author.value = floatAuthorSel.value;
+      els.author.dispatchEvent(new Event('change'));
+    });
+    floatAugustin.addEventListener('change', () => {
+      els.augustin.checked = floatAugustin.checked;
+      if (floatAugustin.checked) {
+        els.author.value = 'all';
+        floatAuthorSel.value = 'all';
+      }
+      apply();
+      setFloatLabel();
+      syncAugustinParam();
+    });
+    function highlightRow(url) {
+      if (url) {
+        for (const r of els.body.querySelectorAll('tr[data-url]')) {
+          if (r.dataset.url === url) {
+            sessionStorage.removeItem('ks-last');
+            r.classList.add('row-highlight');
+            r.addEventListener('animationend', () => r.classList.remove('row-highlight'), { once: true });
+            break;
+          }
+        }
+      }
+      // Khôi phục đúng vị trí đã rời đi (khi quay lại từ trang bài đọc); nếu không có → về đầu bảng
+      const savedY = sessionStorage.getItem('ks-scroll');
+      if (savedY !== null) {
+        sessionStorage.removeItem('ks-scroll');
+        window.scrollTo({ top: parseInt(savedY, 10) || 0, behavior: 'instant' });
+      } else {
+        scrollToTable();
+      }
+    }
+    function fromUrl(scroll = true) {
+      const p   = new URLSearchParams(location.search);
+      const cat = p.get('category') || '__all__'; // mặc định: hiện tất cả
+      if (cat === '__all__' || INDEX[cat]) {
+        selectSeason(cat, false);
+        const a = p.get('author');
+        const augustinOnly = p.get('augustin') === '1';
+        els.augustin.checked = augustinOnly;
+        floatAugustin.checked = augustinOnly;
+        if (augustinOnly) {
+          els.author.value = 'all';
+          floatAuthorSel.value = 'all';
+        } else if (a) {
+          els.author.value = a;
+        }
+        apply();
+        setFloatLabel();
+        if (scroll) {
+          // Đợi async today-card xong để layout ổn định rồi mới scroll
+          _todayReady.finally(() => highlightRow(sessionStorage.getItem('ks-last')));
+        }
+      }
+    }
+    // Ẩn backBtn của BaseLayout, dùng float filter thay thế
+    document.getElementById('backBtn')?.remove();
+    window.addEventListener('scroll', () => {
+      floatWidget.classList.toggle('show', window.scrollY > 300 && current !== null);
+    });
+    window.addEventListener('popstate', () => fromUrl(true));
+    // Khôi phục từ bfcache (back-link dùng history.back) → đồng bộ lại bộ lọc theo URL
+    window.addEventListener('pageshow', (e) => { if (e.persisted) fromUrl(true); });
+    // Load lần đầu:
+    //  - Có deep-link ?category → cuộn xuống bảng (đúng như link chia sẻ / quay lại từ bài đọc)
+    //  - Vào trang bình thường → hiển thị ngay masthead lib (bỏ qua banner)
+    const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+    if (isReload) {
+      history.replaceState({}, '', location.pathname + location.hash);
+      sessionStorage.removeItem('ks-scroll');
+      fromUrl(false);
+    } else if (new URLSearchParams(location.search).has('category')) {
+      fromUrl(true);
+    } else {
+      sessionStorage.removeItem('ks-scroll');
+      fromUrl(false);
+      const mh = document.querySelector('.lib-masthead');
+      if (mh) window.scrollTo({ top: Math.max(0, mh.getBoundingClientRect().top + window.scrollY - 70), behavior: 'instant' });
+    }
+  </script>
+</BaseLayout>
+
+<style is:global>
+/* ---- Panel Bài Đọc Hôm Nay (thiết kế mới đồng bộ lịch phụng vụ) ---- */
+.today-inner { padding: 0; } /* override listings.css */
+.td-stripe { height: 4px; width: 100%; transition: background .4s; }
+.td-body {
+  padding: 1.4rem 1.8rem 1.2rem;
+  display: flex; flex-direction: column; min-height: 8rem;
+}
+.td-header-label {
+  font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12rem; color: #c5a059; margin-bottom: .3rem;
+}
+.td-date {
+  font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.55rem;
+  color: #d4ad4a; font-weight: 700; line-height: 1.25; margin-bottom: .8rem;
+}
+.td-cycle { font-size: 1.25rem; font-weight: 400; color: #c9bfa9; }
+.td-chip-row { display: flex; align-items: center; gap: .55rem; margin-bottom: .5rem; }
+.td-rank-label { font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.3rem; color: #c9bfa9; font-weight: 600; }
+.td-chip {
+  display: inline-block; font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1rem; font-weight: 500; line-height: 1.5;
+  padding: 0 .4rem; border-radius: 3px; flex-shrink: 0; letter-spacing: .01rem;
+}
+.td-chip-solemn        { background: #8b2020; color: #efe7d6; }
+.td-chip-feast         { background: #e9c176; color: #0d1f2b; }
+.td-chip-memorial      { background: #ccc8c0; color: #0d1f2b; }
+.td-chip-opt-memorial  { background: #a8a4a0; color: #0d1f2b; }
+.td-liturgy {
+  font-family: 'Merriweather', Georgia, serif; font-size: 1.5rem;
+  color: #efe7d6; line-height: 1.55; margin-bottom: .7rem;
+}
+.td-feast-row { display: flex; align-items: center; gap: .5rem; margin-bottom: .55rem; }
+.td-feast-name { font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.35rem; color: #c9bfa9; line-height: 1.4; }
+.td-read-bar {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: .5rem; margin-top: auto; padding-top: .9rem;
+}
+.td-select {
+  flex: 1; background: rgba(255,255,255,.05);
+  border: 1px solid rgba(233,193,118,.22); border-radius: 8px;
+  color: #c9bfa9; font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.25rem;
+  padding: .45rem 2.4rem .45rem .75rem; cursor: pointer; outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23c5a059' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .75rem center; min-width: 0;
+}
+.td-select:focus { border-color: rgba(233,193,118,.5); background-color: rgba(255,255,255,.05); }
+.td-select option { background: #1a2a4a; color: #efe7d6; }
+/* Firefox: gradient trick để ghi đè màu highlight mặc định của option:checked */
+.td-select option:checked { background: #1a2a4a linear-gradient(0deg,#1a2a4a 0%,#1a2a4a 100%); color: #e9c176; }
+.td-read-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 3rem; height: 3rem; border-radius: 50%;
+  border: 1px solid rgba(233,193,118,.3); background: transparent;
+  color: #e9c176; text-decoration: none; flex-shrink: 0;
+  transition: background .2s, border-color .2s;
+}
+.td-read-btn:hover { background: rgba(233,193,118,.12); border-color: #e9c176; }
+
+/* ---- Floating filter widget ---- */
+#floatFilterWidget {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 7.6rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+#floatFilterWidget.show { opacity: 1; pointer-events: auto; }
+
+/* Trigger pill button */
+#floatFilterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  width: 3.8rem;
+  height: 3.8rem;
+  padding: 0;
+  background: rgba(16, 27, 51, 0.94);
+  border: 1px solid rgba(233, 196, 106, 0.35);
+  border-radius: 50%;
+  color: #e9c176;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 .4rem 1rem rgba(0,0,0,.35);
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+#floatFilterLabel { display: none; }
+#floatFilterBtn .filter-state-icon { display: block; flex: 0 0 auto; }
+#floatFilterBtn .filter-icon-filled { opacity: 0; }
+#floatFilterBtn.filtered .filter-icon-empty { opacity: 0; }
+#floatFilterBtn.filtered .filter-icon-filled { opacity: 1; }
+#floatFilterBtn:hover,
+#floatFilterBtn[aria-expanded="true"] {
+  border-color: rgba(233, 196, 106, 0.65);
+  box-shadow: 0 .6rem 1.4rem rgba(0,0,0,.45);
+  background: rgba(22, 34, 61, 0.97);
+}
+/* Panel — appears above button via JS class */
+#floatFilterPanel {
+  position: absolute;
+  bottom: calc(100% + .55rem);
+  right: 0;
+  width: 18rem;
+  background: rgba(13, 20, 40, 0.97);
+  border: 1px solid rgba(233, 196, 106, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 .6rem 2rem rgba(0,0,0,.6);
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+  pointer-events: none;
+}
+#floatFilterPanel.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+  pointer-events: auto;
+}
+
+/* Label trên mỗi select */
+.ffp-label {
+  margin: .6rem .8rem .2rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: .06rem;
+  text-transform: uppercase;
+  color: rgba(233, 193, 118, 0.5);
+}
+.ffp-label:first-child { margin-top: .7rem; }
+
+/* Tuần row — ẩn khi mùa không có cấu trúc tuần */
+#ffpWeekRow.ffp-week-hidden { display: none; }
+
+/* Select boxes trong panel */
+#floatSearchInput, #floatSeasonSel, #floatWeekSel, #floatAuthorSel {
+  display: block;
+  width: calc(100% - 1.6rem);
+  margin: 0 .8rem .7rem;
+  padding: .35rem .5rem;
+  background: rgba(22, 34, 61, 0.95);
+  border: 1px solid rgba(233, 196, 106, 0.22);
+  border-radius: 6px;
+  color: #efe7d6;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+}
+#floatSearchInput { cursor: text; }
+#floatSearchInput:focus, #floatSeasonSel:focus, #floatWeekSel:focus, #floatAuthorSel:focus {
+  border-color: rgba(233, 196, 106, 0.5);
+}
+#floatSeasonSel option, #floatWeekSel option, #floatAuthorSel option {
+  background: #0d1628;
+  color: #efe7d6;
+}
+.ffp-augustin-toggle {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  min-height: 3.4rem;
+  margin: .1rem .8rem .8rem;
+  padding: .55rem .65rem;
+  border: 1px solid rgba(233,196,106,.2);
+  border-radius: .55rem;
+  color: #d6b96e;
+  font: 600 1.05rem/1.25 'Be Vietnam Pro', sans-serif;
+  cursor: pointer;
+}
+.ffp-augustin-toggle input { accent-color: #d6b96e; }
+.augustin-only-toggle:has(input:checked) {
+  border-color: rgba(233,193,118,.55);
+  background: rgba(233,193,118,.1);
+  color: var(--gold);
+}
+body.page-kinh-sach .listing-toolbar .augustin-only-toggle {
+  gap: .65rem;
+  padding: .65rem 1rem .65rem .8rem;
+  border-radius: 999px;
+  color: #d6b96e;
+  font-weight: 600;
+  cursor: pointer;
+}
+body.page-kinh-sach .listing-toolbar .augustin-only-toggle input {
+  appearance: none;
+  width: 1.45rem;
+  height: 1.45rem;
+  margin: 0;
+  border: 1px solid rgba(233,193,118,.58);
+  border-radius: 50%;
+  background: transparent;
+  transition: background .16s ease, box-shadow .16s ease;
+}
+body.page-kinh-sach .listing-toolbar .augustin-only-toggle input:checked {
+  background: #d6b96e;
+  box-shadow: inset 0 0 0 3px var(--bg-main);
+}
+body.page-kinh-sach .unfilled-toggle { display: none; }
+body.page-kinh-sach[data-ks-admin] .unfilled-toggle { display: inline-flex; }
+html[data-theme="light"] .ffp-augustin-toggle {
+  border-color: rgba(26,94,60,.2);
+  color: #1a5e3c;
+}
+html[data-theme="light"] .augustin-only-toggle:has(input:checked) {
+  border-color: rgba(26,94,60,.45);
+  background: rgba(26,94,60,.08);
+  color: #1a5e3c;
+}
+html[data-theme="light"] body.page-kinh-sach .listing-toolbar .augustin-only-toggle { color: #1a5e3c; }
+html[data-theme="light"] body.page-kinh-sach .listing-toolbar .augustin-only-toggle input {
+  border-color: rgba(26,94,60,.55);
+}
+html[data-theme="light"] body.page-kinh-sach .listing-toolbar .augustin-only-toggle input:checked {
+  background: #1a5e3c;
+  box-shadow: inset 0 0 0 3px #fffdf8;
+}
+
+
+/* Mobile: thẻ entry Kinh Sách gọn hơn, không kế thừa min-width của bảng desktop. */
+/* ---- Tab mùa dùng component tab gạch chân chung với Thánh Augustinô. ---- */
+body.page-kinh-sach .season-filter {
+  --shared-tab-max-width: 100%;
+  --shared-tab-margin: 0;
+  --shared-tab-padding: 0;
+  --shared-tab-margin-mobile: 0;
+  --shared-tab-padding-mobile: 0;
+  justify-content: center;
+  max-width: 128rem;
+  margin: 0 auto 1.25rem;
+  padding: .3rem 2rem .15rem;
+}
+body.page-kinh-sach .listing-toolbar.shared-filter-bar {
+  --shared-filter-justify: center;
+  justify-content: center;
+  margin: 0 auto 1.05rem;
+}
+body.page-kinh-sach .season-filter ~ .listing-toolbar.shared-filter-bar {
+  padding: .9rem 0 .85rem;
+  margin-bottom: 1.05rem;
+}
+body.page-kinh-sach .listing-count { margin: .35rem auto .85rem; }
+body.page-kinh-sach .shared-index-table thead th,
+body.page-kinh-sach .shared-index-table tbody td { text-align: left; }
+/* Bảng Kinh sách: ba cột có phân vai rõ, nhưng cùng tỷ lệ index chung. */
+body.page-kinh-sach .shared-index-table {
+  font-size: 1.42rem;
+  line-height: 1.55;
+}
+body.page-kinh-sach .shared-index-table thead th {
+  padding: 1.08rem 1.35rem;
+  font-size: 1.25rem;
+}
+body.page-kinh-sach .shared-index-table tbody td { padding: 1.15rem 1.35rem; }
+body.page-kinh-sach .shared-index-table tbody tr[data-url] { cursor: pointer; }
+body.page-kinh-sach .shared-index-table tbody tr[data-url]:focus-visible {
+  outline: 2px solid var(--gold-dim);
+  outline-offset: -2px;
+}
+body.page-kinh-sach .shared-index-table th:nth-child(1),
+body.page-kinh-sach .shared-index-table td:nth-child(1) { width: 22%; }
+body.page-kinh-sach .shared-index-table th:nth-child(2),
+body.page-kinh-sach .shared-index-table td:nth-child(2) { width: 46%; }
+body.page-kinh-sach .shared-index-table th:nth-child(3),
+body.page-kinh-sach .shared-index-table td:nth-child(3) { width: 32%; }
+body.page-kinh-sach .shared-index-table tbody td:first-child,
+body.page-kinh-sach .shared-index-table .ks-author-txt {
+  color: rgb(214, 185, 110);
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: .012em;
+}
+body.page-kinh-sach .shared-index-table tbody td:nth-child(2),
+body.page-kinh-sach .shared-index-table .ks-excerpt-txt {
+  color: var(--ink-cream-soft);
+  font: italic 500 1.46rem/1.62 var(--font-body);
+  letter-spacing: .01em;
+}
+body.page-kinh-sach .shared-index-table tbody td:nth-child(3),
+body.page-kinh-sach .shared-index-table .ks-liturgy-txt {
+  color: rgba(201,191,169,.82);
+  font: 500 1.4rem/1.5 var(--font-ui);
+}
+html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody td:first-child,
+html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table .ks-author-txt {
+  color: rgb(214, 185, 110);
+  font-weight: 500;
+  letter-spacing: .012em;
+}
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody td:first-child,
+html[data-theme="light"] body.page-kinh-sach .shared-index-table .ks-author-txt {
+  color: #1a5e3c;
+  font-weight: 500;
+  letter-spacing: .012em;
+}
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody td:nth-child(2),
+html[data-theme="light"] body.page-kinh-sach .shared-index-table .ks-excerpt-txt { color: #263e32; }
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody td:nth-child(3),
+html[data-theme="light"] body.page-kinh-sach .shared-index-table .ks-liturgy-txt { color: #263e32; }
+
+/* Hàng do Thánh Augustinô viết: nhận diện ấm, nhưng không trở thành một khối nặng. */
+html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody tr.row-augustin {
+  background: linear-gradient(90deg, rgba(233,193,118,.27), rgba(233,193,118,.11) 58%, rgba(233,193,118,.025) 86%);
+  box-shadow: inset 0 1px 0 rgba(239,209,143,.35), inset 0 -1px 0 rgba(239,209,143,.2);
+}
+html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody tr.row-augustin td:first-child,
+html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody tr.row-augustin .ks-author-txt {
+  color: #bfa46c;
+  font-weight: 500;
+}
+html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody tr.row-augustin:hover {
+  background: linear-gradient(90deg, rgba(233,193,118,.34), rgba(233,193,118,.16) 58%, rgba(233,193,118,.04) 86%);
+  box-shadow: inset 0 1px 0 rgba(255,224,160,.48), inset 0 -1px 0 rgba(255,224,160,.28);
+}
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-augustin {
+  background: linear-gradient(90deg, rgba(204,155,59,.25), rgba(204,155,59,.1) 58%, rgba(204,155,59,.025) 86%);
+  box-shadow: inset 0 1px 0 rgba(138,93,31,.34), inset 0 -1px 0 rgba(138,93,31,.18);
+}
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-augustin td:first-child,
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-augustin .ks-author-txt {
+  color: #6b542a;
+  font-weight: 500;
+}
+html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-augustin:hover {
+  background: linear-gradient(90deg, rgba(204,155,59,.32), rgba(204,155,59,.15) 58%, rgba(204,155,59,.04) 86%);
+  box-shadow: inset 0 1px 0 rgba(92,59,16,.42), inset 0 -1px 0 rgba(92,59,16,.24);
+}
+@media (min-width: 641px) {
+  body.page-kinh-sach #tableWrap { margin-top: .85rem; }
+}
+
+@media (max-width: 640px) {
+  /* Mobile chỉ dùng một toggle filter; tránh hai cụm lọc cùng lúc. */
+  body.page-kinh-sach .season-filter,
+  body.page-kinh-sach .listing-toolbar.shared-filter-bar { display: none !important; }
+  #floatFilterWidget {
+    right: 1.2rem;
+    bottom: 7rem;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #floatFilterBtn {
+    min-height: 44px;
+    padding: .65rem 1.2rem;
+    border-radius: 999px;
+    font-size: 1.3rem;
+  }
+  #floatFilterPanel {
+    width: min(28rem, calc(100vw - 4rem));
+    max-height: min(62vh, 36rem);
+    overflow-y: auto;
+    border-radius: .8rem;
+  }
+  #floatSearchInput, #floatSeasonSel, #floatWeekSel, #floatAuthorSel {
+    min-height: 42px;
+    margin-bottom: .75rem;
+    padding: .55rem .7rem;
+    font-size: 1.25rem;
+  }
+  /* Dùng thêm phần lề của listing cho bảng, để nội dung không bị bó hẹp. */
+  body.page-kinh-sach #tableWrap {
+    width: calc(100vw - 2.4rem) !important;
+    max-width: none !important;
+    margin-right: 0;
+    margin-left: calc((100% - (100vw - 2.4rem)) / 2);
+    box-sizing: border-box;
+  }
+  body.page-kinh-sach .listing-count { margin: .2rem auto .7rem; }
+  body.page-kinh-sach #tableWrap { border-radius: .6rem; }
+  body.page-kinh-sach .shared-index-table tbody { gap: .42rem; }
+  body.page-kinh-sach .shared-index-table tbody tr { padding: .04rem 0; }
+  body.page-kinh-sach .shared-index-table tbody td {
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+    gap: .35rem;
+    padding: .46rem .62rem;
+  }
+  /* Huỷ tỷ lệ ba cột desktop: mỗi trường phải dùng toàn bộ chiều ngang của card. */
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(1),
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(2),
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(3) {
+    width: 100%;
+    min-width: 0;
+  }
+  body.page-kinh-sach .shared-index-table tbody td::before { font-size: .72rem; line-height: 1.25; }
+  /* Hai trường dài dùng toàn bộ chiều ngang: nhãn ở trên giúp thẻ thấp hơn rõ rệt. */
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(2),
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(3) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .2rem;
+  }
+  body.page-kinh-sach .shared-index-table tbody td:first-child { font-size: 1.16rem; line-height: 1.36; }
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(3) { font-size: 1.16rem; line-height: 1.4; }
+  body.page-kinh-sach .shared-index-table tbody td:nth-child(2) { font-size: 1.19rem; line-height: 1.46; }
+  html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody tr.row-augustin {
+    background: linear-gradient(90deg, rgba(233,193,118,.25), rgba(233,193,118,.055) 78%, transparent);
+    border-left-width: 1px;
+    border-color: rgba(239,209,143,.38);
+    box-shadow: inset 0 1px 0 rgba(239,209,143,.28), inset 0 -1px 0 rgba(239,209,143,.18);
+  }
+  html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-augustin {
+    background: linear-gradient(90deg, rgba(204,155,59,.23), rgba(204,155,59,.045) 78%, transparent);
+    border-left-width: 1px;
+    border-color: rgba(138,93,31,.34);
+    box-shadow: inset 0 1px 0 rgba(138,93,31,.25), inset 0 -1px 0 rgba(138,93,31,.15);
+  }
+}
+
+/* Mobile reset: one filter control and full-width reading cards. */
+@media (max-width: 640px) {
+  body.page-kinh-sach .listing { padding-bottom: 4rem; }
+  body.page-kinh-sach .lib-masthead {
+    width: calc(100% - 1rem);
+    padding: 1.9rem 0 2.5rem;
+  }
+  body.page-kinh-sach .lib-masthead-sub {
+    margin-bottom: .85rem;
+    font-size: 1.15rem;
+  }
+  body.page-kinh-sach .lib-masthead-title {
+    margin-bottom: 1rem;
+    font-size: 3.45rem;
+    line-height: 1.1;
+  }
+  body.page-kinh-sach .lib-masthead-desc {
+    margin-bottom: 2.2rem;
+    font-size: 1.42rem;
+    line-height: 1.5;
+    overflow-wrap: normal;
+  }
+  body.page-kinh-sach .season-filter {
+    display: flex !important;
+    position: sticky;
+    top: 6.58rem;
+    z-index: 90;
+    width: calc(100vw - 2.4rem);
+    margin: 0 0 .85rem calc((100% - (100vw - 2.4rem)) / 2);
+    padding: 0;
+    background: var(--bg-main);
+  }
+  body.page-kinh-sach .ks-season-bar.shared-tab-bar { width: 100%; }
+  body.page-kinh-sach .listing-toolbar.shared-filter-bar { display: none !important; }
+
+  body.page-kinh-sach #todayCard {
+    position: relative;
+    left: 50%;
+    width: min(35.5rem, calc(100vw - 4rem));
+    margin: 0 0 1.1rem;
+    transform: translateX(-50%);
+  }
+  body.page-kinh-sach #todayCard .td-body {
+    position: relative;
+    min-height: 0;
+    padding: 1rem 1.2rem .95rem;
+  }
+  body.page-kinh-sach #todayCard .td-body:has(.td-read-bar-single) { padding-right: 4.9rem; }
+  body.page-kinh-sach #todayCard .td-date { font-size: 1.38rem; margin-bottom: .55rem; }
+  body.page-kinh-sach #todayCard .td-liturgy { font-size: 1.28rem; line-height: 1.48; margin-bottom: .55rem; }
+  body.page-kinh-sach #todayCard .td-read-bar:empty { display: none; }
+  body.page-kinh-sach #todayCard .td-read-bar-single {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+  body.page-kinh-sach #todayCard .td-read-bar-multi { margin-top: .45rem; padding-top: 0; }
+
+  body.page-kinh-sach #floatFilterWidget {
+    position: fixed;
+    top: auto;
+    right: 1.35rem;
+    bottom: calc(max(1.35rem, env(safe-area-inset-bottom)) + 4.4rem + .7rem);
+    left: auto;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none;
+  }
+  #floatFilterBtn {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+    border-radius: 999px;
+    font-size: 1.16rem;
+  }
+  #floatFilterPanel {
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: calc(100% + .65rem);
+    display: block;
+    width: min(26rem, calc(100vw - 4rem));
+    max-height: min(62vh, 34rem);
+    margin: 0;
+    padding: .35rem .2rem .1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    background: #111d34;
+    border-color: rgba(233,196,106,.3);
+    border-radius: .8rem;
+    box-shadow: 0 .8rem 2rem rgba(0,0,0,.42);
+  }
+  #floatFilterPanel.open {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  #floatSearchInput,
+  #floatSeasonSel,
+  #floatWeekSel,
+  #floatAuthorSel {
+    min-height: 38px;
+    margin-bottom: .65rem;
+    padding: .48rem .65rem;
+    font-size: 1.18rem;
+  }
+  #floatSearchInput { display: none; }
+  #floatFilterPanel .ffp-label { margin-top: .5rem; font-size: .86rem; }
+  #floatFilterPanel #floatSeasonSel,
+  #floatFilterPanel #floatWeekSel,
+  #floatFilterPanel #floatAuthorSel {
+    width: calc(100% - 1.4rem);
+    margin-right: .7rem;
+    margin-left: .7rem;
+    background-color: #162640;
+    border-color: rgba(233,196,106,.26);
+  }
+  #floatFilterPanel .ffp-augustin-toggle {
+    min-height: 36px;
+    margin: .1rem .7rem .7rem;
+    background: #162640;
+    font-size: 1.08rem;
+  }
+  html[data-theme="light"] #floatFilterPanel { background: #fffaf1; }
+  html[data-theme="light"] #floatFilterPanel #floatSeasonSel,
+  html[data-theme="light"] #floatFilterPanel #floatWeekSel,
+  html[data-theme="light"] #floatFilterPanel #floatAuthorSel,
+  html[data-theme="light"] #floatFilterPanel .ffp-augustin-toggle { background-color: #fffdf8; }
+
+  body.page-kinh-sach #tableWrap {
+    width: min(38rem, calc(100vw - 4rem)) !important;
+    max-width: none !important;
+    position: relative;
+    left: 50%;
+    margin: .15rem 0 0;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  body.page-kinh-sach .listing-count { margin: .15rem auto .7rem; }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody { gap: .85rem; }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody tr {
+    display: block;
+    padding: .05rem 0;
+    border: 1px solid rgba(233,193,118,.16);
+    border-radius: .65rem;
+    background: rgba(255,255,255,.018);
+    box-shadow: none;
+    overflow: hidden;
+    position: relative;
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody tr[data-url]::after {
+    content: 'MỞ ›';
+    position: absolute;
+    top: .62rem;
+    right: .72rem;
+    padding: .2rem .42rem;
+    border: 1px solid rgba(233,193,118,.24);
+    border-radius: 999px;
+    color: rgba(233,193,118,.72);
+    font: 700 .72rem/1 'Be Vietnam Pro', sans-serif;
+    letter-spacing: .06em;
+    pointer-events: none;
+  }
+  html[data-theme="light"] body.page-kinh-sach .shared-index-table.shared-index-table tbody tr[data-url]::after {
+    border-color: rgba(26,94,60,.22);
+    color: rgba(26,94,60,.72);
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td,
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:nth-child(1),
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:nth-child(2),
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:nth-child(3) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .22rem;
+    width: 100%;
+    min-width: 0;
+    gap: .14rem;
+    padding: 0;
+    text-align: left;
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td::before {
+    font-size: .82rem;
+    line-height: 1.15;
+    letter-spacing: .08em;
+  }
+  body.page-kinh-sach .shared-index-table .ks-author-txt,
+  body.page-kinh-sach .shared-index-table .ks-excerpt-txt,
+  body.page-kinh-sach .shared-index-table .ks-liturgy-txt {
+    display: block;
+    width: 100%;
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:first-child {
+    grid-template-columns: 4.6rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: .55rem;
+    padding: .7rem 4.8rem .46rem 1rem;
+    font-size: 1.32rem;
+    line-height: 1.34;
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:first-child .ks-author-txt {
+    width: auto;
+    min-width: 0;
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:nth-child(2) {
+    padding: .46rem 1rem .56rem;
+    font-size: 1.42rem;
+    line-height: 1.48;
+  }
+  body.page-kinh-sach .shared-index-table.shared-index-table tbody td:nth-child(3) {
+    padding: .5rem 1rem .75rem;
+    background: rgba(255,255,255,.018);
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+  html[data-theme="light"] body.page-kinh-sach .shared-index-table.shared-index-table tbody td:nth-child(3) {
+    background: rgba(26,94,60,.025);
+  }
+  html:not([data-theme="light"]) body.page-kinh-sach .shared-index-table tbody tr.row-augustin {
+    background: linear-gradient(90deg, rgba(233,193,118,.22), rgba(233,193,118,.045) 78%, transparent);
+    border-color: rgba(239,209,143,.42);
+    box-shadow: none;
+  }
+  html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr {
+    border-color: rgba(26,94,60,.17);
+    background: rgba(255,253,248,.72);
+  }
+  html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-augustin {
+    background: linear-gradient(90deg, rgba(204,155,59,.2), rgba(204,155,59,.04) 78%, transparent);
+    border-color: rgba(138,93,31,.4);
+    box-shadow: none;
+  }
+}
+</style>

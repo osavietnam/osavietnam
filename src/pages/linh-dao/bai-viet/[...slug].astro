@@ -1,0 +1,229 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleHero from '../../../components/ArticleHero.astro';
+import ArticleProseMeta from '../../../components/ArticleProseMeta.astro';
+import { articleCategoryTone } from '../../../utils/article-category';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const visibleCategories = new Set([
+    'Chung',
+    'Chú Giải Thánh Vịnh',
+    'Bài Giảng',
+  ]);
+  const allEntries = await getCollection('bai-viet');
+  const articles = allEntries.filter(({ id, data }) =>
+    id.startsWith('linh-dao/')
+    && !data.draft
+    && visibleCategories.has(data.category ?? ''),
+  );
+
+  return articles.map((entry) => ({
+    params: { slug: entry.id.replace(/^linh-dao\//, '') },
+    props: {
+      entry,
+      englishEntry: allEntries.find((article) => article.id === `${entry.id}-en`),
+      related: articles
+        .filter((article) => article.id !== entry.id)
+        .sort((a, b) => Number(b.data.category === entry.data.category) - Number(a.data.category === entry.data.category))
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { entry, englishEntry, related } = Astro.props;
+const { Content } = await render(entry);
+const EnglishContent = englishEntry ? (await render(englishEntry)).Content : null;
+const d = entry.data;
+const cover = entry.id === 'linh-dao/hiep-nhat-trong-duc-ai'
+  ? (d.heroImage ?? d.image)
+  : d.image;
+const socialImage = cover
+  ? (await getImage({ src: cover, width: 1200, height: 630, fit: 'cover' })).src
+  : undefined;
+const articleHref = (id: string) => `/linh-dao/bai-viet/${id.replace(/^linh-dao\//, '')}/`;
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.excerpt}
+  image={socialImage}
+  type="article"
+  bodyClass="no-sidebar page-spirit-article"
+>
+  <main class="spirit-reader">
+    <ArticleHero
+      title={d.title}
+      category={d.category ?? 'Linh Đạo'}
+      subtitle={d.subtitle}
+      author={d.author}
+      image={cover}
+    />
+
+    <nav class="spirit-breadcrumb" aria-label="Đường dẫn">
+      <a href="/linh-dao/">Linh Đạo</a>
+      <span aria-hidden="true">/</span>
+      <span
+        class:list={['article-category-badge', { 'is-long': (d.category ?? '').length > 18 }]}
+        data-category-tone={articleCategoryTone(d.category)}
+      >
+        {d.category}
+      </span>
+    </nav>
+
+    {EnglishContent && (
+      <div class="spirit-article-language" data-spirit-language-switch aria-label="Chọn ngôn ngữ bài viết">
+        <button type="button" data-spirit-language="vi" aria-pressed="true">VN</button>
+        <button type="button" data-spirit-language="en" aria-pressed="false">EN</button>
+      </div>
+    )}
+
+    <div class="article-shell spirit-reader-shell" data-spirit-language-reader>
+      <article class="prose spirit-reader-prose" data-spirit-language-panel="vi" lang="vi">
+        <ArticleProseMeta author={d.author} />
+        {EnglishContent && (
+          <aside class="prose-source prose-source--lead" data-spirit-language-source="vi">
+            <span class="prose-source-tag">Nguồn:</span>
+            <p class="prose-source-text">
+              <a href="https://hocviendaminh.com/thu-muc/tong-quat-than-hoc/linh-dao-augustino" target="_blank" rel="noopener noreferrer">
+                Học viện Thần học Đa Minh — <em>Linh đạo Augustinô (Unitas in Caritas – Hiệp nhất trong Đức ái)</em>
+              </a>
+            </p>
+          </aside>
+        )}
+        <Content />
+      </article>
+      {EnglishContent && (
+        <article class="prose spirit-reader-prose" data-spirit-language-panel="en" lang="en" hidden>
+          <ArticleProseMeta author={englishEntry?.data.author ?? d.author} />
+          <aside class="prose-source prose-source--lead" data-spirit-language-source="en">
+            <span class="prose-source-tag">Source:</span>
+            <p class="prose-source-text">
+              <a href="https://www.synod.va/content/dam/synod/common/resources/spirituality/augustine/EN_Spiri_Farrell.pdf" target="_blank" rel="noopener noreferrer">
+                General Secretariat for the Synod of Bishops — <em>Augustinian Spirituality (Unitas in Caritas)</em>
+              </a>
+            </p>
+          </aside>
+          <EnglishContent />
+        </article>
+      )}
+    </div>
+
+    <nav class="spirit-breadcrumb spirit-breadcrumb-end" aria-label="Đường dẫn cuối bài">
+      <a href="/linh-dao/">Linh Đạo</a>
+      <span aria-hidden="true">/</span>
+      <span
+        class:list={['article-category-badge', { 'is-long': (d.category ?? '').length > 18 }]}
+        data-category-tone={articleCategoryTone(d.category)}
+      >
+        {d.category}
+      </span>
+    </nav>
+
+    {related.length > 0 && (
+      <section class="spirit-related" aria-labelledby="spirit-related-title">
+        <header class="idx-section-heading">
+          <h2 id="spirit-related-title">Đọc tiếp</h2>
+        </header>
+        <div>
+          {related.map((article) => (
+            <a href={articleHref(article.id)} aria-label={`Đọc ${article.data.title}`}>
+              {(article.data.image || article.data.heroImage) && (
+                <figure>
+                  <Image
+                    src={article.data.image ?? article.data.heroImage!}
+                    alt=""
+                    width={720}
+                    height={405}
+                    loading="lazy"
+                  />
+                </figure>
+              )}
+              <small
+                class:list={['article-category-badge', { 'is-long': (article.data.category ?? '').length > 18 }]}
+                data-category-tone={articleCategoryTone(article.data.category)}
+              >
+                {article.data.category}
+              </small>
+              <span>
+                {article.data.author ?? 'Ban Biên Tập'}
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m7 4 6 6-6 6"></path>
+                </svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>
+
+<style>
+  .spirit-reader { width:min(100% - 3rem,112rem); margin:0 auto; padding:0 0 7rem; }
+  .spirit-breadcrumb { display:flex; align-items:center; flex-wrap:wrap; gap:.8rem; margin:0 0 3rem; color:var(--ink-cream-soft); font:500 1.2rem/1.45 var(--font-ui); }
+  .spirit-breadcrumb a { color:inherit; text-decoration:none; }
+  .spirit-breadcrumb a:hover { color:var(--gold); }
+  .spirit-breadcrumb .article-category-badge { font-size:1.02rem; }
+  .spirit-breadcrumb-end { width:min(100%,106rem); margin:3rem auto 0; }
+  .spirit-reader-shell { margin:0 auto; padding-top:2rem; }
+  .spirit-article-language { display:flex; width:fit-content; margin:0 auto 1.5rem; padding:.25rem; border:1px solid rgba(201,191,169,.22); border-radius:999px; background:rgba(255,255,255,.035); }
+  .spirit-article-language button { min-width:4.2rem; min-height:2.7rem; padding:.45rem .8rem; border:0; border-radius:999px; color:var(--ink-cream-soft); background:transparent; font:600 1rem/1 var(--font-ui); cursor:pointer; }
+  .spirit-article-language button[aria-pressed='true'] { color:#16241d; background:var(--gold); }
+  [data-spirit-language-source][hidden],
+  [data-spirit-language-panel][hidden] { display:none !important; }
+  .spirit-related { width:min(100%,106rem); margin:6rem auto 0; }
+  .spirit-related > .idx-section-heading { margin-bottom:1.7rem; }
+  .spirit-related > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1.2rem,2vw,2rem); }
+  .spirit-related a { display:flex; min-width:0; flex-direction:column; color:inherit; text-decoration:none; }
+  .spirit-related figure { aspect-ratio:16/9; margin:0 0 1.2rem; overflow:hidden; background:var(--bg-card); }
+  .spirit-related figure :global(img) { display:block; width:100%; height:100%; object-fit:cover; transition:transform .28s ease,opacity .28s ease; }
+  .spirit-related a:hover figure :global(img) { opacity:.86; transform:scale(1.025); }
+  .spirit-related small { margin-bottom:.85rem; }
+  .spirit-related a > span { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:.9rem; color:var(--ink-cream-soft); font:500 1.05rem/1.35 var(--font-ui); }
+  .spirit-related svg { width:1.45rem; height:1.45rem; fill:none; stroke:var(--gold); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  :global(html[data-theme='light']) .spirit-breadcrumb { color:#5f6c64; }
+  :global(html[data-theme='light']) .spirit-article-language { border-color:rgba(45,112,87,.25); background:#edf4ef; }
+  :global(html[data-theme='light']) .spirit-article-language button { color:#416253; }
+  :global(html[data-theme='light']) .spirit-article-language button[aria-pressed='true'] { color:#fff; background:#2d7057; }
+  :global(html[data-theme='light']) .spirit-breadcrumb a:hover { color:var(--accent); }
+  :global(html[data-theme='light']) .spirit-related a > span { color:#68736c; }
+  @media (max-width:700px) {
+    .spirit-reader { width:min(100% - 1.5rem,112rem); }
+    .spirit-breadcrumb { gap:.6rem; margin-bottom:2.4rem; font-size:1.05rem; }
+    .spirit-breadcrumb .article-category-badge { padding:.3rem .55rem; font-size:.9rem; }
+    .spirit-related { margin-top:4rem; }
+    .spirit-related > .idx-section-heading { margin-bottom:1.35rem; }
+    .spirit-related > div { grid-template-columns:1fr; }
+    .spirit-related a + a { margin-top:.8rem; }
+  }
+</style>
+
+<script>
+  const initializeSpiritLanguageSwitch = () => {
+    document.querySelectorAll<HTMLElement>('[data-spirit-language-switch]').forEach((control) => {
+      if (control.dataset.ready === 'true') return;
+      control.dataset.ready = 'true';
+      const reader = control.parentElement?.querySelector<HTMLElement>('[data-spirit-language-reader]');
+      if (!(reader instanceof HTMLElement)) return;
+      const buttons = Array.from(control.querySelectorAll<HTMLButtonElement>('[data-spirit-language]'));
+      const panels = Array.from(reader.querySelectorAll<HTMLElement>('[data-spirit-language-panel]'));
+      const sources = Array.from(control.parentElement?.querySelectorAll<HTMLElement>('[data-spirit-language-source]') ?? []);
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const language = button.dataset.spiritLanguage;
+          buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          panels.forEach((panel) => { panel.hidden = panel.dataset.spiritLanguagePanel !== language; });
+          sources.forEach((source) => { source.hidden = source.dataset.spiritLanguageSource !== language; });
+        });
+      });
+    });
+  };
+
+  initializeSpiritLanguageSwitch();
+  document.addEventListener('astro:page-load', initializeSpiritLanguageSwitch);
+</script>
