@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 22 Thường Niên"
 order: 151
 ---
 
-*Trích sách chú giải của linh mục O-ri-giê-nê, về Tin Mừng theo thánh Gio-an.*
+**Trích sách chú giải của linh mục O-ri-giê-nê, về Tin Mừng theo thánh Gio-an.**
 
 Người Do-thái, theo tôi, tượng trưng cho những kẻ yêu mến xác thịt và những thực tại hữu hình. Họ tức giận khi thấy Đức Giê-su đuổi những kẻ vì hành động của mình đã biến nhà Cha của Người thành nơi buôn bán, và đòi hỏi Người làm một dấu lạ. Nhưng dấu lạ họ đòi sẽ cho thấy Con Thiên Chúa, Đấng họ không công nhận, có lý mà hành động như vậy. Nhưng Chúa Cứu Thế chỉ dùng một lời để vừa ám chỉ thân xác của Người, vừa ám chỉ đền thờ. Khi người Do-thái hỏi : Ông lấy dấu nào cho chúng tôi thấy là ông có quyền làm như thế ? Người trả lời : Các ông cứ phá huỷ đền thờ này đi ; nội ba ngày, tôi sẽ xây dựng lại.
 

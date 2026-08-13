@@ -16,7 +16,7 @@ Sinh năm 1502 tại Cơ-rê-mon, miền Lom-bác-đi-a, An-tôn theo học y kh
 
 </div>
 
-*Trích bài giảng của thánh An-tôn Ma-ri-a Da-ca-ri-a cho anh em trong dòng.*
+**Trích bài giảng của thánh An-tôn Ma-ri-a Da-ca-ri-a cho anh em trong dòng.**
 
  
 

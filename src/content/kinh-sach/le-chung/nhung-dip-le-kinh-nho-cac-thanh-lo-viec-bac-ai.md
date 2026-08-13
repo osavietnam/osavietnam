@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Các Thánh Lo Việc Bác Ái"
 order: 20
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư gửi tín hữu Rô-ma.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư gửi tín hữu Rô-ma.**
 
 Thiên Chúa đã trao nộp Con của Ngài. Còn bạn, bạn không trao tặng được miếng bánh nào cho Đấng đã bị trao nộp và bị giết thay cho bạn sao ?
 

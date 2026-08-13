@@ -16,7 +16,7 @@ Sinh năm 1491 tại Loay-ô-la miền Căng-to-bê-ri. Lúc còn thanh niên, I
 
 </div>
 
-*Trích tự thuật của thánh I-nha-xi-ô do linh mục Lu-y Gon-xan-ve ghi lại.*
+**Trích tự thuật của thánh I-nha-xi-ô do linh mục Lu-y Gon-xan-ve ghi lại.**
 
 Lúc bấy giờ, I-nha-xi-ô say mê đọc những sách vô bổ và dối trá ; các sách này thuật lại những việc phi thường của các danh nhân. Khi cảm thấy khoẻ, I-nha-xi-ô xin người ta đem lại cho mình vài quyển để đọc giết thời giờ. Nhưng ở trong nhà ấy, người ta không tìm được quyển nào như vậy. Vì thế người ta đưa cho anh quyển sách nhan đề “Cuộc đời Đức Ki-tô”, và một cuốn khác nhan đề “Bông hoa các thánh”, cả hai đều được viết bằng tiếng mẹ đẻ.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 8 Thường Niên"
 order: 55
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Kẻ bị bạn hữu chê cười như chính tôi đây, kẻ ấy khẩn cầu Thiên Chúa, và Người sẽ đáp lời. Khi một người có tâm hồn mến yêu được khen ngợi vì những việc lành mình đã làm thì thường bị lôi cuốn vì những niềm vui bên ngoài, nên người ấy coi nhẹ những điều mình mong ước bên trong, và dễ dàng phó mặc cho những điều mình nghe thấy bên ngoài. Do đó, người ấy lấy làm vui sướng vì được người đời khen là có phúc, hơn là vì chính mình vươn tới hạnh phúc. Vì ham hố tiếng khen, nên họ đã bỏ luôn việc đã bắt đầu. Vậy, chính vì có vẻ đáng khen trước mtặt Thiên Chúa, mà người ấy lại xa cách Thiên Chúa.
 

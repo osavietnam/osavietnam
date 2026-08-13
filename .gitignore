@@ -1,20 +1,9 @@
-# Dependencies and build output
 node_modules/
-dist/
 .astro/
-
-# Local tools and temporary files
-.github-pages-build/
-*.log
-npm-debug.log*
-.DS_Store
-Thumbs.db
-
-# Environment files
+dist/
 .env
 .env.*
 !.env.example
-
-# Editor settings
-.vscode/
-.idea/
+*.log
+*.zip
+temp_/

@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Mục Tử (tùy chọn, Lm.)"
 order: 11
 ---
 
-*Trích sắc lệnh “Thánh chức linh mục” của công đồng Va-ti-ca-nô II, về tác vụ và đời sống linh mục.*
+**Trích sắc lệnh “Thánh chức linh mục” của công đồng Va-ti-ca-nô II, về tác vụ và đời sống linh mục.**
 
 Nhờ bí tích chức thánh các linh mục được nên đồng hình đồng dạng với Đức Ki-tô tư tế, để như là thừa tác viên của Đầu Nhiệm Thể và như là cộng tác viên của hàng giám mục, các ngài xây dựng và kiến thiết toàn tân thể của Người là Hội Thánh.
 

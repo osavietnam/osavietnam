@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 7 Thường Niên"
 order: 46
 ---
 
-*Trích bài chú giải của thánh Giê-rô-ni-mô, linh mục, về sách Giảng Viên.*
+**Trích bài chú giải của thánh Giê-rô-ni-mô, linh mục, về sách Giảng Viên.**
 
 Bất cứ ai được Thiên Chúa ban cho cùa cải, tài sản cũng như quyền sử dụng, mà lãnh nhận tất cả làm của riêng mình, và vui hưởng những thành quả do công lao khó nhọc mình làm ra, thì người đó nhận được một món quà Thiên Chúa ban tặng rồi. Bấy giờ người đó không còn quá bận tâm về cuộc sống ngắn ngủi của mình nữa, vì Thiên Chúa đã làm cho tâm hồn người đó được tràn ngập niềm vui. Sánh với người được hưởng của cải mình có mà phải đầu tát mặt tối, cũng như sánh với kẻ được nhiều của mau hư nát mà chán chường cuộc sống, thì tác giả sách Giảng Viên nói người được hưởng dùng những của cải hiện tại vẫn hơn. Quả thế, một đàng thì ít ra cũng được vui thú phần nào khi hưởng dùng, còn một đàng thì chỉ toàn là bận tâm lo lắng. Và tác giả đưa ra lý do tại sao được hưởng dùng của cải và hồng ân của Thiên Chúa, vì “người đó không còn quá bận tâm về cuộc sống ngắn ngủi của mình nữa”.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 10 Thường Niên"
 order: 66
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Rô-ma.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Rô-ma.**
 
 Vui thú trần gian chẳng ích gì, vương quốc đời này cũng chẳng lợi ích gì cho tôi. Đối với tôi, chết trong Đức Ki-tô Giê-su thì còn hơn trị vì cả trăm cõi. Tôi kiếm tìm Đấng đã chết cho chúng ta ; tôi mong mỏi Đấng sống lại vì chúng ta. Đã đến giờ tôi được sinh ra để hưởng sự sống đời đời. Xin anh em hãy buông tha tôi, đừng cản không cho tôi sống đời sống ấy, đừng muốn cho tôi phải chết muôn đời. Tôi đang khao khát được thuộc về Thiên Chúa, xin dừng nộp tôi cho thế gian, đừng đem vật chất ra quyến rủ tôi. Hãy để tôi đón nhận ánh sáng tinh tuyền. Về được cõi ánh sáng, tôi mới thực là người. Hãy để tôi bắt chước Chúa tôi mà chịu khổ nạn. Ai có Chúa trong lòng, người ấy mới hiểu tôi muốn gì, mới thông cảm với tôi, vì biết được những gì đang thôi thúc tôi.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 4 Thường Niên"
 order: 24
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Ngôi Lời của Thiên Chúa đã làm người và Con Thiên Chúa đã trở thành con của loài người, để một khi con người được liên kết với Ngôi Lời của Thên Chúa và lãnh nhận ơn làm nghĩa tử, thì họ trở nên con Thiên Chúa.
 

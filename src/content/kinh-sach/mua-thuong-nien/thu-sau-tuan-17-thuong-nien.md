@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 17 Thường Niên"
 order: 118
 ---
 
-*Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi thánh Pô-ly-ca-pô.*
+**Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi thánh Pô-ly-ca-pô.**
 
 Tôi là I-nha-xi-ô, cũng gọi là Thê-ô-phô-rô, kính gửi đức cha Pô-ly-ca-pô, giám mục Hội Thánh Miếc-na, người cùng có giám mục của mình là Thiên Chúa Cha và Chúa Giê-su Ki-tô. Kính chúc đức cha vạn sự khang an.
 

@@ -8,7 +8,7 @@ liturgy: "Ngày 22 Tháng 12"
 order: 26
 ---
 
-*Trích bài diễn giải của thánh Bê-đa Khả Kính, linh mục, về Tin Mừng theo thánh Lu-ca.*
+**Trích bài diễn giải của thánh Bê-đa Khả Kính, linh mục, về Tin Mừng theo thánh Lu-ca.**
 
 Bấy giờ Đức Ma-ri-a nói : ”Linh hồn tôi ngợi khen ĐỨC CHÚA, thần trí tôi hớn hở vui mừng vì Thiên Chúa, Đấng Cứu Độ tôi”. Như thế là Người muốn nói : ĐỨC CHÚA đã làm cho tôi nên cao trọng khi ban ân huệ rất lớn lao và chưa từng nghe nói, đến nỗi không miệng lưỡi nào giải thích nổi, mà phải có lòng mến yêu sâu thẳm mới mong hiểu phần nào. Vì thế, tôi đem hết sức lực của linh hồn để dâng lời cảm tạ. Đời sống của tôi cùng với mọi cảm nghĩ và hiểu biết, tôi dùng tất cả để chiêm ngưỡng ân huệ cao quý vô song đó với tâm tình tri ân cảm tạ, bởi vì trong chính Đức Giê-su, Đấng Cứu Độ tôi, thần trí tôi được hớn hở vui mừng vì Người là Thiên Chúa vĩnh cửu, và thân xác tôi trở nên phong phú vì Người đã đầu thai để sống trong thời gian.
 

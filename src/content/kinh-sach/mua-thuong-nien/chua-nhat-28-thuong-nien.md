@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 28 Thường Niên"
 order: 190
 ---
 
-*Trích bài chú giải của thánh Xy-ri-lô, giám mục A-lê-xan-ri-a, về sách ngôn sứ Khác-gai.*
+**Trích bài chú giải của thánh Xy-ri-lô, giám mục A-lê-xan-ri-a, về sách ngôn sứ Khác-gai.**
 
 Thời Đấng cứu độ chúng ta ngự đến, đã xuất hiện một đền thánh vinh quang, huy hoàng và cao trọng hơn bội phần so với đền thờ cũ. Càng thẩm định được sự khác biệt giữa phụng tự theo Luật cũ và phụng tự trong Đức Ki-tô theo Tin Mừng, giữa hình bóng và thực tại, thì người ta còn thấy điều đó rõ ràng hơn.
 

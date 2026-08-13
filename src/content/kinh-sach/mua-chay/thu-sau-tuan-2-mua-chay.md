@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 2 Mùa Chay"
 order: 17
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Trong sách Đệ Nhị Luật, ông Mô-sê nói với dân : ĐỨC CHÚA, Thiên Chúa của anh em đã lập một giao ước với anh em tại núi Kho-rép. ĐỨC CHÚA đã lập giao ước này không phải với cha ông anh em, mà là với anh em.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 3 Mùa Vọng"
 order: 19
 ---
 
-*Trích Hiến chế tín lý Lời Thiên Chúa của công đồng Va-ti-ca-nô II về Mặc Khải.*
+**Trích Hiến chế tín lý Lời Thiên Chúa của công đồng Va-ti-ca-nô II về Mặc Khải.**
 
 Thiên Chúa tạo dựng và bảo tồn vạn vật nhờ Ngôi Lời vẫn ban cho loài người lời chứng về mình qua các thọ tạo. Ngoài ra, vì muốn mở rộng con đường cứu độ siêu nhiên ngay từ thuở khởi đầu, Người đã tỏ mình ra cho nguyên tổ chúng ta.
 

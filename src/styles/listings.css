@@ -435,23 +435,6 @@
 }
 .readings-table tbody tr.row-needs-fix:hover { background: rgba(200, 60, 60, 0.22); }
 
-/* Badge "fill tay" (manualFill) — bài fill bằng tay, cần chuẩn hóa sau */
-.tag-manual {
-  display: inline-block;
-  font-family: var(--font-ui);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color:#ffffff;
-  background:#2b6570;
-  border:1px solid #2b6570;
-  border-radius: 4px;
-  padding: 0.05rem 0.5rem;
-  margin-left: 0.6rem;
-  vertical-align: middle;
-}
-
 /* Nút edit trong bảng — chỉ hiện khi admin-server chạy (body[data-ks-admin]) */
 .readings-table tbody td:last-child { position: relative; padding-right: 1.2rem; }
 body[data-ks-admin] .readings-table tbody td:last-child { padding-right: 3.8rem; }

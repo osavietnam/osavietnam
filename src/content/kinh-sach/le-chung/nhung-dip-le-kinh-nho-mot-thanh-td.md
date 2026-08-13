@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ (một) Thánh Tđ."
 order: 7
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Nhờ những hành vi cao cả của các chứng nhân tử đạo, Hội Thánh ở khắp mọi miền được rạng rỡ. Chính mắt chúng ta thấy rằng điều chúng ta vẫn hát đúng dường nào : Trước mặt Chúa thật là quý giá, cái chết của những ai trung hiếu với Người. Quả vậy, cái chết đó quý giá đối với chúng ta và cũng quý giá trước mặt Chúa, bởi lẽ các vị đã chết vì danh Người.
 

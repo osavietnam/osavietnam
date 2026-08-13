@@ -4,7 +4,7 @@
 
 @media screen and (max-width: 768px) {
 
-
+   
 
     main.content {
         padding-left: 1.5rem;
@@ -39,8 +39,8 @@
         padding: 1rem 0; /* Remove horizontal padding to use full width */
     }
 
-
-
+   
+    
     #next-saint-container .featured-container-shifted .saint-card:first-child {
         margin-left: 1.5rem;
     }
@@ -48,7 +48,7 @@
         margin-right: 1.5rem;
     }
 
-
+    
     #next-saint-container .featured-nav-btn.left {
         left: 0.5rem;
     }
@@ -82,7 +82,7 @@
     .bio-modal > h3 {
         font-size: 2.4rem; /* Slightly smaller title */
         /* Reduced top, bottom, and side padding */
-        padding: 1.2rem 4.5rem 1.2rem 1.2rem;
+        padding: 1.2rem 4.5rem 1.2rem 1.2rem; 
     }
 
     .bio-modal-close {

@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1786 tại Ly-ông. Sau biết bao khó khăn gian khó n
 
 </div>
 
-*Trích bài giáo huấn của thánh Gio-an Ma-ri-a Vi-a-nê.*
+**Trích bài giáo huấn của thánh Gio-an Ma-ri-a Vi-a-nê.**
 
 Các con thân mến, kho tàng của người Ki-tô hữu không phải ở dưới đất này, nhưng ở trên trời. Thế thì lòng trí của chúng ta phải hướng đến nơi có kho tàng của chúng ta.
 

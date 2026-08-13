@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 24 Thường Niên"
 order: 163
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Chúng ta hãy xem lời Thiên Chúa là lời không ve vãn ai, nói gì với các mục tử chỉ nuôi mình chứ không nuôi con chiên. Các ngươi uống sữa, mặc đồ len, giết chiên béo tốt, còn đàn chiên lại không lo chăn dắt. Chiên đau yếu, các ngươi không bồi dưỡng ; chiên bệnh tật, các ngươi không chữa lành ; chiên bị thương, các ngươi không băng bó ; chiên bị lạc, các ngươi không đưa về ; chiên bị mất, các ngươi không chịu đi tìm. Các ngươi thống trị chúng một cách tàn bào và hà khắc. Chiên của Ta tán loạn vì thiếu mục tử.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 16 Thường Niên"
 order: 108
 ---
 
-*Trích thư thánh của I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi giáo đoàn Ma-nhê-xi-a.*
+**Trích thư thánh của I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi giáo đoàn Ma-nhê-xi-a.**
 
 Chúng ta chớ vô tình trước lòng nhân hậu của Đức Ki-tô. Thật vậy, giả sử Người cũng hành động như chúng ta, thì chúng ta đã phải chết rồi. Bởi thế, một khi đã thành môn đệ Đức Ki-tô, chúng ta hãy học cho biết sống theo tinh thần Ki-tô giáo. Ai mang danh hiệu nào khác với danh hiệu đó, thì không thuộc về Thiên Chúa. Vậy anh em hãy vất bỏ men xấu, men cũ, men chua, và hãy để cho men mới là Đức Giê-su Ki-tô biến đổi anh em. Hãy để Ngưới ướp mặn anh em, để không ai trong anh em ra hư hỏng, chẳng vậy, anh em sẽ xông mùi tanh hôi.
 

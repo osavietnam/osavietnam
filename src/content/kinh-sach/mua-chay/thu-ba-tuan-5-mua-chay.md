@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 5 Mùa Chay"
 order: 41
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Thần khí Sự Thật chiếu soi tâm trí chúng ta. Chớ gì chúng ta đã biết đem lòng trong sạch và thanh thản mà đón nhận vinh qung của thập giá đang chiếu tỏa rạng ngời khắp cả trời đất ; chớ gì chúng ta biết lấy tinh thần bén nhạy mà nhận ra ý nghĩa của lời Chúa đã nói về cuộc thương khó sắp đến của Người : Đã đến giờ Con Người được tôn vinh. Người còn thêm sau đó rằng : Bây giờ, tâm hồn được Thầy xao xuyến ! Thầy biết nói gì đây ? “Lạy Cha, xin cứu Con khỏi giờ này, nhưng chính vì giờ này mà Con đã đến. Lạy Cha, xin tôn vinh Con Cha”. Và có tiếng Chúa Cha từ trời vọng xuống : “ Ta đã tôn vinh, Ta sẽ còn tôn vinh nữa”. Và Chúa Giê-su nói với những người đứng chung quanh rằng : Tiếng ấy đã vọng xuống không phải vì tôi, mà vì các người. Giờ đây đang diễn ra cuộc phán xét thế gian này. Giờ đây thủ lãnh thế gian này sắp bị tống ra ngoài ! Phần tôi, một khi đã được giương cao lên khỏi mặt đất, tôi sẽ kéo mọi người lên với tôi.
 

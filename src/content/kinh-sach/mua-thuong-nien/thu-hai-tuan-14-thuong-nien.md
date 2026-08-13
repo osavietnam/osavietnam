@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 14 Thường Niên"
 order: 93
 ---
 
-*Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Có lời chép rằng : Anh em hãy liên kết với các thánh, vì ai gắn bó với các ngài sẽ được nên thánh. Và ở nơi khác cũng có lời rằng : Lạy Chúa, Ngài giữ tín trung với kẻ tín trung, xử tuyệt hảo với người tuyệt hảo, ở liêm khiết cùng ai liêm khiết ; nhưng dùng mưu mẹo với kẻ gian ngoan. Vậy chúng ta hãy liên kết với những kẻ tín trung và những người công chính, vì họ là những người được Thiên Chúa tuyển chọn. Tại sao anh em lại tranh giành, giận dữ, chia rẽ, bè phái và gây chiến với nhau ? Chẳng phải chúng ta có một Thiên Chúa, một Đức Ki-tô, một Thần Khí duy nhất sao ? Thần Khí là Đấng ban ân sủng đã được đổ tràn trên chúng ta. Và chẳng phải chúng ta có cùng một ơn gọi trong Đức Ki-tô sao ? Sao chúng ta lại chặt lìa và xâu xé thân thể của Đức Ki-tô ? Sao chúng ta lại xách động cuộc nổi loạn chống lại Hội Thánh là thân thể mình ? Làm như thế, chúng ta trở thành những kẻ mất trí đến độ quên rằng mình là chi thể của nhau.
 

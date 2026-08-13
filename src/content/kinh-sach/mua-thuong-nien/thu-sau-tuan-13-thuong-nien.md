@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 13 Thường Niên"
 order: 90
 ---
 
-*Trích sách của thánh Âu-tinh, giám mục, về ơn tiền định.*
+**Trích sách của thánh Âu-tinh, giám mục, về ơn tiền định.**
 
 Ánh sáng vô cùng rực rỡ của ơn tiền định và ân sủng là Đấng cứu độ, chính Đấng trung gian giữa Thiên Chúa và loài người, tức là con người Đức Ki-tô. Thử hỏi bản tính nhân loại nơi Người đã có công trạng gì trước, do việc làm hay do đức tin, mà được địa vị đó ? Xin trả lời cho tôi câu hỏi này : Bởi đâu con người ấy đáng được như vậy, tức là trở nên Con Một Thiên Chúa, nhờ được Ngôi Lời đồng bản tính với Chúa Cha đảm nhận, mà thành một ngôi vị ? Trước đây Người đã làm gì tốt lành mà được như thế ? Trước đây Người đã làm gì, đã tin gì, đã xin gì để được địa vị cao sang khôn tả dường ấy ? Há chẳng phải nhờ Ngôi Lời hành động và đón nhận, mà con người ấy, từ lúc bắt đầu hiện hữu nhờ Người, thì đã bắt đầu là Con Một Thiên Chúa sao ?
 

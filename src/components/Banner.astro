@@ -13,6 +13,7 @@ const multi = variants.length > 1;
   <section class="banner-container" aria-label="Ảnh biểu ngữ và câu trích dẫn"
            data-multi={multi ? '' : undefined}
            data-banner-key={bannerKey}>
+    {bannerKey && <button type="button" class="banner-inline-edit" data-banner-inline-edit hidden aria-label="Sửa trích dẫn banner" title="Sửa trích dẫn banner">✎</button>}
     {variants.map((v, i) => (
       <div class="banner-variant" data-vi={i} data-default={i === 0 ? '' : undefined}>
         <img src={v.imageUrl} alt={v.altText ?? ''} loading="lazy" />
@@ -42,6 +43,44 @@ const multi = variants.length > 1;
     )}
   </section>
 )}
+
+<style is:global>
+  .banner-container { position:relative; }
+  .banner-inline-edit {
+    position:fixed; top:6.8rem; right:1rem; z-index:80; width:3.3rem; height:3.3rem; padding:0;
+    border:1px solid rgba(233,193,118,.72); border-radius:.45rem; color:#102118; background:#e9c176;
+    font:600 1.2rem/1 var(--font-ui); cursor:pointer; box-shadow:0 .25rem .8rem rgba(0,0,0,.2);
+  }
+  .banner-inline-edit[hidden] { display:none; }
+  .banner-inline-edit:hover,.banner-inline-edit:focus-visible { background:#f1d394; outline:2px solid rgba(233,193,118,.3); outline-offset:2px; }
+  .banner-container .banner-variant[data-default] .banner-quote .bvq-text {
+    animation: banner-quote-reveal .68s cubic-bezier(.22,.78,.24,1) both;
+  }
+  .banner-container .banner-variant[data-default] .banner-quote .bvq-cite {
+    animation: banner-cite-reveal .52s .18s cubic-bezier(.22,.78,.24,1) both;
+  }
+  .banner-container .banner-variant[data-default] > img {
+    animation: banner-image-settle .9s cubic-bezier(.22,.78,.24,1) both;
+  }
+  @keyframes banner-quote-reveal {
+    from { opacity:0; transform:translateY(1rem); clip-path:inset(0 0 100% 0); }
+    to { opacity:1; transform:translateY(0); clip-path:inset(0 0 0 0); }
+  }
+  @keyframes banner-cite-reveal {
+    from { opacity:0; transform:translateY(.55rem); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  @keyframes banner-image-settle {
+    from { opacity:.72; transform:scale(1.018); }
+    to { opacity:1; transform:scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .banner-container .banner-variant[data-default] .banner-quote .bvq-text,
+    .banner-container .banner-variant[data-default] .banner-quote .bvq-cite,
+    .banner-container .banner-variant[data-default] > img { animation:none; }
+  }
+  @media(max-width:640px){ .banner-inline-edit { top:5.9rem; right:.65rem; width:3rem; height:3rem; } }
+</style>
 
 {variants.length > 0 && (
   <script is:inline>

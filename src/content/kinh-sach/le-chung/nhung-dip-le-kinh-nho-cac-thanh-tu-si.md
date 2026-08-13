@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Các Thánh Tu sĩ"
 order: 19
 ---
 
-*Trích bài giảng của thánh Ghê-ô-ri-ô Cả, về Tin Mừng.*
+**Trích bài giảng của thánh Ghê-ô-ri-ô Cả, về Tin Mừng.**
 
 Tôi muốn khuyên anh em từ bỏ mọi sự. Nhưng không biết chắc anh em có thực hiện nổi không. Vậy nếu anh em không thể từ bỏ mọi sự thế gian, thì ít là anh em giữ của cải đời này, mà đừng để mình bị giữ lại trong thế gian. Anh em hãy chiếm hữu của cải trần gian nhưng không để mình bị chiếm hữu. Hãy để cho tâm trí anh em làm chủ những gì anh em có ; nếu anh em để cho tâm trí mình bị khuất phục bởi lòng yêu mến của cải trần gian, thì bấy giờ tâm trí của anh em đã bị của cải trần gian chiếm hữu rồi đó.
 

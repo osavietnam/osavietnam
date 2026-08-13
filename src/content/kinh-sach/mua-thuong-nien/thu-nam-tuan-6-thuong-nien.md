@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 6 Thường Niên"
 order: 40
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.**
 
 Chớ gì lòng và miệng chúng ta luôn suy gẫm sự khôn ngoan và luỗi bạn nói lên điều chính trực, chớ gì luật Thiên Chúa được ghi tạc vào lòng bạn. Vì thế, Sách Thánh nói với bạn : Bạn hãy nói những lời ấy cho con cái, khi ở nhà cũng như lúc đi đường, khi ngủ cũng như khi thức dậy. Vậy chúng ta hãy nói về Chúa Giê-su vì chính Người là sự khôn ngoan, chính Người là lời, và là Lời của Thiên Chúa.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 19 Thường Niên"
 order: 131
 ---
 
-*Trích khảo luận của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về đời trọn lành của Ki-tô hữu.*
+**Trích khảo luận của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về đời trọn lành của Ki-tô hữu.**
 
 Chính Người là bình an của chúng ta, Người đã liên kết đôi bên thành một. Đức Ki-tô là bình an cho chúng ta. Hiểu như thế, chúng ta sẽ cho mọi người thấy được danh xưng đích thực của Ki-tô hữu là gì nếu chúng ta biết lấy niềm bình an đang có nơi chúng ta mà diễn tả Đức Ki-tô qua cách sống của chúng ta. Thánh tông đồ nói : Người đã tiêu diệt sự thù ghét. Vì thế, chúng ta đừng để cho nó sống lại trong chúng ta dưới bất cứ hình thức nào, nhưng hãy cho thấy là nó đã chết hẳn rồi. Thiên Chúa đã tiêu diệt nó một cách oai hùng để chúng ta được ơn cứu độ, thì chúng ta đừng có giận dữ, đừng nhớ đến những sỉ nhục ta phải chịu mà làm cho nó sống lại, giết chết linh hồn chúng ta. Nó đã chết hoàn toàn rồi, thì chúng ta đừng có dại dột làm cho nó hồi sinh.
 

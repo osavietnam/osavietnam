@@ -9,7 +9,7 @@ rank: "solemn"
 order: 1
 ---
 
-*Trích thư của thánh A-tha-na-xi-ô, giám mục.*
+**Trích thư của thánh A-tha-na-xi-ô, giám mục.**
 
 Ngôi Lời đã nhận lấy dòng giống Áp-ra-ham, như thánh tông đồ nói, bởi thế Người đã phải giống anh em mình về mọi phương diện, và phải mang lấy một thân xác giống chúng ta. Vì vậy, cần phải có Đức Ma-ri-a ; để từ nơi Mẹ, Ngôi Lời nhận lấy một thân xác và Người hiến dâng thân xác ấy như của riêng mình để chúng ta được hưởng nhờ. Nhắc đến việc Người giáng sinh, Kinh Thánh viết : Bà đã lấy tã bọc con ; và đã công bố : Phúc cho bà mẹ đã cho Người bú mớm, đã sinh người con đầu lòng làm của lễ hiến dâng. Thiên sứ Gáp-ri-en đã thận trọng và khôn ngoan truyền tin cho Đức Mẹ, thiên sứ không nói trống rằng : Đấng sẽ sinh ra nơi bà, kẻo có người lầm tưởng có một thân xác từ bên ngoài được đưa vào trong lòng Đức Mẹ. Nhưng thiên sứ nói : Đấng bà sẽ sinh ra, để người ta tin rằng Đấng được sinh ra đã xuất phát bởi chính Đức Mẹ.
 

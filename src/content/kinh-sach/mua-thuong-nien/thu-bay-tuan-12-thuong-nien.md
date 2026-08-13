@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 12 Thường Niên"
 order: 84
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.**
 
 Trong đời sống con người, thân xác có được khoẻ mạnh là một điều tốt ; nhưng thật là hạnh phúc nếu được biết sức khoẻ là gì lại vừa thực sự được khoẻ mạnh. Thật thế, ai luôn ca tụng sức khoẻ mà cứ ăn những thứ làm cho máu ra xấu và sinh bệnh tật, thì thử hỏi những lời ca tụng sức khoẻ kia có ích gì cho họ đang khi họ đang bị bệnh tật giày vò ? Ta cũng phải hiểu như thế về lời giảng dạy đã được trình bày, nghĩa là Chúa không bảo người biết được điều gì đó về Thiên Chúa là người có phúc ; nhưng là người có Thiên Chúa ngự trong mình. Chúa nói : Phúc thay ai có lòng trong sạch, vì họ sẽ được nhìn thấy Thiên Chúa.
 

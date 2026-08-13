@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 24 Thường Niên"
 order: 164
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Có thời thánh Phao-lô bị xiềng xích vì tuyên xưng chân lý, nên lâm cảnh túng quẫn. Bấy giờ các anh em gửi đồ cần dùng để giúp người trong cơn thiếu thốn. Người trả lời cảm ơn họ và nói : Anh em đã chia sẻ với tôi khi tôi gặp cơn quẫn bách ; như thế là phải. Tôi đã học sống tự lập trong bất cứ hoàn cảnh nào. Tôi sống thiếu thốn cũng được mà sống dư dật cũng được. Trong mọi hoàn cảnh, no hay đói, dư dật hay túng bấn, tôi đã tập quen cả. Với Đấng ban sức mạnh cho tôi, tôi chịu được hết. Tuy nhiên, anh em đã gởi cho tôi những thứ cần dùng, như thế là phải.
 

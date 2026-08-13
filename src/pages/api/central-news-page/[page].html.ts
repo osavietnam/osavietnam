@@ -4,7 +4,7 @@ export const prerender = false;
 export async function GET({ params, url }: { params: { page?: string }, url: URL }) {
   const page = Math.max(2, Number(params.page || 2));
   try {
-    return new Response(await renderCentralNewsPage(page, url.origin, url.searchParams.get('theme') ?? 'dark'), {
+    return new Response(await renderCentralNewsPage(page, url.origin, url.searchParams.get('theme') ?? 'dark', url.searchParams.get('external') === '1'), {
       headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store, no-cache, must-revalidate' },
     });
   } catch (error) {

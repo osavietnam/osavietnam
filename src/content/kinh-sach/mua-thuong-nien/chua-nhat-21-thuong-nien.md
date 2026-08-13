@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 21 Thường Niên"
 order: 141
 ---
 
-*Trích Hiến chế mục vụ Vui Mừng và Hy Vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui Mừng và Hy Vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.**
 
 Bao giờ trái đất cùng loài người đến ngày cùng tận, chúng ta không biết. Vũ trụ biến đổi ra sao, chúng ta cũng không biết. Chắc chắn bộ mặt thế gian này đang biến đi, bộ mặt đã ra méo mó vì tội lỗi. Nhưng chúng ta biết được rằng : Thiên Chúa đang chuẩn bị một nơi ở mới, một vùng đất mới, nơi công lý ngự trị, nơi hạnh phúc ngập tràn và vượt quá mọi khát vọng hoà bình vẫn trào dâng trong lòng người. Khi đó, tử thần sẽ bị đánh bại, con cái Thiên Chúa sẽ được phục sinh trong Đức Ki-tô, những gì gieo xuống thì yếu đuối và hư nát, sẽ mặc lấy sự bất diệt ; đức mến và các hoạt động do đức mến thúc đẩy sẽ tồn tại, và mọi loài thụ tạo mà Thiên Chúa đã dựng nên vì con người, sẽ được giải thoát, không phải lệ thuộc vào cảnh hư ảo nữa.
 

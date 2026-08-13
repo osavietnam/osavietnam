@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 3 Mùa Chay, Năm A"
 order: 19
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Có một phụ nữ đến. Chị là hình ảnh tượng trưng cho Hội Thánh, một Hội Thánh chưa được công chính hoá, nhưng đã đến lúc phải được công chính hoá. Đó là vấn đề được đề cập ở đây. Chị đến mà không biết gì trước. Chị đã gặp Đức Giê-su và có câu chuyện về chị. Chúng ta xem đó là chuyện gì và tại sao một người phụ nữ Sa-ma-ri đến lấy nước.
 

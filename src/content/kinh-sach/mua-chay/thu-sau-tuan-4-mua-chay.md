@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 4 Mùa Chay"
 order: 35
 ---
 
-*Trích thư Mùa Phục Sinh của thánh A-tha-na-xi-ô, giám mục.*
+**Trích thư Mùa Phục Sinh của thánh A-tha-na-xi-ô, giám mục.**
 
 Anh em thân mến, thật là tốt đẹp khi mừng hết lễ này đến lễ kia, cầu nguyện hết lần này sang lần khác, mừng hết đại lễ này tới đại lễ khác. Quả thật, đây là lúc đưa chúng ta vào một khởi điểm mới, và giúp chúng ta hiểu biết về cuộc vượt qua hồng phúc, trong đó Chúa Giê-su đã chịu sát tế. Thật thế, chúng ta vẫn được nuôi dưỡng nhờ lương thực ban sự sống, và tâm hồn luôn được vui thoả nhờ máu châu báu, như được uống tận nguồn. Tuy nhiên chúng ta vẫn còn khát, và vẫn luôn mong mỏi. Bởi vậy, chính Chúa đến với những người đang khát. Và do lòng nhân từ, Người cho những kẻ có lòng khát khao được tham dự vào ngày lễ này, như lời Đấng Cứu Độ chúng ta đã phán : Ai khát, hãy đến với Ta mà uống.
 

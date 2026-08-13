@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 4 Mùa Chay"
 order: 32
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Trong Tin Mừng theo thánh Gio-an, Chúa nói : Ở điểm này, mọi người sẽ nhận biết anh em là môn đệ Thầy : là anh em có lòng yêu thương nhau. Và trong thư của chính thánh nhân, người ta cũng đọc thấy : Anh em thân mến, chúng ta hãy yêu thương nhau, vì tình yêu bắt nguồn từ Thiên Chúa. Phàm ai yêu thương thì đã được Thiên Chúa sinh ra và người ấy biết Thiên Chúa. Ai không yêu thương thì không biết Thiên Chúa, vì Thiên Chúa là tình yêu.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 3 Phục Sinh"
 order: 20
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.**
 
 Chúa Giê-su nói : Tôi chết cho hết mọi người, để mọi người nhờ tôi mà được sống, và tôi đã dùng thân xác tôi để cứu chuộc thân xác mọi người. Quả thật, Tử Thần sẽ phải chết trong cái chết của tôi ; và cùng với tôi, bản tính nhân loại đã sa ngã sẽ được chỗi dậy.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 24 Thường Niên"
 order: 166
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Khi nói về những điều các mục tử xấu ưa thích, Chúa cũng nói về những điều họ lơ là. Quả thật nết xấu của chiên nhan nhản. Chiên lành mạnh và béo tốt thì rất ít, nghĩa là những con chiên vững mạnh nhờ được nuôi dưỡng bằng chân lý và biết dùng ơn Chúa như ăn trong đồng cỏ xanh tươi. Nhưng những mục tử xấu thì không để cho chúng được yên. Không săn sóc những con chiên yếu nhược, ốm đau, lạc đàn, hư mất, đối với ho là điều không đáng kể. Ngay cả những con mạnh khoẻ béo tốt kia, nếu họ có thể, họ cũng giết luôn. Thế mà những con gầy yếu này vẫn sống, được là nhờ lòng xót thương của Thiên Chúa. Nhưng xét như là những mục tử xấu, thì họ giết chúng. Bạn hỏi : họ giết cách nào ? Thưa, bằng cách ăn ở xấu, làm gương xấu. Chẳng lẽ bỗng dưng lại có những lời nói sau đây với người tôi tớ của Thiên Chúa là ông Ti-tô, một người trổi vượt trong các chi thể của Vị Mục Tử tối cao : Trước mặt mọi người, anh hãy làm gương về các việc lành phúc đức và anh hãy nêu gương cho các tín hữu.
 

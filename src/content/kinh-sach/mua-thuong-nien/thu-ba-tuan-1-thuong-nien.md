@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 1 Thường Niên"
 order: 3
 ---
 
-*Trích bản Giải thích tu luật của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích bản Giải thích tu luật của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Lòng yêu mến Thiên Chúa không phải do lời giảng dạy mà có. Quả vậy, chung ta chẳng cần ai dạy cho biết vui hưởng ánh sáng, khao khát sự sống, mến yêu các bậc sinh thành dưỡng dục. Về lòng yêu mến Thiên Chúa cũng vậy, mà còn hơn thế nữa : chúng ta cũng chẳng phải học với ai. Một khi con vật mà chúng ta gọi là con người xuất hiện, thì tự bẩm sinh, kiểu như hạt giống, nó có một sức mạnh tinh thần chứa đựng khả năng và nhu cầu yêu mến. Chính nhờ luật Thiên Chúa mà chúng ta đón nhận sức mạnh đó, và ân cần vun xới và khéo léo nuôi dưỡng cho nó lớn lên, rồi nhờ Thiên Chúa trợ giúp, đưa nó tới mức hoàn thiện.
 

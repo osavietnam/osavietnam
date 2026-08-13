@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import CollectionProseInlineEditor from '../../components/CollectionProseInlineEditor.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('lich-su-dong', ({ data }) => !data.draft);
@@ -24,6 +25,7 @@ const d = entry.data;
 const hasToc = headings.filter(h => h.depth === 2 || h.depth === 3).length > 2;
 ---
 <BaseLayout title={d.title} description={d.excerpt} bodyClass="page-articles no-sidebar" banner="home">
+  <CollectionProseInlineEditor collection="lich-su-dong" entryId={entry.id} label="Sửa bài lịch sử" />
 
   <nav class="art-back" aria-label="Điều hướng">
     <a class="art-back-link" href="/lich-su-dong/">

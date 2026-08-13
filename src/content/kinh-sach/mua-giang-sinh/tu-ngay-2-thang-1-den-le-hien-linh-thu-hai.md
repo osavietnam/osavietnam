@@ -8,7 +8,7 @@ liturgy: "Từ ngày 2 Tháng 1 đến Lễ Hiển Linh, Thứ Hai"
 order: 9
 ---
 
-*Trích sách Chúa Thánh Thần của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích sách Chúa Thánh Thần của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Ai không còn sống theo kiểu người phàm, nhưng được Thần Khí của Thiên Chúa tác động, được gọi là con Thiên Chúa và trở nên đồng hình đồng dạng với Con Thiên Chúa, thì người ấy được coi là sống theo Thần Khí. Cũng như khả năng nhìn rõ sự vật chỉ có nơi con mắt sáng thế nào, thì hoạt động của Thần Khí cũng chỉ có nơi tâm hồn được thanh tẩy.
 

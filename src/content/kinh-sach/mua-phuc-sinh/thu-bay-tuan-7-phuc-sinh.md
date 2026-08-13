@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 7 Phục Sinh"
 order: 48
 ---
 
-*Trích bài giảng của một tác giả châu Phi, thế kỷ VI.*
+**Trích bài giảng của một tác giả châu Phi, thế kỷ VI.**
 
 Các tông đồ đã nói mọi thứ tiếng. Như thế, lúc bấy giờ Thiên Chúa đã muốn biểu lộ sự hiện diện của Chúa Thánh Thần, để ai đã lãnh nhận Chúa Thánh Thần thì nói được mọi thứ tiếng. Quả thật, anh em thân mến, phải hiểu rằng đó là Chúa Thánh Thần, Đấng làm cho tình yêu của Thiên Chúa được đổ vào lòng chúng ta.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 3 Phục Sinh"
 order: 16
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 “Hát lên Chúa một bài ca mới, ngợi khen Người trong cộng đoàn những kẻ hiếu trung”.
 

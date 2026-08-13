@@ -15,7 +15,7 @@ Sinh năm 1515 tại Phi-ren-xê, thánh nhân đến Rô-ma và dấn thân lo 
 
 </div>
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Thánh tông đồ truyền cho chúng ta phải vui lên, nhưng phải vui lên trong Chúa, chứ không theo thế gian. Quả thật, như lời Thánh Kinh chép : Ai muốn làm bạn với thế gian, thì sẽ bị coi như kẻ thù của Thiên Chúa. Nhưng như con người không thể làm tôi hai chủ, thì cũng vậy : không người nào có thể vừa vui theo thế gian, vừa vui trong Chúa.
 

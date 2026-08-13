@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 3 Mùa Chay"
 order: 24
 ---
 
-*Trích sách của thánh Thê-ô-phi-lô, giám mục An-ti-ô-khi-a, gửi cho Au-tô-li-cô.*
+**Trích sách của thánh Thê-ô-phi-lô, giám mục An-ti-ô-khi-a, gửi cho Au-tô-li-cô.**
 
 Nếu bạn nói : “Hãy tỏ cho tôi biết Thiên Chúa của bạn”, thì tôi có thể trả lời : “Hãy tỏ cho tôi biết con người của bạn, rồi tôi sẽ tỏ cho bạn biết Thiên Chúa của tôi. Vì thế, bạn hãy cho biết mắt tâm hồn của bạn có nhìn thấy và tai lòng bạn có nghe được không.
 

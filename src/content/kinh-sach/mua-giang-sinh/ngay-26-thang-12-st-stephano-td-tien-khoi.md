@@ -15,7 +15,7 @@ Thánh Tê-pha-nô là vị tử đạo tiên khởi, đứng đầu danh sách 
 
 </div>
 
-*Trích bài giảng của thánh Phun-gien-xi-ô, giám mục Rút-pê.*
+**Trích bài giảng của thánh Phun-gien-xi-ô, giám mục Rút-pê.**
 
 Hôm qua, chúng ta vừa mừng Vua vĩnh cửu của chúng ta sinh ra trong thời gian. Hôm nay, chúng ta mừng một chiến sĩ của Người vinh thắng khải hoàn sau khi trải qua cuộc thương khó. Thật vậy, hôm qua Vua của chúng ta, mặc lấy xác phàm, ra khỏi cung lòng Trinh Nữ, đã đoái thương viếng thăm trần gian. Hôm nay, một chiến sĩ ra khỏi lều thân xác, được lên trời thật vinh hiển cao sang.
 

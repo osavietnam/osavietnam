@@ -10,7 +10,7 @@ order: 6
 draft: false
 ---
 
-*Trích bài giảng của thánh Lô-ren-xô Giút-ti-a-nô, giám mục.*
+**Trích bài giảng của thánh Lô-ren-xô Giút-ti-a-nô, giám mục.**
 
 Khi Đức Ma-ri-a suy đi nghĩ lại trong lòng tất cả những điều đã đọc, đã nghe và đã thấy, thì lòng tin của Người càng lớn mạnh, công phúc của Người càng gia tăng, Người được đức khôn ngoan soi sáng và ngọn lửa mến yêu nung nấu tâm hồn. Khi nghiền ngẫm sâu xa các mầu nhiệm Thiên Chúa tỏ bày, Đức Ma-ri-a được chan chứa niềm vui, đầy tràn Thần Khí, quy hướng về Thiên Chúa mà vẫn một lòng khiêm hạ. Sự thăng tiến trong ân sủng như thế nâng con người từ chỗ rốt hết lên đến đỉnh cao và càng làm cho thêm rạng rỡ.
 

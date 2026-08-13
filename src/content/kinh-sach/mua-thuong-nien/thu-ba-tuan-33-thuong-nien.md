@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 33 Thường Niên"
 order: 227
 ---
 
-*Trích bài giảng của thánh An-rê, giám mục Cơ-rê-ta.*
+**Trích bài giảng của thánh An-rê, giám mục Cơ-rê-ta.**
 
 Chúng ta hãy tung hô Đức Ki-tô, chúng ta hãy tung hô rằng : Chúc tụng Đấng ngự đến nhân danh ĐỨC CHÚA, Vua Ít-ra-en. Ta hãy lấy những lời trên đỉnh cây thập giá thay cho tàu lá mà tung hô Người. Ta hãy hân hoan nhập đoàn đi theo mà tôn vinh Người, không phải với những cành ô-liu mà bằng những việc bác ái huynh đệ. Ta hãy đem những khát vọng của tâm hồn làm như áo trải xuống dưới chân Người, để Người hoàn toàn vào trong chúng ta, chúng ta hoàn toàn ở trong Người, và để Người hoàn toàn tỏ mình ra nơi chúng ta. Hãy nói với Xi-on lời của ngôn sứ : Hỡi thiếu nữ Xi-on, đừng lo sợ, nhưng hãy tin tưởng. Kìa Đức Vua của ngươi đang đến với ngươi, khiêm tốn ngồi trên lưng lừa, một con lừa con vẫn còn theo mẹ.
 

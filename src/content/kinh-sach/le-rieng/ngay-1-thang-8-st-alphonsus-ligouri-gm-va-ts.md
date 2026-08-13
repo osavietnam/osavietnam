@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1696 tại Na-pô-li. Người từ bỏ nghề luật s�
 
 </div>
 
-*Trích tác phẩm của thánh An-phong-sô về cách tỏ lòng yêu mến Đức Ki-tô.*
+**Trích tác phẩm của thánh An-phong-sô về cách tỏ lòng yêu mến Đức Ki-tô.**
 
 Tất cả sự trọn lành thánh thiện của linh hồn hệ tại lòng yêu mến Đức Giê-su Ki-tô là Thiên Chúa chúng ta, là sự thiện tuyệt đối và và Đấng cứu chuộc chúng ta. Đức ái liên kết và bảo toàn mọi nhân đức làm cho con người trở nên trọn lành.
 

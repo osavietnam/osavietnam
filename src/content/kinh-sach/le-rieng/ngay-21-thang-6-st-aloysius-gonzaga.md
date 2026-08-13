@@ -15,7 +15,7 @@ Sinh năm 1568 gần Man-tu-a miền Lom-bác-đi-a, trong một gia đình Cát
 
 </div>
 
-*Trích thư thánh Lu-y Gon-da-ga gửi cho thân mẫu.*
+**Trích thư thánh Lu-y Gon-da-ga gửi cho thân mẫu.**
 
 Thưa mẹ khả kính, con cầu xin Chúa Thánh Thần ban xuống cho mẹ ân sủng và niềm an ủi của Người. Khi nhận được thư của mẹ thì con vẫn còn ở trên chốn tử vong này. Nhưng đã đến lúc phải hướng về trời, nơi chúng ta sẽ ca ngợi Thiên Chúa hằng hữu trong cõi đất dành cho kẻ sống. Con cứ tưởng mình đã hoàn tất được cuộc hành trình này trước đây rồi. Nếu bác ái là vui với người vui, khóc với người khóc, như thánh Phao-lô nói, thì thưa mẹ khả kính, hẳn là mẹ phải hết sức vui mừng vì Chúa đã tỏ cho con thấy niềm hoan lạc đích thực và sự bảo đảm không bao giờ sợ mất Người nữa ; sở dĩ con được ơn này cũng là vì tình thương và ân sủng Chúa dành cho mẹ.
 

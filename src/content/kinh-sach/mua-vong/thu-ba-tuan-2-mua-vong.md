@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 2 Mùa Vọng"
 order: 10
 ---
 
-*Trích Hiến chế tín lý Ánh sáng muôn dân của công đồng Va-ti-ca-nô II về Hội Thánh.*
+**Trích Hiến chế tín lý Ánh sáng muôn dân của công đồng Va-ti-ca-nô II về Hội Thánh.**
 
 Trong Đức Ki-tô Giê-su, tất cả chúng ta được kêu gọi gia nhập Hội Thánh, và trong Hội Thánh, nhờ ơn Thiên Chúa, chúng ta đạt tới sự thánh thiện. Hội Thánh chỉ hoàn tất trong vinh quang trên trời, khi đến thời phục hồi vạn vật và khi toàn thể vũ trụ cùng với loài người được tái tạo cách hoàn hảo trong Đức Ki-tô, vì vũ trụ liên kết mật thiết với con người và nhờ con người mà đạt tới cùng đích của mình.
 

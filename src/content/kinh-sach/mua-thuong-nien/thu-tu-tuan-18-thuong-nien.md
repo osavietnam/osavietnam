@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 18 Thường Niên"
 order: 123
 ---
 
-*Trích thư được gọi là của thánh Ba-na-ba.*
+**Trích thư được gọi là của thánh Ba-na-ba.**
 
 Đây là con đường ánh sáng : kẻ nào muốn đạt tới đích đã nhắm, thì phải cố gắng hết sức mình. Đây là những điều chúng ta đã được dạy cho biết để đi trên con đường này. Bạn hãy yêu mến Đấng đã tạo thành bạn. Hãy tôn vinh Đấng đã nhào nắn nên bạn. Hãy tôn vinh Đấng đã cứu chuộc bạn khỏi tử thần. Bạn hãy có tâm hồn đơn sơ nhưng đầy Thần Khí. Đừng gắn bó với những ai theo con đường dẫn tới sự chết. Hãy chê ghét bất cứ những gì không đẹp lòng Chúa và mọi thứ giả hình. Đừng bỏ các mệnh lệnh Chúa truyền. Đừng tự cao tự đại, nhưng hãy khiêm nhường trong mọi sự. Đừng nhận lấy vinh quang cho mình. Đừng mưu hại người thân cận. Đừng để lòng mắc phải tính kiêu căng.
 

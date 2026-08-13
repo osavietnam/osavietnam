@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 17 Thường Niên"
 order: 119
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi thánh Pô-ly-ca-pô.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi thánh Pô-ly-ca-pô.**
 
 Đức cha hãy tránh xa những nghề xấu ; hơn nữa, hãy dạy cho dân tránh những nghề này. Hãy khuyên chị em của tôi yêu mến Thiên Chúa và sống vui vẻ hoà hợp với chồng cả hồn lẫn xác. Với anh em tín hữu của tôi cũng vậy, xin đức cha hãy nhân danh Đức Giê-su Ki-tô truyền dạy họ yêu thương vợ mình như Chúa yêu thương Hội Thánh. Ai có thể sống khiết tịnh để tôn vinh thân thể Chúa, thì hãy sống cho khiêm nhường. Khiết tịnh mà tự phụ khoe khoang là hỏng ; lại còn cho mình hơn cả giám mục thì thật là tiêu vong. Vợ chồng kết hôn với nhau có sự đồng ý của giám mục là điều xứng hợp, vì như thế là cưới hỏi theo ý Chúa chứ không theo đam mê xác thịt. Hãy làm mọi sự để tôn vinh Thiên Chúa.
 

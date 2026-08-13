@@ -15,7 +15,7 @@ Thánh nhân là một nhân vật quen thuộc trong số các tông đồ. Câ
 
 </div>
 
-*Trích bài giảng của thánh Bê-đa Khả kính, linh mục.*
+**Trích bài giảng của thánh Bê-đa Khả kính, linh mục.**
 
 Đức Giê-su thấy một người tên là Mát-thêu đang ngồi ở bàn thu thuế. Người bảo ông : Anh hãy theo tôi. Người thấy không phải bằng con mắt thể xác, cho bằng với cái nhìn đầy tình thương sâu xa. Đức Giê-su thấy người thu thuế ; Người thấy ông với tình thương và có ý chọn ông, nên bảo rằng Anh hãy theo tôi ! Nhưng hãy theo có nghĩa là hãy bắt chước, không phải chỉ theo bằng bước chân, mà nhất là bằng cách ăn thói ở. Quả thật, ai nói mình ở lại trong Đức Ki-tô thì phải đi trên con đường Người đã đi.
 

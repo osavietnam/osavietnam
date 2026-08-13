@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 16 Thường Niên"
 order: 107
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi giáo đoàn Ma-nhê-xi-a.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi giáo đoàn Ma-nhê-xi-a.**
 
 Vì qua các nhân vật nói trên, tôi nhìn thấy và yêu mến cộng đoàn anh em trong đức tin, nên tôi khuyên anh em hãy ra sức làm mọi việc trong tinh thần hoà hợp của Thiên Chúa, dưới quyền chủ toạ của giám mục thay thay thế Thiên Chúa và các linh mục thay thế tông đồ đoàn, cùng các trợ tá mà tôi rất thương mến là những người đã nhận được thừa tác vụ do Đức Giê-su Ki-tô giao phó, Đấng đã có từ trước muôn thuở nơi Chúa Cha và đã xuất hiện vào thời cuối cùng. Vậy, sau khi đã sống theo những thói tục lành thánh, anh em hãy kính trọng lẫn nhau, đừng ai nhìn người lân cận theo con mắt xác thịt, mà phải luôn yêu mến nhau trong Đức Giê-su Ki-tô. Anh em không được làm điều gì có thể gây chia rẽ giữa anh em, nhưng hãy hiệp nhất với giám mục và các vị lãnh đạo, để làm mô hình chứng tỏ có đời sống bất diệt.
 

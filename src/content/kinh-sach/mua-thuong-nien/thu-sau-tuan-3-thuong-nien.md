@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 3 Thường Niên"
 order: 20
 ---
 
-*Trích bài chú giải Thánh Vịnh của thánh Gio-an Phi-sơ, giám mục, tử đạo.*
+**Trích bài chú giải Thánh Vịnh của thánh Gio-an Phi-sơ, giám mục, tử đạo.**
 
 Trước hết, Thiên Chúa đã làm nhiều điềm thiêng dấu lạ để giải thoát dân Ít-ra-en cho khỏi làm tôi Ai-cập : Người đã cho họ qua Biển Đỏ không ướt chân, và dùng lương thực bởi trời là man-na và chim cút nuôi họ trong sa mạc, đã cho nước từ tảng đá rất cứng vọt ra tràn trề cho những kẻ mệt lả được uống, cho họ chiến thắng những kẻ thù gây hấn với họ, bắt sông Gio-đan chảy ngược dòng trong một thời gian, phân chia đất đã hứa cho họ theo số các chi tộc và các thị tộc. Dù Thiên Chúa đã ban cho họ những ơn ấy một cách thân tình và rộng rãi như vậy, nhưng là những người vô ơn bạc nghĩa hầu như quên hẳn mọi sự đó, họ đã chối bỏ và khinh chê việc thờ phượng Thiên Chúa mà hơn một lần sa vào tội gớm ghê là tôn thờ ngẫu tượng.
 

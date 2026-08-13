@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 4 Phục Sinh"
 order: 25
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Chúa Giê-su tuyên bố : Người ban cho các môn đệ một điều răn mới, đó là tình yêu thương lẫn nhau. Người nói : Thầy ban cho anh em một điều răn mới, là anh em hãy yêu thương nhau.
 

@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh năm 1601 tại giáo phận Căng, nước Pháp. Hầu như suốt đời người đã sống tại đây. Sau khi chịu chức linh mục, người đã đi giảng thuyết nhiều năm trong các xứ đạo. Rồi vì muốn cho các linh mục tương lai được đào luyện tốt trong các chủng viện, và các phụ nữ đã lầm đường lạc lối được vững vàng trong đời sống đạo, người đã lập ra các tu hội Thánh Tâm Chúa Giêsu và Trái Tim Đức Mẹ. Người nhiệt thành cổ võ việc tôn sùng Trái Tim Chúa và Trái Tim Đức Mẹ nhằm mục đích đem “sự sống và vương quốc của Chúa Giêsu đến mọi tâm hồn.” Người qua đời năm 1680. 
 
-Nguồn ơn cứu độ và nguồn sự sống thật.
+*Nguồn ơn cứu độ và nguồn sự sống thật.*
 
-*Trích khảo luận của thánh Gio-an Ơ-đơ linh mục, về Trái Tim rất đáng ngợi khen của Chúa Giê-su.*
+**Trích khảo luận của thánh Gio-an Ơ-đơ linh mục, về Trái Tim rất đáng ngợi khen của Chúa Giê-su.**
 
  
 

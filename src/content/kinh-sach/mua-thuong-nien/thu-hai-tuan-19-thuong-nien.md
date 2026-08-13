@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 19 Thường Niên"
 order: 128
 ---
 
-*Trích khảo luận của đức cha Thê-ô-đô-rê, giám mục Sia, về mầu nhiệm Chúa nhập thể.*
+**Trích khảo luận của đức cha Thê-ô-đô-rê, giám mục Sia, về mầu nhiệm Chúa nhập thể.**
 
 Đức Giê-su đã tự ý đi vào cuộc thương khó như Sách Thánh đã chép về Người. Chính Người đã nhiều lần báo trước cho các môn đệ và đã khiển trách ông Phê-rô vì ông không sẵn lòng chấp nhận lời loan báo ấy. Cuối cùng, Người chứng tỏ rằng chính cuộc thương khó ấy đem lại ơn cứu độ cho thế gian. Vì thế, Người đã tỏ mình ra cho những kẻ đến bắt Người mà rằng : Chính tôi đây là người các anh đang tìm. Khi bị tố cáo, Người không đáp lại. Lúc có thể trốn đi, Người lại chối từ; dầu vậy, hơn một lần Người đã lánh đi, khi người ta gài bẫy định bắt Người.
 

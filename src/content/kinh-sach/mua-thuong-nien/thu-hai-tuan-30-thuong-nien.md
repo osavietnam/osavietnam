@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 30 Thường Niên"
 order: 205
 ---
 
-*Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Anh em thân mến hãy coi chừng đừng để cho biết bao ân huệ Chúa ban lại trở nên án phạt cho tất cả chúng ta, nếu chúng ta không sống xứng đáng với Người và hoà thuận với nhau mà làm những điều tốt lành và đẹp lòng Người. Quả vậy, có nơi Sách Thánh nói : Thần Khí của Chúa là ngọn đèn soi thấu thâm cung lòng người.
 

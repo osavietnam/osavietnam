@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 20 Thường Niên"
 order: 138
 ---
 
-*Trích khảo luận kinh Kính Mừng của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.*
+**Trích khảo luận kinh Kính Mừng của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.**
 
 Hằng ngày, khi đọc lại lời chào của sứ thần để sốt sắng chào mừng Đức Trinh Nữ rất thánh, chúng ta hay thêm vào câu Con lòng Bà gồm phúc lạ. Sau lời chào của Trinh Nữ, bà Ê-li-sa-bét đã nói thêm câu kết trên đây như thể lặp lại phần cuối trong lời chào của sứ thần. Bà nói : Bà có phúc lạ hơn mọi người nữ, và Giê-su con lòng Bà gồm phúc lạ. Người con nói đây chính là hoa trái mà ông I-sai-a đã báo trước : Ngày đó, chồi non ĐỨC CHÚA cho mọc lên sẽ là vinh quang và danh dự, và hoa màu từ ruộng đất trổ sinh sẽ là niềm hãnh diện và tự hào. Hoa trái đó là ai nếu không phải là Đấng Thánh của dân Ít-ra-en, tức chính là miêu duệ của ông Áp-ra-ham, là chồi lộc của Chúa, là đoá hoa trổ sinh từ gốc tổ Gie-sê, là hoa trái đem lại sự sống mà chúng ta đã được thông chia ?
 

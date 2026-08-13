@@ -10,7 +10,7 @@ order: 1
 draft: false
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Khi ban cho các môn đệ quyền cho người ta được tái sinh làm con Thiên Chúa, Chúa Giê-su nói với các ông : Anh em hãy đi và làm cho muôn dân trở thành môn đệ, làm phép rửa cho họ, nhân danh Chúa Cha và Chúa Con và Chúa Thánh Thần.
 

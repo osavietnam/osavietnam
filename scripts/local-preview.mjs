@@ -5,6 +5,7 @@ import { extname, join, normalize, resolve } from 'node:path';
 const root = resolve(process.cwd(), 'dist');
 const host = process.env.HOST || '0.0.0.0';
 const port = Number(process.env.PORT || 4321);
+const basePath = (process.env.BASE_PATH || '').replace(/\/$/, '');
 const sourceOrigin = 'https://www.augustinianorder.org';
 
 const types = {
@@ -79,7 +80,10 @@ async function resolveStatic(pathname) {
 createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || `${host}:${port}`}`);
   if (url.pathname === '/api/central-news-article') return proxyArticle(url, res);
-  const file = await resolveStatic(url.pathname);
+  const pathname = basePath && (url.pathname === basePath || url.pathname.startsWith(`${basePath}/`))
+    ? url.pathname.slice(basePath.length) || '/'
+    : url.pathname;
+  const file = await resolveStatic(pathname);
   if (!file) return send(res, 404, 'Not found');
   try {
     const data = await readFile(file);

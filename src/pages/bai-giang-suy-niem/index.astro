@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
 import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+import ArticleInlineManager from '../../components/ArticleInlineManager.astro';
 
 const seasons = [
   'Mùa Vọng',
@@ -87,6 +88,7 @@ const seasonGroups = seasons.map((season) => ({
       />
     </section>
   </ArticleLibraryLanding>
+  <ArticleInlineManager kind="sermon" />
 </BaseLayout>
 
 <style>

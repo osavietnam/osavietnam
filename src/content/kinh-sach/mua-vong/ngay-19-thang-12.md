@@ -8,7 +8,7 @@ liturgy: "Ngày 19 Tháng 12"
 order: 23
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Thiên Chúa là vinh quang của con người, nhưng con người lại đón nhận hoạt động của Thiên Chúa với tất cả sự khôn ngoan và quyền năng của Người.
 

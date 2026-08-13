@@ -1,3 +1,5 @@
+import articleTaxonomy from '../data/article-taxonomy.json';
+
 export type ArticleCategoryTone =
   | 'green'
   | 'violet'
@@ -10,8 +12,26 @@ export type ArticleCategoryTone =
   | 'news'
   | 'neutral';
 
+const taxonomyTones = new Map<string, ArticleCategoryTone>();
+const taxonomyVariants = new Map<string, number>();
+for (const [groupKey, group] of Object.entries(articleTaxonomy)) {
+  for (const [categoryIndex, category] of group.categories.entries()) {
+    const tone = (category.tone || 'neutral') as ArticleCategoryTone;
+    const normalizedCategory = category.label.toLocaleLowerCase('vi').trim();
+    taxonomyTones.set(normalizedCategory, tone);
+    if (groupKey !== 'scholar') taxonomyVariants.set(normalizedCategory, categoryIndex + 1);
+    for (const [subcategoryIndex, subcategory] of (category.subcategories ?? []).entries()) {
+      const normalizedSubcategory = subcategory.toLocaleLowerCase('vi').trim();
+      taxonomyTones.set(normalizedSubcategory, tone);
+      taxonomyVariants.set(normalizedSubcategory, subcategoryIndex + 1);
+    }
+  }
+}
+
 export const articleCategoryTone = (category?: string): ArticleCategoryTone => {
-  const value = (category ?? '').toLocaleLowerCase('vi');
+  const value = (category ?? '').toLocaleLowerCase('vi').trim();
+  const taxonomyTone = taxonomyTones.get(value);
+  if (taxonomyTone) return taxonomyTone;
   if (
     value === 'cộng đoàn'
     || value === 'dòng'
@@ -61,6 +81,8 @@ export const isAugustineAuthor = (author?: string) =>
 
 export const articleCategoryVariant = (category?: string): number => {
   const value = (category ?? '').toLocaleLowerCase('vi').trim();
+  const taxonomyVariant = taxonomyVariants.get(value);
+  if (taxonomyVariant) return taxonomyVariant;
   const newsVariants: Array<[string, number]> = [
     ['cộng đoàn', 1],
     ['dòng', 2],

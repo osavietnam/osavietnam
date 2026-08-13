@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 26 Thường Niên"
 order: 180
 ---
 
-*Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.*
+**Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.**
 
 Tôi xác tín là anh em thông thạo Kinh Thánh và chẳng có gì là bí ẩn đối với anh em. Phần tôi thì không được như vậy. Tôi chỉ mượn lời Kinh Thánh mà nói : Anh em nổi nóng ư ? Đừng phạm tội : Chớ để mặt trời lặn mà cơn giận vẫn còn. Phúc cho ai nhớ điều ấy. Tôi nghĩ rằng anh em đã giữ như vậy.
 

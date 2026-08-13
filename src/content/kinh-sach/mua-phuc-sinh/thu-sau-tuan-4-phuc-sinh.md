@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 4 Phục Sinh"
 order: 26
 ---
 
-*Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Anh em thân mến, con đường đưa chúng ta đến ơn cứu độ chính là Đức Giê-su Ki-tô. Người là Thượng Tế hiến dâng của lễ thay cho chúng ta, là Đấng bảo trợ và cứu giúp chúng ta, loài phàm nhân yếu đuối.
 

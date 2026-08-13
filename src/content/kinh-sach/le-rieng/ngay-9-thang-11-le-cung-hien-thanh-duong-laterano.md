@@ -15,7 +15,7 @@ Thánh đường La-tê-ra-nô là vương cung thánh đường của đức gi
 
 </div>
 
-*Trích bài giảng của thánh Xê-da-ri-ô, giám mục Ác-lơ.*
+**Trích bài giảng của thánh Xê-da-ri-ô, giám mục Ác-lơ.**
 
 Anh em thân mến, hôm nay nhờ lòng khoan nhân của Đức Ki-tô, chúng ta hân hoan mừng rỡ cử hành ngày kỷ niệm khánh thành ngôi đền thờ này. Nhưng chính chúng ta phải là đền thờ đích thực và sống động của Thiên Chúa. Dân Ki-tô hữu quả có lý khi trung thành mừng kính ngày lễ trọng đại của Mẹ Hội Thánh, vì họ biết nhờ Mẹ Hội Thánh mà họ được tái sinh vào cuộc sống thiêng liêng. Bởi vì khi sinh ra lần đâu, chúng ta là những kẻ đáng hứng chịu cơn thịnh nộ của Thiên Chúa, nhưng lần sau chúng ta đã được trở nên những kẻ được Người xót thương. Lần sinh thứ nhất dẫn chúng ta đến cõi chết, còn lần sinh thứ hai lại đưa chúng ta về cõi sống.
 

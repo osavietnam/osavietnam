@@ -8,7 +8,7 @@ liturgy: "Thứ 6 sau Thứ Tư Lễ Tro"
 order: 3
 ---
 
-*Trích bài giảng được coi như của thánh Gio-an Kim Khẩu.*
+**Trích bài giảng được coi như của thánh Gio-an Kim Khẩu.**
 
 Cầu nguyện hay nói chuyện với Thiên Chúa là điều cao quý nhất. Cầu nguyện là hiệp thông, là nên một với Người. Đôi mắt sáng lên khi nhìn thấy ánh sáng, tâm hồn hướng lên Thiên Chúa cũng được rạng ngời nhờ ánh quang khôn tả của Người. Cầu nguyện không chỉ là một cử chỉ bên ngoài, nhưng là một hành động phát xuất tự thâm tâm. Cầu nguyện không bị giới hạn vào thời gian giờ giấc, nhưng được thực hiện không ngừng bất kể ngày đêm.
 

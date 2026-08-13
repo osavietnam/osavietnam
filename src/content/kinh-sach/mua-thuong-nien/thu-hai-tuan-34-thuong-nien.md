@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 34 Thường Niên"
 order: 233
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Chúa nói : Nếu anh em không ăn ở công chính hơn các kinh sư và người Pha-ri-sêu, thì sẽ chẳng được vào Nước Trời. Nhưng làm sao ăn ở công chính hơn được, khi xót thương không vượt hẳn xét đoán ? Thụ tạo đã được dựng nên theo hình ảnh Thiên Chúa và giống như Thiên Chúa, nếu noi gương bắt chước Đấng Tạo Dựng, thì còn chi hợp lẽ và chính đáng bằng ? Chính Người đã phục hồi và thánh hoá các tín hữu khi tha tội cho họ, bỏ hẳn ý định trừng phạt nghiêm khắc, ngưng mọi cực hình, khiến cho tội nhân được trong trắng như xưa, và một khi tội lỗi chấm dứt thì nhân đức trổ sinh.
 

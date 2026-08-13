@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 23 Thường Niên"
 order: 161
 ---
 
-*Trích bài giảng của thánh A-tha-na-xi-ô, giám mục.*
+**Trích bài giảng của thánh A-tha-na-xi-ô, giám mục.**
 
 Ngôi Lời là Thiên Chúa và là Lời của Chúa Cha tốt lành vô cùng đã không bỏ mặc cho bản tính loài người chìm sâu trong hư hỏng, nên đã hiến chính bản thân để tiêu diệt sự chết như án phạt họ đã mắc phải, và đã dùng đạo lý của mình mà sửa trị tính lơ là của họ, lại dùng sức mạnh và quyền năng mà phục hồi tất cả những gì trước kia đã thuộc về loài người.
 

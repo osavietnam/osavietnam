@@ -11,9 +11,9 @@ draft: false
 ---
 Thánh nhân sinh năm 1480 tại Vin-xen-xa. Người học luật, nhưng sau khi làm linh mục, người trở thành một quan chức tại giáo triều Rôma. Người vừa chu toàn các công việc quản trị hành chánh, vừa để tâm chăm sóc các bệnh nhân và chuyên cần cầu nguyện. Cùng với các bạn là Gio-an, Phê-rô, Ca-ra-pha, người lập hội giáo sĩ chuyên lo giảng thuyết và phụng vụ. Người qua đời tại Na-pô-li năm 1547. 
 
-Nhờ đức tin, chúng ta có Đức Ki-tô ngự trong lòng 
+*Nhờ đức tin, chúng ta có Đức Ki-tô ngự trong lòng*
 
-*Trích thư của thánh Ga-ê-ta-nô, linh mục.*
+**Trích thư của thánh Ga-ê-ta-nô, linh mục.**
 
  
 

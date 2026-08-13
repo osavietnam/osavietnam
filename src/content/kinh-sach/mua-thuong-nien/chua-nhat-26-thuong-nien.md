@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 26 Thường Niên"
 order: 176
 ---
 
-*Mở đầu thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.*
+**Mở đầu thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.**
 
 Pô-li-ca-pô và các kỳ mục cộng sự viên kính gửi Hội Thánh lữ hành của Thiên Chúa tại Phi-líp-phê. Xin Thiên Chúa toàn năng và Chúa Giê-su Ki-tô, Đấng cứu độ chúng ta, ban cho anh em được hưởng dồi dào lòng thương xót và sự bình an.
 

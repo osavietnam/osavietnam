@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 29 Thường Niên"
 order: 198
 ---
 
-*Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.*
+**Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.**
 
 Chúng ta hãy luôn khao khát cuộc sống hạnh phúc đến từ Thiên Chúa là Chúa, và chúng ta hãy cầu nguyện luôn. Vì thế, khi dứt bỏ các mối bận tâm và công việc khác có thể làm cho chính lòng khao khát ra nguội lạnh, chúng ta chú tâm đến việc cầu nguyện vào những giờ ấn định. Những lời cầu nguyện nhắc nhở cho chúng ta mục đích mình khao khát hướng tới, kẻo lòng khao khát bắt đầu ra nguội lạnh, sẽ nguội lạnh hẳn và tắt lịm đi, trừ phi được nung nấu thường xuyên hơn.
 

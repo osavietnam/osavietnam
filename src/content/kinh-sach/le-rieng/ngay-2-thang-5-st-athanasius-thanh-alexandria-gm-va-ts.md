@@ -15,7 +15,7 @@ Thánh nhân sinh năm 295 tại A-lê-xan-ri-a. Người cộng tác, rồi k�
 
 </div>
 
-*Trích bài giảng của thánh A-tha-na-xi-ô, giám mục.*
+**Trích bài giảng của thánh A-tha-na-xi-ô, giám mục.**
 
 Ngôi Lời Thiên Chúa vốn không có thân xác, không thể hư hoại, và không phải là thể chất. Người đã ngự đến miền đất của chúng ta, mặc dù trước đó Người cũng không ở xa. Quả thế, chẳng bao giờ có nơi nào trong vũ trụ vắng bóng Người. Trái lại, Người luôn hiện hữu cùng với Chúa Cha, và đồng thời hiện diện trong muôn vật muôn loài ở khắp nơi khắp chốn.
 

@@ -9,7 +9,7 @@ rank: "none"
 order: 6
 ---
 
-*Trích khảo luận Chống lạc thuyết của thánh Hi-pô-ly-tô, linh mục.*
+**Trích khảo luận Chống lạc thuyết của thánh Hi-pô-ly-tô, linh mục.**
 
 Chúng ta tin, không phải vì những lời hão huyến thuyết phục, không phải vì những dao động nhất thời của con tim lôi cuốn, cũng không vì những lời êm dịu, hùng hồn mê hoặc, nhưng vì chúng ta đón nhận những lời phát xuất từ quyền năng của Thiên Chúa, và do đó, chúng ta không chối bỏ đức tin của mình.
 

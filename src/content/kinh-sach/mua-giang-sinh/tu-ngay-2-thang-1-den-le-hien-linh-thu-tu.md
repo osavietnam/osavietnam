@@ -8,7 +8,7 @@ liturgy: "Từ ngày 2 Tháng 1 đến Lễ Hiển Linh, Thứ Tư"
 order: 11
 ---
 
-*Trích sách Năm trăm luận đề thần học của thánh Mác-xi-mô Tuyên giáo, viện phụ.*
+**Trích sách Năm trăm luận đề thần học của thánh Mác-xi-mô Tuyên giáo, viện phụ.**
 
 Ngôi Lời Thiên Chúa sinh ra làm người chỉ có một lần (do lòng quảng đại và nhân ái của Người) ; nhưng Người muốn sinh ra cách thiêng liêng luôn mãi nơi những ai ao ước. Người trở nên bé thơ, ép mình cho vừa khả năng của họ. Người tỏ chính mình ra theo tầm mức lãnh hội của kẻ đón nhận ; Người giảm thiểu vẻ oai nghiêm của mình mà lòng chẳng chút đắng cay. Tuỳ theo mức độ và cách thức của những kẻ ao ước thấy Người, Người thích ứng theo khả năng tiếp nhận của họ. Dầu vậy, không ai thấu hiểu được Người vì mầu nhiệm của Người cao cả.
 

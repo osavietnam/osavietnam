@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Banner from '../components/Banner.astro';
 import ProseImageLightbox from '../components/ProseImageLightbox.astro';
-import { withBase } from '../lib/site-path';
+import BannerInlineEditor from '../components/BannerInlineEditor.astro';
 
 // Nạp NGUYÊN BẢN css gốc để giữ đúng thiết kế cũ
 import '../styles/base.css';
@@ -31,9 +31,10 @@ const pageTitle = title ? `OSA Việt Nam | ${title}` : 'OSA Việt Nam | Trang 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site) : undefined;
 const showVocationTail = title !== 'Admin';
+const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
 ---
 <!doctype html>
-<html lang="vi" data-theme="light">
+<html lang="vi" data-theme="light" data-public-build={publicStaticBuild ? 'true' : undefined}>
   <head>
     <meta charset="UTF-8" />
     <!-- Khởi tạo theme trước khi render để tránh flash (chạy đồng bộ) -->
@@ -49,6 +50,39 @@ const showVocationTail = title !== 'Admin';
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+      }());
+    </script>
+    <!-- Cho phép mở đồng thời một tab admin và một tab public khi API local vẫn chạy. -->
+    <script is:inline>
+      (function () {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var requestedMode = params.get('view');
+          if (requestedMode === 'public') {
+            sessionStorage.setItem('osa-preview-mode', 'public');
+          } else if (requestedMode === 'admin' || requestedMode === 'auto') {
+            sessionStorage.removeItem('osa-preview-mode');
+          }
+
+          var publicPreview = document.documentElement.dataset.publicBuild === 'true'
+            || sessionStorage.getItem('osa-preview-mode') === 'public';
+          document.documentElement.dataset.previewMode = publicPreview ? 'public' : 'admin';
+          if (!publicPreview) return;
+
+          window.__OSA_PUBLIC_PREVIEW__ = true;
+          var nativeFetch = window.fetch.bind(window);
+          window.fetch = function (input, init) {
+            var rawUrl = input instanceof Request ? input.url : String(input);
+            try {
+              var url = new URL(rawUrl, window.location.href);
+              var isLocalAdmin = url.port === '4322';
+              if (isLocalAdmin) {
+                return Promise.reject(new TypeError('Admin API disabled in public preview'));
+              }
+            } catch (error) {}
+            return nativeFetch(input, init);
+          };
+        } catch (error) {}
       }());
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -101,6 +135,7 @@ const showVocationTail = title !== 'Admin';
       </div>
     </div>
     <ProseImageLightbox />
+    <BannerInlineEditor />
     {bodyClass.includes('page-news-detail') && <button id="newsBackToggle" class="news-back-float" type="button" aria-label="Quay lại trang Tin tức">←</button>}
     <button id="topBtn" type="button" aria-label="Lên đầu trang">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -109,15 +144,13 @@ const showVocationTail = title !== 'Admin';
     </button>
 
     <script>
-      import { withBase } from '../lib/site-path';
-
       const topBtn = document.getElementById('topBtn');
       window.addEventListener('scroll', () => {
         topBtn?.classList.toggle('show', window.scrollY > 500);
         document.getElementById('newsBackToggle')?.classList.toggle('show', window.scrollY > 500);
       });
       topBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'auto' }));
-      document.getElementById('newsBackToggle')?.addEventListener('click', () => { window.location.href = withBase('/tin-tuc/'); });
+      document.getElementById('newsBackToggle')?.addEventListener('click', () => { window.location.href = '/tin-tuc/'; });
     </script>
 
     <script>
@@ -300,43 +333,34 @@ const showVocationTail = title !== 'Admin';
       })();
     </script>
 
-    <!-- ── Banner inline-edit (explicit admin preview only) ── -->
-    <div id="banner-oe-bar" hidden style="position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:.8rem;background:rgba(16,27,51,0.97);border:1px solid rgba(233,193,118,0.35);border-radius:10px;padding:.55rem 1.1rem;box-shadow:0 4px 20px rgba(0,0,0,.5);font-family:'Be Vietnam Pro',system-ui,sans-serif;font-size:1.2rem;">
-      <span style="color:rgba(233,193,118,.7);letter-spacing:.06em;text-transform:uppercase;">Banner</span>
-      <button id="banner-oe-edit" style="background:rgba(233,193,118,.12);border:1px solid rgba(233,193,118,.3);border-radius:6px;color:#e9c176;padding:.3rem .85rem;cursor:pointer;">Sửa</button>
-      <span id="banner-oe-actions" hidden style="display:flex;gap:.6rem;align-items:center;">
-        <button id="banner-oe-save"   style="background:#1a5e3c;border:none;border-radius:6px;color:#fff;padding:.3rem .85rem;cursor:pointer;">Lưu</button>
-        <button id="banner-oe-cancel" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#c9bfa9;padding:.3rem .85rem;cursor:pointer;">Huỷ</button>
-        <span id="banner-oe-msg" style="color:#e9c176;min-width:4rem;"></span>
-      </span>
-    </div>
+    <!-- Banner editor cũ đã được thay bằng BannerInlineEditor. -->
     <script>
     (function () {
-      const ADMIN = 'http://localhost:4322';
-      const bar     = document.getElementById('banner-oe-bar') as HTMLElement | null;
-      const editBtn = document.getElementById('banner-oe-edit') as HTMLButtonElement | null;
-      const actions = document.getElementById('banner-oe-actions') as HTMLElement | null;
-      const saveBtn = document.getElementById('banner-oe-save') as HTMLButtonElement | null;
-      const cancelBtn = document.getElementById('banner-oe-cancel') as HTMLButtonElement | null;
-      const msg     = document.getElementById('banner-oe-msg') as HTMLElement | null;
+      if (document.querySelector('[data-banner-editor-root]')) return;
+      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const bar = null;
+      const editBtn = null;
+      const actions = null;
+      const saveBtn = null;
+      const cancelBtn = null;
+      const msg = null;
       const bc      = document.querySelector<HTMLElement>('.banner-container[data-banner-key]');
-      // Never expose editing controls to ordinary visitors. Admin preview is
-      // opt-in via ?admin=1, so merely running the local admin API is not
-      // enough to make the toolbar appear in a normal browsing session.
-      const adminMode = new URLSearchParams(window.location.search).get('admin') === '1';
-      if (!adminMode) { bar?.remove(); return; }
       if (!bc) return; // trang không có banner chuẩn → bỏ qua
 
       const bannerKey = bc.dataset.bannerKey!;
+      const inlineEditBtn = bc.querySelector<HTMLButtonElement>('[data-banner-inline-edit]');
 
       // Phát hiện admin server
       fetch(ADMIN + '/api/banners').then(r => {
-        if (r.ok && bar) bar.removeAttribute('hidden');
+        if (r.ok) {
+          inlineEditBtn?.removeAttribute('hidden');
+        }
       }).catch(() => {});
 
       const origValues = new Map<HTMLElement, string>();
 
       function enterEdit() {
+        bar?.removeAttribute('hidden');
         document.querySelectorAll<HTMLElement>('[data-banner-field]').forEach(el => {
           origValues.set(el, el.innerHTML);
           el.setAttribute('contenteditable', 'true');
@@ -356,6 +380,7 @@ const showVocationTail = title !== 'Admin';
         });
         editBtn?.removeAttribute('hidden');
         actions?.setAttribute('hidden', '');
+        bar?.setAttribute('hidden', '');
       }
 
       function cancelEdit() {
@@ -413,16 +438,17 @@ const showVocationTail = title !== 'Admin';
       }
 
       editBtn?.addEventListener('click', enterEdit);
+      inlineEditBtn?.addEventListener('click', enterEdit);
       cancelBtn?.addEventListener('click', cancelEdit);
       saveBtn?.addEventListener('click', saveEdit);
     })();
     </script>
 
     <!-- Swap emblem SVG ↔ transparent color emblem theo theme; CSS giữ khung cố định -->
-    <script is:inline define:vars={{ emblemSvg: withBase('/images/emblem.svg'), emblemColor: withBase('/images/emblem-color-transparent.png') }}>
+    <script is:inline>
       (function () {
-        var SVG   = emblemSvg;
-        var COLOR = emblemColor;
+        var SVG   = '/images/emblem.svg';
+        var COLOR = '/images/emblem-color-transparent.png';
         function syncEmblems() {
           var light = document.documentElement.getAttribute('data-theme') === 'light';
           document.querySelectorAll('[data-emblem]').forEach(function (img) {

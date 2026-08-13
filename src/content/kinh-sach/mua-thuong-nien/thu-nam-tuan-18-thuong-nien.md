@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 18 Thường Niên"
 order: 124
 ---
 
-*Trích khảo luận của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.*
+**Trích khảo luận của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.**
 
 Tử thần thật mãnh liệt vì có sức cướp đoạt hồng ân sự sống của chúng ta. Tình yêu thật mãnh liệt vì có sức đưa ta đến hưởng sự sống tốt đẹp hơn.
 

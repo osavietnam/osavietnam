@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 1 Mùa Vọng"
 order: 3
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.**
 
 Chính Con Thiên Chúa, Đấng hằng có từ trước muôn đời, Đấng thiêng liêng vô hình, Đấng không ai hiểu thấu, là nguồn gốc phát xuất từ nguồn gốc, ánh sáng từ ánh sáng, Đấng là nguồn sự sống và sự bất tử, là biểu hiện trung thực của nguyên mẫu, là dấu ấn không phai nhoà, là hình ảnh giống hệt Chúa Cha trong mọi sự, là ý hướng và tư tưởng của Chúa Cha. Đấng ấy đang đến với loài người là hình ảnh của mình, mặc xác phàm vì người phàm, kết hợp với hồn thiêng vì linh hồn tôi, để dùng cái giống nhau mà thanh tẩy cái giống nhau và hoàn toàn trở nên giống con người, chỉ trừ tội lỗi. Người được Trinh Nữ cưu mang ; hồn xác Trinh Nữ được Thánh Thần giữ gìn nguyên vẹn (vì nếu phải trọng kính việc sinh hạ thì lại càng phải kính trọng sự đồng trinh hơn). Thiên Chúa ra đời mặc tính nhân loại, thành một hữu thể do hai nguyên lý trái ngược nhau là thể xác và tinh thần ; tinh thần ban thần tính, thể xác nhận thần tính.
 

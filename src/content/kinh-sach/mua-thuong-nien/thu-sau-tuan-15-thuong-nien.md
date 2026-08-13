@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 15 Thường Niên"
 order: 104
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Sau khi được thanh tẩy, các tân tòng rạng rỡ trong những dấu hiệu riêng biệt. Họ tiến lên bàn thờ Chúa Ki-tô, vừa đi vừa nói : Con sẽ bước lên bàn thờ Thiên Chúa, nguồn vui của lòng con. Một khi đã rũ sạch những sai làm xưa kia như rũ bỏ chiếc áo cũ, nên mới mẻ trẻ trung tựa chim bằng, họ mau mắn bước lên dự tiệc thánh bởi trời. Khi đến và thấy bàn thánh đã sẵn sàng, ho liền kêu lên : Chúa đã dọn sẵn cho con bữa tiệc. Vua Đa-vít đã nói thay họ : Chúa là mục tử chăn dắt tôi, tôi chẳng thiếu thốn gì. Trong đồng cỏ xanh tươi, Người cho tôi nằm nghỉ. Người đưa tôi tới dòng nước trong lành. Rồi sau đó : Dầu qua lũng âm u, con sợ gì nguy khốn, vì có Chúa ở cùng. Côn trượng ngài bảo vệ, con vững dạ an tâm. Chúa dọn sẵn cho con bữa tiệc ngay trước mặt quân thù. Đầu con Chúa xức đượm dầu thơm, ly rượu con tràn đầy chan chứa.
 

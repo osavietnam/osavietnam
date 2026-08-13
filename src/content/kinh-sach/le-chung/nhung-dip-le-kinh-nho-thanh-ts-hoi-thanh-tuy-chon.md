@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Ts. Hội Thánh (tùy chọn)"
 order: 14
 ---
 
-*Trích hiến chế tín lý Lời Thiên Chúa của công đồng Va-ti-ca-nô II về mặc khải của Thiên Chúa.*
+**Trích hiến chế tín lý Lời Thiên Chúa của công đồng Va-ti-ca-nô II về mặc khải của Thiên Chúa.**
 
 Nơi Chúa Ki-tô, toàn thể mặc khải của Thiên Chúa tối cao được hoàn tất trọn vẹn. Chúa Ki-tô đã truyền cho các tông đồ rao giảng Tin Mừng cho mọi người. Tin Mừng này đã được hứa trước qua các ngôn sứ, chính Người đã hoàn tất và chính miệng Người đã công bố. Tin Mừng ấy là nguồn của tất cả chân lý cứu độ và tất cả quy luật sống. Đồng thời Người cũng truyền cho các tông đồ, đang khi rao giảng, phải thông ban các ân huệ của Thiên Chúa.
 

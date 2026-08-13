@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 32 Thường Niên"
 order: 219
 ---
 
-*Trích bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Trích bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Chúa đã tỏ lòng thương xót chúng ta chừng nào ! Trước hết, chúng ta là người sống, nên không tế lễ, càng không thờ lạy những thần linh đã chết, nhưng thờ Đức Ki-tô, chúng ta đã nhận biết Chúa Cha là Đấng chân thật. Nhờ nhận thức nào mà chúng ta đến được với Chúa Cha, nếu không phải là nhận thức đã khiến chúng ta không chối bỏ Đức Ki-tô, Đấng giúp chúng ta nhận biết Chúa Cha ? Chính Đức Ki-tô đã nói : Phàm ai tuyên bố nhận Thầy trước mặt thiên hạ, thì Thầy cũng tuyên bố nhận người ấy trước mặt Cha Thầy. Đó là phần thưởng dành cho chúng ta nếu chúng ta tuyên xưng Người, Đấng đã cứu chúng ta. Nhưng tuyên xưng Người bằng cách nào ? Thưa bằng cách thi hành những điều Người dạy và không khinh rẻ mệnh lệnh Người truyền, tôn kính Người không chỉ ngoài miệng, nhưng hết tâm hồn và hết trí khôn. Trong sách I-sai-a, Thiên Chúa phán : Dân này chỉ tôn kính Ta bằng môi miệng, còn lòng chúng thì xa Ta lắm.
 

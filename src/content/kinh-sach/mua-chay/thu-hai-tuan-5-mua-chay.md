@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 5 Mùa Chay"
 order: 40
 ---
 
-*Trích bài chú giải Thánh Vịnh của thánh Gio-an Phi-sơ, giám mục, tử đạo.*
+**Trích bài chú giải Thánh Vịnh của thánh Gio-an Phi-sơ, giám mục, tử đạo.**
 
 Đức Giê-su Ki-tô là Thượng Tế của chúng ta, thân xác quý giá của Người là hy lễ của chúng ta. Người đã hiến tế trên bàn thờ thập giá để đem lại ơn cứu độ cho mọi người.
 

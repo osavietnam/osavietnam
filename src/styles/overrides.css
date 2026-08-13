@@ -452,6 +452,11 @@ html[data-theme="light"] .article-meta-media .article-author-badge[data-author-a
 .article-category-badge[data-category-tone="spirituality"][data-category-variant="1"] { --category-bg:oklch(48% .13 165); --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="spirituality"][data-category-variant="2"] { --category-bg:oklch(48% .13 175); --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="spirituality"][data-category-variant="3"] { --category-bg:oklch(48% .13 185); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="4"] { --category-bg:#176b63; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="5"] { --category-bg:#1d6475; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="6"] { --category-bg:#285f78; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="7"] { --category-bg:#315b72; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="8"] { --category-bg:#38576b; --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="philosophy"] {
   --category-bg:#a84608;
   --category-ink:#ffffff;
@@ -477,6 +482,10 @@ html[data-theme="light"] .article-meta-media .article-author-badge[data-author-a
 .article-category-badge[data-category-tone="philosophy"][data-category-variant="2"] { --category-bg:#b42318; --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="philosophy"][data-category-variant="3"] { --category-bg:#9a3412; --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="philosophy"][data-category-variant="4"] { --category-bg:#6d28d9; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="5"] { --category-bg:#be185d; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="6"] { --category-bg:#c2410c; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="7"] { --category-bg:#7c3aed; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="8"] { --category-bg:#a21caf; --category-ink:#ffffff; }
 /* Thần: dải OKLCH đồng độ sáng/chroma, đi liền mạch từ teal đến lam. */
 .article-category-badge[data-category-tone="theology"][data-category-variant="1"] { --category-bg:oklch(48% .13 165); --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="theology"][data-category-variant="2"] { --category-bg:oklch(48% .13 175); --category-ink:#ffffff; }
@@ -487,6 +496,59 @@ html[data-theme="light"] .article-meta-media .article-author-badge[data-author-a
 .article-category-badge[data-category-tone="theology"][data-category-variant="7"] { --category-bg:oklch(48% .13 225); --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="theology"][data-category-variant="8"] { --category-bg:oklch(48% .13 235); --category-ink:#ffffff; }
 .article-category-badge[data-category-tone="theology"][data-category-variant="9"] { --category-bg:oklch(48% .13 245); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"] { --category-bg:#465b68; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="1"] { --category-bg:#465b68; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="2"] { --category-bg:#3f6170; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="3"] { --category-bg:#4c596f; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="4"] { --category-bg:#5b536d; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="5"] { --category-bg:#645064; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="6"] { --category-bg:#6b514f; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="7"] { --category-bg:#62594b; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="8"] { --category-bg:#506050; --category-ink:#ffffff; }
+/* Palette mở rộng: mỗi category/subcategory mới dùng một slot riêng theo thứ tự taxonomy. */
+.article-category-badge[data-category-tone="news"][data-category-variant="5"] { --category-bg:#7c3f91; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="6"] { --category-bg:#006b75; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="7"] { --category-bg:#a33a52; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="8"] { --category-bg:#4e5f9b; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="9"] { --category-bg:#8f4a18; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="10"] { --category-bg:#286f64; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="11"] { --category-bg:#71558f; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="12"] { --category-bg:#375f88; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="13"] { --category-bg:#8a3048; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="14"] { --category-bg:#684787; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="15"] { --category-bg:#9b3e22; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="news"][data-category-variant="16"] { --category-bg:#2f6d8c; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="9"] { --category-bg:#265977; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="10"] { --category-bg:#31547b; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="11"] { --category-bg:#3f507b; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="12"] { --category-bg:#4d4d77; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="13"] { --category-bg:#584b70; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="14"] { --category-bg:#624b67; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="15"] { --category-bg:#684d5c; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="spirituality"][data-category-variant="16"] { --category-bg:#6a514f; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="9"] { --category-bg:#881337; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="10"] { --category-bg:#991b1b; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="11"] { --category-bg:#b45309; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="12"] { --category-bg:#7e22ce; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="13"] { --category-bg:#c026d3; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="14"] { --category-bg:#db2777; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="15"] { --category-bg:#ea580c; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="philosophy"][data-category-variant="16"] { --category-bg:#9333ea; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="10"] { --category-bg:oklch(48% .13 255); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="11"] { --category-bg:oklch(48% .13 265); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="12"] { --category-bg:oklch(48% .13 275); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="13"] { --category-bg:oklch(48% .13 285); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="14"] { --category-bg:oklch(48% .13 295); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="15"] { --category-bg:oklch(48% .13 305); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="theology"][data-category-variant="16"] { --category-bg:oklch(48% .13 315); --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="9"] { --category-bg:#3e6470; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="10"] { --category-bg:#4a6078; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="11"] { --category-bg:#585b7a; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="12"] { --category-bg:#675777; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="13"] { --category-bg:#74536e; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="14"] { --category-bg:#7b5261; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="15"] { --category-bg:#79564f; --category-ink:#ffffff; }
+.article-category-badge[data-category-tone="neutral"][data-category-variant="16"] { --category-bg:#6f5d45; --category-ink:#ffffff; }
 html[data-theme="light"] .article-category-badge {
   --category-bg: #68635c;
   --category-ink: #fffdf8;
@@ -511,21 +573,9 @@ html[data-theme="light"] .article-category-badge[data-category-tone="news"][data
 html[data-theme="light"] .article-category-badge[data-category-tone="news"][data-category-variant="2"] { --category-bg:#1f6548; --category-ink:#ffffff; }
 html[data-theme="light"] .article-category-badge[data-category-tone="news"][data-category-variant="3"] { --category-bg:#315f91; --category-ink:#ffffff; }
 html[data-theme="light"] .article-category-badge[data-category-tone="news"][data-category-variant="4"] { --category-bg:#8c681d; --category-ink:#ffffff; }
-html[data-theme="light"] .article-category-badge[data-category-tone="spirituality"] {
-  --category-bg: oklch(48% .13 165);
-  --category-ink: #ffffff;
-}
 html[data-theme="light"] .article-category-badge[data-category-tone="spirituality"][data-category-variant="1"] { --category-bg:oklch(48% .13 165); --category-ink:#ffffff; }
 html[data-theme="light"] .article-category-badge[data-category-tone="spirituality"][data-category-variant="2"] { --category-bg:oklch(48% .13 175); --category-ink:#ffffff; }
 html[data-theme="light"] .article-category-badge[data-category-tone="spirituality"][data-category-variant="3"] { --category-bg:oklch(48% .13 185); --category-ink:#ffffff; }
-html[data-theme="light"] .article-category-badge[data-category-tone="philosophy"] {
-  --category-bg:#a84608;
-  --category-ink:#ffffff;
-}
-html[data-theme="light"] .article-category-badge[data-category-tone="theology"] {
-  --category-bg: oklch(48% .13 205);
-  --category-ink: #ffffff;
-}
 html[data-theme="light"] .article-category-badge[data-category-tone="liturgy"] {
   --category-bg:#3a8b65;
   --category-ink:#ffffff;
@@ -571,7 +621,16 @@ html, body { background: var(--bg-main); }
 
 /* ---------- 1b. MARGIN NỘI DUNG ĐỒNG BỘ TOÀN SITE ---------- */
 /* Một nguồn duy nhất cho padding ngang — mọi trang đều hưởng */
-main.content { padding-left: 3rem; padding-right: 3rem; }
+:root {
+  --site-content-max: 112rem;
+  --site-page-gutter-desktop: 4rem;
+  --site-page-gutter-mobile: 1.5rem;
+  --site-prose-gutter-mobile: 4rem;
+}
+#main > main.content {
+  padding-left: var(--site-page-gutter-desktop);
+  padding-right: var(--site-page-gutter-desktop);
+}
 /* Các container trang không tự thêm padding ngang nữa (main.content lo) */
 .listing      { max-width: 100%; padding-left: 0; padding-right: 0; }
 .articles-page { max-width: 100%; padding-left: 0; padding-right: 0; }
@@ -759,9 +818,38 @@ h4, h5 { color: var(--ink-cream); }
 .banner-dot[data-active] { background: var(--gold); transform: scale(1.35); }
 
 .banner-quote {
+  --banner-quote-text: #c9bfa9;
+  --banner-quote-cite: rgba(201,191,169,.72);
+  --banner-quote-accent: #e9c176;
   text-align: center;
   margin: 1.44rem auto 0;
   max-width: 72rem;
+}
+.banner-quote .bvq-text {
+  margin: 0 auto 1.2rem;
+  color: var(--banner-quote-text);
+  font-size: 1.6245rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+.banner-quote .bvq-cite {
+  color: var(--banner-quote-cite);
+  font-size: .96rem;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: .12em;
+  opacity: 1;
+  text-shadow: none;
+}
+.banner-quote .bvq-lord,
+.banner-quote .bvq-wisdom,
+.banner-quote .bvq-cite em {
+  color: var(--banner-quote-accent);
+}
+[data-theme="light"] .banner-quote {
+  --banner-quote-text: #344239;
+  --banner-quote-cite: #2f392f;
+  --banner-quote-accent: #775a19;
 }
 
 /* ---------- 5. CHUẨN HOÁ CARD (theo .a-card trang Bài Viết) ---------- */
@@ -1249,8 +1337,7 @@ body.page-tu-thuat .toc { top: calc(var(--tt-navbar-height, 6.58rem) + var(--tt-
 [data-theme="light"] .ks-season-tab:hover { color: rgba(42, 30, 16, 0.85); }
 [data-theme="light"] .ks-season-tab.active { color: #1a5e3c; border-bottom-color: #1a5e3c; }
 
-/* Badge fill tay + nút edit — light mode */
-[data-theme="light"] .tag-manual { color:#ffffff; background:#2b6570; border-color:#2b6570; }
+/* Nút edit bảng Kinh Sách — light mode */
 [data-theme="light"] .row-edit-btn { color: #1a5e3c; background: rgba(26, 94, 60, 0.08); border-color: rgba(26, 94, 60, 0.3); }
 [data-theme="light"] .row-edit-btn:hover { background: rgba(26, 94, 60, 0.16); border-color: #1a5e3c; }
 [data-theme="light"] .readings-table tbody tr.row-unfilled .row-edit-btn { color: #7a5a1a; border-color: rgba(122, 90, 26, 0.5); background: rgba(122, 90, 26, 0.12); }
@@ -2025,7 +2112,7 @@ html[data-theme="light"] .bio-fig {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* --- 8r. DocumentReader — Tu Luật / Hiến Chương / Ratio (scoped) --- */
+/* --- 8r. DocumentReader — Tu Luật / Hiến Pháp / Ratio (scoped) --- */
 
 /* Floating lang switcher: từ dark-navy sang teal green */
 html[data-theme="light"] .fl-lang.current {
@@ -2199,7 +2286,7 @@ html[data-theme="light"] .article-num.flash {
   opacity: 1;
 }
 
-/* ── Watermark emblem (tu-luat, hien-chuong, ratio) ── */
+/* ── Watermark emblem (tu-luat, hien-phap, ratio) ── */
 .cs-body {
   position: relative;
 }
@@ -2229,25 +2316,32 @@ html[data-theme="light"] .article-num.flash {
   z-index: 1;
 }
 
-/* DocumentReader: keep the prose surface below the emblem and the copy above it. */
-.page-document-reader .content-watermark {
-  display: none;
-}
-.page-document-reader .prose::after {
-  content: '';
+/* DocumentReader: emblem thật nằm trong prose để không bị nền đọc che mất. */
+.page-document-reader .document-prose-watermark {
   position: fixed;
   top: 50%;
   left: 50%;
   z-index: 0;
-  width: 38rem;
-  height: 38rem;
+  display: block;
+  width: clamp(36rem, 34vw, 48rem);
+  height: auto;
   transform: translate(-50%, -50%) rotate(-30deg);
-  background: url('/images/emblem.svg') center / contain no-repeat;
-  opacity: .07;
+  opacity: .075;
   pointer-events: none;
   user-select: none;
+  line-height: 0;
 }
-.page-document-reader .prose > * {
+.page-document-reader .document-prose-watermark img {
+  position: static;
+  left: auto;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 0;
+  transform: none;
+}
+.page-document-reader .prose > :not(.document-prose-watermark) {
   position: relative;
   z-index: 1;
 }
@@ -2259,8 +2353,10 @@ html[data-theme="light"] .article-num.flash {
 [data-theme="light"] .content-watermark img {
   filter: brightness(0);
 }
-[data-theme="light"] .page-document-reader .prose::after {
-  opacity: .10;
+[data-theme="light"] .page-document-reader .document-prose-watermark {
+  opacity: .09;
+}
+[data-theme="light"] .page-document-reader .document-prose-watermark img {
   filter: brightness(0);
 }
 
@@ -3533,11 +3629,6 @@ html[data-theme="light"] .article-num.flash {
 [data-theme="light"] .bv-quotes .bvq-cite em { color: #5c3f08 !important; -webkit-text-fill-color: #5c3f08; }
 [data-theme="light"] .bv-quotes .bvq-dot { background: rgba(52,66,57,.24); }
 [data-theme="light"] .bv-quotes .bvq-dot.active { background: #775a19; }
-[data-theme="light"] .banner-quote .bvq-text { color: #344239; font-weight: 400; }
-[data-theme="light"] .banner-quote .bvq-wisdom { color:#775a19; }
-[data-theme="light"] .banner-quote .bvq-cite { color: #2f392f !important; -webkit-text-fill-color: #2f392f; font-size: .96rem; font-weight: 500; letter-spacing: .12em; opacity: 1; text-shadow: none; }
-[data-theme="light"] .banner-quote .bvq-cite em { color: #5c3f08 !important; -webkit-text-fill-color: #5c3f08; }
-
 .bv-catnav { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 3rem; }
 .bv-catnav-pill {
   font-family: var(--font-ui); font-size: 1.2rem; font-weight: 500;
@@ -4379,42 +4470,6 @@ html.has-prose-lightbox { overflow:hidden; }
   .art-rel-arrow { display: none; }
 }
 
-/* ══ INLINE EDIT TOOLBAR (dùng chung mọi trang) ═════════════ */
-.oe-bar {
-  position: fixed;
-  bottom: 2.4rem; right: 2.4rem;
-  z-index: 9999;
-  display: flex; align-items: center; gap: 0.8rem;
-  background: rgba(10,18,36,0.92);
-  border: 1px solid rgba(233,193,118,0.3);
-  border-radius: 100px;
-  padding: 0.65rem 1.2rem;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-}
-.oe-bar[hidden] { display: none; }
-.oe-bar-btn {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 1.22rem; font-weight: 600;
-  background: transparent; border: none; cursor: pointer;
-  color: var(--gold);
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 100px;
-  transition: color 0.15s, background 0.15s;
-}
-.oe-bar-btn:hover { color: #fff; background: rgba(233,193,118,0.15); }
-.oe-bar-cancel { color: var(--ink-cream-soft); }
-.oe-bar-cancel:hover { color: #fff; }
-.oe-bar-save { color: #101b33; background: var(--gold); padding: 0.3rem 1.1rem; }
-.oe-bar-save:hover { background: #f4d98f; }
-.oe-save-row { display: flex; align-items: center; gap: 0.7rem; }
-.oe-save-row[hidden] { display: none; }
-.oe-msg {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 1.1rem; color: var(--ink-cream-soft);
-  white-space: nowrap;
-}
 .oe-editing [data-oe] {
   outline: 1px dashed rgba(233,193,118,0.4);
   border-radius: 3px; cursor: text;
@@ -4651,7 +4706,7 @@ html.has-prose-lightbox { overflow:hidden; }
 /* Kinh Sách — related reading cards (global fallback for detail pages) */
 .page-kinh-sach .ks-related {
   max-width: 112rem;
-  margin: 2.4rem auto 7rem;
+  margin: clamp(5rem, 7vw, 7rem) auto 7rem;
 }
 .page-kinh-sach .ks-related h2 {
   margin: 0 0 1rem;
@@ -4687,7 +4742,7 @@ html.has-prose-lightbox { overflow:hidden; }
 [data-theme="light"] .page-kinh-sach .ks-related-meta,
 [data-theme="light"] .page-kinh-sach .ks-related-excerpt { color: #4a5040; }
 @media (max-width: 640px) {
-  .page-kinh-sach .ks-related { margin-bottom: 5rem; }
+  .page-kinh-sach .ks-related { margin-top: 4.25rem; margin-bottom: 5rem; }
   .page-kinh-sach .ks-related-grid { grid-template-columns: 1fr; }
 }
 
@@ -4752,8 +4807,32 @@ body.page-tu-thuat .toc { top: calc(var(--tt-navbar-height, 6.58rem) + var(--tt-
   body { overflow-x: clip; }
   #main, .site-wrapper, main.content, main.content > * { min-width: 0; max-width: 100%; }
   #main, .site-wrapper { overflow-x: clip; }
-  main.content { padding: 2.2rem 1.35rem 4.8rem; }
+  #main > main.content {
+    padding: 2.2rem var(--site-page-gutter-mobile) 4.8rem;
+  }
   body.page-home main.content { padding: 0; }
+
+  /* Canonical reader frame: page gutter outside, reading gutter inside. */
+  body #main > main.content :is(
+    .spirit-reader,
+    .sermon-reader,
+    .news-reading,
+    .aug-ency-reader,
+    .aug-life-reader,
+    .aug-work-reader,
+    .aug-community-reader,
+    .aug-history-reader
+  ) {
+    width: 100%;
+    max-width: var(--site-content-max);
+    margin-inline: auto;
+  }
+
+  body #main > main.content .prose {
+    width: calc(100% - 2 * (var(--site-prose-gutter-mobile) - var(--site-page-gutter-mobile)));
+    max-width: var(--site-content-max);
+    margin-inline: auto;
+  }
 
   /* Media and embeds never widen the viewport. */
   img, video, canvas, svg { max-width: 100%; }
@@ -4790,7 +4869,7 @@ body.page-tu-thuat .toc { top: calc(var(--tt-navbar-height, 6.58rem) + var(--tt-
   #topBtn { right: 1.35rem; bottom: max(1.35rem, env(safe-area-inset-bottom)); }
   .news-back-float { right: 5.9rem; bottom: max(1.35rem, env(safe-area-inset-bottom)); }
 
-  /* DocumentReader (Tu Luật, Hiến Chương, Ratio): stack the TOC toggle above
+  /* DocumentReader (Tu Luật, Hiến Pháp, Ratio): stack the TOC toggle above
      Go up, with a generous gap so their tap targets never overlap. */
   #docFloatToc {
     right: 1.35rem;
@@ -5527,7 +5606,7 @@ html[data-theme="light"] body.page-thanh-au-tinh .works-sources {
   }
 }
 
-/* ==========================================================================
+/* ========================================================================== 
    GLOBAL TOC PANEL — DocumentReader, Tự thuật and floating mobile readers
    ========================================================================== */
 :root {
@@ -5827,13 +5906,24 @@ body.page-tu-luat .prose h2 {
   }
 }
 
-/* ==========================================================================
+/* ========================================================================== 
    CANONICAL TOC SKIN — single source for every reader page
    ========================================================================== */
 @media (min-width: 1100px) {
   .article-shell.has-toc {
     grid-template-columns: 3.55rem minmax(0, 1fr) !important;
     column-gap: 1.65rem !important;
+  }
+  /* The collapsed TOC rail sits outside a centred 112rem reading column. */
+  #main > main.content .article-shell.has-toc:not(.toc-open) {
+    width: min(calc(100% - 4rem), calc(var(--site-content-max) + 5.2rem));
+    max-width: none;
+    left: -2.6rem;
+  }
+  #main > main.content .article-shell.has-toc.toc-open { left: 0; }
+  #main > main.content .article-shell.has-toc:not(.toc-open) > :is(.prose, #tt-chapter-wrap) {
+    width: 100%;
+    max-width: var(--site-content-max);
   }
   .article-shell.has-toc.toc-open {
     grid-template-columns: 24rem minmax(0, 1fr) !important;
@@ -5860,7 +5950,7 @@ body.page-tu-luat .prose h2 {
   transform: translateY(0) !important;
 }
 
-/* Shared trigger — same geometry on Tự Thuật, Tự Luật, Hiến Chương, Ratio, etc. */
+/* Shared trigger — same geometry on Tự Thuật, Tự Luật, Hiến Pháp, Ratio, etc. */
 body .article-shell.has-toc > .toc .toc-trigger {
   min-height: 3.55rem !important;
   padding: .55rem .8rem !important;
@@ -6033,3 +6123,128 @@ body .article-shell.has-toc > .toc .toc-depth-3 a.active {
   font-weight: 380 !important;
 }
 
+/* Shared inline editing palette ------------------------------------------------
+   One solid, accessible visual system for every local inline editor. */
+:root {
+  --inline-edit-panel: #101c18;
+  --inline-edit-panel-alt: #15241e;
+  --inline-edit-field: #09140f;
+  --inline-edit-border: #5f563b;
+  --inline-edit-border-strong: #b78b43;
+  --inline-edit-text: #f1ead8;
+  --inline-edit-muted: #b9c1b9;
+  --inline-edit-accent: #e9c176;
+  --inline-edit-accent-text: #102118;
+  --inline-edit-danger: #ff9d91;
+  --inline-edit-backdrop: rgba(3, 8, 6, .78);
+}
+html[data-theme="light"] {
+  --inline-edit-panel: #fffdf8;
+  --inline-edit-panel-alt: #edf3ed;
+  --inline-edit-field: #ffffff;
+  --inline-edit-border: #aebdaf;
+  --inline-edit-border-strong: #27664c;
+  --inline-edit-text: #183e2c;
+  --inline-edit-muted: #53685b;
+  --inline-edit-accent: #27664c;
+  --inline-edit-accent-text: #ffffff;
+  --inline-edit-danger: #a8322d;
+  --inline-edit-backdrop: rgba(18, 35, 27, .48);
+}
+
+html body :is(.banner-editor-dialog,.augnet-edit-dialog,.ency-edit-dialog,.ks-inline-dialog,.timeline-inline-dialog,.saint-inline-dialog) {
+  border-color: var(--inline-edit-border);
+  color: var(--inline-edit-text);
+  background: var(--inline-edit-panel);
+  box-shadow: 0 1.5rem 4rem rgba(0,0,0,.38);
+}
+html body :is(.banner-editor-dialog,.augnet-edit-dialog,.ency-edit-dialog,.ks-inline-dialog,.timeline-inline-dialog,.saint-inline-dialog)::backdrop {
+  background: var(--inline-edit-backdrop);
+  backdrop-filter: blur(3px);
+}
+html body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) > header,
+html body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) > footer {
+  border-color: var(--inline-edit-border);
+  background: var(--inline-edit-panel-alt);
+}
+html body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) header h2 {
+  color: var(--inline-edit-text);
+}
+html body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) header small {
+  color: var(--inline-edit-accent);
+}
+html[data-theme="light"] body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) header small {
+  color: var(--inline-edit-accent);
+}
+
+html body :is(.banner-editor-fields,.augnet-edit-fields,.ency-edit-fields,.ks-inline-fields,.timeline-inline-fields,.saint-inline-grid) :is(input[type="text"],input[type="url"],input[type="number"],input[type="file"],select,textarea) {
+  border-color: var(--inline-edit-border);
+  color: var(--inline-edit-text);
+  background: var(--inline-edit-field);
+  caret-color: var(--inline-edit-accent);
+}
+html body :is(.banner-editor-fields,.augnet-edit-fields,.ency-edit-fields,.ks-inline-fields,.timeline-inline-fields,.saint-inline-grid) :is(input,select,textarea):focus {
+  border-color: var(--inline-edit-border-strong);
+  outline: 2px solid color-mix(in srgb, var(--inline-edit-border-strong) 28%, transparent);
+  outline-offset: 1px;
+}
+html body :is(.banner-editor-fields,.augnet-edit-fields,.ency-edit-fields,.ks-inline-fields,.timeline-inline-fields,.saint-inline-grid) label > span,
+html body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) footer p {
+  color: var(--inline-edit-muted);
+}
+html body :is(.banner-editor-form,.augnet-edit-form,.ency-edit-form,.ks-inline-form,.timeline-inline-form,.saint-inline-form) footer p.is-error {
+  color: var(--inline-edit-danger);
+}
+html body :is(.banner-editor-close,.augnet-edit-close,.ency-edit-close,.ks-inline-close,.timeline-inline-close,.saint-inline-close) {
+  color: var(--inline-edit-muted);
+  background: transparent;
+}
+html body :is(.banner-editor-close,.augnet-edit-close,.ency-edit-close,.ks-inline-close,.timeline-inline-close,.saint-inline-close):hover {
+  color: var(--inline-edit-accent);
+  background: color-mix(in srgb, var(--inline-edit-accent) 12%, transparent);
+}
+html body :is(.banner-editor-save,.augnet-edit-save,.ency-edit-save,.ks-inline-save,.timeline-inline-save,.saint-inline-save) {
+  border-color: var(--inline-edit-accent);
+  color: var(--inline-edit-accent-text);
+  background: var(--inline-edit-accent);
+}
+html body :is(.banner-editor-cancel,.augnet-edit-cancel,.ency-edit-cancel,.ks-inline-cancel,.timeline-inline-cancel,.saint-inline-cancel) {
+  border-color: var(--inline-edit-border);
+  color: var(--inline-edit-text);
+  background: transparent;
+}
+
+html body .inline-prose-mode,
+html body .inline-prose-formatbar,
+html body .inline-prose-visual,
+html body .inline-prose-markdown {
+  border-color: var(--inline-edit-border);
+  color: var(--inline-edit-text);
+  background: var(--inline-edit-field);
+}
+html body .inline-prose-head > span,
+html body .inline-prose-note,
+html body .inline-prose-mode button,
+html body .inline-prose-formatbar button {
+  color: var(--inline-edit-muted);
+}
+html body .inline-prose-mode button[aria-pressed="true"] {
+  color: var(--inline-edit-accent-text);
+  background: var(--inline-edit-accent);
+}
+html body .inline-prose-formatbar button:hover,
+html body .inline-prose-formatbar button:focus-visible {
+  border-color: var(--inline-edit-border-strong);
+  color: var(--inline-edit-accent);
+  background: var(--inline-edit-panel-alt);
+}
+html body .inline-prose-visual:focus,
+html body .inline-prose-markdown:focus {
+  border-color: var(--inline-edit-border-strong);
+  outline: 2px solid color-mix(in srgb, var(--inline-edit-border-strong) 24%, transparent);
+}
+html body .inline-prose-visual :is(h2,h3,a) { color: var(--inline-edit-accent); }
+html body .inline-prose-visual blockquote {
+  border-left-color: var(--inline-edit-border-strong);
+  color: var(--inline-edit-muted);
+}

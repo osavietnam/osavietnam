@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 7 Thường Niên"
 order: 47
 ---
 
-*Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.*
+**Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.**
 
 Thiên Chúa ở khắp mọi nơi, mênh mông bát ngát, và ở đâu cũng gần gũi như lời Người làm chứng về mình : Phải chăng Ta chỉ là Thiên Chúa khi ở gần, chứ không phải Thiên Chúa khi ở xa ?
 

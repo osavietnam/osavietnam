@@ -1,14 +1,22 @@
 ---
 title: "Plato và Giả thiết Ý thể (Theory of Forms)"
 author: "Prof. Peter Kreeft"
+authorDetails:
 category: "Triết Học"
 subcategory: "Siêu Hình Học"
 excerpt: "Giả thiết Ý thể là một trong những tư tưởng nổi tiếng nhất của Plato, đồng thời là trung tâm của toàn bộ triết học Plato."
-date: 2025-09-02
+date: "2025-09-02"
+readings:
+tags:
+  - "Plato"
+  - "Siêu Hình Học"
+  - "Nhận Thức Luận"
+  - "Triết Học Cổ Đại"
 image: "../../../assets/plato.webp"
 heroImage: "../../../assets/plato-hero.png"
-tags: ["Plato", "Siêu Hình Học", "Nhận Thức Luận", "Triết Học Cổ Đại"]
+language: "vi"
 featured: true
+draft: false
 ---
 
 Để hiểu *Ý thể Cái Thiện* (*Form of the Good*), trước hết cần hiểu khái niệm *Ý thể* nơi Plato. *Giả thiết Ý thể* (*Theory of Forms*) — đôi khi còn được gọi bằng một tên dễ gây nhầm lẫn là *Giả thiết Ý niệm* (*Theory of Ideas*) — có thể được xem là tư tưởng nổi tiếng nhất trong lịch sử triết học, đồng thời là trái tim của toàn bộ triết học Plato.

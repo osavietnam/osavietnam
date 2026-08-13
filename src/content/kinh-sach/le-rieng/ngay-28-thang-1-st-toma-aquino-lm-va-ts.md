@@ -15,7 +15,7 @@ Sinh năm 1225 trong một gia đình quý tộc ở A-qui-nô, rồi người t
 
 </div>
 
-*Trích bài chia sẻ của thánh Tô-ma A-qui-nô, linh mục.*
+**Trích bài chia sẻ của thánh Tô-ma A-qui-nô, linh mục.**
 
 Có cần thiết Con Thiên Chúa phải chịu đau khổ vì chúng ta không ? Thưa cần lắm và có thể tóm lại trong hai lý do : một là để làm phương được chữa trị tội lỗi, hai là để làm gương cho chúng ta noi theo.
 

@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 5 Mùa Chay, Năm C"
 order: 39
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Luật Mô-sê truyền phải ném đá những kẻ ngoại tình. Mà luật không thể ra lệnh bắt phải làm điều bất chính, nên nếu có ai nói trái với điều luật truyền thì đó là người bất chính. Vì thế, người Pha-ri-sêu mới nói với nhau về Đức Giê-su : “Ông ấy được tiếng là người chân thật ; con người ông ấy toát ra sự hiền lành. Ta phải dựa vào đức công chính mà tấn công ông. Ta hãy dẫn đến một người đàn bà bị bắt quả tang phạm tội ngoại tình, và nói cho ông điều luật truyền về người đàn bà ấy”.
 

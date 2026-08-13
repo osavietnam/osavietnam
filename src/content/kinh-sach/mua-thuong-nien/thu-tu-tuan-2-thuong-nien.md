@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 2 Thường Niên"
 order: 11
 ---
 
-*Trích Hiến chế tín lý Ánh Sáng muôn dân của công đồng Va-ti-ca-nô II về Hội Thánh.*
+**Trích Hiến chế tín lý Ánh Sáng muôn dân của công đồng Va-ti-ca-nô II về Hội Thánh.**
 
 Do ý định khôn ngoan và nhân hậu, ý định hoàn toàn tự do và mầu nhiệm, Chúa Cha hằng hữu đã sáng tạo cả thế giới, và quyết định nâng con người lên, cho con người tham dự vào sự sống thần linh. Người không bỏ rơi những ai vì liên đới với A-đam mà đã sa ngã, nhưng luôn trợ giúp để họ đạt tới ơn cứu độ, nhờ chiêm ngưỡng Đức Ki-tô cứu thế, Đấng là hình ảnh Thiên Chúa vô hình, là trưởng tử sinh ra trước mọi loài thọ tạo. Từ muôn đời, Chúa đã biết trước những kẻ được Người tuyển chọn và đã tiền định cho họ trở nên đồng hình đồng dạng với Con của Người, để Con của Người làm trưởng tử giữa một đàn em đông đúc.
 

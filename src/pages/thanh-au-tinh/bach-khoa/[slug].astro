@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import LibraryMasthead from '../../../components/LibraryMasthead.astro';
+import EncyclopediaInlineEditor from '../../../components/EncyclopediaInlineEditor.astro';
 
 export const prerender = true;
 
@@ -32,6 +33,7 @@ const {
 const tocHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const hasToc = tocHeadings.length > 0;
 const displayTitle = titleVi || title;
+const entryId = entry.id;
 ---
 
 <BaseLayout
@@ -137,6 +139,8 @@ const displayTitle = titleVi || title;
       </button>
     </div>
   )}
+
+  <EncyclopediaInlineEditor entryId={entryId} />
 
   <script>
     const inlineToc = document.querySelector<HTMLElement>('.aug-ency-inline-toc');

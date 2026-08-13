@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 4 Phục Sinh"
 order: 27
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê- xan-ri-a, về thư gửi tín hữu Rô-ma.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê- xan-ri-a, về thư gửi tín hữu Rô-ma.**
 
 Theo lời Kinh Thánh, chúng ta tuy nhiều, nhưng chỉ là một. thân thế, và là những bộ phận có liên đới với nhau, vì Đức Ki-tô đã nối kết chúng ta nên một bằng mối dây đức ái : Chính Người là Đấng đã liên kết đôi bên thành một, đã phá đổ bức tường ngăn cách, và huỷ bỏ Luật Cũ gồm các điều răn và giới luật. Vậy tất cả chúng ta phải có chung một cảm nghĩ đối với nhau : nếu một bộ phận nào đau, thì mọi bộ phận cùng đau ; nếu một bộ phận nào được vẻ vang thì mọi bộ phận cũng vui chung.
 

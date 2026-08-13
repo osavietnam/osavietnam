@@ -15,7 +15,7 @@ Hội Thánh hân hoan mừng ngày thánh Gio-an Tẩy Giả chào đời. Sứ
 
 </div>
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Hội Thánh coi sinh nhật của thánh Gio-an như một ngày thiêng liêng. Không có vị thánh nào trong bậc cha ông được chúng ta mừng sinh nhật trọng thể như thế. Chúng ta mừng sinh nhật thánh Gio-an và mừng sinh nhật Đức Ki-tô : đó là điều không thể bỏ qua. Nếu chúng tôi không giải thích nổi ý nghĩa cao trọng của ngày lễ, thì anh em vẫn có thể suy gẫm về điều đó một cách hữu ích và sâu sắc.
 

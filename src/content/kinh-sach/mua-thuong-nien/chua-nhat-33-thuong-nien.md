@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 33 Thường Niên"
 order: 225
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Hỡi cây cối rừng xanh, hãy reo mừng trước nhan Thiên Chúa, vì Người ngự đến, Người ngự đến xét xử trần gian. Trước đây, Người đã ngự đến, và sau này Người còn ngự đến nữa. Trước đây, tiếng Người đã vang lên trong Tin Mừng : Từ nay, các ông sẽ thấy Con Người ngự bên hữu Đấng Toàn Năng và ngự giá mây trời mà ngự đến. Từ nay là khi nào ? Phải chăng sau này, khi muôn dân trên mặt đất đấm ngực khóc than, Người mới ngự đến ? Không phải vậy, vì trước đó, qua những kẻ Người sai đi rao giảng, Người đã ngự đến rồi, và thế là Người đã hiện diện khắp mặt đất. Người ngự đến lần thứ nhất, chúng ta đừng chống lại, để khi Người ngự đến lần thứ hai, chúng ta khỏi sợ hãi.
 

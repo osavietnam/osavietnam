@@ -14,7 +14,7 @@
   },
   "saints": {
     "title": "Thánh – Chân Phước",
-    "sub": "Dòng Augustinô Việt Nam"
+    "sub": "Dòng Thánh Augustinô"
   },
   "thu-vien": {
     "title": "Thư Viện",
@@ -39,7 +39,7 @@
   "on-goi": {
     "eyebrow": "Dòng Thánh Augustinô — OSA<br>Cộng Đoàn Việt Nam",
     "title": "Ơn Gọi",
-    "quote": "\"Mục đích chính yếu mà anh em quy tụ cùng nhau là để sống hòa hợp dưới một mái nhà, và đồng tâm nhất trí với nhau hướng về THIÊN CHÚA.\"",
+    "quote": "\"Mục đích chính yếu mà anh em quy tụ cùng nhau là để sống hòa hợp dưới một mái nhà, và đồng tâm nhất trí với nhau hướng về <span class=\"bvq-lord\">THIÊN CHÚA</span>.\"",
     "cite": "Thánh Augustinô · <em>Tu Luật</em>, 3"
   }
 }

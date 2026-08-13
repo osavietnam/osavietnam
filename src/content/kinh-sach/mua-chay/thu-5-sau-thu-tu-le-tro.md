@@ -8,7 +8,7 @@ liturgy: "Thứ 5 sau Thứ Tư Lễ Tro"
 order: 2
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Anh em thân mến, mãi mãi tình thương Chúa phủ đầy mặt đất. Chính thiên nhiên dạy mỗi tín hữu phải thờ phượng Thiên Chúa. Trời đất, biển khơi và mọi vật trong đó đều nói lên lòng nhân hậu và uy quyền toàn năng của Đấng đã tạo thành nên chúng. Đồng thời vẻ đẹp lạ lùng của vạn vật đang phục vụ con người cũng đòi hỏi con người là thọ tạo có trí khôn phải cảm tạ ngợi khen Chúa cho phải đạo.
 

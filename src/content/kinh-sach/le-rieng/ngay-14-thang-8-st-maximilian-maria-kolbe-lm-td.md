@@ -15,7 +15,7 @@ Thánh nhân sinh ngày 8 tháng Giêng năm 1894 tại Ba-lan. Người gia nh�
 
 </div>
 
-*Trích thư của thánh Mắc-xi-mi-li-a-nô Ma-ri-a Kôn-bê, linh mục tử đạo.*
+**Trích thư của thánh Mắc-xi-mi-li-a-nô Ma-ri-a Kôn-bê, linh mục tử đạo.**
 
 Anh thân mến, tôi rất vui mừng vì thấy anh hăng hái nhiệt thành làm vinh danh Thiên Chúa. Ở thời đại chúng ta, không phải là không đáng buồn khi thấy chủ trương lãnh đạm, như người ta thường gọi, đang lan tràn dưới nhiều hình thức khác nhau. Chủ trương ấy giống như một cơn dịch lây lan không chỉ nơi các giáo dân, mà cả trong các cộng đoàn tu trì nữa. Tuy nhiên, vì Thiên Chúa đáng được vinh quang vô tận, nên bổn phận trước hết và trên hết của chúng ta là đem trọn khả năng yếu kém của mình mà dâng lên Người vinh quang cao cả nhất, cho dù chúng ta không bao giờ có thể dâng cho Người như Người đáng được, vì chúng ta chỉ là những thụ tạo tha hương yếu hèn.
 

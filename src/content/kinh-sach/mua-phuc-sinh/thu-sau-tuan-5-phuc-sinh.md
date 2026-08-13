@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 5 Phục Sinh"
 order: 33
 ---
 
-*Trích bài giảng của Chân phước I-xa-ác, viện phụ đan viện Sao Mai.*
+**Trích bài giảng của Chân phước I-xa-ác, viện phụ đan viện Sao Mai.**
 
 Như đầu và thân của một người chỉ là một người mà thôi, thì người con của Đức Trinh Nữ cùng với các chi thể được tuyển chọn của Người chỉ là một người và là Con Người duy nhất. Kinh Thánh nói : Đức Ki-tô toàn thân và toàn vẹn gồm đầu và thân. Quả vậy, mọi chi thể cùng làm nên một thân thể. Thân thể đó cùng với đầu là một con người duy nhất. Con người này cùng với Con Thiên Chúa là người con duy nhất của Thiên Chúa. Chính người con này cùng với Thiên Chúa là Thiên Chúa duy nhất.
 

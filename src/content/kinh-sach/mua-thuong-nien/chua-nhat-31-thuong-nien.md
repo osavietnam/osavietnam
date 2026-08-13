@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 31 Thường Niên"
 order: 211
 ---
 
-*Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.**
 
 Hoà bình không chỉ là không có chiến tranh, không chỉ giản lược vào thế quân bình giữa các lực lượng đối nghịch, cũng chẳng phát sinh từ quyền thống trị độc tài. Nhưng hiểu cách đúng đắn và chính xác, thì hoà bình là sự nghiệp của đức công minh. Hoà bình là thành quả trật tự đã được chính Thiên Chúa là Đấng sáng lập ghi khắc trong xã hội loài người. Trật tự này phải được những ai luôn khao khát một nền công lý hoàn hảo hơn đem ra thực hành. Đành rằng, tự căn bản, công ích của nhân loại được luật vĩnh cửu điều khiển, tuy nhiên, theo đòi hỏi của hoàn cảnh cụ thể, công ích còn lệ thuộc vào những thay đổi không ngừng diễn ra theo dòng thời gian. Vì thế, người ta không bao giờ đạt tới hoà bình một lần là xong, nhưng phải kiến tạo luôn mãi. Đàng khác, ý chí con người có thể sai lầm vì tội lỗi làm tổn thương, nên việc mưu tìm hoà bình vừa đòi hỏi mỗi người phải luôn biết chế ngự những đam mê của mình, vừa đòi hỏi quyền bính hợp pháp phải cảnh giác.
 

@@ -1,5 +1,5 @@
 ---
-title: "Ngày 13 Tháng 8: Thánh Pontian, Gh. và Tđ. , và Thánh Hippolitô, Lm. và Tđ."
+title: "Ngày 13 Tháng 8: Thánh Pontian, Gh. và Tđ., và Thánh Hippolitô, Lm. và Tđ."
 season: "Lễ Riêng"
 seasonKey: "le-rieng"
 source: "Thánh Cyprian, Gm. và Tđ."
@@ -14,9 +14,9 @@ Thánh Híp-pô-li-tô là linh mục giáo phận Rô-ma. Người là một nh
 
 Lễ kính các vị vào ngày hôm nay kỷ niệm ngày cải táng thi hài các vị. Thi hài thánh Híp-pô-li-tô được đưa về an táng trong nghĩa trang trên đường Ti-buốc-ti-na, còn thi hài thánh Pon-xi-a-nô được đưa về an táng trong nghĩa trang Ca-lít-tô. 
 
-Đức tin bất khuất.
+*Đức tin bất khuất.*
 
-*Trích thư thánh Síp-ri-a-nô, giám mục, tử đạo.*
+**Trích thư thánh Síp-ri-a-nô, giám mục, tử đạo.**
 
  
 

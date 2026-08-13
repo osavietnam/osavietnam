@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Trinh Nữ Maria"
 order: 3
 ---
 
-*Trích bài giảng của thánh Xốp-rô-ni-ô, giám mục.*
+**Trích bài giảng của thánh Xốp-rô-ni-ô, giám mục.**
 
 Kính chào bà, bà đầy ân sủng, Đức Chúa ở cùng bà . Ôi, lạy Mẹ Đồng Trinh, có niềm vui nào lớn hơn niềm vui này ? Có ân huệ nào tuyệt vời hơn ân huệ này, ân huệ mà chỉ một mình Mẹ được Thiên Chúa ban cho ? Hoặc có gì vui sướng hơn và sáng chói hơn ân huệ đó ? Mọi sự đều thua xa phép lạ đang ở nơi Mẹ, tất cả đều thua kém ân huệ của Mẹ. Tất cả những gì tuyệt vời nhất chỉ đứng hàng nhì và ít sáng chói hơn.
 

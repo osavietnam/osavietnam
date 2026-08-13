@@ -9,7 +9,7 @@ rank: "solemn"
 order: 7
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Thưa tất cả anh em, tôi xin ngỏ lời với anh em là những trẻ vừa mới sinh, những trẻ nhỏ trong Đức Ki-tô, con cái Hội Thánh mới sinh ra, ơn của Chúa Cha, đàn con đông đúc của Mẹ, mầm non thánh thiện, đoàn người mới, bông hoa danh dự và kết quả công lao của chúng tôi, niềm vui và triều thiên của tôi, anh em là những người đang đứng vững trong Chúa.
 

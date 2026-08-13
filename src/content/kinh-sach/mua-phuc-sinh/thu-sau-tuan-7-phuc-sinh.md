@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 7 Phục Sinh"
 order: 47
 ---
 
-*Trích khảo luận Chúa Ba Ngôi của thánh Hi-la-ri-ô, giám mục.*
+**Trích khảo luận Chúa Ba Ngôi của thánh Hi-la-ri-ô, giám mục.**
 
 Chúa Giê-su truyền làm phép rửa nhân danh Chúa Cha và Chúa Con và Chúa Thánh Thần, nghĩa là làm phép rửa mà tuyên xưng niềm tin vào Đấng tạo thành, Đấng là Con Một và Đấng là hồng ân.
 

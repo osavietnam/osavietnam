@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 2 Mùa Chay"
 order: 12
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Chúa đã tỏ vinh quang của Người ra trước mặt các chứng nhân của Người đã tuyển chọn, và chiếu giãi ánh sáng rực rỡ trên thân thể của Người, một thân thể giống như thân thể bao người khác, khiến dung mạo Người chẳng khác chi mặt trời chói lọi, và áo Người ngang với màu trắng của tuyết.
 

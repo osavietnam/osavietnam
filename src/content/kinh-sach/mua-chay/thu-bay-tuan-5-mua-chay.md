@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 5 Mùa Chay"
 order: 45
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na- di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na- di-en.**
 
 Chúng ta sắp tham dự Lễ Vượt Qua. Lễ Vượt Qua này, tuy rõ hơn Lễ Vượt Qua trong Luật cũ, nhưng vẫn còn là hình bóng tượng trưng. (Tôi dám nói rằng Lễ Vượt Qua trong Luật cũ là hình bóng rất lu mờ của hình bóng tượng trưng đó). Nhưng ít lâu nữa thôi, khi Ngôi Lời cùng với Chúng ta uống rượu mới trong vương quốc của Chúa Cha, thì Lễ Vượt Qua ấy còn hoàn hảo và tinh tuyền hơn nữa. Bấy giờ, Ngôi Lời sẽ làm sáng tỏ và dạy cho biết những điều mà cho đến nay Người chưa bày tỏ hết. Quả vậy, Lễ Vượt Qua mà bây giờ Chúng ta được biết, vẫn còn mới mãi.
 

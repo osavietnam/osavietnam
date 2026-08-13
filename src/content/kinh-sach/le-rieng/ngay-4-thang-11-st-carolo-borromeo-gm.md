@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1538 tại A-rô-na, miền Lom-ba-đi-a. Sau khi đã h�
 
 </div>
 
-*Trích bài giảng của thánh Ca-rô-lô Bo-rô-mê-ô trong kỳ họp hội đồng lần cuối cùng.*
+**Trích bài giảng của thánh Ca-rô-lô Bo-rô-mê-ô trong kỳ họp hội đồng lần cuối cùng.**
 
 Tôi nhìn nhận rằng hết thảy chúng ta đều là những con người yếu đuối, nhưng Thiên Chúa là Chúa chúng ta đã ban cho chúng ta những phương tiện giúp chúng ta dễ dàng hành động, nếu chúng ta muốn. Linh mục nọ muốn có một đời sống tinh tuyền theo lương tâm đòi hỏi, muốn sống tiết độ và có phong cách của bậc thiên thần : đó là điều hợp lý ; nhưng vị ấy lại không quyết tâm dùng những phương tiện cần thiết là : ăn chay, cầu nguyện, tránh tiếp xúc với những người xấu, tránh những cuộc giao du thân mật nguy hại.
 

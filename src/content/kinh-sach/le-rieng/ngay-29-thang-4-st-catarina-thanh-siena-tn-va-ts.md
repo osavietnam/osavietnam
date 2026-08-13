@@ -15,7 +15,7 @@ Ca-ta-ri-na sinh năm 1347 tại Xi-ê-na. Ngay từ thuở niên thiếu, chị
 
 </div>
 
-*Trích sách Đối thoại của thánh Ca-ta-ri-na Xi-ê-na, trinh nữ, về Thiên Chúa quan phòng.*
+**Trích sách Đối thoại của thánh Ca-ta-ri-na Xi-ê-na, trinh nữ, về Thiên Chúa quan phòng.**
 
 Ôi Thiên Chúa vĩnh hằng, ôi Ba Ngôi vĩnh cửu ! Ngài đã dùng sự kết hợp với bản tính Thiên Chúa mà làm cho máu Con Một Ngài có giá trị biết bao ! Lạy Ba Ngôi vĩnh cửu, Ngài ví tựa đại dương sâu thẳm, càng tìm con càng thấy ; càng thấy con càng tìm. Ngài làm cho linh hồn được no thoả nhưng dường như lại không no thoả. Bởi lẽ trong vực thẳm của Chúa, Chúa làm cho linh hồn được no thoả mà vẫn còn luôn đói khát Chúa, vì linh hồn vẫn hết sức ước mong khao khát được thấy Chúa là ánh sáng trong ánh sáng của Chúa, ôi lạy Ba Ngôi vĩnh cửu !
 

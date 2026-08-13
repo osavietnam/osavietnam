@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 21 Thường Niên"
 order: 143
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.**
 
 Hẳn anh em muốn tôi nhắc anh em về cách thức sám hối ? Chắc chắn là có nhiều cách sám hối khác nhau, và cách nào cũng đưa ta về trời.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 9 Thường Niên"
 order: 61
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Bình minh hay rạng đông là lúc trời chuyển từ tối qua sáng. Gọi Hội Thánh là bình minh hay rạng đông thì cũng đúng thôi. Gồm những người Chúa chọn, Hội Thánh được dẫn đưa từ đêm tối không tin đến ánh sáng đức tin và, khác nào rạng đông, Hội Thánh rời bỏ bóng tối để bước vào ngày rực rỡ ánh sáng của Chúa. Sách Diễm Ca đã nói thật đúng : Kìa bà nào đang tiến lên như rạng đông ? Hội Thánh khát khao phần thưởng là sự sống trên trời, nên được gọi là rạng đông, vì đang khước từ bóng tối tội lỗi và rực lên ánh sáng công chính.
 

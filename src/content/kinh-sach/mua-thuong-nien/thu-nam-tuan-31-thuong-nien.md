@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 31 Thường Niên"
 order: 215
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Bạn hãy vừa học hỏi vừa tuyên xưng đức tin, vừa chấp nhận và duy trì một đức tin duy nhất đang được Hội Thánh truyền dạy cho bạn và được toàn bộ Sách Thánh bảo vệ. Không phải ai cũng đọc Sách Thánh được. Vì thế, để linh hồn đừng thiếu hiểu biết mà phải hư vong, chúng tôi gom tất cả những điều phải tin vào một ít câu làm thành biểu thức đức tin. Tôi muốn bạn hãy giữ lấy đức tin này như của ăn đàng suốt hành trình cuộc sống, và ngoài đức tin này, không được đón nhận một đức tin nào khác nữa. Hãy giữ lấy đức tin này ngay cả khi chúng tôi có thay lòng đổi dạ mà nói chi trái nghịch với những điều chúng tôi đang giảng dạy đây, và khi cả khi có sứ thần phản nghịch nào đội lốt sứ thần sáng láng muốn đưa bạn vào con đường lầm lạc. Vì nếu có ai, kể cả chúng tôi, hoặc một thiên thần nào từ trời xuống, loan báo cho anh em tin mừng nào khác với Tin Mừng chúng tôi đã loan báo cho anh em, thì xin Chúa loại trừ kẻ ấy đi.
 

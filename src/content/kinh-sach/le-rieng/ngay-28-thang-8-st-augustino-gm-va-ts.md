@@ -15,7 +15,7 @@ Thánh nhân sinh năm 354 tại Ta-gát, châu Phi. Người đã trải qua gi
 
 </div>
 
-*Trích sách Tự Thuật của thánh Âu-tinh, giám mục.*
+**Trích sách Tự Thuật của thánh Âu-tinh, giám mục.**
 
 Khi được nhắc nhở phải trở về với chính mình, nhờ Chúa hướng dẫn, con đã đi vào tận thâm tâm con, và con vào được vì có Chúa phù trì nâng đỡ. Con đã vào, và dầu mắt linh hồn con có thế nào chăng nữa, nhờ nó, con cũng đã thấy một thứ ánh sáng không hề thay đổi. Ánh sáng này vượt cả mắt linh hồn con, vượt quá trí khôn con. Đó không phải là ánh sáng thông thường trên trần gian mà xác phàm nào cũng thấy được. Đó cũng không phải như cùng loại với ánh sáng phàm trần, mà chỉ khác là có độ sáng mạnh hơn và cứ mỗi ngày mỗi sáng hơn mãi, rực chiếu khắp nơi. Không, không phải loại ánh sáng ấy, mà khác, khác hẳn với mọi loại ánh sáng nói trên. Ánh sáng đó cũng vượt quá trí khôn con, không phải chỉ như dầu ở trên nước, hay như trời vượt trên đất, nhưng vượt xa hẳn, vì đã làm ra con, và con ở dưới hẳn, vì đã được ánh sáng đó làm ra. Ai biết chân lý thì biết ánh sáng đó.
 

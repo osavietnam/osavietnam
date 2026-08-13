@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 6 Thường Niên"
 order: 36
 ---
 
-*Trích bài chú giải của thánh Ép-rem, phó tế, về sách Tin Mừng tổng hợp.*
+**Trích bài chú giải của thánh Ép-rem, phó tế, về sách Tin Mừng tổng hợp.**
 
 Lạy Chúa, ai nào hiểu nổi dù chỉ một lời trong các lời Chúa phán. Như miệng kẻ khát nước uống nơi mạch suối, chúng con bỏ đi nhiều hơn là thu vào, bởi lẽ lời Chúa có muôn màu muôn vẻ, tuỳ theo nhận thức khác nhau của những người học hỏi. Chúa tô điểm lời Người bằng muôn màu sắc, để ai học hỏi đều tìm thấy ở đó điều mình ưa thích. Người thiết lập nhiều kho tàng châu báu trong lời của mình, để ai trong chúng ta khai thác ở đâu thì nên giàu ở đó.
 

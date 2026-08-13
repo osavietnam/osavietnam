@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 3 Phục Sinh"
 order: 18
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Nếu không có chuyện cứu độ xác phàm, thì Chúa Ki-tô đã chẳng lấy Máu mình mà cứu chuộc chúng ta, và ta chẳng nâng chén tạ ơn mà dự phần vào Máu Người, cũng như ta chẳng bẻ bánh mà dự phần vào Mình Người. Không có máu nào mà không bởi mạch máu, không bởi xác thịt và những gì thuộc bản chất con người. Nhờ trở nên người phàm, Ngôi Lời của Thiên Chúa đã lấy Máu mình mà cứu chuộc chúng ta, như lời thánh Phao-lô tông đồ : Trong Thánh Tử, nhờ Máu Thánh Tử đổ ra, chúng ta được cứu chuộc, được thứ tha tội lỗi.
 

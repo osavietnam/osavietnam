@@ -62,7 +62,7 @@ def get_first_sunday_of_advent(year):
 
     # Find the Sunday on or before Nov 30
     sun_before = nov30 - timedelta(days=(weekday + 1) % 7)
-
+    
     # Find the Sunday after Nov 30
     sun_after = nov30 + timedelta(days=(6 - weekday) % 7)
 
@@ -113,11 +113,11 @@ def get_liturgical_dates(year):
     easter = get_easter(year)
     pentecost = easter + timedelta(days=49)
     start_of_next_liturgical_year = get_first_sunday_of_advent(year)
-
+    
     # Calculate Epiphany first, as Baptism of the Lord depends on it.
     epiphany = get_epiphany(year)
     baptism_of_the_lord = get_baptism_of_the_lord(epiphany)
-
+    
     return {
         "start_of_liturgical_year": get_first_sunday_of_advent(year - 1),
         "christmas": date(year - 1, 12, 25),
@@ -145,13 +145,13 @@ def get_liturgical_dates(year):
 def generate_liturgical_year(year):
     """Generates the full seasonal liturgical index for a given year."""
     dates = get_liturgical_dates(year)
-
+    
     # Determine the Liturgical Year Cycle (A, B, C)
     start_year = year - 1
     cycle_map = {1: 'B', 2: 'C', 0: 'A'}
     year_cycle_letter = cycle_map[start_year % 3]
     year_cycle_suffix = f", Năm {year_cycle_letter}"
-
+    
     calendar = {
         "mua-vong": [],
         "mua-giang-sinh": [],
@@ -160,22 +160,22 @@ def generate_liturgical_year(year):
         "mua-phuc-sinh": [],
         "trong-kinh-chua": []
     }
-
+    
     day_names = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chúa Nhật"]
-
+    
     current_date = dates["start_of_liturgical_year"]
-
+    
     while current_date < dates["end_of_liturgical_year"]:
         entry = {"date": current_date.strftime("%Y-%m-%d")}
         season = ""
-
+        
         # --- Determine the season and liturgy for the current date ---
-
+        
         # 1. Advent
         if current_date < dates["christmas"]:
             season = "mua-vong"
             day, month = current_date.day, current_date.month
-
+            
             if month == 12 and 17 <= day <= 24:
                 entry["liturgy"] = f"Ngày {day} Tháng {month}"
             else:
@@ -186,7 +186,7 @@ def generate_liturgical_year(year):
         elif current_date <= dates["baptism_of_the_lord"]:
             season = "mua-giang-sinh"
             day, month = current_date.day, current_date.month
-
+            
             if current_date == dates["christmas"]: entry["liturgy"] = "Ngày 25 Tháng 12: Đại Lễ Giáng Sinh"
             elif month == 12 and day == 26: entry["liturgy"] = "Ngày 26 Tháng 12: St. Stêphanô, Tđ. tiên khởi"
             elif month == 12 and day == 27: entry["liturgy"] = "Ngày 27 Tháng 12: St. Gioan, Tông đồ"
@@ -195,7 +195,7 @@ def generate_liturgical_year(year):
             elif month == 1 and day == 1: entry["liturgy"] = "Ngày 1 Tháng 1: Đức Trinh Nữ Maria, Mẹ Thiên Chúa, Lễ Trọng"
             elif current_date == dates["epiphany"]: entry["liturgy"] = "Lễ Chúa Hiển Linh"
             elif current_date == dates["baptism_of_the_lord"]: entry["liturgy"] = "Lễ Chúa Giêsu Chịu Phép Rửa"
-
+            
             elif date(year, 1, 1) < current_date < dates["epiphany"]:
                 entry["liturgy"] = f"Từ ngày 2 Tháng 1 đến Lễ Hiển Linh, {day_names[current_date.weekday()]}"
             elif dates["epiphany"] < current_date < dates["baptism_of_the_lord"]:
@@ -220,7 +220,7 @@ def generate_liturgical_year(year):
                 else: entry["liturgy"] = "Thứ Bảy Tuần Thánh (Vọng Phục Sinh)"
             elif current_date >= dates["palm_sunday"]:
                 entry["liturgy"] = "Chúa Nhật Lễ Lá" if current_date.weekday() == 6 else f"{day_names[current_date.weekday()]} Tuần Thánh"
-            elif current_date == dates["ash_wednesday"]:
+            elif current_date == dates["ash_wednesday"]: 
                 entry["liturgy"] = "Thứ Tư Lễ Tro"
             elif current_date < dates["ash_wednesday"] + timedelta(days=4):
                 entry["liturgy"] = f"{day_names[current_date.weekday()]} sau Lễ Tro"
@@ -228,7 +228,7 @@ def generate_liturgical_year(year):
                 first_sunday_of_lent = dates["ash_wednesday"] + timedelta(days=(6 - dates["ash_wednesday"].weekday() + 7) % 7)
                 week = ((current_date - first_sunday_of_lent).days // 7) + 1
                 entry["liturgy"] = f"Chúa Nhật {week} Mùa Chay" if current_date.weekday() == 6 else f"{day_names[current_date.weekday()]}, Tuần {week} Mùa Chay"
-
+        
         # 5. Easter Season
         elif current_date < dates["pentecost_sunday"]:
             season = "mua-phuc-sinh"
@@ -263,34 +263,34 @@ def generate_liturgical_year(year):
                 entry["liturgy"] = "Lễ Trái Tim Vô Nhiễm Đức Mẹ Maria"
             else:
                 season = "mua-thuong-nien"
-
+                
                 # --- CORRECTED WEEK CALCULATION ---
                 # The last day of the liturgical year is the Saturday before the First Sunday of Advent.
                 last_day_of_year = dates["end_of_liturgical_year"] - timedelta(days=1)
-
+                
                 # Calculate the week number by counting backwards from the 34th week.
                 week = 34 - ((last_day_of_year - current_date).days // 7)
-
+                
                 if current_date == dates["christ_the_king"]:
                     entry["liturgy"] = f"Chúa Nhật {week} Thường Niên - Lễ Chúa Kitô Vua Vũ Trụ"
                 elif current_date.weekday() == 6:
                     entry["liturgy"] = f"Chúa Nhật {week} Thường Niên"
                 else:
                     entry["liturgy"] = f"{day_names[current_date.weekday()]}, Tuần {week} Thường Niên"
-
+        
         # --- MODIFICATION: Add contentFile and year cycle suffix ---
         if "liturgy" in entry:
             # First, generate the contentFile path using the clean liturgy text
             clean_liturgy_text = entry["liturgy"]
             slug = slugify(clean_liturgy_text)
             entry["kinh-sach-file"] = f"db/phung-vu/kinh-sach/content/{season}/{slug}.json"
-
+            
             # Second, add the year cycle suffix to the display liturgy text
             entry["liturgy"] += year_cycle_suffix
 
         calendar[season].append(entry)
         current_date += timedelta(days=1)
-
+        
     return calendar
 
 # ==============================================================================
@@ -302,8 +302,8 @@ if __name__ == "__main__":
         description="Generate a Vietnamese liturgical calendar for a given year."
     )
     parser.add_argument(
-        "year",
-        type=int,
+        "year", 
+        type=int, 
         help="The target liturgical year to generate the calendar for (e.g., 2026)."
     )
     args = parser.parse_args()
@@ -311,9 +311,9 @@ if __name__ == "__main__":
 
     print(f"Generating liturgical calendar for {target_year}...")
     liturgical_calendar = generate_liturgical_year(target_year)
-
+    
     file_name = f"liturgyIndex-{target_year}.json"
     with open(file_name, 'w', encoding='utf-8') as f:
         json.dump(liturgical_calendar, f, ensure_ascii=False, indent=2)
-
+        
     print(f"✅ Successfully generated and saved to '{file_name}'")

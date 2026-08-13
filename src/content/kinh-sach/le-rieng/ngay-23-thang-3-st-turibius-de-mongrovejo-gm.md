@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh tại Tây-ban nha quãng năm 1538. Học luật tại Xa-la-man-ca. Năm 1580, người được đặt làm giám mục giáo phận Li-ma ở Nam Mỹ. Là một người đầy nhiệt tâm tông đồ, người đã tổ chức nhiều cuộc hội miền để cổ võ đời sống tu trì của toàn miền và đã gặt hái được nhiều kết quả. Người mạnh mẽ bênh vực luật của Hội Thánh. Người hoàn toàn hiến thân phục vụ đoàn chiên, và nhất là chăm lo cho dân bản xứ. Người qua đời năm 1606.
 
-Hãy sẵn sàng làm mọi việc tốt
+*Hãy sẵn sàng làm mọi việc tốt*
 
-*Trích Sắc lệnh Chúa Ki-tô của Công Đồng Va-ti-ca-nô II, về nhiệm vụ mục tử của hàng giám mục trong Hội Thánh.*
+**Trích Sắc lệnh Chúa Ki-tô của Công Đồng Va-ti-ca-nô II, về nhiệm vụ mục tử của hàng giám mục trong Hội Thánh.**
 
  
 

@@ -16,7 +16,7 @@ Thánh Phêrô và thánh Phao-lô, không giống nhau về tính khí, cũng k
 
 </div>
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Cuộc tử đạo của hai vị tông đồ diễm phúc là thánh Phê-rô và thánh Phao-lô đã làm cho ngày hôm nay trở thành ngày thánh đối với chúng ta. Các thánh chúng ta nói tới hôm nay không phải là những vị tử đạo vô danh nào đó. Thật ra, tiếng các ngài đã vang dội khắp hoàn cầu, và thông điệp loan đi tới chân trời góc biển. Một khi các ngài đã đi theo đường công chính vì tuyên xưng và chết cho công lý, thì giờ đây các vị tử đạo này được thấy thể hiện điều các ngài đã rao giảng.
 

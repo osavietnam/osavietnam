@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ (các) Thánh Tđ."
 order: 6
 ---
 
-*Trích thư của thánh Síp-ri-a-nô, giám mục tử đạo, gửi các linh mục và phó tế đang bị giam cầm.*
+**Trích thư của thánh Síp-ri-a-nô, giám mục tử đạo, gửi các linh mục và phó tế đang bị giam cầm.**
 
 Anh em rất thân mến, tôi xin gửi lời chào thăm đến anh em. Giả như hoàn cảnh hiện thời cho phép, thì tôi đã đến thăm để được vui mừng giáp mặt anh em. Thật vậy, còn gì có thể làm cho tôi ao ước hơn, vui vẻ hơn là được liên kết với anh em để tôi được anh em dang tay ôm lấy, những cánh tay thanh khiết và vô tội luôn giữ vững niềm tin vào Chúa mà từ khước không làm những việc tôn thờ phạm thánh.
 

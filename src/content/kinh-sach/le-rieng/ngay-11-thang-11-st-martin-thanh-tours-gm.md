@@ -15,7 +15,7 @@ Thánh nhân sinh khoảng năm 316 trong một gia đình ngoại giáo. Ngư�
 
 </div>
 
-*Trích thư của sử gia Xun-pi-xi-ô Xê-vê-rô.*
+**Trích thư của sử gia Xun-pi-xi-ô Xê-vê-rô.**
 
 Giám mục Mác-ti-nô đã biết trước giờ ra đi của mình từ lâu. Người cho anh em biết giờ thân xác người phải tiêu tan đã gần kề. Bấy giờ có một việc khiến người phải đi thăm giáo xứ Can-đơ : các giáo hữu tại Hội Thánh ấy đang bất hoà với nhau. Vì muốn tái lập sự hoà thuận, nên dù biết ngày cuối đời của mình không còn nhiều, người vẫn không vì thế mà từ khước ra đi. Thật vậy, người nghĩ rằng các hoạt động của mình sẽ kết thúc hoàn hảo, nếu người vãn hồi được sự hoà thuận cho Hội Thánh ấy.
 

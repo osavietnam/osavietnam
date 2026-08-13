@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 1 Mùa Chay"
 order: 9
 ---
 
-*Trích bài giảng của thánh Át-tê-ri-ô, giám mục A-ma-xê-a.*
+**Trích bài giảng của thánh Át-tê-ri-ô, giám mục A-ma-xê-a.**
 
 Anh em đã được dựng nên theo hình ảnh Thiên Chúa, nếu muốn giống Người thì hãy noi gương bắt chước Người. Anh em là Ki-tô hữu, và danh tánh ấy tự nó nói lên lòng nhân ái. Vậy anh em hãy noi gương bác ái của Đức Ki-tô.
 

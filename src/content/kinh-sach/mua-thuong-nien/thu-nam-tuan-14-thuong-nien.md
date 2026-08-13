@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 14 Thường Niên"
 order: 96
 ---
 
-*Trích bài diễn giải Thánh Vịnh 118 của thánh Am-rô-xi-ô, giám mục.*
+**Trích bài diễn giải Thánh Vịnh 118 của thánh Am-rô-xi-ô, giám mục.**
 
 Cha của Thầy và Thầy sẽ đến và ở lại với người ấy. Hãy mở cửa sẵn để đón chào Người đang đến. Hãy mở rộng tâm hồn và nới rộng tâm trí để thấy được sự đơn thuần phong phú, bình an đầy tràn và ân sủng dịu ngọt. Hãy làm cho trái tim bạn nở ra, hãy ra đón vầng thái dương giãi ánh sáng vĩnh cửu chiếu soi mọi người. Quả vậy, ánh sáng đích thực ấy soi dẫn mọi người ; nhưng nếu ai đóng của sổ lại, thì tự họ đã đánh mất ánh sáng vĩnh cửu. Nếu bạn đóng kín lòng trí mình, thì cả Đức Ki-tô cũng bị chận không được vào. Mặc dù Người có thể vào, nhưng Người không muốn làm như ai đó không được mời mà vẫn đến. Người không muốn ép lòng những kẻ miễn cưỡng.
 

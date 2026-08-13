@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 7 Thường Niên"
 order: 44
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Giảng Viên.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Giảng Viên.**
 
 Nếu linh hồn đưa mắt nhìn lên Đầu của mình là Đức Ki-tô, như thánh Phao-lô quen gọi, thì linh hồn được kể là có phúc nhờ mang đôi mắt sâu sắc tinh tường, vì nó đưa mắt nhìn vào nơi không có bóng tối sự dữ. Thánh Phao-lô là con người vĩ đại, và những ai khác vĩ đại như người, cũng như tất cả những kẻ sống, cử động và hiện hữu trong Đức Ki-tô, thì đều đưa mắt nhìn lên Đầu của mình.
 

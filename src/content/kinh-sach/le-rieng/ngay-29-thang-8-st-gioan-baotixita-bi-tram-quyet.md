@@ -15,7 +15,7 @@ Thánh Gio-an Tẩy Giả đã bị chém đầu ở Ma-kê-ron, gần Biển Ch
 
 </div>
 
-*Trích bài giảng của thánh Bê-đa Khả Kính, linh mục.*
+**Trích bài giảng của thánh Bê-đa Khả Kính, linh mục.**
 
 Vị thánh loan báo Chúa sẽ sinh ra, rao giảng và chịu chết, đã tỏ ra là người có sức chiến đấu can đảm, xứng đáng được trời cao đoái nhìn. Đúng như Kinh Thánh nói, thiên hạ nghĩ rằng thánh nhân đã bị hành hạ, còn người vẫn chứa chan hy vọng được trường sinh bất tử. Chúng ta có lý để vui mừng và long trọng tưởng nhớ sinh nhật của người. Ngày ấy, chính người đã làm ra cho thành trọng thể do cuộc khổ nạn người chịu. Ngày ấy, chính người đã làm cho nên tươi đẹp bằng máu hồng sáng chói người đổ ra. Chúng ta có lý để, trong niềm vui thiêng liêng, kính nhớ con người đã lấy ấn tử đạo đóng lên chứng từ làm chứng cho Chúa.
 

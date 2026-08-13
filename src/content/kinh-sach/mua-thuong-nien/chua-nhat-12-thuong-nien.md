@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 12 Thường Niên"
 order: 78
 ---
 
-*Trích khảo luận của linh mục Phao-li-nô Lu-xi-phê-ra-nô, về Chúa Ba Ngôi.*
+**Trích khảo luận của linh mục Phao-li-nô Lu-xi-phê-ra-nô, về Chúa Ba Ngôi.**
 
 Đấng cứu độ chúng ta, khi làm người, đã thực sự trở thành Đấng đã được xức dầu. Như thế, Người tỏ mình là quân vương thật và cũng là tư tế thật : cả hai đều là một nơi Người, và không tước vị nào kém tước vị nào nơi Đấng cứu độ. Bạn hãy nghe Đấng làm vua nói : Tôi đã được Chúa đặt làm quân vương trị vì Xion, núi thánh của Người. Và hãy nghe Chúa Cha làm chứng Đức Ki-tô còn là tư tế nữa : Muôn thuở, con là Thượng Tế, theo phẩm trật Men-ki-xê-đê. Trong thời luật cũ, ông A-ha-ron là người đầu tiên được xức dầu làm tư tế Thiên Chúa. Thiên Chúa không phán theo phẩm trật A-ha-ron, để đừng ai nghĩ rằng chức tư tế của Đấng cứu độ có thể do cha truyền con nối. Nhưng chức tư tế của Đấng cứu độ thì không truyền lại cho người khác theo cách cha truyền con nối, vì lẽ chính Người là tư tế mãi mãi, như có lời chép : Muôn thuở, con là Thượng Tế, theo phẩm trật Men-ki-xê-đê.
 

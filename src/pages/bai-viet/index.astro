@@ -3,33 +3,21 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
 import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+import ArticleInlineManager from '../../components/ArticleInlineManager.astro';
+import articleTaxonomy from '../../data/article-taxonomy.json';
 
-const domains = [
-  {
-    key: 'triet-hoc',
-    label: 'Triết Học',
-    tone: 'philosophy',
-    subcategoryOrder: ['Tri Luận', 'Siêu Hình Học', 'Đạo Đức', 'Nhân Học'],
-  },
-  {
-    key: 'than-hoc',
-    label: 'Thần Học',
-    tone: 'theology',
-    subcategoryOrder: [
-      'Kinh Thánh',
-      'Thần Học Nền Tảng',
-      'Luân Lý Kitô Giáo',
-      'Giáo Hội Học',
-      'Kitô Học',
-    ],
-  },
-] as const;
+const domains = articleTaxonomy.scholar.categories.map((category) => ({
+  key: category.folder,
+  label: category.label,
+  tone: category.tone as 'philosophy' | 'theology' | 'neutral',
+  subcategoryOrder: category.subcategories,
+}));
 
 const articles = (await getCollection(
   'bai-viet',
   ({ id, data }) =>
-    (id.startsWith('triet-hoc/') || id.startsWith('than-hoc/'))
-    && !data.draft,
+    domains.some((domain) => id.startsWith(`${domain.key}/`))
+    && !data.draft && !data.translationOf && data.language !== 'en',
 )).sort((a, b) => {
   if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
   return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
@@ -53,16 +41,16 @@ const featuredTabs = articles.slice(0, 10).map(articleSummary);
 const latestArticles = articles.map(articleSummary);
 
 const domainLibraries = domains.map((domain) => {
-  const domainArticles = articles.filter((article) => article.id.startsWith(`${domain.key}/`));
+  const domainArticles = articles.filter((article) => article.data.category === domain.label);
   const orderedSubcategories: readonly string[] = domain.subcategoryOrder;
-  const subcategories = [...orderedSubcategories];
+  const subcategories = orderedSubcategories.length > 0 ? [...orderedSubcategories] : [domain.label];
 
   return {
     ...domain,
     groups: subcategories.map((subcategory) => ({
       category: subcategory,
       articles: domainArticles
-        .filter((article) => (article.data.subcategory ?? domain.label) === subcategory)
+        .filter((article) => (article.data.subcategory || domain.label) === subcategory)
         .map((article) => ({
           id: article.id,
           title: article.data.title,
@@ -118,6 +106,7 @@ const domainLibraries = domains.map((domain) => {
       </div>
     </section>
   </ArticleLibraryLanding>
+  <ArticleInlineManager kind="scholar" />
 </BaseLayout>
 
 <style>

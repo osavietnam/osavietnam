@@ -11,11 +11,11 @@ order: 98
 
 <div class="ks-tieu-su">
 
-Chào đời khoảng năm 1218 ở Ba-nho-rê-gi-ô, tỉnh Vi-téc-bô, Bô-na-ven-tu-ra theo học triết lý rồi thần học ở Pa-ri, sau đó dạy các tu sĩ dòng Anh Em Hèn mọn. Khi được chọn làm tổng phục vụ, người đã chu toàn nhiệm vụ một cách khôn ngoan, đã soạn thảo hiến chương nhằm giúp anh em sống luật dòng thánh Phan-xi-cô. Là một nhà thần học sâu sắc, theo trường phái thánh Âu-tinh, người nghiên cứu và giảng dạy lộ trình đưa linh hồn về với Thiên Chúa. Được đặt làm hồng y giám mục An-ba-nô, người qua đời năm 1274 giữa lúc công đồng Ly-ông đang họp.
+Chào đời khoảng năm 1218 ở Ba-nho-rê-gi-ô, tỉnh Vi-téc-bô, Bô-na-ven-tu-ra theo học triết lý rồi thần học ở Pa-ri, sau đó dạy các tu sĩ dòng Anh Em Hèn mọn. Khi được chọn làm tổng phục vụ, người đã chu toàn nhiệm vụ một cách khôn ngoan, đã soạn thảo hiến pháp nhằm giúp anh em sống luật dòng thánh Phan-xi-cô. Là một nhà thần học sâu sắc, theo trường phái thánh Âu-tinh, người nghiên cứu và giảng dạy lộ trình đưa linh hồn về với Thiên Chúa. Được đặt làm hồng y giám mục An-ba-nô, người qua đời năm 1274 giữa lúc công đồng Ly-ông đang họp.
 
 </div>
 
-*Trích tác phẩm “Lộ trình của tâm hồn đến với Thiên Chúa” của thánh Bô-na-ven-tu-ta, giám mục.*
+**Trích tác phẩm “Lộ trình của tâm hồn đến với Thiên Chúa” của thánh Bô-na-ven-tu-ta, giám mục.**
 
 Đức Ki-tô là đường và là cửa. Đức Ki-tô là thang và là xe, là nắp xá tội được đặt trên Hòm Bia Chứng Ước, và là mầu nhiệm đã được giữ kín từ muôn thuở. Người nào hoàn toàn ngước mắt nhìn về nắp xá tội này, nhìn về Đấng chịu treo trên thập giá, với lòng tin, cậy, mến, lòng sùng kính ngưỡng mộ, vui mừng, lòng quý trọng, ngợi khen và hoan hỷ… thì người ấy cùng với Đức Ki-tô làm một cuộc vượt qua, nghĩa là băng qua Biển Đỏ nhờ cây thập giá. Người ấy rời Ai-cập đi vào hoang địa, ở đó họ thưởng thức man-na đã được giấu kỹ, được an nghỉ trong mồ cùng với Đức Ki-tô. Người ấy bề ngoài như thể đã chết, nhưng trong thân phận lữ hành, lại cảm nghiệm được lời Đức Ki-tô trên thập giá nói với kẻ trộm gắn bó với Người : Hôm nay, anh sẽ được ở với tôi trên thiên đàng.
 

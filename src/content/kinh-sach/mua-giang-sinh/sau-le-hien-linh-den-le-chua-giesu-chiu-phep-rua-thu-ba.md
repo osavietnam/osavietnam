@@ -8,7 +8,7 @@ liturgy: "Sau Lễ Hiển Linh đến Lễ Chúa Giêsu Chịu Phép Rửa - Th�
 order: 17
 ---
 
-*Trích bài giảng Lễ Hiển Linh, được coi là của thánh Hi-pô-ly-tô, linh mục.*
+**Trích bài giảng Lễ Hiển Linh, được coi là của thánh Hi-pô-ly-tô, linh mục.**
 
 Chúa Giê-su đến với ông Gio-an và đón nhận phép rửa của ông. Biến cố thật lạ lùng : con sông vô tận làm hoan hỷ thành đô Thiên Chúa, làm sao con sông ấy được thanh tẩy bằng một chút nước thôi ? Ngọn suối khôn dò khôn thấu làm nẩy sinh sự sống cho mọi người, ngọn suối vô cùng vô tận, lại được bao phủ bằng một chút nước ít oi, tạm bợ. Đấng có mặt khắp nơi và không vắng mặt nơi nào, Đấng thiên thần không hiểu thấu và loài người không nhìn thấy được, lại đến lãnh phép rửa, vì Người muốn thế.
 

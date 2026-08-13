@@ -15,7 +15,7 @@ Chào đời năm 1515 tại A-vi-la, Tây-ban-nha, Tê-rê-xa là một nhà c�
 
 </div>
 
-*Trích tác phẩm của thánh Tê-rê-xa Giê-su, trinh nữ.*
+**Trích tác phẩm của thánh Tê-rê-xa Giê-su, trinh nữ.**
 
 Ai được Chúa Giê-su là bạn thân và là nhà lãnh đạo hào hiệp ngự trong lòng, thì có thể chịu đựng mọi sự. Quả thật, chính Người trợ lực và tăng cường sức mạnh cho chúng ta ; Người không bỏ rơi ai, vì Người là bạn thân đích thực và chân thành. Tôi thấy rõ là : nếu chúng ta muốn đẹp lòng Thiên Chúa và được Người ban cho những ân huệ lớn lao, thì chính Thiên Chúa lại muốn những ơn ấy đến với chúng ta qua bàn tay của con người Giê-su cực thánh là Đấng mà Thiên Chúa uy nghi đã tuyên bố là rất đẹp lòng Người.
 

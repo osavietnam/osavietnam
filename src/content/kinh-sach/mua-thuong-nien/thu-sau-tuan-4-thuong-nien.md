@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 4 Thường Niên"
 order: 27
 ---
 
-*Trích bài giảng của một tác giả thế kỷ thứ tư, về đời sống thiêng liêng.*
+**Trích bài giảng của một tác giả thế kỷ thứ tư, về đời sống thiêng liêng.**
 
 Những ai xứng đáng trở nên con cái Thiên Chúa và được tái sinh từ trên cao bởi Chúa Thánh Thần, những ai có Đức Ki-tô ngự trong mình để soi sáng và tái tạo họ, thì được Thần Khí hướng dẫn bằng nhiều cách khác nhau, và được hưởng sự dìu dắt kín nhiệm của ân sủng cùng với sự an nghỉ thiêng liêng trong tâm hồn.
 

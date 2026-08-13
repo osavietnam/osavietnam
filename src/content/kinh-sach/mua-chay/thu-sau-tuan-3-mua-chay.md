@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 3 Mùa Chay"
 order: 26
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Thánh Gióp là hình ảnh tượng trưng cho Hội thánh ; nên khi cầu nguyện, có khi ông nói tiếng nói của thân thể, lúc khác ông nói tiếng nói của đầu. Có lúc đang nói về chi thể, bỗng nhiên ông lại nói tiếng nói của đầu. Vì thế, ông nói : Tôi chịu bấy nhiêu nỗi khổ, thế nhưng bàn tay tôi chẳng vương bạo lực, và lời cầu nguyện của tôi thật tinh tuyền.
 

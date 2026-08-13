@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật Lễ Lá"
 order: 46
 ---
 
-*Trích bài giảng của thánh An-rê Cơ-rê-ta, giám mục.*
+**Trích bài giảng của thánh An-rê Cơ-rê-ta, giám mục.**
 
 Anh em hãy đến, và cùng nhau chúng ta lên núi Ô-liu đón Đức Ki-tô ; hôm nay, Người từ Bê-ta-ni-a trở về, và tự nguyện đi đến cuộc thương khó hồng phúc và cao quý, để hoàn thành mầu nhiệm cứu độ chúng ta.
 

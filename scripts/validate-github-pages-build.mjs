@@ -45,8 +45,7 @@ async function localTargetExists(sourceFile, rawUrl) {
 async function validateCssUrls(file, source) {
   const pattern = /url\((?:\s*)(["']?)([^"')]+)\1(?:\s*)\)/gi;
   for (const match of source.matchAll(pattern)) {
-    const url = match[2].trim();
-    if (!(await localTargetExists(file, url))) missing.push(`${relative(dist, file)} -> ${url}`);
+    if (!(await localTargetExists(file, match[2].trim()))) missing.push(`${relative(dist, file)} -> ${match[2].trim()}`);
   }
 }
 
@@ -55,30 +54,19 @@ for (const file of files) {
   const extension = extname(file).toLowerCase();
   if (extension !== '.html' && extension !== '.css') continue;
   const source = await readFile(file, 'utf8');
+  if (extension === '.css') { await validateCssUrls(file, source); continue; }
 
-  if (extension === '.css') {
-    await validateCssUrls(file, source);
-    continue;
-  }
-
-  // Inline JavaScript contains path separators, closing SVG tags and runtime
-  // templates. They are not rendered URLs and must not be treated as base-path
-  // leaks. Keep only each opening <script> tag so external script src attributes
-  // are still validated.
   const htmlMarkup = source.replace(/(<script\b[^>]*>)[\s\S]*?<\/script>/gi, '$1</script>');
   const attributePattern = /\b(?:href|src|poster|action|formaction|data-href)\s*=\s*["']([^"']+)["']/gi;
   for (const match of htmlMarkup.matchAll(attributePattern)) {
-    const url = match[1];
-    if (!(await localTargetExists(file, url))) missing.push(`${relative(dist, file)} -> ${url}`);
+    if (!(await localTargetExists(file, match[1]))) missing.push(`${relative(dist, file)} -> ${match[1]}`);
   }
-
   const srcsetPattern = /\bsrcset\s*=\s*["']([^"']+)["']/gi;
   for (const match of htmlMarkup.matchAll(srcsetPattern)) {
     for (const candidate of match[1].split(',').map((item) => item.trim().split(/\s+/)[0]).filter(Boolean)) {
       if (!(await localTargetExists(file, candidate))) missing.push(`${relative(dist, file)} -> ${candidate}`);
     }
   }
-
   await validateCssUrls(file, htmlMarkup);
 }
 

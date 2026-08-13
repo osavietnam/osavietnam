@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 26 Thường Niên"
 order: 178
 ---
 
-*Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.*
+**Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.**
 
 Các kỳ mục hãy nhạy bén với lòng trắc ẩn xót thương mọi người, đưa kẻ lầm lạc trở về, thăm viếng mọi người đau ốm, không bỏ bê cô nhi quả phụ hay người nghèo khó, nhưng luôn chăm lo làm việc lành trước mặt Thiên Chúa và người ta. Đừng bao giờ giận dữ, thiên vị hay phán đoán bất công ; hãy tránh xa mọi thứ hà tiện, không vội tin lời tố cáo kẻ khác ; đừng quá nghiêm khắc khi xét xử, vì biết rằng tất cả chúng ta đều là những người mắc nợ với Chúa vì tội.
 

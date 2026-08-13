@@ -8,7 +8,7 @@ liturgy: "Ngày 24 Tháng 12"
 order: 28
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Hỡi con người, thức dậy đi : vì bạn, Thiên Chúa đã làm người. Tỉnh giấc đi, hỡi người còn đang ngủ ! Từ chốn tử vong, chỗi dậy đi nào ! Đức Ki-tô sẽ chiếu sáng bạn. Tôi xin lặp lại : vì bạn, Thiên Chúa đã làm người.
 

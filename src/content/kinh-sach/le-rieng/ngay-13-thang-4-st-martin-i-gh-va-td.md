@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh tại Tô-đi, thuộc quận Um-ri-a, nước Ý. Người nhập hàng giáo sĩ Rô-ma và được bầu lên kế vị thánh Phê-rô năm 649. Cũng năm ấy, người mở công đồng, công đồng này kết án những người chủ trương Chúa Giê-su chỉ có một ý muốn. Thánh nhân bị hoàng đế Con-tan-ti-nô bắt giam năm 653 rồi bị đày sang Con-tan-ti-nô-pô-li, phải chịu nhiều gian nan khốn khổ. Cuối cùng người bị chuyển về Kéc-xô-nê-xô và qua đời ở đó năm 655.
 
-Chúa đã gần kề, tôi còn lo lắng chi?
+*Chúa đã gần kề, tôi còn lo lắng chi?*
 
-*Trích thư của thánh Mác-ti-nô I, giáo hoàng.*
+**Trích thư của thánh Mác-ti-nô I, giáo hoàng.**
 
  
 

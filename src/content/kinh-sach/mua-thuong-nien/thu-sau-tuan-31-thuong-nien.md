@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 31 Thường Niên"
 order: 216
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.**
 
 Con người là chi mà Chúa cần nhớ đến ? Một mầu nhiệm mới đang bao trùm trên tôi. Mầu nhiệm gì ? Tôi vừa bé nhỏ, lại vừa to lớn ; vừa tầm thường, laị vừa cao cả ; vừa phải chết, lại vừa bất tử ; vẫn ở dưới đất mà đã thuộc về trời. Tôi cần được mai táng với Đức Ki-tô, rồi chỗi dậy với Đức Ki-tô, đồng thừa tự với Đức Ki-tô, trở nên con Thiên Chúa và thậm chí còn trở thành chính Thiên Chúa nữa.
 

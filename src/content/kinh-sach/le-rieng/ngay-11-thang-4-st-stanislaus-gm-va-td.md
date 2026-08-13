@@ -15,7 +15,7 @@ Thánh nhân sinh tại Xê-pa-nốp-ki, nước Ba-lan, quãng năm 1030. Ngư�
 
 </div>
 
-*Trích thư của thánh Síp-ri-a-nô, giám mục, tử đạo.*
+**Trích thư của thánh Síp-ri-a-nô, giám mục, tử đạo.**
 
 Khi chúng ta lâm trận và chiến đấu cho đức tin, có Thiên Chúa chứng giám, có các thiên sứ của Người chứng giám, và cả Đức Ki-tô cũng chứng giám nữa. Ôi vinh hiển dường bao, hạnh phúc biết chừng nào, khi xông vào cuộc chiến mà có Chúa hiện diện, có Đức ki-tô làm trọng tài và đội triều thiên cho người chiến thắng.
 

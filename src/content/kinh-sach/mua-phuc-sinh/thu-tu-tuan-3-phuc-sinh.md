@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 3 Phục Sinh"
 order: 17
 ---
 
-*Trích sách Minh giáo quyển thứ nhất của thánh Giút-ti-nô, tử đạo.*
+**Trích sách Minh giáo quyển thứ nhất của thánh Giút-ti-nô, tử đạo.**
 
 Chúng tôi xin trình bày cho quý vị biết chúng tôi được hiến dâng cho Thiên Chúa như thế nào sau khi được Đức Ki-tô đổi mới.
 

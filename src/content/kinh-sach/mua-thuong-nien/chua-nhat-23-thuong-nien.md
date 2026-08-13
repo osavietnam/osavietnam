@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 23 Thường Niên"
 order: 155
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.**
 
 Rồi Chúa nói tiếp : Phúc thay ai khát khao nên người công chính, vì họ sẽ được Thiên Chúa cho thoả lòng. Đói đây không phải là đói của phần xác, khát đây không phải là khát của trần gian, mà là ước ao được no đầy sự công chính, và một khi đã được đưa vào lãnh vực nhiệm mầu của những điều bí ẩn, con người sẽ mong mỏi được đầy tràn chính Chúa.
 

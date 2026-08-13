@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 8 Thường Niên"
 order: 52
 ---
 
-*Trích sách Tự thuật của thánh Âu-tinh, giám mục.*
+**Trích sách Tự thuật của thánh Âu-tinh, giám mục.**
 
 Lạy Chúa, Chúa biết con, xin cho con biết Chúa ; xin cho con biết Chúa như con được Chúa biết. Lạy Chúa là sức mạnh tâm hồn con, xin ngự vào và uốn nắn tâm hồn con cho hợp với Chúa, để nó thành sở hữu của Chúa, không còn một vết nhơ hay nếp nhăn nào. Đó là niềm hy vọng của con và cũng là lý do để con thốt ra những lời này. Niềm hy vọng ấy làm cho con vui một niềm vui lành mạnh. Về mọi sự khác trên đời này, những gì càng được khóc thương bao nhiêu thì càng ít đáng được khóc thương bấy nhiêu, và những gì càng ít được khóc thương, thì lại càng đáng được khóc thương hơn bấy nhiêu. Nhưng Chúa, Chúa quý sự thật, vì ai làm theo sự thật thì đến cùng ánh sáng. Con muốn làm theo sự thật bằng cách tuyên xưng trong tâm hồn con trước nhan thánh Chúa, và trong sách này trước mặt nhiều chứng nhân.
 

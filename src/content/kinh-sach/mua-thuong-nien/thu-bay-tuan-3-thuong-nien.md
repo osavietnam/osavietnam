@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 3 Thường Niên"
 order: 21
 ---
 
-*Trích Hiến chế Vui Mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế Vui Mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.**
 
 Điều bí ẩn nhất về thân phận con người là sự chêt. Không những con người băn khoăn day dứt vì thân xác phải đau khổ và hao mòn dần, mà còn hơn nữa băn khoăn vì sợ phải bị tiêu diệt vĩnh viễn. Con người xét đoán thật đúng theo linh tính của lòng mình, khi khiếp sợ và lẩn tránh sự huỷ diệt hoàn toàn và ra đi vĩnh viễn của bản thân. Con người chống lại sự chết vì mang trong mình mầm mống của vĩnh cửu không thể bị thu gọn lại trong vật chất mà thôi. Mọi cố gắng lớn lao của kỹ thuật, dù rất hữu ích, cũng không thể xoa dịu nổi mối lo âu của con người : cuộc sống thể xác có kéo dài đến mấy cũng không thoả mãn được khát vọng sống mãi vẫn hằng tiềm ẩn sâu xa trong lòng người.
 

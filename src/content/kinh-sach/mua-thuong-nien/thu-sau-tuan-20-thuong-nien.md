@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 20 Thường Niên"
 order: 139
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.**
 
 Anh em không cứu chuộc được nhau, nhưng có một con người cứu chuộc được con người. Người ta không trả được giá phục hồi cho Thiên Chúa, cũng không trả được giá chuộc mạng mình. Điều đó có nghĩa là Đức Ki-tô nói : Ngày vận hạn cớ chi tôi phải sợ ? Vì chưng, có gì hại được tôi ? Bởi chưng chẳng những tôi không cần ai cứu chuộc, nhưng chính tôi sẽ cứu chuộc mọi người. Tôi sẽ đem lại tự do cho người khác mà tôi phải run sợ cho chính mình sao ? Này cả những gì vượt trên tình cảm họ hàng, vượt trên tình nghĩa gia đình, tôi cũng sẽ đổi mới hết. Anh em cùng một mẹ sinh ra không thể cứu chuộc được nhau, nhưng sẽ có một con người cứu chuộc họ. Đã có lời chép về con người ấy thế này : Chúa sẽ sai một con người đến với họ. Con người ầy sẽ cứu thoát họ. Con người ấy đã nói về chính mình như sau : Các ông tìm giết tôi là người đã nói cho các ông biết sự thật.
 

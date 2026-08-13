@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleHero from '../../components/ArticleHero.astro';
 import ArticleLectionaryMeta from '../../components/ArticleLectionaryMeta.astro';
 import ArticleProseMeta from '../../components/ArticleProseMeta.astro';
+import ContentInlineEditor from '../../components/ContentInlineEditor.astro';
 import { articleCategoryTone, articleCategoryVariant } from '../../utils/article-category';
 
 export const prerender = true;
@@ -44,6 +45,7 @@ const articleHref = (id: string) => `/bai-giang-suy-niem/${id.replace(/^bai-gian
   type="article"
   bodyClass="no-sidebar page-spirit-article page-sermon-article"
 >
+  <ContentInlineEditor entryId={entry.id} kind="sermon" />
   <main class="sermon-reader">
     <ArticleHero
       title={d.title}

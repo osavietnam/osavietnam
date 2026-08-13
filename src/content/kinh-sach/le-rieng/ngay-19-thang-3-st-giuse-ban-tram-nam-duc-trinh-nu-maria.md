@@ -15,7 +15,7 @@ Thánh Giu-se, bạn trăm năm của Đức Ma-ri-a, có sứ mạng “chăm s
 
 </div>
 
-*Trích bài giảng của thánh Bê-na-đi-nô Xi-ê-na, linh mục.*
+**Trích bài giảng của thánh Bê-na-đi-nô Xi-ê-na, linh mục.**
 
 Đây là đường lối thông thường của Chúa khi Người ban những ơn riêng cho một thọ tạo có trí khôn : Chúa thương tuyển chọn và ban cho ai một ơn đặc biệt hay một địa vị cao trọng nào, thì Người cũng ban mọi đặc sủng cần thiết cho kẻ được tuyển chọn ấy cũng như cho nhiệm vụ của họ. Những đặc sủng này còn tô điểm thêm cho bản thân họ rất nhiều.
 

@@ -9,6 +9,7 @@ image: "../../../assets/linh-dao/linh-dao-augustino-cover.png"
 heroImage: "../../../assets/linh-dao/linh-dao-augustino-cover.png"
 tags: ["Linh đạo Augustinô", "Unitas in Caritas", "Cộng đoàn", "Christus Totus"]
 featured: true
+language: "vi"
 draft: false
 ---
 

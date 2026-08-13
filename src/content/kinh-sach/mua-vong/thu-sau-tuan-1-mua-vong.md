@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 1 Mùa Vọng"
 order: 6
 ---
 
-*Trích sách Minh giải của thánh An-xen-mô, giám mục.*
+**Trích sách Minh giải của thánh An-xen-mô, giám mục.**
 
 Này hỡi con người bé nhỏ ! Hãy tạm gác một bên các nỗi lo toan, hãy tạm xa lánh các mối bận rộn. Giờ đây hãy vất bỏ những nỗi lo lắng vất vả, hãy để đó những căng thẳng nặng nề. Hãy dành cho Thiên Chúa một khoảng thời gian, và nghỉ ngơi đôi chút trong Người.
 

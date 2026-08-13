@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 5 Thường Niên"
 order: 34
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Khi sinh ra làm người thật và chẳng bao giờ không là Thiên Chúa thật, Đức Ki-tô, Chúa chúng ta, đã thực hiện nơi bản thân mình bước đầu của một tạo thành mới, và nhờ việc được sinh ra, Người đã ban cho nhân loại một nguyên lý thiêng liêng. Mầu nhiệm đó, trí nào hiểu cho thấu ? Ân huệ ấy, lưỡi nào kể cho cùng ? Tội nhân lại trở thành kẻ vô tội, cũ lại nên mới, kẻ xa lạ được nhận làm con cái, người ngoài được thừa hưởng gia nghiệp.
 

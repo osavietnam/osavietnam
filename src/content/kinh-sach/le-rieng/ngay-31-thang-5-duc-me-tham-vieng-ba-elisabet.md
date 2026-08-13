@@ -15,7 +15,7 @@ Trong khoảng thời gian giữa Lễ Truyền Tin và Lễ Sinh Nhật Thánh 
 
 </div>
 
-*Trích bài giảng của thánh Bê-đa Khả Kính, linh mục.*
+**Trích bài giảng của thánh Bê-đa Khả Kính, linh mục.**
 
 Linh hồn tôi ngợi khen ĐỨC CHÚA, thần trí tôi hớn hở vui mừng, vì Thiên Chúa, Đấng cứu độ tôi. Qua những lời đó, trước hết Đức Mẹ muốn tuyên xưng những ơn riêng Chúa đã ban cho Người cách đặc biệt, sau là kể ra những ơn chung Thiên Chúa không ngừng ban cho nhân loại đến muôn đời.
 

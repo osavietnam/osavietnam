@@ -15,7 +15,7 @@ Trên đường đi Đa-mát, ông Sao-lê quê thành Tác-xô đã khám phá 
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.**
 
 Con người là gì, bản tính nhân loại của chúng ta cao trọng thế nào, và con người có khả năng đến đâu dù cũng chỉ là động vật, thì, hơn bất cứ ai, thánh Phao-lô đã cho chúng ta thấy rõ. Người sống mỗi ngày một cao thượng hơn, vươn lên mỗi ngày một mạnh mẽ hơn ; khi gặp hiểm nguy, người luôn chiến đấu với niềm phấn khởi mới. Người cho thấy điều đó khi nói : Tôi quên đi chặng đường đã qua, để lao mình về phía trước. Khi thấy giờ chết đã gần kề, thánh Phao-lô cũng khuyến khích người khác hiệp thông và chia sẻ niềm vui với mình, người nói : Anh em hãy vui lên và chia sẻ niềm vui với tôi. Khi gặp nguy hiểm và bị lăng nhục, người lại vui mừng viết cho các tín hữu Cô-rin-tô : Tôi cảm thấy vui sướng khi mình yếu đuối, khi bị sỉ nhục, bị bắt bớ. Người gọi đó là khí cụ để làm điều công chính, và cho thấy nhờ vậy người đã gặt hái được những thành quả mỹ mãn.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 17 Thường Niên"
 order: 116
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Hội Thánh được gọi là công giáo hay phổ quát, vì những lý do sau đây : Hội Thánh đã lan rộng khắp hoàn cầu, từ đông sang tây, từ nam chí bắc. Hội Thánh dạy - không sai sót - cho mọi người biết tất cả những điều phải tin, dù về thế giới hữu hình hay vô hình, dù về những sự trên trời hay dưới đất. Hội Thánh giúp mọi hạng người thờ phượng Thiên Chúa cho phải đạo : thủ lãnh và thường dân, trí thức hay ít học. Sau cùng, Hội Thánh được gọi là công giáo, vì Hội Thánh săn sóc và chữa lành người ta khỏi mọi thứ tội đã phạm trong linh hồn hay ngoài thân xác. Cũng chính Hội Thánh có đủ mọi năng lực dưới mọi danh xưng, trong việc lành, lời nói và mọi thứ ơn thiêng.
 

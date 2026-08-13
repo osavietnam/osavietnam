@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 1 Mùa Chay"
 order: 7
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về kinh Lạy Cha.**
 
 Anh em thân mến, những lời Tin Mừng truyền dạy chẳng là gì khác mà chính là giáo huấn của Thiên Chúa, là nền móng để xây lên đức cậy, rường cột củng cố đức tin, lương thực nuôi dưỡng tâm hồn, tay lái hướng dẫn đường đi, sự trợ giúp để đạt tới ơn cứu độ. Ở đời này, những lời ấy giáo dục tâm hồn các tín hữu đạo hạnh, và dẫn đưa họ vào Nước Trời.
 

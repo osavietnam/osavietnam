@@ -11,9 +11,9 @@ draft: false
 ---
 Thánh nhân sinh tại Anh quốc quãng năm 385. Lúc còn bé, người đã bị bắt đưa sang Ai-len và phải đi chăn chiên. Khi được tự do, người nhập hàng giáo sĩ, được tấn phong giám mục Ai-len và hăng say loan báo Tin Mừng cho dân thuộc quần đảo này. Người đã đem ánh sáng đức tin đến cho rất nhiều người và có công rất lớn trong việc thiết lập hàng giáo phẩm tại đây. Người qua đời năm 461, gần thành phố Đa-un.
 
-Qua tôi, nhiều dân tộc đã được tái sinh trong Chúa
+*Qua tôi, nhiều dân tộc đã được tái sinh trong Chúa*
 
-*Trích lời tuyên xưng đức tin của thánh Pát-rích, giám mục.* 
+**Trích lời tuyên xưng đức tin của thánh Pát-rích, giám mục.**
 
  
 

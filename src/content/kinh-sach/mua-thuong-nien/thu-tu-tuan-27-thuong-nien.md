@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 27 Thường Niên"
 order: 186
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Tra-lét.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Tra-lét.**
 
 Anh em hãy trở nên thọ tạo mới trong đức tin là mình Chúa Giê-su Ki-tô và trong máu của Người bằng một nếp sống nhân ái. Đừng ai trong anh em có điều gì nghịch với người thân cận. Đừng làm cớ cho lương dân : vì một vài người ngu xuẩn mà thoá mạ cộng đoàn ở trong Thiên Chúa. Quả thật, khốn cho kẻ nào nhẹ dạ mà khiến cho kẻ khác xúc phạm đến Ta.
 

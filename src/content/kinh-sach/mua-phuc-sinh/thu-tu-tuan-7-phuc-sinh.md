@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 7 Phục Sinh"
 order: 45
 ---
 
-*Trích Hiến chế tín lý Ánh sáng muôn dân của công đồng Va-ti-ca-nô II về Giáo Hội (số 4 và 12).*
+**Trích Hiến chế tín lý Ánh sáng muôn dân của công đồng Va-ti-ca-nô II về Giáo Hội (số 4 và 12).**
 
 Một khi công trình Cha trao cho Con phải thi hành ở trần gian đã hoàn tất, thì Thánh Thần được sai đến trong ngày Lễ Ngũ Tuần, để không ngừng thánh hoá Giáo Hội, và như thế nhờ Đức Ki-tô các kẻ tin được đến cùng Cha trong một Thánh Thần duy nhất. Chính Người là Thần Khí ban sự sống, hay nói khác đi, là mạch nước vọt lên, đưa tới sự sống đời đời ; nhờ Người, Cha làm cho những kẻ đã chết vì tội, được sống cho tới khi làm cho thân xác phải chết của họ, được sống lại trong Đức Ki-tô.
 

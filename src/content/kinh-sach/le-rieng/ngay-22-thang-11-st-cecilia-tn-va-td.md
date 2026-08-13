@@ -15,7 +15,7 @@ Cuối thế kỷ V, câu chuyện về cuộc thương khó của các chứng 
 
 </div>
 
-*Trích bài diễn giải thánh vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải thánh vịnh của thánh Âu-tinh, giám mục.**
 
 Hãy tạ ơn Chúa, gieo vạn tiếng đàn cầm ; kính mừng Người, gảy muôn cung đàn sắt. Nào dâng Chúa một bài ca mới. Hãy cởi bỏ cái cũ kỹ : anh em đã biết bài ca mới. Con người mới, giao ước mới, bài ca mới. Bài ca mới không thích hợp với những con người cũ. Bài ca đó, chỉ những con người mới mới học được, vì nhờ ân sủng họ đã được đổi mới từ tình trạng cũ kỹ, và từ nay thuộc về giao ước mới, tức là Nước Trời. Tất cả tình yêu của chúng ta tha thiết hướng về Nước ấy và hát bài ca mới ; hãy hát bài ca mới, không phải bằng môi miệng nhưng bằng đời sống.
 

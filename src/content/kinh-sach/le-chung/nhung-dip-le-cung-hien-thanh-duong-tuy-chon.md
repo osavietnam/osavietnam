@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Cung Hiến Thánh Đường (tùy chọn)"
 order: 2
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Hôm nay, chúng ta tập hợp nhau ở đây là để cử hành lễ cung hiến ngôi nhà cầu nguyện này. Nhưng ngôi nhà cho chúng ta cầu nguyện, nhà của Thiên Chúa, là chính chúng ta. Nếu nhà của Thiên Chúa là chính chúng ta, thì chúng ta được xây dựng ở đời này để được cung hiến vào ngày tận thế. Ngôi nhà, hay đúng hơn, việc kiến thiết ngôi nhà thì đòi nhiều vất vả, còn khi cung hiến thì mừng vui.
 

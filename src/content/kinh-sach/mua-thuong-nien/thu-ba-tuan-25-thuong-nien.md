@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 25 Thường Niên"
 order: 171
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Chiên của Ta tản mác trên các ngọn núi, trên môi đỉnh đồi, trên khắp mặt đất. Tản mác trên khắp mặt đất là gì ? Đó là những kẻ chạy theo của cải trần gian, những của phù hoa trên mặt đất ; họ yêu mến quý chuộng những thứ ấy. Họ không muốn chết cho tội lỗi, để đời sống của họ được ẩn tàng trong Đức Ki-tô. Khắp mặt đất, là do lòng yêu chuộng của đời này, và vì họ là những con chên lạc loài trên khắp mặt đất. Họ ở khắp nơi : một người mẹ là tình kiêu căng đã sinh ra họ hết thảy, cũng như một người mẹ duy nhất của chúng ta là Hội Thánh Công Giáo đã sinh ra mọi Ki-tô hữu rải rác trên khắp hoàn cầu.
 

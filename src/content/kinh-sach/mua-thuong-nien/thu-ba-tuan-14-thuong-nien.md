@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 14 Thường Niên"
 order: 94
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Thưa anh em, chúng tôi tha thiết khuyên anh em : hãy sống bác ái không phải chỉ giữa anh em với nhau, mà còn với người ngoài. Đó là những người ngoại giáo chưa tin vào Đức Ki-tô, hoặc là những người đã phân ly khỏi chúng ta ; vì tuy dầu cùng với chúng ta tuyên xưng Đức Ki-tô là Đầu, nhưng họ lại tách lìa khỏi Hội Thánh là thân thể Người. Thưa anh em, ta hãy thương họ như là những người anh em của ta. Chỉ khi nào họ thôi không đọc Lạy Cha chúng con nữa, bấy giờ họ mới thôi không còn là anh em của ta.
 

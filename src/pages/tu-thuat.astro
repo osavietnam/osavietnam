@@ -1,6 +1,7 @@
 ---
 import { getEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CollectionProseInlineEditor from '../components/CollectionProseInlineEditor.astro';
 
 // Metadata từ sach collection
 const meta = await getEntry('sach', 'st-augustine/tu-thuat');
@@ -22,6 +23,13 @@ const allChapters = (await getCollection('tu-thuat', (e) => !e.data.draft && e.i
   banner="tu-thuat"
   bodyClass="no-sidebar page-tu-thuat"
 >
+<CollectionProseInlineEditor
+  collection="tu-thuat"
+  entryId="bio"
+  activeSelector="#tt-chapter-content"
+  activeAttribute="data-content-slug"
+  label="Sửa quyển đang đọc"
+/>
 <script is:inline>
   if (new URLSearchParams(location.search).has('book') && location.hash) {
     document.body.dataset.noAutoscroll = '1';
@@ -645,8 +653,6 @@ body.page-tu-thuat .tt-prose[data-content-slug="bio"] > p:first-of-type::first-l
 </style>
 
 <script>
-import { withBase } from '../lib/site-path';
-
 document.getElementById('backBtn')?.remove();
 
 // Chiều cao thực tế của toàn bộ sticky stack: navbar + book bar + spacer.
@@ -697,7 +703,8 @@ function getTuThuatScrollOffset() {
 })();
 
 // ── Article number formatter ──
-function processArticleNums(container: Element) {
+function processArticleNums(container: Element, contentSlug = container.getAttribute('data-content-slug') || '') {
+  const bookNumber = contentSlug.match(/^quyen-(\d+)$/)?.[1] ?? '';
   container.querySelectorAll<HTMLParagraphElement>('p').forEach((p) => {
     if (p.closest('.footnotes')) return;
     const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
@@ -705,6 +712,8 @@ function processArticleNums(container: Element) {
     if (!first) return;
     const m = first.textContent?.match(/^(\d+\.?\s)/);
     if (!m) return;
+    const paragraphNumber = m[1].trim().replace(/\.$/, '');
+    if (!p.id && bookNumber) p.id = `conf-${bookNumber}-${paragraphNumber}`;
     const span = document.createElement('span');
     span.className = 'article-num';
     span.textContent = m[1];
@@ -723,7 +732,7 @@ function processArticleNums(container: Element) {
   const sticky  = document.querySelector<HTMLElement>('.tt-book-sticky');
   if (!tabs.length || !content) return;
 
-  const BASE = withBase('/tu-thuat/fragment/');
+  const BASE = '/tu-thuat/fragment/';
   const cache = new Map<string, string>();
   // A horizontal drag on the book strip must not become a click that loads
   // another book and scrolls the document vertically when the finger lifts.
@@ -749,7 +758,7 @@ function processArticleNums(container: Element) {
   cache.set('bio', content.innerHTML);
 
   // Process article nums in initial content
-  processArticleNums(content);
+  processArticleNums(content, 'bio');
 
   let loadVersion = 0;
   let activeRequest: AbortController | null = null;
@@ -882,7 +891,7 @@ function processArticleNums(container: Element) {
     if (cache.has(slug)) {
       content.innerHTML = cache.get(slug)!;
       content.dataset.contentSlug = slug;
-      processArticleNums(content);
+      processArticleNums(content, slug);
       finishChapterLayout();
       return;
     }
@@ -901,7 +910,7 @@ function processArticleNums(container: Element) {
       cache.set(slug, frag);
       content.innerHTML = frag;
       content.dataset.contentSlug = slug;
-      processArticleNums(content);
+      processArticleNums(content, slug);
     } catch (error) {
       if (controller.signal.aborted || thisLoad !== loadVersion) return;
       content.innerHTML = '<p style="color:var(--ink-cream-soft);text-align:center;padding:4rem">Không thể tải nội dung. Vui lòng thử lại.</p>';
@@ -1161,13 +1170,44 @@ if (progressBar) {
   const trigger = document.querySelector<HTMLButtonElement>('.toc-trigger');
   if (!shell || !trigger) return;
 
-  function setOpen(open: boolean) {
+  // Tự Thuật dựng TOC trực tiếp trong trang (không qua TableOfContents), nên
+  // gắn cùng cơ chế toggle ổn định tại đây. Khi prose reflow do đổi chiều rộng,
+  // giữ heading đang đọc ở nguyên cao độ trong viewport.
+  trigger.dataset.tocToggleBound = 'true';
+  trigger.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const open = !shell.classList.contains('toc-open');
+    const sharedToggle = (window as Window & { __setStableTocOpen?: (shell: HTMLElement, trigger: HTMLButtonElement, open: boolean) => void }).__setStableTocOpen;
+    if (sharedToggle) {
+      sharedToggle(shell, trigger, open);
+      return;
+    }
+
+    const headings = Array.from(shell.querySelectorAll<HTMLElement>('h2[id], h3[id], h4[id]'));
+    let anchor: HTMLElement | null = null;
+    if (location.hash) {
+      try { anchor = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch {}
+    }
+    if (!anchor || !shell.contains(anchor)) {
+      anchor = headings.reduce<HTMLElement | null>((best, heading) => {
+        const top = heading.getBoundingClientRect().top;
+        if (top > innerHeight) return best;
+        if (!best) return heading;
+        return Math.abs(top - 96) < Math.abs(best.getBoundingClientRect().top - 96) ? heading : best;
+      }, null);
+    }
+    const anchorTop = anchor?.getBoundingClientRect().top ?? null;
     shell.classList.toggle('toc-open', open);
     trigger.setAttribute('aria-expanded', String(open));
-  }
-
-  trigger.addEventListener('click', () => {
-    setOpen(!shell.classList.contains('toc-open'));
+    if (!anchor || anchorTop === null) return;
+    const restore = () => {
+      if (!anchor?.isConnected) return;
+      const delta = anchor.getBoundingClientRect().top - anchorTop;
+      if (Math.abs(delta) > .5) scrollBy({ top: delta, left: 0, behavior: 'instant' });
+    };
+    requestAnimationFrame(() => { restore(); requestAnimationFrame(restore); });
+    setTimeout(restore, 80);
+    setTimeout(restore, 180);
   });
 
   // Active link highlight via IntersectionObserver (rebuild after each chapter load)

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 3 Mùa Chay"
 order: 22
 ---
 
-*Trích bài giảng của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích bài giảng của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Kẻ khôn ngoan, đừng tự hào mình khôn ngoan ; kẻ hùng mạnh đừng tự hào mình hùng mạnh ; kẻ giàu có, đừng tự hào mình giàu có. Vậy đâu là niềm tự hào đích thực ? Nhờ đâu con người nên cao cả ? Vị ngôn sứ trả lời : Ai tự hào thì hãy tự hào về điều này là hiểu biết Ta, vì Ta là ĐỨC CHÚA.
 

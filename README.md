@@ -1,8 +1,5 @@
 # AUGUSINH — bản migrate Astro (giữ nguyên thiết kế gốc)
 
-> **Bản GitHub Pages:** repository `osavietnam/osavietnam`, deploy tự động tại `https://osavietnam.github.io/osavietnam/`. Xem [DEPLOY-GITHUB.md](./DEPLOY-GITHUB.md).
-
-
 Đây là bản dựng lại site AUGUSINH trên **Astro 5**, **giữ nguyên giao diện, màu sắc
 và font của bản gốc**. Chỉ thực hiện 4 tối ưu hạ tầng:
 
@@ -14,7 +11,7 @@ và font của bản gốc**. Chỉ thực hiện 4 tối ưu hạ tầng:
    phải dữ liệu người dùng.
 3. **Soạn bài bằng Markdown** + script chuyển JSON cũ sang Markdown.
 4. **Astro + SEO meta** (Open Graph, Twitter, JSON-LD, sitemap) — thứ bản SPA cũ
-   thiếu — và **Decap CMS** (form) cho cộng tác viên.
+   thiếu — và **Content Studio** để biên tập, preview và xuất bản qua GitHub.
 
 Thiết kế (navy + gold, 4 font Be Vietnam Pro / Source Serif 4 / Playfair Display /
 Montserrat) được tái sử dụng **nguyên bản** từ thư mục `css/` cũ.
@@ -48,13 +45,15 @@ src/
 ├── components/                ← Navbar, Footer, ArticleCard, TableOfContents
 ├── pages/                    ← trang chủ, danh mục, trang đọc
 └── styles/                   ← CSS GỐC (base/layout/components/nav-mobile) + reader.css
-public/admin/                  ← Decap CMS (form cho cộng tác viên)
+src/pages/admin.astro          ← giao diện Content Studio
+scripts/admin-server.mjs       ← API biên tập local và GitHub adapter
 scripts/convert-json-to-md.mjs ← chuyển JSON cũ → Markdown
 ```
 
 ## Soạn bài
-Xem `HUONG-DAN-SOAN-BAI.md`. Ba cách: form Decap CMS (`/admin/`), viết Markdown
-trực tiếp, hoặc chạy script chuyển hàng loạt từ `db/` cũ.
+Xem `HUONG-DAN-SOAN-BAI.md` và `docs/CONTENT-STUDIO.md`. Có thể dùng Content
+Studio (`/admin/`), viết Markdown trực tiếp, hoặc chạy script chuyển hàng loạt từ
+`db/` cũ.
 
 
 ## Kiểm tra toàn vẹn (đã chạy)
@@ -187,4 +186,4 @@ Tất cả biến màu/font ở đầu `overrides.css`.
 - Chuyển nốt các mục còn lại (Saints, Phụng vụ, Encyclopedia, Niên biểu, các trang
   tĩnh tu-luat/linh-dao...) theo đúng mẫu collection + script đã có. Link navbar
   cho các mục này hiện trỏ tới route dự kiến, sẽ hoạt động khi chuyển nốt.
-- Cấu hình xác thực Decap CMS theo hosting (Netlify Identity hoặc GitHub backend).
+- Cấu hình token GitHub fine-grained và GitHub Actions deploy theo hướng dẫn Content Studio.

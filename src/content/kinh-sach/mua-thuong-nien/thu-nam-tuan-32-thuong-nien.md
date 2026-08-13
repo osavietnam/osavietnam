@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 32 Thường Niên"
 order: 222
 ---
 
-*Trích bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Trích bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Chúa phán : Suốt ngày, danh Ta không ngớt bị chê cười giữa chư dân. Người còn phán : Khốn cho kẻ làm cho danh Ta bị phỉ báng giữa chư dân. Nhưng vì đâu danh Người bị phỉ báng ? Vì ngôn hành của chúng ta bất nhất. Thực vậy, chư dân nghe chúng ta nói lời Thiên Chúa thì cảm phục, vì thấy tốt đẹp và cao cả. Nhưng khi biết việc chúng ta làm không đi đôi với lời chúng ta nói, họ quay ra phạm thượng, cho đó toàn là chuyện phù phiếm và sai lầm.
 

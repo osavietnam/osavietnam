@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 15 Thường Niên"
 order: 101
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Thánh Phao-lô tông đồ dạy bạn rằng : Tất cả cha ông chúng ta đều được ở dưới cột mây, tất cả đều vượt qua Biển Đỏ. Tất cả cùng được chịu phép rửa dưới đám mây và trong lòng biển. Sau cùng, chính ông Mô-sê cũng nói trong bài ca rằng : Ngài hà hơi nổi gió, biển vùi lấp chúng đi. Trong cuộc vượt qua của dân Híp-ri, bạn thấy hình bóng của bí tích Thánh Tẩy. Trong cuộc vượt qua đó, người Ai-cập phải chết, con người Híp-ri được thoát nạn. Điều mà chúng ta học được mỗi ngày trong bí tích ấy là gì, nếu không phải là tội lỗi bị nhận chìm và lầm lạc bị xoá bỏ, còn lòng đạo đức và sự trong trắng được bảo toàn nguyên vẹn.
 

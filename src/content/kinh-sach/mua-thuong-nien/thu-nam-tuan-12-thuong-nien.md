@@ -10,7 +10,7 @@ order: 82
 draft: false
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.**
 
 Những người đứng trên đỉnh núi cao nhìn ra biển khơi bao la có cảm giác như thế nào, thì tâm trí tôi cũng cảm thấy như vậy, khi từ lời Chúa cao vời, như từ đỉnh núi nhìn xuống cõi tư tưởng thâm sâu khôn dò khôn thấu.
 

@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân là phó tế giáo đoàn Xa-ra-gô-xa. Sau khi đã chịu cực hình ghê rợn, người đã chịu tử đạo tại Va-len-xi-a (Tây-ban-nha) cùng với giám mục của mình là Va-lê-ri-ô năm 304 hoặc 305. Cũng giống như thánh phó tế Lô-ren-xô, thánh Vinh-sơn để lại gương mẫu tận tuỵ phục vụ trong Hội Thánh: là thừa tác viên phụ giúp giám mục trong việc dâng tiến hy lễ và điều hành cộng đoàn, vị phó tế này còn tháp tùng vị giám mục của mình trong giờ phút nêu cao chứng tá tử đạo nữa. 
 
-Thánh Vinh-sơn chiến thắng nhờ Đấng đã chiến thắng thế gian 
+*Thánh Vinh-sơn chiến thắng nhờ Đấng đã chiến thắng thế gian*
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
  
 

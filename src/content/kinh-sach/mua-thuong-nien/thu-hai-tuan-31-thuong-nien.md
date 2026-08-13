@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 31 Thường Niên"
 order: 212
 ---
 
-*Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.**
 
 Người ta cần thận trọng để đừng chỉ ủng hộ những nỗ lực của một số người, mà không quan tâm đến não trạng của chính mình. Các nhà lãnh đạo quốc gia, một đàng là những người có trách nhiệm về công ích của dân tộc mình, mặt khác cũng là những người góp phần xây dựng công ích của thế giới, họ tuỳ thuộc rất nhiều vào tư tưởng và cảm tình của quần chúng. Họ có muốn kiến tạo hoà bình cũng vô ích, bao lâu những tình cảm thù địch, khinh dể và nghi kỵ, những thái độ kỳ thị chủng tộc và cố chấp dựa vào những ý thức hệ còn tạo ra những chia rẽ giữa người với người và còn khiến phe này chống lại phe kia. Đó là lý do tại sao phải cấp bách đổi mới việc giáo dục não trạng và tạo một đường hướng suy nghĩ mới trong công luận.
 

@@ -15,7 +15,7 @@ Thánh I-nha-xi-ô thành An-ti-ô-ki-a đã bị án quăng làm mồi cho thú
 
 </div>
 
-*Trích thư thánh I-nha-xi-ô, giám mục, tử đạo, gửi tín hữu Rô-ma.*
+**Trích thư thánh I-nha-xi-ô, giám mục, tử đạo, gửi tín hữu Rô-ma.**
 
 Tôi viết cho tất cả các Hội Thánh và loan báo cho mọi người biết : tôi sẽ vui lòng chết vì Thiên Chúa, nếu anh em không ngăn cản. Tôi nài xin anh em đừng tốt với tôi không đúng lúc. Hãy cứ để thú dữ ăn thịt tôi, nhờ thế, tôi sẽ được về cùng Thiên Chúa. Tôi là hạt lúa mì của Thiên Chúa và sẽ được nanh thú dữ nghiền tán để thành tấm bánh tinh tuyền của Đức Ki-tô. Xin khẩn cầu cùng Đức Ki-tô cho tôi, để nhờ đám thú dữ này, tôi được nên của lễ tiến dâng lên Thiên Chúa.
 

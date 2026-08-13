@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 4 Thường Niên"
 order: 28
 ---
 
-*Trích Hiến chế Vui Mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế Vui Mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.**
 
 Vì hoạt động của con người phát xuất từ con người, nên cũng quy hướng về con người. Quả thế, khi hoạt động, không những con người biến đổi sự vật và xã hội, mà còn kiện toàn chính bản thân. Con người học hỏi nhiều điều, trau dồi tài năng, ra khỏi mình và vượt lên trên chính mình. Sự phát triển đó, nếu hiểu cho đúng, thì quý giá hơn của cải bên ngoài người ta có thể thu tích được. Con người có giá trị vì tư cách con người hơn là vì sở hữu.
 

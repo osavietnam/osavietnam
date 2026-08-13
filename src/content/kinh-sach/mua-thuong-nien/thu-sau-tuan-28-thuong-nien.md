@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 28 Thường Niên"
 order: 195
 ---
 
-*Trích sách Thành Đô Thiên Chúa của thánh Âu-tinh, giám mục.*
+**Trích sách Thành Đô Thiên Chúa của thánh Âu-tinh, giám mục.**
 
 Hy lễ đích thực là mọi công việc chúng ta làm để gắn bó với Thiên Chúa, hầu gây dựng một xã hội thánh thiện, nghĩa là công việc nhằm mục đích đạt tới sự thiện làm cho chúng ta có thể thực sự được hạnh phúc. Bởi đó, ngay cả lòng thương xót để giúp người ta, nếu được thể hiện không phải vì Thiên Chúa thì cũng không phải là hy lễ. Quả vậy, dù hy lễ được thể hiện hay dâng hiến do con người thì nó vẫn là một thực tại thần linh, nên người La-tinh xưa mới dùng từ hy lễ để gọi thực tại đó. Vì thế, chính con người một khi được thánh hoá nhân danh Thiên Chúa và được hiến dâng cho Người, nghĩa là chết đối với thế gian để sống cho Thiên Chúa thì gọi đó là hy lễ. Điều này cũng liên hệ đến lòng thương xót mà mỗi người thể hiện đối với chính mình. Vì thế, có lời chép rằng : Bạn hãy thương xót linh hồn bạn bằng cách làm đẹp lòng Thiên Chúa.
 

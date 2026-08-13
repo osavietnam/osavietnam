@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 5 Thường Niên"
 order: 31
 ---
 
-*Trích bài giảng của linh mục Ô-ri-giê-nê về sách Sáng Thế.*
+**Trích bài giảng của linh mục Ô-ri-giê-nê về sách Sáng Thế.**
 
 Ông Áp-ra-ham lấy củi dùng để đốt lễ toàn thiêu đặt lên vai I-xa-ác, con ông. Ông cầm lửa và dao trong tay, và cả hai cùng đi. I-xa-ác mang củi dùng đốt lễ toàn thiêu : đó là hình ảnh Đức Ki-tô vác thập giá ; mà mang củi dùng để đốt lễ toàn thiêu lại là nhiệm vụ của tư tế. Vậy, chính Đức Ki-tô đã thành tế phẩm và tư tế. Nhưng lời thêm ngay sau đó : rồi cả hai cùng đi cũng liên hệ đến điều ấy. Thật vậy, khi ông Áp-ra-ham cầm lửa và dao như thể sẽ tế lễ, thì I-xa-ác không đi đàng sau mà cùng với ông ; điều đó cũng cho thấy rõ I-xa-ác cũng thực thi chức vụ tư tế với cha.
 

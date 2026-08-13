@@ -10,7 +10,7 @@ order: 2
 draft: false
 manualFill: true
 ---
-*Trích diễn từ của Đức Giáo hoàng Phao-lô VI dịp kết thúc khoá III Công Đồng Va-ti-ca-nô II, 21-11-1964*
+**Trích diễn từ của Đức Giáo hoàng Phao-lô VI dịp kết thúc khoá III Công Đồng Va-ti-ca-nô II, 21-11-1964**
 
  
 

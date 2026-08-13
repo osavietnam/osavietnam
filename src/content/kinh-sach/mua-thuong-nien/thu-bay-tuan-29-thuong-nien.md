@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 29 Thường Niên"
 order: 203
 ---
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Thánh Phao-lô tông đồ dạy rằng nhân loại bắt nguồn từ hai người : ông A-đam và Đức Ki-tô. Hai người này ngang hàng xét theo thể xác, nhưng xét về công trạng thì không ngang hàng ; hoàn toàn giống nhau về cấu trúc thể xác, nhưng lại hoàn toàn khác nhau về nguồn gốc của mỗi người. Thánh Phao-lô viết : Con người đầu tiên được dựng nên thành một sinh vật, còn A-đam cuối cùng là thần khí ban sự sống.
 

@@ -1,10 +1,16 @@
 ---
 title: "Nhịp Sống Cộng Đoàn Tháng Sáu"
 subtitle: "Cầu nguyện, gặp gỡ và cùng nhau phục vụ"
+authorDetails:
 category: "Cộng Đoàn"
-date: 2026-06-30
 excerpt: "Một tháng Sáu được dệt nên từ giờ kinh chung, những cuộc gặp gỡ giản dị và niềm vui phục vụ trong tinh thần một lòng hướng về Thiên Chúa."
-tags: ["cộng đoàn", "sinh hoạt", "tháng sáu", "OSA Việt Nam"]
+date: "2026-06-30"
+tags:
+  - "cộng đoàn"
+  - "sinh hoạt"
+  - "tháng sáu"
+  - "OSA Việt Nam"
+language: "vi"
 featured: true
 draft: false
 ---

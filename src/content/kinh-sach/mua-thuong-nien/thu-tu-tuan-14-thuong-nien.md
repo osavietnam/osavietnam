@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 14 Thường Niên"
 order: 95
 ---
 
-*Trích sách cổ xưa nhan đề Giáo huấn của Mười Hai Tông Đồ.*
+**Trích sách cổ xưa nhan đề Giáo huấn của Mười Hai Tông Đồ.**
 
 Anh em hãy tạ ơn thế này : Trước tiên khi nâng chén, hãy nói rằng : “Lạy Cha chúng con, chúng con tạ ơn Cha vì cây nho thánh của Đa-vít, tôi tớ Cha, cây nho mà Cha đã tỏ ra cho chúng con nhờ Đức Giê-su, người tôi tớ của Cha. Tung hô Cha vinh hiển muôn đời !”.
 

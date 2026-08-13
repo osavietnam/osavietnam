@@ -15,7 +15,7 @@ Thánh Phan-xi-cô chào đời tại Tây-ban-nha năm 1506. Khi đang học v�
 
 </div>
 
-*Trích thư của thánh Phan-xi-cô Xa-vi-ê linh mục gửi thánh I-nha-xi-ô.*
+**Trích thư của thánh Phan-xi-cô Xa-vi-ê linh mục gửi thánh I-nha-xi-ô.**
 
 Chúng tôi đã tới nhiều làng tân tòng mới được chịu phép rửa cách đây ít năm. Người Bồ-đào-nha không ở các làng này vì đất đai xác xơ cằn cỗi. Vì không có linh mục nên các Ki-tô hữu bản xứ chẳng biết gì khác ngoài việc mình là Ki-tô hữu. Chẳng có ai cử hành bí tích cho họ, chẳng có ai dạy Kinh Tin Kính, Kinh Lạy Cha, Kinh Kính Mừng ; chẳng có ai dạy cho họ biết điều răn của Chúa.
 

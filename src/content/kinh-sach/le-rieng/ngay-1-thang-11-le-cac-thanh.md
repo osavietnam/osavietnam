@@ -15,7 +15,7 @@ order: 176
 
 </div>
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Chúng ta ca ngợi các thánh để làm gì ? Chúng ta tôn kính các thánh để làm gì ? Chúng ta mừng ngày đại lễ này để làm gì ? Những vinh dự trần gian ích gì cho các ngài, một khi Chúa Cha trên trời tôn vinh các ngài đúng như lời Chúa Con đã hứa ? Lời tán dương của chúng ta ích gì cho các ngài ? Các thánh không cần chúng ta tôn vinh, và lòng tôn kính của chúng ta cũng chẳng thêm gì cho các ngài. Thực ra, chúng ta kính nhớ các ngài thì ích lợi cho chúng ta chứ không phải cho các ngài. Phần tôi, tôi phải thú thật là khi tưởng nhớ các ngài, tôi cảm thấy bừng lên trong lòng một khát vọng mãnh liệt.
 

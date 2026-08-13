@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 2 Mùa Chay"
 order: 13
 ---
 
-*Trích giáo huấn của thánh Gio-an Kim Khẩu, giám mục.*
+**Trích giáo huấn của thánh Gio-an Kim Khẩu, giám mục.**
 
 Người Do-thái đã nhìn thấy các phép lạ. Bạn cũng sẽ nhìn thấy những phép lạ còn vĩ đại và rõ ràng, hơn cả khi người Do-thái ra khỏi Ai-cập. Bạn đã không nhìn thấy Pha-ra-ô cùng với quân lính của ông bị nhận chìm, nhưng đã nhìn thấy quỷ cùng với võ khí của nó bị sóng vùi dập. Dân Do-thái đi qua biển, còn bạn, bạn vượt qua sự chết. Họ được cứu thoát khỏi tay quân Ai-cập, còn bạn, bạn được cứu thoát khỏi tay ma quỷ. Người Do-thái thoát cảnh nô lệ dã man, còn bạn, bạn thoát khỏi ách nô lệ tội lỗi thảm thương hơn nhiều.
 

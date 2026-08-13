@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 17 Thường Niên"
 order: 114
 ---
 
-*Trích bài giảng của thánh Xê-da-ri-ô, giám mục Ác-lơ.*
+**Trích bài giảng của thánh Xê-da-ri-ô, giám mục Ác-lơ.**
 
 Phúc thay ai xót thương người, vì họ sẽ được Thiên Chúa xót thương. Anh em thân mến, tiếng thương xót. Thật là êm dịu. Tiếng thương xót mà đã êm tai như thế, thì chính lòng thương xót còn dịu ngọt biết chừng nào ! Ai cũng muốn được người ta thương xót, nhưng đáng tiếc là không phải ai cũng xử sự để đáng được xót thương, vì người nào cũng muốn nhận mà ít kẻ muốn cho.
 

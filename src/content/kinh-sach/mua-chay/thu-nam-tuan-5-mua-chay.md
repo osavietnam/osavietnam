@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 5 Mùa Chay"
 order: 43
 ---
 
-*Trích Hiến chế tín lý Ánh Sáng muôn dân của công đồng Va-ti-ca-nô II về Hội Thánh.*
+**Trích Hiến chế tín lý Ánh Sáng muôn dân của công đồng Va-ti-ca-nô II về Hội Thánh.**
 
 Này sẽ đến những ngày -sấm ngôn của ĐỨC CHÚA- Ta sẽ lập với nhà Ít-ra-en và nhà Giu-đa một giao ước mới… Ta sẽ ghi vào lòng dạ chúng, sẽ khắc vào tâm khảm chúng Lề Luật cúa Ta. Ta sẽ là Thiên Chúa của chúng, còn chúng sẽ là dân cúa Ta... Hết thảy chúng, từ người nhỏ đến người lớn, sẽ biết Ta -sấm ngôn của ĐỨC CHÚA.
 

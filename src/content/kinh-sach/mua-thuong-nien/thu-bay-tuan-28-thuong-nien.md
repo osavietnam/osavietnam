@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 28 Thường Niên"
 order: 196
 ---
 
-*Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.**
 
 Sự hoà nhập giữa thành đô trần thế và thành đô thiên quốc chỉ nhờ đức tin mới nhận thấy được. Ngay cả lịch sử loài người vẫn còn là một mầu nhiệm ; lịch sử này bị xáo trộn vì tội lỗi cho tới khi phúc phận làm con Thiên Chúa được tỏ hiện rõ ràng nhờ mặc khải đầy đủ.
 

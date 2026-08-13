@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Trinh Nữ Maria (tùy chọn 2)"
 order: 5
 ---
 
-*Trích hiến chế tín lý “Ánh sáng muôn dân” của công đồng Va-ti-ca-nô II về Hội Thánh.*
+**Trích hiến chế tín lý “Ánh sáng muôn dân” của công đồng Va-ti-ca-nô II về Hội Thánh.**
 
 Từ muôn thuở, theo ý định Thiên Chúa quan phòng, Đức Trinh Nữ đã được tiền định làm Thánh Mẫu Thiên Chúa liên hệ vời việc Ngôi Lời nhập thể. Trên trần gian này, Đức Trinh Nữ đã được làm Mẫu Nghi cao cả sinh dưỡng Đấng Cứu Chuộc, được làm người cộng tác quảng đại độc nhất vô nhị và là nữ tỳ khiêm hạ của Chúa. Khi cưu mang sinh hạ, nuôi dưỡng Đức Ki-tô, khi tiến dâng Người cho Chúa Cha trong đền thờ và đồng lao cộng khổ với Con mình đang chết trên thập giá, Mẹ đã đem lòng yêu mến hiết tha mà cộng tác một cách đặc biệt vào việc phục hồi sự sống siêu nhiên nơi các linh hồn. Vì thế, Mẹ là Mẹ chúng ta trong phạm vi ân sủng.
 

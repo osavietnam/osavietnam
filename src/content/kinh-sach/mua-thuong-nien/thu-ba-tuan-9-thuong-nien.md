@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 9 Thường Niên"
 order: 59
 ---
 
-*Trích sách giáo lý của thánh Đô-rô-thê-ô, viện phụ.*
+**Trích sách giáo lý của thánh Đô-rô-thê-ô, viện phụ.**
 
 Ai nhận mình có lỗi thì khi gặp điều chi phiền lòng, bất hạnh, nhuốc nhơ, tủi hổ hay bất cứ nỗi khổ nào khác, người ấy cũng vui vẻ chấp nhận hết. Họ nghĩ rằng mình có phải chịu tất cả những điều đó thì cũng đáng, nên không có gì có thể làm cho họ dao động. Hỏi có ai thanh thản hơn người ấy chăng ?
 

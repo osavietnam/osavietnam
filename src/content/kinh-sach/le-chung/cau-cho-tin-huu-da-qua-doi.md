@@ -8,7 +8,7 @@ liturgy: "Cầu cho tín hữu đã qua đời"
 order: 22
 ---
 
-*Trích bài giảng của thánh A-tha-na-xi-ô, giám mục An-ti-ô-khi-a.*
+**Trích bài giảng của thánh A-tha-na-xi-ô, giám mục An-ti-ô-khi-a.**
 
 Đức Ki-tô đã chết và sống lại chính là để làm Chúa kẻ sống cũng như kẻ chết. Nhưng Người không phải là Thiên Chúa của kẻ chết, nhưng của người sống. Người đang sống, vì thế những kẻ đã chết mà có Người làm Chúa cai trị, thì không còn là người chết nữa mà là người sống. : sự sống đang ngự trị nơi họ để họ sống mà không phải sợ chết nữa, giống như Đức Ki-tô khi đã trỗi dậy từ cõi chết thì không còn chết nữa.
 

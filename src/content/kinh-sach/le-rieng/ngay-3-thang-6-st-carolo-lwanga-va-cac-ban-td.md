@@ -15,7 +15,7 @@ Cùng với hai mươi vị tử đạo U-gan-đa này, trang sử về các ch�
 
 </div>
 
-*Trích bài giảng của đức giáo hoàng Phao-lô VI trong lễ phong thánh các vị tử đạo U-gan-đa.*
+**Trích bài giảng của đức giáo hoàng Phao-lô VI trong lễ phong thánh các vị tử đạo U-gan-đa.**
 
 Các vị tử đạo Phi châu này đã thêm một trang mới vào Danh Bộ Các Thánh Tử Đạo, vào cuốn sổ ghi tên những người chiến thắng. Trang sách đó cho thấy những sự việc vừa bi thảm, lại vừa cao đẹp. Chúng tôi coi đó là những trang sử xứng đáng tiếp nối những bài tường thuật hiển hách về châu Phi ngày xưa. Chúng ta, những con người của thời đại hôm nay, những người kém lòng tin, chúng ta vẫn tưởng rằng sẽ không bao giờ lại có những trang hùng tráng như xưa.
 

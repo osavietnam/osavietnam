@@ -11,9 +11,9 @@ draft: false
 ---
 Quãng năm 1233, bảy thường nhân quê tại Phi-ren-xê rút vào Mon-tê Xe-na-ri-ô để sống một cuộc sống huynh đệ, thanh bần, hãm mình đền tội và chiêm ngưỡng sự thương khó của Đức Giê-su, dưới sự che chở của Đức Maria. Người ta quen gọi các vị là “các tôi tớ của Đức Maria”. 
 
-Chúng ta hãy ca ngợi những con người hiển hách 
+*Chúng ta hãy ca ngợi những con người hiển hách*
 
-*Sự tích nguồn gốc dòng Tôi Tớ Đức Mẹ.*
+**Sự tích nguồn gốc dòng Tôi Tớ Đức Mẹ.**
 
  
 

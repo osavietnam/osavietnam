@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 16 Thường Niên"
 order: 110
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô.*
+**Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô.**
 
 Sao Ngài còn ẩn mặt ? Chúng ta nghĩ rằng khi chúng ta phải âu sầu khổ não, thì Thiên Chúa ẩn mặt không nhìn đến chúng ta, đến nỗi tối tăm bao phủ cõi lòng khiến mắt chúng ta bị che khuất không thể nhìn thấy ánh rạng ngời của chân lý. Nhưng nếu Thiên Chúa nhìn đến trí khôn chúng ta và đoái thương thăm viếng tâm hồn chúng ta, thì chúng ta tin chắc rằng không gì có thể xô chúng ta chìm vào tăm tối. Vì gương mặt con người rạng rỡ hơn các phần thân thể khác, nên khi nhìn đến ai, chúng ta biết ngay là người không quen hay nhận ra là người quen. Vậy khi nhìn ai, chúng ta còn nhận diện được người ấy, thì huống hồ là Thiên Chúa, khi nhìn người nào, Thánh Nhan lại chẳng làm cho người ấy rạng sáng hơn sao ?
 

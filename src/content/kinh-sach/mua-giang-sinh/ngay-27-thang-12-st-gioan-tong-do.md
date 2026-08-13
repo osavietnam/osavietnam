@@ -15,7 +15,7 @@ Thánh Gio-an là người đã được sống thân mật với Chúa Ki-tô. 
 
 </div>
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về thư thứ nhất của thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về thư thứ nhất của thánh Gio-an.**
 
 Điều vẫn có ngay từ lúc khởi đầu, điều chúng tôi đã được nghe, điều mắt chúng tôi đã được nhìn thấy và chiêm ngưỡng, điều chính tay chúng tôi đã được chạm đến, đó là lời sự sống. Làm sao có thể có người được tận tay chạm đến Ngôi Lời, nếu không phải vì Ngôi Lời đã làm người và ở giữa chúng ta ?
 

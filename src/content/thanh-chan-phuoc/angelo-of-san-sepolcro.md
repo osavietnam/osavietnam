@@ -4,7 +4,7 @@ subtitle: "Linh mục"
 rank: "none"
 feastDay: 3
 feastMonth: 10
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/augustinian-monk-by-piero-della-francesca-florence-c.1454-1469.-traveling-in-tuscany.webp"
 draft: false
 manualFill: false
 ---

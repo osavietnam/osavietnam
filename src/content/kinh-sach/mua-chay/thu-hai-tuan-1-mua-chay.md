@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 1 Mùa Chay"
 order: 6
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô giám mục Na-di-en.**
 
 Bạn hãy nhận biết bởi đâu bạn được hiện hữu, được hít thở, được hiểu biết và nhất là được biết Thiên Chúa ; bởi đâu bạn được trông đợi Nước Trời, nơi đó bạn sẽ chiêm ngưỡng vinh quang Thiên Chúa cách đầy đủ và tỏ tường hơn, mà bây giờ bạn chỉ được thấy ẩn hiện như một tấm gương ; bởi đâu bạn được làm con Thiên Chúa, được đồng thừa tự với Đức Ki-tô, và - cho phép tôi nói bạo - bởi đâu bạn trở nên một vị thần ?
 

@@ -99,6 +99,8 @@
   color: var(--ink-cream-soft);   /* nhãn nhỏ, quiet nhất */
   margin: 2rem 0 0.6rem;
 }
+/* Heading mở đầu không cộng thêm margin riêng vào khoảng cách do layout trang quản lý. */
+.prose > :is(h1, h2, h3, h4, h5, h6):first-child { margin-top: 0; }
 .prose p { text-align: justify; color: var(--ink-cream-soft); font-size: 1.805rem; }
 .prose em { font-style: italic; color: var(--gold); }
 .prose strong { font-weight: 700; color: var(--ink-cream); }

@@ -29,7 +29,7 @@
     text-shadow: 0.2rem 0.2rem 0.6rem rgba(0,0,0,0.3);
     margin: 0 0 2.5rem 0;
     padding-bottom: 1.5rem;
-
+    
 }
 .home-section-title::after {
     content: '';
@@ -68,8 +68,8 @@
     background-size: cover;
     background-position: center;
     color: white;
-
-
+    
+    
 }
 .book-card.has-bg-image::before {
     content: '';
@@ -132,7 +132,7 @@
     grid-template-columns: 1fr;
     gap: 3rem;
     place-items: center; /* This line centers all items in the grid */
-
+  
 }
 .quote-card-grid {
     display: grid;
@@ -251,11 +251,11 @@
     position: absolute;
     top: 0rem;
     left: -1rem;
-
+    
     line-height: 1;
 }
 
-/* --- Style for Order Document Cards (Tu Luat, Hien Chuong, Ratio) --- */
+/* --- Style for Order Document Cards (Tu Luat, Hien Phap, Ratio) --- */
 /* Remove the inner border from the order doc cards to avoid a double-border effect */
 .order-doc-shortcut.book-card {
     border: none;
@@ -285,7 +285,7 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-
+    
 }
 .order-doc-shortcut::after,
 .confessions-shortcut::after {
@@ -295,7 +295,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('/db/emblem.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16rem; /* Made slightly larger for the bigger card area */
@@ -410,7 +409,7 @@
     align-items: center;
     justify-content: center;
     align-self: center;
-
+    
 }
 .home-section-title-right {
     text-align: center;
@@ -421,10 +420,10 @@
 /* --- Lễ Riêng Card Specifics --- */
 .is-le-rieng-card {
     width: 100%;
-
+    
     margin-bottom: auto;
-
-
+    
+    
 }
 
 
@@ -439,7 +438,7 @@
     height: 100%;
     padding: 1.4rem;
     opacity: 0.9;
-
+    
 }
 .is-le-rieng-card .summary-paragraph {
     font-size: 1.4rem;
@@ -540,7 +539,7 @@
 #side-content-column .book-selector {
     margin-top: 0; /* This removes the large space above the select box */
     margin-bottom: 1.5rem;
-
+    
 }
 
 #side-content-column #le-rieng-select {
@@ -685,14 +684,14 @@
 background-color: rgba(31, 39, 48, 0.4);    border: none;
     padding: 1.2rem 1.5rem;
     text-align: left;
-
+    
     /* Interactivity */
     cursor: pointer;
     transition: background-color 0.2s ease;
+    
+  
 
-
-
-
+  
 }
 
 
@@ -716,7 +715,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     transition: transform 0.3s ease-in-out;
-
+    
 }
 
 .collapsible-saint-toggle.is-open .chevron {
@@ -732,7 +731,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 
 .collapsible-saint-content.is-open {
     /* A height large enough to fit the content */
-    max-height: fit-content;
+    max-height: fit-content; 
     transition: max-height 0.5s ease-in;
 }
 
@@ -742,8 +741,8 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
        padding: 0;
     overflow: hidden;
     margin-bottom: 0; /* No margin needed inside the container */
-
-
+    
+   
 }
 
 .next-saint-image {
@@ -791,7 +790,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
     margin: 0;
     padding-bottom: 1.5rem; /* Keeps space for the decorative underline */
     text-align: center;
-
+     
 }
 
 .calendar-view-button {
@@ -866,7 +865,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
     align-items: flex-start;
     /* REMOVED: Do not transition the grid itself */
     margin-bottom: 5rem;
-
+    
 }
 .calendar-interactive-layout.sidebar-collapsed {
     grid-template-columns: 0px 1fr;
@@ -929,7 +928,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
     margin-left: auto;   /* Aligns the calendar to the right by default */
     margin-right: 0;
    transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-
+    
     /* Keep all other existing .monthly-calendar styles (background, border, padding, etc.) */
     background: #0d1f2b;
     border: 1px solid rgba(196, 179, 145, 0.2);
@@ -1044,7 +1043,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 .calendar-tooltip a:hover {
     color: #d1b516;
     text-decoration: none;
-
+    
 }
 .day-events a {
     margin: 0 0 0.2rem;
@@ -1149,7 +1148,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
     margin-top: 1.5rem;
     padding-top: 0.5rem;
     border-top: 1px dashed rgba(196, 179, 145, 0.2);
-
+    
 }
 .legend-item {
     display: flex;
@@ -1213,7 +1212,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 .calendar-day.is-priesthood::before, .event-rank-priesthood::before, .legend-label.is-priesthood {
     content: ''; /* Remove text content */
     background-color: #ffffff; /* The color of the icon */
-
+    
     /* Set dimensions for the icon */
     width: 2.5em;
     height: 2.5em;
@@ -1235,10 +1234,10 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 }
 
 .legend-label.is-first_vow {
-
+   
     width: 3em;
     height: 3em;
-
+    
 }
 .calendar-day.is-solemn_vow::before, .event-rank-solemn_vow::before {
    width: 3em;
@@ -1247,11 +1246,11 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 }
 
 .legend-label.is-solemn_vow {
-
+   
     background-color: #fffb00;
     width: 3em;
     height: 3em;
-
+    
 }
 
 
@@ -1263,35 +1262,8 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 .event-rank-solemn_vow,
 .event-rank-priesthood {
     opacity: 0.9;
-
-
-}
-
-/* Specific SVG icon shape for each anniversary type */
-.calendar-day.is-patron::before, .event-rank-patron::before, .legend-label.is-patron {
-    -webkit-mask-image: url("/db/assets/patron.svg");
-    mask-image: url("/db/assets/patron.svg");
-}
-.calendar-day.is-birthday::before, .event-rank-birthday::before, .legend-label.is-birthday {
-    -webkit-mask-image: url("/db/assets/first-birthday.svg");
-    mask-image: url("/db/assets/first-birthday.svg");
-}
-
-.calendar-day.is-baptism::before, .event-rank-baptism::before, .legend-label.is-baptism {
-    -webkit-mask-image: url("/db/assets/baptism.svg");
-    mask-image: url("/db/assets/baptism.svg");
-}
-.calendar-day.is-first_vow::before, .event-rank-first_vow::before, .legend-label.is-first_vow {
-    -webkit-mask-image: url("/db/assets/vow.svg");
-    mask-image: url("/db/assets/vow.svg");
-}
-.calendar-day.is-solemn_vow::before, .event-rank-solemn_vow::before, .legend-label.is-solemn_vow {
-    -webkit-mask-image: url("/db/assets/vow.svg");
-    mask-image: url("/db/assets/vow.svg");
-}
-.calendar-day.is-priesthood::before, .event-rank-priesthood::before, .legend-label.is-priesthood {
-    -webkit-mask-image: url("/db/assets/priesthood.svg");
-    mask-image: url("/db/assets/priesthood.svg");
+    
+    
 }
 
 /* in css/home-layout.css */
@@ -1421,7 +1393,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
     flex-wrap: wrap;
     align-items: baseline;
     padding: 0.8rem 0;
-
+    
 }
 #upcoming-events-list li:last-child {
     border-bottom: none; /* Remove border from the last item */
@@ -1431,7 +1403,7 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 .collapsible-content.is-open {
     scrollbar-width:thin;
     /* Thumb and Track color, aligned with #e9c46a */
-    scrollbar-color: #e9c46a #fdfbf5;
+    scrollbar-color: #e9c46a #fdfbf5; 
 }
 
 /* For Chrome, Safari, Edge, and other Webkit browsers */
@@ -1441,21 +1413,21 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 
 .collapsible-content.is-open::-webkit-scrollbar-track {
     /* A very light, warm background to complement the gold thumb */
-    background: #fdfbf5;
+    background: #fdfbf5; 
     border-radius: 8px;
 }
 
 .collapsible-content.is-open::-webkit-scrollbar-thumb {
     /* The requested accent color for the thumb */
-    background-color: #e9c46a;
+    background-color: #e9c46a; 
     border-radius: 8px;
     /* Creates a nice padding effect around the thumb */
-    border: 2px solid #fdfbf5;
+    border: 2px solid #fdfbf5; 
 }
 
 .collapsible-content.is-open::-webkit-scrollbar-thumb:hover {
     /* A slightly darker shade for feedback on hover */
-    background-color: #d4b15f;
+    background-color: #d4b15f; 
 }
 
 
@@ -1478,11 +1450,11 @@ background-color: rgba(31, 39, 48, 0.4);    border: none;
 /* 1. The main grid container, with a refined transition */
 .home-main-layout-grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 3fr 2fr; 
     gap: 2.5rem;
     align-items: start;
     /* A custom timing function for a more polished animation */
-    transition: grid-template-columns 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+    transition: grid-template-columns 0.6s cubic-bezier(0.65, 0, 0.35, 1), 
                 gap 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 
 }

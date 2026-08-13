@@ -15,7 +15,7 @@ Thánh nhân còn được gọi là Na-tha-na-en, quê ở Ca-na. Chính tông 
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư thứ nhất gửi tín hữu Cô-rin-tô.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư thứ nhất gửi tín hữu Cô-rin-tô.**
 
 Thập giá do những ngựời dốt nát rao truyền đã thuyết phục được nhiều người, đúng hơn, đã thuyết phục được toàn thể địa cầu. Thập giá không bàn về những chuyện tầm thường, nhưng bàn về Thiên Chúa, về đạo thật, về đời sống theo Tin Mừng, cũng như về cuộc phán xét mai sau, đồng thời làm cho mọi người quê mùa thất học thành những người khôn ngoan thông thái. Thế mới hay điều điên dại của Thiên Chúa còn khôn ngoan hơn con người, và cái yếu đuối của Thiên Chúa còn mạnh mẽ hơn con người.
 

@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
-import { siteBase } from '../../lib/site-path';
+import KinhSachInlineEditor from '../../components/KinhSachInlineEditor.astro';
 
 export const prerender = true;
 
@@ -83,8 +83,13 @@ if (saintCount <= 1) {
   }
 }
 
-const mainTitle = workTitle;
-const titleSub = [rankSub ? expandRanks(rankSub) : null, parenSub].filter(Boolean).join(' — ') || null;
+// Mọi biến thể còn nằm trong tiêu đề (nhiều thánh, phẩm trật ở giữa câu,
+// hoặc phẩm trật nằm trong ngoặc) cũng phải hiển thị đầy đủ trên masthead.
+const mainTitle = expandRanks(workTitle);
+const titleSub = [
+  rankSub ? expandRanks(rankSub) : null,
+  parenSub ? expandRanks(parenSub) : null,
+].filter(Boolean).join(' — ') || null;
 ---
 <BaseLayout title={d.title} description={d.source ? `Trích: ${d.source}` : d.title}
   type="article" bodyClass="page-kinh-sach no-sidebar" banner="readings">
@@ -98,6 +103,7 @@ const titleSub = [rankSub ? expandRanks(rankSub) : null, parenSub].filter(Boolea
         </span>
       )}
     </PageHeader>
+    <KinhSachInlineEditor entryId={entry.id} editBody={true} />
   </div>
   <div class={`article-shell ${hasToc ? 'has-toc' : ''}`} id="reading-content">
     {hasToc && <TableOfContents headings={headings} />}
@@ -119,13 +125,12 @@ const titleSub = [rankSub ? expandRanks(rankSub) : null, parenSub].filter(Boolea
     </section>
   )}
 
-  <script define:vars={{ backUrl, siteBase }}>
-    const withBase = (path) => !path || !path.startsWith('/') || path.startsWith('//') || !siteBase || path === siteBase || path.startsWith(siteBase + '/') ? path : siteBase + path;
+  <script define:vars={{ backUrl }}>
     // Ghi nhớ URL bài đọc hiện tại để trang index biết nơi cần highlight khi quay lại
     sessionStorage.setItem('ks-last', location.pathname.endsWith('/') ? location.pathname : location.pathname + '/');
     // Nếu đến từ lịch phụng vụ → back về lịch thay vì về danh mục
     const from = sessionStorage.getItem('ks-from');
-    const resolvedBackUrl = withBase(from === 'lich-phung-vu' ? '/lich-phung-vu/' : backUrl);
+    const resolvedBackUrl = from === 'lich-phung-vu' ? '/lich-phung-vu/' : backUrl;
     const resolvedBackText = from === 'lich-phung-vu' ? '← Về Lịch Phụng Vụ' : null;
     if (from === 'lich-phung-vu') sessionStorage.removeItem('ks-from');
     const backLink = document.querySelector('.back-link');
@@ -139,6 +144,7 @@ const titleSub = [rankSub ? expandRanks(rankSub) : null, parenSub].filter(Boolea
   </script>
 
 <style>
+.ks-masthead { position: relative; }
 /* Badge mùa + bậc lễ trong master header — căn giữa & align đều */
 .ks-badges {
   display: inline-flex;

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 1 Thường Niên"
 order: 5
 ---
 
-*Trích bài giảng Chống ngoại giáo của thánh A-tha-na-xi-ô, giám mục.*
+**Trích bài giảng Chống ngoại giáo của thánh A-tha-na-xi-ô, giám mục.**
 
 Như một hoa tiêu tuyệt vời, Cha chí thánh của Đức Ki-tô cũng là Đấng siêu việt trên muôn loài thọ tạo, đã dùng chính sự khôn ngoan và Ngôi Lời của mình là Chúa Ki-tô, Đấng cứu độ chúng ta, mà làm ra, sắp xếp và điều khiển mọi loài khắp mọi nơi một cách an lành, theo như Người xét là đúng. Sở dĩ muôn vật được hiện hữu như Thiên Chúa đã tạo thành, và còn hình thành như chúng ta thấy, là vì chính Người muốn như vậy : điều đó là hợp lý, không ai chối cãi. Vì chưng, giả sử thọ tạo biến chuyển cách phi lý, và vũ trụ xoay vần cách ngẫu nhiên, thì không có lý gì buộc phải tin những điều đã nói. Trái lại, nếu vũ trụ được tạo thành có lý do, với sự khôn ngoan và hiểu biết, đồng thời được trang hoàng đầy đủ, thì tác giả là Đấng trang hoàng cho nó phải là Ngôi Lời của Thiên Chúa, chứ không ai khác.
 

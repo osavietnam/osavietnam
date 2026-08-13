@@ -12,9 +12,9 @@ manualFill: true
 ---
 Chị sinh tại Rô-ma năm 1384. Chị lập gia đình lúc còn trẻ và sinh được ba người con. Gặp thời buổi khó khăn, chị đã phân phát của cải cho người nghèo, phục vụ những người bệnh tật, những người cùng khốn. Điểm nổi bật hơn hết là chị phục vụ với tinh thần khiêm tốn, nhẫn nại. Năm 1425, chị lập tu hội Tận Hiến, theo tu luật thánh Biển-đức. Chị qua đời năm 1440. 
 
-Lòng nhẫn nại và đức ái của thánh Phan-xi-ca
+*Lòng nhẫn nại và đức ái của thánh Phan-xi-ca*
 
-*Trích hạnh thánh Phan-xi-ca Rô-ma do chị Ma-ri-a Ma-đa-lê-na An-ghi-la-ri-a biên soạn.* 
+**Trích hạnh thánh Phan-xi-ca Rô-ma do chị Ma-ri-a Ma-đa-lê-na An-ghi-la-ri-a biên soạn.**
 
  
 

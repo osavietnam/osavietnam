@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 11 Thường Niên"
 order: 77
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Anh em thân mến, có gì lạ khi lời cầu nguyện Thiên Chúa dạy chúng ta lại tuyệt vời đến thế. Người lấy quyền giáo huấn mà tóm gọn mọi ý nguyện của chúng ta trong một lời kinh cứu độ. Ngôn sứ I-sai-a đã báo trước điều này khi ông được đầy Thánh Thần để nói về quyền uy và lòng nhân hậu của Thiên Chúa. Ngôn sứ nói : Đây là lời bao gồm và tóm gọn tất cả ơn cứu độ, vì Thiên Chúa sẽ làm cho lời vắn tắt này vang dội trên toàn trái đất. Quả thật, khi lời Thiên Chúa là chính Đức Giê-su Ki-tô, Chúa chúng ta đến với mọi người, quy tụ người thông thái cũng như kẻ ngu si, công bố những lệnh truyền cứu độ cho hết thảy nam phụ lão ấu, thì Người đã làm một bản tổng lược tóm tắt mọi lệnh truyền của Người, để những ai muốn học hỏi giáo huấn của Người đem xuống từ trời khỏi phải mệt trí nhớ, nhưng mau thuộc những điều cần thiết cho một đức tin đơn thành.
 

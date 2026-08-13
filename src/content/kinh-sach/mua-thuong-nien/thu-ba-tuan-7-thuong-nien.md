@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 7 Thường Niên"
 order: 45
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Giảng Viên.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Giảng Viên.**
 
 Tác giả sách Giảng Viên nói : Có một thời để sinh ra và một thời để chết. Ngay từ đầu, ông đã dùng lời lẽ khéo léo để nói lên mối liên hệ thiết yếu đó, khi nối kết chuyện sinh tử với nhau. Quả thật, cái tử nhất thiết theo sau cái sinh, và mọi người sinh ra rồi cũng biến tan trong cái chết.
 

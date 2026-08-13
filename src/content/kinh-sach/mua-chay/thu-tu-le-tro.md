@@ -9,7 +9,7 @@ rank: "solemn"
 order: 1
 ---
 
-*Trích thư của thánh Cơ-lê-men-tê thứ nhất, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư của thánh Cơ-lê-men-tê thứ nhất, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Chúng ta hãy chăm chú để mắt ngắm nhìn Máu Thánh Đức Ki-tô và nhận biết điều này : đối với Thiên Chúa là Cha Đức Ki-tô, Máu Thánh ấy quý giá dường nào ! Máu Thánh ấy đã đổ ra để cứu độ chúng ta và đã đem lại cho mọi người ơn hối cải.
 

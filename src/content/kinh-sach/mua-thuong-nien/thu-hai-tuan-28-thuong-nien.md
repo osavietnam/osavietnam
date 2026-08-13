@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 28 Thường Niên"
 order: 191
 ---
 
-*Trích khảo luận chống Pha-bi-a-nô của thánh Phun-gien-xiô, giám mục Rút-pê.*
+**Trích khảo luận chống Pha-bi-a-nô của thánh Phun-gien-xiô, giám mục Rút-pê.**
 
 Khi dâng thánh lễ, chúng ta thi hành lệnh truyền của Đấng cứu độ chúng ta. Thánh Phao-lô làm chứng điều này khi nói : Trong đêm bị nộp, Chúa Giê-su cầm lấy bánh, dâng lời chúc tụng tạ ơn, rồi bẻ ra và nói : Anh em hãy cầm lấy mà ăn, vì này là mình Thầy, hiến tế vì anh em ; anh em hãy làm như Thầy vừa làm để tưởng nhớ đến Thầy. Cũng thế, cuối bữa ăn, Người nâng chén và nói : Đây là chén máu Thầy, máu đổ ra để lập Giao Ước Mới ; mỗi khi uống, anh em hãy làm như Thầy vừa làm để tưởng nhớ đến Thầy. Thật vậy, cho tới ngày Chúa đến, mỗi lần ăn Bánh và uống Chén này, là anh em loan truyền việc Chúa đã chịu chết.
 

@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Mục Tử (tùy chọn, Gm.)"
 order: 10
 ---
 
-*Trích bài giảng của thánh Phun-gien-xi-ô, giám mục Rút-pê.*
+**Trích bài giảng của thánh Phun-gien-xi-ô, giám mục Rút-pê.**
 
 Khi Chúa muốn giải thích nhiệm vụ của những người tôi tớ đã được Người đặt lên coi sóc dân Người, Chúa đã nói : Ai là người quản gia trung tín, khôn ngoan, mà ông chủ sẽ đặt lên coi sóc kẻ ăn người ở trong nhà, để cấp phát phần ăn cho họ đúng giờ đúng lúc ? Khi chủ về mà thấy đầy tớ ấy làm như vậy, thì thật là phúc cho anh ta.
 

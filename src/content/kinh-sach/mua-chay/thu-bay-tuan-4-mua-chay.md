@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 4 Mùa Chay"
 order: 36
 ---
 
-*Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.**
 
 Kinh Thánh, phù hợp với kinh nghiệm ngàn đời, dạy cho gia đình nhân loại biết rằng : sự tiến bộ tuy là một lợi ích to lớn cho con người, nhưng cũng kéo theo một thử thách lớn lao. Thực tế, khi bậc thang giá trị bị đảo lộn, khi ác và thiện pha trộn lẫn nhau, thì cá nhân mỗi người cũng như tập thể chỉ còn quan tâm đến lợi ích riêng của mình, chứ không để ý đến lợi ích của người khác.
 

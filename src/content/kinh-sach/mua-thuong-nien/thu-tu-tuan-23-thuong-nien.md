@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 23 Thường Niên"
 order: 158
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Chúng ta hãy đứng gác trên tường luỹ, hãy hết sức dựa vào tảng đá vô cùng vững chắc là Chúa Giê-su Ki-tô, như có lời chép : Người đặt chân tôi đứng trên tảng đá, làm cho tôi bước đi vững vàng. Vậy một khi được đặt vững vàng như thế, chúng ta ngắm nhìn để xem Người nói gì với chúng ta, và chúng ta phải trả lời thế nào cho Đấng hạch hỏi chúng ta.
 

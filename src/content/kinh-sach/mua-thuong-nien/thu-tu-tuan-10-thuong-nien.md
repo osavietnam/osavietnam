@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 10 Thường Niên"
 order: 67
 ---
 
-*Trích bài giảng của linh mục Ô-ri-giê-nê, về sách Giô-suê.*
+**Trích bài giảng của linh mục Ô-ri-giê-nê, về sách Giô-suê.**
 
 Tại sông Gio-đan, hòm bia giao ước hướng dẫn dân Thiên Chúa. Hàng tư tế và Lê-vi dừng lại, dòng nước ra như trong kinh các thừa tác viên của Thiên Chúa nên đứng khựng lại và dồn thành một khối, chừa cho dân Thiên Chúa một lối đi an toàn. Vậy hỡi người Ki-tô hữu, bạn đừng ngạc nhiên khi thấy những việc Thiên Chúa thực hiện cho dân của Người xưa kia, nay được thuật lại cho bạn. Bạn cũng đã vượt qua dòng nước Gio-đan nhờ bí tích thánh tẩy. Lời Chúa còn hứa cho bạn những điều trọng đại cao siêu hơn nhiều, lời Chúa mở cho bạn một con đường băng qua cả không trung.
 

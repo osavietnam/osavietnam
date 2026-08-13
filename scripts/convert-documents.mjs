@@ -1,6 +1,6 @@
 /**
  * convert-documents.mjs
- * Chuyển JSON tài liệu Dòng (tu-luat, hien-chuong, ratio) → Markdown
+ * Chuyển JSON tài liệu Dòng (tu-luat, hien-phap, ratio) → Markdown
  * Cấu trúc JSON: sections[].paragraphs[].subparagraphs[].content[]
  * Chạy: node scripts/convert-documents.mjs
  */
@@ -25,11 +25,11 @@ const DOCS = [
     lang: 'en',
   },
   {
-    input: 'hien-chuong-eng.json',
-    output: 'hien-chuong-en.md',
+    input: 'hien-phap-eng.json',
+    output: 'hien-phap-en.md',
     title: 'Constitutions of the Order of Saint Augustine',
-    subtitle: 'Hiến Chương Dòng Thánh Augustinô',
-    docType: 'Hiến Chương',
+    subtitle: 'Hiến Pháp Dòng Thánh Augustinô',
+    docType: 'Hiến Pháp',
     lang: 'en',
   },
   {

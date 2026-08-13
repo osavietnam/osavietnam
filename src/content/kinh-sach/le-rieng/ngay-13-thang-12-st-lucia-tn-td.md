@@ -6,7 +6,7 @@ source: "Thánh Ambrôsiô, Gm.,Ts."
 excerpt: "On Virginity 12, 68, 74-75; 13, 77-78"
 liturgy: "Ngày 13 Tháng 12: Thánh Lucia, Tn., Tđ."
 rank: "memorial"
-order: 201
+order: 202
 ---
 
 <div class="ks-tieu-su">
@@ -15,7 +15,7 @@ Có lẽ thánh nữ đã chịu chết ở Xy-ra-cu-xa, thời hoàng đế Đi
 
 </div>
 
-*Trích sách Bậc đồng trinh của thánh Am-rô-xi-ô, giám mục.*
+**Trích sách Bậc đồng trinh của thánh Am-rô-xi-ô, giám mục.**
 
 Con là một thành phần của dân thánh và cũng là một trong số các trinh nữ, một người làm cho thân xác duyên dáng nhờ ánh sáng trong tâm hồn (nhờ vậy, con là hình ảnh sống động của Hội Thánh). Vậy lúc đêm khuya, khi ở trong phòng, con hãy luôn suy niệm về Chúa Ki-tô, và lúc nào, con cũng hãy chờ mong Người đến.
 

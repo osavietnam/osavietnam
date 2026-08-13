@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 2 Thường Niên"
 order: 10
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Ê-phê-xô.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Ê-phê-xô.**
 
 Ai có lòng mến trong Đức Ki-tô, hãy thực hành những điều Đức Ki-tô truyền. Ai giải thích nổi mối dây ràng buộc của lòng mến Thiên Chúa ? Ai diễn tả được vẻ đẹp huy hoàng của lòng mến ấy ? Lòng mến đưa chúng ta tới chiều cao khôn tả. Lòng mến gắn chặt chúng ta với Thiên Chúa, lòng mến che phủ muôn vàn tội lỗi. Lòng mến chịu đựng tất cả, bao dung tấ cả một cách kiên nhẫn ; trong lòng mến không có gì nhơ nhớp, không một chút kiêu căng ; lòng mến không chấp nhận chia rẽ, không xúi giục nổi loạn ; lòng mến làm mọi sự trong tinh thần hoà hợp ; tất cả những người được Thiên Chúa tuyển chọn đều được hoàn thiện nhờ lòng mến. Không có lòng mến thì chẳng có gì làm đẹp lòng Thiên Chúa. Vì yêu thương, Chúa đã nhận lấy chúng ta ; bởi tình thương của Người đối với chúng ta, Đức Giê-su Ki-tô, Chúa chúng ta, theo ý định của Thiên Chúa, đã đổ máu mình ra vì chúng ta, và hiến dâng thân xác mình cho thân xác chúng ta, linh hồn mình cho linh hồn chúng ta.
 

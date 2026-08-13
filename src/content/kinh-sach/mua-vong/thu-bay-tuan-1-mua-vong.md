@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 1 Mùa Vọng"
 order: 7
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục tử đạo, về lợi ích của đức nhẫn nại.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục tử đạo, về lợi ích của đức nhẫn nại.**
 
 Chúa và Thầy chúng ta muốn cứu độ chúng ta, đã truyền cho chúng ta lệnh này là : Kẻ nào bền chí đến cùng, kẻ ấy sẽ được cứu thoát. Và lại có lời khác : Nếu anh em trung thành giữ lời Thầy thì anh em thật là môn đệ Thầy ; anh em sẽ biết sự thật và sự thật sẽ giải phóng anh em.
 

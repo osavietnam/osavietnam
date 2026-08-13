@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 10 Thường Niên"
 order: 65
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Rô-ma.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Rô-ma.**
 
 Anh em đã không bao giờ ngăn cản, nhưng đã khuyên dạy người khác sẵn sàng tử đạo. Vậy, tôi muốn rằng những điều anh em dạy bảo vẫn còn giá trị đối với tôi. Chỉ xin anh em cầu xin cho tôi được sức mạnh bề trong cũng như bề ngoài, để không những chỉ nói mà thực sự muốn tử đạo ; ước gì tôi không chỉ mang danh Ki-tô hữu mà là Ki-tô hữu đích thực. Quả vậy, có thực sự là Ki-tô hữu, tôi mới được gọi là Ki-tô hữu và tôi chỉ là tín hữu trung thành, khi không còn xuất hiện ở trần gian này nữa. Không có cái gì tốt chỉ do bề ngoài. Vì khi về lại với Chúa Cha, chính Đức Giê-su Ki-tô mới tỏ mình ra là Thiên Chúa chúng ta rõ ràng hơn. Khi bị thế gian ghen ghét thì đích thị là công trình của Thiên Chúa cao cả, chứ không do sức thuyết phục của loài người.
 

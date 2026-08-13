@@ -16,7 +16,7 @@ Tương truyền rằng vào cuối thế kỷ II, thánh A-pô-li-na-rê làm g
 
 </div>
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục**
 
  
 

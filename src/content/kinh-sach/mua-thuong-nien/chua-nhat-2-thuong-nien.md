@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 2 Thường Niên"
 order: 8
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Ê-phê-xô.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Ê-phê-xô.**
 
 Thật là một điều thích hợp, khi anh em dùng mọi cách mà tôn vinh Đức Giê-su Ki-tô, Đấng đã tôn vinh anh em, để một khi sống niềm vâng phục trọn hảo, nghĩa là tùng phục đức giám mục và hàng linh mục, anh em được thánh hoá qua mọi sự.
 

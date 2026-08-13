@@ -8,7 +8,7 @@ liturgy: "Thứ 3 Tuần Thánh"
 order: 48
 ---
 
-*Trích sách Chúa Thánh Thần của thánh Ba-xi-Ii-ô Cả, giám mục.*
+**Trích sách Chúa Thánh Thần của thánh Ba-xi-Ii-ô Cả, giám mục.**
 
 Kế hoạch của Thiên Chúa, Đấng Bảo Tồn nhân loại, là kêu gọi họ từ chỗ sa ngã đứng lên và đưa họ trở về sống thân mật với Thiên Chúa mà họ đã lìa xa vì tội bất phục tùng. Vì lẽ đó, Đức Ki-tô đã đến trong thân phận xác phàm, đã sống như sách Tin Mừng thuật lại, đã phải sầu khổ, chịu đóng đinh trên thập giá, chịu mai táng trong mồ rồi sống lại, để ai được cứu độ nhờ noi gương Đức Ki-tô thì lấy lại được phúc làm nghĩa tử đã có khi xưa.
 

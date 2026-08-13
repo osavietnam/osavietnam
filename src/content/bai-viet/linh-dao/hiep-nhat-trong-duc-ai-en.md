@@ -7,7 +7,9 @@ date: 2026-07-30
 excerpt: "An English reading of Augustinian spirituality as an inward search for God that becomes communion, service and unity in Christ."
 tags: ["Augustinian spirituality", "Unitas in Caritas", "Community", "Christus Totus"]
 featured: false
-draft: true
+language: "en"
+translationOf: "linh-dao/hiep-nhat-trong-duc-ai"
+draft: false
 ---
 
 An investigation into the spirituality of St. Augustine and any attempt to describe aspects of an Augustinian spirituality require a brief preliminary exploration of what is meant by the term spirituality. Walter Principe <sup><a href="#fn-en-1" id="fnref-en-1" data-footnote-ref aria-label="Footnote 1">1</a></sup>, Jon Alexander <sup><a href="#fn-en-2" id="fnref-en-2" data-footnote-ref aria-label="Footnote 2">2</a></sup>, Charles André Bernard <sup><a href="#fn-en-3" id="fnref-en-3" data-footnote-ref aria-label="Footnote 3">3</a></sup>, Sandra Schneiders <sup><a href="#fn-en-4" id="fnref-en-4" data-footnote-ref aria-label="Footnote 4">4</a></sup>, and others <sup><a href="#fn-en-5" id="fnref-en-5" data-footnote-ref aria-label="Footnote 5">5</a></sup> have all published research describing the history of developing a definition of what spirituality means as a discipline and how it relates to theology.

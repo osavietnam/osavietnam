@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 3 Phục Sinh"
 order: 15
 ---
 
-*Trích bài chú giải của thánh Bê-đa Khả Kính, linh mục, về thư thứ nhất của thánh Phê-rô.*
+**Trích bài chú giải của thánh Bê-đa Khả Kính, linh mục, về thư thứ nhất của thánh Phê-rô.**
 
 Anh em là giống nòi được tuyển chọn, hàng tư tế vương giả. Xưa kia, Ông Mô-sê đã tặng lời khen ấy cho dân cũ của Thiên Chúa, nay thánh Phê-rô tông đồ lại tặng cách đích đáng cho các dân ngoại, bởi vì họ đã tin vào Đức Ki-tô. Người như viên đá chóp đỉnh đã liên kết các dân ngoại trong ơn cứu độ trước đây dành cho dân Ít-ra-en.
 

@@ -21,7 +21,7 @@ Còn những vị khác là giáo dân nam, nữ, độc thân, có gia đình, 
 
 </div>
 
-*Trích huấn dụ cuối cùng của thánh An-rê Kim Tê-gon, linh mục, tử đạo.*
+**Trích huấn dụ cuối cùng của thánh An-rê Kim Tê-gon, linh mục, tử đạo.**
 
 Anh em và các bạn rất thân mến, trước hết hãy suy nghĩ cho thấu đáo : từ thuở ban đầu, Thiên Chúa đã tạo dựng trời đất muôn vật thế nào. Sau đó, hãy suy gẫm xem vì lý do và ý định nào Thiên Chúa đã dựng nên từng người theo hình ảnh của Chúa và giống như Người.
 

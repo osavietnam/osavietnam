@@ -15,7 +15,7 @@ Hai anh em Công-tăng-ti-nô và Mê-tô-đi-ô được thượng phụ giáo 
 
 </div>
 
-*Trích hạnh thánh Công-tăng-ti-nô.*
+**Trích hạnh thánh Công-tăng-ti-nô.**
 
 Thánh Công-tăng-tin-nô Sy-ri-lô vì phải gánh vác nhiều công việc, nên đã ngã bệnh. Trong lúc đau yếu lâu ngày, một hôm ngài đã thấy một thị kiến về Thiên Chúa, nên ngài cất tiếng hát : Thiên hạ bảo tôi : Nào chúng ta hãy vào nhà Chúa, thần trí tôi hân hoan và tâm hồn tôi nhảy mừng.
 

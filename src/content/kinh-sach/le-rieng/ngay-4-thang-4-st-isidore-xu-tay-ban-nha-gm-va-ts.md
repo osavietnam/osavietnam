@@ -11,9 +11,9 @@ draft: false
 ---
 Thánh nhân sinh tại Xê-vi-gia, nước Tây-ban-nha, quãng năm 560. Sau khi thân phụ qua đời, người được người anh là Lê-an-rô dưỡng dục, rồi được chọn làm giám mục coi sóc thành phố nhà. Người đã viết nhiều và viết một cách sâu sắc, đã tổ chức và hướng dẫn nhiều công đồng miền ở Tây-ban-nha. Trong các công đồng này, nhiều chuyện đã được sắp xếp một cách khôn ngoan khéo léo để phục vụ lợi ích của Hội Thánh. Người qua đời năm 636.
 
-Người kinh sư thông thái trong Nước Trời
+*Người kinh sư thông thái trong Nước Trời*
 
-*Trích Các luận đề của thánh I-xi-đô-rô, giám mục.*
+**Trích Các luận đề của thánh I-xi-đô-rô, giám mục.**
 
  
 

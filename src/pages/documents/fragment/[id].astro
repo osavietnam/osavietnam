@@ -14,6 +14,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+const translatorMatch = d.translator?.match(/^Bản\s+Dịch\s+bởi\s+(.+)$/i);
+const translatorLabel = translatorMatch ? 'Bản dịch bởi' : '';
+const translatorPerson = translatorMatch?.[1] ?? d.translator ?? '';
 ---
 <html lang={d.lang ?? 'vi'}>
 <head><meta charset="UTF-8" /></head>
@@ -26,7 +29,10 @@ const d = entry.data;
   <div class="doc-fragment-translator">
     {d.translator && (
       <span class="translator">
-        <span class="translator-name">{d.translator}</span>
+        <span class="translator-name">
+          {translatorLabel && <span class="translator-label">{translatorLabel}</span>}
+          <span class="translator-person">{translatorPerson}</span>
+        </span>
         {d.translatorNote && <span class="translator-note" set:html={d.translatorNote} />}
       </span>
     )}

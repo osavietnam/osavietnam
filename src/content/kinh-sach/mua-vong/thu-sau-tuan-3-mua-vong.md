@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 3 Mùa Vọng"
 order: 20
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Tim thét gào thì miệng phải rống lên. Có tiếng thét gào trong thâm tâm người ta không nghe thấy ; nhưng khi tâm hồn tràn đầy ước vọng mãnh liệt, đến nỗi phát ra tiếng nói khá rõ biểu lộ vết thương lòng, thì người ta sẽ tìm kiếm nguyên nhân và tự hỏi : Có lẽ vì vậy mà người ta gào thét ? Và có lẽ người ta gặp phải điều gì đó ? Ai có thể hiểu được nếu không phải là người mắt thấy tai nghe tiếng thét gào ? Vì thế, tác giả Thánh Vịnh viết : Tim thét gào thì miệng phải rống lên. Bởi vì khi con người nghe được tiếng thét gào, thì thường chỉ nghe thấy tiếng thét gào của thân xác, nhưng không nghe được tiếng thét gào của con tim.
 

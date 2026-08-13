@@ -10,7 +10,7 @@ order: 88
 draft: false
 ---
 
-*Trích sách Đường trọn lành của thánh Tê-rê-xa, trinh nữ.*
+**Trích sách Đường trọn lành của thánh Tê-rê-xa, trinh nữ.**
 
 Nếu muốn xin một điều gì với một nhân vật quan trọng và có thế giá, thử hỏi có người nào ngớ ngẩn và vô tâm đến nỗi trước đó không đắn đo suy nghĩ xem phải nói thế nào cho đẹp lòng người ấy, để người ấy không cảm thấy chán hay bực mình ? Người xin phải xét xem cần xin điều gì và lý do nào thúc đẩy họ xin điều đó, nhất là khi họ xin một điều hệ trọng như chính Đức Giê-su tốt lành đã dạy chúng ta. Tôi cho đó là điều đáng suy nghĩ. Lạy Chúa, chẳng lẽ Chúa chẳng gom tất cả vào một lời và dạy chúng con nói : “Lạy Cha, xin ban cho chúng con điều thích hợp với chúng con”. Vì đối với Chúa là Đấng hiểu thấu tất cả, thì cần gì phải nói thêm nữa.
 

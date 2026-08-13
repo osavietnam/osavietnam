@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 21 Thường Niên"
 order: 142
 ---
 
-*Trích bài diễn giải của thánh Tô-ma A-qui-nô, linh mục, về Tin Mừng theo thánh Gio-an.*
+**Trích bài diễn giải của thánh Tô-ma A-qui-nô, linh mục, về Tin Mừng theo thánh Gio-an.**
 
 Tôi chính là mục tử nhân lành. Đức Ki-tô là mục tử, danh hiệu này hiển nhiên phù hợp với Người, vì đoàn chiên mục tử dẫn dắt, chăn nuôi thế nào, thì các tín hữu cũng được Đức Ki-tô lấy lương thực thiêng liêng, lấy mình và máu Người mà nuôi dưỡng như thế. Thánh Phê-rô tông đồ nói : Trước kia, anh em chẳng khác nào những chiên lạc, nhưng nay đã quay về với Vị Mục Tử, Đấng chăn dắt linh hồn anh em. Và ngôn sứ I-sai-a cũng nói : Như mục tử, Chúa chăn giữ đoàn chiên của Chúa.
 

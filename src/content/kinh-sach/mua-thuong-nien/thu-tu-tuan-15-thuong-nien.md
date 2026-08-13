@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 15 Thường Niên"
 order: 102
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Bạn đã được bảo cho biết đừng chỉ tin vào cái bạn thấy mà thôi kẻo bạn cũng nói : Đây có phải là mầu nhiệm cao cả mà mắt chẳng hề thấy, tai chẳng hề nghe, lòng người không hề nghĩ tới ? Nước mà tôi đang thấy là nước mà tôi vẫn thấy hằng ngày. Phải chăng nước thanh tẩy tôi đây là nước tôi vẫn thường xuống tắm mà không bao giờ được sạch ? Thế là bạn phải biết nước không tẩy sạch nếu không nhờ thần khí.
 

@@ -12,9 +12,9 @@ manualFill: true
 ---
 Đức giáo hoàng Pha-bi-a-nô điều khiển giáo đoàn Rô-ma suốt mười bốn năm trời (236-250). Đó là những năm Hội Thánh được bình an, có tổ chức, và nỗ lực truyền giáo. Khi cuộc bách hại dưới thời hoàng đế Đê-xi-ô bùng nổ, người là một trong những vị đầu tiên được lãnh nhận triều thiên tử đạo. Người được an táng ở nghĩa trang thánh Ca-lít-tô. 
 
-Thánh Pha-bi-a-nô nêu gương cho chúng ta về đức tin và lòng dũng cảm.
+*Thánh Pha-bi-a-nô nêu gương cho chúng ta về đức tin và lòng dũng cảm.*
 
-*Trích thư của thánh Síp-ri-a-nô và của giáo đoàn Rô-ma, về cuộc tử đạo của thánh Pha-bi-a-nô, giáo hoàng.*
+**Trích thư của thánh Síp-ri-a-nô và của giáo đoàn Rô-ma, về cuộc tử đạo của thánh Pha-bi-a-nô, giáo hoàng.**
 
  
 

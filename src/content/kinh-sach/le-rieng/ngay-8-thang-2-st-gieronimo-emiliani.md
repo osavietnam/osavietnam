@@ -12,9 +12,9 @@ manualFill: true
 ---
 Giê-rô-ni-mô Ê-mi-li-a-ni (1486-1537) là một nhà quý tộc tại Vê-nê-xi-a. Người trở lại với Chúa vào lúc hai mươi lăm tuổi. Từ đó, người hiến trọn cuộc đời phục vụ những người xấu số, nhất là các bệnh nhân và các trẻ mồ côi. Được một số bạn bè tiếp tay, thánh nhân lập dòng Tôi Tớ Người Nghèo ở Xô-ma-ca, gần Béc-ga-mô. Có lẽ thánh nhân qua đời vì bệnh dịch đang lúc phục vụ các bệnh nhân. 
 
-Phải đặt hết niềm tin vào một mình Chúa 
+*Phải đặt hết niềm tin vào một mình Chúa*
 
-*Trích thư của thánh Giê-rô-ni-mô Ê-mi-li-a-ni gửi anh em trong Hội Dòng.*
+**Trích thư của thánh Giê-rô-ni-mô Ê-mi-li-a-ni gửi anh em trong Hội Dòng.**
 
  
 

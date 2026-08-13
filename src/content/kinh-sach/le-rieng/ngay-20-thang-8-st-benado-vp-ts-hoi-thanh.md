@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1090 gần Đi-giông, nước Pháp. Được giáo dụ
 
 </div>
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ, về sách Diễm Ca.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ, về sách Diễm Ca.**
 
 Tình yêu tự mình đủ cho mình, tự mình và vì mình đem lại niềm vui. Chính tình yêu là công trạng, nhưng cũng chính tình yêu là phần thưởng cho mình. Tình yêu không tìm lý do, không tìm hiệu quả ngoài mình : hiệu quả của tình yêu là chính tình yêu. Tôi yêu vì tôi yêu, tôi yêu để tôi yêu. Tình yêu là một điều cao cả, miễn là luôn trở lại với nguồn gốc của mình, miễn là ngược trở lại nguôn mạch của mình để luôn luôn được tuôn trào. Trong mọi hoạt động, cảm xúc và tâm tình của linh hồn, chỉ có tình yêu có thể giúp thụ tạo đáp lại Đấng Tạo Hoá, dầu không tương xứng, thì ít ra cũng giống nhau được phần nào. Vì khi Thiên Chúa yêu, thì Người không nhằm điều gì khác ngoài được yêu lại : Thật vậy, Thiên Chúa yêu thì Người không nhận điều gì khác ngoài được yêu lại, vì Người biết ai yêu mến Người thì sẽ được hạnh phúc nhờ chính tình yêu đó.
 

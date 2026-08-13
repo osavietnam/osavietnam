@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 20 Thường Niên"
 order: 134
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.**
 
 Chính anh em là muối cho đời. Chúa muốn nói : “Thầy trao lời cho anh em không phải cho mình anh em mà cho khắp cả thiên hạ được sống. Thầy không chỉ sai anh em đến với hai thành, mười thành, hay hai mươi thành ; cũng như không sai anh em đến với một dân tộc như sai các ngôn sứ xưa ; nhưng Thầy sai anh em đi khắp cả địa cầu, biển khơi, đến toàn thế giới đang bị ảnh hưởng xấu xa. Khi nói chính anh em là muối cho đời, Người muốn cho ta thấy rằng toàn thể bản chất con người đã bị nhạt đi và hư đốn vì tội lỗi. Bởi thế, Người triệt để đòi những kẻ Người sai đi phải có các nhân đức cần thiết và hữu hiệu hơn nữa cho việc chăm sóc mọi người. Bởi chưng một người hiền lành, tiết độ, thương người và công chính thì không chỉ đóng khung mọi việc lành lại nơi một mình mình, mà cũng liệu sao cho những dòng suối đặc biệt đó tuôn chảy để làm ích cho người khác. Cũng vậy, một người có tâm hồn trong sạch, yêu chuộng hoà bình và chịu khổ vì chân lý thì sẽ cống hiến cuộc đời của mình cho lợi ích chung.
 

@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 1 Mùa Chay"
 order: 5
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Lạy Chúa Trời, xin nghe tiếng kêu van, và lưu ý đến lời con thỉnh nguyện. Ai nói đó ? Dường như chỉ có một người. Bạn xem có phải một người mà thôi không. Từ cùng cõi địa cầu, con kêu lên Chúa, tâm thần đang mòn mỏi rã rời. Từ đây, không còn là một người đơn độc, nhưng vẫn là một người, vì Đức Ki-tô chỉ là một, mà tất cả chúng ta là chi thể ! Ai là một người đơn độc mà kêu lên từ cùng cõi địa cầu, ngoại trừ phần sản nghiệp đã được đề cập tới trong lời nói với Chúa Con : Con cứ xin, rồi Cha ban tặng muôn dân nước làm sản nghiệp riêng, toàn cõi đất làm phần lãnh địa.
 

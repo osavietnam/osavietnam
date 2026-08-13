@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 5 Phục Sinh"
 order: 30
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.**
 
 Đức Ki-tô muốn tỏ cho thấy cần phải gắn bó với Người trong tình yêu, và nhờ kết hợp với Người, chúng ta được lợi ích thế nào, thì Người đã xưng mình là cây nho. Còn những ai liên kết với Người như được tháp, được gắn vào Người, lại được thông phần chính bản tính của Người nhờ được thông ban Thánh Thần (vì Thánh Thần của Đức Ki-tô liên kết chúng ta với Người), thì Người ví họ như cành nho.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 5 Thường Niên"
 order: 30
 ---
 
-*Trích bài giảng ngắn của thánh Bô-na-ven-tu-ra, giám mục.*
+**Trích bài giảng ngắn của thánh Bô-na-ven-tu-ra, giám mục.**
 
 Kinh Thánh không phát xuất từ công việc sưu tầm của con người, nhưng từ mặc khải của Thiên Chúa ; mặc khải ấy tuôn xuống từ Chúa Cha là nguồn ánh sáng, là nguồn gốc mọi gia tộc trên trời dưới đất. Chính nhờ Chúa Cha và nhờ Đức Giê-su Ki-tô, Con của Người, mà Thánh Thần là Đấng phân phối và ban phát ân huệ cho từng người theo ý muốn của Người, đức tin được ban tặng cho chúng ta : nhờ đức tin, chúng ta được Đức Ki-tô ngự trong tâm hồn. Đó là ơn nhận biết Đức Giê-su Ki-tô, ơn ấy là nguồn mạch của sự hiểu biết vững chắc về toàn bộ Kinh Thánh.
 

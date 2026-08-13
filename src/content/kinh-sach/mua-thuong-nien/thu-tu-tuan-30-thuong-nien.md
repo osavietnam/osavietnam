@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 30 Thường Niên"
 order: 207
 ---
 
-*Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Chúng ta hãy sống hoà thuận mà ăn ở khiêm nhường, tiết chế, xa tránh mọi lời gièm pha nói xấu, tự minh chứng cho mình bằng hành động chứ không phải bằng lời nói. Thật đúng như có lời chép : Người nói nhiều thì đến lượt mình phải biết nghe, kẻ ba hoa tưởng mình là công chính sao ?
 

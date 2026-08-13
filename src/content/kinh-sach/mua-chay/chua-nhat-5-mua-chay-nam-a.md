@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 5 Mùa Chay, Năm A"
 order: 37
 ---
 
-*Trích khảo luật của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an*
+**Trích khảo luật của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an**
 
 Anh em thân mến, xin hãy nghe, xin hãy nghe điều Chúa Giê-su nói : Thầy là sự sống lại và là sự sống. Người Do-thái nóng lòng mong đợi được thấy ông La-da-rô chết đã bốn ngày, nay sống lại. Hãy lắng nghe, cả chúng ta nữa, và hãy sống lại với Người. Người là sự sống lại, bởi vì Người là sự sống. Ai tin vào Thầy, thì dù đã chết, cũng sẽ được sống. Dù kẻ ấy đã chết như ông La-da-rô, cũng sẽ được sống : bởi vì Thiên Chúa không phải là Thiên Chúa của kẻ chết, nhưng là của những người sống. Đó là câu trả lời của Đức Ki-tô cho người Do-thái khi nói về các tổ phụ đã chết từ lâu : Thiên Chúa phán : Ta là Thiên Chúa của Áp-ra-ham, Thiên Chúa của I-xa-ác và Thiên Chúa của Gia-cóp ; không phải Thiên Chúa của kẻ chết, nhưng là của kẻ sống. Bởi vì tất cả mọi người đều nhờ Đức Ki-tô mà được sống. Hãy tin vào điều ấy, và như vậy, dù bạn đã chết, bạn cũng sẽ được sống ; ngược lại, nếu bạn không tin, thì cho dù bạn đang sống, cũng kể là là bạn đã chết.
 

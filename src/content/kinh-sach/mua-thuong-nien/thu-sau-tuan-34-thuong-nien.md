@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 34 Thường Niên"
 order: 237
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về thân phận phải chết của con người.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về thân phận phải chết của con người.**
 
 Phải luôn nhớ rằng chúng ta không được sống theo ý riêng, nhưng phải thi hành thánh ý Thiên Chúa. Đó là điều Chúa đã truyền dạy chúng ta phải cầu xin mỗi ngày. Thật là ngược đời và mâu thuẫn, trong khi cầu xin cho thánh ý Thiên Chúa được thể hiện, chúng ta lại không mau mắn tuân theo thánh ý Người, khi Người gọi chúng ta ra khỏi thế gian. Chúng ta ra đi vì bó buộc chứ không do lòng vâng phục. Chúng ta được dẫn đến trước nhan Thiên Chúa, nhưng tâm hồn lại ủ rũ buồn phiền. Chúng ta kháng cự và chống đối như những tên đầy tớ ương ngạnh. Chúng ta muốn được Thiên Chúa ban thưởng trên trời, thế mà ta lại đến với Người cách miễn cưỡng ! Tại sao chúng ta lại cầu xin cho Nước Trời mau đến, trong khi vẫn cứ thích bám lấy cảnh lưu đày trần gian ? Tại sao chúng ta cứ xin đi xin lại cho triều đại Chúa mau đến, trong khi chúng ta những thiết tha mong muốn làm tôi ma quỷ ở đời này hơn là cùng hiển trị với Đức Ki-tô ?
 

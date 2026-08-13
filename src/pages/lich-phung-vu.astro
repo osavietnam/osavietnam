@@ -2,9 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import indexData from '../data/kinh-sach-index.json';
-import saintIndexRaw from '../../saintIndex.json';
+import saintIndexRaw from '../data/saint-index.json';
 import pageHeaders from '../data/page-headers.json';
-import { siteBase } from '../lib/site-path';
 const ph = (pageHeaders as Record<string, Record<string, string>>)['lich-phung-vu'];
 
 const leRiengEntries = (indexData as Record<string, unknown[]>)['le-rieng'] || [];
@@ -655,8 +654,8 @@ for (const month of (saintIndexRaw as any).months) {
 
 /* Mobile layout pass: use the viewport efficiently and keep controls/card rhythm stable. */
 @media (max-width: 640px) {
-  body.page-lich-phung-vu #main > main.content { padding:2.2rem 1.35rem 5.5rem; }
-  body.page-lich-phung-vu .banner-container { padding:.9rem 1.35rem 1.15rem; }
+  body.page-lich-phung-vu #main > main.content { padding:2.2rem 2.2rem 5.5rem; }
+  body.page-lich-phung-vu .banner-container { padding:.9rem 2.2rem 1.15rem; }
   body.page-lich-phung-vu .banner-container .banner-variant img { max-height:18rem !important; border-radius:1rem; }
   body.page-lich-phung-vu .banner-quote { max-width:35rem; margin-top:.8rem; padding-inline:.3rem; }
   body.page-lich-phung-vu .banner-quote .bvq-text { margin:0; font-size:1.5rem; line-height:1.55; }
@@ -712,21 +711,389 @@ for (const month of (saintIndexRaw as any).months) {
 }
 
 @media (max-width: 360px) {
-  body.page-lich-phung-vu #main > main.content { padding-inline:.8rem; }
+  body.page-lich-phung-vu #main > main.content { padding-inline:2.2rem; }
   body.page-lich-phung-vu .lpv-cell { min-height:4.8rem; }
   body.page-lich-phung-vu .lpv-day-num,
   body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-day-num { font-size:1.28rem; }
   body.page-lich-phung-vu .lpv-rank-chip { min-width:1.42rem; padding-inline:.2rem; font-size:.76rem; }
 }
-</style>
 
-<script define:vars={{ leRiengEntries, saintByDate, liturgyToEntry, siteBase }}>
-function withBase(path) {
-  if (!path || !path.startsWith('/') || path.startsWith('//') || !siteBase) return path;
-  if (path === siteBase || path.startsWith(siteBase + '/')) return path;
-  return siteBase + path;
+/* Calendar grid visual system */
+body.page-lich-phung-vu {
+  --lpv-cal-surface: #101a2f;
+  --lpv-cal-surface-raised: #142039;
+  --lpv-cal-surface-muted: #0d1729;
+  --lpv-cal-line: #2b3342;
+  --lpv-cal-line-strong: #4a4334;
+  --lpv-cal-text: #eee7d9;
+  --lpv-cal-text-soft: #b8b4ab;
+  --lpv-cal-text-muted: #777d89;
+  --lpv-cal-accent: #e9c176;
+  --lpv-cal-accent-ink: #172235;
+  --lpv-cal-sunday: #24293a;
+  --lpv-cal-selected: #202d3f;
+  --lpv-cal-hover: #18263d;
 }
 
+html[data-theme="light"] body.page-lich-phung-vu {
+  --lpv-cal-surface: #fffdf8;
+  --lpv-cal-surface-raised: #f6f2e9;
+  --lpv-cal-surface-muted: #f1eee7;
+  --lpv-cal-line: #d9ded8;
+  --lpv-cal-line-strong: #d5bf8d;
+  --lpv-cal-text: #24372d;
+  --lpv-cal-text-soft: #516159;
+  --lpv-cal-text-muted: #929993;
+  --lpv-cal-accent: #17613f;
+  --lpv-cal-accent-ink: #ffffff;
+  --lpv-cal-sunday: #fbf3df;
+  --lpv-cal-selected: #e7f1ea;
+  --lpv-cal-hover: #f0f6f1;
+}
+
+body.page-lich-phung-vu .lpv-cal-section {
+  background: var(--lpv-cal-surface);
+  border: 1px solid var(--lpv-cal-line);
+  border-radius: 1.2rem;
+  box-shadow: 0 1rem 2.6rem rgba(0,0,0,.17);
+}
+
+html[data-theme="light"] body.page-lich-phung-vu .lpv-cal-section {
+  box-shadow: 0 .8rem 2.2rem rgba(41,73,55,.08);
+}
+
+body.page-lich-phung-vu .lpv-nav {
+  min-height: 6rem;
+  padding: 1rem 1.25rem;
+  gap: .7rem;
+  background: var(--lpv-cal-surface);
+  border-bottom: 0;
+}
+
+body.page-lich-phung-vu .lpv-month-label {
+  color: var(--lpv-cal-accent);
+  font-size: 2.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+body.page-lich-phung-vu .lpv-nav-btn,
+body.page-lich-phung-vu .lpv-expand-btn,
+body.page-lich-phung-vu .lpv-today-btn {
+  border: 1px solid var(--lpv-cal-line);
+  background: var(--lpv-cal-surface-raised);
+  color: var(--lpv-cal-accent);
+  box-shadow: none;
+}
+
+body.page-lich-phung-vu .lpv-nav-btn {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: .9rem;
+}
+
+body.page-lich-phung-vu .lpv-expand-btn {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: .9rem;
+}
+
+body.page-lich-phung-vu .lpv-today-btn {
+  min-height: 3.6rem;
+  padding: .45rem 1.25rem;
+  border-radius: .9rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+body.page-lich-phung-vu .lpv-nav-btn:hover,
+body.page-lich-phung-vu .lpv-expand-btn:hover,
+body.page-lich-phung-vu .lpv-today-btn:hover {
+  border-color: var(--lpv-cal-accent);
+  background: var(--lpv-cal-hover);
+  color: var(--lpv-cal-accent);
+}
+
+body.page-lich-phung-vu .lpv-nav-btn:focus-visible,
+body.page-lich-phung-vu .lpv-expand-btn:focus-visible,
+body.page-lich-phung-vu .lpv-today-btn:focus-visible {
+  outline: 2px solid var(--lpv-cal-accent);
+  outline-offset: 2px;
+}
+
+body.page-lich-phung-vu .lpv-grid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--lpv-cal-line);
+  border-top: 1px solid var(--lpv-cal-line);
+  border-bottom: 1px solid var(--lpv-cal-line);
+}
+
+body.page-lich-phung-vu .lpv-cell-header {
+  padding: .75rem .35rem;
+  border: 0;
+  background: var(--lpv-cal-surface-raised);
+  color: var(--lpv-cal-text-soft);
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: .08rem;
+}
+
+body.page-lich-phung-vu .lpv-cell-header.is-sunday-col {
+  background: var(--lpv-cal-sunday);
+  color: var(--lpv-cal-accent);
+}
+
+body.page-lich-phung-vu .lpv-cell {
+  min-width: 0;
+  min-height: 10.8rem;
+  padding: .72rem .7rem .65rem;
+  border: 0;
+  background: var(--lpv-cal-surface);
+  color: var(--lpv-cal-text);
+  transition: background-color .16s ease, box-shadow .16s ease;
+}
+
+body.page-lich-phung-vu .lpv-cell:hover {
+  z-index: 1;
+  background: var(--lpv-cal-hover);
+  box-shadow: inset 0 0 0 1px var(--lpv-cal-accent);
+}
+
+body.page-lich-phung-vu .lpv-cell.other-month {
+  opacity: 1;
+  background: var(--lpv-cal-surface-muted);
+}
+
+body.page-lich-phung-vu .lpv-cell.other-month .lpv-day-num,
+body.page-lich-phung-vu .lpv-cell.other-month .lpv-event-name,
+body.page-lich-phung-vu .lpv-cell.other-month .lpv-day-sunday,
+body.page-lich-phung-vu .lpv-cell.other-month .lpv-day-feast {
+  color: var(--lpv-cal-text-muted);
+  opacity: .52;
+}
+
+body.page-lich-phung-vu .lpv-cell.is-sunday {
+  border-top: 0;
+  background: var(--lpv-cal-sunday);
+}
+
+body.page-lich-phung-vu .lpv-cell.is-sunday:hover {
+  background: var(--lpv-cal-hover);
+}
+
+body.page-lich-phung-vu .lpv-cell.today {
+  outline: 0;
+  background: var(--lpv-cal-selected);
+}
+
+body.page-lich-phung-vu .lpv-cell.selected {
+  z-index: 2;
+  outline: 0;
+  background: var(--lpv-cal-selected);
+  box-shadow: inset 0 0 0 2px var(--lpv-cal-accent);
+}
+
+body.page-lich-phung-vu .lpv-day-num,
+body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-day-num {
+  margin: 0 0 .45rem;
+  color: var(--lpv-cal-text-soft);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-day-num {
+  color: var(--lpv-cal-accent);
+}
+
+body.page-lich-phung-vu .lpv-today-circle {
+  width: 2.65rem;
+  height: 2.65rem;
+  background: var(--lpv-cal-accent);
+  color: var(--lpv-cal-accent-ink);
+  font-size: 1.45rem;
+  box-shadow: none;
+}
+
+body.page-lich-phung-vu .lpv-day-sunday {
+  margin-top: 0;
+  color: var(--lpv-cal-text);
+  font-size: 1.13rem;
+  font-weight: 500;
+  line-height: 1.38;
+}
+
+body.page-lich-phung-vu .lpv-day-feast {
+  margin-top: 0;
+  color: var(--lpv-cal-text-soft);
+  font-size: 1.08rem;
+  line-height: 1.38;
+}
+
+body.page-lich-phung-vu .lpv-event {
+  align-items: flex-start;
+  gap: .38rem;
+  margin-top: .3rem;
+}
+
+body.page-lich-phung-vu .lpv-rank-chip {
+  min-width: 1.65rem;
+  padding: .05rem .38rem;
+  border-radius: .38rem;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+
+body.page-lich-phung-vu .lpv-event-name {
+  color: var(--lpv-cal-text-soft);
+  font-size: 1.08rem;
+  font-weight: 450;
+  line-height: 1.38;
+}
+
+body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-event-name,
+body.page-lich-phung-vu .lpv-cell.today .lpv-event-name,
+body.page-lich-phung-vu .lpv-cell.selected .lpv-event-name {
+  color: var(--lpv-cal-text);
+}
+
+body.page-lich-phung-vu .lpv-legend {
+  min-height: 4.5rem;
+  padding: .9rem 1.25rem;
+  gap: .7rem 1.6rem;
+  border-top: 0;
+  background: var(--lpv-cal-surface-raised);
+}
+
+body.page-lich-phung-vu .lpv-legend-item {
+  color: var(--lpv-cal-text-soft);
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+body.page-lich-phung-vu .lupv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+body.page-lich-phung-vu .lupv-toggle {
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--lpv-cal-line);
+  border-radius: .8rem;
+  background: var(--lpv-cal-surface-raised);
+  color: var(--lpv-cal-accent);
+  cursor: pointer;
+}
+
+body.page-lich-phung-vu .lupv-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .2s ease;
+}
+
+body.page-lich-phung-vu .lpv-upcoming.is-collapsed .lupv-toggle svg {
+  transform: rotate(-90deg);
+}
+
+@media (min-width: 961px) {
+  body.page-lich-phung-vu .lpv-body.expanded .lpv-cell { min-height: 12rem; }
+  body.page-lich-phung-vu .lpv-body.expanded .lpv-day-sunday,
+  body.page-lich-phung-vu .lpv-body.expanded .lpv-day-feast,
+  body.page-lich-phung-vu .lpv-body.expanded .lpv-event-name { font-size: 1.18rem; }
+}
+
+@media (max-width: 640px) {
+  body.page-lich-phung-vu .lpv-cal-section { border-radius: 1rem; }
+  body.page-lich-phung-vu .lpv-nav {
+    min-height: 0;
+    padding: .75rem;
+    background: var(--lpv-cal-surface);
+  }
+  body.page-lich-phung-vu .lpv-nav-btn { width: 3.8rem; height: 3.8rem; min-height: 3.8rem; }
+  body.page-lich-phung-vu .lpv-month-label { font-size: 1.65rem; }
+  body.page-lich-phung-vu .lpv-today-btn { min-height: 3.6rem; }
+  body.page-lich-phung-vu .lpv-cell-header {
+    padding: .58rem .02rem;
+    font-size: .88rem;
+    letter-spacing: .02rem;
+  }
+  body.page-lich-phung-vu .lpv-cell {
+    min-height: clamp(5.2rem, 14.5vw, 6rem);
+    padding: .42rem .1rem .32rem;
+  }
+  body.page-lich-phung-vu .lpv-day-num,
+  body.page-lich-phung-vu .lpv-cell.is-sunday .lpv-day-num {
+    margin-bottom: .32rem;
+    font-size: 1.35rem;
+  }
+  body.page-lich-phung-vu .lpv-today-circle {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.14rem;
+  }
+  body.page-lich-phung-vu .lpv-event { margin-top: .12rem; }
+  body.page-lich-phung-vu .lpv-rank-chip {
+    min-width: 1.5rem;
+    padding: .02rem .24rem;
+    border-radius: .32rem;
+    font-size: .8rem;
+  }
+  body.page-lich-phung-vu .lpv-legend {
+    min-height: 0;
+    padding: .8rem .9rem;
+    gap: .6rem .75rem;
+  }
+  body.page-lich-phung-vu .lpv-legend-item { font-size: .98rem; }
+
+  body.page-lich-phung-vu .lupv-header {
+    min-height: 4.6rem;
+    padding: .72rem .85rem .72rem 1.1rem;
+  }
+  body.page-lich-phung-vu .lupv-toggle { display: inline-flex; flex: 0 0 auto; }
+  body.page-lich-phung-vu .lupv-toggle:focus-visible {
+    outline: 2px solid var(--lpv-cal-accent);
+    outline-offset: 2px;
+  }
+  body.page-lich-phung-vu .lupv-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    padding: .25rem 1.1rem .65rem;
+    scroll-snap-type: none;
+  }
+  body.page-lich-phung-vu .lupv-item {
+    width: 100%;
+    min-height: 0;
+    padding: .75rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--lpv-cal-line);
+    border-radius: 0;
+    background: transparent;
+    scroll-snap-align: none;
+  }
+  body.page-lich-phung-vu .lupv-item:last-child { border-bottom: 0; }
+  body.page-lich-phung-vu .lpv-upcoming.is-collapsed .lupv-header { border-bottom-color: transparent; }
+  body.page-lich-phung-vu .lpv-upcoming.is-collapsed .lupv-body { display: none; }
+}
+</style>
+
+<script define:vars={{ leRiengEntries, saintByDate, liturgyToEntry }}>
 // ===== CONSTANTS =====
 const SEASON_COLORS = {
   'mua-vong':        '#b499d8',
@@ -794,9 +1161,9 @@ function bioSlug(bioFile) {
   return bioFile.split('/').pop().replace('.json', '');
 }
 function bioHref(slug) {
-  return withBase(slug === 'st-augustine-of-hippo'
+  return slug === 'st-augustine-of-hippo'
     ? '/thanh-au-tinh/#tieu-su'
-    : `/thanh-chan-phuoc/${slug}/`);
+    : `/thanh-chan-phuoc/${slug}/`;
 }
 
 function expandAbbrev(text) {
@@ -821,7 +1188,7 @@ async function loadYear(year) {
   if (calCache[year] !== undefined) return calCache[year];
   calCache[year] = null; // mark as attempted
   try {
-    const r = await fetch(withBase(`/data/calendar/${year}.json`));
+    const r = await fetch(`/data/calendar/${year}.json`);
     if (r.ok) calCache[year] = await r.json();
   } catch (_) {}
   return calCache[year];
@@ -845,6 +1212,7 @@ let mode = 'chung';
 let viewYear = todayDate.getFullYear();
 let viewMonth = todayDate.getMonth();
 let expanded = false;
+let upcomingCollapsed = false;
 let selectedDateStr = todayStr;
 
 // ===== HELPERS =====
@@ -1058,7 +1426,7 @@ function renderSidebar(date, info, lr, saints) {
     if (info) {
       const slabel = SEASON_LABELS[info.s] || info.s;
       const mainEntry = LITURGY_TO_ENTRY[info.l];
-      const mainUrl = withBase(mainEntry?.url || `/kinh-sach/?category=${info.s}`);
+      const mainUrl = mainEntry?.url || `/kinh-sach/?category=${info.s}`;
 
       // Badge bậc lễ cho Lễ Chung / Lễ Trọng Kính Chúa
       if ((info.s === 'le-chung' || info.s === 'trong-kinh-chua') && mainEntry?.rank && RANK_CHIPS[mainEntry.rank]) {
@@ -1087,7 +1455,7 @@ function renderSidebar(date, info, lr, saints) {
           const ci = (e.liturgy || '').indexOf(':');
           const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : (e.liturgy || '');
           const chip = RANK_CHIPS[e.rank];
-          readings.push({ label: `${chip ? `[${chip.label}] ` : ''}${fname}`, url: withBase(e.url || `/kinh-sach/?category=le-rieng`) });
+          readings.push({ label: `${chip ? `[${chip.label}] ` : ''}${fname}`, url: e.url || `/kinh-sach/?category=le-rieng` });
         }
       }
       html += `<div class="ltc-read-bar">`;
@@ -1157,7 +1525,13 @@ function renderSidebar(date, info, lr, saints) {
 // ===== RENDER: UPCOMING =====
 function renderUpcoming() {
   const el = document.getElementById('lpvUpcoming');
-  let html = `<div class="lupv-header">Lễ Sắp Tới</div><div class="lupv-body">`;
+  const toggleLabel = upcomingCollapsed ? 'Mở danh sách lễ sắp tới' : 'Thu gọn danh sách lễ sắp tới';
+  let html = `<div class="lupv-header">
+    <span>Lễ Sắp Tới</span>
+    <button class="lupv-toggle" type="button" aria-controls="lupvUpcomingBody" aria-expanded="${String(!upcomingCollapsed)}" aria-label="${toggleLabel}" title="${toggleLabel}">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+    </button>
+  </div><div class="lupv-body" id="lupvUpcomingBody">`;
 
   const FEAST_SEASONS = new Set(['le-rieng','le-chung','trong-kinh-chua']);
   const d = new Date(todayDate);
@@ -1179,12 +1553,16 @@ function renderUpcoming() {
     const hasSaint = saints && saints.length > 0;
     const hasLr = effectiveLr && effectiveLr.length > 0;
 
-    if (hasCalFeast || hasSaint || hasLr) {
+    const hasUpcomingEvent = mode === 'nha-dong'
+      ? hasSaint
+      : (hasCalFeast || hasLr);
+
+    if (hasUpcomingEvent) {
       const label = `${DAY_NAMES[d.getDay()]}, ${d.getDate()}/${d.getMonth()+1}`;
       let itemHtml = `<div class="lupv-item"><div class="lupv-item-date">${label}</div>`;
 
       // Hàng lịch chung: mùa/tên lễ
-      if (hasCalFeast) {
+      if (mode === 'chung' && hasCalFeast) {
         const color = SEASON_COLORS[info.s] || 'var(--gold)';
         itemHtml += `<div class="lupv-event-row">
           <span class="lupv-dot" style="background:${color}"></span>
@@ -1193,7 +1571,7 @@ function renderUpcoming() {
       }
 
       // Lễ riêng cố định (kinh sách index) — đã ẩn khi isSun, hiện tất cả
-      if (hasLr) {
+      if (mode === 'chung' && hasLr) {
         for (const e of effectiveLr) {
           const chip = RANK_CHIPS[e.rank];
           const ci = (e.liturgy || '').indexOf(':');
@@ -1206,7 +1584,7 @@ function renderUpcoming() {
       }
 
       // Thánh-Chân phước (Nhà Dòng) — hiện tất cả
-      if (hasSaint) {
+      if (mode === 'nha-dong' && hasSaint) {
         for (const s of saints) {
           const chip = RANK_CHIPS[saintRank(s.rank)];
           itemHtml += `<div class="lupv-event-row">
@@ -1226,6 +1604,17 @@ function renderUpcoming() {
 
   html += `</div>`; // close lupv-body
   el.innerHTML = html;
+  el.classList.toggle('is-collapsed', upcomingCollapsed);
+
+  el.querySelector('.lupv-toggle')?.addEventListener('click', () => {
+    upcomingCollapsed = !upcomingCollapsed;
+    el.classList.toggle('is-collapsed', upcomingCollapsed);
+    const toggle = el.querySelector('.lupv-toggle');
+    const label = upcomingCollapsed ? 'Mở danh sách lễ sắp tới' : 'Thu gọn danh sách lễ sắp tới';
+    toggle?.setAttribute('aria-expanded', String(!upcomingCollapsed));
+    toggle?.setAttribute('aria-label', label);
+    toggle?.setAttribute('title', label);
+  });
 }
 
 // ===== FULL RENDER =====

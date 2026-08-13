@@ -15,7 +15,7 @@ Chào đời khoảng năm 380 ở miền I-mô-la, Ê-mi-li-a, cũng tại đó
 
 </div>
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Khi Đức Trinh Nữ cưu mang, Đức Trinh Nữ sinh con, và mãi mãi là trinh nữ, thì quả đó không phải là chuyện thường tình, nhưng là dấu lạ ; không phải là lý lẽ, nhưng là quyền năng ; có tác giả, nhưng không phải là giới tự nhiên ; không phải là chuyện thông thường, nhưng độc nhất vô nhị ; chuyện của Thiên Chúa, chứ không phải chuyện của loài người. Đức Ki-tô sinh ra không phải là tất yếu nhưng là quyền năng. Đây là mầu nhiệm của tình thương, là ơn cứu độ cho loài người. Đấng khi chưa sinh ra làm người, thì đã tạo dựng con người từ đất nhuyễn, khi sinh ra làm người, thì làm một con người từ một thân xác trinh nguyên. Bàn tay đã đoái thương lấy đất sét mà nắn lên hình hài chúng ta, thì cũng đoái thương nhận lấy huyết nhục chúng ta để cứu chữa chúng ta. Vì thế, Đấng Tạo Hoá ở trong loài thọ tạo của mình, Thiên Chúa ở trong xác phàm, thì là một vinh dự cho loài thọ tạo, chứ không làm tổn thương chính Đấng Tạo Hoá.
 

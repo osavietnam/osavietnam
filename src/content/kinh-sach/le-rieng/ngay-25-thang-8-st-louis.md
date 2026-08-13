@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh năm 1214, Năm 22 tuổi, người lên ngôi vua cai trị nước Pháp. Người là mẫu mực cho người giáo dân sống Tin Mừng: một người chồng tốt, một người cha hết lòng giáo dục con thành những Ki-tô hữu đích thực, một ông vua lo cổ võ công lý và hoà bình. Người sống đức tin một cách khiêm nhường: mỗi ngày người siêng năng cầu nguyện, phục vụ người nghèo trong tinh thần vui tươi. Người nhận lãnh nhiệm vụ đi giải phóng Mồ Thánh và qua đời gần Các-tha-go năm 1270. 
 
-Vua công chính cai trị thế gian.
+*Vua công chính cai trị thế gian.*
 
-*Trích di chúc thiêng liêng của thánh Lu-y để lại cho thái tử.*
+**Trích di chúc thiêng liêng của thánh Lu-y để lại cho thái tử.**
 
  
 

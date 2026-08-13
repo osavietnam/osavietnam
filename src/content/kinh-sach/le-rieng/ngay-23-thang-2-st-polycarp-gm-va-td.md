@@ -15,7 +15,7 @@ Thánh Pô-li-ca-pô là môn đệ của thánh Gio-an và là chứng nhân cu
 
 </div>
 
-*Trích thư của Hội Thánh Miếc-na về cuộc tử đạo của thánh Pô-ly-ca-pô.*
+**Trích thư của Hội Thánh Miếc-na về cuộc tử đạo của thánh Pô-ly-ca-pô.**
 
 Khi giàn hoả thiêu đã sẵn sàng, giám mục Pô-li-ca-pô tự mình cởi áo xống và dây lưng ra ; ngài gắng tháo cả giày ra nữa. Trước đó, ngài không hề làm điều ấy, bởi vì mọi tín hữu luôn luôn tranh nhau để được là người đầu tiên chạm vào thân thể ngài : thật thế, ngay cả trước cuộc tử đạo, ngài đã được tôn vinh vì nếp sống thánh thiện của mình.
 

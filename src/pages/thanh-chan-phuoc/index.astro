@@ -2,9 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import saintData from '../../../saintIndex.json';
+import saintData from '../../data/saint-index.json';
 import pageHeaders from '../../data/page-headers.json';
-import { withBase } from '../../lib/site-path';
 const ph = (pageHeaders as Record<string, Record<string, string>>)['saints'];
 
 const RANK_LABEL: Record<string, string> = {
@@ -24,10 +23,13 @@ function getBioSlug(bioFile: string | undefined): string | null {
   const s = bioFile.split('/').pop()?.replace('.json', '') ?? null;
   return s && bioSlugs.has(s) ? s : null;
 }
+function getEntryId(bioFile: string | undefined): string | null {
+  return bioFile?.split('/').pop()?.replace(/\.json$/, '') || null;
+}
 function getBioHref(slug: string): string {
-  return withBase(slug === 'st-augustine-of-hippo'
+  return slug === 'st-augustine-of-hippo'
     ? '/thanh-au-tinh/#tieu-su'
-    : `/thanh-chan-phuoc/${slug}/`);
+    : `/thanh-chan-phuoc/${slug}/`;
 }
 function hasImg(f: string | undefined): boolean {
   return !!f && !f.endsWith('/') && !f.endsWith('.json') && f.length > 4;
@@ -48,13 +50,12 @@ const months = saintData.months;
 <BaseLayout
   title="Thánh-Chân Phước"
   banner="saints"
-  bodyClass="no-sidebar"
+  bodyClass="no-sidebar page-saints-index"
   description="Lịch kính các Thánh và Chân Phước Dòng Augustinô (Âu-Tinh) theo tháng và ngày lễ."
 >
 
 <div class="sp-wrap">
 
-  <!-- Tiêu đề -->
   <PageHeader
     title={ph.title}
     sub={ph.sub}
@@ -83,6 +84,7 @@ const months = saintData.months;
             const badge    = RANK_LABEL[saint.rank] || '';
             const rankCls  = `rank-${saint.rank}`;
             const slug     = getBioSlug(saint.bioFile);
+            const entryId  = getEntryId(saint.bioFile);
             const subtitle = slug ? (bioSubtitles[slug] || inferSubtitle(saint.name)) : ((saint as any).subtitle || inferSubtitle(saint.name));
             const imgOk    = hasImg(saint.imageFile);
             const mAbbr    = MONTH_ABBR[month.monthNumber - 1];
@@ -93,7 +95,7 @@ const months = saintData.months;
             const inner = <>
               <div class="sc-img"></div>
               <div class="sc-overlay"></div>
-              {badge && <span class="sc-badge">{badge}</span>}
+              {badge && <span class={`rank-badge ${rankCls} sc-badge`}>{badge}</span>}
               <div class="sc-body">
                 <div class="sc-date">{saint.day} {mAbbr}</div>
                 <h4 class="sc-name">{saint.name}</h4>
@@ -105,7 +107,8 @@ const months = saintData.months;
               return (
                 <a href={getBioHref(slug)}
                    class={`saint-card ${rankCls} ${extra}`}
-                   {...(imgOk ? { style: `--sc-bg:url('${withBase(saint.imageFile)}')` } : {})}
+                   data-saint-id={entryId || undefined}
+                   {...(imgOk ? { style: `--sc-bg:url('${saint.imageFile}')` } : {})}
                    aria-label={saint.name}>
                   {inner}
                 </a>
@@ -113,7 +116,8 @@ const months = saintData.months;
             }
             return (
               <div class={`saint-card ${rankCls} ${extra}`}
-                   {...(imgOk ? { style: `--sc-bg:url('${withBase(saint.imageFile)}')` } : {})}
+                   data-saint-id={entryId || undefined}
+                   {...(imgOk ? { style: `--sc-bg:url('${saint.imageFile}')` } : {})}
                    aria-label={saint.name}>
                 {inner}
               </div>
@@ -126,14 +130,69 @@ const months = saintData.months;
 
 </div>
 
+<dialog class="saint-inline-dialog" id="saintInlineDialog" aria-labelledby="saintInlineTitle">
+  <form method="dialog" class="saint-inline-form" id="saintInlineForm">
+    <header>
+      <div>
+        <small>Biên tập thẻ thánh</small>
+        <h2 id="saintInlineTitle">Thánh – Chân phước</h2>
+      </div>
+      <button type="button" class="saint-inline-close" id="saintInlineClose" aria-label="Đóng">×</button>
+    </header>
+    <div class="saint-inline-grid">
+      <label class="saint-inline-title-field">
+        <span>Tên hiển thị</span>
+        <input id="saintInlineName" type="text" required />
+      </label>
+      <label class="saint-inline-subtitle-field">
+        <span>Phụ đề</span>
+        <input id="saintInlineSubtitle" type="text" />
+      </label>
+      <label>
+        <span>Bậc lễ</span>
+        <select id="saintInlineRank">
+          <option value="none">Không ghi bậc</option>
+          <option value="memorial">Lễ Nhớ</option>
+          <option value="feast">Lễ Kính</option>
+          <option value="solemn">Lễ Trọng</option>
+        </select>
+      </label>
+      <label>
+        <span>Ngày</span>
+        <input id="saintInlineDay" type="number" min="1" max="31" required />
+      </label>
+      <label>
+        <span>Tháng</span>
+        <select id="saintInlineMonth">
+          {Array.from({ length: 12 }, (_, index) => <option value={index + 1}>Tháng {index + 1}</option>)}
+        </select>
+      </label>
+      <label class="saint-inline-image-field">
+        <span>Ảnh thẻ</span>
+        <select id="saintInlineImage"></select>
+      </label>
+      <div class="saint-inline-image-preview">
+        <img id="saintInlinePreview" alt="Xem trước ảnh thẻ" />
+      </div>
+      <div class="saint-inline-upload">
+        <button type="button" id="saintInlineUpload">Tải ảnh mới</button>
+        <input id="saintInlineFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/svg+xml" hidden />
+      </div>
+    </div>
+    <footer>
+      <span id="saintInlineMessage" role="status"></span>
+      <button type="button" class="saint-inline-cancel" id="saintInlineCancel">Hủy</button>
+      <button type="submit" class="saint-inline-save">Lưu thay đổi</button>
+    </footer>
+  </form>
+</dialog>
+
 <script set:html={`
 window.__SAINTS__=${JSON.stringify(saintData)};
 window.__BIO_SLUGS__=${JSON.stringify([...bioSlugs])};
 window.__BIO_SUBTITLES__=${JSON.stringify(bioSubtitles)};
 `}></script>
 <script>
-import { withBase } from '../../lib/site-path';
-
 const DATA      = window.__SAINTS__;
 const BIO_SLUGS = new Set(window.__BIO_SLUGS__);
 const BIO_SUBTITLES = window.__BIO_SUBTITLES__;
@@ -163,9 +222,9 @@ function getBioSlug(bioFile) {
   return s && BIO_SLUGS.has(s) ? s : null;
 }
 function getBioHref(slug) {
-  return withBase(slug === 'st-augustine-of-hippo'
+  return slug === 'st-augustine-of-hippo'
     ? '/thanh-au-tinh/#tieu-su'
-    : `/thanh-chan-phuoc/${slug}/`);
+    : `/thanh-chan-phuoc/${slug}/`;
 }
 function esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -205,16 +264,17 @@ function buildUpcoming() {
                   && ((s.day === 28 && (s.bioFile||'').includes('st-augustine-of-hippo'))
                    || (s.day === 27 && (s.bioFile||'').includes('monica')));
     const slug     = getBioSlug(s.bioFile);
+    const entryId  = s.bioFile?.split('/').pop()?.replace(/\.json$/, '') || '';
     const subtitle = slug ? (BIO_SUBTITLES[slug] || inferSubtitle(s.name)) : (s.subtitle || inferSubtitle(s.name));
     const imgOk    = s.imageFile && !s.imageFile.endsWith('/') && !s.imageFile.endsWith('.json');
-    const bgAttr   = imgOk ? ` style="--sc-bg:url('${withBase(s.imageFile)}')"` : '';
+    const bgAttr   = imgOk ? ` style="--sc-bg:url('${s.imageFile}')"` : '';
     const badge    = RANK_LABEL[s.rank] || '';
     const mAbbr    = MONTH_ABBR[s.monthNumber - 1];
     const inner    = `
       <div class="sc-img"></div>
       <div class="sc-overlay"></div>
       ${isToday ? `<span class="sc-today-tag">Hôm Nay</span>` : ''}
-      ${badge ? `<span class="sc-badge">${badge}</span>` : ''}
+      ${badge ? `<span class="rank-badge rank-${s.rank} sc-badge">${badge}</span>` : ''}
       <div class="sc-body">
         <div class="sc-date">${s.day} ${mAbbr}</div>
         <h4 class="sc-name">${esc(s.name)}</h4>
@@ -223,8 +283,8 @@ function buildUpcoming() {
       </div>`;
     const cls = `saint-card rank-${s.rank}${isToday ? ' is-today' : ''}${isNext ? ' is-next' : ''}${isPatron ? ' is-patron' : ''}${slug ? ' has-bio' : ''}`;
     return slug
-      ? `<a href="${getBioHref(slug)}" class="${cls}"${bgAttr} aria-label="${esc(s.name)}">${inner}</a>`
-      : `<div class="${cls}"${bgAttr} aria-label="${esc(s.name)}">${inner}</div>`;
+      ? `<a href="${getBioHref(slug)}" class="${cls}" data-saint-id="${esc(entryId)}"${bgAttr} aria-label="${esc(s.name)}">${inner}</a>`
+      : `<div class="${cls}" data-saint-id="${esc(entryId)}"${bgAttr} aria-label="${esc(s.name)}">${inner}</div>`;
   }).join('');
 
   document.getElementById('ucTrack').innerHTML = html;
@@ -286,6 +346,191 @@ requestAnimationFrame(() => {
   const grid = document.querySelector('.saints-grid');
   if (grid) new ResizeObserver(syncCardWidth).observe(grid);
 });
+
+/* Mobile: lần chạm đầu chọn thẻ, lần chạm thứ hai mới mở tiểu sử. */
+(() => {
+  const touchNavigation = matchMedia('(hover: none), (pointer: coarse)');
+  let selectedCard: HTMLAnchorElement | null = null;
+
+  const clearSelection = (except?: HTMLAnchorElement | null) => {
+    if (selectedCard && selectedCard !== except) {
+      selectedCard.classList.remove('is-touch-selected');
+    }
+    if (!except) selectedCard = null;
+  };
+
+  document.addEventListener('click', event => {
+    if (!touchNavigation.matches || event.detail === 0) return;
+    const target = event.target as HTMLElement;
+    if (target.closest('button, input, select, textarea, label')) return;
+    const card = target.closest<HTMLAnchorElement>('a.saint-card.has-bio');
+
+    if (!card) {
+      clearSelection();
+      return;
+    }
+
+    if (selectedCard !== card || !card.classList.contains('is-touch-selected')) {
+      event.preventDefault();
+      clearSelection(card);
+      selectedCard = card;
+      card.classList.add('is-touch-selected');
+      card.focus({ preventScroll: true });
+      return;
+    }
+
+    card.classList.remove('is-touch-selected');
+    selectedCard = null;
+  }, true);
+
+  touchNavigation.addEventListener?.('change', () => clearSelection());
+})();
+</script>
+
+<script>
+(() => {
+  const dialog = document.getElementById('saintInlineDialog') as HTMLDialogElement | null;
+  if (!dialog) return;
+
+  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const form = document.getElementById('saintInlineForm') as HTMLFormElement;
+  const title = document.getElementById('saintInlineTitle') as HTMLElement;
+  const name = document.getElementById('saintInlineName') as HTMLInputElement;
+  const subtitle = document.getElementById('saintInlineSubtitle') as HTMLInputElement;
+  const rank = document.getElementById('saintInlineRank') as HTMLSelectElement;
+  const day = document.getElementById('saintInlineDay') as HTMLInputElement;
+  const month = document.getElementById('saintInlineMonth') as HTMLSelectElement;
+  const image = document.getElementById('saintInlineImage') as HTMLSelectElement;
+  const preview = document.getElementById('saintInlinePreview') as HTMLImageElement;
+  const upload = document.getElementById('saintInlineUpload') as HTMLButtonElement;
+  const fileInput = document.getElementById('saintInlineFile') as HTMLInputElement;
+  const message = document.getElementById('saintInlineMessage') as HTMLElement;
+  const save = form.querySelector<HTMLButtonElement>('.saint-inline-save')!;
+  let active: any = null;
+  let imageFiles: string[] | null = null;
+
+  const json = async (url: string, options?: RequestInit) => {
+    const response = await fetch(ADMIN + url, options);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    return data;
+  };
+  const asDataUrl = (file: File) => new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ''));
+    reader.onerror = () => reject(new Error('Không thể đọc ảnh'));
+    reader.readAsDataURL(file);
+  });
+  const setMessage = (text = '', error = false) => {
+    message.textContent = text;
+    message.classList.toggle('is-error', error);
+  };
+  const paintPreview = () => {
+    preview.src = image.value || '';
+    preview.hidden = !image.value;
+  };
+  const populateImages = (current = '') => {
+    const options = [...(imageFiles || [])];
+    if (current && !options.includes(current)) options.unshift(current);
+    image.innerHTML = '<option value="">— Không dùng ảnh —</option>' + options.map(url => {
+      const label = url.split('/').pop() || url;
+      return `<option value="${url.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${label.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</option>`;
+    }).join('');
+    image.value = current;
+    paintPreview();
+  };
+
+  async function openEditor(id: string) {
+    setMessage('Đang tải…');
+    dialog.showModal();
+    try {
+      const [item, library] = await Promise.all([
+        json(`/api/studio/item?collection=thanh-chan-phuoc&id=${encodeURIComponent(id)}`),
+        imageFiles ? Promise.resolve({ files:imageFiles }) : json('/api/studio/images?scope=saints'),
+      ]);
+      active = item;
+      imageFiles = library.files || [];
+      title.textContent = item.fm.title || id;
+      name.value = item.fm.title || '';
+      subtitle.value = item.fm.subtitle || '';
+      rank.value = item.fm.rank || 'none';
+      day.value = item.fm.feastDay || '';
+      month.value = item.fm.feastMonth || '';
+      populateImages(item.fm.imageFile || '');
+      setMessage('');
+    } catch (error) {
+      active = null;
+      setMessage(error instanceof Error ? error.message : 'Không thể tải dữ liệu', true);
+    }
+  }
+
+  function closeEditor() {
+    active = null;
+    dialog.close();
+  }
+
+  function addEditTriggers() {
+    document.querySelectorAll<HTMLElement>('.saint-card[data-saint-id]').forEach(card => {
+      if (card.querySelector('.saint-inline-trigger')) return;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'saint-inline-trigger';
+      button.setAttribute('aria-label', `Sửa thẻ ${card.getAttribute('aria-label') || ''}`);
+      button.title = 'Sửa trực tiếp thẻ này';
+      button.innerHTML = '<span aria-hidden="true">✎</span><span>Sửa</span>';
+      button.addEventListener('click', event => {
+        event.preventDefault(); event.stopPropagation();
+        const id = card.dataset.saintId;
+        if (id) openEditor(id);
+      });
+      card.appendChild(button);
+    });
+  }
+
+  json('/api/studio/manifest').then(() => {
+    document.body.classList.add('saint-inline-admin');
+    addEditTriggers();
+  }).catch(() => dialog.remove());
+
+  image.addEventListener('change', paintPreview);
+  upload.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files?.[0]; if (!file) return;
+    upload.disabled = true; setMessage('Đang tải ảnh…');
+    try {
+      const result = await json('/api/studio/images', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ scope:'saints', filename:file.name, data:await asDataUrl(file) }),
+      });
+      imageFiles = [...new Set([...(imageFiles || []), result.url])];
+      populateImages(result.url);
+      setMessage('Ảnh đã tải lên. Bấm Lưu thay đổi để áp dụng.');
+    } catch (error) { setMessage(error instanceof Error ? error.message : 'Tải ảnh thất bại', true); }
+    finally { upload.disabled = false; fileInput.value = ''; }
+  });
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!active || !form.reportValidity()) return;
+    save.disabled = true; setMessage('Đang lưu…');
+    const fm = { ...active.fm, title:name.value.trim(), subtitle:subtitle.value.trim(), rank:rank.value, feastDay:Number(day.value), feastMonth:Number(month.value), imageFile:image.value };
+    try {
+      await json('/api/studio/item', {
+        method:'PUT', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ collection:'thanh-chan-phuoc', id:active.id, originalId:active.id, fm, body:active.body, extension:active.extension, checksum:active.checksum }),
+      });
+      setMessage('Đã lưu. Đang cập nhật thẻ…');
+      setTimeout(() => location.reload(), 450);
+    } catch (error) {
+      save.disabled = false;
+      setMessage(error instanceof Error ? error.message : 'Lưu thất bại', true);
+    }
+  });
+
+  document.getElementById('saintInlineClose')?.addEventListener('click', closeEditor);
+  document.getElementById('saintInlineCancel')?.addEventListener('click', closeEditor);
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeEditor(); });
+})();
 </script>
 
 <style is:global>
@@ -299,6 +544,124 @@ requestAnimationFrame(() => {
   max-width: 120rem;
   margin: 0 auto;
   padding: 0 2.4rem 5rem;
+}
+
+/* Inline editor chỉ được JS kích hoạt khi API Admin local sẵn sàng. */
+.saint-inline-trigger {
+  position: absolute;
+  z-index: 8;
+  top: .8rem;
+  right: .8rem;
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .75rem;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 6px;
+  color: #fff;
+  background: rgba(7,13,24,.86);
+  box-shadow: 0 4px 14px rgba(0,0,0,.28);
+  font: 500 1.05rem/1 var(--font-ui);
+  cursor: pointer;
+}
+.saint-inline-trigger:hover,
+.saint-inline-trigger:focus-visible { color: #0d1f2b; background: #e9c176; border-color: #e9c176; outline: none; }
+.saint-inline-trigger span:first-child { font-size: 1.35rem; }
+.saint-card.is-today .saint-inline-trigger { top: 4rem; }
+
+.saint-inline-dialog {
+  width: min(62rem, calc(100vw - 3.2rem));
+  max-height: min(86vh, 76rem);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid rgba(233,193,118,.42);
+  border-radius: 12px;
+  color: var(--ink-cream);
+  background: #101a2e;
+  box-shadow: 0 24px 70px rgba(0,0,0,.58);
+}
+.saint-inline-dialog::backdrop { background: rgba(3,7,14,.74); backdrop-filter: blur(4px); }
+.saint-inline-form > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.8rem 2rem 1.4rem;
+  border-bottom: 1px solid rgba(233,193,118,.2);
+}
+.saint-inline-form header small { display: block; margin-bottom: .35rem; color: #e9c176; font: 600 1rem/1.4 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
+.saint-inline-form header h2 { margin: 0; color: var(--ink-cream); font: 600 2.2rem/1.3 var(--font-display); }
+.saint-inline-close {
+  width: 3.2rem; height: 3.2rem; padding: 0; border: 0; border-radius: 50%;
+  color: var(--ink-cream-soft); background: transparent; font: 300 2.6rem/1 var(--font-ui); cursor: pointer;
+}
+.saint-inline-close:hover { color: #e9c176; background: rgba(233,193,118,.1); }
+.saint-inline-grid { display: grid; grid-template-columns: 1.2fr .7fr .7fr; gap: 1.2rem; padding: 1.8rem 2rem; }
+.saint-inline-grid label { min-width: 0; display: flex; flex-direction: column; gap: .5rem; }
+.saint-inline-grid label > span { color: var(--ink-cream-soft); font: 500 1.05rem/1.4 var(--font-ui); }
+.saint-inline-title-field,
+.saint-inline-subtitle-field { grid-column: 1 / -1; }
+.saint-inline-grid select,
+.saint-inline-grid input[type="number"],
+.saint-inline-grid input[type="text"] {
+  width: 100%; min-height: 4.2rem; padding: .75rem 1rem;
+  border: 1px solid rgba(233,193,118,.25); border-radius: 7px; outline: none;
+  color: var(--ink-cream); background: #070d18; font: 500 1.25rem/1.4 var(--font-ui);
+}
+.saint-inline-grid select:focus,
+.saint-inline-grid input:focus { border-color: #e9c176; }
+.saint-inline-image-field { grid-column: 1 / -1; }
+.saint-inline-image-preview {
+  grid-column: 1 / span 2; min-height: 18rem; overflow: hidden;
+  border: 1px solid rgba(233,193,118,.2); border-radius: 8px; background: #070d18;
+}
+.saint-inline-image-preview img { width: 100%; height: 22rem; display: block; object-fit: cover; object-position: center 18%; }
+.saint-inline-upload { display: flex; align-items: flex-end; }
+.saint-inline-upload button,
+.saint-inline-form footer button {
+  min-height: 4rem; padding: .7rem 1.2rem; border: 1px solid rgba(233,193,118,.32);
+  border-radius: 7px; color: var(--ink-cream); background: transparent; font: 600 1.15rem/1 var(--font-ui); cursor: pointer;
+}
+.saint-inline-upload button:hover,
+.saint-inline-form footer button:hover { color: #e9c176; border-color: #e9c176; }
+.saint-inline-form > footer {
+  display: flex; align-items: center; justify-content: flex-end; gap: .8rem;
+  padding: 1.3rem 2rem 1.6rem; border-top: 1px solid rgba(233,193,118,.18);
+}
+#saintInlineMessage { min-width: 0; flex: 1; color: #e9c176; font: 500 1.05rem/1.5 var(--font-ui); }
+#saintInlineMessage.is-error { color: #ef9b9b; }
+.saint-inline-form footer .saint-inline-save { color: #0d1f2b; background: #e9c176; border-color: #e9c176; }
+.saint-inline-form footer .saint-inline-save:hover { color: #0d1f2b; background: #f2d18d; }
+.saint-inline-form button:disabled { opacity: .48; cursor: wait; }
+
+[data-theme="light"] .saint-inline-dialog { color: #203a2d; background: #fffdf8; border-color: rgba(24,62,44,.25); }
+[data-theme="light"] .saint-inline-form > header,
+[data-theme="light"] .saint-inline-form > footer { border-color: rgba(24,62,44,.14); }
+[data-theme="light"] .saint-inline-form header h2 { color: #183e2c; }
+[data-theme="light"] .saint-inline-form header small,
+[data-theme="light"] .saint-inline-grid label > span { color: #51695c; }
+[data-theme="light"] .saint-inline-grid select,
+[data-theme="light"] .saint-inline-grid input[type="number"],
+[data-theme="light"] .saint-inline-grid input[type="text"] { color: #183e2c; background: #fff; border-color: rgba(24,62,44,.22); }
+[data-theme="light"] .saint-inline-image-preview { background: #eee9df; border-color: rgba(24,62,44,.18); }
+[data-theme="light"] .saint-inline-close,
+[data-theme="light"] .saint-inline-upload button,
+[data-theme="light"] .saint-inline-form footer .saint-inline-cancel { color: #31513f; border-color: rgba(24,62,44,.22); }
+
+@media (max-width: 620px) {
+  .saint-inline-trigger span:last-child { display: none; }
+  .saint-inline-trigger { width: 3rem; justify-content: center; padding: 0; }
+  .saint-inline-grid { grid-template-columns: 1fr 1fr; padding: 1.4rem; }
+  .saint-inline-grid > label:first-child,
+  .saint-inline-image-field,
+  .saint-inline-image-preview,
+  .saint-inline-upload { grid-column: 1 / -1; }
+  .saint-inline-image-preview img { height: 18rem; }
+  .saint-inline-form > header,
+  .saint-inline-form > footer { padding-left: 1.4rem; padding-right: 1.4rem; }
+  .saint-inline-form > footer { flex-wrap: wrap; }
+  #saintInlineMessage { flex-basis: 100%; }
 }
 
 /* ── Tiêu đề trang — dùng .listing-head từ listings.css ── */
@@ -498,7 +861,8 @@ requestAnimationFrame(() => {
 }
 .saint-card.has-bio { cursor: pointer; }
 .saint-card:hover,
-.saint-card:focus-visible {
+.saint-card:focus-visible,
+.saint-card.is-touch-selected {
   transform: translateY(-6px);
   box-shadow: 0 10px 30px rgba(0,0,0,.5);
   filter: grayscale(0%) brightness(1.2);
@@ -552,21 +916,11 @@ requestAnimationFrame(() => {
     rgba(5,8,20,.04) 100%);
 }
 
-/* Badge bậc lễ — solid color, đồng bộ với global rank convention */
+/* Chỉ định vị badge trên thẻ; toàn bộ hình thức dùng chung .rank-badge global. */
 .sc-badge {
   position: absolute; top: .8rem; left: .8rem; z-index: 4;
-  font-family: var(--font-ui); font-size: .78rem; font-weight: 500;
-  letter-spacing: .05rem; text-transform: uppercase;
-  border-radius: 4px; padding: .2rem .8rem;
-  white-space: nowrap;
+  margin-bottom: 0;
 }
-/* Lễ Trọng — đỏ đô (= global .rank-badge.rank-solemn) */
-.rank-solemn .sc-badge  { background: #8b2020; color: #efe7d6; }
-/* Lễ Kính — vàng (= global feast) */
-.rank-feast .sc-badge   { background: #e9c176; color: #0d1f2b; }
-/* Lễ Nhớ — kem xám (= global memorial) */
-.rank-memorial .sc-badge { background: #ccc8c0; color: #0d1f2b; }
-.rank-none .sc-badge { display: none; }
 
 /* Text — bottom overlay */
 .sc-body {
@@ -603,7 +957,8 @@ requestAnimationFrame(() => {
   opacity: 0; transition: opacity .16s;
 }
 .saint-card.has-bio:hover .sc-readmore,
-.saint-card.has-bio:focus-visible .sc-readmore { opacity: 1; }
+.saint-card.has-bio:focus-visible .sc-readmore,
+.saint-card.has-bio.is-touch-selected .sc-readmore { opacity: 1; }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {

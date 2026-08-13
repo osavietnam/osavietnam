@@ -15,7 +15,7 @@ Mác-ta là chị của cô Ma-ri-a và ông La-da-rô ở Bê-ta-ni-a. Trong s�
 
 </div>
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Lời Đức Giê-su Ki-tô, Chúa chúng ta, nhắc nhở chúng ta phải hướng về một mục đích, khi gánh vác trăm công ngàn việc ở đời này. Chúng ta hướng về đó bao lâu còn là lữ khách, chứ chưa phải là cư dân, bao lâu còn ở trên đường, chứ chưa vào quê thật, bao lâu còn đang phải ước ao, chứ chưa được vui hưởng. Thế nên chúng ta phải hướng về đó mà không lơ là và cũng không ngơi, để ngày kia chúng ta đạt tới đích.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 12 Thường Niên"
 order: 80
 ---
 
-*Trích khảo luận của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về đời trọn lành của Ki-tô hữu.*
+**Trích khảo luận của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về đời trọn lành của Ki-tô hữu.**
 
 Có ba điều cho thấy rõ đặc điểm của đời sống Ki-tô hữu : hành động, lời nói và tư tưởng. Trong ba điều, trước hết là tư tưởng. Thứ đến là lời nói, vì lời nói dùng từ ngữ để bộc lộ và giãi bày tư tưởng đã được cưu mang và hình thành trong tâm trí. Sau tư tưởng, lời nói là hành động, vì hành động dùng việc làm để thực hiện những gì đã được tâm trí nghĩ ra. Vậy, nếu trong cuộc sống, chúng ta phải hành động, suy nghĩ hay nói năng, thì mọi lời nói, việc làm, tư tưởng của chúng ta cần phải phù hợp với các danh hiệu cao vời vốn được dùng để tuyên xưng Đức Ki-tô. Như thế, chúng ta sẽ không nghĩ gì, không nói gì, không làm gì trái với ý nghĩa tuyệt vời của các danh hiệu đó.
 

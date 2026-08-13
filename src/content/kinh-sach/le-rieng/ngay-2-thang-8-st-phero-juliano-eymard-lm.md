@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh tại thành La Muyrơ bên Pháp năm 1811. Sau khi chịu chức linh mục và lo việc mục vụ được vài năm, người vào hiệp hội Đức Maria. Với lòng tôn sùng mầu nhiệm Thánh Thể rất đặc biệt, người thành lập các tu hội nam nữ chuyên lo sùng kính bí tích Thánh Thể và lập ra nhiều tổ chức rất thích hợp cho giáo dân thuộc đủ mọi giai cấp, để cổ võ lòng sùng kính ấy. Người qua đời ngày 1 tháng 8 năm 1868 tại tỉnh nhà.
 
-Bí tích Thánh Thể, bí tích ban sự sống
+*Bí tích Thánh Thể, bí tích ban sự sống*
 
-*Trích tác phẩm “Chúa hiện diện đích thực” của thánh Phêrô Giulianô Ema, linh mục.*
+**Trích tác phẩm “Chúa hiện diện đích thực” của thánh Phêrô Giulianô Ema, linh mục.**
 
 Bí tích Thánh Thể là sự sống của mọi người. Bí tích Thánh Thể ban cho họ nguyên lý sự sống. Để cử hành tiệc thánh của Giáo Hội, mọi người có thể họp nhau lại, bất chấp họ thuộc dân tộc hay ngôn ngữ nào. Bí tích Thánh Thể ban cho họ luật sống, hơn nữa luật bác ái mà bí tích này là nguồn mạch. Vì vậy, bí tích này tạo ra một mối dây chung ràng buộc các tín hữu, một sự liên hệ trong Đức Kitô.
 

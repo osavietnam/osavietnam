@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 7 Phục Sinh"
 order: 42
 ---
 
-*Thánh thi “Lạy Thiên Chúa”*
+**Thánh thi “Lạy Thiên Chúa”**
 
 Lạy Thiên Chúa,
 

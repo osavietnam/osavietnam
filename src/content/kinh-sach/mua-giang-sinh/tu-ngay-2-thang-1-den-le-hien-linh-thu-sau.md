@@ -8,7 +8,7 @@ liturgy: "Từ ngày 2 Tháng 1 đến Lễ Hiển Linh, Thứ Sáu"
 order: 13
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.**
 
 Đức Ki-tô toả sáng, chúng ta hãy toả sáng cùng với Người. Đức Ki-tô được dìm xuống nước, chúng ta hãy cùng xuống để cùng lên với Người.
 

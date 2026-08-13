@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 4 Mùa Chay"
 order: 34
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Ai thực sự tôn kính cuộc thương khó của Chúa thì phải dùng con mắt tâm hồn mà nhìn ngắm Chúa Giê-su chịu đóng đinh để nhận thân xác của Người cũng là của mình.
 

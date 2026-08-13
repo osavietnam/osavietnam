@@ -15,7 +15,7 @@ Thánh nữ sinh năm 1873 tại A-lăng-xông, nước Pháp. Người nhập �
 
 </div>
 
-*Trích sách Tự thuật của thánh Tê-rê-xa Hài Đồng Giê-su, trinh nữ.*
+**Trích sách Tự thuật của thánh Tê-rê-xa Hài Đồng Giê-su, trinh nữ.**
 
 Khi nguyện ngắm, những khát vọng của em làm cho em bị đau khổ giày vò. Em mở các thư của thánh Phao-lô để tìm một câu trả lời. Tình cờ em bắt gặp chương 12 và 13, thư thứ nhất gửi tín hữu Cô-rin-tô... Khi đọc chương trước, em thấy rằng không phải ai có cũng làm tông đồ, ngôn sứ hay thầy dạy. Em cũng thấy rằng Hội Thánh gồm nhiều phần tử khác nhau, và mắt không thể vừa là mắt vừa là tay được... Câu trả lời trên thật rõ ràng nhưng không làm cho em thoả mãn và đem lại cho em sự bình an.
 

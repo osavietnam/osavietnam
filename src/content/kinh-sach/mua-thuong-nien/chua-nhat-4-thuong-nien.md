@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 4 Thường Niên"
 order: 22
 ---
 
-*Trích thư thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi Hội Thánh Miếc-na.*
+**Trích thư thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi Hội Thánh Miếc-na.**
 
 Tôi là I-nha-xi-ô, cũng gọi là Thê-ô-pho-rô, kính gửi Hội Thánh tại Miếc-na thuộc A-xi-a, Hội Thánh của Thiên Chúa Cha và của Đức Giê-su Ki-tô, con chí ái của Người. Anh chị em là Hội Thánh được Thiên Chúa từ bi ban cho mọi ơn lành, đầy tràn đức tin và đức mến, không thiếu một ơn nào, được Thiên Chúa yêu thương rất mực và đầy sự thánh thiện. Tôi cầu chúc anh chị em vạn sự an lành trong lòng thuần khiết và lời của Thiên Chúa.
 

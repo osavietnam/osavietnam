@@ -16,7 +16,7 @@ Thánh nhân sinh tại làng Bi-ka Káp-ra nước Li-băng năm 1828, vào dò
 
 </div>
 
-*Trích thư thánh Am-mo-ni-ô, ẩn tu.*
+**Trích thư thánh Am-mo-ni-ô, ẩn tu.**
 
  
 

@@ -15,7 +15,7 @@ Thánh nữ sinh năm 331 tại Ta-gát, châu Phi, trong một gia đình theo 
 
 </div>
 
-*Trích sách Tự Thuật của thánh Âu-tinh, giám mục.*
+**Trích sách Tự Thuật của thánh Âu-tinh, giám mục.**
 
 Hôm ấy, gần tới ngày mẹ con lìa khỏi đời này, ngày mà Chúa biết rõ, còn chúng con thì không, đã xảy ra một chuyện mà bây giờ con tin là đã do Chúa sắp đặt theo đường lối nhiệm mầu của Chúa : lúc đó chỉ có hai mẹ con chúng con đứng tựa cửa sổ quay ra thửa vườn bên cạnh ngôi nhà chúng con đang ở, gần Ốt-ti-a, bên bờ sông Ti-be. Nơi đây xa chỗ đông người, chúng con muốn nghỉ ngơi cho khoẻ lại sau những ngày đường xa mệt nhọc, hầu có thể lên tàu tiếp tục chuyến đi. Chỉ có hai mẹ con chúng con trò chuyện rất thân mật. Chúng con muốn quên đi những chặng đường đã qua, để lao mình về phía trước. Đứng trước Chân Lý là chính Chúa, chúng con tìm hiểu xem cuộc sống vĩnh cửu của các thánh sẽ ra sao, cuộc sống mà mắt không hề thấy, tai chẳng hề nghe, lòng người không hề nghĩ tới. Chúng con nao nức mở rộng tâm hồn hớp lấy những dòng nước từ trời cao đổ xuống, nước suối nguồn của Chúa, suối ban sự sống bắt nguồn từ nơi Chúa.
 

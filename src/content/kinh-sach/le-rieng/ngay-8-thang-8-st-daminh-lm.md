@@ -15,7 +15,7 @@ Thánh nhân sinh quãng năm 1170 tại Ca-lê-ru-ê-ga, Tây-ban-nha. Người
 
 </div>
 
-*Trích các văn kiện lịch sử Dòng Anh Em Thuyết Giáo.*
+**Trích các văn kiện lịch sử Dòng Anh Em Thuyết Giáo.**
 
 Thánh Đô-mi-ni-cô rất mực đoan chính và nhiệt tình mến Chúa. Không nghi ngờ gì nữa, ai cũng chứng thực là người thật đáng kính và đầy ân sủng. Tâm hồn người hết sức bình thản, chỉ xao động khi đồng cảm nỗi thống khổ của người khác, hay khi tỏ lòng thương xót khoan dung. Lòng vui thì nét mặt cũng lây vui, nên người đã giải toả niềm an vui nội tâm trên khuôn mặt khả ái hân hoan.
 

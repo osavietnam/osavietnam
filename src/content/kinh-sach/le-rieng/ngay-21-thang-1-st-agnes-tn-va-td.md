@@ -15,7 +15,7 @@ A-nê là một thiếu nữ Rô-ma, mới từ mười hai tuổi đến mườ
 
 </div>
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các trinh nữ.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các trinh nữ.**
 
 Hôm nay là ngày sinh nhật trên trời của một trinh nữ, chúng ta hãy noi gương trong trắng của người. Hôm này là ngày sinh nhật trên trời của một vị tử đạo, chúng ta hãy dâng hy lễ. Hôm này là ngày sinh nhật trên trời của thánh A-nê. Tương truyền rằng thánh nữ đã được phúc tử đạo năm mười hai tuổi. Người ta đối xử tàn bạo không nương tay với một thiếu nữ còn ít tuổi, thì lại còn làm lộ ra sức mạnh lớn lao của đức tin nơi thiếu nữ ấy, vì cô đã dám làm chứng.
 

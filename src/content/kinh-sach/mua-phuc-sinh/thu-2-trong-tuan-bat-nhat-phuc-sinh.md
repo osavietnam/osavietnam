@@ -9,7 +9,7 @@ rank: "solemn"
 order: 1
 ---
 
-*Trích bài giảng của đức cha Mê-li-tơn, giám mục Xác-đê, về mầu nhiệm vượt qua.*
+**Trích bài giảng của đức cha Mê-li-tơn, giám mục Xác-đê, về mầu nhiệm vượt qua.**
 
 Anh em thân mến, anh em hãy biết rằng mầu nhiệm vượt qua vừa mới lại vừa cũ, vừa vĩnh cửu vừa tạm thời, bao hàm cái hư hoại lẫn cái bất hoại, cái phải chết cũng như cái bất tử.
 

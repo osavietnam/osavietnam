@@ -15,7 +15,7 @@ Bốn mươi ngày trước Lễ Suy Tôn Thánh Giá, Lễ Chúa Hiển Dung nh
 
 </div>
 
-*Trích bài giảng Lễ Chúa Hiển Dung của giám mục A-nát-ta-xi-ô Xi-nai.*
+**Trích bài giảng Lễ Chúa Hiển Dung của giám mục A-nát-ta-xi-ô Xi-nai.**
 
 Đức Giê-su đã bày tỏ mầu nhiệm này cho các môn đệ trên núi Ta-bo. Đang khi cùng đi đường, Người đã chuyện trò với các ông về Nước Trời và về cuộc quang lâm của Người. Có lẽ các ông chưa xác tín những điều Người tiên báo về Nước Trời, nên Người muốn cho các ông thâm tín tận đáy lòng và từ những việc hiện tại, các ông có thể tin vào những việc tương lai. Vì thế, trên núi Ta-bo, Người đã cho các ông thấy một quang cảnh thần diệu như hình ảnh Người đã báo trước về Nước Trời. Dường như Người muốn nói với các ông : “Để anh em khỏi mất lòng tin trong khi còn phải chờ đợi, thì ngay bây giờ, Thầy bảo thật anh em : trong số người có mặt ở đây, có những kẻ sẽ không phải nếm sự chết trước khi thấy Con Người đến hiển trị trong vinh quang của Cha Người”.
 

@@ -9,7 +9,7 @@ rank: "solemn"
 order: 2
 ---
 
-*Trích bài giảng của thánh A-nát-ta-xi-ô An-ti-ô-khi-a.*
+**Trích bài giảng của thánh A-nát-ta-xi-ô An-ti-ô-khi-a.**
 
 Đức Ki-tô đã dùng lời nói và việc làm mà chứng tỏ Người là Thiên Chúa thật và là Chúa Tể càn khôn. Lúc gần lên Giê-ru-sa-lem, Người nói với các môn đệ rằng : Này chúng ta lên Giê-ru–sa-lem, và Con Người sẽ bị nộp cho các thượng tế và kinh sư... Họ sẽ nộp Người cho dân ngoại nhạo báng, đánh đòn và đóng đinh vào thập giá. Điều Người nói phù hợp với lời các ngôn sứ tiên báo về cuộc ra đi của Người sẽ xảy ra tại Giê-ru-sa-lem.
 

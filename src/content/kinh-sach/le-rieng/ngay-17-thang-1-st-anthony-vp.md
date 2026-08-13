@@ -15,7 +15,7 @@ Thánh An-tôn là tổ phụ của các đan sĩ ở Ai-cập. Người chào �
 
 </div>
 
-*Trích hạnh thánh An-tôn do thánh A-tha-na-xi-ô, giám mục, ghi lại.*
+**Trích hạnh thánh An-tôn do thánh A-tha-na-xi-ô, giám mục, ghi lại.**
 
 Sau khi cha mẹ qua đời, thánh An-tôn sống một mình với đứa em gái. Bấy giờ cậu mới chừng mười tám hay hai mươi tuổi thôi, mà lại phải đứng ra coi sóc cửa nhà và cô em.
 

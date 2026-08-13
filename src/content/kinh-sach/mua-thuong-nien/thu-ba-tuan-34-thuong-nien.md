@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 34 Thường Niên"
 order: 234
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Sánh với người không tin, thì Ki-tô hữu đã là ánh sáng rồi. Vì thế, thánh tông đồ nói : Xưa kia anh em là bóng tối, nhưng bây giờ trong Chúa, anh em lại là ánh sáng. Vậy anh em hãy ăn ở như con cái ánh sáng. Và nơi khác, thánh nhân nói : Đêm sắp tàn, ngày gần đến. Vậy chúng ta hãy loại bỏ những việc làm đen tối, và cầm lấy vũ khí ánh sáng để chiến đấu. Chúng ta hãy ăn ở đứng đắn như những người đang sống giữa ban ngày.
 

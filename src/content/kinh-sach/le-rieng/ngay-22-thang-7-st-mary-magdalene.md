@@ -15,7 +15,7 @@ Vốn là người phụ nữ tội lỗi đã được Chúa Giê-su ban ơn th
 
 </div>
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về bài Tin Mừng.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về bài Tin Mừng.**
 
 Khi bà Ma-ri-a Ma-đa-lê-na đến mộ mà không thấy xác Chúa ở đó, bà tưởng người ta đã đem đi mất, nên đi báo tin cho các môn đệ. Các ông đã đến, đã thấy và tin như người phụ nữ đã nói. Rồi sau đó, Kinh Thánh đã viết về các ông rằng các môn đệ trở về nhà, và tiếp theo ngay bà Ma-ri-a đứng ở ngoài, gần bên mộ, mà khóc.
 

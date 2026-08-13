@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 2 Mùa Vọng"
 order: 14
 ---
 
-*Trích bài giảng của chân phúc I-xa-ác, viện phụ đan viện Sao Mai.*
+**Trích bài giảng của chân phúc I-xa-ác, viện phụ đan viện Sao Mai.**
 
 Con Thiên Chúa đã trở nên Trưởng Tử giữa muôn vàn anh em ; vì là Con duy nhất xét theo bản tính, nên Người đã lấy ân sủng mà liên kết nhiều anh em với mình để họ nên một với Người. Quả thật, những ai đón tiếp Người, Người cho họ quyền trở nên con Thiên Chúa.
 

@@ -16,7 +16,7 @@ Chào đời quãng năm 480 tại Noóc-xi-a (Um-ri-a), sau một thời gian t
 
 </div>
 
-*Trích tu luật của thánh Bê-nê-đi-tô, viện phụ.*
+**Trích tu luật của thánh Bê-nê-đi-tô, viện phụ.**
 
 Tiên vàn, bạn hãy đem lời khẩn cầu tha thiết mà xin Thiên Chúa hoàn thành bất cứ công việc tốt lành nào bạn đã khởi sự ; ngõ hầu Đấng đã thương kể chúng ta vào số các con cái Người, sẽ không lúc nào phải phiền lòng vì những hành vi xấu xa của chúng ta. Thật vậy, trong mọi lúc, chúng ta phải dùng các ơn lành Thiên Chúa đã ban để phục vụ Người. Như thế, Thiên Chúa sẽ không như một người cha nổi giận truất quyền thừa kế của con cái. Người cũng không phải như một ông chủ đáng sợ, bực tức vì những việc xấu xa ta đã làm mà bắt chúng ta phải chịu hình khổ đời đời như những đầy tớ gian ác nhất đã không muốn đi theo Người vào chốn vinh quang.
 

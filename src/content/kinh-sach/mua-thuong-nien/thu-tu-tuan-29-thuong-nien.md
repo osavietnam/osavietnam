@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 29 Thường Niên"
 order: 200
 ---
 
-*Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.*
+**Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.**
 
 Giả như có ai nói : Xin làm cho chư dân nhận biết Ngài, như chúng con từng nhận biết xưa nay ; xin cho các ngôn sứ của Ngài được mọi người tin tưởng, thì người ấy có nói gì khác hơn là : Xin làm cho danh thánh Cha hiển vinh ?
 

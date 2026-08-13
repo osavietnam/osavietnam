@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh quãng năm 969 tại Pa-nô-ni-a. Người là “ông vua tông đồ nước Hung-ga-ri.” Lễ Chúa Giáng Sinh năm 1000, người lãnh bí tích thánh tẩy và lãnh nhận vương miện do đức giáo hoàng Xin-vét-te II ban. Người trị nước một cách công minh, giữ cho dân nước được thái bình. Nhưng người cũng là một tín hữu đạo đức, lo tuân giữ luật lệ Hội Thánh. Người lo vun trồng đạo thánh trong quê hương mình: lập nhiều giáo phận, xây cất nhiều thánh đường nay vẫn được dân tộc Hung-ga-ri trân trọng nhất. Người qua đời năm 1038. 
 
-Này con, hãy nghe lời cha dạy bảo.
+*Này con, hãy nghe lời cha dạy bảo.*
 
-*Trích lời thánh Tê-pha-nô khuyên dạy con.*
+**Trích lời thánh Tê-pha-nô khuyên dạy con.**
 
  
 

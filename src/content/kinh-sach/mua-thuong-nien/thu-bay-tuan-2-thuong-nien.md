@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 2 Thường Niên"
 order: 14
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Hiến lễ của Hội Thánh mà Chúa dạy chúng ta phải dâng trên toàn thế giới và được Người chấp nhận. Không phải Thiên Chúa cần chúng ta dâng hy lễ, nhưng vì ai dâng của lễ thì chính người đó được vinh dự qua của lễ mình dâng, nếu của lễ đó được chấp nhận. Quả vậy, nhờ của lễ mà người ta bày tỏ lòng kính trọng và mến yêu đối với một vị vua. Đó là điều Chúa đã giảng dạy, khi muốn chúng ta dâng của lễ với tất cả lòng đơn sơ trong trắng : Nếu khi anh em dâng lễ vật trước bàn thờ, mà sực nhớ có người anh em có chuyện bất bình với anh, thì hãy để của lễ đó trước bàn thờ, đi làm hoà với người anh em ấy đã, rồi trở lại dâng lễ vật của mình. Chúng ta phải dâng cho Thiên Chúa những của đầu mùa trong các loài Chúa đã dựng nên, như ông Mô-sê nói : Ngươi không được đến tay không trước nhan Chúa là Thiên Chúa của ngươi. Như vậy, khi bày tỏ lòng biết ơn đối với Thiên Chúa vì những ân huệ Người ban, con người được nên đep lòng Thiên Chúa và được Người ban cho vinh dự.
 

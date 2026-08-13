@@ -8,7 +8,7 @@ liturgy: "Sau Lễ Hiển Linh đến Lễ Chúa Giêsu Chịu Phép Rửa - Th�
 order: 16
 ---
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Dù trong chính mầu nhiệm Thiên Chúa nhập thể có những dấu đặc biệt luôn luôn rõ ràng về thần tính, nhưng bằng nhiều cách, ngày lễ Hiển Linh hôm nay cũng tỏ cho chúng ta thấy Thiên Chúa đã đến trong một thân xác phàm nhân. Nhờ vậy, thân phận người phàm mỏng manh vốn đã bị tối tăm vây phủ, không vì ngu muội mà mất đi những gì họ đã được chiếm hữu nhờ ơn thánh. Bởi vì Đấng đã muốn sinh ra cho chúng ta, lại không muốn cho chúng ta không nhận biết Người. Thế nên Người tỏ cho thấy rằng mầu nhiệm yêu thương cao cả này không được nên cơ hội khiến người ta sai lầm nghiêm trọng.
 

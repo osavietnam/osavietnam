@@ -4,13 +4,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
 import QuoteReel from '../../components/QuoteReel.astro';
 import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+import ArticleInlineManager from '../../components/ArticleInlineManager.astro';
 import ongoi from '../../data/on-goi-content.json';
-import { siteBase } from '../../lib/site-path';
+import articleTaxonomy from '../../data/article-taxonomy.json';
+import { BANNERS, type BannerVariant } from '../../lib/banners';
 
-const posts = await getCollection('bai-viet', ({ data }) => !data.draft);
-const NEWS_CATEGORIES = ['Cộng Đoàn', 'Dòng', 'Giáo Hội', 'Giáo Phận'] as const;
-type NewsCategory = typeof NEWS_CATEGORIES[number];
+const posts = await getCollection('bai-viet', ({ data }) => !data.draft && !data.translationOf && data.language !== 'en');
+const NEWS_CATEGORIES = articleTaxonomy.news.categories.map(({ label }) => label);
+type NewsCategory = string;
 const newsCategoryFor = (category?: string): NewsCategory | null => {
+  const direct = NEWS_CATEGORIES.find((label) => label.toLocaleLowerCase('vi') === (category ?? '').toLocaleLowerCase('vi').trim());
+  if (direct) return direct;
   const value = (category ?? '').toLocaleLowerCase('vi').trim();
   if (value === 'cộng đoàn' || value.includes('sinh hoạt cộng đoàn')) return 'Cộng Đoàn';
   if (value === 'dòng' || value.includes('tin dòng') || value.includes('dòng thánh augustinô')) return 'Dòng';
@@ -24,7 +28,8 @@ const sorted = [...newsPosts].sort((a, b) => {
   const bd = b.data.date ? new Date(b.data.date).getTime() : 0;
   return bd - ad || a.data.title.localeCompare(b.data.title);
 });
-const featured = sorted.find((post) => post.data.featured) ?? sorted[0];
+const featured = sorted.find((post) => post.data.featured);
+const newsBanner = BANNERS.news as BannerVariant;
 const featurePool = [
   ...(featured ? [featured] : []),
   ...sorted.filter((post) => post.id !== featured?.id),
@@ -89,10 +94,16 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
 
 <BaseLayout title="Tin tức" bodyClass="page-news no-sidebar" banner={null}>
   <div slot="full-bleed" class="news-banner-outer">
-    <div class="news-banner news-slider">
-      <img src="/images/on-goi/banner.avif" alt="" class="news-slide active" loading="eager" />
-      <img src="/images/on-goi/demo-1.jpg" alt="" class="news-slide" loading="lazy" />
-      <img src="/images/on-goi/demo-2.jpg" alt="" class="news-slide" loading="lazy" />
+    <div class="news-banner news-slider" data-banner-editor-container data-banner-key="news" data-banner-image-only>
+      <img src={newsBanner.imageUrl} alt={newsBanner.altText ?? ''} class="news-slide active" loading="eager" />
+      <button
+        type="button"
+        class="news-banner-image-edit"
+        data-banner-inline-edit
+        hidden
+        aria-label="Thay ảnh banner Tin tức"
+        title="Thay ảnh banner Tin tức"
+      >✎</button>
       {featured && (
         <article class="news-masthead">
           <div class="news-masthead-head">
@@ -224,7 +235,7 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
 
   </ArticleLibraryLanding>
 
-  <script is:inline define:vars={{ siteBase }}>
+  <script is:inline>
     document.body.dataset.noAutoscroll = 'true';
 
     var newsMasthead = document.querySelector('.news-masthead');
@@ -356,20 +367,19 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
     var provinceNewsFrame = document.querySelector('[data-province-news-frame]');
     var provinceNewsControls = document.querySelector('.journal-live-province .journal-frame-controls');
     var provinceNewsBack = document.querySelector('[data-province-news-frame-back]');
-    var withBase = function (path) { return !path || !path.startsWith('/') || path.startsWith('//') || !siteBase || path === siteBase || path.startsWith(siteBase + '/') ? path : siteBase + path; };
-    var provinceNewsGalleryUrl = withBase('/api/province-news.html?theme=dark');
+    var provinceNewsGalleryUrl = '/api/province-news.html?theme=dark';
     var provinceNewsLastHeight = 0;
     var provinceNewsViewingArticle = false;
     function provinceNewsUrl() {
       try {
         var frameUrl = new URL(provinceNewsFrame.contentWindow.location.href);
-        if (frameUrl.origin === window.location.origin && frameUrl.pathname.startsWith(withBase('/api/province-news'))) return frameUrl;
+        if (frameUrl.origin === window.location.origin && frameUrl.pathname.startsWith('/api/province-news')) return frameUrl;
       }
       catch (error) { return new URL(provinceNewsFrame.getAttribute('src') || provinceNewsGalleryUrl, window.location.href); }
       return new URL(provinceNewsFrame.getAttribute('src') || provinceNewsGalleryUrl, window.location.href);
     }
-    function provinceNewsIsArticle(url) { return url.pathname.endsWith(withBase('/api/province-news-article')); }
-    function provinceNewsIsGallery(url) { return url.pathname.endsWith(withBase('/api/province-news.html')) || url.pathname.includes(withBase('/api/province-news-page/')); }
+    function provinceNewsIsArticle(url) { return url.pathname.endsWith('/api/province-news-article'); }
+    function provinceNewsIsGallery(url) { return url.pathname.endsWith('/api/province-news.html') || url.pathname.includes('/api/province-news-page/'); }
     function updateProvinceNewsControls() {
       if (!provinceNewsFrame) return;
       var url = provinceNewsUrl();
@@ -418,23 +428,23 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
     var centralNewsFrame = document.querySelector('[data-central-news-frame]');
     var centralNewsControls = document.querySelector('.journal-live-central .journal-frame-controls');
     var centralNewsBack = document.querySelector('[data-news-frame-back]');
-    var centralNewsGalleryUrl = withBase('/api/central-news.html?theme=dark');
+    var centralNewsGalleryUrl = '/api/central-news.html?theme=dark';
     var centralNewsLastHeight = 0;
     var centralNewsArticleHeightLocked = false;
     var centralNewsViewingArticle = false;
     function centralNewsUrl() {
       try {
         var frameUrl = new URL(centralNewsFrame.contentWindow.location.href);
-        if (frameUrl.origin === window.location.origin && frameUrl.pathname.startsWith(withBase('/api/central-news'))) return frameUrl;
+        if (frameUrl.origin === window.location.origin && frameUrl.pathname.startsWith('/api/central-news')) return frameUrl;
       }
       catch (error) { return new URL(centralNewsFrame.getAttribute('src') || centralNewsGalleryUrl, window.location.href); }
       return new URL(centralNewsFrame.getAttribute('src') || centralNewsGalleryUrl, window.location.href);
     }
     function centralNewsIsArticle(url) {
-      return url.pathname.endsWith(withBase('/api/central-news-article'));
+      return url.pathname.endsWith('/api/central-news-article');
     }
     function centralNewsIsGallery(url) {
-      return url.pathname.endsWith(withBase('/api/central-news.html')) || url.pathname.includes(withBase('/api/central-news-page/'));
+      return url.pathname.endsWith('/api/central-news.html') || url.pathname.includes('/api/central-news-page/');
     }
     function updateCentralNewsControls() {
       if (!centralNewsFrame) return;
@@ -525,6 +535,7 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
       if (viewport) viewport.style.height = centralNewsFrame.style.height;
     });
   </script>
+  <ArticleInlineManager kind="news" />
 </BaseLayout>
 
 <style>
@@ -547,6 +558,27 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
   overflow: hidden;
 }
 .news-banner .news-slide { z-index: 0; filter: none; }
+:global(.news-banner .news-banner-image-edit) {
+  position:absolute;
+  z-index:10;
+  top:calc(6.58rem + 1rem);
+  left:1rem;
+  display:grid;
+  width:2.6rem;
+  height:2.6rem;
+  place-items:center;
+  padding:0;
+  border:1px solid #d7ae60;
+  border-radius:50%;
+  color:#102118;
+  background:#e9c176;
+  font:700 1rem/1 var(--font-ui);
+  cursor:pointer;
+  box-shadow:0 .3rem .8rem rgba(0,0,0,.25);
+}
+:global(.news-banner .news-banner-image-edit[hidden]) { display:none; }
+:global(.news-banner .news-banner-image-edit:hover),
+:global(.news-banner .news-banner-image-edit:focus-visible) { background:#f0cf8c; outline:2px solid rgba(233,193,118,.3); outline-offset:2px; }
 .news-banner::after {
   content: '';
   position: absolute;
@@ -845,6 +877,7 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
 .journal-live { margin-top: 0; }
 .journal-live + .journal-live { margin-top:clamp(5rem,8vw,8rem); }
 @media (max-width:760px) {
+  :global(.news-banner .news-banner-image-edit) { top:calc(6.58rem + .65rem); left:.65rem; width:2.4rem; height:2.4rem; }
   .news-library-heading { margin-bottom:2.5rem; }
 }
 .news-vocation-tail {

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 34 Thường Niên"
 order: 235
 ---
 
-*Trích bài giảng được coi là của thánh Ma-ca-ri-ô, giám mục.*
+**Trích bài giảng được coi là của thánh Ma-ca-ri-ô, giám mục.**
 
 Ngày xưa, Thiên Chúa nổi giận với dân Do-thái, nên đã trao nộp Giê-ru-sa-lem cho quân thù, khiến Giê-ru-sa-lem thành trò cười cho chúng. Dân Do-thái vốn khinh ghét quân thù, thế mà lại bị chúng thống trị, và họ không còn lễ hội, chẳng còn hiến tế nữa. Cũng vậy, một khi linh hồn vi phạm huấn lệnh của Thiên Chúa, thì Người cũng trao linh hồn đó cho quân thù. Chúng sẽ quyến rũ và làm cho linh hồn đó ra hư hỏng hoàn toàn.
 

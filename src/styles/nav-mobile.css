@@ -69,7 +69,7 @@
     background: rgba(0,0,0,0.2);
     padding: 0;
     margin-top: 0.5rem;
-
+    
     /* Use max-height for the main slide-down animation */
     overflow: hidden;
     max-height: 0;

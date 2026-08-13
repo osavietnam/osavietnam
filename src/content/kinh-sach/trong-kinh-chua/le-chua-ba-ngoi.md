@@ -10,7 +10,7 @@ order: 3
 draft: false
 ---
 
-*Trích thư thánh A-tha-na-xi-ô, Giám mục.*
+**Trích thư thánh A-tha-na-xi-ô, Giám mục.**
 
 Không phải là điều viển vông khi chúng ta nghiên cứu truyền thống cổ xưa, giáo lý và đức tin của Hội Thánh công giáo, đức tin mà Chúa đã trao ban, các tông đồ đã rao giảng và các giáo phụ đã duy trì. Thật vậy, Hội Thánh được xây dựng trên nền tảng đức tin đó, đức tin mà hễ ai lạc xa thì không phải và không còn lý do để được gọi là Ki-tô hữu nữa.
 

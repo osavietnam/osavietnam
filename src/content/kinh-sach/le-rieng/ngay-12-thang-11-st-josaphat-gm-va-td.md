@@ -15,7 +15,7 @@ Thánh nhân sinh khoảng năm 1580 tại U-cơ-rai-na, trong một gia đình 
 
 </div>
 
-*Trích thông điệp Hội Thánh của Thiên Chúa của đức giáo hoàng Pi-ô XI.*
+**Trích thông điệp Hội Thánh của Thiên Chúa của đức giáo hoàng Pi-ô XI.**
 
 Hội Thánh của Thiên Chúa đã được thiết lập theo một kế hoạch kỳ diệu, để khi thời gian viên mãn, Hội Thánh nên như một đại gia đình bao gồm toàn thể nhân loại. Chúng ta biết rằng người ta nhận ra Hội Thánh là của Thiên Chúa nhờ sự hiệp nhất phổ quát cũng như một số đặc tính khác.
 

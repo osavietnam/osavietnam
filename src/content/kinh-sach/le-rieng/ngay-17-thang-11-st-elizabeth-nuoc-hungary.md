@@ -15,7 +15,7 @@ Thánh nữ sinh năm 1207. Năm lên 14 tuổi, thân phụ là An-rê vua Hung
 
 </div>
 
-*Trích thư của thánh Côn-rát thành Mác-bua. linh hướng của thánh nữ, gửi đức giáo hoàng Ghê-gô-ri-ô IX, năm 1232.*
+**Trích thư của thánh Côn-rát thành Mác-bua. linh hướng của thánh nữ, gửi đức giáo hoàng Ghê-gô-ri-ô IX, năm 1232.**
 
 Bà Ê-li-da-bét sớm bắt đầu trổi vượt về các nhân đức. Cũng như suốt đời, bà đã là người an ủi những người nghèo, thì bây giờ bà hoàn toàn trở nên vị cứu tinh của những người đói. Bà ra lệnh xây một nhà thương gần lâu đài của mình, đón về đó nhiều người đau yếu tàn tật. Đối với mọi người đến xin của bố thí, bà đã làm các việc từ thiện cách rộng rãi, ở đây cũng như trong toàn lãnh thổ thuộc quyền cai trị của chồng bà. Bà đã phân phát tất cả hoa lợi do bốn lãnh địa của chồng bà đem lại, thậm chí cuối cùng bà đã cho bán hết đồ trang sức và y phục quý giá để giúp người nghèo.
 

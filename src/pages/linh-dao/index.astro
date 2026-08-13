@@ -4,20 +4,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AugustineLifeLibrary from '../../components/AugustineLifeLibrary.astro';
 import ArticleLibraryLanding from '../../components/ArticleLibraryLanding.astro';
 import CategoryArticleGallery from '../../components/CategoryArticleGallery.astro';
+import ArticleInlineManager from '../../components/ArticleInlineManager.astro';
+import articleTaxonomy from '../../data/article-taxonomy.json';
 
 const articles = (await getCollection(
   'bai-viet',
-  ({ id, data }) => id.startsWith('linh-dao/') && !data.draft,
+  ({ id, data }) => id.startsWith('linh-dao/') && !data.draft && !data.translationOf && data.language !== 'en',
 )).sort((a, b) => {
   if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
   return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
 });
 
-const categories = [
-  'Chung',
-  'Chú Giải Thánh Vịnh',
-  'Bài Giảng',
-];
+const categories = articleTaxonomy.spirituality.categories.map(({ label }) => label);
 const articleHref = (id: string) => `/linh-dao/bai-viet/${id.replace(/^linh-dao\//, '')}/`;
 const visibleArticles = articles.filter((article) => categories.includes(article.data.category ?? ''));
 const featuredEntry = visibleArticles.find((article) => article.data.featured) ?? visibleArticles[0];
@@ -59,7 +57,7 @@ const categoryGroups = categories.map((category) => ({
   title="Linh Đạo"
   description="Các bài viết về đời sống nội tâm, cầu nguyện, cộng đoàn và truyền thống linh đạo Augustinô."
   bodyClass="no-sidebar page-linh-dao"
-  banner="thu-vien"
+  banner="linh-dao"
 >
   <ArticleLibraryLanding
     class="linh-dao-index"
@@ -78,4 +76,5 @@ const categoryGroups = categories.map((category) => ({
 
     <AugustineLifeLibrary kind="community" />
   </ArticleLibraryLanding>
+  <ArticleInlineManager kind="spirituality" />
 </BaseLayout>

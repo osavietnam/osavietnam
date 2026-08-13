@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 1 Mùa Vọng"
 order: 2
 ---
 
-*Trích thư mục vụ của thánh Ca-rô-lô Bô-rô-mê-ô, giám mục.*
+**Trích thư mục vụ của thánh Ca-rô-lô Bô-rô-mê-ô, giám mục.**
 
 Anh em thân mến, đây là mùa phụng vụ được cử hành sốt sắng ; và như Chúa Thánh Thần phán dạy, đây là thời thuận tiện, đây là ngày cứu độ, ngày bình an và hoà giải ; đây là thời mà xưa kia các tổ phụ và các ngôn sứ đã hết lòng mong ước và liên lỉ nài xin, thời mà ông Si-mê-on, người công chính, đã được thấy, khiến ông hớn hở vui mừng. Chính vì thời gian này là mùa phụng vụ vẫn được Giáo Hội cử hành sốt sắng, nên chúng ta phải sống thời gian này cách đạo đức là ngợi khen cảm tạ Chúa Cha hằng hữu, vì Người đã tỏ lòng nhân hậu đối với chúng ta trong mầu nhiệm này. Thật vậy, vì quá yêu thương chúng ta là những người tội lỗi, Chúa Cha đã sai Con Một giáng thế, để cứu chúng ta khỏi bị ma quỷ hà hiếp và thống trị, mời chúng ta tiến vào thiên quốc, đưa chúng ta vào các mầu nhiệm nước trời, tỏ cho chúng ta được thấy chân lý, tập chúng ta ăn ở ngay chính, gieo hạt giống các nhân đức vào lòng chúng ta, cho chúng ta được dư đầy ân sủng, và sau hết, nhận chúng ta làm con cái, được quyền thừa hưởng phúc trường sinh.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 2 Mùa Vọng"
 order: 9
 ---
 
-*Trích khảo luận Đường lên núi Các-men của thánh Gio-an Thánh Giá, linh mục.*
+**Trích khảo luận Đường lên núi Các-men của thánh Gio-an Thánh Giá, linh mục.**
 
 Trong luật cũ, lý do chính yếu tại sao cho phép người ta thỉnh vấn Thiên Chúa, và tại sao các ngôn sứ và các tư tế lại cần phải xin Thiên Chúa ban cho thị kiến và mặc khải, đó là vì thời ấy đức tin chưa có nền tảng và luật Tin Mừng chưa được thiết lập. Vì thế, cần phải xin Thiên Chúa bày tỏ ý định của Người : bằng lời nói, hoặc bằng thị kiến và mặc khải, hoặc các hình ảnh hay các biểu tượng, hoặc bằng bất cứ cách diễn tả nào khác. Quả thật, tất cả những điều Người trả lời, phán dạy hay mặc khải, đều là những mầu nhiệm đức tin của chúng ta, hoặc là những chân lý liên quan hay hướng về đức tin của chúng ta.
 

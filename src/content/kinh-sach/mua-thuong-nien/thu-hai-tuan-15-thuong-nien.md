@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 15 Thường Niên"
 order: 100
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Bạn thấy gì nơi giếng rửa tội ? Tất nhiên là thấy nước, nhưng không phải chỉ có nước, mà ở đó còn có các thầy Lê-vi phục vụ, có vị thượng tế thẩm vấn và hiến thánh. Trước hết, thánh Phao-lô tông đô dạy bạn : Đừng chú tâm đến những sự vật hữu hình, nhưng đến những thực tại vô hình. Quả vậy, những sự vật hữu hình chỉ tạm thời, còn những thực tại vô hình mới tồn tại vĩnh viễn. Bạn còn đọc thấy ở chỗ khác : Những gì người ta không thể nhìn thấy được nơi Thiên Chúa tức là quyền năng vĩnh cửu và thần tính của Người, thì từ khi Thiên Chúa tạo thành vũ trụ, trí khôn con người có thể nhìn thấy được qua những công trình của Người. Chính Người cũng đã nói : Dù các ông không tin tôi, ít ra cũng tin các việc tôi đã làm. Vậy bạn hãy tin ở đó có Thiên Chúa hiện diện. Bạn tin Chúa hành động mà lại không tin Ngài hiện diện sao ? Nếu không hiện hữu trước đã thì làm sao hành động được ?
 

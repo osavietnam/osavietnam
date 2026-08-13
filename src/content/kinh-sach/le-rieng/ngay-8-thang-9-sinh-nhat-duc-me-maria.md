@@ -15,7 +15,7 @@ Sinh nhật của Đức Ma-ri-a vượt hẳn cả sinh nhật của thánh Gio
 
 </div>
 
-*Trích bài giảng của thánh An-rê, giám mục Cơ-rê-ta.*
+**Trích bài giảng của thánh An-rê, giám mục Cơ-rê-ta.**
 
 Cứu cánh của Lề Luật là Đức Ki-tô. Người không đẩy chúng ta xa Lề Luật cho bằng nâng chúng ta lên tới tinh thần của nó. Quả thật, nơi Người, Lề Luật được hoàn tất, vì sau khi kiện toàn và kết thúc mọi sự, thì chính Đấng lập Luật đã chuyển chữ viết sang tinh thần. Thật vậy, Người thâu hồi tất cả nơi bản thân và sống theo luật ân sủng. Luật thì Người bắt phục tùng, còn ân sủng thì Người phối hợp và liên kết với Luật. Đặc tính của bên này, Người không trộn lẫn và hoà tan với bên kia, nhưng hoán chuyển cách thần kỳ, khiến điều xưa nặng nề nay trở nên nhẹ nhàng và tự do, để chúng ta không phải làm nô lệ những yếu tố của vũ trụ, như thánh Phao-lô tông đồ đã nói, và chúng ta cũng chẳng phải mang ách nô lệ dựa trên chữ viết của Luật.
 

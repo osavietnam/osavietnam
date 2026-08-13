@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 9 Thường Niên"
 order: 58
 ---
 
-*Trích sách giáo lý của thánh Đô-rô-thê-ô, viện phụ.*
+**Trích sách giáo lý của thánh Đô-rô-thê-ô, viện phụ.**
 
 Thưa anh em, chúng ta hãy tìm hiểu do nơi đâu mà nhiều khi người ta bị một lời xúc phạm, nhng cứ như thể là không nghe thấy gì, thường bỏ đi, chẳng chút buồn bực ; lại có khi vừa nghe thấy lại lộn gan và buồn bực ngay. Xin hỏi : sao lại thay đổi thế ? Sự thể do một hay nhiều nguyên nhân ? Tôi nghĩ có nhiều nguyên nhân, nhưng đặc biêt có một nguyên nhân làm phát sinh mọi nguyên nhân khác, như có người nói : điều đó đôi khi là do chính tâm trạng của mỗi người lúc xảy ra sự việc.
 

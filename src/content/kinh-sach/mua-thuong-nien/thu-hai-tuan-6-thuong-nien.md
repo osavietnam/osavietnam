@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 6 Thường Niên"
 order: 37
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Chúng ta hãy làm việc để có của ăn không hư nát, nghĩa là chúng ta hãy làm việc để lo cho phần rỗi của mình. Chúng ta hãy làm việc trong vườn nho của Chúa để xứng đáng lãnh tiền công nhật. Chúng ta hãy làm việc trong đức khôn ngoan vì đức khôn ngoan dạy : Ai hoạt động trong Ta sẽ không phạm tội. Đấng là Chân Lý nói : Ruộng là thế gian. Chúng ta hãy đào bới trong đó vì ở đó có kho tàng ẩn giấu, chúng ta hãy đào nó lên. Quả vậy, kho tàng ấy là đức khôn ngoan được kéo ra từ nơi kín ẩn. Mọi người chúng ta, ai cũng tìm kiếm đức khôn ngoan, mọi người chúng ta, ai cũng ao ước có được đức khôn ngoan.
 

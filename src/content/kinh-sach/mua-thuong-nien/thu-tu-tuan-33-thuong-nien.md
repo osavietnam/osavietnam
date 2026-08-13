@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 33 Thường Niên"
 order: 228
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Người công chính hãy vui mừng trong Chúa và hy vọng nơi Người. Mọi tấm lòng chính trực đều lấy thế làm vinh. Quả thật, chúng ta đã đem hết tâm hồn và tiếng nói mà ca hát lên như thế. Cả trí khôn lẫn miệng lưỡi người Ki-tô hữu đã thưa với Thiên Chúa những lời này :Người công chính sẽ vui mừng, không phải trong thế gian, nhưng trong Chúa. Cũng có lời khác rằng : Ánh sáng bừng lên chiếu rọi người công chính, niềm vui làm rạng rỡ kẻ lòng ngay. Bạn sẽ hỏi niềm vui này bởi đâu mà có ? Xin bạn nghe đây : Người công chính sẽ vui mừng trong Chúa. Rồi còn nữa : Hãy lấy Chúa làm nguồn vui của bạn, Người sẽ cho được phỉ chí toại lòng.
 

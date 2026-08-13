@@ -15,7 +15,7 @@ Thánh nữ là em của thánh Bê-nê-đi-tô, nhà lập luật cho các đan
 
 </div>
 
-*Trích sách Đối thoại của thánh Ghê-rô-ri-ô Cả, giáo hoàng.*
+**Trích sách Đối thoại của thánh Ghê-rô-ri-ô Cả, giáo hoàng.**
 
 Cô-lát-ti-ca là em ruột của thánh Bê-nê-đi-tô ; bà đã sống tận hiến cho Chúa toàn năng từ thời thơ ấu. Bà quen đến thăm anh mỗi năm một lần. Người của Thiên Chúa đi xuống gặp em ở bên ngoài cổng cách một quãng đường không xa trong phần đất của đan viện.
 

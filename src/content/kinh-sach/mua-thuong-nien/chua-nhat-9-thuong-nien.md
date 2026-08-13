@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 9 Thường Niên"
 order: 57
 ---
 
-*Trích sách Tự thuật của thánh Âu-tinh, giám mục.*
+**Trích sách Tự thuật của thánh Âu-tinh, giám mục.**
 
 Lạy Chúa, Chúa thật là cao cả, xứng muôn lời ca tụng, uy lực vô biên, trí tuệ khôn lường. Thế mà phàm nhân vẫn muốn ngợi khen Chúa, dầu nó chỉ là một loài bé nhỏ giữa muôn loài thụ tạo, đi đâu cũng phải mang thân phận phải chết, cũng mang theo dấu chứng về tội lỗi của mình và dấu chứng rõ ràng cho sự kiện này : Chúa chống lại kẻ kiêu căng. Phàm nhân vẫn muốn ngợi khen, dầu nó chỉ là một loài bé nhỏ giữa muôn loài thụ tạo. Chính Chúa hằng thúc đẩy con người biết mừng vui khi được ngợi khen Chúa : vì Chúa đã tạo dựng chúng con cho Chúa, nên bao lâu chúng con chưa được nghỉ yên trong Chúa, thì lòng chúng con những bồi hồi khắc khoải.
 

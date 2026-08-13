@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 2 Mùa Chay"
 order: 16
 ---
 
-*Trích khảo luận của thánh Hi-la-ri-ô, giám mục, về Thánh Vịnh.*
+**Trích khảo luận của thánh Hi-la-ri-ô, giám mục, về Thánh Vịnh.**
 
 Hạnh phúc thay bạn nào kính sợ Chúa, ăn ở theo đường lối của Người. Chúng ta nên lưu ý là mỗi lần nói về lòng kính sợ Chúa, Kinh Thánh không bao giờ trình bày riêng rẽ, như thể một mình nó đã đủ kiện toàn đức tin của chúng ta, nhưng luôn có những yếu tố tiềm ẩn hay phụ thuộc, giúp ta hiểu thế nào là kính sợ Thiên Chúa, và thế nào mới hoàn hảo, như vua Sa-lô-môn cho chúng ta biết trong sách Châm Ngôn : Nếu con cầu xin trí thông minh, và van nài ơn hiểu biết, nếu con tìm sự khôn ngoan như tìm bạc, và lùng kiếm như kho tàng, thì lúc đó con sẽ hiểu thế nào là kính sợ ĐỨC CHÚA.
 

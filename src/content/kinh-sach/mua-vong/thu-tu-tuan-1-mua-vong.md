@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 1 Mùa Vọng"
 order: 4
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Chúng ta biết có ba lần Chúa đến. Lần thứ ba ở giữa hai lần kia. Hai lần kia thật là rõ ràng, còn lần thứ ba ở giữa thì không. Lần đầu, Người xuất hiện trên mặt đất và ở với người phàm, như chính Người quả quyết, họ đã thấy và ghét Người. Còn lần cuối, mọi xác phàm sẽ nhìn thấy ơn cứu độ của Thiên Chúa chúng ta và chúng sẽ nhìn xem Đấng chúng đã đâm thâu. Lần giữa thì ẩn khuất, chỉ có những ai được tuyển chọn mới thấy Người trong lòng mình và linh hồn những người ấy được cứu độ. Vậy lần đầu, Người đến mang xác phàm và phận mỏng manh ; lần giữa, Người đến với thần khí và sức mạnh ; còn lần cuối, Người đến trong vinh quang và oai hùng.
 

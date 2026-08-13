@@ -15,7 +15,7 @@ Thánh nhân sinh tại Ranh, nước Pháp, năm 1651. Sau khi làm linh mục,
 
 </div>
 
-*Trích bài suy niệm của thánh Gio-an Bao-ti-xi-ta La-san.*
+**Trích bài suy niệm của thánh Gio-an Bao-ti-xi-ta La-san.**
 
 Theo thánh Phao-lô, Thiên Chúa đã đặt trong Hội Thánh một số người làm tông đồ, một số khác làm ngôn sứ và thầy dạy. Anh em hãy suy niệm điều ấy và sẽ đi đến xác tín rằng chính Thiên Chúa cũng đã đặt anh em trong nhiệm vụ hiện nay. Về điều này, thánh nhân đưa ra một bằng chứng : có nhiều việc phục vụ khác nhau và nhiều hoạt động khách nhau, nhưng chỉ có một Thánh Thần tỏ mình ra qua từng ân sủng khác nhau ấy vì ích chung, tức là ích lợi của Hội Thánh.
 

@@ -15,7 +15,7 @@ Lễ Suy Tôn Thánh Giá được cử hành sau Lễ Cung Hiến Thánh Đư�
 
 </div>
 
-*Trích bài giảng của thánh An-rê, giám mục Cơ-rê-ta.*
+**Trích bài giảng của thánh An-rê, giám mục Cơ-rê-ta.**
 
 Hôm nay, chúng ta mừng lễ thánh giá ; thánh giá đã xua tan bóng tối và đem lại ánh sáng. Chúng ta mừng lễ thánh giá, và cùng với Đấng bị đóng đinh, chúng ta được đưa lên cao. Vì thế, chúng ta hãy từ bỏ trần gian và tội lỗi để được những của trên trời. Có được thánh giá là điều lớn lao biết mấy ! Ai có thánh giá là có một kho tàng. Tôi vừa dùng chữ kho tàng để chỉ điều người ta gọi, -và sự thực là như thế-, đó là của tốt nhất và đẹp nhất trong mọi của cải, vì trong đó, nhờ đó mà tất cả điều cốt yếu cho ơn cứu độ chúng ta được tạo lập và phục hồi.
 

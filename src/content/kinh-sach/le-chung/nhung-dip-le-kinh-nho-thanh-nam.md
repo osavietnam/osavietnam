@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Nam"
 order: 17
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về sách Công Vụ Tông Đồ.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về sách Công Vụ Tông Đồ.**
 
 Không có gì lãnh đạm hơn một Ki-tô hữu không lo lắng đến ơn cứu độ của tha nhân.
 

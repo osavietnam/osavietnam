@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 1 Mùa Chay"
 order: 11
 ---
 
-*Trích Hiến chế mục vụ Vui Mừng và Hy Vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui Mừng và Hy Vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.**
 
 Thế giới ngày nay tỏ ra vừa mạnh lại vừa yếu, có khả năng thực hiện cả những điều cao đẹp nhất lẫn những chuyện xấu xa nhất. Trước mặt nó là con đường dẫn tới tự do hay nô lệ, tiến bộ hay thoái hoá, huynh đệ hay hận thù. Đàng khác, con người cũng ý thức rằng mình phải định hướng cho đúng cho những năng lực chính mình đã khởi động, vì chúng có thể phục vụ chính mình đã khởi động, vì chúng có thể phục vụ mình, nhưng cũng có thể đè bẹp mình. Vì thế con người tự đặt cho mình những câu hỏi.
 

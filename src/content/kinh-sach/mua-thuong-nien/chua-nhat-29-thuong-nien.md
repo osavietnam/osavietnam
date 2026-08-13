@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 29 Thường Niên"
 order: 197
 ---
 
-*Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.*
+**Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.**
 
 Tại sao chúng ta để cho lòng trí bị phân tán vì nhiều chuyện, và tìm xem phải cầu xin điều gì, bởi sợ rằng mình cầu xin chẳng nên ? Tại sao không dùng lời Thánh Vịnh mà nói : Một điều tôi kiếm tôi xin, là luôn được ở trong đền Chúa tôi, mọi ngày trong suốt cuộc đời, để chiêm ngưỡng Chúa tuyệt vời cao sang, ngắm xem thánh điện huy hoàng ? Quả vậy, ở đó mọi ngày diễn ra không phải do ngày này đến, rồi ngày kia qua, cũng không phải là ngày này bắt đầu là ngày kia kết thúc ; mọi ngày vô tận đều xuất hiện cùng một lúc, tại đây chính đời sống mà mọi ngày đó tuỳ thuộc cũng không có tận cùng.
 

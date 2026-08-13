@@ -9,7 +9,7 @@ rank: "none"
 order: 7
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Con Thiên Chúa uy nghi cao cả đã chẳng coi khinh tình trạng trẻ thơ. Với thời gian, trẻ thơ đã lớn, đã đạt tới mức trưởng thành. Sau khi Người đạt được chiến thắng hoàn toàn nhờ cuộc thương khó và phục sinh, thì tất cả hành động của kiếp người hèn hạ của Người đã chấp nhận vì yêu thương chúng ta, đã trở thành quá khứ. Tuy nhiên, ngày lễ hôm nay nhắc lại cho chúng ta những biến cố đầu tiên của Đức Giê-su sinh làm con Đức Trinh Nữ Ma-ri-a. Khi mừng kính ngày giáng sinh của Đấng Cứu Thế, chúng ta cũng mừng chính nguồn gốc của mình.
 

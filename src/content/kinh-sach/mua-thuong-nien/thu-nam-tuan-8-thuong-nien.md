@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 8 Thường Niên"
 order: 54
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Chúng ta phải hiểu luật Chúa là gì, nếu không phải là đức ái, vì nhờ đức ái, tâm trí chúng ta luôn luôn nhớ đến những điều răn phải đem ra thực hành để được sống ? Quả vậy, có lời của Đấng là Chân Lý phán về luật ấy rằng : Đây là điều răn của Thầy : Anh em hãy yêu thương nhau. Thánh Phao-lô cũng dạy : Yêu thương là chu toàn Lề Luật. Người lại nói thêm : Anh em hãy mang gánh nặng cho nhau, như vậy là anh em chu toàn luật Đức Ki-tô. Thật thế, không có gì diễn tả luật Đức Ki-tô cách thích đáng hơn đức ái ; luật ấy, chúng ta giữ trọn được khi chúng ta lấy tình thương mà mang gánh nặng cho anh em mình.
 

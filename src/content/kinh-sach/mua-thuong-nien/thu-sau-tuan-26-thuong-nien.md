@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 26 Thường Niên"
 order: 181
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về thư gửi tín hữu Phi-líp-phê.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về thư gửi tín hữu Phi-líp-phê.**
 
 Anh em thân mến, vì muốn cứu độ chúng ta, nên Thiên Chúa giàu lòng nhân từ đã kêu gọi chúng tới vui hưởng hạnh phúc muôn đời, như thánh Phao-lô nói trong đoạn thư anh em vừa nghe : Anh em hãy vui lên trong Chúa. Các sự vui thú đời này đưa tới buồn sầu muôn thuở, còn các niềm vui trong thánh ý Chúa, thì dẫn đưa những ai kiên trì trong niềm vui ấy, tới nguồn hoan lạc tồn tại muôn đời. Vì thế, thánh Phao-lô tông đồ nói : Tôi nhắc lại : vui lên anh em !
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 25 Thường Niên"
 order: 173
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Ta sẽ đem chiên ra khỏi các dân, tập họp chúng lại từ các nước và đưa chúng vào đất của chúng. Ta sẽ chăn dắt chúng trên các núi Ít-ra-en. Chúa đã lập nên các núi Ít-ra-en, đó là các tác giả Kinh Thánh. Anh em hãy ăn trong đồng cỏ đó, để được chăn nuôi an toàn. Nghe được điều gì trong Kinh Thánh, anh em hãy thưởng thức cho kỹ ; còn điều gì ở ngoài Kinh Thánh, hãy vứt bỏ đi. Để khỏi lạc lõng trong sương mù, hãy nghe tiếng của người mục tử. Hãy đến tập họp tại các núi Kinh Thánh. Ở đây, tâm hồn anh em được vui sướng, ở đây không có gì là độc hại, bất lợi cho sức khoẻ ; đây là những đồng cỏ xanh tươi màu mỡ. Hỡi anh em là những con chiên lành mạnh ; hỡi các con chiên lành mạnh, cứ ăn cỏ trên các núi Ít-ra-en.
 

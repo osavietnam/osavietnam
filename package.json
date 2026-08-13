@@ -1,27 +1,27 @@
 {
   "name": "osavietnam",
   "version": "1.0.0",
-  "description": "Website OSA Việt Nam — Astro 5, deployable to GitHub Pages",
+  "description": "Website OSA Việt Nam — Astro 5",
   "private": true,
   "homepage": "https://osavietnam.github.io/osavietnam/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/osavietnam/osavietnam.git"
   },
-  "author": "osavietnam",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "astro dev --host 0.0.0.0",
+    "admin": "node scripts/admin-server.mjs",
+    "build": "astro build",
+    "build:github": "node scripts/build-github-pages.mjs",
+    "start": "astro build && node ./dist/server/entry.mjs",
+    "preview": "astro preview --host 0.0.0.0",
+    "preview:github": "node scripts/local-preview.mjs"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "type": "module",
-  "scripts": {
-    "dev": "astro dev --host 0.0.0.0",
-    "build": "node scripts/build-github-pages.mjs",
-    "build:github": "node scripts/build-github-pages.mjs",
-    "build:server": "astro build --config astro.config.mjs",
-    "preview": "astro preview --config astro.config.github.mjs --host 0.0.0.0",
-    "start": "npm run build:server && node ./dist/server/entry.mjs",
-    "admin": "node scripts/admin-server.mjs",
-    "audit:source": "node scripts/audit-deploy-source.mjs",
-    "test": "npm run audit:source"
-  },
   "engines": {
     "node": ">=22.12.0 <25",
     "npm": ">=10 <12"
@@ -36,6 +36,5 @@
   },
   "devDependencies": {
     "playwright": "^1.61.1"
-  },
-  "keywords": []
+  }
 }

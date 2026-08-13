@@ -1,51 +1,163 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import CategoryArticleGallery from '../components/CategoryArticleGallery.astro';
 import pageHeaders from '../data/page-headers.json';
-import popeLeoBanner from '../../banner-Pope-Leo.png';
+import saintIndexRaw from '../data/saint-index.json';
+import { BANNERS, type BannerVariant } from '../lib/banners';
 
 const ph = (pageHeaders as Record<string, Record<string, string>>)['on-goi'];
+const homeBannerRaw = BANNERS.home;
+const homeBanner = (Array.isArray(homeBannerRaw) ? homeBannerRaw[0] : homeBannerRaw) as BannerVariant;
+const homeQuoteText = homeBanner.quoteText?.trim() || 'Đồng Tâm Nhất Trí Hướng Về Thiên Chúa';
+const homeQuoteWords = homeQuoteText.split(/\s+/).filter(Boolean);
+const homeQuoteBreak = Math.ceil(homeQuoteWords.length / 2);
+const homeQuoteLines = [homeQuoteWords.slice(0, homeQuoteBreak), homeQuoteWords.slice(homeQuoteBreak)].filter((line) => line.length);
 
-const library = [
+const allArticles = await getCollection('bai-viet', ({ data }) => !data.draft);
+const byDate = (a: typeof allArticles[number], b: typeof allArticles[number]) =>
+  (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0)
+  || a.data.title.localeCompare(b.data.title, 'vi');
+
+const editorialArticles = allArticles
+  .filter(({ id, data }) => (id.startsWith('linh-dao/') || id.startsWith('triet-hoc/') || id.startsWith('than-hoc/')) && !data.translationOf && data.language !== 'en')
+  .sort(byDate);
+
+const articleHref = (id: string) => id.startsWith('linh-dao/')
+  ? `/linh-dao/bai-viet/${id.replace(/^linh-dao\//, '')}/`
+  : `/bai-viet/${id}/`;
+
+const articleDomain = (article: typeof allArticles[number]) => {
+  if (article.id.startsWith('linh-dao/')) return article.data.category ?? 'Linh Đạo';
+  return article.data.subcategory ?? article.data.category ?? 'Bài Viết';
+};
+
+const articleSummary = (article: typeof allArticles[number]) => ({
+  id: article.id,
+  title: article.data.title,
+  href: articleHref(article.id),
+  category: articleDomain(article),
+  excerpt: article.data.excerpt,
+  author: article.data.author,
+  image: article.data.image ?? article.data.heroImage,
+  date: article.data.date,
+});
+
+const featuredEditorial = editorialArticles.find(({ data }) => data.featured) ?? editorialArticles[0];
+const homeEditorialArticles = featuredEditorial
+  ? [featuredEditorial, ...editorialArticles.filter(({ id }) => id !== featuredEditorial.id)].slice(0, 12)
+  : [];
+const homeEditorialGroups = homeEditorialArticles.map((article) => ({
+  category: articleDomain(article),
+  articles: [articleSummary(article)],
+}));
+
+const communityPosts = allArticles
+  .filter(({ id }) => id.startsWith('sinh-hoat-cong-doan/'))
+  .sort(byDate)
+  .slice(0, 2);
+
+const communityImage = (index: number) => `/images/on-goi/demo-${(index % 3) + 1}.jpg`;
+
+const saintByDate: Record<string, { name: string; rank: string; bioFile: string }[]> = {};
+for (const month of (saintIndexRaw as any).months) {
+  for (const saint of month.saints) {
+    const key = `${String(month.monthNumber).padStart(2, '0')}-${String(saint.day).padStart(2, '0')}`;
+    if (!saintByDate[key]) saintByDate[key] = [];
+    saintByDate[key].push({ name: saint.name, rank: saint.rank, bioFile: saint.bioFile ?? '' });
+  }
+}
+
+const dailyQuoteGroups = [
   {
     key: 'rule',
-    label: 'Nền tảng đời sống',
-    title: 'Tu Luật',
-    text: 'Mục đích chính yếu mà anh em quy tụ cùng nhau là để sống hòa hợp dưới một mái nhà, và đồng tâm nhất trí với nhau hướng về Thiên Chúa.',
-    cite: 'Tu Luật, Chương I, số 3',
-    href: '/tu-luat/',
+    label: 'Tu Luật',
+    href: '/tu-luat/#tu-luat-3',
+    quotes: [
+      {
+        text: 'Mục đích chính yếu mà anh em quy tụ cùng nhau là để sống hòa hợp dưới một mái nhà, và đồng tâm nhất trí với nhau hướng về Thiên Chúa.',
+        cite: 'Thánh Augustinô · <em>Tu Luật</em>, 3',
+      },
+      {
+        text: 'Anh em thân mến, trên hết mọi sự hãy yêu mến Thiên Chúa và rồi yêu thương tha nhân.',
+        cite: 'Thánh Augustinô · <em>Tu Luật</em>, 1',
+      },
+      {
+        text: 'Khi cầu nguyện cùng Thiên Chúa bằng thánh vịnh và thánh ca, anh em hãy suy niệm trong lòng điều mà môi miệng cất lên.',
+        cite: 'Thánh Augustinô · <em>Tu Luật</em>, 12',
+      },
+    ],
   },
   {
     key: 'constitution',
-    label: 'Căn tính Hội Dòng',
-    title: 'Hiến Chương',
-    text: 'Hiệp nhất hài hòa với nhau trong tình huynh đệ và tình bạn thiêng liêng, tìm kiếm và thờ lạy Thiên Chúa, và làm việc để phục vụ dân Ngài.',
-    cite: 'Hiến chương, số 13',
-    href: '/hien-chuong/',
+    label: 'Hiến Pháp',
+    href: '/hien-phap/',
+    quotes: [
+      {
+        text: 'Mục đích của Hội Dòng là hiệp nhất hài hòa với nhau trong tình huynh đệ và tình bạn thiêng liêng, tìm kiếm và thờ lạy Thiên Chúa, và làm việc để phục vụ dân Ngài.',
+        cite: '<em>Hiến Pháp</em>, 13',
+      },
+      {
+        text: 'Cộng đoàn là một cái trục mà quanh nó đời sống tu trì của Dòng Thánh Augustinô quay quanh.',
+        cite: '<em>Hiến Pháp</em>, 26',
+      },
+      {
+        text: 'Tất cả chúng ta là các tông đồ, vì tất cả chúng ta đều cầu nguyện, làm việc và hỗ trợ lẫn nhau.',
+        cite: '<em>Hiến Pháp</em>, 36',
+      },
+    ],
   },
   {
     key: 'ratio',
-    label: 'Hành trình đào tạo',
-    title: 'Ratio Institutionis',
-    text: 'Chương trình đào tạo của Dòng Thánh Augustinô trong tiến trình trưởng thành nhân bản, thiêng liêng và tông đồ.',
-    cite: 'Dòng Thánh Augustinô',
+    label: 'Ratio Institutionis',
     href: '/ratio/',
+    quotes: [
+      {
+        text: 'Đời sống cộng đoàn tự bản thân nó là một giá trị Tin Mừng chính yếu, mời gọi chúng ta dấn thân trọn vẹn.',
+        cite: '<em>Ratio Institutionis</em>, 42',
+      },
+      {
+        text: 'Khi anh em bắt đầu yêu thương, là lúc Thiên Chúa bắt đầu ngự trong anh em.',
+        cite: '<em>Ratio Institutionis</em>, 43',
+      },
+      {
+        text: 'Xây dựng một cộng đoàn tốt lành có nghĩa là thực hành giới răn mến Chúa và yêu người.',
+        cite: '<em>Ratio Institutionis</em>, 40',
+      },
+    ],
   },
   {
     key: 'confessions',
-    label: 'Hành trình nội tâm',
-    title: 'Tự Thuật',
-    text: 'Lạy Chúa, Chúa tạo dựng chúng con cho Chúa, và tâm hồn chúng con khắc khoải cho đến khi được nghỉ ngơi trong Chúa.',
-    cite: 'Thánh Augustinô, Tự Thuật, I, 1',
-    href: '/tu-thuat/',
+    label: 'Tự Thuật',
+    href: '/tu-thuat/?book=quyen-1',
+    quotes: [
+      {
+        text: 'Lạy Chúa, Chúa tạo dựng chúng con cho Chúa, và tâm hồn chúng con khắc khoải cho đến khi được nghỉ ngơi trong Chúa.',
+        cite: 'Thánh Augustinô · <em>Tự Thuật</em>, I, 1',
+      },
+      {
+        text: 'Căn nhà linh hồn con quá chật hẹp, để Chúa ngự đến: xin Chúa hãy làm cho nó rộng ra.',
+        cite: 'Thánh Augustinô · <em>Tự Thuật</em>, I, 5',
+      },
+      {
+        text: 'Con đã yêu mến Chúa quá muộn, ôi Đấng tốt đẹp rất cổ kính và rất tân kỳ! Con đã yêu mến Chúa quá muộn!',
+        cite: 'Thánh Augustinô · <em>Tự Thuật</em>, X, 27',
+      },
+      {
+        text: 'Ở đâu con tìm thấy chân lý, là ở đấy con tìm thấy Chúa con, là chính chân lý.',
+        cite: 'Thánh Augustinô · <em>Tự Thuật</em>, X, 24',
+      },
+    ],
   },
 ];
 ---
 
 <BaseLayout title={null} bodyClass="page-home no-sidebar" banner={null}>
+  {false && (
+  <Fragment>
   <div slot="full-bleed" class="og-banner og-slider">
-    <img src={popeLeoBanner.src} alt="" class="og-slide active" loading="eager" />
-    <img src="/images/on-goi/demo-1.jpg" alt="" class="og-slide" loading="lazy" />
-    <img src="/images/on-goi/demo-2.jpg" alt="" class="og-slide" loading="lazy" />
+    <img src={homeBanner.imageUrl} alt={homeBanner.altText ?? ''} class="og-slide active" loading="eager" />
     <header class="og-masthead">
       <div class="og-masthead-head">
         <div class="masthead-identity">
@@ -60,107 +172,475 @@ const library = [
     </header>
   </div>
 
-  <main class="home-page">
-    <section class="home-construction cs-wrap" aria-label="Trang chủ đang được biên soạn">
-      <div class="cs-emblem-wrap">
-        <img src="/images/emblem.svg" alt="" class="cs-emblem cs-emblem-dark" aria-hidden="true" />
-        <img src="/images/emblem-color-transparent.png" alt="" class="cs-emblem cs-emblem-light" aria-hidden="true" />
+  <main class="home-hub">
+    <section class="home-gateways" aria-label="Gia đình Augustinô" data-reveal>
+      <div class="home-gateway-grid">
+        <a class="home-gateway home-gateway-augustine" href="/thanh-au-tinh/">
+          <img src="/images/banners/banner-triet-hoc.jpg" alt="Thánh Augustinô thành Hippô" loading="lazy" />
+          <span class="home-gateway-copy">
+            <small>Tổ Phụ Dòng</small>
+            <strong>Thánh Augustinô</strong>
+            <em>Cuộc đời, tác phẩm và gia sản tư tưởng</em>
+          </span>
+        </a>
+        <a class="home-gateway home-gateway-order" href="/lich-su-dong/">
+          <img src="/images/on-goi/banner.avif" alt="Dòng Thánh Augustinô" loading="lazy" />
+          <span class="home-gateway-copy">
+            <small>Ordo Sancti Augustini</small>
+            <strong>Dòng Thánh Augustinô</strong>
+            <em>Lịch sử, đặc sủng và sứ vụ</em>
+          </span>
+        </a>
+        <a class="home-gateway home-gateway-vocation" href="/on-goi/">
+          <img src="/images/on-goi/demo-3.jpg" alt="Ơn gọi Augustinô" loading="lazy" />
+          <span class="home-gateway-copy">
+            <small>Đến Và Xem</small>
+            <strong>Ơn Gọi Augustinô</strong>
+            <em>Cùng sống, cùng tìm kiếm, cùng phục vụ</em>
+            <span class="home-gateway-cta">Khám phá ơn gọi <i aria-hidden="true">→</i></span>
+          </span>
+        </a>
       </div>
-      <div class="cs-ornament" aria-hidden="true">
-        <span class="cs-line"></span><span class="cs-star">✦</span><span class="cs-line"></span>
-      </div>
-      <p class="cs-badge">Đang được biên soạn</p>
     </section>
-    <section class="home-today" aria-labelledby="home-today-title" data-reveal>
-      <div class="home-today-date" aria-hidden="true">
+
+    <div class="home-daily-row">
+      <section class="home-liturgy" aria-labelledby="home-liturgy-title" data-reveal>
+      <div class="home-liturgy-date" aria-hidden="true">
         <strong id="homeTodayDay">—</strong>
         <span id="homeTodayMonth">Hôm nay</span>
       </div>
-      <div class="home-today-copy">
-        <p class="home-kicker">Nhịp sống phụng vụ</p>
-        <h2 id="home-today-title">Hôm nay trong Hội Thánh</h2>
-        <p id="homeTodayLiturgy">Đang tải lịch phụng vụ…</p>
+      <div class="home-liturgy-main">
+        <div class="home-liturgy-heading">
+          <div>
+            <p class="home-kicker">Phụng Vụ Hôm Nay</p>
+            <h2 id="home-liturgy-title">Hôm Nay Trong Hội Thánh</h2>
+          </div>
+          <div class="home-liturgy-legend" aria-label="Ký hiệu lịch phụng vụ">
+            <span class="home-calendar-key home-calendar-key-general"><i aria-hidden="true"></i>Lịch Chung</span>
+            <span class="home-calendar-key home-calendar-key-order"><i aria-hidden="true"></i>Lịch Nhà Dòng</span>
+          </div>
+        </div>
+        <div class="home-liturgy-content" id="homeLiturgyContent" aria-live="polite">
+          <p class="home-liturgy-loading">Đang tải lịch phụng vụ…</p>
+        </div>
       </div>
-      <div class="home-today-actions">
-        <a href="/lich-phung-vu/">Xem lịch <span aria-hidden="true">↗</span></a>
-        <a href="/kinh-sach/">Bài đọc Kinh sách <span aria-hidden="true">↗</span></a>
+      <div class="home-liturgy-actions">
+        <a href="/lich-phung-vu/">Mở Lịch Phụng Vụ <span aria-hidden="true">→</span></a>
+        <a href="/kinh-sach/">Bài Đọc Kinh Sách <span aria-hidden="true">→</span></a>
       </div>
-    </section>
+      </section>
 
-    <section class="home-opening" data-reveal>
-      <p class="home-kicker">Một mái nhà · Một tâm hồn</p>
-      <h2>Cùng nhau hướng về Thiên Chúa</h2>
-      <p>Không gian đọc và cầu nguyện của Cộng đoàn Augustinô Việt Nam — nơi nhịp sống phụng vụ và gia sản của thánh Augustinô đồng hành trong đời sống hôm nay.</p>
-    </section>
-
-    <section class="home-daily" aria-label="Lịch phụng vụ và Kinh sách">
-      <a class="home-daily-card home-calendar-card" href="/lich-phung-vu/" data-reveal>
-        <div class="home-card-visual">
-          <span class="home-card-number" id="homeCalendarNumber">24</span>
-          <span class="home-card-month" id="homeCalendarMonth">Tháng 7</span>
-          <i aria-hidden="true"></i>
+      <section class="home-daily-quotes bv-quotes" aria-labelledby="home-daily-title" data-home-daily-quotes data-reveal>
+        <header class="idx-section-heading home-section-heading">
+          <h2 id="home-daily-title">Lời Sống Mỗi Ngày</h2>
+        </header>
+        <div class="home-daily-grid">
+          {dailyQuoteGroups.map((group, index) => (
+            <a
+              class:list={["home-daily-quote", "bvq-slide", index === 0 && "active"]}
+              href={group.href}
+              data-home-quote-group={group.key}
+              data-home-daily-slide
+              style={`--quote-order:${index}`}
+            >
+              <span class="home-daily-source"><small>0{index + 1}</small><b>{group.label}</b></span>
+              <blockquote class="bvq-text" data-home-quote-text>{group.quotes[0].text}</blockquote>
+              <cite class="bvq-cite" data-home-quote-cite set:html={group.quotes[0].cite}></cite>
+              <span class="home-daily-open">Đọc tiếp <i aria-hidden="true">→</i></span>
+            </a>
+          ))}
         </div>
-        <div class="home-card-copy">
-          <p class="home-kicker">Năm phụng vụ</p>
-          <h2>Lịch Phụng Vụ</h2>
-          <p>Theo dõi ngày lễ, mùa phụng vụ và các ngày kính nhớ của Hội Thánh và Dòng Thánh Augustinô.</p>
-          <span class="home-text-link">Mở lịch hôm nay <b aria-hidden="true">↗</b></span>
-        </div>
-      </a>
+        <nav class="home-daily-dots bvq-dots" aria-label="Chọn nguồn trích dẫn">
+          {dailyQuoteGroups.map((group, index) => (
+            <button
+              class:list={["bvq-dot", index === 0 && "active"]}
+              type="button"
+              data-home-daily-index={String(index)}
+              aria-label={`Xem trích dẫn ${group.label}`}
+              aria-pressed={index === 0 ? "true" : "false"}
+            ></button>
+          ))}
+        </nav>
+      </section>
+    </div>
 
-      <a class="home-daily-card home-readings-card" href="/kinh-sach/" data-reveal>
-        <figure><img src="/images/banners/TolleLege.webp" alt="Tolle Lege — Hãy cầm lấy mà đọc" loading="lazy" /></figure>
-        <div class="home-card-copy">
-          <p class="home-kicker">Giờ Kinh Phụng Vụ</p>
-          <h2>Bài Đọc Kinh Sách</h2>
-          <p>Kho bài đọc theo mùa, lễ chung và lễ riêng, với các bản văn của thánh Augustinô và các Giáo phụ.</p>
-          <span class="home-text-link">Bắt đầu đọc <b aria-hidden="true">↗</b></span>
-        </div>
-      </a>
-    </section>
+    {homeEditorialGroups.length > 0 && (
+      <section class="home-editorial" aria-label="Bài viết mới" data-reveal>
+        <CategoryArticleGallery
+          groups={homeEditorialGroups}
+          rowTitle="Bài Viết Mới"
+          idPrefix="home-editorial"
+          showTitles
+          showAuthors
+          showCategories
+          showFilters={false}
+          showAuthorFilters={false}
+        />
+        <nav class="home-editorial-links" aria-label="Các thư viện bài viết">
+          <a href="/linh-dao/">Linh Đạo <span aria-hidden="true">→</span></a>
+          <a href="/bai-viet/">Triết – Thần <span aria-hidden="true">→</span></a>
+        </nav>
+      </section>
+    )}
 
-    <section class="home-library" aria-labelledby="home-library-title">
-      <header class="home-section-head" data-reveal>
-        <div><p class="home-kicker">Gia sản Augustinô</p><h2 id="home-library-title">Đọc · Suy niệm · Sống</h2></div>
-        <p>Bốn lối vào đời sống, căn tính và hành trình nội tâm của gia đình Augustinô.</p>
+    <section class="home-news" aria-labelledby="home-news-title" data-reveal>
+      <header class="idx-section-heading home-section-heading">
+        <h2 id="home-news-title">Tin Tức</h2>
+        <a href="/tin-tuc/">Xem tất cả <span aria-hidden="true">→</span></a>
       </header>
-      <div class="home-library-grid">
-        {library.map((item, index) => (
-          <a class={`home-library-card home-library-${item.key}${index === 0 ? ' is-featured' : ''}`} href={item.href} data-reveal>
-            <div class="home-library-top">
-              <span>{item.label}</span>
-              <i aria-hidden="true">↗</i>
+      <div class="home-news-grid">
+        <article class="home-news-source">
+          <header>
+            <span>Ordo Sancti Augustini</span>
+            <h3>Trung Ương Dòng</h3>
+          </header>
+          <div class="home-news-frame-shell">
+            <iframe
+              class="home-news-frame"
+              data-home-news-frame
+              data-news-open-external
+              data-news-base="/api/central-news.html"
+              title="Tin tức Trung Ương Dòng"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <a class="home-source-link" href="/tin-tuc/#journal-live-title">Mở nguồn tin <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="home-news-source">
+          <header>
+            <span>Province of Australasia</span>
+            <h3>Tỉnh Dòng</h3>
+          </header>
+          <div class="home-news-frame-shell">
+            <iframe
+              class="home-news-frame"
+              data-home-news-frame
+              data-news-open-external
+              data-news-base="/api/province-news.html"
+              title="Tin tức Tỉnh Dòng Úc Châu"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <a class="home-source-link" href="/tin-tuc/#journal-province-title">Mở nguồn tin <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="home-news-source home-community-news">
+          <header>
+            <span>OSA Việt Nam</span>
+            <h3>Cộng Đoàn</h3>
+          </header>
+          <div class="home-news-frame-shell home-community-shell">
+            <div class="home-community-list">
+              {communityPosts.map((post, index) => (
+                <ArticleCard
+                  href={`/tin-tuc/${post.id}/`}
+                  title={post.data.title}
+                  category="Cộng Đoàn"
+                  excerpt={post.data.excerpt}
+                  date={post.data.date}
+                  image={post.data.image ?? post.data.heroImage ?? communityImage(index)}
+                />
+              ))}
             </div>
-            <h3>{item.title}</h3>
-            <blockquote>“{item.text}”</blockquote>
-            <cite>— {item.cite}</cite>
-          </a>
-        ))}
+          </div>
+          <a class="home-source-link" href="/tin-tuc/">Xem sinh hoạt cộng đoàn <span aria-hidden="true">→</span></a>
+        </article>
       </div>
     </section>
 
-    <section class="home-vocation" data-reveal>
-      <figure><img src="/images/on-goi/demo-3.jpg" alt="Đời sống cộng đoàn Augustinô" loading="lazy" /></figure>
-      <div>
-        <p class="home-kicker">Đến và xem</p>
-        <h2>Một đời sống được sẻ chia</h2>
-        <p>Tìm hiểu đời sống cộng đoàn, linh đạo và hành trình phân định ơn gọi trong Dòng Thánh Augustinô.</p>
-        <a href="/on-goi/">Khám phá ơn gọi <span aria-hidden="true">↗</span></a>
+  </main>
+  </Fragment>
+  )}
+
+  <div
+    slot="full-bleed"
+    class="og-banner og-slider"
+    data-banner-editor-container
+    data-banner-key="home"
+  >
+    <button type="button" class="banner-inline-edit" data-banner-inline-edit hidden aria-label="Sửa banner trang chủ" title="Sửa banner trang chủ">✎</button>
+    <div class="banner-variant home-banner-variant" data-vi="0" data-default>
+      <img src={homeBanner.imageUrl} alt={homeBanner.altText ?? ''} class="og-slide active" loading="eager" />
+    </div>
+    <header class="og-masthead">
+      <div class="og-masthead-head">
+        <div class="masthead-identity">
+          <p class="og-eyebrow" data-oe-target="ph" data-oe="eyebrow" data-oe-html="true" set:html={ph.eyebrow}></p>
+          <img src="/images/emblem.svg" alt="" class="og-masthead-emblem" aria-hidden="true" />
+        </div>
+        <h1 class="og-title" aria-label={homeQuoteText} data-banner-field="quoteText" data-banner-vi="0">
+          {homeQuoteLines.map((line, lineIndex) => (
+            <span class="home-title-line">
+              {line.map((word, wordIndex) => (
+                <span
+                  class="home-title-word"
+                  style={`--word-delay:${((lineIndex * homeQuoteBreak + wordIndex) * .09).toFixed(2)}s`}
+                >{word}</span>
+              ))}
+            </span>
+          ))}
+        </h1>
+        {homeBanner.quoteCite && (
+          <cite class="og-banner-cite" data-banner-field="quoteCite" data-banner-vi="0" set:html={homeBanner.quoteCite}></cite>
+        )}
+      </div>
+    </header>
+  </div>
+
+  {false && (
+  <main class="home-editorial">
+    <section class="ed-today" aria-labelledby="ed-today-title">
+      <header class="ed-today-head">
+        <div>
+          <p class="ed-kicker">Nhịp Sống Mỗi Ngày</p>
+          <h2 id="ed-today-title">Hôm Nay</h2>
+        </div>
+        <time class="ed-date" aria-label="Ngày hôm nay">
+          <strong id="homeTodayDay">—</strong>
+          <span id="homeTodayMonth">Hôm nay</span>
+        </time>
+      </header>
+
+      <div class="ed-today-grid">
+        <article class="ed-liturgy" aria-labelledby="ed-liturgy-title">
+          <header class="ed-column-head">
+            <span aria-hidden="true">01</span>
+            <div>
+              <small>Phụng Vụ</small>
+              <h3 id="ed-liturgy-title">Trong Hội Thánh</h3>
+            </div>
+          </header>
+          <div class="ed-liturgy-content" id="homeLiturgyContent" aria-live="polite">
+            <p>Đang tải lịch phụng vụ…</p>
+          </div>
+          <nav class="ed-links" aria-label="Liên kết phụng vụ">
+            <a href="/lich-phung-vu/">Lịch Phụng Vụ <span aria-hidden="true">↗</span></a>
+            <a href="/kinh-sach/">Bài Đọc Kinh Sách <span aria-hidden="true">↗</span></a>
+          </nav>
+        </article>
+
+        <article class="ed-daily" aria-labelledby="ed-daily-title" data-home-daily-quotes>
+          <header class="ed-column-head">
+            <span aria-hidden="true">02</span>
+            <div>
+              <small>Trích Dẫn</small>
+              <h3 id="ed-daily-title">Lời Sống</h3>
+            </div>
+          </header>
+          <div class="ed-quote-stage">
+            {dailyQuoteGroups.map((group, index) => (
+              <a
+                class:list={["ed-quote-slide", index === 0 && "active"]}
+                href={group.href}
+                data-home-quote-group={group.key}
+                data-home-daily-slide
+              >
+                <span class="ed-quote-source">{group.label}</span>
+                <blockquote data-home-quote-text>{group.quotes[0].text}</blockquote>
+                <cite data-home-quote-cite set:html={group.quotes[0].cite}></cite>
+                <span class="ed-read-link">Đọc bản văn <i aria-hidden="true">↗</i></span>
+              </a>
+            ))}
+          </div>
+          <nav class="ed-quote-tabs" aria-label="Chọn nguồn trích dẫn">
+            {dailyQuoteGroups.map((group, index) => (
+              <button
+                class:list={[index === 0 && "active"]}
+                type="button"
+                data-home-daily-index={String(index)}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >{group.label}</button>
+            ))}
+          </nav>
+        </article>
       </div>
     </section>
   </main>
+  )}
+
+  {false && (
+  <Fragment>
+  <section slot="full-bleed" class="hm-hero" aria-labelledby="hm-hero-title">
+    <img src={popeLeoBanner.src} alt="Cộng đoàn Dòng Thánh Augustinô" loading="eager" />
+    <div class="hm-hero-shade" aria-hidden="true"></div>
+    <div class="hm-hero-content">
+      <p class="hm-eyebrow">Dòng Thánh Augustinô · Việt Nam</p>
+      <h1 id="hm-hero-title">Đồng Tâm Nhất Trí<br /><span>Hướng Về Thiên Chúa</span></h1>
+      <p class="hm-hero-lead">Cùng sống, cùng tìm kiếm chân lý và cùng phục vụ trong tình hiệp nhất.</p>
+      <nav class="hm-hero-actions" aria-label="Lối vào chính">
+        <a class="hm-button hm-button-primary" href="/on-goi/">Khám phá ơn gọi</a>
+        <a class="hm-button hm-button-quiet" href="/lich-su-dong/">Tìm hiểu Hội Dòng <span aria-hidden="true">→</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <main class="hm-main">
+    <nav class="hm-portals" aria-label="Khám phá Dòng Thánh Augustinô">
+      <a class="hm-portal" href="/thanh-au-tinh/">
+        <img src="/images/banners/banner-triet-hoc.jpg" alt="Thánh Augustinô thành Hippô" loading="lazy" />
+        <span class="hm-portal-overlay" aria-hidden="true"></span>
+        <span class="hm-portal-copy">
+          <small>Tổ Phụ Dòng</small>
+          <strong>Thánh Augustinô</strong>
+          <em>Cuộc đời, tác phẩm và tư tưởng</em>
+        </span>
+      </a>
+      <a class="hm-portal" href="/lich-su-dong/">
+        <img src="/images/on-goi/banner.avif" alt="Dòng Thánh Augustinô" loading="lazy" />
+        <span class="hm-portal-overlay" aria-hidden="true"></span>
+        <span class="hm-portal-copy">
+          <small>Ordo Sancti Augustini</small>
+          <strong>Dòng Thánh Augustinô</strong>
+          <em>Lịch sử, đặc sủng và sứ vụ</em>
+        </span>
+      </a>
+      <a class="hm-portal" href="/on-goi/">
+        <img src="/images/on-goi/demo-3.jpg" alt="Ơn gọi Augustinô" loading="lazy" />
+        <span class="hm-portal-overlay" aria-hidden="true"></span>
+        <span class="hm-portal-copy">
+          <small>Đến Và Xem</small>
+          <strong>Ơn Gọi Augustinô</strong>
+          <em>Cùng sống, cùng tìm kiếm, cùng phục vụ</em>
+        </span>
+      </a>
+    </nav>
+
+    <section class="hm-today" aria-label="Phụng vụ và lời sống mỗi ngày">
+      <article class="hm-panel hm-liturgy" aria-labelledby="home-liturgy-title">
+        <header class="hm-panel-head">
+          <div>
+            <p class="hm-label">Phụng Vụ Hôm Nay</p>
+            <h2 id="home-liturgy-title">Hôm Nay Trong Hội Thánh</h2>
+          </div>
+          <time class="hm-date" aria-label="Ngày hôm nay">
+            <strong id="homeTodayDay">—</strong>
+            <span id="homeTodayMonth">Hôm nay</span>
+          </time>
+        </header>
+        <div class="hm-legend" aria-label="Ký hiệu lịch phụng vụ">
+          <span><i aria-hidden="true"></i>Lịch Chung</span>
+          <span class="is-order"><i aria-hidden="true"></i>Lịch Nhà Dòng</span>
+        </div>
+        <div class="hm-liturgy-content" id="homeLiturgyContent" aria-live="polite">
+          <p>Đang tải lịch phụng vụ…</p>
+        </div>
+        <footer class="hm-panel-links">
+          <a href="/lich-phung-vu/">Lịch Phụng Vụ <span aria-hidden="true">→</span></a>
+          <a href="/kinh-sach/">Bài Đọc Kinh Sách <span aria-hidden="true">→</span></a>
+        </footer>
+      </article>
+
+      <article class="hm-panel hm-quotes" aria-labelledby="home-daily-title" data-home-daily-quotes>
+        <header class="hm-panel-head">
+          <div>
+            <p class="hm-label">Trích Dẫn Mỗi Ngày</p>
+            <h2 id="home-daily-title">Lời Sống</h2>
+          </div>
+        </header>
+        <div class="hm-quote-stage">
+          {dailyQuoteGroups.map((group, index) => (
+            <a
+              class:list={["hm-quote", index === 0 && "active"]}
+              href={group.href}
+              data-home-quote-group={group.key}
+              data-home-daily-slide
+            >
+              <span class="hm-quote-source">{group.label}</span>
+              <blockquote data-home-quote-text>{group.quotes[0].text}</blockquote>
+              <cite data-home-quote-cite set:html={group.quotes[0].cite}></cite>
+              <span class="hm-quote-link">Đọc bản văn <i aria-hidden="true">→</i></span>
+            </a>
+          ))}
+        </div>
+        <nav class="hm-quote-dots" aria-label="Chọn nguồn trích dẫn">
+          {dailyQuoteGroups.map((group, index) => (
+            <button
+              class:list={["hm-quote-dot", index === 0 && "active"]}
+              type="button"
+              data-home-daily-index={String(index)}
+              aria-label={`Xem trích dẫn ${group.label}`}
+              aria-pressed={index === 0 ? "true" : "false"}
+            ></button>
+          ))}
+        </nav>
+      </article>
+    </section>
+
+    {homeEditorialGroups.length > 0 && (
+      <section class="hm-section hm-editorial" aria-labelledby="hm-editorial-title">
+        <header class="hm-section-head">
+          <div><p class="hm-label">Đọc Và Suy Tư</p><h2 id="hm-editorial-title">Bài Viết Mới</h2></div>
+          <nav aria-label="Các thư viện bài viết">
+            <a href="/linh-dao/">Linh Đạo</a>
+            <a href="/bai-viet/">Triết – Thần</a>
+          </nav>
+        </header>
+        <div class="hm-article-grid">
+          {homeEditorialGroups.slice(0, 4).map((group) => group.articles.map((article) => (
+            <ArticleCard
+              href={article.href}
+              title={article.title}
+              category={article.category}
+              excerpt={article.excerpt}
+              author={article.author}
+              date={article.date}
+              image={article.image}
+            />
+          )))}
+        </div>
+      </section>
+    )}
+
+    <section class="hm-section hm-news" aria-labelledby="hm-news-title">
+      <header class="hm-section-head">
+        <div><p class="hm-label">Tin Tức</p><h2 id="hm-news-title">Nhịp Sống Augustinô</h2></div>
+        <a href="/tin-tuc/">Xem tất cả <span aria-hidden="true">→</span></a>
+      </header>
+      <div class="hm-news-grid">
+        <article class="hm-news-card">
+          <header><small>Ordo Sancti Augustini</small><h3>Trung Ương Dòng</h3></header>
+          <div class="hm-news-frame">
+            <iframe data-home-news-frame data-news-open-external data-news-base="/api/central-news.html" title="Tin tức Trung Ương Dòng" loading="lazy"></iframe>
+          </div>
+          <a href="/tin-tuc/#journal-live-title">Mở nguồn tin <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="hm-news-card">
+          <header><small>Province of Australasia</small><h3>Tỉnh Dòng</h3></header>
+          <div class="hm-news-frame">
+            <iframe data-home-news-frame data-news-open-external data-news-base="/api/province-news.html" title="Tin tức Tỉnh Dòng Úc Châu" loading="lazy"></iframe>
+          </div>
+          <a href="/tin-tuc/#journal-province-title">Mở nguồn tin <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="hm-news-card hm-community-card">
+          <header><small>OSA Việt Nam</small><h3>Cộng Đoàn</h3></header>
+          <div class="hm-community-list">
+            {communityPosts.map((post, index) => (
+              <ArticleCard
+                href={`/tin-tuc/${post.id}/`}
+                title={post.data.title}
+                excerpt={post.data.excerpt}
+                date={post.data.date}
+                image={post.data.image ?? post.data.heroImage ?? communityImage(index)}
+              />
+            ))}
+          </div>
+          <a href="/tin-tuc/">Xem tin cộng đoàn <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
+  </main>
+  </Fragment>
+  )}
 </BaseLayout>
 
-<script>
-  import { withBase } from '../lib/site-path';
-
-  // Trang chủ luôn mở tại banner; không dùng cơ chế tự cuộn chung của layout.
+<script define:vars={{ dailyQuoteGroups, saintByDate }}>
   document.body.dataset.noAutoscroll = 'true';
 
-  const masthead = document.querySelector<HTMLElement>('.og-masthead');
-  const banner = document.querySelector<HTMLElement>('.og-banner');
-  const activeSlide = document.querySelector<HTMLImageElement>('.og-banner .og-slide.active');
-  const titleWords = Array.from(document.querySelectorAll<HTMLElement>('.home-title-word'));
+  const masthead = document.querySelector('.og-masthead');
+  const banner = document.querySelector('.og-banner');
+  const activeSlide = document.querySelector('.og-banner .og-slide.active');
+  const titleWords = Array.from(document.querySelectorAll('.home-title-word'));
   const revealTitleWords = () => {
     titleWords.forEach((word) => word.classList.remove('is-revealing', 'is-revealed'));
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -177,60 +657,200 @@ const library = [
     if (!masthead || !banner) return;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting ? showMasthead() : masthead.classList.remove('is-visible'));
-    }, { threshold:.15 });
+    }, { threshold: .15 });
     observer.observe(banner);
   };
   if (!activeSlide || (activeSlide.complete && activeSlide.naturalHeight > 0)) observeMasthead();
-  else activeSlide.addEventListener('load', observeMasthead, { once:true });
+  else activeSlide.addEventListener('load', observeMasthead, { once: true });
   window.setTimeout(() => titleWords.forEach((word) => word.classList.add('is-revealed')), 2200);
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.og-slider').forEach((panel) => {
-      const slides = Array.from(panel.querySelectorAll<HTMLElement>('.og-slide'));
+      const slides = Array.from(panel.querySelectorAll('.og-slide'));
       if (slides.length < 2) return;
       let active = 0;
       window.setInterval(() => {
         slides[active]?.classList.remove('active');
         active = (active + 1) % slides.length;
         slides[active]?.classList.add('active');
-      }, 4500);
+      }, 5200);
     });
   }
 
-  document.querySelectorAll<HTMLElement>('.og-masthead-quote').forEach((quote) => {
-    quote.innerHTML = quote.innerHTML.replace(/Thiên Chúa|Chúa/gi, (word) => `<span class="bvq-lord">${word.toUpperCase()}</span>`);
-  });
+  const zonedParts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date());
+  const datePart = (type) => zonedParts.find((part) => part.type === type)?.value ?? '';
+  const year = datePart('year');
+  const month = datePart('month');
+  const day = datePart('day');
+  const dateKey = `${year}-${month}-${day}`;
+  const saintKey = `${month}-${day}`;
+  const today = new Date(`${dateKey}T12:00:00+07:00`);
+  const daySeed = Math.floor(Date.UTC(Number(year), Number(month) - 1, Number(day)) / 86400000);
 
-  const now = new Date();
-  const parts = new Intl.DateTimeFormat('en-CA', { timeZone:'Asia/Ho_Chi_Minh', year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(now);
-  const value = (type: string) => parts.find((part) => part.type === type)?.value ?? '';
-  const year = value('year');
-  const month = value('month');
-  const day = value('day');
-  const key = `${year}-${month}-${day}`;
-  const monthLabel = new Intl.DateTimeFormat('vi-VN', { timeZone:'Asia/Ho_Chi_Minh', month:'long' }).format(now);
-  const fullDate = new Intl.DateTimeFormat('vi-VN', { timeZone:'Asia/Ho_Chi_Minh', weekday:'long', day:'numeric', month:'long', year:'numeric' }).format(now);
+  const fullDate = new Intl.DateTimeFormat('vi-VN', {
+    timeZone: 'Asia/Ho_Chi_Minh', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+  }).format(today);
   const dayNode = document.getElementById('homeTodayDay');
   const monthNode = document.getElementById('homeTodayMonth');
-  const calendarNumber = document.getElementById('homeCalendarNumber');
-  const calendarMonth = document.getElementById('homeCalendarMonth');
   if (dayNode) dayNode.textContent = day;
   if (monthNode) monthNode.textContent = fullDate;
-  if (calendarNumber) calendarNumber.textContent = day;
-  if (calendarMonth) calendarMonth.textContent = monthLabel;
-  fetch(withBase(`/data/calendar/${year}.json`))
-    .then((response) => response.ok ? response.json() : Promise.reject())
-    .then((data) => {
-      const liturgy = data?.days?.[key]?.l;
-      const node = document.getElementById('homeTodayLiturgy');
-      if (node) node.textContent = liturgy || 'Mở lịch để xem cử hành phụng vụ hôm nay.';
-    })
-    .catch(() => {
-      const node = document.getElementById('homeTodayLiturgy');
-      if (node) node.textContent = 'Mở lịch để xem cử hành phụng vụ hôm nay.';
-    });
 
-  const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  document.querySelectorAll('[data-home-quote-group]').forEach((card, groupIndex) => {
+    const key = card.getAttribute('data-home-quote-group');
+    const group = dailyQuoteGroups.find((item) => item.key === key);
+    if (!group?.quotes?.length) return;
+    let quoteIndex = Math.abs(daySeed + groupIndex * 7) % group.quotes.length;
+    const quote = group.quotes[quoteIndex];
+    const text = card.querySelector('[data-home-quote-text]');
+    const cite = card.querySelector('[data-home-quote-cite]');
+    if (text) text.textContent = quote.text;
+    if (cite) cite.innerHTML = quote.cite;
+    requestAnimationFrame(() => card.classList.add('is-ready'));
+
+    if (group.quotes.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let quoteTimer;
+      const scheduleNextQuote = (delay = 12000 + groupIndex * 900) => {
+        window.clearTimeout(quoteTimer);
+        quoteTimer = window.setTimeout(() => {
+          if (document.hidden || card.matches(':hover') || card.matches(':focus-within')) {
+            scheduleNextQuote(2400);
+            return;
+          }
+          card.classList.add('is-changing');
+          window.setTimeout(() => {
+            quoteIndex = (quoteIndex + 1) % group.quotes.length;
+            const nextQuote = group.quotes[quoteIndex];
+            if (text) text.textContent = nextQuote.text;
+            if (cite) cite.innerHTML = nextQuote.cite;
+            card.classList.remove('is-changing');
+            scheduleNextQuote();
+          }, 320);
+        }, delay);
+      };
+      scheduleNextQuote(5200 + groupIndex * 1700);
+    }
+  });
+
+  document.querySelectorAll('[data-home-daily-quotes]:not([data-daily-reel-ready])').forEach((reel) => {
+    reel.setAttribute('data-daily-reel-ready', 'true');
+    const slides = Array.from(reel.querySelectorAll('[data-home-daily-slide]'));
+    const dots = Array.from(reel.querySelectorAll('[data-home-daily-index]'));
+    if (!slides.length) return;
+
+    let current = 0;
+    let reelTimer;
+    const showSlide = (nextIndex) => {
+      current = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const active = index === current;
+        slide.classList.toggle('active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        slide.tabIndex = active ? 0 : -1;
+      });
+      dots.forEach((dot, index) => {
+        const active = index === current;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    };
+    const stopReel = () => window.clearInterval(reelTimer);
+    const startReel = () => {
+      stopReel();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        reelTimer = window.setInterval(() => showSlide(current + 1), 7600);
+      }
+    };
+
+    dots.forEach((dot, index) => dot.addEventListener('click', () => {
+      showSlide(index);
+      startReel();
+    }));
+    reel.addEventListener('pointerenter', stopReel);
+    reel.addEventListener('pointerleave', startReel);
+    reel.addEventListener('focusin', stopReel);
+    reel.addEventListener('focusout', startReel);
+    showSlide(0);
+    startReel();
+  });
+
+  const seasonLabels = {
+    'mua-vong': 'Mùa Vọng',
+    'mua-giang-sinh': 'Mùa Giáng Sinh',
+    'mua-thuong-nien': 'Mùa Thường Niên',
+    'mua-chay': 'Mùa Chay',
+    'mua-phuc-sinh': 'Mùa Phục Sinh',
+    'le-chung': 'Lễ Chung',
+    'le-rieng': 'Lễ Riêng',
+    'trong-kinh-chua': 'Lễ Trọng Kính Chúa',
+  };
+  const rankLabels = {
+    solemn: 'Lễ Trọng', feast: 'Lễ Kính', memorial: 'Lễ Nhớ', 'opt-memorial': 'Lễ Nhớ Tùy Chọn',
+  };
+  const homeLiturgy = document.getElementById('homeLiturgyContent');
+  let calendarInfo = null;
+
+  const bioHref = (bioFile) => {
+    const slug = (bioFile || '').split('/').pop()?.replace('.json', '');
+    if (!slug) return '/thanh-chan-phuoc/';
+    return slug === 'st-augustine-of-hippo' ? '/thanh-au-tinh/#tieu-su' : `/thanh-chan-phuoc/${slug}/`;
+  };
+
+  const renderHomeLiturgy = () => {
+    if (!homeLiturgy) return;
+    const saints = saintByDate[saintKey] || [];
+    if (!calendarInfo && !saints.length) {
+      homeLiturgy.innerHTML = '<p class="home-liturgy-loading">Chưa có dữ liệu lịch phụng vụ cho hôm nay.</p>';
+      return;
+    }
+    const season = calendarInfo ? (seasonLabels[calendarInfo.s] || calendarInfo.s || '') : '';
+    const generalEvent = calendarInfo ? `
+      <div class="home-liturgy-event home-liturgy-event-general">
+        <span class="home-event-calendar">Lịch Chung</span>
+        ${season ? `<span class="season-badge season-${calendarInfo.s}">${season}</span>` : ''}
+        <strong>${calendarInfo.l || 'Ngày phụng vụ'}</strong>
+        ${calendarInfo.cycle ? `<small>Năm phụng vụ ${calendarInfo.cycle}</small>` : ''}
+      </div>` : '';
+    const orderEvents = saints.map((saint) => `
+      <a class="home-liturgy-event home-liturgy-event-order" href="${bioHref(saint.bioFile)}">
+        <span class="home-event-calendar">Nhà Dòng</span>
+        <span class="rank-badge rank-${rankLabels[saint.rank] ? saint.rank : 'opt-memorial'}">${rankLabels[saint.rank] || 'Lễ Nhớ Tùy Chọn'}</span>
+        <strong>${saint.name}</strong>
+      </a>`).join('');
+    const orderEmpty = saints.length ? '' : `
+      <div class="home-liturgy-order-empty">
+        <span class="home-event-calendar">Nhà Dòng</span>
+        <span>Không có lễ riêng hôm nay</span>
+      </div>`;
+    homeLiturgy.innerHTML = `<div class="home-liturgy-events">${generalEvent}${orderEvents}${orderEmpty}</div>`;
+  };
+
+  fetch(`/data/calendar/${year}.json`)
+    .then((response) => response.ok ? response.json() : Promise.reject(new Error('calendar unavailable')))
+    .then((data) => {
+      calendarInfo = data?.days?.[dateKey] ? { ...data.days[dateKey], cycle: data.cycle } : null;
+      renderHomeLiturgy();
+    })
+    .catch(() => renderHomeLiturgy());
+
+  const syncNewsFrames = () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    document.querySelectorAll('[data-home-news-frame]').forEach((frame) => {
+      const base = frame.getAttribute('data-news-base');
+      if (!base) return;
+      const params = new URLSearchParams({ theme });
+      if (frame.hasAttribute('data-news-open-external')) params.set('external', '1');
+      const next = `${base}?${params}`;
+      if (frame.getAttribute('src') !== next) frame.setAttribute('src', next);
+    });
+  };
+  syncNewsFrames();
+  new MutationObserver(syncNewsFrames).observe(document.documentElement, {
+    attributes: true, attributeFilter: ['data-theme'],
+  });
+
+  const revealItems = document.querySelectorAll('[data-reveal]');
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     revealItems.forEach((item) => item.classList.add('is-visible'));
   } else {
@@ -240,121 +860,256 @@ const library = [
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
-    }, { threshold:.12 });
+    }, { threshold: .08 });
     revealItems.forEach((item) => observer.observe(item));
   }
 </script>
 
 <style is:global>
-body.page-home main.content { padding:0; }
-.page-home .og-banner { position:relative; min-height:98vh; display:flex; align-items:stretch; justify-content:flex-end; margin-top:-6.58rem; overflow:hidden; }
-.page-home .og-banner .og-slide { z-index:0; filter:none; }
-.page-home .og-banner::after { content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom,transparent 0%,transparent 35%,rgba(10,18,36,.14) 72%,var(--bg-main) 100%); }
-.page-home .og-masthead { position:relative; z-index:2; text-align:center; width:50%; padding:7.5rem 4rem 4rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; background:rgba(8,14,30,.40); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); border-left:1px solid rgba(233,193,118,.14); -webkit-mask-image:linear-gradient(to bottom,black 0%,black 72%,transparent 100%); mask-image:linear-gradient(to bottom,black 0%,black 72%,transparent 100%); opacity:0; transform:translateX(2.5rem); transition:opacity .9s cubic-bezier(.22,1,.36,1) .5s,transform .9s cubic-bezier(.22,1,.36,1) .5s; }
-.page-home .og-masthead.is-visible { opacity:1; transform:translateX(0); }
-.page-home .og-masthead-head { display:flex; flex:0 1 auto; flex-direction:column; align-items:center; justify-content:center; width:100%; }
-.page-home .masthead-identity { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; transform:translateY(-1.35rem); margin-bottom:-1.35rem; }
-.page-home .og-masthead-emblem { display:block; flex-shrink:0; width:11.8rem; height:11.8rem; margin:-2.15rem auto .65rem; object-fit:contain; opacity:.55; filter:brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(5deg) brightness(.85); }
-.page-home .og-masthead-foot { width:100%; text-align:center; }
-.page-home .og-eyebrow { margin:0; color:#e9c176; font:700 1.14rem/1.45 'Be Vietnam Pro','Manrope',system-ui,sans-serif; letter-spacing:.2em; text-transform:uppercase; text-shadow:0 1px 10px rgba(0,0,0,.8); }
-.page-home .og-title { margin:0 0 1.2rem; font:700 clamp(3.96rem,2.7rem + 3.15vw,6.84rem)/1.16 'Playfair Display','Noto Serif',serif; letter-spacing:.01em; background:linear-gradient(160deg,#fff 0%,#fff4d6 25%,#f4d98f 55%,#e9c176 80%,#d4a84b 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 28px rgba(233,193,118,.7)) drop-shadow(0 2px 10px rgba(0,0,0,.5)); }
-.page-home .og-title { font-size:clamp(2.8rem,2.1rem + 2.15vw,4.75rem); }
-.page-home .home-title-line { display:block; }
-.page-home .home-title-word { display:inline-block; margin-right:.2em; color:#fff4d6; opacity:0; transform:translateY(.65em); background:linear-gradient(160deg,#fff 0%,#fff4d6 25%,#f4d98f 55%,#e9c176 80%,#d4a84b 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 1px 8px rgba(0,0,0,.32); }
-.page-home .home-title-word:last-child { margin-right:0; }
+body.page-home {
+  --home-surface:#101b30;
+  --home-surface-raised:#15233b;
+  --home-line:rgba(233,193,118,.2);
+  --home-text:var(--ink-cream);
+  --home-muted:#c9c1b2;
+  --home-heading:#e9c176;
+  --home-section-gap:clamp(5.8rem,7vw,8rem);
+  --home-liturgy-date-bg:#c5a059;
+  --home-liturgy-date-ink:#101a2f;
+  --home-scroll-thumb:#c5a059;
+  --home-scroll-thumb-hover:#e9c176;
+}
+[data-theme="light"] body.page-home {
+  --home-surface:#fffdf8;
+  --home-surface-raised:#f4efe5;
+  --home-line:rgba(26,94,60,.2);
+  --home-text:#1a5e3c;
+  --home-muted:#46564c;
+  --home-heading:#1a5e3c;
+  --home-liturgy-date-bg:#1a5e3c;
+  --home-liturgy-date-ink:#fffdf8;
+  --home-scroll-thumb:#1a5e3c;
+  --home-scroll-thumb-hover:#0f3d24;
+}
+body.page-home #main > main.content { padding:0; }
+.page-home .og-banner { position:relative; min-height:94vh; display:flex; align-items:stretch; justify-content:flex-end; margin-top:-6.58rem; overflow:hidden; }
+.page-home .og-banner::after { content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom,transparent 0%,transparent 36%,rgba(10,18,36,.14) 72%,var(--bg-main) 100%); }
+.page-home .og-slide { position:absolute; inset:0; z-index:0; width:100%; height:100%; display:block; object-fit:cover; opacity:0; filter:none; transition:opacity .7s ease; }
+.page-home .og-slide.active { opacity:1; }
+.page-home .og-masthead { position:relative; z-index:2; width:50%; padding:7.5rem 4rem 4rem; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:rgba(8,14,30,.34); backdrop-filter:blur(2px); border-left:1px solid rgba(233,193,118,.16); -webkit-mask-image:linear-gradient(to bottom,black 0%,black 74%,transparent 100%); mask-image:linear-gradient(to bottom,black 0%,black 74%,transparent 100%); opacity:0; transform:translateX(1.5rem); transition:opacity .7s cubic-bezier(.22,1,.36,1) .35s,transform .7s cubic-bezier(.22,1,.36,1) .35s; }
+.page-home .og-masthead.is-visible { opacity:1; transform:none; }
+.page-home .og-masthead-head,.page-home .masthead-identity { display:flex; flex-direction:column; align-items:center; width:100%; }
+.page-home .masthead-identity { transform:translateY(-1.35rem); margin-bottom:-1.35rem; }
+.page-home .og-masthead-emblem { width:10.8rem; height:10.8rem; margin:-1.8rem auto .75rem; object-fit:contain; opacity:.62; filter:brightness(0) invert(1) sepia(1) saturate(2.2) hue-rotate(5deg) brightness(.86); }
+.page-home .og-eyebrow { margin:0; color:#e9c176; font:650 1.05rem/1.45 var(--font-ui); letter-spacing:.18em; text-transform:uppercase; text-shadow:0 1px 5px rgba(0,0,0,.68); }
+.page-home .og-masthead .og-title { margin:0 0 1rem; color:#f4d98f; font:650 clamp(2.8rem,2.15rem + 1.85vw,4.45rem)/1.14 var(--font-display); letter-spacing:.005em; background:none; -webkit-background-clip:border-box; background-clip:border-box; -webkit-text-fill-color:currentColor; filter:none; }
+.page-home .home-title-line { display:flex; align-items:baseline; justify-content:center; gap:.22em; filter:drop-shadow(0 2px 5px rgba(0,0,0,.55)); }
+.page-home .home-title-line + .home-title-line { margin-top:.06em; }
+.page-home .og-banner-cite { display:block; max-width:42rem; margin:.45rem auto 0; color:rgba(255,247,222,.8); font:500 1.05rem/1.55 var(--font-ui); letter-spacing:.04em; text-shadow:0 1px 4px rgba(0,0,0,.72); }
+.page-home .og-banner-cite :is(a,em) { color:inherit; }
+.page-home .home-title-word { display:inline-block; margin:-.06em -.01em -.18em; padding:.06em .01em .18em; opacity:0; color:#f4d98f; background:linear-gradient(160deg,#fff7de 0%,#f4d98f 58%,#d9ae55 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; transform:translateY(.5em); }
 .page-home .home-title-word.is-revealing { animation:home-title-word .62s cubic-bezier(.16,1,.3,1) var(--word-delay) both; }
 .page-home .home-title-word.is-revealed { opacity:1; transform:none; }
-@keyframes home-title-word {
-  from { opacity:0; transform:translateY(.65em); filter:blur(3px); }
-  to { opacity:1; transform:translateY(0); filter:blur(0); }
+@keyframes home-title-word { from { opacity:0; transform:translateY(.65em); filter:blur(3px); } to { opacity:1; transform:none; filter:blur(0); } }
+
+.home-hub { width:min(128rem,100%); margin:0 auto; padding:0 3rem 7rem; }
+.home-daily-row {
+  position:relative;
+  z-index:3;
+  display:grid;
+  grid-template-columns:minmax(39rem,.92fr) minmax(0,1.48fr);
+  align-items:stretch;
+  gap:1.2rem;
+  width:min(120rem,100%);
+  margin:var(--home-section-gap) auto 0;
 }
-.page-home .og-masthead-quote { max-width:46rem; margin:0 auto .35rem; color:#fff8ef; font:300 1.539rem/1.6 var(--font-body); font-style:italic; letter-spacing:.01em; text-shadow:0 1px 6px rgba(0,0,0,.26),0 0 18px rgba(233,193,118,.07); }
-.page-home .og-masthead-cite { margin:0; color:#e9c176; font-size:.92rem; letter-spacing:.1em; text-shadow:0 1px 6px rgba(0,0,0,.6); }
-.page-home .og-masthead-cite em,.page-home .og-masthead .bvq-lord { color:#e9c176; text-shadow:none; }
-.page-home .og-slide { position:absolute; inset:0; width:100%; height:100%; display:block; object-fit:cover; opacity:0; filter:brightness(.88); transition:opacity 1s ease; }
-.page-home .og-slide.active { opacity:1; }
+.home-liturgy,.home-daily-quotes {
+  min-width:0;
+  margin:0;
+  color:var(--home-text);
+  background:var(--home-surface);
+  border:1px solid var(--home-line);
+}
+.home-daily-quotes { border-top:3px solid var(--gold); }
+.home-liturgy {
+  display:grid;
+  grid-template-columns:8.6rem minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr) auto;
+  grid-template-areas:"date main" "date actions";
+  overflow:hidden;
+}
+.home-liturgy-date {
+  grid-area:date;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100%;
+  padding:1.45rem 1rem;
+  color:var(--home-text);
+  background:transparent;
+  border-right:1px solid var(--home-line);
+  text-align:center;
+}
+.home-liturgy-date strong { color:var(--gold); font:600 4.1rem/.88 var(--font-display); font-variant-numeric:tabular-nums; }
+.home-liturgy-date span { max-width:7rem; margin-top:.9rem; color:var(--home-muted); font:550 .78rem/1.45 var(--font-ui); letter-spacing:.035em; text-transform:capitalize; }
+.home-liturgy-main { grid-area:main; min-width:0; display:flex; flex-direction:column; justify-content:center; padding:1.55rem 1.65rem .8rem; }
+.home-liturgy-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; }
+.home-kicker { margin:0 0 .3rem; color:var(--gold); font:600 .76rem/1.35 var(--font-ui); letter-spacing:.12em; text-transform:uppercase; }
+.home-liturgy-heading h2 { margin:0; color:var(--home-text); font:600 clamp(1.75rem,1.55rem + .35vw,2.08rem)/1.22 var(--font-display); }
+.home-liturgy-legend { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:.45rem .75rem; padding-bottom:.18rem; }
+.home-calendar-key { display:inline-flex; align-items:center; gap:.4rem; color:var(--home-muted); font:500 .68rem/1.3 var(--font-ui); letter-spacing:.05em; text-transform:uppercase; white-space:nowrap; }
+.home-calendar-key i { width:.46rem; height:.46rem; display:block; border-radius:50%; background:var(--home-muted); }
+.home-calendar-key-order i { background:var(--gold); }
+.home-liturgy-content { min-height:7.3rem; display:flex; align-items:center; margin-top:.8rem; }
+.home-liturgy-events { width:100%; display:grid; gap:0; }
+.home-liturgy-event,.home-liturgy-order-empty { min-width:0; display:flex; flex-wrap:wrap; align-items:center; gap:.42rem .65rem; padding:.62rem 0; color:var(--home-text); text-decoration:none; background:transparent; border-top:1px solid var(--home-line); }
+.home-liturgy-event:first-child { border-top:0; }
+.home-event-calendar { color:var(--home-muted); font:650 .71rem/1.3 var(--font-ui); letter-spacing:.075em; text-transform:uppercase; }
+.home-liturgy-event-order .home-event-calendar,.home-liturgy-order-empty .home-event-calendar { color:var(--gold); }
+.home-liturgy-event .rank-badge,.home-liturgy-event .season-badge { margin:0; }
+.home-liturgy-event strong { font:500 1.2rem/1.42 var(--font-body); }
+.home-liturgy-event small { width:100%; color:var(--home-muted); font:450 .9rem/1.4 var(--font-ui); }
+.home-liturgy-order-empty { color:var(--home-muted); font:400 .88rem/1.4 var(--font-ui); }
+.home-liturgy-loading,.home-liturgy-empty { margin:0; color:var(--home-muted); font:1.02rem/1.5 var(--font-body); }
+.home-liturgy-empty { display:flex; flex-direction:column; gap:.2rem; }
+.home-liturgy-actions { grid-area:actions; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.85rem 1.65rem 1.05rem; }
+.home-liturgy-actions a,.home-source-link,.home-editorial-links a { color:var(--gold); font:600 .82rem/1.4 var(--font-ui); letter-spacing:.045em; text-decoration:none; }
+.home-liturgy-actions a span,.home-source-link span,.home-editorial-links a span { display:inline-block; transition:transform .2s ease; }
+.home-liturgy-actions a:hover span,.home-source-link:hover span,.home-editorial-links a:hover span { transform:translateX(.25rem); }
 
-.home-page { max-width:132rem; margin:0 auto; padding:0 3rem 8rem; }
-.page-home .home-page > section:not(.home-construction) { display:none; }
-.page-home .home-construction { min-height:58vh; padding-bottom:5rem; }
-.home-kicker { margin:0 0 .7rem; color:var(--gold); font:650 .9rem 'Be Vietnam Pro',system-ui,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
-.home-today { position:relative; z-index:5; display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:2rem; width:min(118rem,calc(100% - 2rem)); box-sizing:border-box; margin:-3.7rem auto 0; padding:1.45rem 1.7rem; background:var(--bg-card); border-top:1px solid rgba(233,193,118,.34); box-shadow:0 1.3rem 3.5rem rgba(0,0,0,.17); }
-.home-today-date { display:flex; flex-direction:column; align-items:center; justify-content:center; width:7rem; min-height:7rem; border-right:1px solid rgba(233,193,118,.18); }
-.home-today-date strong { color:var(--gold); font:600 3rem/1 'Playfair Display',Georgia,serif; }
-.home-today-date span { max-width:6rem; margin-top:.4rem; overflow:hidden; color:var(--ink-cream-soft); font:600 .72rem/1.3 'Be Vietnam Pro',system-ui,sans-serif; letter-spacing:.06em; text-align:center; text-transform:capitalize; white-space:nowrap; text-overflow:ellipsis; }
-.home-today-copy h2 { margin:0 0 .35rem; color:var(--ink-cream); font:600 1.85rem/1.2 'Playfair Display',Georgia,serif; }
-.home-today-copy > p:last-child { margin:0; color:var(--ink-cream-soft); font:1.12rem/1.5 var(--font-body); }
-.home-today-actions { display:flex; flex-direction:column; align-items:flex-end; gap:.55rem; }
-.home-today-actions a,.home-vocation a { color:var(--gold); font:600 .9rem 'Be Vietnam Pro',system-ui,sans-serif; letter-spacing:.06em; text-decoration:none; transition:color .2s ease,transform .2s ease; }
-.home-today-actions a:hover,.home-vocation a:hover { color:var(--ink-cream); transform:translateX(.2rem); }
-.home-opening { max-width:80rem; margin:clamp(5rem,8vw,9rem) auto 5rem; text-align:center; }
-.home-opening h2,.home-section-head h2,.home-vocation h2 { margin:0; color:var(--ink-cream); font:600 clamp(2.65rem,2rem + 1.2vw,4.2rem)/1.2 'Playfair Display',Georgia,serif; }
-.home-opening > p:last-child { max-width:72rem; margin:1.25rem auto 0; color:var(--ink-cream-soft); font:1.45rem/1.8 var(--font-body); }
+.home-daily-quotes.bv-quotes {
+  width:auto;
+  max-width:none;
+  min-height:30rem;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  text-align:center;
+  box-shadow:none;
+}
+.home-daily-quotes .home-section-heading {
+  min-height:5.4rem;
+  justify-content:center;
+  margin:0;
+  padding:1.25rem 1.5rem;
+  border:0;
+}
+.home-daily-quotes .home-section-heading h2 { font-size:1.72rem; }
+.home-daily-grid { position:relative; min-width:0; min-height:20.8rem; }
+.home-daily-quote.bvq-slide {
+  position:absolute;
+  inset:0;
+  min-width:0;
+  min-height:100%;
+  display:none;
+  align-content:center;
+  grid-template-rows:auto auto auto auto;
+  gap:.85rem;
+  padding:1.6rem clamp(3rem,5vw,6rem) 1.2rem;
+  color:var(--home-text);
+  text-decoration:none;
+  background:transparent;
+  border:0;
+  animation:bvqFade .35s ease;
+}
+.home-daily-quote.bvq-slide.active { display:grid; }
+.home-daily-source { display:flex; align-items:baseline; justify-content:center; gap:.65rem; min-width:0; text-align:center; }
+.home-daily-source small { color:var(--gold-dim); font:600 .72rem/1.2 var(--font-ui); letter-spacing:.08em; }
+.home-daily-source b { overflow:hidden; color:var(--gold); font:650 .78rem/1.35 var(--font-ui); letter-spacing:.13em; text-overflow:ellipsis; text-transform:uppercase; white-space:nowrap; }
+.home-daily-quote .bvq-text { width:min(100%,62rem); max-width:62rem; margin:0 auto; color:var(--home-muted); font-size:clamp(1.45rem,1.22rem + .34vw,1.72rem); line-height:1.72; text-wrap:balance; transition:opacity .22s ease,transform .25s ease; }
+.home-daily-quote .bvq-cite { margin:0; min-height:1.4em; color:rgba(201,191,169,.68); font-size:.78rem; font-weight:450; letter-spacing:.15em; transition:opacity .22s ease,transform .25s ease; }
+[data-theme="light"] .home-daily-quote .bvq-cite { color:#2f392f !important; font-size:.82rem; font-weight:500; letter-spacing:.12em; }
+.home-daily-quote.is-changing .bvq-text,.home-daily-quote.is-changing .bvq-cite { opacity:0; transform:translateY(-.35rem); }
+.home-daily-open { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; width:max-content; margin:.25rem auto 0; color:var(--gold); font:600 .72rem/1.3 var(--font-ui); letter-spacing:.08em; text-transform:uppercase; }
+.home-daily-open i { font-style:normal; transition:transform .2s ease; }
+.home-daily-quote:hover .home-daily-open i,.home-daily-quote:focus-visible .home-daily-open i { transform:translateX(.25rem); }
+.home-daily-quote:focus-visible { outline:2px solid var(--gold); outline-offset:-4px; }
+.home-daily-dots.bvq-dots { align-self:end; margin:0; padding:.8rem 1rem 1.25rem; }
+.home-daily-dots .bvq-dot { width:.62rem; height:.62rem; }
 
-.home-daily { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr); gap:1.2rem; }
-.home-daily-card { min-width:0; color:var(--ink-cream); text-decoration:none; background:var(--bg-card); overflow:hidden; transition:transform .35s cubic-bezier(.22,1,.36,1); }
-.home-daily-card:hover { transform:translateY(-.42rem); }
-.home-calendar-card { display:grid; grid-template-columns:minmax(15rem,.72fr) minmax(0,1.28fr); min-height:28rem; }
-.home-card-visual { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; background:linear-gradient(145deg,rgba(233,193,118,.13),rgba(233,193,118,.025)); }
-.home-card-visual::before { content:''; position:absolute; width:16rem; height:16rem; border:1px solid rgba(233,193,118,.2); border-radius:50%; }
-.home-card-visual i { position:absolute; inset:1.2rem; border:1px solid rgba(233,193,118,.1); }
-.home-card-number { position:relative; color:var(--gold); font:600 clamp(5rem,7vw,8.5rem)/.9 'Playfair Display',Georgia,serif; }
-.home-card-month { position:relative; margin-top:.8rem; color:var(--ink-cream-soft); font:600 .9rem 'Be Vietnam Pro',system-ui,sans-serif; letter-spacing:.14em; text-transform:capitalize; }
-.home-card-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(2rem,3.4vw,4rem); }
-.home-card-copy h2 { margin:0 0 1rem; color:var(--ink-cream); font:600 clamp(2.3rem,1.9rem + .8vw,3.3rem)/1.2 'Playfair Display',Georgia,serif; }
-.home-card-copy > p:not(.home-kicker) { margin:0; color:var(--ink-cream-soft); font:1.3rem/1.7 var(--font-body); }
-.home-text-link { margin-top:1.7rem; color:var(--gold); font:600 .95rem 'Be Vietnam Pro',system-ui,sans-serif; letter-spacing:.06em; }
-.home-text-link b { display:inline-block; margin-left:.3rem; transition:transform .25s ease; }
-.home-daily-card:hover .home-text-link b { transform:translate(.22rem,-.22rem); }
-.home-readings-card { display:grid; grid-template-rows:14rem 1fr; }
-.home-readings-card figure { margin:0; overflow:hidden; }
-.home-readings-card img { width:100%; height:100%; object-fit:cover; filter:saturate(.78) contrast(1.04); transition:transform .8s cubic-bezier(.22,1,.36,1); }
-.home-readings-card:hover img { transform:scale(1.035); }
-.home-readings-card .home-card-copy { padding:2rem 2.3rem 2.35rem; }
+.home-editorial { width:min(120rem,100%); margin:var(--home-section-gap) auto 0; }
+.home-editorial > .spirit-library { width:100%; margin:0; padding:0; }
+.home-editorial .spirit-category-stack { gap:0; }
+.home-editorial .spirit-category-heading { margin-bottom:1.5rem; }
+.home-editorial .spirit-rail { grid-auto-columns:clamp(32rem,31vw,39rem); gap:1rem; padding:.15rem .1rem .8rem; }
+.home-editorial .spirit-rail,.home-community-shell { scrollbar-width:thin; scrollbar-color:var(--home-scroll-thumb) transparent; }
+.home-editorial .spirit-rail::-webkit-scrollbar { width:.4rem; height:.4rem; }
+.home-community-shell::-webkit-scrollbar { width:.4rem; height:.4rem; }
+.home-editorial .spirit-rail::-webkit-scrollbar-track,.home-community-shell::-webkit-scrollbar-track { background:transparent; }
+.home-editorial .spirit-rail::-webkit-scrollbar-thumb,.home-community-shell::-webkit-scrollbar-thumb { border:0; border-radius:0; background:var(--home-scroll-thumb); }
+.home-editorial .spirit-rail::-webkit-scrollbar-thumb:hover,.home-community-shell::-webkit-scrollbar-thumb:hover { background:var(--home-scroll-thumb-hover); }
+.home-editorial .spirit-gallery-card > a { min-height:34rem; border-radius:0; background:var(--home-surface); border:1px solid var(--home-line); }
+.home-editorial .spirit-gallery-thumb { border-radius:0; }
+.home-editorial .spirit-gallery-copy { padding:1.45rem 1.6rem 1.55rem; }
+.home-editorial .spirit-gallery-copy > p { -webkit-line-clamp:3; }
+.home-editorial .spirit-shift-controls button { border-radius:0; }
+.home-editorial-links { display:flex; justify-content:flex-end; gap:1.6rem; margin-top:1.15rem; padding-top:1rem; border-top:1px solid var(--home-line); }
 
-.home-library { margin-top:clamp(7rem,10vw,11rem); }
-.home-section-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(20rem,.65fr); align-items:end; gap:3rem; margin-bottom:2.5rem; }
-.home-section-head > p { margin:0; color:var(--ink-cream-soft); font:1.25rem/1.65 var(--font-body); }
-.home-library-grid { display:grid; grid-template-columns:1.18fr .82fr .82fr; grid-template-areas:'rule rule constitution' 'ratio confessions confessions'; gap:1rem; }
-.home-library-card { position:relative; display:flex; flex-direction:column; min-height:20rem; padding:2rem 2.1rem; overflow:hidden; color:var(--ink-cream); text-decoration:none; background:rgba(233,193,118,.035); border-top:1px solid rgba(233,193,118,.22); transition:transform .35s cubic-bezier(.22,1,.36,1),background .3s ease,border-color .3s ease; }
-.home-library-card:hover { transform:translateY(-.4rem); background:rgba(233,193,118,.075); border-top-color:var(--gold); }
-.home-library-rule { grid-area:rule; min-height:22rem; background:linear-gradient(135deg,rgba(233,193,118,.1),rgba(233,193,118,.02)); }
-.home-library-constitution { grid-area:constitution; }
-.home-library-ratio { grid-area:ratio; }
-.home-library-confessions { grid-area:confessions; }
-.home-library-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; color:var(--gold); font:650 .82rem 'Be Vietnam Pro',system-ui,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
-.home-library-top i { font-style:normal; font-size:1.2rem; transition:transform .25s ease; }
-.home-library-card:hover .home-library-top i { transform:translate(.22rem,-.22rem); }
-.home-library-card h3 { margin:1.5rem 0 .8rem; color:var(--ink-cream); font:600 clamp(2rem,1.6rem + .65vw,2.8rem)/1.2 'Playfair Display',Georgia,serif; }
-.home-library-card blockquote { margin:0 0 1.2rem; color:var(--ink-cream-soft); font:italic 1.3rem/1.65 var(--font-body); }
-.home-library-rule blockquote { max-width:75rem; font-size:1.55rem; }
-.home-library-card cite { margin-top:auto; color:var(--gold-dim); font:500 .9rem/1.5 'Be Vietnam Pro',system-ui,sans-serif; }
+.home-news,.home-gateways { margin-top:var(--home-section-gap); }
+.home-hub > .home-gateways:first-child { margin-top:clamp(3rem,4vw,4.5rem); }
+.home-section-heading { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; margin-bottom:1.7rem; }
+.home-section-heading h2 { margin:0; color:var(--home-heading); font:650 clamp(1.65rem,1.45rem + .35vw,1.95rem)/1.25 var(--font-ui); letter-spacing:.015em; }
+.home-section-heading > a { color:var(--gold); font:600 .92rem/1.4 var(--font-ui); text-decoration:none; }
+.home-news-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.2rem; align-items:stretch; }
+.home-news-source { min-width:0; display:flex; flex-direction:column; padding:1.4rem; background:var(--home-surface); border:1px solid var(--home-line); }
+.home-news-source > header { min-height:6.5rem; padding:.2rem .25rem 1rem; }
+.home-news-source > header span { color:var(--gold-dim); font:600 .78rem/1.4 var(--font-ui); letter-spacing:.12em; text-transform:uppercase; }
+.home-news-source > header h3 { margin:.4rem 0 0; color:var(--home-text); font:600 1.85rem/1.22 var(--font-display); }
+.home-news-frame-shell { height:36rem; overflow:hidden; background:var(--home-surface-raised); }
+.home-news-frame { display:block; width:100%; height:100%; border:0; background:transparent; }
+.home-source-link { align-self:flex-end; margin-top:1rem; }
+.home-community-shell { overflow:auto; }
+.home-community-list { min-height:100%; display:flex; flex-direction:column; gap:.7rem; padding:.7rem; }
+.home-community-list .article-card { min-height:0; display:flex; flex-direction:column; }
+.home-community-list .article-card-image { width:100%; height:auto; min-height:0; aspect-ratio:16 / 9; object-fit:cover; }
+.home-community-list .article-card-content { min-width:0; padding:1.15rem 1.25rem 1.3rem; }
+.home-community-list .article-card-meta { margin-bottom:.75rem; }
+.home-community-list .article-card-title { margin-bottom:.55rem; font-size:1.42rem; line-height:1.35; }
+.home-community-list .article-card-summary { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:3; }
+.home-community-list .article-card { border:0; border-radius:0; box-shadow:none; background:var(--home-surface); }
+.home-community-list .article-card::before { display:none; }
+.home-community-list .article-card:hover { transform:none; box-shadow:none; background:var(--home-surface-raised); }
 
-.home-vocation { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:stretch; min-height:28rem; margin:clamp(7rem,10vw,11rem) 0 0; background:var(--bg-card); }
-.home-vocation figure { margin:0; overflow:hidden; }
-.home-vocation img { width:100%; height:100%; min-height:28rem; object-fit:cover; transition:transform .9s cubic-bezier(.22,1,.36,1); }
-.home-vocation:hover img { transform:scale(1.025); }
-.home-vocation > div { display:flex; flex-direction:column; justify-content:center; padding:clamp(2.3rem,4vw,5rem); }
-.home-vocation > div > p:not(.home-kicker) { margin:1.2rem 0 1.7rem; color:var(--ink-cream-soft); font:1.32rem/1.7 var(--font-body); }
+.home-gateway-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:minmax(31rem,1.15fr) minmax(24rem,.85fr); gap:1.1rem; }
+.home-gateway { position:relative; min-width:0; min-height:22rem; display:block; overflow:hidden; color:#fff; text-decoration:none; background:#0b1424; }
+.home-gateway-vocation { grid-column:1 / -1; grid-row:1; min-height:30rem; }
+.home-gateway-augustine { grid-column:1; grid-row:2; }
+.home-gateway-order { grid-column:2; grid-row:2; }
+.home-gateway img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .45s cubic-bezier(.22,1,.36,1); }
+.home-gateway::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(5,11,22,.92) 0%,rgba(5,11,22,.32) 58%,rgba(5,11,22,.04) 100%); }
+.home-gateway-vocation::after { background:linear-gradient(90deg,rgba(5,11,22,.94) 0%,rgba(5,11,22,.66) 38%,rgba(5,11,22,.1) 76%); }
+.home-gateway-vocation img { object-position:center 56%; }
+.home-gateway-copy { position:absolute; z-index:1; right:0; bottom:0; left:0; display:flex; flex-direction:column; align-items:flex-start; padding:clamp(2rem,2.5vw,2.7rem); }
+.home-gateway-vocation .home-gateway-copy { top:0; bottom:0; width:min(54rem,62%); justify-content:center; padding:clamp(2.2rem,4vw,4.8rem); }
+.home-gateway-copy small { color:#e9c176; font:650 .9rem/1.4 var(--font-ui); letter-spacing:.13em; text-transform:uppercase; }
+.home-gateway-copy strong { margin-top:.5rem; color:#fff; font:600 clamp(2.35rem,1.95rem + .82vw,3.25rem)/1.14 var(--font-display); text-wrap:balance; }
+.home-gateway-vocation .home-gateway-copy strong { font-size:clamp(3.15rem,2.55rem + 1.5vw,4.65rem); }
+.home-gateway-copy em { margin-top:.65rem; color:rgba(255,255,255,.86); font:450 clamp(1.08rem,1rem + .2vw,1.24rem)/1.5 var(--font-body); }
+.home-gateway-vocation .home-gateway-copy em { font-size:clamp(1.18rem,1.08rem + .2vw,1.35rem); }
+.home-gateway-cta { display:inline-flex; align-items:center; gap:1.2rem; margin-top:1.7rem; padding:.8rem 1rem; color:#101a2f; background:#e9c176; font:650 .78rem/1 var(--font-ui); letter-spacing:.08em; text-transform:uppercase; }
+.home-gateway-cta i { font-style:normal; transition:transform .2s ease; }
+.home-gateway-vocation:hover .home-gateway-cta i { transform:translateX(.25rem); }
+.home-gateway:hover img { transform:scale(1.035); }
 
-[data-reveal] { opacity:0; transform:translateY(1.5rem); transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1); }
+[data-reveal] { opacity:0; transform:translateY(1rem); transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1); }
 [data-reveal].is-visible { opacity:1; transform:none; }
-[data-theme="light"] .home-today,[data-theme="light"] .home-daily-card,[data-theme="light"] .home-vocation { background:#f4efe5; }
-[data-theme="light"] .home-opening h2,[data-theme="light"] .home-today-copy h2,[data-theme="light"] .home-card-copy h2,[data-theme="light"] .home-section-head h2,[data-theme="light"] .home-library-card h3,[data-theme="light"] .home-vocation h2 { color:#1a5e3c; }
-[data-theme="light"] .home-opening > p:last-child,[data-theme="light"] .home-today-copy > p:last-child,[data-theme="light"] .home-card-copy > p:not(.home-kicker),[data-theme="light"] .home-section-head > p,[data-theme="light"] .home-library-card blockquote,[data-theme="light"] .home-vocation > div > p:not(.home-kicker) { color:#4a5040; }
-[data-theme="light"] .home-library-card { background:rgba(26,94,60,.035); border-top-color:rgba(26,94,60,.2); }
-[data-theme="light"] .home-library-card:hover { background:rgba(26,94,60,.07); border-top-color:#1a5e3c; }
-[data-theme="light"] .home-library-rule { background:linear-gradient(135deg,rgba(26,94,60,.09),rgba(26,94,60,.018)); }
-[data-theme="light"] .home-card-visual { background:linear-gradient(145deg,rgba(26,94,60,.1),rgba(26,94,60,.02)); }
-[data-theme="light"] .home-card-visual i,[data-theme="light"] .home-card-visual::before { border-color:rgba(26,94,60,.16); }
 
+@media (max-width:1100px) {
+  .home-daily-row { grid-template-columns:1fr; gap:1.2rem; width:min(96rem,100%); }
+  .home-liturgy { min-height:26rem; }
+  .home-daily-quotes.bv-quotes { min-height:30rem; }
+  .home-daily-grid { min-height:20.8rem; }
+  .home-news-grid { grid-template-columns:1fr 1fr; }
+  .home-community-news { grid-column:1 / -1; }
+  .home-community-list { grid-template-columns:1fr 1fr; }
+}
 @media (max-width:900px) {
-  .page-home .og-banner { min-height:76vh; min-height:76svh; }
+  .page-home .og-banner { min-height:76svh; }
   .page-home .og-masthead { width:62%; }
-  .home-today { grid-template-columns:auto 1fr; }
-  .home-today-actions { grid-column:2; flex-direction:row; align-items:center; justify-content:flex-start; flex-wrap:wrap; }
-  .home-daily { grid-template-columns:1fr; }
-  .home-library-grid { grid-template-columns:1fr 1fr; grid-template-areas:'rule rule' 'constitution ratio' 'confessions confessions'; }
+  .home-gateway-grid { grid-template-columns:1fr 1fr; grid-template-rows:minmax(30rem,auto) minmax(22rem,auto); }
 }
 @media (max-width:700px) {
   .page-home .og-banner { min-height:clamp(41rem,72svh,47rem); }
@@ -362,26 +1117,857 @@ body.page-home main.content { padding:0; }
   .page-home .masthead-identity { transform:none; margin-bottom:0; }
   .page-home .og-masthead-emblem { width:9.25rem; height:9.25rem; margin:-1.65rem auto .55rem; }
   .page-home .og-eyebrow { font-size:.9rem; letter-spacing:.16em; }
-  .page-home .og-title { margin-bottom:1rem; font-size:clamp(2.45rem, 9.5vw, 3.7rem); line-height:1.14; }
-  .home-page { padding:0 1.2rem 5rem; }
-  .home-today { grid-template-columns:1fr; width:calc(100% - .8rem); margin-top:-2.2rem; padding:1.3rem; gap:1rem; }
-  .home-today-date { width:100%; min-height:auto; flex-direction:row; justify-content:flex-start; gap:.8rem; border-right:0; }
-  .home-today-date strong { font-size:2rem; }
-  .home-today-date span { max-width:none; margin:0; }
-  .home-today-actions { grid-column:auto; }
-  .home-opening { margin:5rem auto 3.5rem; }
-  .home-calendar-card { grid-template-columns:1fr; }
-  .home-card-visual { min-height:15rem; }
-  .home-section-head { grid-template-columns:1fr; gap:1rem; }
-  .home-library-grid { grid-template-columns:1fr; grid-template-areas:'rule' 'constitution' 'ratio' 'confessions'; }
-  .home-library-card,.home-library-rule { min-height:18rem; }
-  .home-library-rule blockquote { font-size:1.32rem; }
-  .home-vocation { grid-template-columns:1fr; }
-  .home-vocation img { min-height:18rem; max-height:22rem; }
+  .page-home .og-title { margin-bottom:1rem; font-size:clamp(2.45rem,9.5vw,3.7rem); line-height:1.14; }
+  .home-hub { padding:0 1.8rem 5rem; }
+  .home-daily-row { width:100%; gap:1rem; margin-top:5rem; }
+  .home-liturgy { grid-template-columns:1fr; grid-template-areas:"date" "main" "actions"; width:100%; margin:0; }
+  .home-liturgy-date { min-height:auto; flex-direction:row; justify-content:flex-start; gap:.8rem; padding:.85rem 1.15rem; text-align:left; }
+  .home-liturgy-date strong { font-size:2.35rem; }
+  .home-liturgy-date span { max-width:none; margin:0; }
+  .home-liturgy-main { padding:1.25rem 1.15rem .95rem; }
+  .home-liturgy-heading { gap:.7rem; }
+  .home-liturgy-heading h2 { font-size:1.65rem; }
+  .home-liturgy-legend { justify-content:flex-start; padding:0; }
+  .home-liturgy-events { grid-template-columns:1fr; }
+  .home-liturgy-content { min-height:6.4rem; }
+  .home-liturgy-actions { justify-content:space-between; flex-wrap:wrap; padding:.85rem 1.15rem; }
+  .home-daily-quotes.bv-quotes { min-height:29rem; }
+  .home-daily-quotes .home-section-heading { min-height:0; padding:1.15rem; }
+  .home-daily-quotes .home-section-heading h2 { font-size:1.6rem; }
+  .home-daily-grid { min-height:20rem; }
+  .home-daily-quote.bvq-slide { min-height:100%; gap:.72rem; padding:1.25rem 2.15rem 1rem; }
+  .home-daily-source b { white-space:normal; }
+  .home-daily-quote .bvq-text { margin:0 auto; font-size:1.34rem; line-height:1.68; }
+  .home-daily-quote .bvq-cite { font-size:.72rem; white-space:normal; }
+  [data-theme="light"] .home-daily-quote .bvq-cite { font-size:.76rem; }
+  .home-daily-open { margin-top:.15rem; }
+  .home-editorial,.home-news,.home-gateways { margin-top:5.5rem; }
+  .home-editorial .spirit-rail-frame { margin-right:-.75rem; }
+  .home-editorial .spirit-rail { grid-auto-columns:min(84vw,32rem); gap:.85rem; padding-right:.75rem; }
+  .home-editorial .spirit-gallery-card > a { min-height:32rem; }
+  .home-editorial-links { justify-content:flex-start; }
+  .home-news-grid { grid-template-columns:1fr; }
+  .home-community-news { grid-column:auto; }
+  .home-news-frame-shell { height:32rem; }
+  .home-community-list { grid-template-columns:1fr; }
+  .home-gateway-grid { grid-template-columns:1fr; grid-template-rows:auto; }
+  .home-gateway,.home-gateway-augustine,.home-gateway-order,.home-gateway-vocation { grid-column:auto; grid-row:auto; min-height:23rem; aspect-ratio:16 / 9; }
+  .home-gateway-vocation { order:-1; min-height:27rem; aspect-ratio:4 / 3; }
+  .home-gateway-vocation::after { background:linear-gradient(to top,rgba(5,11,22,.94) 0%,rgba(5,11,22,.46) 62%,rgba(5,11,22,.08) 100%); }
+  .home-gateway-vocation .home-gateway-copy { top:auto; width:100%; justify-content:flex-end; padding:1.7rem 1.5rem; }
+  .home-gateway-vocation .home-gateway-copy strong { font-size:2.6rem; }
+  .home-gateway-cta { margin-top:1.1rem; }
+  .home-gateway-copy { padding:1.5rem; }
+}
+@media (max-width:420px) {
+  .home-hub { padding-inline:1.5rem; }
+  .home-liturgy-event strong { font-size:1.22rem; }
+  .home-community-list .article-card-summary { -webkit-line-clamp:2; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .og-slide,.home-daily-card,.home-library-card,.home-readings-card img,.home-vocation img,[data-reveal] { transition:none; animation:none; }
-  .page-home .home-title-word { animation:none; opacity:1; transform:none; }
-  .page-home .og-title > span { opacity:1; transform:none; }
+  .page-home .og-slide,.page-home .home-title-word,.home-gateway img,.home-daily-quote blockquote,.home-daily-quote cite,[data-reveal] { transition:none; animation:none; }
+  .page-home .home-title-word,[data-reveal] { opacity:1; transform:none; }
+}
+</style>
+
+<style is:global>
+body.page-home {
+  --hm-bg: #0d182b;
+  --hm-panel: #121f34;
+  --hm-panel-alt: #17263d;
+  --hm-text: #f4efe3;
+  --hm-muted: #c5bdad;
+  --hm-line: rgba(233,193,118,.2);
+  --hm-accent: #e9c176;
+  --hm-accent-ink: #142034;
+  --hm-green: #2f7b59;
+  background: var(--hm-bg);
+}
+[data-theme="light"] body.page-home {
+  --hm-bg: #f7f4ed;
+  --hm-panel: #fffdf8;
+  --hm-panel-alt: #f0ece3;
+  --hm-text: #183e2c;
+  --hm-muted: #52645a;
+  --hm-line: rgba(24,62,44,.18);
+  --hm-accent: #b8892f;
+  --hm-accent-ink: #fffdf8;
+  --hm-green: #1d6847;
+}
+body.page-home #main > main.content { padding: 0; }
+
+.hm-hero {
+  position: relative;
+  min-height: clamp(43rem, 86svh, 61rem);
+  display: flex;
+  align-items: flex-end;
+  margin-top: -6.58rem;
+  overflow: hidden;
+  color: #fff;
+  background: #101827;
+}
+.hm-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  animation: hm-hero-image 1.1s cubic-bezier(.22,1,.36,1) both;
+}
+.hm-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(5,12,23,.82) 0%, rgba(5,12,23,.52) 44%, rgba(5,12,23,.08) 75%),
+    linear-gradient(0deg, rgba(5,12,23,.76) 0%, transparent 48%),
+    linear-gradient(180deg, rgba(5,12,23,.34) 0%, transparent 30%);
+}
+.hm-hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(82rem, calc(100% - 6rem));
+  margin: 0 auto;
+  padding: 12rem 0 clamp(4rem, 8vh, 7rem);
+  animation: hm-hero-copy .8s cubic-bezier(.22,1,.36,1) .12s both;
+}
+.hm-eyebrow,
+.hm-label {
+  margin: 0;
+  color: var(--hm-accent);
+  font: 650 1.05rem/1.4 var(--font-ui);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.hm-hero .hm-eyebrow { color: #e9c176; }
+.hm-hero h1 {
+  max-width: 14ch;
+  margin: .75rem 0 0;
+  color: #fff;
+  font: 600 clamp(3.6rem, 2.55rem + 3.2vw, 6.8rem)/1.02 var(--font-display);
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.hm-hero .hm-hero-content h1 { color: #fff; }
+.hm-hero h1 span { color: #f2d48a; }
+.hm-hero-lead {
+  max-width: 42rem;
+  margin: 1.35rem 0 0;
+  color: rgba(255,255,255,.84);
+  font: 400 clamp(1.45rem, 1.32rem + .25vw, 1.7rem)/1.65 var(--font-body);
+}
+.hm-hero .hm-hero-lead { color: rgba(255,255,255,.86); }
+.hm-hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
+.hm-button {
+  min-height: 4.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: 1rem 1.55rem;
+  border: 1px solid transparent;
+  color: #fff;
+  font: 600 1.05rem/1 var(--font-ui);
+  letter-spacing: .07em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.hm-button-primary { color: #172137; background: #e9c176; }
+.hm-button-primary:hover { background: #f1d491; }
+.hm-button-quiet { border-color: rgba(255,255,255,.42); background: rgba(5,12,23,.18); }
+.hm-button-quiet:hover { border-color: #fff; background: rgba(5,12,23,.48); }
+
+.hm-main {
+  width: min(126rem, 100%);
+  margin: 0 auto;
+  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.5rem, 3vw, 3rem) 7rem;
+  color: var(--hm-text);
+}
+.hm-portals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.hm-portal {
+  position: relative;
+  min-width: 0;
+  min-height: 28rem;
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  background: #101827;
+  text-decoration: none;
+}
+.hm-portal img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.hm-portal-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(4,10,20,.9) 0%, rgba(4,10,20,.2) 68%, transparent 100%);
+}
+.hm-portal-copy {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.5rem, 2vw, 2.2rem);
+}
+.hm-portal-copy small {
+  color: #e9c176;
+  font: 650 1.02rem/1.4 var(--font-ui);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.hm-portal-copy strong {
+  margin-top: .4rem;
+  color: #fff;
+  font: 600 clamp(2rem, 1.55rem + .8vw, 2.8rem)/1.14 var(--font-display);
+  text-wrap: balance;
+}
+.hm-portal-copy em {
+  margin-top: .45rem;
+  color: rgba(255,255,255,.78);
+  font: 400 1.28rem/1.5 var(--font-body);
+}
+.hm-portal:hover img,
+.hm-portal:focus-visible img { transform: scale(1.035); }
+.hm-portal:focus-visible { outline: 2px solid var(--hm-accent); outline-offset: 3px; }
+
+.hm-today {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: clamp(4.5rem, 7vw, 7rem);
+}
+.hm-panel,
+.hm-news-card {
+  min-width: 0;
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+}
+.hm-panel { min-height: 31rem; display: flex; flex-direction: column; }
+.hm-panel-head {
+  min-height: 7.1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.55rem 1.7rem;
+  border-bottom: 1px solid var(--hm-line);
+}
+.hm-panel-head h2,
+.hm-section-head h2 {
+  margin: .28rem 0 0;
+  color: var(--hm-text);
+  font: 600 clamp(1.8rem, 1.55rem + .45vw, 2.25rem)/1.2 var(--font-display);
+}
+.hm-date { display: flex; align-items: center; gap: .75rem; color: var(--hm-muted); text-align: right; }
+.hm-date strong { color: var(--hm-accent); font: 600 3rem/.9 var(--font-display); font-variant-numeric: tabular-nums; }
+.hm-date span { max-width: 12rem; font: 500 1rem/1.4 var(--font-ui); }
+.hm-legend { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; padding: .8rem 1.7rem 0; }
+.hm-legend span { display: inline-flex; align-items: center; gap: .42rem; color: var(--hm-muted); font: 550 .95rem/1.3 var(--font-ui); letter-spacing: .055em; text-transform: uppercase; }
+.hm-legend i { width: .48rem; height: .48rem; border-radius: 50%; background: var(--hm-green); }
+.hm-legend .is-order i { background: var(--hm-accent); }
+.hm-liturgy-content { flex: 1; display: flex; align-items: center; padding: .55rem 1.7rem .8rem; }
+.hm-liturgy-content > p { margin: 0; color: var(--hm-muted); font: 400 1.3rem/1.55 var(--font-body); }
+.hm-liturgy :is(.home-liturgy-events) { width: 100%; display: grid; }
+.hm-liturgy :is(.home-liturgy-event,.home-liturgy-order-empty) {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem .65rem;
+  padding: .75rem 0;
+  color: var(--hm-text);
+  background: transparent;
+  border-top: 1px solid var(--hm-line);
+  text-decoration: none;
+}
+.hm-liturgy :is(.home-liturgy-event,.home-liturgy-order-empty):first-child { border-top: 0; }
+.hm-liturgy .home-event-calendar { color: var(--hm-muted); font: 600 .95rem/1.3 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
+.hm-liturgy .home-liturgy-event-order .home-event-calendar { color: var(--hm-accent); }
+.hm-liturgy .home-liturgy-event strong { font: 500 1.42rem/1.45 var(--font-body); }
+.hm-liturgy .home-liturgy-event small { width: 100%; color: var(--hm-muted); font: 450 1.05rem/1.4 var(--font-ui); }
+.hm-liturgy .home-liturgy-order-empty { color: var(--hm-muted); font: 400 1.08rem/1.45 var(--font-ui); }
+.hm-panel-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .7rem 1rem; padding: 1rem 1.7rem 1.15rem; border-top: 1px solid var(--hm-line); }
+.hm-panel-links a,
+.hm-section-head a,
+.hm-section-head nav a,
+.hm-news-card > a {
+  color: var(--hm-accent);
+  font: 600 1.05rem/1.4 var(--font-ui);
+  letter-spacing: .035em;
+  text-decoration: none;
+}
+.hm-panel-links a:hover,
+.hm-section-head a:hover,
+.hm-section-head nav a:hover,
+.hm-news-card > a:hover { color: var(--hm-text); }
+
+.hm-quotes { overflow: hidden; }
+.hm-quote-stage { position: relative; flex: 1; min-height: 18rem; }
+.hm-quote {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-content: center;
+  justify-items: center;
+  gap: .9rem;
+  padding: 1.7rem clamp(2rem, 4vw, 4.5rem);
+  color: var(--hm-text);
+  text-align: center;
+  text-decoration: none;
+  animation: hm-quote-in .35s ease both;
+}
+.hm-quote.active { display: grid; }
+.hm-quote-source { color: var(--hm-accent); font: 650 1rem/1.35 var(--font-ui); letter-spacing: .12em; text-transform: uppercase; }
+.hm-quote blockquote { max-width: 45rem; margin: 0; padding: 0; color: var(--hm-text); border: 0; font: 400 clamp(1.55rem, 1.35rem + .35vw, 1.9rem)/1.65 var(--font-body); text-wrap: balance; }
+.hm-quote blockquote::before,
+.hm-quote blockquote::after { content: none; }
+.hm-quote cite { color: var(--hm-muted); font: 450 1rem/1.5 var(--font-ui); letter-spacing: .05em; }
+.hm-quote-link { color: var(--hm-accent); font: 600 .98rem/1.4 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
+.hm-quote-link i { display: inline-block; font-style: normal; transition: transform .2s ease; }
+.hm-quote:hover .hm-quote-link i { transform: translateX(.25rem); }
+.hm-quote.is-changing { opacity: 0; transform: translateY(-.25rem); }
+.hm-quote-dots { display: flex; justify-content: center; gap: .5rem; padding: 1rem 1.5rem 1.2rem; border-top: 1px solid var(--hm-line); }
+.hm-quote-dot { width: .52rem; height: .52rem; padding: 0; border: 0; border-radius: 50%; background: var(--hm-line); cursor: pointer; }
+.hm-quote-dot.active { background: var(--hm-accent); }
+
+.hm-section { margin-top: clamp(5rem, 8vw, 8rem); }
+.hm-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.6rem; }
+.hm-section-head nav { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+.hm-article-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.hm-article-grid .article-card,
+.hm-community-list .article-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--hm-text);
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: none;
+}
+.hm-article-grid .article-card-image,
+.hm-community-list .article-card-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 0; }
+.hm-article-grid .article-card-content { flex: 1; padding: 1.2rem 1.25rem 1.35rem; }
+.hm-article-grid .article-card-title,
+.hm-community-list .article-card-title { color: var(--hm-text); font: 600 1.72rem/1.35 var(--font-display); }
+.hm-article-grid .article-card-summary { color: var(--hm-muted); font: 400 1.2rem/1.6 var(--font-body); }
+.hm-article-grid .article-card:hover,
+.hm-community-list .article-card:hover { border-color: var(--hm-accent); }
+
+.hm-news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.hm-news-card { display: flex; flex-direction: column; padding: 1.25rem; }
+.hm-news-card > header { min-height: 5.7rem; padding: .15rem .15rem 1rem; }
+.hm-news-card > header small { color: var(--hm-accent); font: 600 .98rem/1.4 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
+.hm-news-card > header h3 { margin: .35rem 0 0; color: var(--hm-text); font: 600 1.95rem/1.25 var(--font-display); }
+.hm-news-frame { height: 31rem; overflow: hidden; background: var(--hm-panel-alt); }
+.hm-news-frame iframe { width: 100%; height: 100%; display: block; border: 0; background: transparent; }
+.hm-news-card > a { align-self: flex-end; margin-top: 1rem; }
+.hm-community-list { height: 31rem; display: grid; align-content: start; gap: .75rem; overflow: auto; background: var(--hm-panel-alt); }
+.hm-community-list .article-card { display: grid; grid-template-columns: 8rem minmax(0,1fr); flex: none; }
+.hm-community-list .article-card-image { height: 100%; aspect-ratio: auto; }
+.hm-community-list .article-card-content { padding: .9rem; }
+.hm-community-list .article-card-meta { margin-bottom: .35rem; }
+.hm-community-list .article-card-summary { display: none; }
+
+@keyframes hm-hero-image { from { opacity: 0; transform: scale(1.025); } to { opacity: 1; transform: none; } }
+@keyframes hm-hero-copy { from { opacity: 0; transform: translateY(1.2rem); } to { opacity: 1; transform: none; } }
+@keyframes hm-quote-in { from { opacity: 0; transform: translateY(.35rem); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 1050px) {
+  .hm-portals { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .hm-portal:last-child { grid-column: 1 / -1; min-height: 25rem; }
+  .hm-article-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .hm-news-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .hm-community-card { grid-column: 1 / -1; }
+  .hm-community-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 760px) {
+  .hm-hero { min-height: clamp(38rem, 78svh, 48rem); margin-top: -5.8rem; }
+  .hm-hero > img { object-position: 57% center; }
+  .hm-hero-shade { background: linear-gradient(0deg, rgba(5,12,23,.9) 0%, rgba(5,12,23,.45) 68%, rgba(5,12,23,.2) 100%); }
+  .hm-hero-content { width: calc(100% - 3rem); padding: 10rem 0 3.4rem; }
+  .hm-hero h1 { max-width: 11ch; font-size: clamp(3rem, 12vw, 4.25rem); }
+  .hm-hero-lead { max-width: 31rem; font-size: 1.35rem; }
+  .hm-hero-actions { align-items: stretch; }
+  .hm-button { min-height: 4.4rem; }
+  .hm-main { padding: 1.5rem 1.25rem 5rem; }
+  .hm-portals { grid-template-columns: 1fr; gap: .75rem; }
+  .hm-portal,
+  .hm-portal:last-child { grid-column: auto; min-height: 0; aspect-ratio: 16 / 9; }
+  .hm-portal-copy { padding: 1.4rem; }
+  .hm-portal-copy strong { font-size: 2rem; }
+  .hm-today { grid-template-columns: 1fr; margin-top: 4.25rem; }
+  .hm-panel { min-height: 29rem; }
+  .hm-panel-head { min-height: 6.4rem; padding: 1.25rem; }
+  .hm-panel-head h2 { font-size: 1.7rem; }
+  .hm-date { gap: .55rem; }
+  .hm-date strong { font-size: 2.4rem; }
+  .hm-date span { max-width: 10rem; font-size: .92rem; }
+  .hm-legend { padding: .75rem 1.25rem 0; }
+  .hm-liturgy-content { padding-inline: 1.25rem; }
+  .hm-panel-links { padding: .9rem 1.25rem 1rem; }
+  .hm-quote { padding-inline: 1.5rem; }
+  .hm-section { margin-top: 5rem; }
+  .hm-section-head { align-items: flex-start; flex-direction: column; gap: .8rem; }
+  .hm-section-head h2 { font-size: 1.8rem; }
+  .hm-article-grid { grid-template-columns: 1fr; gap: .8rem; }
+  .hm-news-grid { grid-template-columns: 1fr; }
+  .hm-community-card { grid-column: auto; }
+  .hm-news-frame { height: 29rem; }
+  .hm-community-list { height: auto; max-height: 32rem; grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
+  .hm-hero-content { width: calc(100% - 2.5rem); }
+  .hm-hero-actions { flex-direction: column; }
+  .hm-button { width: 100%; }
+  .hm-panel-head { align-items: flex-start; }
+  .hm-date { flex-direction: column; align-items: flex-end; gap: .25rem; }
+  .hm-date span { max-width: 8rem; }
+  .hm-panel-links { align-items: flex-start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-hero > img,
+  .hm-hero-content,
+  .hm-quote { animation: none; }
+  .hm-portal img { transition: none; }
+}
+</style>
+
+<style is:global>
+body.page-home {
+  --ed-bg: #101b19;
+  --ed-text: #f4efe4;
+  --ed-muted: #aaa99f;
+  --ed-line: rgba(235, 199, 126, .24);
+  --ed-accent: #e7be6b;
+  --ed-panel: #14231f;
+}
+[data-theme="light"] body.page-home {
+  --ed-bg: #f7f4ed;
+  --ed-text: #183e2c;
+  --ed-muted: #59675f;
+  --ed-line: rgba(24, 62, 44, .22);
+  --ed-accent: #a97622;
+  --ed-panel: #f0ece2;
+}
+.home-editorial {
+  width: 100%;
+  margin: 0;
+  color: var(--ed-text);
+  background: var(--ed-bg);
+}
+.ed-today {
+  width: min(118rem, calc(100% - 6rem));
+  margin: 0 auto;
+  padding: clamp(6rem, 9vw, 10rem) 0 clamp(7rem, 10vw, 11rem);
+}
+.ed-today-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid var(--ed-line);
+}
+.ed-kicker {
+  margin: 0 0 .7rem;
+  color: var(--ed-accent);
+  font: 600 1.1rem/1.4 var(--font-ui);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.ed-today-head h2 {
+  margin: 0;
+  color: var(--ed-text);
+  font: 500 clamp(3.8rem, 3rem + 2vw, 6rem)/.98 var(--font-display);
+  letter-spacing: -.025em;
+}
+.ed-date {
+  display: grid;
+  grid-template-columns: auto minmax(0, 16rem);
+  align-items: end;
+  gap: 1.4rem;
+  color: var(--ed-muted);
+  text-align: left;
+}
+.ed-date strong {
+  color: var(--ed-accent);
+  font: 500 clamp(4.5rem, 3.8rem + 1.5vw, 6.3rem)/.82 var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+.ed-date span {
+  padding-bottom: .2rem;
+  font: 500 1.08rem/1.45 var(--font-ui);
+}
+.ed-today-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  min-height: 41rem;
+}
+.ed-liturgy,
+.ed-daily {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+}
+.ed-liturgy { padding-right: clamp(3rem, 5vw, 6rem); }
+.ed-daily {
+  padding-left: clamp(3rem, 5vw, 6rem);
+  border-left: 1px solid var(--ed-line);
+}
+.ed-column-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.ed-column-head > span {
+  min-width: 2.4rem;
+  padding-top: .25rem;
+  color: var(--ed-accent);
+  font: 600 1rem/1 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+}
+.ed-column-head small {
+  color: var(--ed-muted);
+  font: 600 1rem/1.3 var(--font-ui);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.ed-column-head h3 {
+  margin: .4rem 0 0;
+  color: var(--ed-text);
+  font: 500 clamp(2rem, 1.75rem + .5vw, 2.5rem)/1.2 var(--font-display);
+}
+.ed-liturgy-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 2.8rem 0;
+}
+.ed-liturgy-content > p {
+  margin: 0;
+  color: var(--ed-muted);
+  font: 400 1.35rem/1.6 var(--font-body);
+}
+.ed-liturgy .home-liturgy-events { width: 100%; }
+.ed-liturgy :is(.home-liturgy-event, .home-liturgy-order-empty) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1rem;
+  padding: 1.5rem 0;
+  color: var(--ed-text);
+  border: 0;
+  border-bottom: 1px solid var(--ed-line);
+  background: transparent;
+  text-decoration: none;
+}
+.ed-liturgy :is(.home-liturgy-event, .home-liturgy-order-empty):last-child { border-bottom: 0; }
+.ed-liturgy .home-event-calendar {
+  color: var(--ed-muted);
+  font: 600 1rem/1.35 var(--font-ui);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.ed-liturgy .home-liturgy-event-order .home-event-calendar { color: var(--ed-accent); }
+.ed-liturgy .home-liturgy-event strong {
+  color: var(--ed-text);
+  font: 500 1.55rem/1.45 var(--font-body);
+}
+.ed-liturgy .home-liturgy-event small {
+  width: 100%;
+  color: var(--ed-muted);
+  font: 450 1.08rem/1.4 var(--font-ui);
+}
+.ed-liturgy .home-liturgy-order-empty {
+  color: var(--ed-muted);
+  font: 450 1.15rem/1.45 var(--font-ui);
+}
+.ed-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.4rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--ed-line);
+}
+.ed-links a,
+.ed-read-link {
+  color: var(--ed-accent);
+  font: 600 1.05rem/1.4 var(--font-ui);
+  letter-spacing: .04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.ed-links a:hover,
+.ed-quote-slide:hover .ed-read-link { color: var(--ed-text); }
+.ed-quote-stage {
+  position: relative;
+  flex: 1;
+  min-height: 25rem;
+  margin-top: 1.8rem;
+}
+.ed-quote-slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-content: center;
+  gap: 1.2rem;
+  padding: 1rem 0 2rem;
+  color: var(--ed-text);
+  text-decoration: none;
+}
+.ed-quote-slide.active {
+  display: grid;
+  animation: ed-quote-in .35s ease both;
+}
+.ed-quote-source {
+  color: var(--ed-accent);
+  font: 600 1.05rem/1.35 var(--font-ui);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.ed-quote-slide blockquote {
+  max-width: 52rem;
+  margin: 0;
+  padding: 0;
+  color: var(--ed-text);
+  border: 0;
+  font: 400 clamp(1.8rem, 1.55rem + .55vw, 2.35rem)/1.55 var(--font-body);
+  text-wrap: balance;
+}
+.ed-quote-slide blockquote::before,
+.ed-quote-slide blockquote::after { content: none; }
+.ed-quote-slide cite {
+  color: var(--ed-muted);
+  font: 450 1.08rem/1.5 var(--font-ui);
+  letter-spacing: .035em;
+}
+.ed-read-link { margin-top: .3rem; }
+.ed-read-link i { font-style: normal; }
+.ed-quote-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--ed-line);
+}
+.ed-quote-tabs button {
+  min-height: 4.5rem;
+  padding: .8rem .7rem;
+  color: var(--ed-muted);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font: 550 1rem/1.3 var(--font-ui);
+  cursor: pointer;
+}
+.ed-quote-tabs button:hover { color: var(--ed-text); }
+.ed-quote-tabs button.active {
+  color: var(--ed-accent);
+  border-bottom-color: var(--ed-accent);
+}
+.ed-quote-tabs button:focus-visible {
+  outline: 2px solid var(--ed-accent);
+  outline-offset: -2px;
+}
+@keyframes ed-quote-in {
+  from { opacity: 0; transform: translateY(.5rem); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 760px) {
+  .ed-today { width: calc(100% - 3.6rem); padding: 5rem 0 6rem; }
+  .ed-today-head { align-items: flex-start; }
+  .ed-today-head h2 { font-size: 4.2rem; }
+  .ed-date { grid-template-columns: auto 9rem; gap: .9rem; }
+  .ed-date strong { font-size: 4.4rem; }
+  .ed-date span { font-size: .92rem; }
+  .ed-today-grid { grid-template-columns: 1fr; min-height: 0; }
+  .ed-liturgy { padding: 3rem 0 4rem; }
+  .ed-daily { padding: 3.5rem 0 0; border-top: 1px solid var(--ed-line); border-left: 0; }
+  .ed-liturgy-content { min-height: 18rem; padding: 2rem 0; }
+  .ed-quote-stage { min-height: 27rem; }
+  .ed-quote-slide blockquote { font-size: 1.72rem; }
+  .ed-quote-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 430px) {
+  .ed-today-head { gap: 1.5rem; }
+  .ed-today-head h2 { font-size: 3.6rem; }
+  .ed-date { flex: 0 0 10.5rem; display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; }
+  .ed-date strong { font-size: 4rem; }
+  .ed-date span { width: 10.5rem; max-width: none; line-height: 1.3; text-align: right; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-quote-slide.active { animation: none; }
+}
+</style>
+
+<style is:global>
+.page-home .og-today-dock {
+  --ed-text: #f6f0e4;
+  --ed-muted: #c4beb1;
+  --ed-line: rgba(231, 190, 107, .2);
+  --ed-accent: #e7be6b;
+  position: absolute;
+  inset: 0 50% 0 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: clamp(7.5rem, 10vh, 9rem) clamp(3rem, 4vw, 5.5rem) clamp(2.5rem, 5vh, 4rem);
+  color: var(--ed-text);
+  background: linear-gradient(90deg, rgba(12, 10, 9, .9) 0%, rgba(12, 10, 9, .82) 76%, rgba(12, 10, 9, .62) 100%);
+}
+.og-today-dock .ed-today {
+  width: min(52rem, 100%);
+  margin: 0 auto;
+  padding: 0;
+}
+.og-today-dock .ed-today-head {
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-color: var(--ed-line);
+}
+.og-today-dock .ed-kicker {
+  margin-bottom: .2rem;
+  color: var(--ed-accent);
+  font-size: .78rem;
+}
+.og-today-dock .ed-today-head h2 {
+  color: var(--ed-text);
+  font-size: clamp(2.4rem, 2rem + .7vw, 3.15rem);
+}
+.og-today-dock .ed-date {
+  grid-template-columns: auto minmax(0, 10rem);
+  gap: .9rem;
+  color: var(--ed-muted);
+}
+.og-today-dock .ed-date strong {
+  color: var(--ed-accent);
+  font-size: 3.25rem;
+}
+.og-today-dock .ed-date span { font-size: .78rem; }
+.og-today-dock .ed-today-grid {
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+.og-today-dock :is(.ed-liturgy, .ed-daily) { padding: 1.15rem 0 0; }
+.og-today-dock .ed-daily {
+  margin-top: .9rem;
+  border-top: 1px solid var(--ed-line);
+  border-left: 0;
+}
+.og-today-dock .ed-column-head { gap: 0; }
+.og-today-dock .ed-column-head small { color: var(--ed-accent); font-size: .74rem; }
+.og-today-dock .ed-column-head h3 {
+  margin-top: .2rem;
+  color: var(--ed-text);
+  font-size: 1.35rem;
+}
+.og-today-dock .ed-liturgy-content {
+  min-height: 6.7rem;
+  padding: .35rem 0;
+}
+.og-today-dock .ed-liturgy :is(.home-liturgy-event, .home-liturgy-order-empty) {
+  gap: .4rem .65rem;
+  padding: .42rem 0;
+  border-color: var(--ed-line);
+}
+.og-today-dock .ed-liturgy .home-event-calendar { color: var(--ed-muted); font-size: .78rem; }
+.og-today-dock .ed-liturgy .home-liturgy-event-order .home-event-calendar { color: var(--ed-accent); }
+.og-today-dock .ed-liturgy .home-liturgy-event strong { color: var(--ed-text); font-size: 1.08rem; }
+.og-today-dock .ed-liturgy .home-liturgy-event small { color: var(--ed-muted); font-size: .86rem; }
+.og-today-dock .ed-liturgy .home-liturgy-order-empty { color: var(--ed-muted); font-size: .9rem; }
+.og-today-dock .ed-links {
+  gap: .7rem 1.6rem;
+  padding-top: .65rem;
+  border-color: var(--ed-line);
+}
+.og-today-dock :is(.ed-links a, .ed-read-link) { color: var(--ed-accent); font-size: .74rem; }
+.og-today-dock .ed-quote-stage {
+  min-height: 10.7rem;
+  margin-top: .2rem;
+}
+.og-today-dock .ed-quote-slide { gap: .48rem; padding: .35rem 0 .7rem; }
+.og-today-dock .ed-quote-source { color: var(--ed-accent); font-size: .74rem; }
+.og-today-dock .ed-quote-slide blockquote {
+  max-width: 46rem;
+  color: var(--ed-text);
+  font-size: clamp(1.16rem, 1.05rem + .2vw, 1.35rem);
+  line-height: 1.5;
+}
+.og-today-dock .ed-quote-slide cite { color: var(--ed-muted); font-size: .74rem; }
+.og-today-dock .ed-quote-tabs { border-color: var(--ed-line); }
+.og-today-dock .ed-quote-tabs button {
+  min-height: 2.8rem;
+  color: var(--ed-muted);
+  font-size: .72rem;
+}
+.og-today-dock .ed-quote-tabs button:hover { color: var(--ed-text); }
+.og-today-dock .ed-quote-tabs button.active {
+  color: var(--ed-accent);
+  border-bottom-color: var(--ed-accent);
+}
+
+@media (max-width: 900px) {
+  .page-home .og-banner {
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+  .page-home .og-slide,
+  .page-home .og-banner::after { height: 76svh; bottom: auto; }
+  .page-home .og-masthead {
+    order: 1;
+    width: 100%;
+    min-height: 76svh;
+  }
+  .page-home .og-today-dock {
+    position: relative;
+    inset: auto;
+    order: 2;
+    width: 100%;
+    padding: 4.5rem 2.4rem 5rem;
+    background: #15110f;
+  }
+  .og-today-dock .ed-today { width: min(62rem, 100%); }
+}
+
+@media (max-width: 700px) {
+  .page-home .og-slide,
+  .page-home .og-banner::after,
+  .page-home .og-masthead { height: clamp(41rem, 72svh, 47rem); min-height: clamp(41rem, 72svh, 47rem); }
+  .page-home .og-today-dock { padding: 3.2rem 1.8rem 3.6rem; }
+  .og-today-dock .ed-today-head { align-items: flex-start; }
+  .og-today-dock .ed-date {
+    flex: 0 0 9.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .35rem;
+  }
+  .og-today-dock .ed-date strong { font-size: 3rem; }
+  .og-today-dock .ed-date span { width: 9.5rem; text-align: right; }
+  .og-today-dock .ed-quote-stage { min-height: 13.5rem; }
+  .og-today-dock .ed-quote-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 </style>

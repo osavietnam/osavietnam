@@ -15,7 +15,7 @@ Là một người thợ ở làng Na-da-rét, thánh Giu-se là mẫu gương n
 
 </div>
 
-*Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.**
 
 Con người luôn ra sức vận dụng lao động và óc sáng tạo để làm cho cuộc sống phát triển rộng rãi hơn. Nhưng ngày nay, nhất là nhờ có khoa học và kỹ thuật yểm trợ, con người đã và còn đang không ngừng mở rộng sức thống tri của mình hầu như trên toàn cõi thiêu nhiên. Đặc biệt, các phương tiện trao đổi đa dạng giữa các quốc gia ngày càng gia tăng, nên gia đình nhân loại trên toàn thế giới dần dần nhận thức chính mình, dần dẫn kết thành một cộng đồng duy nhất. Hậu quả là ngày nay, nhờ sự cần lao của chính mình, con người tự cung cấp được nhiều phẩm vật mà xưa kia họ thường chờ đợi từ quyền năng thượng giới.
 

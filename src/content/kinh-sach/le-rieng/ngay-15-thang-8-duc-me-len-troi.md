@@ -15,7 +15,7 @@ order: 125
 
 </div>
 
-*Trích Tông hiến “Thiên Chúa vô cùng đại lượng” của đức giáo hoàng Pi-ô XII.*
+**Trích Tông hiến “Thiên Chúa vô cùng đại lượng” của đức giáo hoàng Pi-ô XII.**
 
 Khi giảng dạy hay diễn thuyết cho dân ngày lễ Đức Mẹ Thiên Chúa hồn xác lên trời, các thánh giáo phụ và các bậc đại tiến sĩ vẫn nói về sự kiện Đức Ma-ri-a được đưa lên trời như là một chân lý đã được các Ki-tô hữu hiểu biết và tin nhận. Các ngài đã giải thích rõ hơn về sự kiện đó, dựa vào những lý lẽ sâu sắc hơn để trình bày ý nghĩa và bản chất của sự kiện, nhất là cho mọi người thấy rõ rằng : lễ này không phải chỉ để kính nhớ thân xác Đức Trinh Nữ Ma-ri-a sau khi chết không bị hư nát chút nào, mà còn kính nhớ việc Mẹ chiến thắng tử thần và được tôn vinh trên trời cũng giống như Đức Giê-su Ki-tô, Con Một của Mẹ.
 

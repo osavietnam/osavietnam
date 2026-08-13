@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 6 Thường Niên"
 order: 41
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về thư thứ nhất của thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về thư thứ nhất của thánh Gio-an.**
 
 Thiên Chúa đã hứa cho ta điều gì ? Người hứa rằng : Chúng ta sẽ nên giống như Người, vì Người thế nào, chúng ta sẽ thấy Người như vậy.Ngôn ngữ diễn tả như thế là hết mức, nhưng lòng cũng phải suy tưởng những điều khác nữa. Điều thánh Gio-an đã nói sánh sao được với thực tại Thiên Chúa hứa ? Phương chi là chúng ta, những con người kém xa thánh Gio-an về công đức, chúng ta nói gì được ?
 

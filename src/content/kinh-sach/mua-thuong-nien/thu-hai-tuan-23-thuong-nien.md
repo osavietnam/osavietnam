@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 23 Thường Niên"
 order: 156
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.**
 
 Ai có lòng trong sạch thì được Thiên Chúa hứa ban phúc nhìn thấy Người. Đó là điều phải lẽ. Quả vậy, con mắt vẩn đục không thể nhìn thấy vẻ huy hoàng của ánh sáng chân thật, và điều là niềm vui của những tâm hồn trong sạch thì lại là hình phạt cho những tâm hồn nhơ bẩn. Vậy, đừng để cho những sự phù phiếm thế gian làm cho ra tối tăm mù mịt, và phải thanh tẩy tâm hồn cho sạch mọi thứ cáu nhơ gian ác, hầu được yên hàn chiêm ngưỡng Thiên Chúa cao sang.
 

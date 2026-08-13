@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 2 Thường Niên"
 order: 12
 ---
 
-*Trích thư thánh Phun-gien-xi-ô, giám mục Rút-pê.*
+**Trích thư thánh Phun-gien-xi-ô, giám mục Rút-pê.**
 
 Trước hết, phải để ý đến diều này : trong câu kết những lời nguyện chúng ta đọc : Nhờ Đức Giê-su Ki-tô, Con Chúa, Chúa chúng con... chứ không đọc : nhờ Chúa Thánh Thần. Hội Thánh thường cầu nguyện như thế, không phải vô cớ, mà vì mầu nhiệm sau đây : con người Giê-su Ki-tô đã trở nên Đấng Trung Gian giữa Thiên Chúa và loài người, trở nên vị tư tế đời đời theo phẩm trật Men-ki-xê-đê. Khi đổ máu mình ra mà hiến tế chính mình, Đức Giê-su Ki-tô đã vào cung thánh chỉ một lần, không phải là cung thánh do tay người làm ra, vì cung thánh ấy chỉ là hình ảnh của cung thánh thật, nhưng Người vào chính cõi trời, nơi Người ngự bên hữu Thiên Chúa mà chuyển cầu cho chúng ta.
 

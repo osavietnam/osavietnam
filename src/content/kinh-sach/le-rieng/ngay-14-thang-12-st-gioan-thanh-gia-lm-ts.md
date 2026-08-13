@@ -6,7 +6,7 @@ source: "Thánh Gioan Thánh Giá, Lm. và Ts."
 excerpt: "Spiritual Canticle Red. B, str. 36-37"
 liturgy: "Ngày 14 Tháng 12: Thánh Gioan Thánh Giá, Lm. , Ts."
 rank: "memorial"
-order: 202
+order: 203
 ---
 
 <div class="ks-tieu-su">
@@ -15,7 +15,7 @@ Thánh Gio-an Thánh Giá chào đời năm 1542 ở Phon-ti-vê-rốt, nước 
 
 </div>
 
-*Trích bài ca thiêng liêng của thánh Gio-an Thánh Giá, linh mục.*
+**Trích bài ca thiêng liêng của thánh Gio-an Thánh Giá, linh mục.**
 
 Dù các bậc thánh sư đã khám phá ra bao điều mầu nhiệm, lạ lùng, đồng thời nhiều tâm hồn đạo đức ngay ở đời này đã được cảm nghiệm những điều ấy, thế nhưng còn có nhiều điều cần phải nói ra, cần được hiểu biết.
 

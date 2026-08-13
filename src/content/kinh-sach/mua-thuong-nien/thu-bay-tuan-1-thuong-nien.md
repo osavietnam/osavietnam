@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 1 Thường Niên"
 order: 7
 ---
 
-*Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Chúng ta hãy kiên trì theo dõi Phúc Âm của Thiên Chúa trong lịch sử, xem Người đã thi ân giáng phúc như thế nào. Chúng ta hãy suy nghĩ những gì đã xảy ra từ thuở ban đầu. Nhờ đâu mà tổ phụ chúng ta là ông Áp-ra-ham đã được hưởng phúc lành ? Không phải vì ông đã nhờ đức tin thi hành sự công chính và hành động theo sự thật hay sao ? Với niềm tín thác vào Thiên Chúa, ông I-xa-ác đã biết trước chuyện sắp xảy ra, đã tự nguyện để mình được hiến dâng mình làm hy lễ. Vì sợ anh, ông Gia-cóp đã đành phải rời bỏ xứ sở để đi đến với ông La-ban và phục vụ ông này ; sau đó, Thiên Chúa đã ban cho ông Gia-cóp làm tổ phụ mười hai chi tộc Ít-ra-en.
 

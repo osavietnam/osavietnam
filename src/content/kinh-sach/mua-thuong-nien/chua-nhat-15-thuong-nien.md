@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 15 Thường Niên"
 order: 99
 ---
 
-*Mở đầu khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Mở đầu khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Hằng ngày chúng tôi đã giảng dạy cho anh em về cách ăn thói ở, khi đọc tiểu sử các tổ phụ hoặc những điều sách Châm Ngôn truyền dạy, để một khi được dạy dỗ và huấn luyện nhờ những điều đó, anh em tập thói quen đi vào lối của tiền nhân và theo gót các ngài mà vâng theo các sấm ngôn của Chúa, Như thế, sau khi đã được đổi mới bằng bí tích Thánh Tẩy, anh em biết sống xứng hợp với đời sống của những người đã được thanh tẩy.
 

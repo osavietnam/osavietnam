@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 19 Thường Niên"
 order: 127
 ---
 
-*Trích sách Đối thoại của thánh Ca-ta-ri-na Xi-ê-na, trinh nữ, về Chúa quan phòng.*
+**Trích sách Đối thoại của thánh Ca-ta-ri-na Xi-ê-na, trinh nữ, về Chúa quan phòng.**
 
 Lạy Chúa Giê-su rất dịu hiền, xin đưa mắt nhân từ mà nhìn đến Hội Thánh là dân Chúa, đồng thời cũng là nhiệm thể của Chúa. Vì danh thánh Chúa càng được vinh quang, khi Chúa tha thứ cho một đoàn vô số thụ tạo mà Chúa đã dựng nên, hơn là chỉ tha thứ cho một mình con là kẻ khốn cùng, kẻ đã xúc phạm nặng nề đến quyền uy cao cả của Chúa. Làm sao con có thể thấy yên tâm khi thấy con được hưởng sự sống, còn dân Chúa lại chìm trong sự chết ? Làm sao con có thể thấy yên hàn khi thấy vì những lỗi lầm của con và của các thụ tạo khác Chúa đã dựng nên, mà bóng đêm tội lỗi lại xuất hiện trong Hội Thánh là hiền thê yêu quý của Chúa ?
 

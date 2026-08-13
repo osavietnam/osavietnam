@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 29 Thường Niên"
 order: 201
 ---
 
-*Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.*
+**Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.**
 
 Có lẽ anh còn muốn tìm hiểu tại sao thánh Phao-lô tông đồ nói : Chúng ta không biết cầu nguyện thế nào cho phải, vì không thể nào tin được rằng chính người cũng như những kẻ được người dạy bảo như thế lại không biết đến Kinh Lạy Cha.
 

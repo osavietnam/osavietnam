@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Cung Hiến Thánh Đường"
 order: 1
 ---
 
-*Trích bài giảng của linh mục Ô-ri-giê-nê về sách Giô-suê.*
+**Trích bài giảng của linh mục Ô-ri-giê-nê về sách Giô-suê.**
 
 Tất cả chúng ta tin vào Đức Giê-su Ki-tô, nên chúng ta được gọi là những viên đá sống động, như lời Kinh Thánh công bố rằng : Anh em là những viên đá sống động được dùng để xây ngôi đền thờ của Thánh Thần, trong chức tư tế thánh, để anh em dùng những của thiêng liêng đáng Thiên Chúa chấp nhận, nhờ Đức Giê-su Ki-tô.
 

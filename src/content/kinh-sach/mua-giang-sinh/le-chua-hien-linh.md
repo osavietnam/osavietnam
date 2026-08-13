@@ -9,7 +9,7 @@ rank: "solemn"
 order: 15
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Thiên Chúa quan phòng đầy nhân hậu, vào thời cuối cùng, đã muốn đến cứu thế gian đang hư mất. Người quyết định thực hiện ơn cứu độ cho muôn dân trong Đức Ki-tô.
 

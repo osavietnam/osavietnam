@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 5 Mùa Chay"
 order: 42
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Thiên Chúa đã dùng Ngôi Lời của Người để tạo thành vũ trụ ; Thiên Chúa không thể ban cho nhân loại ân huệ nào lớn hơn là làm cho Ngôi Lời trở nên Đầu của nhân loại và nhân loại trở nên chi thể của Ngôi Iời , tức là Đức Ki-tô, khiến Đức Ki-tô vừa !à Con Thiên Chúa vừa là con loài người. Đức Ki-tô là Thiên Chúa duy nhất cùng với Chúa Cha, và cũng là một người ở giữa loài người. Bởi đó, khi thân thưa với Thiên Chúa qua lời cầu nguyện, chúng ta không tách biệt Chúa Con ra khỏi Chúa Cha. Cũng vì vậy, khi Thân Thể mầu nhiệm của Đức Ki-tô là Hội Thánh cầu nguyện, thì không tách biệt Đấng là đầu với Hội Thánh là thân. Cuối cùng, Đức Giê-su Ki-tô, Con Thiên Chúa, Chúa chúng ta, Đấng Cứu Chuộc duy nhất của thân thể mầu nhiệm, là Đấng vừa cầu nguyện cho chúng ta, vừa cầu nguyện trong chúng ta, Hại là Đấng chúng ta kêu cầu.
 

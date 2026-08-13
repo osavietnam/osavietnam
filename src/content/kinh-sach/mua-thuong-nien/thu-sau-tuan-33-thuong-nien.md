@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 33 Thường Niên"
 order: 230
 ---
 
-*Trích khảo luận của thánh Gio-an Ơ-đơ, về vương quốc của Đức Ki-tô.*
+**Trích khảo luận của thánh Gio-an Ơ-đơ, về vương quốc của Đức Ki-tô.**
 
 Các tình trạng mà Đức Giê-su đã mang lấy trong đời Người và các mầu nhiệm đã diễn ra nơi Người, chúng ta phải mang lấy và thực hiện cho đầy đủ nơi chúng ta, phải xin Người thực hiện và hoàn thành nơi chúng ta cũng như nơi Hội Thánh Người. Vì chưng, các mầu nhiệm diễn ra nơi Đức Giê-su chưa đạt tới mức vẹn toàn và hoàn tất nơi con người Đức Giê-su, thì vẫn chưa hoàn tất và chưa được vẹn toàn nơi chúng ta là chi thể cũng như nơi Hội Thánh là thân thể mầu nhiệm của Người. Thực vậy, Con Thiên Chúa đã có ý định cho chúng ta và Hội Thánh Người được thông phần vào các mầu nhiệm của Người, như thể Người muốn các mầu nhiệm ấy được lan rộng và nối tiếp.
 

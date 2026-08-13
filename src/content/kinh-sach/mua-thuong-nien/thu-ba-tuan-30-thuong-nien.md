@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 30 Thường Niên"
 order: 206
 ---
 
-*Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Anh em thân mến, khi cho Đức Giê-su Ki-tô từ cõi chết sống lại, Thiên Chúa đã làm cho Người trở nên hoa trái đầu mùa của ơn phục sinh : biến cố đó giúp ta hiểu rằng Thiên Chúa không ngừng tỏ cho ta thấy sự sống lại mai sau như thế nào. Anh em thân mến, chúng ta hãy ngắm nhìn sự sống lại vẫn hằng diễn ra đúng lúc. Ngày và đêm cho chúng ta thấy sự sống lại. Màn đêm buông xuống, ngày mới bừng lên ; ngày qua đi rồi đêm lại tới. Chúng ta hãy nhìn xem hoa màu ruộng đất, hạt giống này nở ra sao, và bằng cách nào ? Người gieo giống ra đi, gieo xuống đất một số hạt giống ; những hạt trần trụi và khô cứng ấy rơi xuống đất, mục nát đi ; nhưng rồi từ sự mục nát đó, Chúa quan phòng uy linh cao cả đã làm cho chúng sống lại ; từ một hạt sinh ra nhiều và kết thành hoa trái.
 

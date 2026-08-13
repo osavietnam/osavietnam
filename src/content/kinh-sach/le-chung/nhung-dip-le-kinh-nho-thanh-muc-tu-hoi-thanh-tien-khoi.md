@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Mục Tử (Hội Thánh tiên k
 order: 9
 ---
 
-*Trích khảo luận của thánh Hi-la-ri-ô, giám mục, về Thánh Vịnh 126.*
+**Trích khảo luận của thánh Hi-la-ri-ô, giám mục, về Thánh Vịnh 126.**
 
 Ví như Chúa chẳng xây nhà, thợ nề vất vả cũng là uổng công. Anh em là đền thờ của Thiên Chúa và Chúa Thánh Thần của Thiên Chúa ngự trong anh em. Ngôi nhà này, ngôi đền thờ này đầy lời dạy dỗ và ơn thánh của Người, và cũng chứa đầy tình thương chí thánh của Người. Chính vị ngôn sứ cũng làm chứng về ngôi đền thờ này như sau : Thánh điện của Người đầy công minh. Con người thánh thiện, công minh, tiết độ là đền thờ cho Thiên Chúa ngự.
 

@@ -2,14 +2,20 @@
 title: "Nỗi Sợ Hãi và Tình Yêu Thuần Khiết"
 subtitle: "Niềm kính sợ phát sinh từ tình yêu"
 author: "Thánh Augustinô"
+authorDetails:
 category: "Chú Giải Thánh Vịnh"
-date: 2026-07-26
 excerpt: "Tình yêu hoàn hảo loại trừ nỗi sợ hãi, nhưng làm nảy sinh niềm kính sợ thuần khiết: sợ xa cách Thánh Nhan Thiên Chúa."
+date: "2026-07-26"
+tags:
+  - "Tình yêu"
+  - "Kính sợ Thiên Chúa"
+  - "Cầu nguyện"
+  - "Thánh Vịnh 127"
 image: "../../../assets/linh-dao/noi-so-hai-va-tinh-yeu-thuan-khiet-thumbnail.jpg"
 heroImage: "../../../assets/linh-dao/noi-so-hai-va-tinh-yeu-thuan-khiet-hero.jpg"
-tags: ["Tình yêu", "Kính sợ Thiên Chúa", "Cầu nguyện", "Thánh Vịnh 127"]
+language: "vi"
 featured: false
-draft: false
+draft: true
 ---
 Chúng ta đã được tháp nhập vào thân thể Đức Kitô; Chúng ta đã trở nên chi thể của Người. Vậy, hãy bước đi trong đường lối của Chúa và kính sợ Người bằng một niềm kính sợ thuần khiết, tồn tại mãi mãi, cho đến muôn đời. Có một nỗi sợ hãi bị loại trừ bởi tình yêu, như thánh Gioan đã nói:
 

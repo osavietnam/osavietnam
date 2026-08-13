@@ -11,9 +11,9 @@ draft: false
 ---
 Thánh nhân sinh tại Bồ-đào-nha năm 1495. Sau đời binh nghiệp đầy nguy hiểm, người hiến thân hoàn toàn để phục vụ các bệnh nhân, ao ước được những điều tốt lành hơn. Người đã lập một bệnh viện ở Gơ-ra-na-đa và được một nhóm các bạn cùng tham gia công việc. Đó là những người sau này làm nên dòng Trợ Thế thánh Gio-an Thiên Chúa. Nổi bật hơn cả là lòng bác ái của thánh nhân đối với những người cùng khốn và bệnh tật. Người qua đời ở Gơ-ra-na-đa năm 1550. 
 
-Đức Ki-tô tiên liệu mọi sự vì Người vốn trung tín
+*Đức Ki-tô tiên liệu mọi sự vì Người vốn trung tín*
 
-*Trích thư của thánh Gio-an Thiên Chúa, tu sĩ.* 
+**Trích thư của thánh Gio-an Thiên Chúa, tu sĩ.**
 
  
 

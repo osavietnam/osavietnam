@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 3 Mùa Chay, Năm B"
 order: 20
 ---
 
-*Trích chú giải của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích chú giải của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Các ông cứ phá huỷ đền thờ này đi, nội ba ngày, tôi sẽ xây dựng lại. Theo lời tác giả sách Tin Mừng, Đền thờ Đức Giê-su muốn nói ở đây là chính thân thể Người. Và điều rõ ràng là Chúa đã chỗi dậy, sau khi đã chịu chết được ba ngày. Nếu người Do-thái không nhận biết điều này, đó là ân huệ vì họ ở bên ngoài ; còn đối với chúng ta, điều đó thật hiển nhiên, bởi vì chúng ta biết mình tin vào ai. Sắp tới đây, chúng ta sẽ mừng đại lễ hằng năm kỷ niệm biến cố đền thờ này bị phá huỷ và được tái thiết.
 

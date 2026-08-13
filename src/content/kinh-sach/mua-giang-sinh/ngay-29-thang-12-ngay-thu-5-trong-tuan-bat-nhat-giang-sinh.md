@@ -9,7 +9,7 @@ rank: "none"
 order: 5
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Thiên Chúa, Đấng cứu độ chúng ta, đã biểu lộ lòng nhân hậu và lòng yêu thương của Người. Chúng ta hãy tạ ơn Thiên Chúa vì Người đã cho chúng ta được đầy tràn yên ủi trong cuộc lữ hành, trong nơi lưu đày và khốn cùng này.
 

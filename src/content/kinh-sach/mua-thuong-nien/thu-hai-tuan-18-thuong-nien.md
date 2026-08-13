@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 18 Thường Niên"
 order: 121
 ---
 
-*Trích thư được coi là của thánh Ba-na-ba.*
+**Trích thư được coi là của thánh Ba-na-ba.**
 
 Thiên Chúa đã bãi bỏ hy lễ của luật cũ, để khi không còn ách bó buộc đó nữa, thì Đức Ki-tô Chúa chúng ta lập ra luật mới, dựa trên một hiến lễ không do tay người phàm. Thiên Chúa đã phán với dân Ít-ra-en : Khi đưa cha ông các ngươi ra khỏi đất Ai-cập, Ta đã chẳng nói gì với chúng, chẳng truyền dạy chúng điều chi về lễ toàn thiêu và lễ hy sinh cả. Những điều Ta truyền cho chúng là : chớ để lòng mưu điều ác hại nhau, và đừng ưa chuộng thề gian.
 

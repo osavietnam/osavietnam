@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 6 Thường Niên"
 order: 39
 ---
 
-*Trích bài chú giải của đức cha Pơ-rơ-cô-pi-ô, giám mục Ga-da, về sách Châm Ngôn.*
+**Trích bài chú giải của đức cha Pơ-rơ-cô-pi-ô, giám mục Ga-da, về sách Châm Ngôn.**
 
 Đức Khôn Ngoan đã xây cất nhà mình. Quyền năng tự tại của Thiên Chúa cũng là Cha đã dựng cho mình một ngôi nhà riêng là toàn thể vũ trụ ; Người ngự trong đó bằng sức mạnh của mình. Quyền năng đó cũng làm nên con người có bản tính vừa hữu hình vừa vô hình, được tạo dựng giống hình ảnh Thiên Chúa.
 

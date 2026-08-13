@@ -1,9 +1,15 @@
 {
   "home": {
-    "imageUrl": "/images/banners/banner-our-lady-of-good-council.jpg",
-    "altText": "Bức tranh Our Lady of Good Counsel",
-    "quoteText": "\"Người bảo gì, các anh cứ việc làm theo.\"",
-    "quoteCite": "— Ga 2,5 —"
+    "imageUrl": "/images/banners/banner-pope-leo.png",
+    "altText": "Dòng Thánh Augustinô",
+    "quoteText": "Đồng Tâm Nhất Trí Hướng Về Thiên Chúa",
+    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-luat/#tu-luat-3\"><em>Tu Luật</em>, 3</a>"
+  },
+  "news": {
+    "imageUrl": "/images/on-goi/banner.avif",
+    "altText": "Tin tức Dòng Thánh Augustinô",
+    "quoteText": "",
+    "quoteCite": ""
   },
   "bai-viet-triet-hoc": {
     "imageUrl": "/images/banners/banner-triet-hoc.jpg",
@@ -13,7 +19,7 @@
   },
   "bai-viet-than-hoc": [
     {
-      "imageUrl": "/images/banners/banner-than-hoc.jpg",
+      "imageUrl": "/images/banners/images-2-.jfif",
       "altText": "Thánh Augustinô suy niệm về Ba Ngôi",
       "quoteText": "\"Thần học — mầu nhiệm sự sống nội tại của Thiên Chúa Ba Ngôi.\"",
       "quoteCite": "— x. GLHTCG 236"
@@ -26,14 +32,14 @@
     }
   ],
   "bai-giang-suy-niem": {
-    "imageUrl": "/images/banners/TolleLege.webp",
+    "imageUrl": "/images/banners/64e5087c1eda867f19f7ec5d_St-Augustine-in-Prayer-lg-2-.webp",
     "altText": "Thánh Augustinô cầu nguyện với Thánh Vịnh",
     "quoteText": "\"Khi cầu nguyện cùng Thiên Chúa bằng thánh vịnh và thánh ca, anh em hãy suy niệm trong lòng điều mà môi miệng cất lên.\"",
     "quoteCite": "— Thánh Augustinô, <a href=\"/tu-luat/#tu-luat-12\"><em>Tu Luật</em>, 12</a>"
   },
   "readings": {
-    "imageUrl": "/images/banners/TolleLege.webp",
-    "altText": "Tolle Lege Augustine",
+    "imageUrl": "/images/banners/02.01-Augustine.webp",
+    "altText": "Augustine",
     "quoteText": "\"Ước gì những bài đọc linh thánh cùng những lời tuyên sấm Chúa âm vang nơi đôi tai, dệt thành tổ trú ngụ trong tâm trí chúng con.\"",
     "quoteCite": "— Thánh Augustinô, <em>Bài giảng</em> 343,1"
   },
@@ -44,8 +50,8 @@
     "quoteCite": "— Ga 2,5"
   },
   "saints": {
-    "imageUrl": "/images/banners/banner-our-lady-of-good-council.jpg",
-    "altText": "Đức Mẹ Chỉ Bảo Đàng Lành — bổn mạng Dòng Âu-Tinh",
+    "imageUrl": "/images/banners/augustinian-saints.png",
+    "altText": "Các Thánh Dòng Thánh Augustinô",
     "quoteText": "\"Vì những ai Người đã biết từ trước, thì Người đã tiền định cho họ nên đồng hình đồng dạng với Con của Người, để Con của Người làm trưởng tử giữa một đàn em đông đúc.\"",
     "quoteCite": "— Rm 8,29"
   },
@@ -53,29 +59,47 @@
     "imageUrl": "/images/banners/TolleLege.webp",
     "altText": "Tolle Lege — Hãy cầm lấy mà đọc",
     "quoteText": "\"Mục đích của Hội Dòng, là hiệp nhất hài hòa với nhau trong tình huynh đệ và tình bạn thiêng liêng, tìm kiếm và thờ lạy Thiên Chúa, và làm việc để phục vụ dân Ngài.\"",
-    "quoteCite": "— <em>Hiến chương</em>, số 13"
+    "quoteCite": "— <em>Hiến Pháp</em>, số 13"
   },
   "tu-luat": {
-    "imageUrl": "/images/banners/TolleLege.webp",
-    "altText": "Tolle Lege — Hãy cầm lấy mà đọc",
+    "imageUrl": "/images/banners/images-1-.jfif",
+    "altText": "Augustine's Rule",
     "quoteText": "\"Trên hết mọi sự hãy yêu mến Thiên Chúa và rồi yêu thương tha nhân.\"",
-    "quoteCite": "— Thánh Augustinô, <em>Tu Luật</em>, Lời Mở Đầu"
+    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-luat/#tu-luat-1\"><em>Tu Luật</em>, 1</a>"
+  },
+  "linh-dao": {
+    "imageUrl": "/images/banners/fratigozzoli-1-.jpg",
+    "altText": "Linh đạo Augustinô",
+    "quoteText": "\"Lạy Chúa, Chúa tạo dựng chúng con cho Chúa, và tâm hồn chúng con khắc khoải cho đến khi được nghỉ ngơi trong Chúa.\"",
+    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#conf-1-1\"><em>Tự Thuật</em>, I, I, 1</a>"
+  },
+  "hien-phap": {
+    "imageUrl": "/images/banners/47ecab_0a0208f5dfa14f83bad8c60f6e73d33e-mv2.jpg",
+    "altText": "Hiến Pháp Dòng Thánh Augustinô",
+    "quoteText": "\"Mục đích của Hội Dòng là hiệp nhất hài hòa với nhau trong tình huynh đệ và tình bạn thiêng liêng, tìm kiếm và thờ lạy Thiên Chúa, và làm việc để phục vụ dân Ngài.\"",
+    "quoteCite": "— <a href=\"/hien-phap/#hien-phap-13\"><em>Hiến Pháp</em>, số 13</a>"
+  },
+  "ratio": {
+    "imageUrl": "/images/banners/afbeelding15.webp",
+    "altText": "St. Augustine sending out monks",
+    "quoteText": "\"Bản kế hoạch này sẽ dùng như một phương tiện cổ vũ sự hiệp nhất lớn hơn về tinh thần và lý tưởng trong việc đào tạo các ứng viên trong toàn thể nhà Dòng.\"",
+    "quoteCite": "— <a href=\"/ratio/#ratio-2\"><em>Ratio Institutionis</em>, số 2</a>"
   },
   "thu-vien": {
-    "imageUrl": "/images/banners/TolleLege.webp",
-    "altText": "Tolle Lege — Hãy cầm lấy mà đọc",
+    "imageUrl": "/images/banners/fratigozzoli-1-.jpg",
+    "altText": "Augustine spirituality",
     "quoteText": "\"Lạy Chúa, Chúa tạo dựng chúng con cho Chúa, và tâm hồn chúng con khắc khoải cho đến khi được nghỉ ngơi trong Chúa.\"",
-    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>"
+    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#conf-1-1\"><em>Tự Thuật</em>, I, I, 1</a>"
   },
   "lich-phung-vu": {
     "imageUrl": "/images/banners/TolleLege.webp",
     "altText": "Lịch Phụng Vụ — Giờ Kinh",
-    "quoteText": "\"Hãy cầu nguyện đúng giờ — vì lời cầu nguyện là nơi tâm trí được nâng lên cùng Thiên Chúa.\"",
-    "quoteCite": "— Thánh Augustinô, <em>Tu Luật</em>, 3"
+    "quoteText": "\"Xin Chúa tha phép cho con, với ký ức hiện tại, duyệt qua một vòng các lầm lạc quá khứ của con và hiến dâng lên Chúa một hy lễ tạ ơn\"",
+    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-4#conf-4-1\"><em>Tự Thuật</em>, IV, I, 1</a>"
   },
   "tu-thuat": {
-    "imageUrl": "/images/banners/TolleLege.webp",
-    "altText": "Tolle Lege — Hãy cầm lấy mà đọc",
+    "imageUrl": "/images/banners/00128329.jpg",
+    "altText": "Augustine",
     "quoteText": "\"Cor nostrum inquietum est, donec requiescat in Te.\"",
     "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>"
   },
@@ -86,9 +110,9 @@
     "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>"
   },
   "thanh-au-tinh": {
-    "imageUrl": "/images/banners/banner-triet-hoc.jpg",
+    "imageUrl": "/images/banners/Rolheiser-1-e1695392872359.jpg",
     "altText": "Thánh Augustinô thành Hippô — Tổ Phụ Dòng",
     "quoteText": "\"Lạy Chúa, Chúa tạo dựng chúng con cho Chúa, và tâm hồn chúng con khắc khoải cho đến khi được nghỉ ngơi trong Chúa.\"",
-    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>"
+    "quoteCite": "— Thánh Augustinô, <a href=\"/tu-thuat/?book=quyen-1#conf-1-1\"><em>Tự Thuật</em>, I, I, 1</a>"
   }
 }

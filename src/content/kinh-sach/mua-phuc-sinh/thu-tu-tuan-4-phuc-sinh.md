@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 4 Phục Sinh"
 order: 24
 ---
 
-*Trích khảo luận Chúa Ba Ngôi của thánh Hi-la-ri-ô, giám mục.*
+**Trích khảo luận Chúa Ba Ngôi của thánh Hi-la-ri-ô, giám mục.**
 
 Nếu thực sự Ngôi Lời đã trở nên người phàm thì khi dự bữa tiệc của Chúa, thực sự chúng ta cũng lãnh nhận Ngôi Lời nhập thể. Làm sao chúng ta lại không nghĩ rằng Người ở lại trong ta theo bản thể ? Quả vậy, khi sinh làm người, Đức Ki-tô đã mãi mãi đảm nhận bản tính phàm nhân của chúng ta, và trong bí tích Thánh Thể Người ban, Người đã kết hợp bản tính phàm nhân của Người với bản tính Thiên Chúa.
 

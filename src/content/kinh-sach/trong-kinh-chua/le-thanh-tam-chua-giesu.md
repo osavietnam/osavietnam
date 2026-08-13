@@ -10,7 +10,7 @@ order: 5
 draft: false
 ---
 
-*Trích tác phẩm của thánh Bô-na-ven-tu-ra, giám mục.*
+**Trích tác phẩm của thánh Bô-na-ven-tu-ra, giám mục.**
 
 Hỡi bạn là người đã được cứu chuộc, bạn hãy ngắm xem Đấng chịu treo trên thập giá vì bạn, Đấng đã chết để làm cho kẻ chết được sống, Đấng đã qua đi mà cả trời đất phải khóc than và đá cứng phải vỡ ra. Đấng ấy là ai, cao cả thế nào, thánh thiện làm sao.
 

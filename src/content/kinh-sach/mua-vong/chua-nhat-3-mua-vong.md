@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 3 Mùa Vọng"
 order: 15
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Thánh Gio-an là tiếng, còn Chúa, ngay từ nguyên thuỷ, đã là Lời. Thánh Gio-an là tiếng trong thời gian, còn Đức Ki-tô, ngay từ lúc khởi đầu, đã là Lời vĩnh cửu.
 

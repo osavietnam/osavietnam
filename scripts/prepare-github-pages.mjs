@@ -1,12 +1,16 @@
 import { readFile, writeFile, rm } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const sourceRoot = resolve(root, process.env.GITHUB_SRC_DIR || 'src');
+const sourceFile = (relative) => pathToFileURL(resolve(sourceRoot, relative));
 const files = {
-  centralIndex: new URL('../src/pages/api/central-news.html.ts', import.meta.url),
-  centralPages: new URL('../src/pages/api/central-news-page/[page].html.ts', import.meta.url),
-  provinceIndex: new URL('../src/pages/api/province-news.html.ts', import.meta.url),
-  provincePages: new URL('../src/pages/api/province-news-page/[page].html.ts', import.meta.url),
+  centralIndex: sourceFile('pages/api/central-news.html.ts'),
+  centralPages: sourceFile('pages/api/central-news-page/[page].html.ts'),
+  provinceIndex: sourceFile('pages/api/province-news.html.ts'),
+  provincePages: sourceFile('pages/api/province-news-page/[page].html.ts'),
 };
 
 async function makeStatic(file, staticPaths = '') {
@@ -24,11 +28,11 @@ await makeStatic(files.provinceIndex);
 await makeStatic(files.provincePages, `export function getStaticPaths() {\n  return Array.from({ length: 56 }, (_, index) => ({ params: { page: String(index + 2) } }));\n}`);
 
 for (const relative of [
-  'src/pages/api/central-news-article.ts',
-  'src/pages/api/central-news-frame.ts',
-  'src/pages/api/province-news-article.ts',
+  'pages/api/central-news-article.ts',
+  'pages/api/central-news-frame.ts',
+  'pages/api/province-news-article.ts',
 ]) {
-  await rm(new URL(`../${relative}`, import.meta.url), { force: true });
+  await rm(sourceFile(relative), { force: true });
 }
 
-console.log(`Prepared static GitHub Pages sources in ${root}`);
+console.log(`Prepared static GitHub Pages sources in ${sourceRoot}`);

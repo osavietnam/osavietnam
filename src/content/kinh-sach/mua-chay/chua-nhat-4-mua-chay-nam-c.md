@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 4 Mùa Chay, Năm C"
 order: 30
 ---
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn.**
 
 Thôi ta đứng lên, đi về cùng cha. Kẻ nói câu : Thôi ta đứng lên, bấy giờ đang nằm dưới đất. Anh ta biết rằng mình sa ngã ; anh nhìn thấy sự sụp đổ của mình. Anh đã khám phá ra mình đã rơi vào tình trạng nhuốc nhơ tội lỗi và vì vậy anh ta mới thốt lên : Thôi, ta đứng lên, đi về cùng cha. Anh hy vọng gì, tin tưởng ra sao, trông cậy thế nào ? Niềm hy vọng của anh là dựa vào cha anh. Anh tự nhủ : “Tôi đã đánh mất tư cách làm con, còn người, người đã không mất tư cách làm cha. Bên cạnh một người cha thì người bào chữa xa lạ chẳng có ích lợi gì. Chỉ có tình thương mới có thể can thiệp và làm rung động cõi lòng của người cha. Tình phụ tử nôn nóng muốn tha thứ để sinh ra con mình một lần nữa. “Tôi có tội, tôi sẽ về cùng cha tôi”.
 

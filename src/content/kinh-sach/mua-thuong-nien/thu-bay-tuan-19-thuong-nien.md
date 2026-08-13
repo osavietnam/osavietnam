@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 19 Thường Niên"
 order: 133
 ---
 
-*Trích bài giảng của thánh Pa-si-a-nô, giám mục, về phép rửa.*
+**Trích bài giảng của thánh Pa-si-a-nô, giám mục, về phép rửa.**
 
 Cũng như chúng ta đã mang hình ảnh người bởi đất mà ra, thì chúng ta cũng mang hình ảnh người bởi trời mà đến. Vì người thứ nhất bởi đất mà ra thì thuộc về đất, còn người thứ hai thì từ trời mà đến. Anh em thân mến, nếu chúng ta làm được như vậy, chúng ta sẽ không chết nữa. Vì cho dù thân xác chúng ta có tiêu tan, chúng ta vẫn sống trong Đức Ki-tô, như chính Người đã nói : Ai tin vào Thầy, thì dù đã chết, cũng sẽ được sống.
 

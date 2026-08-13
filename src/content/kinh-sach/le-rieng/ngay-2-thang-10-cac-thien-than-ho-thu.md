@@ -15,7 +15,7 @@ Các thiên thần được ơn gọi trước hết là để chiêm ngưỡng 
 
 </div>
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Người truyền cho thiên sứ giữ gìn bạn trên khắp nẻo đường. Các ngài hãy tạ ơn Chúa vì Người nhân hậu và vì những kỳ công Người làm cho con cái loài người. Các ngài hãy tuyên xưng và nói lên giữa chư dân những điều lớn lao Người đã làm cho họ. Lạy Chúa, con người là chi mà Chúa tỏ mình ra cho nó ? Phàm nhân là gì mà Chúa phải bận tâm ? Ngài bận tâm đến con người và tỏ ra ân cần săn sóc nó. Sau cùng, Ngài còn sai Con Một Ngài đến với con người, sai Thánh Thần Ngài đến trong con người, và hứa cho con người được thấy nhan Ngài. Và để cho tất cả chư thần trên trời không đứng ngoài công việc chăm sóc chúng con, giao cho các ngài nhiệm vụ bảo vệ chúng con và truyền cho các ngài trở thành những người dìu dắt chúng con.
 

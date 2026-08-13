@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 17 Thường Niên"
 order: 117
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Hội Thánh “Công Giáo” : danh xưng này dành riêng cho cộng đồng thánh tức là Mẹ của hết thảy chúng ta. Hội Thánh đó còn là hiền thê của Đức Giê-su Ki-tô, Con Một Thiên Chúa, Chúa chúng ta (vì Kinh Thánh viết : Đức Ki-tô yêu thương Hội Thánh và hiến mình vì Hội Thánh và những câu tiếp theo). Hội Thánh còn là hình bóng mô phỏng Giê-ru-sa-lem thượng giới là thành trì tự do và là mẹ hết thảy chúng ta. Hội Thánh đó trước kia son sẻ, nhưng nay đã sinh được một đoàn con đông đúc.
 

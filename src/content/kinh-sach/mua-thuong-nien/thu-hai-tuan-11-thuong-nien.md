@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 11 Thường Niên"
 order: 72
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Trước hết, Đức Ki-tô, Thầy dạy hoà bình và Tôn Sư hiệp nhất, không muốn cho ai cầu nguyện một mình và riêng tư, như thể người nào cầu nguyện thì chỉ cầu nguyện cho mình mà thôi. Chúng ta đâu có đọc : Lạy Cha của con, Đấng ngự trên trời, cũng không đọc : Xin Cha cho con lương thực hôm nay. Cũng chẳng phải mỗi người chỉ xin ơn tha tội cho một mình mình, hay chỉ cầu xin cho một mình mình khỏi sa chước cám dỗ và được cứu khỏi sự dữ. Lời cầu nguyện của chúng ta là lời nguyện công khai và mang tính cách cộng đoàn. Rồi khi cầu nguyện, chúng ta không cầu cho một người mà cho toàn dân, bởi toàn dân chúng ta đã nên một.
 

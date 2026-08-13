@@ -51,8 +51,8 @@
     transition: all 0.3s;
 }
 .links a:hover, .links a:active {
-    color: #d4ad4a;
-    background: rgba(212, 173, 74, 0.1);
+    color: #d4ad4a; 
+    background: rgba(212, 173, 74, 0.1); 
     border-left-color: #d4ad4a;
     padding-left: 2rem;
 }
@@ -68,8 +68,8 @@
     animation: zoomIn 0.4s ease-in-out;
     margin-top: 5rem;
 }
-#sidebar:hover #quote-banner, #sidebar.expanded #quote-banner {
-    display: block;
+#sidebar:hover #quote-banner, #sidebar.expanded #quote-banner { 
+    display: block; 
 }
 /* Main container for the entire header link */
 .site-title-link {
@@ -126,8 +126,8 @@
 
 /* Banner & Book Content */
 .banner-container img {
-
-
+    
+   
     width: auto;
     border-radius: 1.2rem;
     box-shadow: 0 0.6rem 1.4rem rgba(0,0,0,0.4);
@@ -304,7 +304,7 @@
     max-height: 0;
     overflow: hidden; /* Important for the collapse animation */
     opacity: 0;
-    transition: max-height 0.35s cubic-bezier(0.25, 0.1, 0.25, 1.0),
+    transition: max-height 0.35s cubic-bezier(0.25, 0.1, 0.25, 1.0), 
                 opacity 0.3s ease;
     padding-left: 1rem;
     margin-top: 0.5rem;
@@ -591,7 +591,7 @@
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background-image: var(--bg-image);
+    background-image: var(--bg-image); 
     background-size: cover;
     background-position: center;
 }
@@ -646,7 +646,7 @@
     text-decoration: none;
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
     color: #fcefdc;
-
+    
 }
 .book-card:hover {
     transform: translateY(-5px);
@@ -754,7 +754,7 @@
     font-family: 'Source Serif 4', serif;
     font-size: 1.4rem;
     font-style: italic;
-    color: #b0a89a;
+    color: #b0a89a; 
     text-align: right;
     margin-top: 1.5rem;
     padding-right: 1rem;
@@ -765,8 +765,8 @@
     border-left-color: #ffd700 !important;
     border-width: 2px;
 }
-.book-card.highlight-author {
-    border-color: #d4ad4a;
+.book-card.highlight-author { 
+    border-color: #d4ad4a; 
 }
 .entry-list-item.selected,
 .book-card.selected {
@@ -833,9 +833,9 @@
 
 /* --- Main Controls (Search & A-Z Navigation) --- */
 #encyclopedia-controls {
-
+    
     max-width: 1000px;
-
+    
     margin: 3rem auto 4rem;
     padding: 2rem;
     background: rgba(13, 31, 43, 0.7);
@@ -893,8 +893,8 @@
     text-align: center;
 }
 
-.az-nav-button:last-child {
-    border-right: none;
+.az-nav-button:last-child { 
+    border-right: none; 
 }
 
 .az-nav-button:hover {
@@ -961,7 +961,7 @@
     transition: transform 0.4s ease-in-out;
     border-top-color: #e9c46a;
 }
-
+        
 .index-letter-toggle.is-open .chevron {
     transform: rotate(-180deg);
 }
@@ -969,7 +969,7 @@
 .index-letter-content {
     max-height: 0;
     overflow: hidden;
-
+    
     /* This new transition is smoother and more refined */
     transition: max-height 0.2s cubic-bezier(0.2, 0, 0.2, 1),
                 opacity 0.4s ease-in-out;
@@ -1008,10 +1008,10 @@
      color: #f2d78e;
 }
 
-.index-no-results {
-    text-align: center;
-    padding: 3rem;
-    font-style: italic;
+.index-no-results { 
+    text-align: center; 
+    padding: 3rem; 
+    font-style: italic; 
     color: rgba(212, 173, 74, 0.5);
 }
 
@@ -1120,11 +1120,11 @@
     font-size: 3rem;
 }
 .full-entry-content .section-wrapper .section-container .section-content .paragraph .subparagraph-wrapper .subpara {
-
-        font-size: 2.2rem;
-    line-height: 1.8;
-    font-weight: 300;
-    color: #ffffff;
+   
+        font-size: 2.2rem; 
+    line-height: 1.8; 
+    font-weight: 300; 
+    color: #ffffff; 
 }
 /* Loading Indicator */
 @keyframes spin {
@@ -1166,7 +1166,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000;
+    z-index: 10000; 
     opacity: 0;
     animation: fadeIn 0.3s forwards;
 }
@@ -1412,14 +1412,14 @@ a.author-link:hover {
     width: 100%;
     max-width: 100%;
     /* MODIFIED: Changed to 'scroll' to allow JS control */
-    overflow-x: scroll;
+    overflow-x: scroll; 
     /* MODIFIED: Removed native smooth scrolling */
-    scroll-behavior: auto;
+    scroll-behavior: auto; 
     margin-bottom: 5rem;
     /* Add these lines to hide the scrollbar */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-
+    
 }
 
 /* Add this to hide the scrollbar in Chrome, Safari and Opera */
@@ -1541,7 +1541,7 @@ a.author-link:hover {
     justify-content: center;
     background-color: #0d1f2b; /* UPDATED: Use site background for letterboxing */
     overflow: hidden;
-
+    
 }
 
 .article-hero-image {
@@ -1554,25 +1554,25 @@ a.author-link:hover {
     opacity: 1;
 }
 
-.article-hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.article-hero-section::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
     background: rgba(0, 0, 0, 0.55);
     z-index: 2;
 }
 
-.article-hero-content {
+.article-hero-content { 
     position: absolute; /* This MUST be absolute to overlay the image */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 3;
-    padding: 2rem;
+    padding: 2rem; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1581,152 +1581,152 @@ a.author-link:hover {
     color: #fff;
 }
 
-.article-hero-category {
-    display: inline-block;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    background-color: #d4ad4a;
-    color: #0d1f2b;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    margin-bottom: 2rem;
+.article-hero-category { 
+    display: inline-block; 
+    font-family: 'Be Vietnam Pro', sans-serif; 
+    font-size: 1.2rem; 
+    font-weight: 600; 
+    background-color: #d4ad4a; 
+    color: #0d1f2b; 
+    padding: 0.5rem 1rem; 
+    border-radius: 4px; 
+    margin-bottom: 2rem; 
     text-decoration: none;
 }
 
-.article-hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    background: none;
-    -webkit-text-fill-color: initial;
-    color: #fcefdc;
-    margin-bottom: 2rem;
+.article-hero-title { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 5rem; 
+    font-weight: 700; 
+    line-height: 1.2; 
+    background: none; 
+    -webkit-text-fill-color: initial; 
+    color: #fcefdc; 
+    margin-bottom: 2rem; 
 }
 
-.article-hero-meta {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+.article-hero-meta { 
+    font-family: 'Be Vietnam Pro', sans-serif; 
+    font-size: 1.6rem; 
+    font-weight: 500; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    opacity: 0.9; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1rem; 
+    padding-bottom: 2rem; 
+    margin-bottom: 2rem; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
-.share-button {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #fff;
-    background: transparent;
-    border: 2px solid #fff;
-    border-radius: 50px;
-    padding: 0.8rem 2.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.share-button { 
+    font-family: 'Be Vietnam Pro', sans-serif; 
+    font-weight: 600; 
+    font-size: 1.4rem; 
+    color: #fff; 
+    background: transparent; 
+    border: 2px solid #fff; 
+    border-radius: 50px; 
+    padding: 0.8rem 2.5rem; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
 }
-.share-button:hover {
-    background: #fff;
-    color: #000;
+.share-button:hover { 
+    background: #fff; 
+    color: #000; 
 }
-.article-main-content {
+.article-main-content { 
     /* MODIFIED: Changed negative top margin to a positive one */
-    margin: 0rem auto 0;
-    padding: 4rem;
-    background: #102433;
-    border-radius: 8px;
-    position: relative;
-    z-index: 3;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    margin: 0rem auto 0; 
+    padding: 4rem; 
+    background: #102433; 
+    border-radius: 8px; 
+    position: relative; 
+    z-index: 3; 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6); 
 }
 
-.breadcrumb {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 1.4rem;
-    margin-bottom: 3rem;
+.breadcrumb { 
+    font-family: 'Be Vietnam Pro', sans-serif; 
+    font-size: 1.4rem; 
+    margin-bottom: 3rem; 
     margin-left: 1rem;
-    color: #9ab;
+    color: #9ab; 
 }
-.breadcrumb a {
-    color: #d4ad4a;
-    text-decoration: none;
-
+.breadcrumb a { 
+    color: #d4ad4a; 
+    text-decoration: none; 
+    
 }
-.breadcrumb a:hover {
-    text-decoration: underline;
+.breadcrumb a:hover { 
+    text-decoration: underline; 
 }
-.article-body-content .section-container {
-
-    background: rgba(13, 31, 43, 0.5);
-    border: 1px solid rgba(212, 173, 74, 0.1);
-    border-radius: 8px;
-    margin-top: 2rem;
-    box-shadow: none;
+.article-body-content .section-container { 
+    
+    background: rgba(13, 31, 43, 0.5); 
+    border: 1px solid rgba(212, 173, 74, 0.1); 
+    border-radius: 8px; 
+    margin-top: 2rem; 
+    box-shadow: none; 
 }
-.article-body-content .section-container h3 {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-top: 0;
-    font-size: 2.6rem;
+.article-body-content .section-container h3 { 
+    border-bottom: none; 
+    padding-bottom: 0; 
+    margin-top: 0; 
+    font-size: 2.6rem; 
 }
-.article-body-content h3 {
-    text-align: left;
-    font-size: 2.8rem;
-    border-bottom: 1px solid rgba(212, 173, 74, 0.2);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-    margin-top: 3rem;
+.article-body-content h3 { 
+    text-align: left; 
+    font-size: 2.8rem; 
+    border-bottom: 1px solid rgba(212, 173, 74, 0.2); 
+    padding-bottom: 1rem; 
+    margin-bottom: 2rem; 
+    margin-top: 3rem; 
 }
-.article-body-content .paragraph-title {
-    text-align: justify;
-    font-style: normal;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #e9c46a;
-    margin-bottom: 1rem;
+.article-body-content .paragraph-title { 
+    text-align: justify; 
+    font-style: normal; 
+    font-size: 1.8rem; 
+    font-weight: 600; 
+    color: #e9c46a; 
+    margin-bottom: 1rem; 
 }
-.subparagraph-title {
-    font-size: 1.7rem;
-    font-weight: 300;
-    color: #e9c46a;
-    margin-bottom: 0.8rem;
-    text-align: justify;
-    font-style: italic;
+.subparagraph-title { 
+    font-size: 1.7rem; 
+    font-weight: 300; 
+    color: #e9c46a; 
+    margin-bottom: 0.8rem; 
+    text-align: justify; 
+    font-style: italic; 
 }
-.subparagraph-wrapper {
-    margin: 1.5rem 0;
-    padding-left: 0;
-    border-left: none;
-
-
-}
+.subparagraph-wrapper { 
+    margin: 1.5rem 0; 
+    padding-left: 0; 
+    border-left: none; 
 
 
-.article-body-content .subpara {
-    font-size: 2.2rem;
-    line-height: 1.8;
-    font-weight: 300;
-    color: #ffffff;
-    position: relative;
-    margin: 1.2rem 0;
-    text-align: justify;
 }
-.article-body-content .subpara:first-of-type::first-letter {
-    font-family: 'Playfair Display', serif;
-    font-size: 7.5rem;
-    font-weight: 700;
-    color: #d4ad4a;
-    float: left;
-    line-height: 0.8;
-    padding: 0.5rem 1.5rem 0.5rem 0;
+
+
+.article-body-content .subpara { 
+    font-size: 2.2rem; 
+    line-height: 1.8; 
+    font-weight: 300; 
+    color: #ffffff; 
+    position: relative; 
+    margin: 1.2rem 0; 
+    text-align: justify; 
+}
+.article-body-content .subpara:first-of-type::first-letter { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 7.5rem; 
+    font-weight: 700; 
+    color: #d4ad4a; 
+    float: left; 
+    line-height: 0.8; 
+    padding: 0.5rem 1.5rem 0.5rem 0; 
 }
 /* --- Styling for Expandable Article Images & Modal --- */
 
@@ -1735,7 +1735,7 @@ a.author-link:hover {
      display: block;
     margin-left: auto;
     margin-right: auto;
-
+    
     /* You can set a maximum width to prevent images from becoming too large */
     max-width: 50%; /* Adjust as needed */
 
@@ -1746,7 +1746,7 @@ a.author-link:hover {
     border-radius: 4px;
     margin-top: 2rem;
     margin-bottom: 2rem;
-
+    
 }
 
 /* 2. The image itself */
@@ -1804,7 +1804,7 @@ a.author-link:hover {
 .image-modal {
     max-width: 90vw;
     max-height: 90vh;
-
+    
 }
 
 .image-modal img {
@@ -1825,61 +1825,61 @@ a.author-link:hover {
     cursor: pointer;
 }
 /*-------------------*/
-.article-blockquote {
-    margin: 2.5rem 0 2.5rem 4rem;
-    padding-left:1rem;
-    border: none;
-    background: none;
-    border-left: 0.1rem solid #9e998c;
+.article-blockquote { 
+    margin: 2.5rem 0 2.5rem 4rem; 
+    padding-left:1rem; 
+    border: none; 
+    background: none; 
+    border-left: 0.1rem solid #9e998c; 
 }
-.article-blockquote .quote-text {
-    font-family: 'Source Serif 4', serif;
-    font-style: italic;
-    font-size: 1.6rem;
-    color: #c0c8d1;
-    line-height: 1.8;
-    margin: 0 0 1rem 0;
+.article-blockquote .quote-text { 
+    font-family: 'Source Serif 4', serif; 
+    font-style: italic; 
+    font-size: 1.6rem; 
+    color: #c0c8d1; 
+    line-height: 1.8; 
+    margin: 0 0 1rem 0; 
 }
-.article-blockquote .quote-author {
-    font-family: 'Source Serif 4', serif;
-    font-style: normal;
-    font-size: 1.3rem;
-    color: #9ab;
-    text-align: right;
-    margin: 0;
-    padding: 0;
+.article-blockquote .quote-author { 
+    font-family: 'Source Serif 4', serif; 
+    font-style: normal; 
+    font-size: 1.3rem; 
+    color: #9ab; 
+    text-align: right; 
+    margin: 0; 
+    padding: 0; 
 }
-.emphasis-block {
-    text-align: center;
-    margin: 4rem 0;
+.emphasis-block { 
+    text-align: center; 
+    margin: 4rem 0; 
 }
-.emphasis-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.2rem;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.5;
-    color: #fcefdc;
-    max-width: 700px;
-    margin: 2rem auto;
-    border: none;
-    padding: 0;
-    text-align: center;
+.emphasis-block h3 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 3.2rem; 
+    font-style: italic; 
+    font-weight: 300; 
+    line-height: 1.5; 
+    color: #fcefdc; 
+    max-width: 700px; 
+    margin: 2rem auto; 
+    border: none; 
+    padding: 0; 
+    text-align: center; 
 }
-.emphasis-block::before, .emphasis-block::after {
-    content: '';
-    display: block;
-    width: 100px;
-    height: 1px;
-    background: #d4ad4a;
-    margin-left: auto;
-    margin-right: auto;
+.emphasis-block::before, .emphasis-block::after { 
+    content: ''; 
+    display: block; 
+    width: 100px; 
+    height: 1px; 
+    background: #d4ad4a; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
-.emphasis-block::before {
-    margin-bottom: 2rem;
+.emphasis-block::before { 
+    margin-bottom: 2rem; 
 }
-.emphasis-block::after {
-    margin-top: 2rem;
+.emphasis-block::after { 
+    margin-top: 2rem; 
 }
 .grid-divider {
     border: none;
@@ -1943,7 +1943,7 @@ a.author-link:hover {
     color: #d1c6ad;
     display: flex;
     align-items: center;
-
+    
 }
 .custom-select-wrapper {
     position: relative;
@@ -2217,12 +2217,12 @@ a.author-link:hover {
     overflow: hidden;
     background: rgba(17, 40, 56, 0.5); /* Slightly darker background */
     margin-bottom: 5rem;
-
+    
 }
 
 #next-sunday-container .article-card-image {
     flex-shrink: 0;
-
+   
     max-width: 70%;
     aspect-ratio: 16 / 9; /* Square image for different look */
     object-fit: cover;
@@ -2262,7 +2262,7 @@ a.author-link:hover {
 .homepage-filter-controls .search-container {
     flex: 1;
     min-width: 300px;
-
+    
 }
 
 /* The new wrapper for the dropdowns */
@@ -2283,7 +2283,7 @@ a.author-link:hover {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 1.4rem;
     color: #d1c6ad;
-
+    
 }
 
 @media screen and (max-width: 768px) {
@@ -2310,7 +2310,7 @@ a.author-link:hover {
         min-width: auto;
         width: 100%;
     }
-
+    
     .custom-select-wrapper select {
         padding: 0.6rem 4rem 0.6rem 1rem;
         font-size: 1.3rem;
@@ -2336,7 +2336,7 @@ a.author-link:hover {
     width: 100%;
     height: 100%;
     transition: transform 0.7s;
-    aspect-ratio: 21 / 9;
+    aspect-ratio: 21 / 9; 
     transform-style: preserve-3d;
     box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     border-radius: 12px;
@@ -2387,7 +2387,7 @@ a.author-link:hover {
     width: 100%;
     height: 100%;
     /* Use 'cover' to ensure the image fills the container whose size is now set by the image's own ratio */
-    object-fit: cover;
+    object-fit: cover; 
 }
 
 .flip-card-back {
@@ -2429,8 +2429,8 @@ a.author-link:hover {
         padding: 3rem;
     }
     .banner-container img {
-
-
+    
+   
     width: 35rem;
     max-height: auto;
 
@@ -2440,9 +2440,9 @@ a.author-link:hover {
         max-width: 85%;
         padding: 0;
         margin-bottom: 2.5rem; /* Add some space below the banner */
-
+               
     }
-
+    
     .flip-card-overlay-content {
         /* Make the text content more compact */
         padding: 1.5rem;
@@ -2462,7 +2462,7 @@ a.author-link:hover {
         padding: 0.6rem 1.5rem;
     }
 
-
+    
 }
 
 
@@ -2543,7 +2543,7 @@ a.author-link:hover {
   background-color: #a88b5c; /* Muted gold accent color */
   border-radius: 10px;
   /* Adds a subtle border that matches the panel's background */
-  border: 2px solid rgba(13, 31, 43, 0.8);
+  border: 2px solid rgba(13, 31, 43, 0.8); 
 }
 
 /* The handle on hover */
@@ -2642,7 +2642,7 @@ a.author-link:hover {
 
 /* Add a smooth transition to the table container */
 #table-container {
-    transition: max-height 0.2s ease-in-out,
+    transition: max-height 0.2s ease-in-out, 
                 opacity 0.3s ease-in-out,
                 margin-top 0.2s ease-in-out,
                 margin-bottom 0.2s ease-in-out;
@@ -2678,7 +2678,6 @@ a.author-link:hover {
     height: 450px;
 
     /* Background Image */
-    background-image: url('/db/emblem.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -2712,8 +2711,8 @@ body.is-emblem-visible #fixed-emblem-container {
     font-size: 1.5rem;
     line-height: 1.6;
     /* This allows the table to shrink or grow to fit its content */
-    width: 95%;
-
+    width: 95%; 
+    
     white-space: wrap; /* Prevents text from wrapping to new lines unnecessarily */
 }
 
@@ -2759,7 +2758,7 @@ body.is-emblem-visible #fixed-emblem-container {
         /* Adds a subtle shadow on the right edge to indicate scrollability */
         -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
         mask-image: linear-gradient(to right, black 90%, transparent 100%);
-
+         
     }
 
     /* 2. Make the table more compact */
@@ -2767,7 +2766,7 @@ body.is-emblem-visible #fixed-emblem-container {
         width: 95%;
         border-collapse: collapse;
         font-size: 0.75em; /* Smaller font on mobile */
-
+      
          table-layout: fixed;
     }
 
@@ -2776,11 +2775,11 @@ body.is-emblem-visible #fixed-emblem-container {
     .article-table td {
         padding: 0.6rem 0.8rem;
          font-weight: 100;
-            border-bottom: 1px solid #9e998c; /* A light horizontal line */
- white-space: normal;
+            border-bottom: 1px solid #9e998c; /* A light horizontal line */   
+ white-space: normal; 
 
     }
-
+    
     /* --- THIS IS THE FIX --- */
     /* 4. Ensure all data cells have a normal font weight */
     .article-table td {

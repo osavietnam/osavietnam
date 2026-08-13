@@ -16,7 +16,7 @@ Vào lúc Đức Giê-su chịu thương khó và phục sinh, khuôn mặt thá
 
 </div>
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về các sách Tin Mừng.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về các sách Tin Mừng.**
 
 Một người trong nhóm Mười Hai tên là Tô-ma, cũng gọi là Đi-đi-mô, không có ở với các ông khi Đức Giê-su đến. Chỉ có người môn đệ này vắng mặt. Khi trở về, ông nghe thuật lại sự việc đã xảy ra, nhưng không chịu tin những điều đã nghe. Chúa đến lần nữa và đưa cạnh sườn cho người môn đệ không tin chạm tay vào. Người đưa tay ra, và khi ông thấy các thương tích của Người. Người chữa lành vết thương cứng tin của ông. Anh em thân mến, trong chuyện này, anh em chú ý đến điều gì ? Lúc đầu, người môn đệ được chọn này vắng mặt, sau đó ông về và nghe kể lại, nghe rồi nghi ngờ, nghi ngờ rồi đưa tay chạm, chạm rồi tin, chẳng lẽ anh em cho tất cả chuyện này là tình cờ hay sao ?
 

@@ -10,7 +10,7 @@ order: 111
 draft: false
 manualFill: true
 ---
-*Trích sách Tự Thuật của Thánh Âu-Tinh.*
+**Trích sách Tự Thuật của Thánh Âu-Tinh.**
 
 Đấng Trung Gian đích thực, mà do lòng thương xót nhiệm mầu, Cha đã cho những ai khiêm nhường được thấy, và đã sai đến làm gương cho họ học biết đức khiêm nhường của Người, Đấng Trung Gian giữa Thiên Chúa và loài người, đó là một con người : đó là Đức Ki-tô Giê-su. Người đã được đặt giữa những kẻ tội lỗi phải chết với Đấng công chính bất tử. Là con người, Người phải chết như mọi người ; là Thiên Chúa, Người công chính như Thiên Chúa. Vì lương bổng của đức công chính, là sự sống và sự bình an ; nên nhờ đức công chính liên kết Người với Thiên Chúa, Người đã huỷ diệt cái chết nơi những người vô đạo đã được nên công chính, cái chết mà Người đã muốn chung phần với họ. Lạy Cha nhân lành, Cha đã yêu thương chúng con biết chừng nào, đến như chính Con Một của Cha, Cha cũng chẳng tha, nhưng đã trao nộp Người vì hết thảy chúng con là những kẻ tội lỗi ! Cha đã yêu thương chúng con biết bao, vì chúng con, Đức Giê-su đã không nghĩ phải nhất quyết duy trì địa vị ngang hàng với Cha, nhưng Người đã vâng lời cho đến nỗi bằng lòng chịu chết, chết trên cây thập tự ! Chỉ một mình Người được tự do giữa những kẻ chết, vì Người có quyền hy sinh mạng sống và có quyền lấy lại. Vì chúng con và trước mắt Cha, Người là Đấng chiến thắng và là lễ hy sinh ; Người là Đấng chiến thắng vì Người là lễ hy sinh. Vì chúng con và trước mắt Cha, Người là tư tế và là hy lễ ; Người là tư tế vì Người là hy lễ. Người làm cho chúng con từ chỗ là nô lệ trở nên con cái Cha, khi Người sinh bởi Cha nhưng lại làm nô lệ cho chúng con.
 

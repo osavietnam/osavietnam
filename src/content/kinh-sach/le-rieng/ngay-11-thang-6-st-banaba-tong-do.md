@@ -15,7 +15,7 @@ Thánh nhân quê ở đáo Sýp. Ít lâu sau Lễ Ngũ Tuần, người có m�
 
 </div>
 
-*Trích khảo luận của thánh Cơ-rô-ma-xi-ô, giám mục, về Tin Mừng theo thánh Mát-thêu.*
+**Trích khảo luận của thánh Cơ-rô-ma-xi-ô, giám mục, về Tin Mừng theo thánh Mát-thêu.**
 
 Chính anh em là ánh sáng cho trần gian. Một thành xây trên núi không tài nào che giấu được. Cũng chẳng có ai thắp đèn lên rồi lấy thùng úp lại, nhưng đặt trên đế, và nó sẽ soi sáng cho mọi người trong nhà. Chúa đã gọi các môn đệ là muối cho đời, vì trái tim con người bị quỷ dữ làm cho ra nhạt, thì các ông đã lấy khôn ngoan bởi trời mà ướp cho mặn lạí. Bây giờ, Người gọi các ông là ánh sáng cho trần gian, vì Người là ánh sáng vĩnh cửu đích thực đã chiếu soi các ông, khiến các ông lại trở nên ánh sáng chiếu soi đêm tối.
 

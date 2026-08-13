@@ -10,7 +10,7 @@
     margin: 0 auto 4rem auto;
     padding: 2rem;
     background: rgba(13, 31, 43, 0.7);
-
+   
     border-radius: 8px;
 }
 
@@ -106,27 +106,24 @@
     background: #102433; /* Darker base for texture */
     border-radius: 4px;
     padding: 2rem 2.5rem;
-
-    /* CSS-only parchment texture; avoids a fragile external asset dependency. */
-    background-image:
-        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.035), transparent 24%),
-        radial-gradient(circle at 78% 68%, rgba(0,0,0,0.12), transparent 30%),
-        linear-gradient(135deg, rgba(168,139,92,0.045), transparent 42%);
-    box-shadow:
-        inset 0 0 0 1px rgba(168, 139, 92, 0.2),
+    
+    /* Subtle parchment texture and inset shadow for depth */
+    background-image: url('/db/images/textures/parchment-dark.png');
+    box-shadow: 
+        inset 0 0 0 1px rgba(168, 139, 92, 0.2), 
         inset 0 0 15px rgba(0,0,0,0.6),
         0 5px 15px rgba(0,0,0,0.3);
 
     /* A subtle hint of a folded edge */
     border-left: 2px solid rgba(168, 139, 92, 0.1);
-
+    
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
 .letter-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow:
-        inset 0 0 0 1px rgba(168, 139, 92, 0.4),
+    box-shadow: 
+        inset 0 0 0 1px rgba(168, 139, 92, 0.4), 
         inset 0 0 20px rgba(0,0,0,0.7),
         0 10px 30px rgba(0,0,0,0.4);
 }
@@ -140,19 +137,17 @@
     right: 20px;
     width: 48px;
     height: 48px;
-
+    
     /* Subtle gradient for a richer color */
-
-
+   
+    
     /* Organic, hand-pressed shape */
     border-radius: 55% 45% 48% 52% / 50% 52% 48% 50%;
-
+    
     /* Clean, soft shadow */
     box-shadow: 2px 3px 6px rgba(0,0,0,0.4);
-
+    
     /* Emblem as a mask for a sharp, gold icon */
-    -webkit-mask-image: url('/db/emblem.svg');
-    mask-image: url('/db/emblem.svg');
     -webkit-mask-size: 60%;
     mask-size: 60%;
     -webkit-mask-repeat: no-repeat;
@@ -256,27 +251,27 @@
 
 /* --- 5. Mobile Responsive Styles --- */
 @media screen and (max-width: 768px) {
-
-    .timeline-container::before {
-        left: 20px;
+    
+    .timeline-container::before { 
+        left: 20px; 
     }
-    .timeline-entry {
-        width: 100%;
-        padding-left: 60px;
-        padding-right: 1rem;
+    .timeline-entry { 
+        width: 100%; 
+        padding-left: 60px; 
+        padding-right: 1rem; 
     }
-    .timeline-entry-right {
-        left: 0;
+    .timeline-entry-right { 
+        left: 0; 
     }
-    .timeline-node {
-        left: 0;
+    .timeline-node { 
+        left: 0; 
     }
-    .filter-bar {
-        flex-direction: column;
+    .filter-bar { 
+        flex-direction: column; 
     }
     .filter-bar .search-input,
-    .filter-bar .custom-select-wrapper {
-        width: 65%;
+    .filter-bar .custom-select-wrapper { 
+        width: 65%; 
     }
     .filter-bar .custom-select-wrapper select {
     width: 100%; /* Ensures the select box fills its container */
@@ -294,14 +289,12 @@
 .letter-paper {
     position: relative;
     overflow: hidden;
-
+    
     /* A subtle gradient and texture for a more realistic paper feel */
     background-color: #f8f5f0; /* Base vellum color */
-    background-image:
-        radial-gradient(circle at 16% 18%, rgba(116, 91, 58, 0.035) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 72% 64%, rgba(116, 91, 58, 0.025) 0 1px, transparent 1.5px),
-        linear-gradient(to bottom, rgba(253, 250, 245, 1), rgba(248, 245, 240, 1));
-    background-size: 17px 19px, 23px 29px, auto;
+    background-image: 
+        linear-gradient(to bottom, rgba(253, 250, 245, 1), rgba(248, 245, 240, 1)),
+        url('/db/images/textures/paper-fiber.png');
     background-blend-mode: multiply;
 
     color: #3a352f;
@@ -309,9 +302,9 @@
     margin: 4rem auto;
     padding: 5rem 6rem;
     border-radius: 3px;
-
+    
     /* Softer, more realistic multi-layered shadow */
-    box-shadow:
+    box-shadow: 
         inset 0 0 2px rgba(139, 115, 82, 0.2),  /* Subtle inner edge */
         0 3px 8px rgba(0,0,0,0.15),              /* Close, soft shadow */
         0 25px 50px -12px rgba(0,0,0,0.4);      /* Diffuse ambient shadow */
@@ -337,7 +330,7 @@
 
 
 /* Override default dark-theme text styles inside the letter */
-.letter-paper h1, .letter-paper h2, .letter-paper h3,
+.letter-paper h1, .letter-paper h2, .letter-paper h3, 
 .letter-paper h4, .letter-paper p, .letter-paper .subpara {
     color: #3a352f;
 }
@@ -370,13 +363,11 @@
     width: 60px;
     height: 60px;
     opacity: 0.8;
-
+    
     /* Use the new, simpler seal design */
     background: radial-gradient(circle at 70% 30%, #a13a3a, #8c2a2a 90%);
     border-radius: 55% 45% 48% 52% / 50% 52% 48% 50%;
     box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
-    -webkit-mask-image: url('/db/emblem.svg');
-    mask-image: url('/db/emblem.svg');
     -webkit-mask-size: 60%;
     mask-size: 60%;
     -webkit-mask-repeat: no-repeat;

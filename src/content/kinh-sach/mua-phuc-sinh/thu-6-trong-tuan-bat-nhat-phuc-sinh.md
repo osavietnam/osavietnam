@@ -9,7 +9,7 @@ rank: "solemn"
 order: 5
 ---
 
-*Trích bài giáo huấn cho tân tòng tại Giê-ru-sa-lem.*
+**Trích bài giáo huấn cho tân tòng tại Giê-ru-sa-lem.**
 
 Anh em đã được dìm vào nước thánh tẩy để thuộc về Đức Ki-tô, anh em đã mặc lấy Đức Ki-tô, vậy anh em đã nên đồng hình đồng dạng với Con Thiên Chúa. Thiên Chúa đã tiền định cho ta được ơn làm nghĩa tử, thì cũng đã làm cho ta được nên đồng hình đồng dạng với thân xác vinh quang của Đức Ki-tô. Vì đã được chung phần với Đức Ki-tô, nên anh em được gọi cách chính đáng là những “Ki-tô”. Thiên Chúa cũng đã nói về anh em rằng : Đừng đụng tới những Ki-tô của Ta tức là những kẻ Ta đã xức dầu tấn phong.
 

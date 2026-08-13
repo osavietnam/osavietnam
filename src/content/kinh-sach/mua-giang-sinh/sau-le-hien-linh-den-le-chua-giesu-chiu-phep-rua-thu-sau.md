@@ -8,7 +8,7 @@ liturgy: "Sau Lễ Hiển Linh đến Lễ Chúa Giêsu Chịu Phép Rửa - Th�
 order: 20
 ---
 
-*Trích bài giảng của thánh Mác-xi-mô, giám mục Tô-ri-nô.*
+**Trích bài giảng của thánh Mác-xi-mô, giám mục Tô-ri-nô.**
 
 Sách Tin Mừng thuật lại Chúa tới sông Gio-đan để chịu phép rửa và cũng trong dòng sông đó, Người muốn cho mọi người thấy rằng Người được dành riêng để phục vụ các mầu nhiệm trên trời. Quả vậy, nếu sau ngày lễ Chúa Giáng Sinh mà chúng ta mừng ngày lễ hôm nay thì cũng là chuyện bình thường, cho dù các biến cố có cách nhau nhiều năm, nhưng diễn ra cùng một thời kỳ. Theo thiển ý, cũng phải gọi ngày hôm nay là lễ giáng sinh nữa.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 7 Phục Sinh"
 order: 46
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.**
 
 Đành rằng tất cả những gì phải thực hiện ở trần gian đã hoàn tất, nhưng nhất thiết chúng ta phải chung số phận và thông phần bản tính với Ngôi Lời, nghĩa là phải từ bỏ đời sống chúng ta và biến đổi sang một đời sống khác và được phục hồi để sống một nếp sống đạo đức mới. Điều này chỉ thể hiện được nhờ việc chúng ta lãnh nhận Thánh Thần.
 

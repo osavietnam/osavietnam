@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 30 Thường Niên"
 order: 208
 ---
 
-*Trích bài giảng của thánh A-tha-na-xi-ô, giám mục, chống lạc giáo A-ri-ô.*
+**Trích bài giảng của thánh A-tha-na-xi-ô, giám mục, chống lạc giáo A-ri-ô.**
 
 Bởi vì hình dáng của Đức Khôn Ngoan đã được tác tạo nơi chúng ta và nơi vạn vật, nên thật là hợp lý khi Đức Khôn Ngoan đích thật và là Hoá Công nói : Chúa đã dựng nên tôi để làm các công việc của Người. nói thế, Đức Khôn Ngoan muốn quy về mình các điều thuộc hình dáng kia. Thực ra những điều mà Đức Khôn Ngoan ở nơi chúng ta nói thì chính Chúa lại muốn áp dụng cho mình.
 

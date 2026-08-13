@@ -15,7 +15,7 @@ Chào đời khoảng năm 130, lớn lên học ở Miếc-na, I-rê-nê trở 
 
 </div>
 
-*Trích khảo luận của thánh I-rê-nê, giám mục, chống lạc giáo.*
+**Trích khảo luận của thánh I-rê-nê, giám mục, chống lạc giáo.**
 
 Vinh quang của Thiên Chúa làm cho sống, nên ai thấy Thiên Chúa thì nhận được sự sống. Vì thế, Đấng mà loài người không thể dò thấu, không thể lãnh hội, không thể thấy được thì lại tỏ mình ra cho họ thấy, cho họ lãnh hội và dò thấu, để ban sự sống cho những ai đón nhận và thấy Người. Vì không thể sống mà không có sự sống, nên sự sống chỉ tồn tại khi nó thông phần vào sự sống của Thiên Chúa và vui hưởng lòng nhân hậu của Người.
 

@@ -8,7 +8,7 @@ liturgy: "Từ ngày 2 Tháng 1 đến Lễ Hiển Linh, Thứ Ba"
 order: 10
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Này chính Chúa ngự đến. Người là Thầy dạy bác ái, đầy tình yêu thương. Như lời sấm đã nói trước, Người mau chóng quảng bá lời Người trên mặt đất và chứng tỏ rằng Lề Luật cùng sách ngôn sứ gồm tóm trong hai điều luật bác ái.
 

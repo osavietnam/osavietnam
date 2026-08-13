@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 25 Thường Niên"
 order: 172
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Vì thế, hỡi các mục tử, hãy nghe lời ĐỨC CHÚA. Nhưng nghe gì, hỡi các mục tử ? ĐỨC CHÚA là Chúa Thượng phán thế này : đây Ta chống lại các mục tử. Ta sẽ đòi lại chiên của ta, không để chúng chăn dắt nữa.
 

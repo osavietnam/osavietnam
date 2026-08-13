@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 30 Thường Niên"
 order: 210
 ---
 
-*Trích sách Đối thoại của thánh Ca-ta-ri-na Xi-ê-na, trinh nữ, về Chúa quan phòng.*
+**Trích sách Đối thoại của thánh Ca-ta-ri-na Xi-ê-na, trinh nữ, về Chúa quan phòng.**
 
 Chúa Cha hằng hữu lấy lòng nhân từ khoan hậu ghé mắt nhìn linh hồn này và bắt đầu nói như sau :
 

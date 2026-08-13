@@ -16,7 +16,7 @@ Sinh năm 1890 trong gia đình rất nghèo ở miền Cô-ri-man-đô, nước
 
  </div>
 
-*Trích bài giảng của đức giáo hoàng Pi-ô XII trong lễ tôn phong thánh Ma-ri-a Gô-rét-ti (25-6-1950)*
+**Trích bài giảng của đức giáo hoàng Pi-ô XII trong lễ tôn phong thánh Ma-ri-a Gô-rét-ti (25-6-1950)**
 
  
 

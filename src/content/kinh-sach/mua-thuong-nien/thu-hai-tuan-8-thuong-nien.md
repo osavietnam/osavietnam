@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 8 Thường Niên"
 order: 51
 ---
 
-*Trích sách của thánh Chê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Chê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Khi thấy mình bên trong thì chứa một kho tàng khôn ngoan phong phú nhưng bên ngoài lại là một thân xác mỏng giòn, thánh Phao-lô đã nói : Kho tàng ấy, chúng tôi chứa đựng trong những bình sành. Trong trường hợp ông Gióp, ta thấy chiếc bình sành ấy bên ngoài đã nứt vì ung nhọt, nhưng bên trong, kho tàng ấy vẫn còn nguyên vẹn. Bên ngoài, da thịt ông nứt vỡ vì các vết thương ; nhưng bên trong, chính kho tàng khôn ngoan ấy không ngừng tái sinh, đã phát ra những lời khôn ngoan thánh thiện như sau : Chúng ta đã đón nhận điều lành từ tay Thiên Chúa, thì tại sao lại không chịu đựng điều dữ ? Điều lành là các ân huệ Thiên Chúa ban, ân huệ đời tạm cũng như ân huệ vĩnh cửu ; còn điều dữ là những thử thách đời này. Về những thử thách đó, ĐỨC CHÚA đã phán như sau. qua lời ngôn sứ I-sai-a : Ta là ĐỨC CHÚA, không còn Chúa nào khác. Ta tạo ra ánh sáng và dựng nên bóng tối.làm ra bình an và dựng nên tai hoạ.
 

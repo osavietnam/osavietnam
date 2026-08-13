@@ -15,7 +15,7 @@ Thánh nhân sinh quãng năm 340 tại Xơ-tri-đôn, Đan-ma-xi-a. Người sa
 
 </div>
 
-*Trích lời tựa sách chú giải ngôn sứ I-sai-a của thánh Giê-rô-ni-mô, linh mục.*
+**Trích lời tựa sách chú giải ngôn sứ I-sai-a của thánh Giê-rô-ni-mô, linh mục.**
 
 Vâng lệnh Đức Ki-tô truyền : Hãy nghiên cứu Kinh Thánh và cứ tìm thì sẽ thấy, giờ đây tôi trả món nợ tôi mắc, kẻo phải cùng với người Do-thái nghe lời sau đây : Các ông lầm vì không biết Kinh Thánh cũng chẳng biết quyền năng Thiên Chúa. Quả vậy, nếu Đức Ki-tô là quyền năng và là sự khôn ngoan của Thiên Chúa như thánh Phao-lô tông đồ nói, thì ai không biết Kinh Thánh là không biết Đức Ki-tô.
 

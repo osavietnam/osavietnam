@@ -12,9 +12,9 @@ manualFill: true
 ---
 Chào đời vào thế kỷ thứ IX, tại Pháp và được giáo dục trong đan viện Coóc-bi, năm 826, thánh nhân được phái tới Sắc-xơ, từ đó người tìm cách đem Tin Mừng vào Đan Mạch, Sơ-lê-vích, rồi Thuỵ Điển. Người được đức giáo hoàng Ghê-gô-ri-ô IV đặt làm giám mục tại Hăm-bua, rồi tại Bơ-rem-mơ (năm 847), cuối cùng làm đặc sứ đức giáo hoàng tại các nước thuộc quần đảo Xơ-căng-đi-na-vi. Thánh nhân qua đời năm 865. 
 
-Phải mạnh dạn nói cho người ta biết về mầu nhiệm Đức Ki-tô 
+*Phải mạnh dạn nói cho người ta biết về mầu nhiệm Đức Ki-tô*
 
-*Trích sắc lệnh Được sai đến muôn dân của công đồng Va-ti-can II về hoạt động truyền giáo của Hội Thánh.* 
+**Trích sắc lệnh Được sai đến muôn dân của công đồng Va-ti-can II về hoạt động truyền giáo của Hội Thánh.**
 
  
 

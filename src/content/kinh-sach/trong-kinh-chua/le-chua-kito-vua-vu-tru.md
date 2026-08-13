@@ -8,7 +8,7 @@ liturgy: "Lễ Chúa Kitô Vua Vũ Trụ"
 order: 232
 ---
 
-*Trích khảo luận của linh mục O-ri-giê-nê, về cầu nguyện.*
+**Trích khảo luận của linh mục O-ri-giê-nê, về cầu nguyện.**
 
 Theo lời Chúa Giê-su, Đấng cứu độ chúng ta, thì triều đại Thiên Chúa không đến như một điều quan sát được. Và người ta sẽ không nói “Ở đây này” hay “ở kia kìa”, nhưng triều đại Thiên Chúa đang ở giữa chúng ta, “vì lời Thiên Chúa thật gần kề, ngay trên miệng, ngay trong lòng chúng ta”. Chắc hẳn rằng : ai cầu cho triều đại Thiên Chúa mau đến thì cũng cầu cho vương quyền của Thiên Chúa nơi mình được tăng triển, đem lại hoa trái và đạt tới tột đỉnh. Thiên Chúa hiển trị nơi tất cả mọi vị thánh : vị nào cũng vâng phục lề luật thiêng liêng của Thiên Chúa và được Thiên Chúa cư ngụ nơi mình như nơi một thành đô có tổ chức. Chúa Cha hiện diện nơi vị đó và Đức Ki-tô đồng hiển trị với Chúa Cha trong tâm hồn hoàn thiện ấy như có lời rằng : “Chúng Ta sẽ đến ở với người ấy và ở lại nơi người ấy”.
 

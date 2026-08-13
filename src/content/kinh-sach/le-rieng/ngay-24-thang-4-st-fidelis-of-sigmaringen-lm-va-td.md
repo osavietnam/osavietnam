@@ -11,9 +11,9 @@ draft: false
 ---
 Thánh nhân sinh năm 1578, tại làng Dích-ma-rinh-gân, nước Đức. Người gia nhập Dòng Anh Em Hèn Mọn Ca-pu-xi-nô, sống khổ hạnh và siêng năng cầu nguyện.  Chuyên cần trong công việc rao giảng Lời Chúa, người được Thánh bộ Truyền Bá Đức Tin giao cho sứ mạng gìn giữ cho đạo lý được tinh tuyền ở Rê-xi-a, Thuỵ Sĩ. Chính vì sứ mạng này mà người bị sát hại năm 1622.
 
-Tên gọi thế nào, đời sống cũng như thế
+*Tên gọi thế nào, đời sống cũng như thế*
 
-*Bài ca ngợi thánh Phi-đen, linh mục, tử đạo.*
+**Bài ca ngợi thánh Phi-đen, linh mục, tử đạo.**
 
  
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 21 Thường Niên"
 order: 146
 ---
 
-*Trích bài chú giải của thánh Giê-rô-ni-mô, linh mục, về sách ngôn sứ Giô-en.*
+**Trích bài chú giải của thánh Giê-rô-ni-mô, linh mục, về sách ngôn sứ Giô-en.**
 
 Các ngươi hãy hết lòng trở về với Ta, hãy ăn chay, khóc lóc, và thống thiết than van mà tỏ lòng sám hối. Bây giờ ăn chay, sau này anh em sẽ no thoả ; bây giờ khóc lóc, sau này anh em sẽ vui cười ; bây giờ thống thiết than van, sau này anh em sẽ được vỗ về an ủi. Anh em có thói quen xé áo khi gặp chuyện buồn hay những nghịch cảnh. (Anh em còn nhớ Tin Mừng ghi lại là vị thượng tế đã xé áo mình để gia tăng tội trạng cho Chúa Cứu Thế, và chúng ta còn đọc thấy là hai ông Phao-lô và Ba-na-ba, cũng làm như vậy khi nghe người ta nói phạm thượng). Vì thế, tôi, tôi truyền cho anh em : không bao giờ được xé áo, nhưng hãy xé nát lòng dạ tội lỗi của anh em. Lòng dạ ấy tựa chiếc bầu da, nếu không xé ra thì cũng tự động tan nát. Xé lòng như vậy, rồi anh em hãy trở về cùng Chúa là Thiên Chúa của anh em, Đấng mà trước kia tội lỗi anh em đã làm trở thành xa lạ với anh em. Đừng vì tội lỗi nặng nề anh em đã phạm mà đâm ra thất vọng về ơn tha thứ, bởi lẽ tội nặng nề sẽ được Chúa nặng tình thương xoá bỏ.
 

@@ -8,7 +8,7 @@ liturgy: "Cầu cho tín hữu đã qua đời (tùy chọn)"
 order: 23
 ---
 
-*Trích thư của thánh Bơ-rau-li-ô, giám mục Xa-ra-gốt.*
+**Trích thư của thánh Bơ-rau-li-ô, giám mục Xa-ra-gốt.**
 
 Chúa Ki-tô, niềm hy vọng của mọi tín hữu, gọi những người đã lìa đời là những người đang an nghỉ chứ không phải là người chết, Người nói : La-da-rô, bạn của chúng ta, đang yên giấc. Chính thánh Phao-lô cũng không muốn chúng ta buồn phiền về những người đã an giấc. Do đó, nếu đức tin của chúng ta quả quyết rằng mọi người tin vào Đức Ki-tô, sẽ không phải chết đời đời, như Tin Mừng nói, thì cũng do đức tin chúng ta biết rằng Đức Ki-tô không chết và chính chúng ta cũng sẽ không chết.
 

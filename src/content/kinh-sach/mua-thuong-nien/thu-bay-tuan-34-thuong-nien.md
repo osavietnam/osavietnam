@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 34 Thường Niên"
 order: 238
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Trên cõi đời này, dẫu còn phải âu lo, chúng ta hãy cứ hát lên Ha-lê-lui-a, để một ngày kia khi được yên ổn trên cõi phúc, chúng ta vẫn có thể hát lên lời này. Tại sao ở đời này ta phải âu lo ? Tôi đọc thấy thế này : Cuộc sống con người nơi dương thế chẳng phải là thời thử thách hay sao, mà bạn lại bảo tôi đừng lo lắng ư ? Tôi nghe dạy thế này : Anh em hãy canh thức và cầu nguyện, để khỏi lâm vào cơn cám dỗ, mà bạn bảo tôi đừng lo lắng ư ? Cám dỗ quá nhiều đến nỗi Chúa phải dạy chúng ta cầu nguyện thế này : Xin tha tội cho chúng con cũng như chúng con cũng tha cho những người có lỗi với chúng con, mà bạn bảo tôi đừng lo lắng ư ? Ngày ngày ta phải cầu xin vì ngày ngày ta mắc tội. Ngày ngày tôi phải xin tha tội, xin cứu nguy, mà bạn lại bảo tôi cứ yên lòng yên trí sao ? Thực vậy, vừa nhắc đến tội lỗi đã phạm : Xin tha tội cho chúng con cũng như chúng con cũng tha cho những người có lỗi với chúng con, tôi phải nghĩ ngay đến hiểm nguy sắp tới và thêm : Xin đừng để chúng con sa chước cám dỗ. Dân hạnh phúc làm sao được khi còn phải cùng tôi kêu cầu : Xin cứu chúng con khỏi mọi sự dữ. Tuy vậy, thưa anh em, ngay khi gặp sự dữ như thế, chúng ta cũng cứ hát Ha-lê-lui-a mừng Thiên Chúa nhân lành là Đấng cứu chúng ta khỏi sự dữ.
 

@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 10 Thường Niên"
 order: 64
 ---
 
-*Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Rô-ma.*
+**Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Rô-ma.**
 
 Tôi, I-nha-xi-ô, cũng gọi là Thê-ô-phô-rô, kính gửi Hội Thánh đã được Chúa Cha chí thánh và Đức Ki-tô, Con Một Người, mở lượng hải hà thương xót. Đây chính là Hội Thánh được yêu thương và soi sáng theo Đấng đã muốn cho muôn loài người hiện hữu đúng theo tình yêu của Đức Giê-su Ki-tô, Chúa chúng ta. Đây cũng là Hội Thánh đứng đầu tại vùng Rô-ma, xứng đáng với Thiên Chúa, xứng đáng được vinh dự, xứng đáng được xưng tụng là diễm phúc, xứng đáng được ngợi khen, xứng đáng được Thiên Chúa đáp lời cầu xin khẩn nguyện, rất mực trung tín, và đứng đầu toàn thể cộng đoàn bác ái, nơi giữ luật Đức Ki-tô và được niêm ấn danh Chúa Cha. Xin chào thăm Hội Thánh nhân danh Đức Giê-su Ki-tô, Con Một Chúa Cha. Cầu chúc cho những ai gắn bó xác hồn với mọi huấn lệnh của Người, những ai vẫn đầy tràn ơn Thiên Chúa và đã sạch mọi tì vết lây nhiễm từ bên ngoài, được dồi dào phúc lành mọi mặt trong Đức Giê-su Ki-tô, Thiên Chúa chúng ta.
 

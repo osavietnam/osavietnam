@@ -13,9 +13,9 @@ Thánh nhân chào đời vào đầu thế kỷ IV tại Poa-chi-ê. Người �
 
 Người phải lưu đày sang Đông phương bốn năm, vì trung hành với đức tin đã được công đồng chung Ni-xê xác định. Trở về Poa-chi-ê, người ủng hộ nỗ lực canh tân đời sống đan viện Li-guy-gê do vị sau này sẽ là thánh Mac-ti-nô khởi xướng. Người qua đời tại Poa-chi-ê năm 367. 
 
-Khi rao giảng về Cha là con phụng sự Cha 
+*Khi rao giảng về Cha là con phụng sự Cha*
 
-*Trích khảo luận Chúa Ba Ngôi của thánh Hi-la-ri-ô, giám mục.* 
+**Trích khảo luận Chúa Ba Ngôi của thánh Hi-la-ri-ô, giám mục.**
 
  
 

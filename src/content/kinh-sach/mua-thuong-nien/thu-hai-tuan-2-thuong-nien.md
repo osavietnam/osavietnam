@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 2 Thường Niên"
 order: 9
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Ê-phê-xô.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Ê-phê-xô.**
 
 Anh em hãy cố gắng hội họp thường xuyên hơn để tạ ơn Thiên Chúa và ngợi khen Người. Vì khi anh em đến gặp gỡ nhau thường xuyên hơn thì sức mạnh của Xa-tan bị tiêu diệt, và sự phá hoại do nó gây nên ắt bị dẹp tan bởi anh em sống hiệp nhất trong đức tin. Không gì quý trọng hơn một nền hoà bình loai trừ được mọi cuộc giao tranh với kẻ thù trên trời và dưới đất.
 

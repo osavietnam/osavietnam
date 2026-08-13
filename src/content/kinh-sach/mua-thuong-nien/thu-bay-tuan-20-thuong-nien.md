@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 20 Thường Niên"
 order: 140
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.**
 
 Vì Đức Ki-tô đã hoà giải nhân loại với Thiên Chúa, nên chính Người không cần được hoà giải chi hết. Người không hề biết đến tội lỗi thì việc gì phải đền tội ? Khi người Do-thái đòi tiền thuế mà Luật quy định cho người ta phải nộp vào đền thờ để đền tội, thì Đức Ki-tô nói với ông Phê-rô : Anh Si-mon, anh nghĩ sao ? Vua chúa trần gian bắt ai nộp sưu nộp thuế ? Con cái mình hay người ngoài ? Ông Phê-rô đáp : Thưa, người ngoài. Đức Giê-su liền bảo : Vậy thì con cái được miễn, Nhưng để khỏi làm gai mắt họ, anh ra biển thả câu ; con cá nào câu được trước hết, thì bắt lấy, mở miệng nó ra ; anh sẽ thấy một đồng tiền bốn quan ; anh lấy đồng tiền ấy, nộp thuế cho họ, phần của Thầy và phần của anh.
 

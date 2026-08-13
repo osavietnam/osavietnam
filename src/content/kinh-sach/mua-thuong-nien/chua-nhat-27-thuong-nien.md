@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 27 Thường Niên"
 order: 183
 ---
 
-*Trích sách Quy luật mục vụ của thánh Ghê-gô-ri-ô Cả, giáo hoàng.*
+**Trích sách Quy luật mục vụ của thánh Ghê-gô-ri-ô Cả, giáo hoàng.**
 
 Khi thinh lặng, người lãnh đạo phải khôn ngoan, khi nói năng, liệu sao cho hữu ích, để khỏi nói ra khi cần giữ kín, hay không làm thinh khi cần lên tiếng. Một lời nói thiếu thận trọng lôi kéo người ta vào con đường lầm lạc. Cũng vậy, sự thinh lặng thiếu khôn ngoan khiến cho người ta tiếp tục sống trong lầm lạc đang khi lẽ ra họ có thể được soi sáng. Thật thế, nhiều khi các vị lãnh đạo không biết lo xa, sợ không được lòng người đời, nên ngại không dám thẳng thắn nói ra sự thật. Họ không nhiệt thành chăm sóc đoàn chiên theo lời Đấng là sự thật, đúng với nhiệm vụ mục tử, mà chỉ chăn dắt như người làm thuê, vì khi ẩn mình làm thinh thì chẳng khác gì họ xa chạy cao bay khi chó sói đến.
 

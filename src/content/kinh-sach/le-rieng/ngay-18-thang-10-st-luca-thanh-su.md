@@ -15,7 +15,7 @@ Thánh Lu-ca, “người thầy thuốc yêu quý”, là bạn đồng hành c
 
 </div>
 
-*Trích bài diễn giải Tin Mừng của thánh Ghê-gô-ri-ô Cả, giáo hoàng.*
+**Trích bài diễn giải Tin Mừng của thánh Ghê-gô-ri-ô Cả, giáo hoàng.**
 
 Anh em thân mến, Chúa Giê-su, Đấng cứu độ chúng ta, khi thì dùng lời nói, lúc thì dùng việc làm mà dạy bảo chúng ta. Chính việc làm của Người là luật cho chúng ta, vì khi lặng lẽ làm một việc nào thì Người cho biết chúng ta phải làm gì. Quả vậy, Người sai các môn đệ từng hai người đi rao giảng là vì đức ái có hai điều luật : đó là mến Chúa và yêu người.
 

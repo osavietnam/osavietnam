@@ -17,7 +17,7 @@ Còn thánh Giu-đa, cũng được gọi là Ta-đê-ô, là người đã hỏ
 
 </div>
 
-*Trích bài chú giải của thánh Sy-ri-lô A-lê-xan-ri-a, giám mục về Tin Mừng theo thánh Gio-an.*
+**Trích bài chú giải của thánh Sy-ri-lô A-lê-xan-ri-a, giám mục về Tin Mừng theo thánh Gio-an.**
 
 Đức Giê-su Ki-tô, Chúa chúng ta, đã đặt những vị lãnh đạo, những bậc tôn sư cho nhân loại và những người quản lý các mầu nhiệm của Người. Người truyền cho những vị đó phải rực sáng như những ngọn đuốc và không những chiếu soi cho vùng đất của người Do-thái, nhưng còn chiếu soi cho bất cứ vùng đất nào dưới ánh mặt trời, cho toàn thể nhân loại khắp hoàn cầu, toàn thể cư dân trên mặt đất. Tất giả thư Do-thái cũng nói lên một sự thật như sau : Không ai tự gán cho mình vinh dự ấy, nhưng phải được Thiên Chúa gọi. Thật vậy, Đức Giê-su Ki-tô, Chúa chúng ta, đã gọi các môn đệ của Người trước những người khác, để các ông thi hành sứ vụ tông đồ rất vẻ vang ấy.
 

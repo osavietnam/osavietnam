@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh Ca-xi-mia sinh năm 1458. Thân phụ người là vua nước Ba-lan và Lít-va. Người qua đời năm 1484 lúc hai mươi sáu tuổi, để lại cho dân chúng hình ảnh đẹp về một vị hoàng tử trẻ tuổi, thông minh và hào hiệp. Nhưng điều đáng kể nhất, đó là người đã sống rất nhiệm nhặt và siêng năng cầu nguyện, kết hiệp mật thiết với Đức Trinh Nữ Ma-ri-a và với Chúa Ki-tô Thánh Thể. 
 
-Người lấy mệnh lệnh của Đấng Tối Cao làm kho tàng cho mình
+*Người lấy mệnh lệnh của Đấng Tối Cao làm kho tàng cho mình*
 
-*Trích hạnh thánh Ca-xi-mia của một tác giả gần như cùng thời với thánh nhân.* 
+**Trích hạnh thánh Ca-xi-mia của một tác giả gần như cùng thời với thánh nhân.**
 
  
 

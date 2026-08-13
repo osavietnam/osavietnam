@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export const prerender = true;
 import PageHeader from '../../components/PageHeader.astro';
+import CollectionProseInlineEditor from '../../components/CollectionProseInlineEditor.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('thanh-chan-phuoc', e => !e.data.draft);
@@ -54,11 +55,12 @@ const feastStr  = feastDay && feastMonth
 <BaseLayout
   title={title}
   banner="saints"
-  bodyClass="no-sidebar"
+  bodyClass="page-saint-bio no-sidebar"
   type="article"
   description={`Tiểu sử ${title} — Dòng Augustinô`}
   image={imageFile || undefined}
 >
+<CollectionProseInlineEditor collection="thanh-chan-phuoc" entryId={entry.id} label="Sửa tiểu sử" />
 
 <div class="bio-masthead">
   <PageHeader title={title} subtitle={subtitle} desc={feastStr}>
@@ -98,8 +100,6 @@ const feastStr  = feastDay && feastMonth
 )}
 
 <script>
-  import { withBase } from '../../lib/site-path';
-
   // Dòng nguồn trong blockquote dùng cùng kiểu prose với các trang bài viết.
   document.querySelectorAll<HTMLQuoteElement>('.prose blockquote').forEach((quote) => {
     quote.querySelectorAll<HTMLParagraphElement>(':scope > p').forEach((paragraph) => {
@@ -110,11 +110,15 @@ const feastStr  = feastDay && feastMonth
   });
 
   document.getElementById('saintBackToggle')?.addEventListener('click', () => {
-    window.location.href = withBase('/thanh-chan-phuoc/');
+    window.location.href = '/thanh-chan-phuoc/';
   });
 </script>
 
 <style>
+:global(body.page-saint-bio .article-shell .prose :is(h1, h2, h3, h4, h5, h6)) {
+  display: none;
+}
+
 /* Bio dùng master lib header (PageHeader). Tên thánh thường dài hơn tên
    tài liệu → thu nhỏ h1 cho phù hợp. */
 .bio-masthead :global(.lib-masthead-title) {

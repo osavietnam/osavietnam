@@ -18,7 +18,7 @@ Thánh nữ được nhiều ơn mặc khải về cuộc thương khó của Ch
 
 </div>
 
-*Trích lời cầu nguyện được coi là của thánh nữ Bi-ghít-ta.*
+**Trích lời cầu nguyện được coi là của thánh nữ Bi-ghít-ta.**
 
  
 

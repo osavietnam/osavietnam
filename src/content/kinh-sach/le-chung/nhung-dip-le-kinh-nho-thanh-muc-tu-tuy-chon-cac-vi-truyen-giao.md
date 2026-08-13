@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Mục Tử (tùy chọn, Các v�
 order: 12
 ---
 
-*Trích sắc lệnh “Đến với muôn dân” của công đồng Va-ti-ca-nô II về hoạt động truyền giáo của Hội Thánh.*
+**Trích sắc lệnh “Đến với muôn dân” của công đồng Va-ti-ca-nô II về hoạt động truyền giáo của Hội Thánh.**
 
 Trước khi tự do hiến dâng mạng sống mình cho thế gian, Đức Ki-tô đã lập ra thừa tác vụ tông đồ và hứa cử Chúa Thánh Thần đến, ngõ hầu cả hai, thừa tác vụ và Chúa Thánh Thần, liên kết với nhau mọi nơi mọi thời để thực hiện công trình cứu độ.
 

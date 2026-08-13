@@ -9,7 +9,7 @@ rank: "solemn"
 order: 39
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Hôm nay, Đức Giê-su Ki-tô, Chúa chúng ta lên trời. Ước gì lòng trí chúng ta cũng lên theo Người.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 3 Thường Niên"
 order: 18
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ, về sách Diễm Ca.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ, về sách Diễm Ca.**
 
 Những kẻ ốm đau sẽ được nơi an toàn bảo đảm và nghỉ ngơi vững chắc ở đâu, nếu không phải ở trong thương tích của Đấng cứu độ ? Đấng ấy càng có quyền năng cứu độ thì tôi càng yên tâm ở lại nơi đó. Thế gian có gầm lên, xác thịt có dồn ép, ma quỷ có bày mưu, tôi cũng sẽ không quỵ ngã, vì tôi được đặt trên nền tảng đá cứng. Tôi đã phạm tội nặng nê, lương tâm xao xuyến, nhưng tôi không bị xáo động, vì tôi nhớ đến các thương tích của Chúa, bởi lẽ Người đã bị đâm vì chúng ta phạm tội. Cái gì có thể đưa tới chỗ chết mà cái chết của Đức Ki-tô không giải gỡ được ? Vậy nếu tâm trí tôi nghĩ đến phương thuốc thần kỳ và hiệu nghiệm như thế thì tôi chẳng còn phải sợ gì nữa về cơn bệnh trầm trọng.
 

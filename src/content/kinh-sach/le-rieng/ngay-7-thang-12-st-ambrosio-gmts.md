@@ -15,7 +15,7 @@ Thánh Am-rô-xi-ô chào đời ở Trê-vê-rô quãng năm 340 trong một gi
 
 </div>
 
-*Trích thư của thánh Am-rô-xi-ô, giám mục.*
+**Trích thư của thánh Am-rô-xi-ô, giám mục.**
 
 Bạn đã nhận thừa tác vụ giám mục, và nay từ buồng lái, bạn điều khiển con thuyền Giáo Hội giữa phong ba bão táp. Bạn hãy giữ chặt bánh lái đức tin để giông tố phong ba đời này không làm bạn quay cuồng nao núng. Biển rộng lớn, biển mênh mông, nhưng bạn chẳng có chi phải sợ, vì nền trái đất, Chúa dựng trên biển cả, đặt vững vàng trên làn nước mênh mông.
 

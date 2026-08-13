@@ -15,7 +15,7 @@ Vượt lên trên những câu chuyện cổ kính thuật lại việc Đức 
 
 </div>
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Tôi xin anh em hãy để ý xem Chúa nói gì khi Người giơ tay chỉ các môn đệ : Đây là mẹ tôi, đây là anh em tôi. Vì phàm ai thi hành ý muốn của Cha tôi, Đấng ngự trên trời, người ấy là anh chị em tôi, là mẹ tôi. Đức Trinh Nữ Ma-ri-a đã không thi hành ý muốn của Cha sao ? Người là đấng đã nhờ lòng tin mà tin, thì cũng nhờ lòng tin mà thụ thai ; người được chọn, để nhờ người Đấng cứu độ chúng ta ra đời ; người được Đức Ki-tô tạo thành trước khi Đức Ki-tô được tạo thành nơi người. Đức Ma-ri-a đã thi hành, hoàn toàn thi hành ý Chúa Cha ; vì thế đối với Người, làm môn đệ của Đức Ki-tô thì quan trong hơn là làm mẹ của Đức Ki-tô. Mẹ cũng sung sướng vì được làm môn đệ của Đức Ki-tô hơn là làm mẹ của Đức Ki-tô. Vậy, Đức Ma-ri-a được hạnh phúc vì đã cưu mang Thầy trước khi sinh ra Thầy.
 

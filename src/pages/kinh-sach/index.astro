@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import KinhSachInlineEditor from '../../components/KinhSachInlineEditor.astro';
 import indexData from '../../data/kinh-sach-index.json';
 import pageHeaders from '../../data/page-headers.json';
 const ph = (pageHeaders as Record<string, Record<string, string>>)['readings'];
@@ -22,9 +23,7 @@ function readEntry(id: string): { filled: boolean; manualFill: boolean } {
   };
 }
 // Entry cần sửa metadata (highlight đỏ)
-const NEEDS_FIX = new Set<string>([
-  'mua-giang-sinh/tu-ngay-2-thang-1-den-le-hien-linh-thu-bay',
-]);
+const NEEDS_FIX = new Set<string>();
 for (const key of Object.keys(indexData as Record<string, any[]>)) {
   for (const e of (indexData as Record<string, any[]>)[key]) {
     const st = readEntry(e.id);
@@ -115,12 +114,11 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
     <p class="listing-hint" id="hint">Hãy chọn một mùa phụng vụ ở trên để xem bảng các bài đọc.</p>
   </div>
 
+  <KinhSachInlineEditor triggerSelector=".row-edit-btn" />
+
   <script set:html={`window.__KS_INDEX__ = ${JSON.stringify(indexData)}; window.__KS_SEASON_LABELS__ = ${JSON.stringify(SEASON_LABELS)}; window.__KS_SEASONS__ = ${JSON.stringify(present)};`}></script>
   <script>
-    import { withBase } from '../../lib/site-path';
-
     const INDEX = window.__KS_INDEX__ || {};
-    Object.values(INDEX).flat().forEach((entry: any) => { if (entry?.url) entry.url = withBase(entry.url); });
     const SEASON_LABELS = window.__KS_SEASON_LABELS__ || {};
     const els = {
       season:  document.getElementById('season-tabs'),
@@ -255,7 +253,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
       for (const ly of [y, y+1, y-1]) {
         if (ly < 2020 || ly > 2100) continue;
         try {
-          const r = await fetch(withBase(`/data/calendar/${ly}.json`));
+          const r = await fetch(`/data/calendar/${ly}.json`);
           if (!r.ok) continue;
           const data = await r.json();
           if (!data.days?.[key]) continue;
@@ -310,18 +308,20 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
 
       // Bài chính: liturgy text (từ entry hoặc từ calendar nếu chưa có entry)
       const liturgyText = primary?.liturgy || calData?.liturgy || '';
+      const displayLiturgyText = expandRanks(liturgyText);
       const primaryUrl  = primary?.url || null;
 
       // Lễ riêng: từng hàng compact (chip + tên), tất cả lễ trong ngày
       let feastsHtml = '';
       const readings = [];
-      if (primaryUrl) readings.push({ label: liturgyText, url: primaryUrl });
+      if (primaryUrl) readings.push({ label: displayLiturgyText, url: primaryUrl });
       for (const e of todayFeasts) {
         const ci = (e.liturgy || '').indexOf(':');
         const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : e.liturgy;
+        const displayName = expandRanks(fname);
         const chip = RANK_CHIPS[e.rank];
-        feastsHtml += `<div class="td-feast-row">${chip ? `<span class="${chip.cls}">${chip.label}</span>` : ''}<span class="td-feast-name">${esc(fname)}</span></div>`;
-        readings.push({ label: (chip ? `[${chip.label}] ` : '') + fname, url: e.url || withBase('/kinh-sach/?category=le-rieng') });
+        feastsHtml += `<div class="td-feast-row">${chip ? `<span class="${chip.cls}">${chip.label}</span>` : ''}<span class="td-feast-name">${esc(displayName)}</span></div>`;
+        readings.push({ label: (chip ? `[${chip.label}] ` : '') + displayName, url: e.url || '/kinh-sach/?category=le-rieng' });
       }
 
       // Nút đọc — góc phải dưới
@@ -341,7 +341,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
             <div class="td-header-label">Hôm Nay</div>
             <div class="td-date">${esc(dateStr)}<span class="td-cycle"> · Năm ${esc(cycleLetter)}</span></div>
             ${chipRowHtml}
-            ${liturgyText ? `<div class="td-liturgy">${esc(liturgyText)}</div>` : ''}
+            ${displayLiturgyText ? `<div class="td-liturgy">${esc(displayLiturgyText)}</div>` : ''}
             ${feastsHtml}
             <div class="td-read-bar${readings.length === 1 ? ' td-read-bar-single' : readings.length > 1 ? ' td-read-bar-multi' : ''}">${readBarHtml}</div>
           </div>
@@ -378,11 +378,10 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
           isAdmin && !r.filled ? 'row-unfilled' : '',
           rankCls.trim(),
         ].filter(Boolean).join(' ');
-        const manualTag = isAdmin && r.manualFill ? ' <span class="tag-manual">fill tay</span>' : '';
         return `<tr data-url="${r.url}" data-id="${r.id}"${cls ? ` class="${cls}"` : ''} role="link" tabindex="0" title="Mở bài đọc — Ctrl/Cmd-click để mở tab mới">
           <td data-label="Tác giả"><span class="ks-author-txt">${esc(stripRankAbbr(r.author))}</span></td>
           <td data-label="Trích đoạn"><span class="ks-excerpt-txt">${esc(r.excerpt)}</span></td>
-          <td data-label="Phụng vụ"><span class="ks-liturgy-txt">${esc(expandRanks(r.liturgy))}</span>${manualTag}<button type="button" class="row-edit-btn" data-id="${r.id}" title="Sửa / fill tay">✎</button></td>
+          <td data-label="Phụng vụ"><span class="ks-liturgy-txt">${esc(expandRanks(r.liturgy))}</span><button type="button" class="row-edit-btn" data-id="${r.id}" title="Sửa">✎</button></td>
         </tr>`;
       }).join('');
     }
@@ -507,8 +506,6 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
       const editBtn = e.target.closest('.row-edit-btn');
       if (editBtn) {
         e.stopPropagation();
-        const id = editBtn.dataset.id;
-        window.open(withBase(`/admin/?id=${encodeURIComponent(id)}&manual=1`), '_blank');
         return;
       }
       const tr = e.target.closest('tr');
@@ -531,8 +528,8 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
       openReading(tr, e.ctrlKey || e.metaKey || e.shiftKey);
     });
 
-    // Nút edit chỉ hiện khi admin-server (localhost:4322) đang chạy
-    fetch('http://localhost:4322/api/entries', { signal: AbortSignal.timeout(2000) })
+    // Tự bật biên tập khi Admin API local sẵn sàng.
+    fetch(`${window.location.protocol}//${window.location.hostname}:4322/api/studio/manifest`, { signal: AbortSignal.timeout(2000) })
       .then((r) => {
         if (r.ok) {
           isAdmin = true;
@@ -1314,6 +1311,21 @@ html[data-theme="light"] body.page-kinh-sach .shared-index-table tbody tr.row-au
     background: linear-gradient(90deg, rgba(204,155,59,.2), rgba(204,155,59,.04) 78%, transparent);
     border-color: rgba(138,93,31,.4);
     box-shadow: none;
+  }
+}
+
+/* Editor belongs to every current shared-index row (the former selector targeted .readings-table). */
+html body.page-kinh-sach #tableWrap .shared-index-table #tableBody td:last-child {
+  position: relative;
+  padding-right: 4.6rem;
+}
+html body.page-kinh-sach #tableWrap .shared-index-table #tableBody .row-edit-btn {
+  right: .85rem;
+  top: 50%;
+}
+@media (max-width: 640px) {
+  html body.page-kinh-sach #tableWrap .shared-index-table #tableBody td:last-child {
+    padding-right: 4.4rem;
   }
 }
 </style>

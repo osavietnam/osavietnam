@@ -15,7 +15,7 @@ Thánh nhân sinh tại Anh quốc, quãng năm 673. Người nhập đan viện
 
 </div>
 
-*Trích thư của thánh Bô-ni-pha-xi-ô, giám mục tử đạo.*
+**Trích thư của thánh Bô-ni-pha-xi-ô, giám mục tử đạo.**
 
 Hội Thánh ví như một con tàu lớn đang vượt biển trần thế, và đang bị mọi thứ sóng gió thử thách trong cuộc đời này tấn công, nên Hội Thánh không thể bị trôi dạt đi mà phải được lèo lái. Về điều này, chúng ta đã có gương sáng của các giáo phụ đầu tiên : Cơ-lê-men-tê, Coóc-nê-li-ô và nhiều vị khác ở thành phố Rô-ma, Síp-ri-a-nô ở Các-tha-gô, A-tha-na-xi-a ở A-lê-xan-ri-a. Dưới thời các hoàng đế ngoại giáo, các ngài đã lèo lái con tàu của Đức Ki-tô, hay đúng hơn là hiền thê rất yêu quý của Người, tức là Hội Thánh ; lèo lái bằng cách dạy dỗ, bảo vệ, chịu vất vả và chịu đau khổ đến mức đổ máu mình ra.
 

@@ -15,7 +15,7 @@ Thánh Phi-lip-phê quê ở Bét-sai-đa. Ban đầu người là môn đệ c�
 
 </div>
 
-*Trích khảo luận Bài trừ lạc giáo của linh mục Téc-tu-li-a-nô.*
+**Trích khảo luận Bài trừ lạc giáo của linh mục Téc-tu-li-a-nô.**
 
 Khi còn tại thế, Đức Giê-su Ki-tô Chúa chúng ta đã tuyên bố Người là ai, trước kia Người là Đấng nào, nay Chúa Cha muốn cho Người làm gì, và Người truyền cho nhân loại phải sống ra sao. Chính Người đã tuyên bố những điều đó, lúc thì công khai giữa dân chúng, lúc thì riêng tư với các môn đệ. Trong số này, Người chọn mười hai vị cốt cán để sát cánh với Người và để sau này làm thầy dạy muôn dân.
 

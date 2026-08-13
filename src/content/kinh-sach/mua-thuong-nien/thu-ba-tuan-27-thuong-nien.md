@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 27 Thường Niên"
 order: 185
 ---
 
-*Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Tra-lét.*
+**Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Tra-lét.**
 
 Tôi, I-nha-xi-ô, cũng gọi là Thê-ô-phô-rô, kính gửi Hội Thánh ở Tra-lét, thuộc tỉnh A-xi-a, Hội Thánh được Thiên Chúa là Cha Đức Giê-su Ki-tô quý mến, được tuyển chọn và xứng đáng với Thiên Chúa, đang hưởng sự bình an nhờ cuộc thương khó của Người, Đấng mang lại cho chúng ta niềm hy vọng được chỗi dậy mà đến với Người. Theo cách thức các tông đồ, tôi chào thăm và cầu mong cho Hội Thánh ấy được đầy tràn ân sủng và mọi phúc lành.
 

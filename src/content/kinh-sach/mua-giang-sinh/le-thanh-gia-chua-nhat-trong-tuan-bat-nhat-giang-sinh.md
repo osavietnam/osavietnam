@@ -9,7 +9,7 @@ rank: "feast"
 order: 8
 ---
 
-*Trích huấn từ của đức giáo hoàng Phao-lô VI (5-1-1964).*
+**Trích huấn từ của đức giáo hoàng Phao-lô VI (5-1-1964).**
 
 Na-da-rét là trường học để ta khởi sự tìm hiểu cuộc đời Đức Giê-su ; đó là trường học của Tin Mừng.
 

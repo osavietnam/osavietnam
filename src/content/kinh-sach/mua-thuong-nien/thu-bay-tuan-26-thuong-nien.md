@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 26 Thường Niên"
 order: 182
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về vấn đề giáo dục Ki-tô hữu.*
+**Trích sách của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về vấn đề giáo dục Ki-tô hữu.**
 
 Phàm ai ở trong Đức Ki-tô đều là thọ tạo mới. Cái cũ đã qua. Người có tâm hồn trong sạch và vô tội, nghĩa là sạch mọi tà ý, mọi bất lương và đồi bại, mà được Thánh Thần ngự đến trong lòng, thì thánh Phao-lô gọi người đó là thọ tạo mới. Vì chưng khi linh hồn chê ghét tội lỗi, ra sức tập tành nhân đức và đón nhận ân sủng của Thần Khí sau khi đã đổi đời, thì nó hoàn toàn nên mới, được cải tạo và phục hồi. Thánh Phao-lô cũng nói : Anh em hãy loại bỏ men cũ để trở thành bột mới. Người còn thêm : Chúng ta đừng lấy men cũ, nhưng hãy lấy bánh không men là lòng tinh tuyền và chân thật mà ăn mừng đại lễ. Tôi xin nói là điều này và những điều đã nói về thọ tạo mới phù hợp với nhau.
 

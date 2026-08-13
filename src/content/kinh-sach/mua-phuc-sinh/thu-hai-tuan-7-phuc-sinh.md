@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 7 Phục Sinh"
 order: 43
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Nơi người ấy, nước tôi cho sẽ trở thành một mạch nước vọt lên, đem lại sự sống đời đời. Đó là thứ nước mới, nước hằng sống vọt lên trên những ai xứng đáng. Tại sao lại gọi ơn Thánh Thần là nước ? Hiển nhiên là vì vạn vật sống nhờ nước, vì nước sinh ra cỏ cây và động vật. Vì nước ấy rơi xuống cùng một kiểu một cách nhưng lại sinh nhiều công hiệu khác nhau : nơi cây dừa thì khác, nơi cây nho lại khác, nước là tất cả nơi vạn vật. Vì nước chỉ có một cách hiện hữu duy nhất, nên nó cũng không khác với chính mình. Quả vậy, mưa không thay đổi tính chất, dù rơi xuống mỗi nơi một khác, nhưng tuỳ theo cơ cấu của vật đón nhận mà nó sinh công hiệu thích hợp.
 

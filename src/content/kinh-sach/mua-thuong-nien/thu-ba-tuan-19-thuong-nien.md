@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 19 Thường Niên"
 order: 129
 ---
 
-*Trích khảo luận của đức cha Thê-ô-đô-rê, giám mục Sia, về mầu nhiệm Chúa nhập thể.*
+**Trích khảo luận của đức cha Thê-ô-đô-rê, giám mục Sia, về mầu nhiệm Chúa nhập thể.**
 
 Các hình khổ Đấng Cứu Thế phải chịu là phương thuốc chữa lành chúng ta. Đó là điều ngôn sứ I-sai-a đã dạy khi nói : Chính Người đã mang lấy tội lỗi của chúng ta, đã gánh chịu những đau khổ của chúng ta. Còn chúng ta, chúng ta lại tưởng Người bị trừng phạt, bị Thiên Chúa giáng hoạ, phải nhục nhã ê chề. Chính Người đã bị đâm vì chúng ta phạm tội, bị nghiền nát vì chúng ta lỗi lầm, Người đã chịu sửa trị để chúng ta được bình an, đã phải mang thương tích cho chúng ta được chữa lành. Tất cả chúng ta lạc lõng như chiên cừu. Còn Người thì như con chiên bị đem đi làm thịt, như cừu câm nín bị đem đi xén lông.
 

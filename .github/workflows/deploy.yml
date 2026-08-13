@@ -1,6 +1,6 @@
-name: Deploy Astro to GitHub Pages
+name: Deploy to GitHub Pages
 
-"on":
+on:
   push:
     branches: [main]
   workflow_dispatch:
@@ -17,17 +17,16 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Install, build, validate, and upload
+      - name: Install, build, and upload site
         uses: withastro/action@v6
         with:
           node-version: 22.16.0
           package-manager: npm@10.9.2
-          build-cmd: npm run build
+          build-cmd: npm run build:github
         env:
           GITHUB_PAGES: 'true'
 

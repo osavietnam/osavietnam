@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 7 Thường Niên"
 order: 43
 ---
 
-*Trích sách của thánh Mác-xi-mô Tuyên Giáo, viện phụ, nói về đức mến.*
+**Trích sách của thánh Mác-xi-mô Tuyên Giáo, viện phụ, nói về đức mến.**
 
 Đức mến là thái độ tốt đẹp của tâm hồn, không trọng điều gì hơn là nhận biết Thiên Chúa. Thái độ ấy, không ai có thể có được, nếu tâm hồn còn bị ràng buộc bởi bất cứ vật gì ở đời này.
 

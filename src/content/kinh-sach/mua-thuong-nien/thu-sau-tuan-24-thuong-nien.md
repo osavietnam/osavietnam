@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 24 Thường Niên"
 order: 167
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Anh em đã nghe các mục tử xấu ưa thích gì. Giờ đây hãy xem họ lơ là gì. Chiên đau yếu, các ngươi không bồi dưỡng ; chiên bệnh tật, các ngươi không chữa lành ; chiên bị thương, nghĩa là bị gãy xương, các ngươi không băng bó ; chiên đi lạc, các ngươi không đưa về ; chiên bị mất, các ngươi không chịu đi tìm ; chiên béo khoẻ, các ngươi làm thịt, các ngươi hạ sát, các người giết chết. Chiên ốm đau là người có tâm hồn yếu đuối, vì bất cẩn và không chuẩn bị, mà gặp cơn cám dỗ, thì có thể chiều theo. Mục tử lơ là sẽ không nói với tín hữu nào yếu đuối như thế rằng : Con ơi, hãy giữ lòng ngay thẳng và hãy kiên trì. Nếu con muốn dấn thân phục vụ Thiên Chúa, thì hãy chuẩn bị tâm hồn để đón nhận thử thách. Quả vậy, kẻ nào nói như thế, thì làm cho người yếu nên mạnh, từ ốm thành khoẻ ; nhờ đó người ấy không còn mơ ước lợi lộc trần gian này nữa. Thực thế, nếu người ta dạy cho tín hữu mơ ước lợi lộc trần gian, thì chính những lợi lộc ấy làm cho họ ra hư hỏng. Khi gặp nghịch cảnh, họ sẽ bị thương hay có khi phải chết.
 

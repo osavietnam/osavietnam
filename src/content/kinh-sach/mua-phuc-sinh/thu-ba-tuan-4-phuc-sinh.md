@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 4 Phục Sinh"
 order: 23
 ---
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Vì Thiên Chúa thương xót chúng ta, tôi nài xin anh em. Thánh Phao-lô xin chúng ta, nói đúng hơn là qua thánh Phao-lô, Thiên Chúa xin chúng ta, vì Người muốn chúng ta yêu mến hơn là kính sợ Người ; Thiên Chúa xin vì Người không muốn làm Chúa Tể cho bằng làm Cha ; Thiên Chúa lấy lòng thương xót mà xin, chứ không khắt khe đòi hỏi.
 

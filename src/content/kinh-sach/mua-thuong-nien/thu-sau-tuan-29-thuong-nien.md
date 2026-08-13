@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 29 Thường Niên"
 order: 202
 ---
 
-*Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.*
+**Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba.**
 
 Bất cứ ai xin Thiên Chúa một điều duy nhất, và kiếm tìm điều ấy, thì hẳn người đó xin với tất cả lòng xác tín vững vàng, cũng chẳng sợ bị thiệt thòi khi lãnh nhận. Nếu không có điều này, thì bất cứ điều gì khác người ấy có nhận được cũng chẳng đem lại ích lợi gì chính đáng. Điều duy nhất đó là cuộc sống chân thật và hạnh phúc. Trong cuộc sống này, chúng ta được vui sướng chiêm ngưỡng Thiên Chúa đến muôn đời, sau khi trở thành bất tử và bất hoại cả về thể xác lẫn tinh thần. Chỉ vì cuộc sống đó mà chúng ta tìm kiếm những điều khác và cầu xin một cách xứng hợp. Ai có đời sống đó thì có mọi sự mình muốn, vì trong đời sống này, người ấy không thể muốn hay có điều gì không xứng hợp.
 

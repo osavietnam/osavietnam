@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 25 Thường Niên"
 order: 169
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Chúa phán : Chiên đau yếu, các ngươi không bồi dưỡng. Người nói với các mục tử xấu, mục tử giả, mục tử chỉ biết tìm lợi ích cho mình, chứ không tìm lợi ích cho Đức Ki-tô Giê-su ; những kẻ chỉ biết uống sữa chiên và mặc đồ len, còn chiên thì chẳng chịu săn sóc, và con nào đau yếu cũng chẳng lo bồi dưỡng. Yếu là không khoẻ, bệnh là không lành ; những người bệnh cũng gọi là yếu. Vậy, giữa yếu và bệnh, tôi cho là có khác biệt.
 

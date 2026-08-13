@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 6 Phục Sinh"
 order: 38
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Anh em thân mến, những ngày từ khi Chúa sống lại cho tới lúc Người lên trời đã không trôi qua lặng lờ vô ích. Nhưng trong thời gian đó, những sự kiện lớn lao đã được chứng nghiệm và những mầu nhiệm cao cả đã được mặc khải.
 

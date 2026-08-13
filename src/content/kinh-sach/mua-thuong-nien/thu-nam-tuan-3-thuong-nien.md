@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 3 Thường Niên"
 order: 19
 ---
 
-*Trích bài giảng của đức cha Gio-an, giám mục Na-pô-li.*
+**Trích bài giảng của đức cha Gio-an, giám mục Na-pô-li.**
 
 Chúa là nguồn ánh sáng và ơn cứu độ của tôi, tôi còn sợ người nào ?
 

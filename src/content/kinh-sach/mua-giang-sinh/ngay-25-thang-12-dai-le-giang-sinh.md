@@ -9,7 +9,7 @@ rank: "solemn"
 order: 1
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Anh chị em thân mến, hôm nay, Đấng Cứu Độ chúng ta đã giáng sinh, chúng ta hãy vui mừng. Chúng ta không được phép buồn khi mừng ngày sự sống xuất hiện. Ngày kỷ niệm này phá tan sự sợ hãi trước cái chết và ban cho chúng ta niềm hân hoan được sống đời đời.
 

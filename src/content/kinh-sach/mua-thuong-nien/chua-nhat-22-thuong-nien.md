@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 22 Thường Niên"
 order: 148
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Chúng ta sẽ được hạnh phúc nếu thực hành những điều chúng ta đã nghe và ca hát. Nghe là gieo hạt, và thực hành là làm cho hạt giống sinh hoa kết quả. Tôi đã nói điều này khi khuyên nhủ anh em sống đức ái, để anh em khỏi vào nhà thờ mà không được kết quả gì, vì nghe biết nhưng điều tốt đẹp nhưng không thực hành cho tốt đẹp. Thực vậy, như thánh tông đồ nói : Chính do ân sủng của Thiên Chúa mà anh em được cứu độ, không phải bởi việc anh em làm, để không ai có thể hãnh diện. Vâng, chính do ân sủng của Người mà anh em được cứu độ. Không có ai sống một đời tốt đẹp trước, để từ trên cao, Thiên Chúa phải quý chuộng mến yêu và phải nói : Nào Ta hãy đến trợ giúp những con người này, vì họ sống tốt đẹp. Chúng ta sống thế nào cũng không đẹp lòng Người. Chúng ta có làm được gì đi nữa trong cuộc sống ấy thì cũng không đẹp lòng Người. Nhưng chính Người thực hiện việc gì nơi chúng ta thì việc ấy đẹp lòng Người. Như thế, Người sẽ kết án việc chúng ta làm, nhưng sẽ cứu độ những gì chính Người đã làm.
 

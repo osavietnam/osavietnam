@@ -15,7 +15,7 @@ Cùng với thánh Lu-ca, thánh Ti-mô-thê và thánh Ti-tô là những cộn
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.**
 
 Bị giam trong tù nhưng thánh Phao-lô như ở trên trời, Người đón nhận đòn vọt và thương tích một cách vui vẻ hơn cả những người chạy đua để giật giải. Người yêu thích đau khổ chẳng kém chi phần thưởng, vì người coi những đau khổ đó là phần thưởng ; bởi thế, người gọi chúng là ơn. Hãy suy cho kỹ xem điều sau đây có ý nghĩa gì. Ra đi để được ở với Đức Ki-tô hẳn là một phần thưởng, nhưng ở lại trong thân xác này, quả là một cuộc chiến. Tuy nhiên, vì Đức Ki-tô, thánh Phao-lô đã hoãn việc lãnh nhận phần thưởng để ở lại chiến đấu, bởi người coi đó là điều cần thiết hơn.
 

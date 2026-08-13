@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 2 Mùa Chay"
 order: 15
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Ngay từ đầu, Thiên Chúa đã nắn ra con người để họ được hưởng sự phong phú khôn lường của Người. Thiên Chúa đã chọn các tổ phụ để ban ơn cứu độ cho các ngài, Người gầy dựng một dân riêng để dạy cho kẻ mê muội biết đường theo Chúa. Người đặt các ngôn sứ để tập cho con người đang sống trên trần gian quen mang lấy Thần Khí của Người và hiệp thông với Thiên Chúa. Chính Người không cần gì cả, nhưng những ai cần Người, Người cho được hiệp thông với mình. Đối với những ai sống đẹp lòng Người, thì Người là kiến trúc sư chỉ vẽ cho họ cách xây toà nhà ơn cứu độ.
 

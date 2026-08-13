@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 2 Thường Niên"
 order: 13
 ---
 
-*Trích sách Đường trọn lành của đức cha Đi-a-đô-cô, giám mục Phô-ti-xê.*
+**Trích sách Đường trọn lành của đức cha Đi-a-đô-cô, giám mục Phô-ti-xê.**
 
 Ai yêu mình thì không thể yêu mến Thiên Chúa ; còn ai không yêu mình vì những sự phong phú tuyệt vời của tình yêu đối với Thiên Chúa, thì người ấy yêu mến Thiên Chúa. Bởi đó, người ấy không hề tìm vinh quang cho mình, mà chỉ tìm vinh quang của Thiên Chúa. Quả vậy, ai yêu mình thì tìm vinh quang cho mình ; còn ai yêu mến Thiên Chúa thì yêu mến vinh quang của Đấng dựng nên mình.
 

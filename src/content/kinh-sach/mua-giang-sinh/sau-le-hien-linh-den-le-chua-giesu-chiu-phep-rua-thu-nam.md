@@ -8,7 +8,7 @@ liturgy: "Sau Lễ Hiển Linh đến Lễ Chúa Giêsu Chịu Phép Rửa - Th�
 order: 19
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.**
 
 Đấng Tạo Thành trời đất đã muốn quy tụ mọi loài dưới quyền một Thủ Lãnh là Đức Ki-tô theo một trật tự tuyệt vời, đồng thời đưa bản tính con người trở lại tình trạng nguyên thuỷ. Cùng với các ơn khác, Người hứa ban Thánh Thần lại cho họ một cách rộng rãi. Nếu không, họ chẳng có cách nào khác để lấy lại các ơn đó một cách yên hàn và chắc chắn.
 

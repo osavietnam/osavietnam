@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 6 Phục Sinh"
 order: 37
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về Tin Mừng theo thánh Gio-an.**
 
 Tất cả chúng ta được kết hợp với thân thể Đức Ki-tô nhờ thông phần Mình Thánh Người, như thánh Phao-lô làm chứng, khi nói về mầu nhiệm đạo thánh. Mầu nhiệm này, Thiên Chúa đã không cho những người thuộc các thế hệ trước được biết, nhưng nay Người đã dùng Thần Khí Nếu tất cả chúng ta cùng !à một thân thể với nhau trong mà mặc khải cho các thánh tông đồ và ngôn sứ của Người. Mầu nhiệm đó là : trong Đức Ki-tô Giê-su và nhờ Tin Mừng, các dân ngoại được cùng thừa kế gia nghiệp với người Do-thái, cùng làm một thân thể và cùng chia sẻ điều Thiên Chúa hứa.
 

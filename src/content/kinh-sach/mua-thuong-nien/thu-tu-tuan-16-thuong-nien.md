@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 16 Thường Niên"
 order: 109
 ---
 
-*Trích sách Gương Chúa Giê-su.*
+**Trích sách Gương Chúa Giê-su.**
 
 Bạn hãy hết lòng trở về với Thiên Chúa và từ bỏ thế gian khốn khổ này, thì tâm hồn bạn sẽ được nghỉ ngơi. Thật vậy, Nước Thiên Chúa là bình an và hoan lạc trong Thánh Thần : Đức Ki-tô sẽ đến với bạn, mang lại cho bạn niềm an ủi của Người, nếu bạn dọn sẵn trong lòng một nơi ở xứng đáng với Người.
 

@@ -18,7 +18,7 @@ Từ thời cổ xưa, núi Cát-minh đã lừng danh vì gắn liền với k�
 
 </div>
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
  
 

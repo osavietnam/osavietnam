@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 5 Phục Sinh"
 order: 32
 ---
 
-*Trích khảo luận của thánh Gau-đen-xi-ô, giám mục Bơ-rét-si-a.*
+**Trích khảo luận của thánh Gau-đen-xi-ô, giám mục Bơ-rét-si-a.**
 
 Một người đã chết vì mọi người. Nay cũng chính Người đó, nơi mỗi nhà thờ của các giáo đoàn, trong mầu nhiệm bánh và rượu, khi được sát tế thì bồi dưỡng, khi được tin kính thì tác sinh, khi được thánh hiến thì thánh hoá những người đọc lời thánh hiến.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 2 Phục Sinh"
 order: 10
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Anh em rất thân mến, hiển nhiên là khi mặc lấy bản tính nhân loại, Con Thiên Chúa đã kết hợp mật thiết với bản tính đó, đến nỗi không những nơi người ấy là trưởng tử giữa mọi loài thọ sinh, mà còn nơi tất cả các thánh của Người, chỉ có một Đức Ki-tô mà thôi, cũng như đầu không thể tách khỏi các chi thể, và các chi thể không thể tách khỏi đầu được.
 

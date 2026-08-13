@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Trình Nữ"
 order: 15
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục tử đạo, về đời sống của các trinh nữ.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục tử đạo, về đời sống của các trinh nữ.**
 
 Giờ đây, tôi ngỏ lời với các trinh nữ. Họ càng cao vinh dự thì càng phải được chăm sóc kỹ càng hơn. Họ là đoá hoa của thân cây là Hội Thánh, là vẻ mỹ miều và là trang sức duyên dáng Thánh Thần ban, là niềm vui sống động, là công trình hoàn hảo và bất hoại đáng ca ngợi và tôn vinh, là hình ảnh của Thiên Chúa, phản ảnh sự thánh thiện của Chúa, là thành phần sáng giá nhất trong đoàn chiên của Chúa Ki-tô. Hội Thánh vui mừng vì các trinh nữ, và nơi họ, Mẹ Hội Thánh sinh hoa kết quả dồi dào. Như thế, số các trinh nữ càng gia tăng, thì càng tăng thêm niềm vui cho Mẹ Hội Thánh.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 20 Thường Niên"
 order: 136
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ, ca ngợi Đức Trinh Nữ Ma-ri-a.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ, ca ngợi Đức Trinh Nữ Ma-ri-a.**
 
 Chỉ có sinh ra như thế này mới xứng với Thiên Chúa : sinh bởi lòng Đức Trinh Nữ. Và cũng chỉ có cuộc sinh sản này mới xứng hợp với Đức Trinh Nữ : sinh ra Thiên Chúa. Vì vậy, Đấng tác tạo loài người, khi muốn làm người sinh bởi một con người, thì biết là một người mẹ phải như thế nào mới xứng hợp với mình, và biết là một người mẹ phải làm sao mới đẹp lòng mình, chắc hẳn Người đã tuyển chọn giữa muôn người, hay đúng hơn, đã tạo thành cho mình một người mẹ đúng như thế.
 

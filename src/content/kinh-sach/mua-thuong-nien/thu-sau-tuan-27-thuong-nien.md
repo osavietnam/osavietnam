@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 27 Thường Niên"
 order: 188
 ---
 
-*Trích bài huấn dụ thứ nhất của thánh Vi-xen-tê Lê-ranh, linh mục.*
+**Trích bài huấn dụ thứ nhất của thánh Vi-xen-tê Lê-ranh, linh mục.**
 
 Phải chăng trong Hội Thánh của Đức Ki-tô không có tiến bộ nào về đạo ? Hẳn là có và có rất nhiều.
 

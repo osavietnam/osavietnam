@@ -15,7 +15,7 @@ Gia-cô-bê là con ông Giê-bê-đê, là anh của thánh Gio-an và là bạ
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng Mát-thêu.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng Mát-thêu.**
 
 Các con ông Dê-bê-đê đã nài nỉ Đức Ki-tô điều này : Xin Thầy truyền cho hai anh em chúng con, một người được ngồi bên hữu, một người được ngồi bên tả Thầy. Vậy Người đã trả lời ra sao ? Người đã tỏ cho các ông thấy là điều các ông xin chẳng có gì do thần khí thúc đẩy, và nếu các ông hiểu điều mình xin, thì chắc chắn các ông không bao giờ xin như vậy. Người đã nói : Các anh chẳng biết các anh xin gì ! Vì điều xin ấy thật lớn lao, thật lạ lùng, còn trổi vượt mọi quyền thần trên trời biết mấy. Rồi Người nói thêm : Các anh có uống nổi chén Thầy sắp uống, và chịu được phép rửa Thầy sắp chịu không ? Người như muốn nói : Các anh nói đến hưởng danh dự, triều thiên với Thầy ; còn Thầy, thầy nói đến chiến đấu và mồ hôi. Vì bây giờ chưa phải là thời thưởng công, và bây giờ vinh quang của Thầy cũng chưa được tỏ hiện, nhưng cuộc sống hiện tại đầy chết chóc, chiến tranh và nguy hiểm.
 

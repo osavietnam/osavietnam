@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 2 Mùa Vọng"
 order: 8
 ---
 
-*Trích bài chú giải ngôn sứ I-sai-a của đức cha Êu-xê-bi-ô, giám mục Xê-da-rê.*
+**Trích bài chú giải ngôn sứ I-sai-a của đức cha Êu-xê-bi-ô, giám mục Xê-da-rê.**
 
 Có tiếng hô : Trong sa mạc, hãy mở một con đường cho ĐỨC CHÚA, giữa đồng hoang hãy vạch một con lộ thẳng băng cho Thiên Chúa chúng ta. Lời này minh chứng rằng các lời sấm đã được các ngôn sứ công bố, sẽ không xảy ra tại Giê-ru-sa-lem, nhưng tại sa mạc. Đó là vinh quang Chúa sẽ tỏ hiện và mọi người phàm sẽ nhận biết ơn cứu độ của Thiên Chúa.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 1 Thường Niên"
 order: 2
 ---
 
-*Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư của thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Chúng ta sẽ liên lỉ dâng lời cầu xin khẩn nguyện lên Đấng tác thành vạn vật : xin Người giữ gìn nguyên vẹn trên khắp thế giới con số những kẻ Người tuyển chọn, nhờ Thánh Tử yêu dấu là Đức Giê-su Ki-tô. Nhờ Thánh Tử, Người đã kêu gọi chúng ta từ chốn tối tăm ra nơi sáng láng, từ chỗ ngu muội đến chỗ nhận biết thánh danh vinh hiển Người.
 

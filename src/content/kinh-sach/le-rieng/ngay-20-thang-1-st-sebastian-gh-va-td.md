@@ -12,9 +12,9 @@ manualFill: true
 ---
 Theo tương truyền, thánh nhân là một quân nhân quê ở Mi-la-nô. Người chịu tử đạo ở Rôma vào lúc khởi đầu cuộc bách hại dưới triều hoàng đế Đi-ô-clê-xi-a-nô, trong một cuộc thanh lọc quân đội (năm 300). Thế kỷ VI, thánh nhân được dân chúng kêu cầu khi xảy ra nạn dịch và tiếp tục được yêu chuộng cho tới ngày nay.
 
-Trung thành làm chứng cho Đức Ki-tô
+*Trung thành làm chứng cho Đức Ki-tô*
 
-*Trích bài diễn giải của thánh Am-brô-xi-ô, giám mục, về thánh vịnh 118.*
+**Trích bài diễn giải của thánh Am-brô-xi-ô, giám mục, về thánh vịnh 118.**
 
  
 

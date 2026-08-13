@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 30 Thường Niên"
 order: 204
 ---
 
-*Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư thánh Cơ-lê-men-tê I, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Chúng ta hãy chiêm ngưỡng Thiên Chúa là Cha toàn vũ trụ và là Đấng tạo thành vạn vật ; hãy giữ ơn bình an cao quý vô song và các ân huệ khác Người ban cho chúng ta. Chúng ta hãy dùng trí suy tưởng mà nhìn ngắm Người, và hãy lấy con mắt trí khôn mà chiêm ngưỡng lòng nhẫn nại của Người. Chúng ta hãy xem Người đối xử nhân từ biết bao đối với mọi loài thọ tạo.
 

@@ -6,15 +6,11 @@ import { githubPagesEnvironment } from './github-pages-env.mjs';
 const outputDirectory = fileURLToPath(new URL('../dist/', import.meta.url));
 const { base: basePath } = githubPagesEnvironment();
 const processedExtensions = new Set(['.html', '.css']);
-
 const CENTRAL_NEWS_ORIGIN = 'https://www.augustinianorder.org';
 const PROVINCE_NEWS_ORIGIN = 'https://www.osa.org.au';
 
 function decodeHtmlAttribute(value) {
-  return value
-    .replace(/&amp;/gi, '&')
-    .replace(/&#38;/g, '&')
-    .replace(/&#x26;/gi, '&');
+  return value.replace(/&amp;/gi, '&').replace(/&#38;/g, '&').replace(/&#x26;/gi, '&');
 }
 
 function encodeHtmlAttribute(value, quote) {
@@ -32,24 +28,17 @@ function addBaseToRootPath(value) {
 function rewriteServerOnlyNewsUrl(rawValue) {
   const decoded = decodeHtmlAttribute(rawValue);
   let url;
-  try {
-    url = new URL(decoded, 'https://static.local');
-  } catch {
-    return decoded;
-  }
-
+  try { url = new URL(decoded, 'https://static.local'); } catch { return decoded; }
   let routePath = url.pathname;
   if (basePath && (routePath === basePath || routePath.startsWith(`${basePath}/`))) {
     routePath = routePath.slice(basePath.length) || '/';
   }
-
   if (routePath === '/api/central-news-article') {
     const articlePath = url.searchParams.get('path');
     if (articlePath?.startsWith('/post/')) {
       try { return new URL(articlePath, CENTRAL_NEWS_ORIGIN).href; } catch {}
     }
   }
-
   if (routePath === '/api/province-news-article') {
     const sourceUrl = url.searchParams.get('url');
     try {
@@ -57,7 +46,6 @@ function rewriteServerOnlyNewsUrl(rawValue) {
       if (external.protocol === 'https:' || external.protocol === 'http:') return external.href;
     } catch {}
   }
-
   return decoded;
 }
 
@@ -88,11 +76,9 @@ function rewriteHtmlMarkup(source) {
     value = addBaseToRootPath(value);
     return `${name}=${quote}${encodeHtmlAttribute(value, quote)}${quote}`;
   });
-
   output = output.replace(/\bsrcset\s*=\s*(["'])([\s\S]*?)\1/gi, (full, quote, value) => {
     return `srcset=${quote}${encodeHtmlAttribute(rewriteSrcset(value), quote)}${quote}`;
   });
-
   return rewriteCssUrls(output);
 }
 
@@ -106,11 +92,8 @@ function rewriteHtmlDocument(source) {
     scripts.push(protectedBlock);
     return token;
   });
-
   let output = rewriteHtmlMarkup(protectedSource);
-  scripts.forEach((block, index) => {
-    output = output.replace(`__OSA_SCRIPT_BLOCK_${index}__`, block);
-  });
+  scripts.forEach((block, index) => { output = output.replace(`__OSA_SCRIPT_BLOCK_${index}__`, block); });
   return output;
 }
 
@@ -138,16 +121,9 @@ for (const file of files) {
 }
 
 await writeFile(join(outputDirectory, '.nojekyll'), '', 'utf8');
-
 const root404 = join(outputDirectory, '404.html');
 const nested404 = join(outputDirectory, '404', 'index.html');
-try {
-  await stat(root404);
-} catch {
-  try {
-    await mkdir(outputDirectory, { recursive: true });
-    await copyFile(nested404, root404);
-  } catch {}
+try { await stat(root404); } catch {
+  try { await mkdir(outputDirectory, { recursive: true }); await copyFile(nested404, root404); } catch {}
 }
-
 console.log(`GitHub Pages base path ${basePath || '/'} safely applied to ${changed} HTML/CSS files.`);

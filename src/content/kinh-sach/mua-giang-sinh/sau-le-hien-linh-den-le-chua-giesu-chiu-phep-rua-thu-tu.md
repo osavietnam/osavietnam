@@ -8,7 +8,7 @@ liturgy: "Sau Lễ Hiển Linh đến Lễ Chúa Giêsu Chịu Phép Rửa - Th�
 order: 18
 ---
 
-*Trích bài giảng của thánh Pơ-róc-lô, giám mục Công-tăn-ti-nốp.*
+**Trích bài giảng của thánh Pơ-róc-lô, giám mục Công-tăn-ti-nốp.**
 
 Đức Ki-tô đã tỏ mình ra cho thế gian ; Người đã tái lập trật tư trong một thế giới hỗn loạn, và làm cho thế giới nên vui tươi rực rỡ. Người đã gánh tội thế gian và tống khứ thù địch của thế gian đi. Người thánh hoá nguồn suối nước và chiếu soi tâm hồn nhân loại, Người đã làm thêm nhiều phép lạ lớn lao hơn trước.
 

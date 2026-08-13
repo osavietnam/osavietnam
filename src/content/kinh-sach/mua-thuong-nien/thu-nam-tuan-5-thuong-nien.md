@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 5 Thường Niên"
 order: 33
 ---
 
-*Trích sách chú giải của thánh Âu-tinh, giám mục, về thư thánh Phao-lô gửi tín hữu Ga-lát.*
+**Trích sách chú giải của thánh Âu-tinh, giám mục, về thư thánh Phao-lô gửi tín hữu Ga-lát.**
 
 Thánh Phao-lô tông đồ nói : Anh em hãy nên giống như tôi, vì tuy sinh ra là người Do-thái, nhưng do cách xét đoán theo thần khí, tôi coi thường những liên hệ huyết nhục. Vì tôi cũng đã nên giống anh em, nghĩa là vì tôi là một con người. Sau đó, một cách thích đáng và tế nhị, ngài nhắc họ nhớ đến lòng thương mến của ngài, để họ đừng coi ngài là thù địch. Vậy ngài nói : Thưa anh em, tôi van anh em, anh em đã không làm gì tổn thương cho tôi cả, như thể ngài muốn nói : “Đừng tưởng rằng tôi muốn làm tổn thương anh em”.
 

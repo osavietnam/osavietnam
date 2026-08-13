@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 3 Mùa Vọng"
 order: 18
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Thiên Chúa là Đấng duy nhất : Người dùng Lời và sự khôn ngoan mà làm ra và an bài mọi sự.
 

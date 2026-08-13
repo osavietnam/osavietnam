@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 32 Thường Niên"
 order: 220
 ---
 
-*Trích bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Trích bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Bao lâu còn sống ở trần gian, chúng ta hãy ăn năn sám hối. Chúng ta chỉ là nắm đất sét trong tay người thợ gốm. Đang khi nắn bình, những chỗ nào méo mó hay sứt mẻ, thì người thợ gốm còn sửa lại được. Nhưng khi đã đưa vào lò nung rồi, thì anh không còn sửa chữa gì được nữa. Chúng ta cũng thế, bao lâu còn ở trần gian, khi còn thời gian sám hối, chúng ta hãy hết lòng sám hối về các tội lỗi đã phạm trong thân xác này, để chúng ta được Thiên Chúa cứu thoát.
 

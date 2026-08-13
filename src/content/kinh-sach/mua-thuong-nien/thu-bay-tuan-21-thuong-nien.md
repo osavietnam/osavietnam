@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 21 Thường Niên"
 order: 147
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.**
 
 Bạn muốn tôn kính thân thể Đức Ki-tô ư ? Chớ khinh chê thân thể ấy khi thân thể ấy trần trụi : đừng có thái độ này là trong nhà thờ thì tôn kính, cho thân thể Người mang những y phục lụa là gấm vóc, nhưng ở ngoài lại coi thường, để cho thân thể ấy lạnh giá và trần trụi. Bởi vì Đấng nói Đây là mình Thầy và đã dùng lời của mình mà thực hiện việc đó, thì cũng chính là Đấng nói : Các ngươi đã thấy Ta đói mà không cho ăn và Các người không làm như thế cho một trong những người bé nhỏ nhất đây, là các ngươi không làm cho chính Ta vậy. Thân thể Chúa ở đây không cần y phục, nhưng cần tâm hồn trong trắng, còn thân thể Chúa ngoài kia thì cần được chăm lo tận tình.
 

@@ -4,7 +4,7 @@ export const prerender = false;
 
 export async function GET({ url }: { url: URL }) {
   try {
-    return new Response(await renderProvinceNewsPage(1, url.searchParams.get('theme') ?? 'dark'), {
+    return new Response(await renderProvinceNewsPage(1, url.searchParams.get('theme') ?? 'dark', url.searchParams.get('external') === '1'), {
       headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store, no-cache, must-revalidate' },
     });
   } catch (error) {

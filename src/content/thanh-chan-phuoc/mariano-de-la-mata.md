@@ -4,7 +4,7 @@ subtitle: "Linh mục"
 rank: "none"
 feastDay: 5
 feastMonth: 4
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/bl-mariano-de-la-mata-b5e9a681-b51b-43d2-af92-af63410c1b5-resize-750.jpeg"
 draft: false
 manualFill: false
 ---

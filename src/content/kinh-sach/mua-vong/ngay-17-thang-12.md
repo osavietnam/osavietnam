@@ -8,7 +8,7 @@ liturgy: "Ngày 17 Tháng 12"
 order: 21
 ---
 
-*Trích thư của thánh Lê-ô Cả, giáo hoàng.*
+**Trích thư của thánh Lê-ô Cả, giáo hoàng.**
 
 Nói rằng Chúa chúng ta là con Đức Trinh Nữ Ma-ri-a, là con người thực sự và trọn vẹn, mà không tin Người là một con người thuộc dòng giống loài người, như Tin Mừng công bố, thì chẳng ích lợi gì.
 

@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân được tấn phong giám mục Rô-ma năm 257. Ngày 6 tháng 8 năm 258, người cùng với 4 phó tế bị chặt đầu đang lúc cử hành phụng vụ thánh tại nghĩa trang Ca-lít-tô. Hoàng đế Va-lê-ri-a-nô đã ra sắc chỉ cấm không được tụ họp để cử hành phụng vụ. Phó tế Lô-ren-xô không bị chém, nhưng phải chịu cực hình. Biến cố này là một trang đẹp trong thiên hùng sử của Hội Thánh Rô-ma thời bách hại. 
 
-Chúng tôi biết các chiến sĩ của Đức Ki-tô không chết, nhưng được đội triều thiên 
+*Chúng tôi biết các chiến sĩ của Đức Ki-tô không chết, nhưng được đội triều thiên*
 
-*Trích thư của thánh Síp-ri-a-nô, giám mục, tử đạo.*
+**Trích thư của thánh Síp-ri-a-nô, giám mục, tử đạo.**
 
  
 

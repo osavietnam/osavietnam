@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 15 Thường Niên"
 order: 103
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Sau nghi thức thánh tẩy, bạn lên đứng trước vị tư tế. Bạn hãy suy xét việc gì xảy ra sau đó. Há chẳng phải là điều vua Đa-vít đã nói như thế này sao ? Như dầu quý đổ trên đầu, xuống râu xuống cổ trên đầu A-ron. Đó chính là dầu thơm mà vua Sa-lô-môn đã nói đến. Tên anh là dầu thơm man mác toả lan, thảo nào các thếu nữ mê say níu kéo. Lạy Chúa Giê-su, ngày nay có biết bao tâm hồn được đổi mới đang yêu mến Ngài để tận hưởng hương thơm phục sinh. Họ nói : Xin lôi kéo chúng con chạy theo Ngài. Áo Ngài thơm nức, chúng con sẽ chạy theo.
 

@@ -15,7 +15,7 @@ Vì cả thân xác cũng đã được biến đổi, Đức Ma-ri-a trong vinh
 
 </div>
 
-*Trích bài giảng của thánh A-mê-đê, giám mục Lô-dan.*
+**Trích bài giảng của thánh A-mê-đê, giám mục Lô-dan.**
 
 Trước khi được cất lên trời, danh tuyệt diệu của Đức Ma-ri-a đã toả sáng trên toàn cõi trái đất và danh thơm lừng lẫy của Mẹ đã lan toả khắp nơi, trước cả khi vẻ huy hoàng lộng lẫy của Mẹ được nâng cao vượt các tầng trời. Bạn xem : điều đó thật là phải lẽ. Thật vậy, vì Mẹ đồng trinh và vì danh dự của Người Con do Mẹ sinh ra, trước hết Mẹ phải cai trị ở dưới đất, rồi sau cùng đón nhận cõi trời vinh quang. Mẹ phải được đầy tràn ở dưới đất này, để rồi tiến vào trong sung mãn thánh thiện chốn trời cao. Và vì Mẹ đã được Thần Khí đưa từ nhân đức này tới nhân đức khác, thì Mẹ cũng được đưa từ chốn rạng ngời dưới đất đến chốn rạng ngời trên trời.
 

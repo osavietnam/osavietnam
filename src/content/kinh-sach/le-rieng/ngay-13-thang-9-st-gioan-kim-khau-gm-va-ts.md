@@ -15,7 +15,7 @@ Thánh nhân sinh quãng năm 349 tại An-ti-ô-khi-a. Người học cao hiể
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục.**
 
 Dù sóng nước mênh mông hay dông tố phũ phàng, chúng ta cũng không sợ bị chìm đắm vì chúng ta đứng vững trên tảng đá. Biển có thét gào cũng không thể làm đá tiêu tan ; sóng có trào lên cũng không thể nhận chìm thuyền của Đức Ki-tô. Vậy chúng ta sợ gì ? Sợ chết ư ? Đối với tôi, sống là Đức Ki-tô và chết là một mối lợi. Hay là sợ phải lưu đày, bạn hãy nói đi. Chúa làm chủ trái đất cùng muôn vật muôn loài. Hay sợ tài sản bị sung vào công quỹ ? Chúng ta đã không mang gì vào trần gian, thì cũng chẳng mang gì ra được. Tôi coi khinh những hình khổ của thế gian này và cho lợi lộc của nó là chuyện nực cười. Tôi không sợ nghèo, chẳng ham giàu có, không ngại chết, cũng chẳng muốn sống, trừ khi là để làm ích cho anh em. Vì thế, tôi nhắc lại những gì đang xảy ra và xin anh em lấy lòng yêu mến mà tin tưởng vào Chúa.
 

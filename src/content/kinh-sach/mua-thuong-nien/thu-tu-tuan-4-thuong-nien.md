@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 4 Thường Niên"
 order: 25
 ---
 
-*Trích sách Đường trọn lành của đức cha Đi-a-đô-cô, giám mục Phô-ti-xê.*
+**Trích sách Đường trọn lành của đức cha Đi-a-đô-cô, giám mục Phô-ti-xê.**
 
 Phân định được cách chính xác lẽ phải và điều sai, đó là nhờ ánh sáng do trí thức đích thực đem lại. Một khi con người bước đi trên con đường công chính như thế, thì bấy giờ họ hướng tâm trí mình về Thiên Chúa là mặt trời công chính, vì chính tâm trí họ cũng được hiểu biết nhờ Thiên Chúa không ngừng soi sáng cho ; từ đây tâm trí họ mạnh dạn tìm cách yêu mến Thiên Chúa.
 

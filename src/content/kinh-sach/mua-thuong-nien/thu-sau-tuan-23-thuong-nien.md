@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 23 Thường Niên"
 order: 160
 ---
 
-*Trích bài giảng của chân phúc I-xa-ác, viện phụ đan viện Ngôi Sao.*
+**Trích bài giảng của chân phúc I-xa-ác, viện phụ đan viện Ngôi Sao.**
 
 Có hai điều chỉ thích hợp với một mình Thiên Chúa : đó là vinh dự nghe thú tội và quyền tha thứ. Vì chỉ có một mình Thiên Chúa mới tha tội, và vì thế, phải xưng tội với Người. Nhưng khi Đấng Toàn Năng kết hôn với người yếu đuối, Đắng cao cả với kẻ thấp hèn, thì Người đã làm cho nữ tỳ trở thành hoàng hậu, kẻ ở đàng sau dưới chân Người, Người đã đưa lên ngồi bên cạnh. Nàng từ cạnh sườn Người mà ra, nên Người đã cưới lấy nàng. Mọi sự của Chúa Cha là của Chúa Con, vì cả hai là một theo bản tính. Cũng thế, mọi sự của Hôn Phu, Hôn Phu cũng chia sẻ với Hôn Thê, và mọi sự của Hôn Thê thì Hôn Phu cũng chia sẻ với Hôn Thê. Hôn Thê đó là Hội Thánh mà Hôn Phu là Đức Ki-tô. Khi kêu cầu cho Hôn Thê, Chúa Con đã thưa cùng Chúa Cha : Con muốn rằng, cũng như thể con với Cha là một, thì xin cho họ được nên một với chúng ta.
 

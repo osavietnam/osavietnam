@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 9 Thường Niên"
 order: 62
 ---
 
-*Trích khảo luận của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.*
+**Trích khảo luận của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.**
 
 Chúa biết mọi tư tưởng và ý hướng trong lòng ta. HIển nhiên là ai suy nghĩ gì, ai toan tính gì, Người biết hết ; còn chúng ta thì chỉ những tư tưởng và ý hướng nào Người cho hiểu thấu nhờ ơn thông hểu, chúng ta mới biết nó là gì. Thần trí ở ngay trong con người cũng không biết được trọn vẹn những gì ở trong con người. Các tư tưởng hữu ý hay vô tình đến với con người, không phải lúc nào con người cũng ý thức được đúng theo thực chất của nó. Cả những tư tưởng hiển nhiên trước con mắt trí khôn, con người cũng đâu hiểu thấu tường tận được, vì đôi mắt này đã ra mờ tối.
 

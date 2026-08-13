@@ -27,7 +27,7 @@
         gap: 2rem;
         ;
     }
-
+    
     .book-selector {
         /* Stack the dropdowns vertically for easier use on mobile */
         flex-direction: column;
@@ -46,7 +46,7 @@
 
     .book-selector select {
         width: 50%; /* Make select boxes full-width */
-
+        
     }
 
     .search-container {
@@ -80,7 +80,7 @@
         align-items: stretch;
         text-align: center;
     }
-
+    
     #tocWrapper .toc > ul > li {
         border-bottom: 1px solid rgba(212, 173, 74, 0.1);
         padding-bottom: 1rem;

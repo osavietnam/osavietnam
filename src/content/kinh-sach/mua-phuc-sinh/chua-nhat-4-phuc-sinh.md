@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 4 Phục Sinh"
 order: 21
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về Tin Mừng.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về Tin Mừng.**
 
 Tôi chính là Mục tử nhân lành. Tôi biết - nghĩa là tôi yêu mến - chiên của tôi, vì chiên của tôi biết tôi. Chúa Giê-su như muốn nói rõ rằng : Ai yêu mến tôi thì vâng lời tôi, vì ai không yêu mến sự thật, kẻ đó chưa biết gì về sự thật.
 

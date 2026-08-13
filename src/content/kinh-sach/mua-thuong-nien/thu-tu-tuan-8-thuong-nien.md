@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 8 Thường Niên"
 order: 53
 ---
 
-*Trích sách Tự thuật của thánh Âu-tinh, giám mục.*
+**Trích sách Tự thuật của thánh Âu-tinh, giám mục.**
 
 Lạy Chúa, con đã tìm thấy Chúa ở đâu để học biết Chúa ? Trước khi con học biết Chúa thì Chúa chưa ở trong ký ức của con. Vậy con tìm thấy Chúa ở đâu để học biết Chúa, nếu không phải ở trong Chúa là Đấng ở trên con ? Ở đây chẳng có vấn đề nơi chốn ; chúng con đến gần Chúa hoặc xa lìa Chúa, thì cũng không phải là vấn đề nơi chốn. Lạy Chúa là chân lý, Chúa ngự khắp nơi để tiếp kiến những ai đến thỉnh vấn Chúa ; đồng thời Chúa trả lời cho mọi người đến thỉnh vấn về những điều khác nhau.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 22 Thường Niên"
 order: 149
 ---
 
-*Trích sách Gương Chúa Giê-su.*
+**Trích sách Gương Chúa Giê-su.**
 
 Hỡi con, hãy lắng tai nghe lời Ta ! Lời Ta rất ngọt ngào vượt trên mọi hiểu biết của các triết gia và những người thông thái đời này. Lời Thầy là Thần Khí và là sự sống. Con không được phép đánh giá lời đó theo cách suy nghĩ của người phàm.
 

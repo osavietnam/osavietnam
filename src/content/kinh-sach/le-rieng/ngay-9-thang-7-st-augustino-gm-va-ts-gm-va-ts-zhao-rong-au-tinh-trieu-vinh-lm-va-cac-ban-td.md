@@ -18,7 +18,7 @@ Năm 1815, vì đã tuyên xưng và rao giảng Tin Mừng, người đã đư�
 
 </div>
 
-*Trích bài giảng của Đức Thánh Cha Gio-an Phao-lô II trong dịp phong thánh các thánh tử đạo Trung Quốc.*
+**Trích bài giảng của Đức Thánh Cha Gio-an Phao-lô II trong dịp phong thánh các thánh tử đạo Trung Quốc.**
 
  
 

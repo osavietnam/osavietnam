@@ -21,9 +21,9 @@ Hợp các nố luân lý nhằm giúp các linh mục cử hành bí tích
 hoà giải cho đúng luật và đem lại lợi ích thiêng liêng. Thánh
 nhân qua đời năm 1275.
 
-Nguyện xin Thiên Chúa tình thương và bình an ban cho anh em được an lòng 
+*Nguyện xin Thiên Chúa tình thương và bình an ban cho anh em được an lòng*
 
-*Trích thư của thánh Râymunđô, linh mục.*
+**Trích thư của thánh Râymunđô, linh mục.**
 
 Nếu thánh Phaolô, người rao giảng chân lý đã nói sự thật, chứ không hề gian dối, khi xác quyết rằng : tất cả những ai muốn sống đạo đức trong Chúa Kitô đều phải chịu đau khổ, thì tôi nghĩ không ai được miễn giữ luật chung ấy, đừng kểnhững người chểnh mãng hoặc không biết sống tiết độ, công chính và đạo đức ở đời này. 
 

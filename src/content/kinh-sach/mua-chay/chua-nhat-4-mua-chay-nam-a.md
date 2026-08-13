@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 4 Mùa Chay, Năm A"
 order: 28
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Chúa nói vắn tắt : Tôi là ánh sáng thế gian. Ai theo tôi sẽ không phải đi trong bóng tối, nhưng sẽ nhận được ánh sáng đem lại sự sống.Những lời này vừa là một lệnh truyền vừa là một lời hứa. Chúng ta hãy thi hành lệnh Người truyền, để khỏi ao ước viễn vông điều Người hứa. Chớ gì trong ngày phán xét, Người đừng nói với chúng ta : “Ngươi đã làm điều Ta truyền chưa mà dám đòi hỏi điều Ta đã hứa ?”. Lạy Chúa là Thiên Chúa chúng con, Chúa đã truyền gì ? Người nói với bạn : “Hãy theo Ta. Ngươi đã xin một lời khuyên đem lại sự sống. Sự sống nào, nếu không phải là sự sống được nói tới là : ”Chúa quả là nguồn sống” ?
 

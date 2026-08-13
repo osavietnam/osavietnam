@@ -15,7 +15,7 @@ Cầu nguyện cho những người đã qua đời là một trong những truy
 
 </div>
 
-*Trích sách của thánh Am-rô-xi-ô, giám mục, về cái chết cùa người anh là ông Xa-ti-rô.*
+**Trích sách của thánh Am-rô-xi-ô, giám mục, về cái chết cùa người anh là ông Xa-ti-rô.**
 
 Chúng ta thấy chết là một mối lợi và sống là một hình phạt. Bởi đó, thánh Phao-lô nói : Đối với tôi, sống là Đức Ki-tô, và chết là một mối lợi. Chúa Ki-tô là gì, nếu không phải là sự chết về thể xác, là thần khí ban sự sống ? Vì thế, chúng ta hãy cùng chết với Người để cùng sống với Người. Chớ gì mỗi ngày chúng ta tập làm quen và yêu mến sự chết, để nhờ sự tách biệt này, linh hồn chúng ta học cho biết đoạn tuyệt với các dục vọng thể xác, và mỗi khi được đặt ở chốn cao siêu, nơi các ham muốn trần tục không thể tới cũng không quyến dụ được nó, linh hồn đón nhận được hình ảnh của sự chết, để khỏi phải chịu hình phạt của sự chết. Quả vậy, luật của xác thịt thì chống lại luật của tinh thần và đưa luật này vào con đường lầm lạc. Nhưng phải dùng phương thuốc nào để trị liệu ? Ai sẽ giải thoát tôi khỏi thân xác phải chết này ? Tạ ơn Thiên Chúa, nhờ Đức Giê-su Ki-tô, Chúa chúng ta.
 

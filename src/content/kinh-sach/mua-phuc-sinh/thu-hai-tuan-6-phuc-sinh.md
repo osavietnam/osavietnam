@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 6 Phục Sinh"
 order: 36
 ---
 
-*Trích khảo luận Chúa Ba Ngôi của ông Đi-đi-mô A-lê-xan-ri-a.*
+**Trích khảo luận Chúa Ba Ngôi của ông Đi-đi-mô A-lê-xan-ri-a.**
 
 Thánh Thần là Thiên Chúa, cùng với Chúa Cha và Chúa Con, đổi mới chúng ta trong bí tích Thánh Tẩy, đưa chúng ta thoát khỏi tình trạng xấu xa trở lại vẻ đẹp ban đầu. Người đổ đầy ân sủng của Người trên chúng ta, đến nỗi chúng ta không còn có thể đón nhận điều gì chẳng đáng ước ao nữa. Người giải thoát chúng ta khỏi tội lỗi và sự chết. Thánh Thần làm cho chúng ta từ thân phận xác đất vật hèn, nghĩa là từ đất và tro, trở thành những con người thần thiêng, được thông phần vinh quang Thiên Chúa, được làm con và làm người thừa kế của Thiên Chúa là Cha, được nên đồng hình đồng dạng và đồng thừa kế với Chúa Con, nên những người anh em cùng được vinh quang với Chúa Con và cùng cai trị với Người. Thay vì đất, Người cho ta trời và rộng ban cho ta cõi thiên đàng. Người còn làm cho chúng ta nên cao trọng hơn các thiên thần, và nhờ ơn thiêng của bể nước thanh tẩy, Người dập tắt ngọn lửa dữ dội không thể dập tắt của Hoả Ngục.
 

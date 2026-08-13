@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 32 Thường Niên"
 order: 218
 ---
 
-*Mở đầu bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Mở đầu bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Thưa anh em, chúng ta phải nhìn nhận Đức Giê-su Ki-tô là Thiên Chúa, là Đấng phán xét kẻ sống và kẻ chết, và đừng coi thường ơn cứu độ của chúng ta. Thật vậy, nếu chúng ta coi thường Đức Ki-tô, thì đó là vì chúng ta tưởng rằng những gì chúng ta sẽ nhận được chỉ nhỏ bé thôi. Ai nghe nói về những điều này mà cho là những điều kém giá trị thì mắc tội. Và chúng ta cũng mắc tội khi không biết chúng ta được kêu gọi từ đâu, hay không biết Đức Ki-tô đã cam chịu đau khổ dường nào vì chúng ta.
 

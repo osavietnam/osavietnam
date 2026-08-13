@@ -15,7 +15,7 @@ order: 144
 
 </div>
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Cuộc tử đạo của Đức Trinh Nữ Ma-ri-a, chúng ta biết được là nhờ lời tiên báo của ông già Si-mê-ôn, cũng như chính bài tường thuật sự thương khó của Chúa. Về Hài Nhi Giê-su, ông già nói rằng : Cháu sẽ là dấu hiệu bị người đời chống báng, còn bà - ông nói với Đức Ma-ri-a : bà sẽ bị nát ruột nát gan như bị lưỡi gươm đâm thâu.
 

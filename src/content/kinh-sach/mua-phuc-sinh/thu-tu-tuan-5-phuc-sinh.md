@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 5 Phục Sinh"
 order: 31
 ---
 
-*Trích thư gửi cho Đi-ô-nhê-tô.*
+**Trích thư gửi cho Đi-ô-nhê-tô.**
 
 Các Ki-tô hữu không khác người ta về xứ sở, ngôn ngữ và tập quán trong đời sống. Họ không ở trong những thành phố riêng, không dùng ngôn ngữ lạ thường, cũng không sống một nếp sống khác biệt. Giáo lý của họ không phải do một sự suy tư nào đó, hay do mối bận tâm của những con người ham tìm hiểu nghĩ ra. Họ không bảo trợ một hệ thống triết lý nào do loài người chủ xướng như một số người kia.
 

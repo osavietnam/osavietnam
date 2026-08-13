@@ -15,7 +15,7 @@ Chào đời khoảng cuối thế kỷ XII, tại Lít-bon, Bồ-đào-nha, nh�
 
 </div>
 
-*Trích bài giảng của thánh An-tôn Pa-đô-va, linh mục.*
+**Trích bài giảng của thánh An-tôn Pa-đô-va, linh mục.**
 
 Ai đầy Thánh Thần thì nói được nhiều thứ tiếng. Nhiều thứ tiếng đây có ý hiểu là những lời chứng về Đức Ki-tô như khiêm nhường, nghèo khó, kiên nhẫn và tuân phục. Chúng ta nói những thứ tiếng đó, khi tỏ cho người khác thấy nơi chúng ta các nhân đức nói trên. Lời nói sẽ hùng hồn khi có việc làm minh chứng. Hãy im đi để việc làm lên tiếng. Chúng ta nói nhiều, nhưng làm chẳng bao nhiêu, vì thế mới bị Chúa nguyền rủa như Người đã nguyền rủa cây vả, khi thấy nó không sinh trái mà chỉ có lá thôi. Thánh Ghê-gô-ri-ô nói : “Quy luật cho nhà giảng thuyết là phải thực hành điều mình rao giảng”. Ai dùng việc làm mà phá huỷ đạo lý luật dạy, thì dù có dạy luật, cũng chỉ là khoác lác ba hoa.
 

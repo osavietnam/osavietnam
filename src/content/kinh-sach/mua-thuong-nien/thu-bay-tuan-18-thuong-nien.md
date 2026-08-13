@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 18 Thường Niên"
 order: 126
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Để cứu rỗi con người, Thiên Chúa không đòi phải có những hy lễ, những hiến tế toàn thiêu, nhưng Người đòi phải tin, phải vâng phục và sống công chính. Trong sách ngôn sứ Hô-sê, Người đã phán dạy cho họ biết ý muốn của Người : Ta muốn tình yêu chứ không cần hy lễ, thích được các ngươi hiểu biết hơn là được của lễ toàn thiêu.
 

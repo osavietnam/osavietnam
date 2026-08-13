@@ -9,7 +9,7 @@ rank: "memorial"
 order: 20
 ---
 
-*Trích truyện tử đạo của thánh Phao-lô Mi-ki và các bạn do một tác giả cùng thời thuật lại.*
+**Trích truyện tử đạo của thánh Phao-lô Mi-ki và các bạn do một tác giả cùng thời thuật lại.**
 
 Thật là kỳ diệu khi thấy các vị tử đạo bị treo trên khổ giá mà tất cả đều một niềm kiên trung theo lời của cha Pa-xi-ô và cha Rót-ri-ghê lần lượt khuyên bảo. Cha đặc uỷ vẫn ở yên dường như bất động, mắt đăm đăm nhìn lên trời. Để cảm tạ lòng nhân từ của Chúa, thầy Mác-ti-nô hát mấy Thánh Vịnh kèm theo câu : Trong tay Ngài, lạy Chúa. Thầy Phan-xi-cô cũng lên tiếng dõng dạc tạ ơn Thiên Chúa. Thầy Gun-xan-vô thì cất cao giọng đọc Kinh Lạy Cha và Kinh Kính Mừng.
 

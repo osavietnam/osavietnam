@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 5 Mùa Chay, Năm B"
 order: 38
 ---
 
-*Trích thư mục vụ Mùa Phục Sinh của thánh A-tha-na-xi-ô, giám mục.*
+**Trích thư mục vụ Mùa Phục Sinh của thánh A-tha-na-xi-ô, giám mục.**
 
 Ngôi Lời đã trở thành tất cả cho chúng ta, Người rất gần gũi chúng ta ; tôi muốn nói về Chúa chúng ta, Đức Giê-su Ki-tô, Người đã hứa ở lại mãi bên chúng ta. Người tuyên bố : Này đây Thầy ở cùng anh em mọi ngày cho đến tận thế. Người là mục tử, là thượng tế, là đường, là cửa ; và Người đã trở thành tất cả cho chúng ta thế nào, thì Người đã xuất hiện như một cuộc lễ, một đại lễ như vậy. Thánh Phao-lô tông đồ cũng đã nói : Đức Ki-tô chịu hiến tế chính là Lễ Vượt Qua của chúng ta. Người là Đấng thiên hạ đợi trông. Người cũng đã soi sáng cho tác giả Thánh Vịnh, để ông cầu nguyện rằng : Chúa là nguồn hoan hỷ của con, xin cứu con khỏi bọn người vây hãm.
 

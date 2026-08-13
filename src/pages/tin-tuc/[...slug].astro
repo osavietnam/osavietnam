@@ -3,11 +3,17 @@ import { getCollection, render } from 'astro:content';
 import { getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleProseMeta from '../../components/ArticleProseMeta.astro';
+import ContentInlineEditor from '../../components/ContentInlineEditor.astro';
+import ArticleLanguageSwitch from '../../components/ArticleLanguageSwitch.astro';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const articles = await getCollection('bai-viet', ({ data }) => !data.draft);
+  const allEntries = await getCollection('bai-viet');
+  const articles = allEntries.filter(({ id, data }) =>
+    id.startsWith('sinh-hoat-cong-doan/')
+    && !data.draft && !data.translationOf && data.language !== 'en',
+  );
   const sorted = [...articles].sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 
   return sorted.map((entry) => {
@@ -22,12 +28,18 @@ export async function getStaticPaths() {
         category: article.data.category ?? '',
         image: article.data.heroImage?.src ?? article.data.image?.src ?? '',
       }));
-    return { params: { slug: entry.id }, props: { entry, related } };
+    const englishEntry = allEntries.find((article) =>
+      !article.data.draft
+      && article.data.language === 'en'
+      && (article.data.translationOf === entry.id || (!article.data.translationOf && article.id === `${entry.id}-en`)),
+    );
+    return { params: { slug: entry.id }, props: { entry, englishEntry, related } };
   });
 }
 
-const { entry, related } = Astro.props;
+const { entry, englishEntry, related } = Astro.props;
 const { Content } = await render(entry);
+const EnglishContent = englishEntry ? (await render(englishEntry)).Content : null;
 const d = entry.data;
 const folder = entry.id.split('/')[0];
 const dateStr = d.date
@@ -53,6 +65,8 @@ const relatedImage = (article: typeof related[number], index: number) =>
   bodyClass="page-news page-news-detail no-sidebar"
   banner={null}
 >
+  <ContentInlineEditor entryId={entry.id} label={englishEntry ? 'Sửa bản VN' : 'Sửa bài viết'} kind="news" />
+  {englishEntry && <ContentInlineEditor entryId={englishEntry.id} label="Sửa bản EN" variant="en" kind="news" />}
   <div slot="full-bleed" class="news-detail-banner-outer">
     <section class="news-detail-banner news-detail-slider">
       <img src={heroSrc || fallbackImage} alt="" class="news-detail-slide active" loading="eager" />
@@ -76,11 +90,22 @@ const relatedImage = (article: typeof related[number], index: number) =>
   </div>
 
   <main class="news-reading">
-    <article class="news-reading-prose prose">
-      <ArticleProseMeta author={d.author} />
-      {d.excerpt && <p class="news-reading-intro">{d.excerpt}</p>}
-      <Content />
-    </article>
+    <ArticleLanguageSwitch
+      hasEnglish={Boolean(EnglishContent)}
+      readerClass="news-language-reader"
+      articleClass="news-reading-prose prose"
+    >
+      <Fragment slot="vi">
+        <ArticleProseMeta author={d.author} />
+        {d.excerpt && <p class="news-reading-intro">{d.excerpt}</p>}
+        <Content />
+      </Fragment>
+      {EnglishContent && <Fragment slot="en">
+        <ArticleProseMeta author={englishEntry?.data.author ?? d.author} />
+        {englishEntry?.data.excerpt && <p class="news-reading-intro">{englishEntry.data.excerpt}</p>}
+        <EnglishContent />
+      </Fragment>}
+    </ArticleLanguageSwitch>
 
     {related.length > 0 && (
       <section class="news-reading-related" aria-labelledby="news-reading-related-title">
@@ -165,7 +190,7 @@ const relatedImage = (article: typeof related[number], index: number) =>
     .news-detail-eyebrow { font-size:.88rem; letter-spacing:.15em; }
     .news-detail-masthead .news-title { margin-bottom:1rem; font-size:clamp(2.35rem, 9vw, 3.6rem); }
     .news-reading { width:100%; max-width:none; margin:2.2rem auto 0; padding-top:0; }
-    .news-reading-prose.prose { width:100% !important; max-width:none !important; margin:0; padding:0; }
+    .news-reading-prose.prose { margin-inline:auto; padding:0; }
     .news-reading-prose.prose { --prose-surface-inset-block:-2.2rem; --prose-surface-inset-inline:-2rem; }
     .news-reading-related-grid { grid-template-columns:1fr; gap:1.8rem; }
   }

@@ -15,7 +15,7 @@ order: 27
 
 </div>
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng.**
 
 Trong khắp thiên hạ, một mình thánh Phê-rô được chọn làm người đứng đầu để kêu gọi muôn dân đến lãnh nhận ơn cứu độ, đồng thời làm thủ lãnh tất cả các tông đồ và tất cả các giáo phụ. Như vậy, cho dầu trong Dân Thiên Chúa có nhiều linh mục và nhiều mục tử, nhưng chính ông Phê-rô điều hành tất cả, dưới quyền lãnh đạo tối cao của Chúa Ki-tô. Anh em thân mến, Thiên Chúa đã đoái thương cho con người này được vinh dự lớn lao và lạ lùng này, là được chia sẻ quyền năng của Người. Giả như Thiên Chúa muốn ban cho các vị thủ lãnh khác một ơn nào như thánh nhân, thì bao giờ Người cũng ban qua trung gian của ngài.
 

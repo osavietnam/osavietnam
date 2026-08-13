@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 11 Thường Niên"
 order: 73
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Chúa Ki-tô khoan dung với chúng ta dường nào ! Lòng nhận hậu và từ ái của Người bao la biết mấy ! Người đã muốn chúng ta dâng lời kinh này trước Tôn Nhan mà gọi Thiên Chúa là Cha, và, như Đức Ki-tô là Con Thiên Chúa, chúng ta cũng được gọi là con Thiên Chúa. Khi cầu nguyện, không ai trong chúng ta dám động tới danh xưng này, nếu chính Đưc Ki-tô không cho phép cầu nguyện như thế. Vậy, anh em thân mến, chúng ta phải ghi lòng tạc dạ điều này : được gọi Thiên Chúa là Cha, chúng ta phải xử sự như con cái của Người, để, chúng ta vui sướng vì có Thiên Chúa là Cha thế nào, thì Người cũng vui sướng vì chúng ta như vậy.
 

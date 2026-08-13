@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Các Thánh Lo Việc Giáo Dục"
 order: 21
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.**
 
 Chúa nói : Anh em hãy coi chừng chớ khinh một ai trong các kẻ bé mọn này ; quả thật, Thầy nói cho anh em biết : các thiên thần của họ ở trên trời không ngừng chiêm ngưỡng nhan Cha Thầy, Đấng ngự trên trời, và Thầy đến để cứu thoát họ, và Cha của anh em, Đấng ngự trên trời, không muốn cho một ai trong những kẻ bé mọn này phải hư mất. Người nói như thế vì muốn cho những ai có nhiệm vụ săn sóc trẻ em phải nhiệt thành hơn.
 

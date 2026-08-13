@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 12 Thường Niên"
 order: 79
 ---
 
-*Trích khảo luận của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về đời trọn lành của Ki-tô hữu.*
+**Trích khảo luận của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về đời trọn lành của Ki-tô hữu.**
 
 Thánh Phao-lô đã tuyên bố rõ ràng hơn bất cứ ai rằng thánh nhân vừa biết Đấng Ki-tô là Đấng nào, vừa biết kẻ đã mang danh Người, thì phải ăn ở làm sao. Thánh nhân đã cặn kẽ noi gương Chúa đến độ có thể diễn tả được Chúa nơi chính bản thân mình. Thật vậy, nhờ tận tình noi gương Đức Ki-tô như thế, người đã biến tâm hồn mình nên giống mẫu mực là Đức Ki-tô. Vì thế, khi nhận thức sâu xa về những điều tốt đẹp của mình, thánh nhân nói : Anh em muốn có bằng chứng cho thấy Đức Ki-tô nói trong tôi. Và người còn nói : Tôi sống không còn phải là tôi, mà là Đức Ki-tô sống trong tôi.
 

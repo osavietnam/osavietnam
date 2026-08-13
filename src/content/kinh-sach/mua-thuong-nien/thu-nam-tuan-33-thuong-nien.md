@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 33 Thường Niên"
 order: 229
 ---
 
-*Trích bài chú giải của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Diễm Ca.*
+**Trích bài chú giải của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Diễm Ca.**
 
 Lạy Đấng Mục Tử nhân lành, Đấng mang cả đoàn chiên trên vai, Chúa đang chăn chiên nơi nào ? Cả nhân loại chỉ là một con chiên Chúa đã nhận vác trên vai. xin chỉ cho con chỗ nghỉ ngơi, xin dẫn con đến đồng cỏ xanh mà bổ dưỡng ; xin gọi con đích danh, để con được nghe tiếng Chúa, vì con là chiên của Chúa. Và vì Chúa đã cho con nghe tiếng Chúa, thì xin cho con được sống muôn đời. Lạy Chúa là Đấng lòng con yêu mến, xin nói cho con nghe.
 

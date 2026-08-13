@@ -7,6 +7,7 @@ excerpt: "Letter 60, 1-2.5"
 liturgy: "Ngày 16 Tháng 9: Thánh Cornelius, Gh. và Tđ. , và Thánh Cyprian, Gm. và Tđ."
 rank: "memorial"
 order: 145
+draft: true
 ---
 
 <div class="ks-tieu-su">
@@ -17,7 +18,7 @@ Thánh Síp-ri-a-nô sinh tại Các-tha-gô, quãng năm 210 trong một gia đ
 
 </div>
 
-*Trích sử liệu về cuộc tử đạo của thánh Síp-ri-a-nô.*
+**Trích sử liệu về cuộc tử đạo của thánh Síp-ri-a-nô.**
 
 Sáng ngày 14 tháng Chín, một đám rất đông dân chúng tụ họp lại tại quảng trường Xét-tô, theo lệnh của quan kinh lược Ga-lê-ri-ô Mác-xi-mô. Viên quan này truyền lệnh phải điệu thánh Síp-ri-a-nô ra trước mặt ông ngay trong ngày, khi ông ngồi xử tại tiền đường Xau-si-ô-lô. Khi giám mục Síp-ri-a-nô bị điệu đến, quan kinh lươc hỏi : “Ông có phải là Ta-si-ô Síp-ri-a-nô không ?”. Giám mục Síp-ri-a-nô trả lời : “Chính tôi”.
 

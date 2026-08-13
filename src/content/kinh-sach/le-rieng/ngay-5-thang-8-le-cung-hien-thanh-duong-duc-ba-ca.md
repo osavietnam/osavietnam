@@ -12,9 +12,9 @@ manualFill: true
 ---
 Vương cung thánh đường Đức Bà Cả được đức giáo hoàng Xít-tô III (421-440) cho xây dựng ở Rô-ma trên đường Ét-ki-li-nô, để tôn kính Thánh Mẫu của Chúa Giê-su. Lúc ấy, tước hiệu này vừa được công đồng Ê-phê-xô dùng để ca tụng Đức Ma-ri-a (431). Đây là một trong những thánh đường cổ kính đầu tiên của Tây Phương mang tước hiệu kính Đức Mẹ. 
 
-Ca ngợi thánh Ma-ri-a, Đức Ma-ri-a Chúa Trời 
+*Ca ngợi thánh Ma-ri-a, Đức Ma-ri-a Chúa Trời*
 
-*Trích bài giảng của thánh Sy-ri-lô A-lê-xan-ri-a, tại công đồng Ê-phê-xô.*
+**Trích bài giảng của thánh Sy-ri-lô A-lê-xan-ri-a, tại công đồng Ê-phê-xô.**
 
  
 

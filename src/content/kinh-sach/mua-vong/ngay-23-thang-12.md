@@ -8,7 +8,7 @@ liturgy: "Ngày 23 Tháng 12"
 order: 27
 ---
 
-*Trích khảo luận Chống lạc thuyết No-ê-tô của thánh Hi-pô-ly-tô, linh mục.*
+**Trích khảo luận Chống lạc thuyết No-ê-tô của thánh Hi-pô-ly-tô, linh mục.**
 
 Anh em thân mến, chỉ có một Thiên Chúa độc nhất, Đấng chúng ta nhận biết, không do bất cứ một nguồn mạch nào ngoài Kinh Thánh. Vì thế, chúng ta hãy tìm hiểu tất cả những gì Kinh Thánh rao giảng và nhìn nhận hết mọi điều Kinh Thánh truyền dạy. Chúa Cha muốn được chúng ta tin thế nào, chúng ta hãy tin như thế. Chúa Cha muốn Chúa Con được tôn vinh thế nào, chúng ta hãy tôn vinh như vậy. Và Chúa Cha muốn Chúa Thánh Thần được ban tặng thế nào, chúng ta hãy đón nhận như thế ! Chúng ta đừng theo ý muốn, cảm nghĩ và sức lực riêng, mà tìm hiểu những gì Thiên Chúa ban cho, nhưng chính Thiên Chúa muốn dùng Kinh Thánh mà dạy dỗ chúng ta thế nào, chúng ta hãy hiểu như vậy.
 

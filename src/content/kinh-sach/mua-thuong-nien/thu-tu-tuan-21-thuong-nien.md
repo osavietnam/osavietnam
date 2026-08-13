@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 21 Thường Niên"
 order: 144
 ---
 
-*Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.*
+**Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.**
 
 Anh em thân mến, hãy lắng tai nghe lời chúng tôi như nghe một điều cần thiết. Hãy nhờ những đợt sóng của nguồn suối thần linh mà thôi thúc cho tâm hồn anh em khao khát mãnh liệt hơn nữa, đừng để cho cơn khát nguội đi. Chúng tôi đang muốn nói về nguồn suối thần linh đó. Anh em uống đi, nhưng chớ coi đó là đã thoả thuê, bởi vì suối hằng sống, suối phát sinh sự sống vẫn lên tiếng kêu gọi chúng ta tìm đến : Ai khát, hãy đến với tôi mà uống.
 

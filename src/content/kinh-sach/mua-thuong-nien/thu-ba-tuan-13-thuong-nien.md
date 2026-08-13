@@ -10,7 +10,7 @@ order: 87
 draft: false
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Điều khiến chúng tôi tự hào là lương tâm làm chứng cho chúng tôi. Có những người xét đoán bừa bãi, gièm pha, to nhỏ, lẩm bẩm kêu ca, tìm cớ nghi ngờ điều mình chẳng thấy, thậm chí làm lung lay cả điều mình không thể nghi ngờ. Với những con người nhu thế thì chúng tôi còn gì để đối lại, ngoài lời chứng của lương tâm chúng tôi ? Quả vậy, thưa anh em, ngay cả khi chúng tôi muốn làm đẹp lòng người ta, chúng tôi không tìm vinh dự cho mình, và cũng chẳng được phép tìm vinh dự ấy, nhưng phải nhắm đến ơn cứu độ của họ. Như thế, nếu chúng tôi sống ngay thẳng, họ sẽ không lạc lối khi đi theo chúng tôi. Nếu chúng tôi bắt chước Đức Ki-tô, thì họ vẫn phải bắt chước Đức Ki-tô. Thật vậy, chính Người là Đấng chăn dắt đoàn chiên của mình, và chỉ một mình Người chăn dắt cùng với tất cả những ai đang tận tâm chăn dắt đoàn chiên, vì hết thảy mọi người chăn đều ở trong Người.
 

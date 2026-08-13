@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 23 Thường Niên"
 order: 157
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Bấy giờ Chúa Giê-su đang giảng. Nhân lúc đề cập đến mầu nhiệm ăn thân mình Người, Người khuyên các môn đệ phải hiệp thông với cuộc thương khó của Người. Lúc đó, theo Tin Mừng, có mấy kẻ nói : Lời này cứng cỏi quá, và vì vậy, họ bỏ không theo Người nữa. Khi Người hỏi các môn đệ có bỏ đi không, các ông đã trả lời : Thưa Thầy, bỏ Thầy chúng con biết đến cùng ai, vì Thầy mới có những lời đem lại sự sống đời đời.
 

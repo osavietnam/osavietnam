@@ -4,7 +4,7 @@ subtitle: "Trinh nữ · Dòng ba"
 rank: "memorial"
 feastDay: 23
 feastMonth: 4
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/Duomo_di_udine-_beata_elena_valentinis.jfif"
 draft: false
 manualFill: false
 ---

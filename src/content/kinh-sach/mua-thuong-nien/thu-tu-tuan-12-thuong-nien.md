@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 12 Thường Niên"
 order: 81
 ---
 
-*Trích khảo luận của chân phúc En-rê-đi, viện phụ, về tình bằng hữu thiêng liêng.*
+**Trích khảo luận của chân phúc En-rê-đi, viện phụ, về tình bằng hữu thiêng liêng.**
 
 Trong các thanh niên, Gio-na-than trổi vượt hơn cả. Chàng không ham danh tước cũng chẳng mong quyền hành, nhưng đã kết ước cùng Đa-vít, và vì tình bạn, đã coi bề tôi ngang hàng với chủ. Một kẻ bề tôi đang phải trốn tránh vua cha, đang ẩn náu trong hoang địa, một kẻ bị án tử chỉ còn chờ chết, mà chàng lại quý bạn hơn chính mình. Chàng đã hạ mình xuống, nâng bạn mình lên. Chàng nói : Chính anh sẽ làm vua, còn tôi sẽ làm phó cho anh.
 

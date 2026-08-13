@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 10 Thường Niên"
 order: 68
 ---
 
-*Trích bài giảng của linh mục Ô-ri-giê-nê, về sách Giô-suê.*
+**Trích bài giảng của linh mục Ô-ri-giê-nê, về sách Giô-suê.**
 
 Thành Giê-ri-khô bị vây hãm. Cần phải đánh chiếm thành này. Nhưng làm sao đánh chiếm Giê-ri-khô ? Không cần vung gươm, không bày binh bố trận, không trương nỏ bắn tên ; chỉ có tiếng kèn của các tư tế, thế mà các tường thành của Giê-ri-khô cũng sụp đổ.
 

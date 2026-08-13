@@ -1,11 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AugnetInlineEditor from '../../../components/AugnetInlineEditor.astro';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const entries = await getCollection('augustine-life', ({ data }) => !data.draft);
+  const entries = await getCollection('augustine-life', ({ data }) => !data.draft && (import.meta.env.DEV || data.translationStatus !== 'draft'));
   const ordered = [...entries].sort((a, b) => a.data.order - b.data.order);
 
   return ordered.map((entry) => {
@@ -60,7 +61,7 @@ const statusLabel = {
       <div class="aug-life-meta lib-masthead-sub">
         <span class="aug-life-code">{code}</span>
         <span>{displayCategory}</span>
-        <span class={`aug-life-translation-status is-${translationStatus}`}>{statusLabel}</span>
+        <span class={`aug-life-translation-status is-${translationStatus}`} data-augnet-admin-only hidden>{statusLabel}</span>
       </div>
       <h1 class="lib-masthead-title">{displayTitle}</h1>
       <div class="lib-masthead-rule" aria-hidden="true"><span class="lib-masthead-ornament">✦</span></div>
@@ -98,6 +99,7 @@ const statusLabel = {
       </nav>
     </section>
   </main>
+  <AugnetInlineEditor collection="augustine-life" entryId={entry.id} />
 </BaseLayout>
 
 <style>

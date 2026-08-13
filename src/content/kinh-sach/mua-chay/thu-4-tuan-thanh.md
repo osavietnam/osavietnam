@@ -8,7 +8,7 @@ liturgy: "Thứ 4 Tuần Thánh"
 order: 49
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Chúa đã định nghĩa thế nào là tình thương trọn vẹn mà chúng ta phải có để yêu thương nhau khi Người nói : Không có tình thương nào cao cả hơn tình thương của người đã hy sinh tính mạng vì bạn hữu của mình. Bởi thế, chính thánh Gio-an, tác giả sách Tin Mừng, cũng viết trong thư : Đức Ki-tô đã thí mạng vì chúng ta. Như vậy, cả chúng ta nữa, chúng ta cũng phải thí mạng vì anh em. Vậy chúng ta phải yêu thương nhau như chính Người đã yêu thương chúng ta, khi Người thí mạng vì chúng ta.
 

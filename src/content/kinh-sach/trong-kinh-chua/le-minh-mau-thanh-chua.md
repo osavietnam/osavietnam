@@ -10,7 +10,7 @@ order: 4
 draft: false
 ---
 
-*Trích tác phẩm của thánh Tô-ma A-qui-nô, linh mục.*
+**Trích tác phẩm của thánh Tô-ma A-qui-nô, linh mục.**
 
 Con Một Thiên Chúa, khi muốn cho chúng ta tham dự vào thần tính của Người, đã nhận lấy bản tính của chúng ta để một khi làm người, Người làm cho con người trở thành “thiên chúa”.
 

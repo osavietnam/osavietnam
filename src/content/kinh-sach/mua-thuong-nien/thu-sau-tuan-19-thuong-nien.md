@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 19 Thường Niên"
 order: 132
 ---
 
-*Trích bài giảng của thánh Pa-si-a-nô, giám mục, về phép rửa.*
+**Trích bài giảng của thánh Pa-si-a-nô, giám mục, về phép rửa.**
 
 Tội A-đam đã truyền sang cả nhân loại, như thánh tông đồ nói : Vì một người duy nhất mà tội lỗi đã xâm nhập trần gian, và tội lỗi gây nên sự chết ; như thế sự chết đã lan tràn tới mọi người. Vậy sự công chính của Đức Ki-tô cũng cần phải được truyền sang nhân loại. Và A-đam đã làm cho cả dòng dõi của mình bị tiêu vong vì tội lỗi thế nào, thì Đức Ki-tô cũng sẽ làm cho cả nòi giống của Người được sống như vậy. Thánh tông đồ đã nhấn mạnh điều đó như sau : Cũng như vì một người duy nhất đã không vâng lời Thiên Chúa, mà muôn người thành tội nhân ; thì nhờ một con người duy nhất đã vâng lời Thiên Chúa, muôn người cũng sẽ thành người công chính. Nếu tội lỗi đã thống trị bằng cách làm cho người ta phải chết, thì ân sủng cũng thống trị bằng cách làm cho người ta nên công chính để được sống đời đời.
 

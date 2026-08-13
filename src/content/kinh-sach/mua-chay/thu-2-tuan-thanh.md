@@ -8,7 +8,7 @@ liturgy: "Thứ 2 Tuần Thánh"
 order: 47
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Cuộc thương khó của Chúa Giê-su Ki-tô,Đấng cứu độ Chủng ta, là bảo đảm cho Chủng ta được vinh quang và là bài học dạy chúng ta biết kiên nhẫn.
 

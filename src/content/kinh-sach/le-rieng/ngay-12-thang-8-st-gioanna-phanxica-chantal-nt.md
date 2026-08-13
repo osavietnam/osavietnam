@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nữ sinh tại Đi-giông, nước Pháp năm 1572. Kết hôn với nam tước Săng-tan và sinh được sáu người con. Thánh nữ giáo dục con cái theo đường đạo đức. Khi nam tước qua đời, thánh nữ được thánh Phan-xi-cô đờ Xan hướng dẫn và đã tiến nhanh trên đường trọn lành, đặc biệt qua những công tác từ thiện giúp đỡ người nghèo khó bệnh tật. Thánh nữ thiết lập dòng Thăm Viếng và đã điều khiển Dòng thật khôn ngoan. Thánh nữ qua đời năm 1641.
 
-Tình yêu mạnh như sự chết 
+*Tình yêu mạnh như sự chết*
 
-*Trích hồi ký của nữ tu, thư ký thánh Gio-an-na Phan-xi-ca*
+**Trích hồi ký của nữ tu, thư ký thánh Gio-an-na Phan-xi-ca**
 
  
 

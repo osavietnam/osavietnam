@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 22 Thường Niên"
 order: 153
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.**
 
 Người nghèo đạt được đức khiêm nhường dễ hơn người giàu, đó là điều không thể hồ nghi. Người nghèo là bạn nghĩa thiết của đức hiền lành, còn người giàu là kẻ thân tình của sự tâng bốc. Thế mà, nơi nhiều người giàu, của cải không làm cho họ vênh váo kiêu căng, nhưng thúc đẩy họ làm việc thiện ; họ coi việc dùng của để nâng đỡ người lầm than như mối lợi lớn. Khi sống khó nghèo, người ta đồng phận với nhau, dù thuộc loại hay bậc người nào, vì có thể chênh lệch về hoàn cảnh xã hội, nhưng lại đồng đều về chí hướng. Khác nhau về của cải trần gian, điều đó không đáng kể, khi người ta bằng nhau về của cải thiêng liêng. Đức khó nghèo như vậy, thật là diễm phúc, vì nó không bị chi phối bởi lòng yêu những của phù vân, cũng chẳng thèm được của cải đời này, nhưng ham muốn giàu có những của cải trên trời.
 

@@ -9,7 +9,7 @@ rank: "solemn"
 order: 4
 ---
 
-*Trích bài giáo huấn cho tân tòng tại Giê-ru-sa-lem.*
+**Trích bài giáo huấn cho tân tòng tại Giê-ru-sa-lem.**
 
 Anh em đã được dẫn tới bể nước thánh tẩy, như Đức Ki-tô được đưa từ thập giá tới phần mộ đàng kia trước mặt anh em.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 2 Mùa Vọng"
 order: 11
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Thiên Chúa đã ấn định một thời gian để đưa ra các lời hứa và một thời gian để hoàn thành các điều Người đã hứa.
 

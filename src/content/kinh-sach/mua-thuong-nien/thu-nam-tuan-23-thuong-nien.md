@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 23 Thường Niên"
 order: 159
 ---
 
-*Trích bài giải nghĩa Thánh Vịnh của thánh Bơ-ru-nô, linh mục.*
+**Trích bài giải nghĩa Thánh Vịnh của thánh Bơ-ru-nô, linh mục.**
 
 Lạy Chúa Tể càn khôn, cung điện Ngài xiết bao khả ái. Mảnh hồn này khao khát mòn mỏi mong tới được khuôn viên đền vàng, nghĩa là tới Giê-ru-sa-lem rộng lớn trên trời, là thành đô của Chúa.
 

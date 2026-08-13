@@ -10,7 +10,7 @@ order: 101
 draft: false
 manualFill: true
 ---
-*Trích khảo luận của thánh Amrôxiô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Amrôxiô, giám mục, về các mầu nhiệm.**
 
 Sau khi được thanh tẩy, các tân tòng rạng rỡ trong những dấu hiệu riêng biệt. Họ tiến lên bàn thờ Chúa Kitô, vừa đi vừa nói : Con sẽ bước lên bàn thờ Thiên Chúa, nguồn vui của lòng con. Một khi đã rũ sạch những sai lầm xưa kia như rũ bỏ chiếc áo cũ, nên mới mẻ trẻ trung tựa chim bằng, họ mau mắn bước lên dự tiệc thánh bởi trời. Khi đến và thấy bàn thánh đã sẵn sàng, ho liền kêu lên : Chúa đã dọn sẵn cho con bữa tiệc.
 

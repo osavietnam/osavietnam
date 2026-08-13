@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 2 Phục Sinh"
 order: 13
 ---
 
-*Trích Hiến chế Phụng vụ của công đồng Va-ti-ca-nô II.*
+**Trích Hiến chế Phụng vụ của công đồng Va-ti-ca-nô II.**
 
 Thiên Chúa muốn cho mọi người được ơn cứu độ và nhận biết chân lý. Thuở xưa, nhiều lần nhiều cách, Người đã phán dạy cha ông chúng ta qua các ngôn sứ. Khi thời gian đến hồi viên mãn, Người đã sai Con mình là Lời đã thành xác phàm, được xức dầu Thánh Thần, đến loan báo Tin Mừng cho người nghèo khó, chữa trị những tâm hồn tan nát, làm thầy thuốc săn sóc xác hồn, làm Đấng trung gian giữa Thiên Chúa và loài người. Thực vậy, nhân tính của Người hiệp nhất với Ngôi Lời đã là dụng cụ mang lại ơn cứu độ cho chúng ta. Vì thế, nơi Chúa Ki-tô, chúng ta được hoàn toàn hoà giải với Thiên Chúa và được tôn thờ Người cách trọn vẹn.
 

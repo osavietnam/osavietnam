@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 6 Thường Niên"
 order: 38
 ---
 
-*Trích bài giảng chống lạc thuyết A-ri-ô của thánh A-tha-na-xi-ô, giám mục.*
+**Trích bài giảng chống lạc thuyết A-ri-ô của thánh A-tha-na-xi-ô, giám mục.**
 
 Chính Đức Khôn Ngoan của Thiên Chúa cũng là Con Một của Người là Đấng tạo dựng và làm nên muôn vật muôn loài, như lời Thánh Vịnh : Chúa làm tất cả thật khôn ngoan, và những loài Chúa dựng nên lan tràn mặt đất. Nhưng để các vật đã được tạo thành không chỉ hiện hữu mà còn hiện hữu một cách tốt đẹp, Thiên Chúa đã muốn cho Đức Khôn Ngoan của Người khuôn mình theo thọ tạo, mà in vào tất cả và từng vật dấu ấn mang hình ảnh của Người ; nhờ thế, người ta thấy rõ các vật tạo thành được tô điểm một cách khôn ngoan, xứng đáng là những công trình của Thiên Chúa.
 

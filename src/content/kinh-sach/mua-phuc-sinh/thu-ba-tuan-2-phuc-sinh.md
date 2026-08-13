@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 2 Phục Sinh"
 order: 9
 ---
 
-*Trích sách của thánh Phun-gien-xi-ô, giám mục Rút-pê, gửi ông Mo-ni-mô.*
+**Trích sách của thánh Phun-gien-xi-ô, giám mục Rút-pê, gửi ông Mo-ni-mô.**
 
 Ngôi nhà thiêng liêng là thân mình Đức Ki-tô được xây dựng trong đức ái, như thánh Phê-rô nói : Hãy để Thiên Chúa dùng anh em như những viên đá sống động mà xây nên ngôi đền thờ thiêng liêng, và hãy để Thiên Chúa đặt anh em làm hàng tư tế thánh, dâng những lễ tế thiêng liêng đẹp lòng Người, nhờ Đức Giê-su Ki-tô. Để cầu xin cho công trình thiêng liêng này, tôi xin nói, không có lúc nào thuận lợi hơn là khi Mình và Máu Đức Ki-tô được hiến dâng trong bí tích bánh và rượu, do chính thân mình của Người là Hội Thánh, vì chén chúng ta uống là thông phần máu Đức Ki-tô, và bánh chúng ta bẻ là dự phần vào thân thể Chúa Ki-tô. Bởi vì chỉ có một tãm bánh, nên tuy nhiều người, chúng ta cũng chỉ là một thân thể vì tất cả chúng ta chia sẻ cùng một bánh ấy.
 

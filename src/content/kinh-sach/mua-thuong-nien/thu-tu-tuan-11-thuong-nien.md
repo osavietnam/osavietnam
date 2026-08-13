@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 11 Thường Niên"
 order: 74
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Tiếp đến là lời nguyện : Xin làm cho triều đại Cha mau đến. Chúng ta xin cho triều đại của Thiên Chúa mau trở thành hiện thực cho chúng ta, cũng như xin cho danh Người hiển thánh nơi chúng ta. Vì có bao giờ Thiên Chúa không hiển trị đâu ? Hay cái vẫn đã có nơi Người và không khi nào chấm dứt lại phải có lúc bắt đầu ? Chúng ta xin cho triều đại của chúng ta, triều đại mà Thiên Chúa đã hứa ban và Đức Ki-tô cam chịu thương khó và đổ máu ra để dành lại cho chúng ta. Như vậy, chúng ta đã sống thân phận tôi đòi nơi trần thế trước, thì về sau, đến thời Đức Ki-tô thống trị, chúng ta cũng sẽ được hiển trị như chính Người đã hứa : Nào những kẻ Cha Ta chúc phúc, hãy đến thừa hưởng vương quốc dọn sẵn cho các ngươi ngay từ thuở tạo thiên lập địa.
 

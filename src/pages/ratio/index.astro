@@ -4,7 +4,7 @@ import DocumentReader from '../../components/DocumentReader.astro';
 const entry = await getEntry('documents', 'ratio-vi');
 if (!entry) return Astro.redirect('/404');
 ---
-<DocumentReader entry={entry} langs={[
+<DocumentReader entry={entry} banner="ratio" langs={[
   { label: 'Tiếng Việt', href: '/ratio/', current: true, id: 'ratio-vi' },
   { label: 'English', href: '/ratio/en/', current: false, id: 'ratio-en' },
 ]} />

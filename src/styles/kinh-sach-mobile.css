@@ -5,7 +5,7 @@
 @media screen and (max-width: 768px) {
 
     /* --- 1. Global Scaling & Layout --- */
-
+  
 
     main.content {
         padding-left: 1.5rem;
@@ -28,15 +28,15 @@
     }
 
     /* --- 3. Table Layout --- */
-
+  
 
 
     .table-scroll-wrapper {
         /* This is the key change: allow the table to scroll horizontally */
         overflow-x: auto;
-
+        
         /* Add a subtle shadow to indicate scrollable content */
-        -webkit-box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.2);
+        -webkit-box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.2); 
         box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.2);
     }
 

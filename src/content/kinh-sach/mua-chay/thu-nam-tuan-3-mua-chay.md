@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 3 Mùa Chay"
 order: 25
 ---
 
-*Trích khảo luận Về việc cầu nguyện của linh mục Te-tu-li-a-nô.*
+**Trích khảo luận Về việc cầu nguyện của linh mục Te-tu-li-a-nô.**
 
 Cầu nguyện là của lễ thiêng liêng huỷ bỏ các hy lễ cũ. Thiên Chúa phán : Ngần ấy hy lễ của các ngươi, đối với Ta, nào nghĩa lý gì ? Lễ toàn thiêu chiên cừu, mỡ bê mập, Ta đã ngấy. Máu bò, máu chiên dê, Ta chẳng thèm. Ai khiến các ngươi mang những thứ ấy đến cho Ta ?
 

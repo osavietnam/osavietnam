@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1835 tại Ri-ê-sê, nước Ý. Sau khi làm linh mục
 
 </div>
 
-*Trích tông hiến Chúa Thánh Thần linh hứng của thánh giáo hoàng Pi-ô X.*
+**Trích tông hiến Chúa Thánh Thần linh hứng của thánh giáo hoàng Pi-ô X.**
 
 Nhờ ơn linh hứng của Thiên Chúa, các Thánh Vịnh đã được sáng tác. Sưu tập các Thánh Vịnh đã được đưa vào Kinh Thánh để, ngay từ thời đầu của Hội Thánh, rõ ràng là các Thánh Vịnh đã có sức nung đức lòng đạo đức của các tín hữu một cách lạ lùng. Họ dùng lời ngợi khen làm lễ tế dâng lên Thiên Chúa, tức là dùng miệng lưỡi mà ca tụng Thánh Danh. Không những thế, theo thói quen đã có từ thời luật cũ, rõ ràng là các Thánh Vịnh còn góp phần hiển nhiên vào phụng vụ thánh và kinh thần vụ. Từ đó phát sinh “tiếng nói của Hội Thánh” như thánh Ba-xi-li-ô thường gọi. Tiếng nói đó chính là lối hát thánh vịnh, hay theo cách gọi của vị tiền nhiệm chúng tôi, là đức giáo hoàng Ua-ba-nô VIII, thì tiếng nói đó chính là ái nữ của thánh thi ca ngợi hằng được hát lên trước ngai Thiên Chúa và Con Chiên. Theo thánh A-tha-na-xi-ô thì thánh thi còn dạy cho những người đặc biệt lãnh trách nhiệm cử hành phụng tự biết phải ca ngợi Thiên Chúa làm sao, và phải dùng lời lẽ nào mà xưng tụng Chúa cho phải đạo. Về vấn đề này, thánh Âu-tinh cũng có những lời rất đẹp : “Vì Thiên Chúa muốn cho nhân loại ca ngợi Người một cách xứng hợp, nên Người đã tự ca ngợi mình trước ; Thiên Chúa đã vì thương mà tự ca ngợi chính mình, nên loài người mới biết cách ca ngợi Thiên Chúa”.
 

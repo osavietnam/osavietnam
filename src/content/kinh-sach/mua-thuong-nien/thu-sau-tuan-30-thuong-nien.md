@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 30 Thường Niên"
 order: 209
 ---
 
-*Trích tác phẩm của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.*
+**Trích tác phẩm của đức cha Ban-đuyn, giám mục Can-tơ-bơ-ri.**
 
 Lời Thiên Chúa là lời sống động, hữu hiệu và sắc bén hơn cả gươm hai lưỡi. Sức mạnh trong lời Thiên Chúa mãnh liệt biết bao, sự khôn ngoan trong lời Người lớn lao dường nào ! Điều này được chứng mình bằng lời trên cho những kẻ tìm kiếm Đức Ki-tô là lời, là sức mạnh và là sự khôn ngoan của Thiên Chúa. Lời này từ nguyên thuỷ nơi Chúa Cha cũng có từ đời đời với Người, vào thời ấn định được mặc khải cho các tông đồ ; các tông đồ loan báo lời này và tín hữu lấy đức tin mà khiêm nhường đón nhận. Vậy lời ở nơi Chúa Cha, lời ở trên miệng các tông đồ, lời ở trong lòng các tín hữu.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 31 Thường Niên"
 order: 213
 ---
 
-*Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế mục vụ Vui mừng và Hy vọng của công đồng Va-ti-ca-nô II, về Hội Thánh trong thế giới ngày nay.**
 
 Các Ki-tô hữu hãy sẵn sàng và tận tâm cộng tác vào việc xây dựng trật tự quốc tế. Trong khi đó, họ phải thực sự tôn trọng các quyền tự do chính đáng và cũng phải giữ gìn tình huynh đệ bằng hữu với tất cả mọi người. Nhất là hiện nay phần lớn nhân loại đang phải chịu cảnh nghèo đói quá mức, tới độ chính Đức Ki-tô, nơi những người nghèo, như đang lớn tiếng kêu gọi các môn đệ của Người hãy thực thi bác ái. Vậy phải làm sao loại bỏ cảnh trớ trêu này là trong khi một số nước giàu có dư thừa, mà thường là những nước có đa số dân vẫn tự hào là Ki-tô hữu, thì các nước khác thiếu cả những điều kiện tối thiểu để sống, lại càng bị nạn đói, bệnh tật và đủ thứ khốn khổ luôn hành hạ giày vò. Quả thế, tinh thần nghèo khó và bác ái là vinh quang của Hội Thánh Đức Ki-tô và cũng là dấu chỉ của Hội Thánh.
 

@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 16 Thường Niên"
 order: 106
 ---
 
-*Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi giáo đoàn Ma-nhê-xi-a.*
+**Mở đầu thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi giáo đoàn Ma-nhê-xi-a.**
 
 Tôi là I-nha-xi-ô, cũng gọi là Thê-ô-phô-rô, kính gửi giáo đoàn được chúc phúc nhờ ơn Thiên Chúa Cha trong Đức Giê-su Ki-tô, Đấng cứu độ chúng ta. Trong Người tôi gửi lời chào thăm giáo đoàn ở Ma-nhê-xi-a bên kia sông Mê-an-rô, và cầu chúc cho giáo đoàn được mọi sự lành trong Thiên Chúa Cha và trong Đức Giê-su Ki-tô.
 

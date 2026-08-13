@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 1 Thường Niên"
 order: 4
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Không ai có thể nhận biết Chúa Cha mà không nhờ Con Thiên Chúa, nghĩa là nhờ Chúa Con mặc khải, cũng không ai nhận biết Chúa Con mà không do ý muốn Chúa Cha. Ý muốn của Chúa Cha thì Chúa Con thực hiện : quả thế, Chúa Cha sai đi, và Chúa Con thì được sai đi và đến trần gian. Đối với chúng ta thì Chúa Cha là Đấng vô hình và không ai định nghĩa được, nhưng Ngôi Lời của Người thì biết Người ; và dù Người là Đấng khôn tả, thì chính Ngôi Lời cũng kể cho chúng ta biết. Và lại, chỉ mình Chúa Cha biết Ngôi Lời của Người. Cả hai điều đó do Chúa Con tỏ cho biết. Vì vậy, khi tỏ mình ra thì Chúa Con cũng mặc khải cho biết Chúa Cha. Quả thật, Chúa Con tỏ mình ra thì Chúa Cha được nhận biết : vì mọi điều được Ngôi Lời biểu lộ.
 

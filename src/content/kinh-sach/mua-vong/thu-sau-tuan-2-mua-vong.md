@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 2 Mùa Vọng"
 order: 13
 ---
 
-*Trích Khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích Khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Khi Chúa công khai đến với nhân loại, thì nhân loại đã nhận lấy Người trong thân phận của mình. Nhưng thực ra chính Người nhận lấy nhân loại. Nhờ việc bằng lòng chịu chết trên cây thập giá, Người đã sửa lại sự bất tuân do cây trái cấm gây ra. Xưa bà E-và, trinh nữ được dành riêng cho một người đàn ông, đã bị quyến rủ làm điều xấu, thì nay Đức Ma-ri-a, Trinh Nữ cũng thuộc về một người đàn ông, đã gỡ được tội cho bà E-và, nhờ tin vào Tin Mừng, do sứ thần loan báo.
 

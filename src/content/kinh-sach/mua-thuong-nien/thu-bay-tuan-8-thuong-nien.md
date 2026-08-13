@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 8 Thường Niên"
 order: 56
 ---
 
-*Trích khảo luận của thánh Dê-nô, giám mục Vê-rô-nê.*
+**Trích khảo luận của thánh Dê-nô, giám mục Vê-rô-nê.**
 
 Anh em thân mến, theo như chúng ta được biết : ông Gióp là hình ảnh tiên báo Đức Ki-tô. Cứ so sánh, chúng ta sẽ thấy đúng như vậy. Ông Gióp được Thiên Chúa gọi là kẻ công chính, còn chính Đức Ki-tô là sự công chính. Người là nguồn suối cho mọi thánh nhân đến uống. bởi có lời nói về Người như sau : Mặt Trời Công Chính sẽ mọc lên chiếu soi các ngươi. Ông Gióp được gọi là người chân thật, còn Chúa là chân lý đích thực, như Người đã nói trong Tin Mừng : Thầy là con đường và là sự thật.
 

@@ -11,9 +11,9 @@ draft: false
 ---
 Thánh nhân là giám mục Xê-bát-tơ ở Ác-mê-ni, chịu tử đạo quãng thế kỷ thứ IV. Lòng tôn kính đối với thánh nhân phổ biến ở Tây phương bắt đầu từ thế kỷ thứ XI, vì theo tương truyền, thánh nhân làm nhiều phép lạ. Nhiều thánh đường đã nhận người làm bổn mạng. Vào thời Trung cổ, lòng tôn kính đối với người tràn lan khắp Hội Thánh. 
 
-Hãy chịu khổ vì chiên của Thầy 
+*Hãy chịu khổ vì chiên của Thầy*
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
  
 

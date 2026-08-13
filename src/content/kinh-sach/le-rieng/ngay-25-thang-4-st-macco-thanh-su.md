@@ -15,7 +15,7 @@ Thánh Mác-cô là cháu của thánh Bác-na-ba. Người đã đi theo thánh
 
 </div>
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Hội Thánh ở rải rác trên khắp hoàn cầu cho đến tận cùng trái đất. Hội Thánh đã nhận lãnh đức tin từ các tông đồ và các môn đệ của các ngài. Hội Thánh tin kính một Thiên Chúa là Chúa Cha toàn năng, Đấng tạo thành trời đất biển khơi cùng muôn loài trong đó ; tin kính Đức Giê-su Ki-tô, Con Thiên Chúa, đã nhập thể để cứu độ chúng ta ; tin kính Chúa Thánh Thần, Đấng đã dùng các ngôn sứ mà công bố các kế hoạch của Thiên Chúa : Đức Giê-su Ki-tô, Chúa chúng ta, đến trần gian, sinh bởi Đức Trinh Nữ, chịu khổ hình, sống lại từ cõi chết và lên trời cả thân xác, rồi sẽ từ trời ngự đến trong vinh quang của Chúa Cha. Khi ấy, Người sẽ quy tụ muôn loài dưới quyền một thủ lãnh, và làm cho mọi xác phàm được sống lại, để theo tôn ý của Chúa Cha vô hình, cả trên trời dưới đất và trong nơi âm phủ, muôn vật phải bái quỳ trước nhan Đức Ki-tô Giê-su là Chúa, là Thiên Chúa, là Đấng cứu độ và là Vua của chúng ta, đồng thời mọi loài phải mở miệng tuyên xưng Người, và để Người xét xử công minh cho mọi loài.
 

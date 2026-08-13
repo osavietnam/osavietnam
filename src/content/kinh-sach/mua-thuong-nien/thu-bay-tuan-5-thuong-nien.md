@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 5 Thường Niên"
 order: 35
 ---
 
-*Trích bài giảng của chân phước I-xa-ác, viện phụ đan viện Sao Mai.*
+**Trích bài giảng của chân phước I-xa-ác, viện phụ đan viện Sao Mai.**
 
 Thưa anh em, tại sao chúng ta không quan tâm tìm dịp giúp đỡ lẫn nhau, tức là ở đâu chúng ta thấy cần hơn, thì chúng ta càng nâng đỡ nhau hơn và mang đỡ gánh nặng cho nhau ? Thánh Phao-lô tông đồ đã khuyên bảo chúng ta điều ấy khi người bảo : Anh em hãy mang gánh nặng cho nhau, như vậy là anh em chu toàn luật của Đức Ki-tô, và ở nơi khác ngài nói : Anh em hãy lấy tình bác ái mà chịu đựng lẫn nhau. Đó chính là luật của Đức Ki-tô.
 

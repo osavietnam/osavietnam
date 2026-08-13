@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 17 Thường Niên"
 order: 115
 ---
 
-*Trích bài giảng của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích bài giảng của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Này bạn, hãy làm như ruộng đất : hãy sinh hoa kết quả như nó, đừng để mình bị coi là kém loài vô tri. Đất nuôi hoa trái, không phải cho chính nó, nhưng cho bạn được hưởng. Còn bạn, mỗi khi bạn sinh hoa trái là việc lành phúc đức, bạn sẽ thu hoạch cho chính mình, vì ân phúc và phần thưởng do việc lành sẽ về lại với những người quảng đại thi ân. Bạn đã cho kẻ đói ăn thì cái bạn cho là của bạn và trở nên phong phú gấp bội khi về lại với bạn. Hạt lúa gieo xuống đất sinh lời cho kẻ gieo thế nào, thì tấm bánh trao cho người đói sẽ sinh lợi nhiều cho bạn về sau như thế. Hãy khởi sự mùa gieo phúc đức khi bạn kết thúc mùa gặt hái trong vườn. Vì Kinh Thánh nói : Hãy gieo công chính rồi sẽ gặt được tình thương.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 26 Thường Niên"
 order: 177
 ---
 
-*Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.*
+**Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.**
 
 Thưa anh em, không phải vì tự phụ mà tôi viết cho anh em những dòng này về đức công chính, nhưng vì anh em gợi ý cho tôi. Quả vậy, chẳng phải tôi, cũng chẳng phải ai khác giống như tôi, có thể đạt tới mức khôn ngoan của thánh Phao-lô vinh hiển. Khi còn ở với anh em, người đã giảng dạy lời chân lý một cách hoàn hảo, vững vàng trước mặt những người đương thời. Khi vắng mặt, người đã viết cho anh em những bức thư, mà nếu đọc kỹ, anh em sẽ được xây dựng vững chắc, trước hết trong đức tin mà người đã mang lại cho anh em, tiếp đến nhờ đức cậy là mẹ chúng ta hết thảy, nhưng nhất là nhờ đức mến đối với Thiên Chúa, với Đức Ki-tô và với tha nhân. Thật thế, ai thực hành các điều ấy là chu toàn luật công chính. Vì ai có đức ái thì ở xa mọi tội lỗi.
 

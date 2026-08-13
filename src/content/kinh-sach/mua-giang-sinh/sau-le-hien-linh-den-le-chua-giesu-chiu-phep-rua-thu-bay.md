@@ -8,7 +8,7 @@ liturgy: "Sau Lễ Hiển Linh đến Lễ Chúa Giêsu Chịu Phép Rửa - Th�
 order: 21
 ---
 
-*Trích bài giảng của Đức Cha Phau-tô, giám mục Ri-e.*
+**Trích bài giảng của Đức Cha Phau-tô, giám mục Ri-e.**
 
 Sách Tin Mừng thuật lại : Ngày thứ ba, có đám cưới. Nhưng đám cưới này là gì, nếu không phải là lời cầu chúc và niềm vui cho nhân loại được cứu độ mừng vào ngày thứ ba, bởi vì con số mầu nhiệm ấy hoặc nói lên tín điều Một Thiên Chúa Ba Ngôi, hoặc nhắc đến niềm tin vào Đức Ki-tô phục sinh vào ngày thứ ba.
 

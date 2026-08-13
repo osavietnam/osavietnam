@@ -15,7 +15,7 @@ Chào đời năm 1815 tại Cát-ten-nô-vô, giáo phận Tô-ri-nô, Gio-an �
 
 </div>
 
-*Trích thư của thánh Gio-an Bốt-cô, linh mục.*
+**Trích thư của thánh Gio-an Bốt-cô, linh mục.**
 
 Nếu chúng ta muốn tỏ ra là người tha thiết quan tâm tới lợi ích thật sự của các học sinh chúng ta, và thối thúc chúng chu toàn bổn phận, các con đừng bao giờ quên rằng mình đang thay mặt cho cha mẹ của lớp trẻ thân yêu này, lớp trẻ đã từng là đối tượng ưu ái khiến cha luôn bận tâm lao nhọc, học hỏi và thực thi tác vụ linh mục. Chúng con là đối tượng cho toàn thể dòng Sa-lê-diêng chúng ta phục vụ nữa. Do đó, nếu chúng con muốn là những người cha đích thực của những học sinh, nhất thiết chúng con phải có tấm lòng của một người cha ; và như thế, chúng con đừng bao giờ dùng tới biện pháp cưỡng chế hay hình phạt cách vô lý và không công bằng, cũng đừng theo lối của người làm việc miễn cưỡng, hoặc chỉ làm đủ để chu toàn phận sự của mình.
 

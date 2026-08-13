@@ -15,7 +15,7 @@ Thánh Lô-ren-xô chịu tử đạo tại Rô-ma ngày 10 tháng 8 năm 268, s
 
 </div>
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Hôm nay, Hội Thánh Rô-ma mời gọi chúng ta mừng lễ thánh Lô-ren-xô khải hoàn, ngày người đã chà đạp thế gian hung tợn, đã loại trừ thế gian nịnh hót. Thế là tên quỷ tấn người chịu hai lần thất bại. Như anh em đã biết, trong Hội Thánh Rô-ma, người đã thi hành chức vụ trợ tá, đã phục vụ Mình Máu Đức Ki-tô, đã chịu đổ máu vì danh Đức Ki-tô. Thánh Gio-an tông đồ đã trình bày rất rõ về mầu nhiệm bữa tối của Chúa khi nói : Đức Ki-tô đã thí mạng vì chúng ta. Như vậy, cả chúng ta nữa, chúng ta cũng phải thí mạng vì anh em. Thưa anh em, thánh Lô-ren-xô hiểu điều ấy, người đã hiểu và thực hành. Người được lãnh nhận Đấng trao ban chính mình làm của ăn tại bàn tiệc thánh thế nào, thì người cũng trao hiến chính mình làm của ăn cho người khác như vậy. Khi sống, người yêu mến Đức Ki-tô, thì lúc chết, người cũng bắt chước Đức Ki-tô.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ 7 sau Thứ Tư Lễ Tro"
 order: 4
 ---
 
-*Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.*
+**Trích khảo luận Chống lạc giáo của thánh I-rê-nê, giám mục.**
 
 Chúa chúng ta, Ngôi Lời của Thiên Chúa, trước tiên đã lôi kéo người đời về làm tôi Thiên Chúa. Rồi sau đó Người giải thoát những ai suy phục Người, như chính Người đã nói với các môn đệ : Thầy không còn gọi anh em là tôi tớ nữa, vì tôi tớ không biết việc chủ làm. Còn anh em, Thầy gọi anh em là bạn hữu, vì tất cả những gì Thầy nghe được nơi Cha Thầy, Thầy đã cho anh em biết. Bởi vì những ai được ơn làm bạn hữu Thiên Chúa thì một trật cũng được hưởng phúc trường sinh bất tử.
 

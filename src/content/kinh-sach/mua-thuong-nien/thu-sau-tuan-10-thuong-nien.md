@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 10 Thường Niên"
 order: 69
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.**
 
 Dầu toàn thể Sách Thánh ngào ngạt hương thơm ơn thánh của Thiên Chúa, nhưng sách Thánh Vịnh là một cuốn sách đặc biệt ngọt ngào. Xưa ông Mô-sê đã dùng văn xuôi thuật lại những việc hào hùng của bậc tiền nhân, trong đó ông đã đưa đoàn dân của các tổ phụ qua Biển Đỏ bằng một phép lạ đáng ghi nhớ. Trước đây ông đã thực hiện nhiều việc vượt quá sức ông, nhưng khi chứng kiến vua Pha-ra-ô với quân binh bị nhận chìm, ông đã trổ tài năng vượt bực là cất lên bài ca chiến thắng mừng Thiên Chúa. Cô Mi-ri-am cũng dùng trống cơm mà mời gọi các chị em khác rằng : Hãy hát mừng ĐỨC CHÚA, Đấng cao cả uy hùng, kỵ binh và chiến mã, Người xô xuống đại dương.
 

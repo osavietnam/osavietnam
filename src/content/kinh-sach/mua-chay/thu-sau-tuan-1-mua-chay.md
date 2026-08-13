@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 1 Mùa Chay"
 order: 10
 ---
 
-*Trích sách Gương bác ái của chân phước En-rê-đi viện phụ.*
+**Trích sách Gương bác ái của chân phước En-rê-đi viện phụ.**
 
 Yêu thương kẻ thù là đỉnh trọn lành của tình bác ái huynh đệ. Không gì thúc đẩy chúng ta đạt tới mức trọn lành đó bằng việc đem hết lòng khâm phục chiêm ngắm sức chịu đựng lạ lùng của Đức Ki-tô, Đấng vô song tuyệt mỹ giữa con cái loài người.
 

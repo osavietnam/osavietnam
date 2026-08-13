@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 3 Thường Niên"
 order: 15
 ---
 
-*Trích Hiến chế Phụng vụ của công đồng của công đồng Va-ti-ca-nô II.*
+**Trích Hiến chế Phụng vụ của công đồng của công đồng Va-ti-ca-nô II.**
 
 Đức Ki-tô luôn hiện diện trong Hội Thánh, nhất là qua các cuộc cử hành phụng vụ. Người hiện diện trong thánh lễ vì trong con người của thừa tác viên, chính Đấng giờ đây dâng mình nhờ thừa tác vụ của các linh mục, cũng là chính Đấng xưa kia đã dâng mình trên cây thập giá ; Người hiện diện cách đặc biệt dưới hình bánh và hình rượu trong bí tích Thánh Thể. Người hiện diện nhờ hiệu năng của Người trong các bí tích ; do đó, ai làm phép rửa là chính Đức Ki-tô làm phép rửa. Người hiện diện trong lời của Người, vì chính Người nói, khi người ta đọc Kinh Thánh trong Giáo Hội. Cuối cùng, Người hiện diện khi Hội Thánh khẩn cầu và đọc Thánh Vịnh, như chính Người đã hứa : Ở đâu có hai ba người họp lại nhân danh Thầy thì có Thầy ở đấy giữa họ.
 

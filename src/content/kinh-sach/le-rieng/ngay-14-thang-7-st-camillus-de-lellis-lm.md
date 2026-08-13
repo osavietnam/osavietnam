@@ -16,7 +16,7 @@ Sinh năm 1550 tại Ki-ê-ti, miền Áp-rút-dô, sau một thời gian sống
 
 </div> 
 
-*Trích hạnh thánh Ca-mi-lô, do một người bạn ghi chép. *
+**Trích hạnh thánh Ca-mi-lô, do một người bạn ghi chép.**
 
  
 

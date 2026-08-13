@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 6 Phục Sinh"
 order: 35
 ---
 
-*Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về thư thứ hai gửi tín hữu Cô-rin-tô.*
+**Trích bài chú giải của thánh Sy-ri-lô, giám mục A-lê-xan-ri-a, về thư thứ hai gửi tín hữu Cô-rin-tô.**
 
 Những ai có Thần Khí làm bảo chứng và có niềm hy vọng được phục sinh thì cầm chắc điều họ trông đợi như đang có rồi ; do đó, họ nói rằng từ nay họ không biết một ai theo quan điểm loài người nữa. Tất cả chúng ta là những người thuộc Thần Khí và không còn lệ thuộc sự hư nát của xác phàm. Thật thế, nhờ Con Một chiếu sáng, chúng ta được biến đổi để nên một với Ngôi Lời là Đấng ban sự sống cho mọi loài. Khi tội lỗi thống trị, chúng ta bị xiềng xích Tử Thần trói buộc ; nhưng nay, được đầy tràn sự công chính của Đức Ki-tô, chúng ta đã trút bỏ sự hư nát.
 

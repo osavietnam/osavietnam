@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 12 Thường Niên"
 order: 83
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.**
 
 Chúa nói : Phúc thay ai có lòng thanh sạch, vì họ sẽ được nhìn thấy Thiên Chúa. Lời hứa này hẳn phải thật lớn lao, vượt trên mọi hạnh phúc. Thật vậy, một khi đã đạt tới phúc lộc ấy, người ta còn mong gì khác nữa, bởi đã có mọi sự nơi Đấng họ được nhìn thấy ? Theo cách nói của Kinh Thánh, “thấy” đồng nghĩa với “có”. Chẳng hạn : Ước chi bạn thấy Giê-ru-sa-lem phồn thịnh có nghĩa là “Ước chi bạn được hưởng sự phồn thịnh của Giê-ru-sa-lem”. Và khi nói : Ước chi kẻ gian ác bị loại trừ, chẳng được thấy vinh quang ĐỨC CHÚA, ngôn sứ muốn cho ta hiểu “chẳng được thấy” chính là “chẳng được thông phần”.
 

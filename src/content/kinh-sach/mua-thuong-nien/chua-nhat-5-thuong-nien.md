@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 5 Thường Niên"
 order: 29
 ---
 
-*Trích bài diễn giải của thánh Âu-tinh, giám mục, về thư thánh Phao-lô gửi tín hữu Ga-lát.*
+**Trích bài diễn giải của thánh Âu-tinh, giám mục, về thư thánh Phao-lô gửi tín hữu Ga-lát.**
 
 Thánh Phao-lô tông đồ viết thư cho tín hữu Ga-lát, là để giúp họ hiểu biết rằng ân sủng không còn phải lệ thuộc vào luật Mô-sê nữa. Quả vậy, trong khi Tin Mừng đã được rao giảng cho người Ga-lát, thì có một số người xuất thân từ giới cắt bì, tuy mệnh danh là Ki-tô hữu, nhưng lại chưa hiểu biết được hiệu quả tốt lành của ân sủng đã lãnh nhận, nên vẫn cứ muốn ở lại dưới gánh nặng của Lề Luật. Lề Luật ấy, Thiên Chúa, Chúa chúng ta, đã dặt ra không phải cho những người phục vụ sự công chính, nhưng cho những kẻ làm tôi tớ tội lỗi ; điều đó có nghĩa là Thiên Chúa ban một Lề Luật cho những người bất chính nhằm tố cáo tội lỗi của họ, chứ không phải để xóa tội lỗi đó đi. Quả vậy, tội lỗi không được xóa đi nếu không phải nhờ đức tin, một dức tin hành dộng nhờ đức ái. Trong khi người Ga-lát đã được đặt dưới ân sủng rồi, thì những người kia lại muốn áp đặt trên họ gánh nặng của Lề Luật, khi khẳng định rằng Tin Mừng không có ích lợi gì cho họ, nếu họ không chịu cắt bì và không chịu tuân giữ những nghi thức khác theo truyền thống của Do-thái giáo.
 

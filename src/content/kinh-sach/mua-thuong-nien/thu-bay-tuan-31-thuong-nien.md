@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 31 Thường Niên"
 order: 217
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về khía cạnh tốt lành của sự chết.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về khía cạnh tốt lành của sự chết.**
 
 Thánh Phao-lô tông đồ nói : Thế gian đã bị đóng đinh vào thập giá với tôi, và tôi đối với thế gian. Sau đó, để chúng ta biết rằng sống trên cõi đời này, người ta phải chết, nhưng cũng có cái chết tốt lành, thánh nhân khuyên chúng ta hãy mang trong thân mình sự chết của Đức Giê-su ; vì ai có sự chết Đức Giê-su nơi mình, thì cũng có sự sống của Đức Giê-su nơi thân xác mình nữa.
 

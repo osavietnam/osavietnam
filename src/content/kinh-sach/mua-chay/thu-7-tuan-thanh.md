@@ -8,7 +8,7 @@ liturgy: "Thứ 7 Tuần Thánh"
 order: 52
 ---
 
-*Trích một bài giảng cổ về ngày Thứ Bảy Tuần Thánh.*
+**Trích một bài giảng cổ về ngày Thứ Bảy Tuần Thánh.**
 
 Thế này là thế nào ? Hôm nay cõi đất chìm trong thinh lặng. Thinh lặng như tờ và hoàn toàn thanh vắng. Thinh lặng như tờ vì Đức Vua đang yên giấc. Cõi đất kinh hãi lặng yên vì Thiên Chúa đã ngủ say trong xác phàm.
 

@@ -8,7 +8,7 @@ liturgy: "Ngày 20 Tháng 12"
 order: 24
 ---
 
-*Trích bài giảng ca ngợi Mẹ Đồng Trinh của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng ca ngợi Mẹ Đồng Trinh của thánh Bê-na-đô, viện phụ.**
 
 Lạy Đức Trinh Nữ, Mẹ đã nghe báo tin Mẹ sẽ thụ thai và sinh một con trai : không phải do con người nhưng do Chúa Thánh Thần. Thần sứ đang chờ câu trả lời của Mẹ vì đã đến lúc người phải trở về cùng Thiên Chúa, Đấng đã sai người. Cả chúng con nữa, lạy Mẹ là bà chúa, chúng con cũng chờ đợi câu trả lời của lòng Chúa xót thương, vì chúng con là những kẻ đang phải khốn khổ bởi mang án tội tình.
 

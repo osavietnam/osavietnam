@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 9 Thường Niên"
 order: 60
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Ông Ê-li-hu nói : Này ông Gióp, xin nghe tôi ngỏ lời, xin lắng nghe mọi lời lẽ của tôi. Đạo lý của những kẻ kiêu căng có đặc tính này là họ không biết mở đầu điều họ dạy thế nào cho khiêm tốn ; và những gì họ nghĩ là đúng đắn, họ không thể truyền đạt cho người khác một cách đúng đắn. Thật vậy, căn cứ vào lời lẽ của họ, thì khi họ dạy dỗ, dường như họ tự đặt mình ở trên đỉnh cao và coi những kẻ họ dạy dỗ là những người ở mãi bên dưới, như hạng cùng đinh. Vì thế, họ nói theo giọng điệu thống trị chứ không phải khuyên lơn.
 

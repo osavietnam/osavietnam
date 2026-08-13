@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 13 Thường Niên"
 order: 91
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Ở đây nếu có ai là nô lệ tội lỗi, thì nhờ đức tin, người ấy hãy chuẩn bị để được nhờ ơn tái sinh làm người tự do và làm nghĩa tử. Một khi đã từ bỏ ách nô lệ xấu xa của tội lỗi mà vui sướng đi theo con đường làm tôi Chúa, người ấy được coi là xứng đáng hưởng gia nghiệp Nước Trời. Qua việc thú tội, anh em hãy cởi bỏ con người cũ đã ra hư hỏng vì những ước muốn lầm lạc, để mặc lấy con người mới đã được canh tân theo hình ảnh của Đấng đã dựng nên nó. Nhờ đức tin, anh em hãy có những bảo chứng của Thánh Thần, để có thể được đón nhận vào nơi ở muôn đời. Hãy đến gần ấn tích nhiệm mầu để chủ có thể dễ dàng nhận biết anh em. Hãy nhập vào đoàn chiên thánh thiện và hiểu biết của Đức Ki-tô, để một ngày kia, khi được xếp vào bên hữu Người, anh em đạt tới sự sống dành sẵn cho anh em làm gia nghiệp.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 24 Thường Niên"
 order: 165
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Vì chúng tôi đã nói uống sữa chiên là gì, nên bây giờ phải tìm hiểu xem mặc áo lông chiên là gì nữa. Ai cung cấp sữa là cung cấp thức ăn, ai cung cấp len là cung cấp danh dự. Đó là hai thứ mà những kẻ nuôi mình chứ không nuôi chiên tìm kiếm ở nơi dân chúng, nghĩa là tìm thoả mãn các nhu cầu của mình, và tìm được danh dự cũng như tiếng khen.
 

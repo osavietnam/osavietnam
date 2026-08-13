@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 5 Phục Sinh"
 order: 34
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Trong cuộc đời hiện tại của chúng ta, suy ngắm phải là ngợi khen Thiên Chúa, bởi vì niềm hoan lạc vĩnh cửu của chúng ta trong cuộc đời mai sau sẽ là ngợi khen Thiên Chúa. Không ai có thể thích hợp với cuộc đời mai sau, nếu bây giờ không luyện tập cho quen trước. Vậy hiện nay chúng ta ngợi khen Thiên Chúa, nhưng chúng ta cũng cầu xin Thiên Chúa nữa. Lời ngợi khen của chúng ta vang tiếng reo vui, còn lời cầu nguyện lại vọng tiếng than thở. Chúng ta được hứa cho điều chúng ta chưa có. Mà Đấng đã hứa là Đấng trung thực, nên chúng ta vui mừng vì hy vọng. Nhưng bởi chưa có, nên chúng ta than thở vì ước mong. Đối với chúng ta, kiên trì ước mong quả là điều tốt, cho tới khi nhận được điều Chúa hứa. Khi ấy, tiếng than thở qua đi, chỉ còn lời ngợi khen liên lỷ.
 

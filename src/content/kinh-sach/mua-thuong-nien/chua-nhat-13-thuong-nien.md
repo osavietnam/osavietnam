@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 13 Thường Niên"
 order: 85
 ---
 
-*Trích bài giảng của đức giáo hoàng Phao-lô VI tại Ma-ni-la (29-11-1970).*
+**Trích bài giảng của đức giáo hoàng Phao-lô VI tại Ma-ni-la (29-11-1970).**
 
 Khốn thân tôi nếu tôi không rao giảng Tin Mừng , vì tôi đã được chính Đức Ki-tô sai đi. Tôi là tông đồ và tôi cũng là chứng nhân. Mục đích càng xa, sứ mệnh càng khó thì tình yêu Đức Ki-tô lại càng thôi thúc tôi mạnh mẽ hơn. Tôi phải rao giảng danh của Người : Đức Giê-su là Đấng Ki-tô, Con Thiên Chúa hằng sống. Chính Người đã tỏ cho chúng ta thấy Thiên Chúa vô hình, chính Người là Trưởng Tử sinh ra trước mọi loài thọ tạo, và chính trong Người mà tất cả tồn tại. Người là Thầy và là Đấng cứu chuộc nhân loại. Vì chúng ta, Người đã sinh ra, đã chết và đã sống lại.
 

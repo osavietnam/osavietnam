@@ -15,7 +15,7 @@ Theo một truyền thống cổ xưa, có thể vào thế kỷ II, thánh Gio-
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Đa-mát, linh mục.*
+**Trích bài giảng của thánh Gio-an Đa-mát, linh mục.**
 
 Vì Đức Trinh Nữ Mẹ Thiên Chúa sẽ phải do bà An-na sinh hạ, nên lẽ tự nhiên đâu dám qua mắt ân sủng mà trổ bông trước được. Do đó, theo lẽ tự nhiên, bà An-na son sẻ cho tới khi ân sủng làm cho bà mang thai. Sở dĩ như thế là vì con trẻ sắp ra đời phải là trưởng nữ để (sau này) trở thành mẹ của Đấng là trưởng tử sinh ra trước mọi loài thọ tạo, nơi Người tất cả đều tồn tại.
 

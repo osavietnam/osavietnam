@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 5 Thường Niên"
 order: 32
 ---
 
-*Trích thư của thánh Am-rô-xi-ô, giám mục.*
+**Trích thư của thánh Am-rô-xi-ô, giám mục.**
 
 Và để khuyên bảo chúng ta bằng lòng chịu đau khổ, thánh Phao-lô thêm rằng : tất cả những đau khổ chúng ta chịu nào đâu đáng kể, nào đâu xứng với những phúc lộc mai sau mà Thiên Chúa dành làm phần thưởng cao quý sẽ được mặc khải nơi chúng ta, để thưởng công cho chúng ta. Phần thưởng đó là chúng ta sẽ đáng được nhìn thấy Thiên Chúa mặt giáp mặt trong vinh quang của Người, một khi đã được tái tạo theo hình ảnh Người.
 

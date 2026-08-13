@@ -17,7 +17,7 @@ Chào đời năm 1271, trong hoàng tộc A-ra-gông, kết hôn với vua Bồ
 
 </div>
 
-*Trích bài giảng được coi là của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng được coi là của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Anh em thân mến, tác giả sách Tin Mừng nói : Phúc thay ai xây dựng hoà bình, vì họ sẽ được gọi là con Thiên Chúa. Đúng vậy, các nhân đức Ki-tô giáo triển nở nơi người nào giữ được sự bình an hoà hợp với mọi người theo tinh thần Ki-tô giáo, và người ta không đáng được danh hiệu con Thiên Chúa nếu không xây dựng hoà bình.
 

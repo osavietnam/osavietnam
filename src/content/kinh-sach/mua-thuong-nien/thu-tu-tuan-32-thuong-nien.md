@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 32 Thường Niên"
 order: 221
 ---
 
-*Trích bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Trích bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Anh em thân mến, chúng ta hãy thi hành thánh ý Chúa Cha ; Người kêu gọi chúng ta để chúng ta sống và nhiệt thành hơn trên đường nhân đức. Vậy ta hãy từ bỏ nết xấu, là đầu mối gây ra mọi tội lỗi. Hãy xa tránh thói vô đạo để khỏi bị sự dữ tấn công. Bởi vì nếu chúng ta chuyên chăm làm điều lành, chúng ta sẽ luôn được bình an. Do đó, loài người không thể được bình an nếu họ sống mà cứ sợ người phàm hơn là sợ Chúa, và ham mê lạc thú đời này hơn là hạnh phúc Chúa hứa ban ở đời sau. Quả vậy, họ không biết rằng lạc thú ở đời này kéo theo bao điều day dứt, còn hạnh phúc Chúa hứa ban ở đời sau thì đem lại bao nỗi hân hoan. Và nếu chỉ riêng mình họ hành động như thế thì còn có thể chịu đựng nổi ; nhưng đằng này, họ lại cố gieo rắc giáo lý sai lạc vào những tâm hồn đơn sơ nữa. Họ không biết rằng họ sẽ chiu hai án phạt : một của mình và một của những kẻ đã nghe họ.
 

@@ -9,7 +9,7 @@ rank: "feast"
 order: 1
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.**
 
 Đức Ki-tô toả sáng, chúng ta hãy toả sáng cùng với Người. Đức Ki-tô được dìm xuống nước, chúng ta hãy cùng xuống để rồi cùng lên với Người.
 

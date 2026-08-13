@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 6 Phục Sinh"
 order: 41
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Diễm Ca.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê, về sách Diễm Ca.**
 
 Nếu tình yêu hoàn toàn loại trừ sợ hãi và nếu sợ hãi biến thành tình yêu, thì bấy giờ người ta sẽ nhận ra rằng sự hiệp nhất chính là yếu tố đưa tới ơn cứu độ : mọi người được kết hợp với nhau khi họ gắn bó mật thiết với điều thiện duy nhất nhờ sự trọn lành mà chim bồ câu là tượng trưng.
 

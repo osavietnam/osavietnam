@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 11 Thường Niên"
 order: 76
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Đức Ki-tô đã minh thị ra thêm một điều luật. Người ra điều kiện rõ ràng và đòi buộc chúng ta : chúng ta chỉ được ơn tha tội theo mức độ chính chúng ta tha cho những người nào mắc nợ chúng ta. Hãy biết rằng chúng ta sẽ không thể nào được tha tội như chúng ta xin, nếu chính chúng ta không tha cho những người xúc phạm đến chúng ta. Chính vì thế mà nơi khác, Chúa nói : Anh em đong đấu nào thì Thiên Chúa cũng sẽ đong cho anh em đấu ấy. Và tên đầy tớ được chủ tha hết nợ, nhưng không tha nợ cho đồng bạn mình, thì đã bị trói và tống giam. Vì hắn không muốn khoan dung cho đồng bạn, nên hắn cũng mất lòng khoan dung ông chủ đã dành cho hắn.
 

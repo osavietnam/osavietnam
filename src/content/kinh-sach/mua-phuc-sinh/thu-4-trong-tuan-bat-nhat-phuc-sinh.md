@@ -9,7 +9,7 @@ rank: "solemn"
 order: 3
 ---
 
-*Trích bài giảng của một tác giả thời xưa về mầu nhiệm vượt qua.*
+**Trích bài giảng của một tác giả thời xưa về mầu nhiệm vượt qua.**
 
 Khi nhắc đến ơn cứu độ hồng phúc Đức Ki-tô đem lại, thánh Phao-lô kêu lên rằng : vì A-đam, sự chết đã xâm nhập trần gian ; cũng vậy, nhờ Đức Ki-tô, ơn cứu độ được hoàn lại cho trần gian. Thánh tông đồ còn nói : Người thứ nhất bởi đất mà ra thì thuộc về đất ; còn người thứ hai bởi trời mà đến thì thuộc về trời.
 

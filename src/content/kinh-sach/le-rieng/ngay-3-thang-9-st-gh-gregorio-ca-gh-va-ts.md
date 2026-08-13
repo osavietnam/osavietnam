@@ -15,7 +15,7 @@ Thánh nhân sinh quãng năm 540 tại Rô-ma. Người theo con đường côn
 
 </div>
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về sách Ê-dê-ki-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về sách Ê-dê-ki-en.**
 
 Hỡi con người, Ta đã đặt ngươi làm người canh gác cho nhà Ít-ra-en. Cần lưu ý rằng Chúa gọi kẻ Người sai đi rao giảng là người canh gác. Người canh gác luôn luôn phải đứng trên cao, để thấy được từ xa chuyện gì xảy tới. Và bất cứ ai được đặt làm người canh gác cho dân đều phải đứng trên cao nhờ cuộc sống của mình, để có thể đem lại lợi ích cho dân nhờ khả năng tiên liệu.
 

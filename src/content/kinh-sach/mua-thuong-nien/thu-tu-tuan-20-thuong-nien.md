@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 20 Thường Niên"
 order: 137
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Mỗi lần chúng ta phải chịu một nỗi gian truân, một cơn quẫn bách nào là chúng ta vừa được cảnh cáo vừa được sửa phạt. Bởi vì chính Kinh Thánh của chúng ta đâu có hứa cho chúng ta được bình an, yên ổn và nghỉ ngơi thư thái. Và Tin Mừng cũng không phải là không nói đến những cơn quẫn bách, những nỗi gian truân và những nguy cơ vấp ngã. Nhưng kẻ nào bền chí đến cùng, kẻ ấy sẽ được cứu thoát.
 

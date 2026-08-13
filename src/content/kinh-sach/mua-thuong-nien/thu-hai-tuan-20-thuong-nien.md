@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 20 Thường Niên"
 order: 135
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Người ta kể lại các bậc thánh nhân khi gặp phải những cuộc chiến đấu đầy gian truân thử thách, thì cùng một lúc vừa phải tấn công người nọ, vừa phải khuyên bảo người kia, vừa phải lấy kiên nhẫn làm khiên mà chống đỡ kẻ này, vừa phải đem giáo thuyết làm lao mà phóng vào kẻ khác. Và các ngài nổi bậc về cả hai lối chiến đấu nhờ tài nghệ lạ lùng do nhân đức đem lại ; vì bên trong các ngài phải khôn ngoan cho thấy những lệch lac, đồng thời bên ngoài, các ngài phải coi thường những chống đối. Kẻ lệch lạc, các ngài lo uốn nắn bằng khuyên lơn dạy bảo ; người chống đối, các ngài phải khuất phục bằng chịu đựng kiên trì. Bởi chưng thù địch nổi dậy, các ngài lấy kiên nhẫn mà coi nhẹ khinh thường ; các đồng hương yếu đuối, các ngài cảm thông mà dẫn về với ơn cứu độ. Các ngài chống lại những kẻ trước, để họ khỏi lôi cuốn người khác. Các ngài lo sợ cho những người sau, không muốn họ mất hẳn cuộc sống ngay lành chính trực.
 

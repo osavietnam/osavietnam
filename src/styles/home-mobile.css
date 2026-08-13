@@ -3,7 +3,7 @@
  * =================================================================== */
 
 @media screen and (max-width: 768px) {
-
+    
     /* --- General Layout & Typography --- */
     #main > .content {
         padding: 2rem 1.5rem; /* Reduce page padding */
@@ -43,7 +43,7 @@
         padding: 2rem; /* Reduce padding on the side column container */
     }
 
-
+    
 
     /* --- Adjust Latest Articles Grid --- */
     .latest-articles-grid {
@@ -56,7 +56,7 @@
     /* This is the key: It ensures the image scales down to fit its
        container and never causes a horizontal overflow. */
    width: 100%;
-
+       
     max-height: fit-content;
     /* This maintains the image's aspect ratio as it scales. */
      aspect-ratio: 2 / 3 ;
@@ -100,7 +100,7 @@
     }
     .calendar-day::before {
         font-size: 0.7rem;
-
+        
     }
 
 
@@ -134,7 +134,7 @@
 }
 
     .legend-item {
-
+        
         font-size: 0.9rem;
     }
     .legend-label {

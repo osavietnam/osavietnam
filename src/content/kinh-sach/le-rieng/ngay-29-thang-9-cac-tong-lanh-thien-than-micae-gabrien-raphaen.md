@@ -15,7 +15,7 @@ Chúng ta mừng các vị tổng lãnh thiên thần, nhưng đồng thời cũ
 
 </div>
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về Tin Mừng.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về Tin Mừng.**
 
 Nên biết rằng “thiên sứ” là danh từ chỉ chức vụ chứ không chỉ bản tính, bởi các thánh thiên thần ở trên trời bao giờ cũng là thiên thần, nhưng không phải bao giờ cũng được gọi là “thiên sứ”. Các vị ấy chỉ là “thiên sứ” khi được sai đi loan báo một điều gì thôi. Các vị loan báo điều nhỏ thì gọi là “thiên sứ”, còn vị nào loan báo điều gì lớn thì gọi là “tổng lãnh thiên sứ”.
 

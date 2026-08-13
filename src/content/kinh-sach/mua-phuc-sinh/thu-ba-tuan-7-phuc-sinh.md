@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 7 Phục Sinh"
 order: 44
 ---
 
-*Trích khảo luận Chúa Thánh Thần của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích khảo luận Chúa Thánh Thần của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Khi nghe các danh xưng của Thần Khí, ai lại không nâng tâm hồn lên, không suy nghĩ về bản tính siêu phàm của Người ? Quả thật, Người được gọi là Thần Khí của Thiên Chúa và cũng là Thần Khí sự thật phát xuất từ Chúa Cha : Thần Khí chính trực, Thần Khí sáng tạo, Thánh Thần là danh xưng riêng biệt và đặc thù của Người.
 

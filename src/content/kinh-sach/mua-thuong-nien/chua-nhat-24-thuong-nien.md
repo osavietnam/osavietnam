@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 24 Thường Niên"
 order: 162
 ---
 
-*Mở đầu bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Mở đầu bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Anh em thân mến, đây không phải là lần đầu tiên anh em được nghe dạy rằng tất cả niềm hy vọng của chúng ta là ở nơi Chúa Ki-tô, chính Người là tất cả vinh quang đích thực và lành thánh của chúng ta. Anh em ở trong đoàn chiên của Đấng chăm sóc và nuôi dưỡng Ít-ra-en. Nhưng bởi vì có những mục tử chỉ muốn người ta gọi mình là mục tử, mà không muốn chu toàn nhiệm vụ mục tử, nên chúng ta hãy duyệt xem Chúa nói gì với họ qua ngôn sứ Ê-dê-ki-en. Anh em hãy chú ý nghe, chúng ta hãy nghe với tất cả lòng kính sợ.
 

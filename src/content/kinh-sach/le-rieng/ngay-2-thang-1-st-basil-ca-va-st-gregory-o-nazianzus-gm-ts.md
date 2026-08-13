@@ -17,7 +17,7 @@ Thánh Ghê-gô-ri-ô cũng sinh năm 330 gần thành Na-di-en. Người đi r�
 
 </div>
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.**
 
 Bấy giờ chúng tôi gặp nhau ở A-ten. Như dòng chảy của con sông, phát xuất từ nguồn mạch duy nhất, được chia thành nhiều nhánh, thì vì ham học, đức cha Ba-xi-li-ô và tôi đã xa lìa nhau, đi đến những miền khác nhau nhằm mục đích trao dồi kiến thức. Sau đó, chúng tôi lại gặp nhau như là do hẹn hò, mà thật ra do Thiên Chúa thúc đẩy.
 

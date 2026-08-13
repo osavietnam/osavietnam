@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 1 Mùa Chay"
 order: 8
 ---
 
-*Trích bài huấn dụ của đức giám mục A-phơ-rát.*
+**Trích bài huấn dụ của đức giám mục A-phơ-rát.**
 
 Lề luật và giao ước đã hoàn toàn được thay đổi. Quả vậy, minh ước đầu tiên cho ông A-đam, Thiên Chúa đã thay đổi và lập một minh ước khác cho ông Nô-ê. Rồi Người cũng thay đổi minh ước đã ban cho ông Áp-ra-ham, để ban cho ông Mô-sê một minh ước mới. Sau đó, vì giao ước ông Mô-sê chẳng được tuân giữ, nên vào thời cuối cùng, Thiên Chúa đã ban cho một giao ước khác từ nay không còn thay đổi nữa.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 27 Thường Niên"
 order: 184
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về Ca-in và A-ben.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về Ca-in và A-ben.**
 
 Hãy tiến dâng Thiên Chúa lời tạ ơn làm hy lễ, giữ trọn điều khấn nguyền cùng Đấng Tối Cao. Ca ngợi Thiên Chúa là khấn hứa và giữ trọn lời nguyền. Bởi thế, người Sa-ma-ri kia được đề cao hơn những kẻ khác, vì khi vâng lệnh Chúa mà được khỏi bệnh cùi cùng với chín người khác thì chỉ một mình anh trở lại với Đức Ki-tô lớn tiếng ngợi khen và cảm tạ Thiên Chúa. Đức Giê-su nói về anh : Chín người kia đâu ? Sao không thấy họ trở lại cảm tạ Thiên Chúa mà chỉ có người ngoại bang này ? Rồi Người nói với anh : Đứng dậy, về đi. Lòng tin của anh đã cứu chữa anh.
 

@@ -1,0 +1,125 @@
+{
+  "news": {
+    "categories": [
+      {
+        "label": "Cộng Đoàn",
+        "folder": "sinh-hoat-cong-doan",
+        "tone": "news",
+        "subcategories": []
+      },
+      {
+        "label": "Dòng",
+        "folder": "sinh-hoat-cong-doan",
+        "tone": "news",
+        "subcategories": []
+      },
+      {
+        "label": "Giáo Phận",
+        "folder": "sinh-hoat-cong-doan",
+        "tone": "news",
+        "subcategories": []
+      }
+    ]
+  },
+  "scholar": {
+    "categories": [
+      {
+        "label": "Triết Học",
+        "folder": "triet-hoc",
+        "tone": "philosophy",
+        "subcategories": [
+          "Tri Luận",
+          "Siêu Hình Học",
+          "Đạo Đức",
+          "Nhân Học"
+        ]
+      },
+      {
+        "label": "Thần Học",
+        "folder": "than-hoc",
+        "tone": "theology",
+        "subcategories": [
+          "Kinh Thánh",
+          "Thần Học Nền Tảng",
+          "Luân Lý Kitô Giáo",
+          "Giáo Hội Học",
+          "Kitô Học"
+        ]
+      }
+    ]
+  },
+  "spirituality": {
+    "categories": [
+      {
+        "label": "Chung",
+        "folder": "linh-dao",
+        "tone": "spirituality",
+        "subcategories": []
+      },
+      {
+        "label": "Chú Giải Thánh Vịnh",
+        "folder": "linh-dao",
+        "tone": "spirituality",
+        "subcategories": []
+      },
+      {
+        "label": "Bài Giảng",
+        "folder": "linh-dao",
+        "tone": "spirituality",
+        "subcategories": []
+      }
+    ]
+  },
+  "sermon": {
+    "categories": [
+      {
+        "label": "Mùa Vọng",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Mùa Giáng Sinh",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Mùa Chay",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Mùa Phục Sinh",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Mùa Thường Niên",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Lễ Trọng",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Lễ Kính",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      },
+      {
+        "label": "Lễ Nhớ",
+        "folder": "bai-giang-suy-niem",
+        "tone": "liturgy",
+        "subcategories": []
+      }
+    ]
+  }
+}

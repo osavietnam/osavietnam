@@ -11,13 +11,13 @@
         flex-direction: column;
         max-width: 95%; /* Allow card to fill the width */
     }
-
+    
     #next-sunday-container .article-card {
         /* Stack the image on top of the text content */
         flex-direction: column;
-        max-width: 85%; /*
+        max-width: 85%; /* 
         Allow card to fill the width */
-
+        
     }
     #todays-weekday-container .article-card-image,
     #next-sunday-container .article-card-image {
@@ -45,9 +45,9 @@
     }
 
     .featured-container-shifted {
-
+   
     margin-bottom: 0;
-
-
+    
+    
 }
 }

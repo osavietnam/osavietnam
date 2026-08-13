@@ -19,7 +19,7 @@ Hồ sơ phong thánh và Các Giờ Kinh Phụng Vụ, đặc biệt chú ý đ
 
 </div>
 
-*Trích thư thánh Phao-lô Lê Bảo Tịnh, gửi các chủng sinh chủng viện Kẻ Vĩnh, năm 1843.*
+**Trích thư thánh Phao-lô Lê Bảo Tịnh, gửi các chủng sinh chủng viện Kẻ Vĩnh, năm 1843.**
 
 Tôi là Phao-lô, đang bị xiềng xích vì Đức Ki-tô. Tôi muốn nói cho anh em biết những gian truân tôi đang chịu hằng ngày, để anh em được cháy lửa yêu mến Chúa mà hợp với tôi dâng lời ca ngợi Thiên Chúa : Chúa yêu thương ta đến muôn đời.
 

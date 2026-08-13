@@ -8,7 +8,7 @@ liturgy: "Ngày 18 Tháng 12"
 order: 22
 ---
 
-*Trích thư gửi ông Đi-ô-nhê-tô.*
+**Trích thư gửi ông Đi-ô-nhê-tô.**
 
 Không ai trong loài người đã nhìn thấy Thiên Chúa, cũng chẳng ai đã biết Người. Chính Thiên Chúa đã tỏ mình ra. Người đã tỏ mình ra qua đức tin là phương thế duy nhất để nhìn thấy Thiên Chúa. Vì chưng Thiên Chúa là Chúa Tể và là Đấng làm nên vạn vật, chính Người đã làm nên vạn vật và xếp đặt cho mỗi vật có một trật tự riêng. Người không chỉ yêu thương nhân loại mà thôi ; nhưng còn kiên nhẫn chịu đựng họ. Xưa Người đã luôn luôn xử sự như thế ; nay cũng như vậy, và sau này cũng sẽ như thế : nhân từ, tốt lành, không giận dữ, chân thật. Duy một mình Người tốt lành. Khi cưu mang điều gì lớn lao và khôn tả trong trí, Người chỉ thông truyền cho Chúa Con mà thôi.
 

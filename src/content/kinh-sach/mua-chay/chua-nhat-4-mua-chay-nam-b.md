@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 4 Mùa Chay, Năm B"
 order: 29
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Đức Ki-tô đã chết để giải thoát chúng ta khỏi cái chết : cái chết đã thắng được Người nhưng Người đã tiêu diệt sự chết. Anh em biết đấy, Kinh Thánh quả quyết : Thiên Chúa không làm ra cái chết. Người chẳng vui gì khi sinh mạng tiêu vong, vì Người đã sáng tạo muôn loài cho chúng hiện hữu. Sách Khôn Ngoan còn nói thêm : chính vì quỷ dữ ghen tị, mà cái chết đã xâm nhập thế gian.
 

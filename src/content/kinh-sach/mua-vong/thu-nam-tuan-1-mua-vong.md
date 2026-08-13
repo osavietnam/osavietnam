@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 1 Mùa Vọng"
 order: 5
 ---
 
-*Trích bài chú giải của thánh Ép-rem, phó tế, về sách Tin Mừng tổng hợp.*
+**Trích bài chú giải của thánh Ép-rem, phó tế, về sách Tin Mừng tổng hợp.**
 
 Để các môn đệ đừng hỏi về lúc Người đến, Đức Ki-tô nói : về ngày hay giờ đó, thì dù các thiên sứ trên trời hay cả Người Con đi nữa, cũng không ai biết được. Anh em không cần biết thời giờ và kỳ hạn. Người đã giấu những điều ấy để chúng ta tỉnh thức và để mọi người trong chúng ta nghĩ rằng điều ấy sẽ xảy ra trong đời mình. Quả vậy, nếu Người mặc khải thời nào sẽ đến thì cuộc quang lâm của Người sẽ quá tầm thường và các dân nước, các thời đại được Người mặc khải cho, cũng chẳng còn ao ước nữa. Chúa nói rằng Người sẽ đến nhưng không nói khi nào, và như vậy để mọi thế hệ và mọi đời tha thiết đợi chờ Người.
 

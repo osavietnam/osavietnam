@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 6 Phục Sinh"
 order: 40
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Hội Thánh được biết là có hai cuộc sống Thiên Chúa đã mặc khải và trao ban : cuộc sống trong đức tin và cuộc sống trong trực kiến ; cuộc sống thời lữ hành và cuộc sống nơi cư ngụ vĩnh viễn ; cuộc sống lầm than vất vả và cuộc sống nghỉ ngơi an nhàn ; cuộc sống thời đi đường và cuộc sống tại quê hương ; cuộc sống phải ra sức làm việc và cuộc sống được thưởng phúc chiêm ngưỡng.
 

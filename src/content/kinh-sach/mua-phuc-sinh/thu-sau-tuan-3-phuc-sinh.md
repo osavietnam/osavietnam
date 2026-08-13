@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 3 Phục Sinh"
 order: 19
 ---
 
-*Trích bài giảng của thánh Ép-rem, phó tế.*
+**Trích bài giảng của thánh Ép-rem, phó tế.**
 
 Chúa chúng ta đã bị Tử Thần chà đạp, nhưng ngược lại Người đã đạp lên nó như đạp lên đường đi. Chính Người chịu khuất phục sự chết và tình nguyện chịu chết để đập tan Tử Thần dù nó không muốn. Vì thế, Chúa chúng ta đã tiến ra vác thập giá, như Tử Thần mong muốn. Thế nhưng Người đã kêu lớn tiếng trên thập giá và dẫn đưa những kẻ đã chết ra khỏi địa ngục, mặc dù Tử Thần không muốn.
 

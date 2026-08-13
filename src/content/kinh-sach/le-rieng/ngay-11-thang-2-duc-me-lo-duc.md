@@ -15,7 +15,7 @@ Năm 1858, Đức Trinh Nữ Ma-ri-a Vô Nhiễm Nguyên Tội hiện ra với c
 
 </div>
 
-*Trích thư của thánh Ma-ri-a Béc-na-đét Xu-bi-ru, trinh nữ.*
+**Trích thư của thánh Ma-ri-a Béc-na-đét Xu-bi-ru, trinh nữ.**
 
 Hôm ấy, con cùng với hai cô bạn ra bờ sông Ga-vơ lượm củi. Bỗng con nghe có tiếng lao xao. Con quay về phía đồng cỏ mà không thấy cây cỏ lay động chút nào. Rồi con ngẩng đầu lên nhìn về phía hang, thì thấy một bà mặc đồ trắng. Bà mặc một áo trắng dài, thắt lưng xanh lơ, và trên mỗi bàn chân có một bông hồng màu vàng ; chuỗi hạt của bà cũng màu vàng như thế.
 

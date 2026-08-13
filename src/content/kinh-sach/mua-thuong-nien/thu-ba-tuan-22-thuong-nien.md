@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 22 Thường Niên"
 order: 150
 ---
 
-*Trích sách Gương Chúa Giê-su.*
+**Trích sách Gương Chúa Giê-su.**
 
 Lạy Chúa, lời Chúa phán xét giống như tiếng sấm nổ trên con. Chúa làm cho mọi xương cốt con phải rụng rời, vì sợ hãi run rẩy. Hồn con kinh khiếp quá đỗi.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 33 Thường Niên"
 order: 231
 ---
 
-*Trích bài giảng của thánh Tô-ma A-qui-nô, linh mục, về Kinh Tin Kính.*
+**Trích bài giảng của thánh Tô-ma A-qui-nô, linh mục, về Kinh Tin Kính.**
 
 Kết thức các tín điều, Kinh Tin Kính nói : Tôi tin có sự sống đời đời. A-men. Thật hợp lý khi câu kết ấy nói lên đích điểm của mọi ước vọng nơi chúng ta. Đích điểm ấy là sự sống đời đời.
 

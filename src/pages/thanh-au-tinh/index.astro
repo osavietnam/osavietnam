@@ -3,7 +3,9 @@ import { getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AugustineLifeLibrary from '../../components/AugustineLifeLibrary.astro';
 import AugustineEncyclopedia from '../../components/AugustineEncyclopedia.astro';
+import CollectionProseInlineEditor from '../../components/CollectionProseInlineEditor.astro';
 import pageHeaders from '../../data/page-headers.json';
+import timelineOverridesSource from '../../data/augustine-timeline-overrides.json';
 const taPh = (pageHeaders as Record<string, Record<string, string>>)['thanh-au-tinh'];
 
 const entry = await getEntry('thanh-chan-phuoc', 'st-augustine-of-hippo');
@@ -11,11 +13,15 @@ if (!entry) return Astro.redirect('/404');
 const { Content } = await render(entry);
 
 interface TlEntry {
+  id?: string;
   year: string;
   aug?: string;
+  augVi?: string;
   world?: string;
+  worldVi?: string;
   major?: boolean;
   era?: string;
+  eraVi?: string;
 }
 
 const TIMELINE: TlEntry[] = [
@@ -214,21 +220,55 @@ const PDF_TIMELINE_VI: Record<string, string> = {
 
 const timelineVi = (value?: string) => value ? (PDF_TIMELINE_VI[value] ?? value) : undefined;
 
+type TimelineOverride = Partial<{
+  year: string;
+  augEn: string;
+  augVi: string;
+  worldEn: string;
+  worldVi: string;
+  eraEn: string;
+  eraVi: string;
+  major: boolean;
+}>;
+
+const TIMELINE_OVERRIDES = timelineOverridesSource as Record<string, TimelineOverride>;
+const EDITABLE_TIMELINE: TlEntry[] = PDF_TIMELINE.map((source, index) => {
+  const id = `timeline-${String(index + 1).padStart(3, '0')}`;
+  const patch = TIMELINE_OVERRIDES[id] ?? {};
+  const aug = patch.augEn ?? source.aug;
+  const world = patch.worldEn ?? source.world;
+  const era = patch.eraEn ?? source.era;
+  return {
+    ...source,
+    id,
+    year: patch.year ?? source.year,
+    aug,
+    augVi: patch.augVi ?? timelineVi(aug),
+    world,
+    worldVi: patch.worldVi ?? timelineVi(world),
+    era,
+    eraVi: patch.eraVi ?? timelineVi(era),
+    major: patch.major ?? source.major,
+  };
+});
+
 interface TlGroup {
   year: string;
   era?: string;
+  eraVi?: string;
   entries: TlEntry[];
   major: boolean;
 }
 
-const PDF_TIMELINE_GROUPS = PDF_TIMELINE.reduce<TlGroup[]>((groups, row) => {
+const PDF_TIMELINE_GROUPS = EDITABLE_TIMELINE.reduce<TlGroup[]>((groups, row) => {
   const current = groups[groups.length - 1];
   if (current?.year === row.year) {
     current.entries.push(row);
     current.major ||= Boolean(row.major);
     current.era ??= row.era;
+    current.eraVi ??= row.eraVi;
   } else {
-    groups.push({ year: row.year, era: row.era, entries: [row], major: Boolean(row.major) });
+    groups.push({ year: row.year, era: row.era, eraVi: row.eraVi, entries: [row], major: Boolean(row.major) });
   }
   return groups;
 }, []);
@@ -827,6 +867,11 @@ const AUGUSTINUS_PL_NOTES: Record<string, string> = {
 
 <!-- ── Panel 1: Tiểu Sử ── -->
 <div class="aug-panel" id="panel-tieu-su" role="tabpanel" aria-labelledby="tab-tieu-su-btn">
+  <CollectionProseInlineEditor
+    collection="thanh-chan-phuoc"
+    entryId={entry.id}
+    label="Sửa tiểu sử Thánh Augustinô"
+  />
   <div class="article-shell" id="aug-bio-overview">
     <article class="prose"><Content /></article>
   </div>
@@ -856,7 +901,7 @@ const AUGUSTINUS_PL_NOTES: Record<string, string> = {
         <>
           {showEra && (
             <div class="tl-era">
-              <span><span class="tl-en">{group.era}</span><span class="tl-vi">{timelineVi(group.era)}</span></span>
+              <span><span class="tl-en">{group.era}</span><span class="tl-vi">{group.eraVi}</span></span>
               <button class="tl-era-toggle" type="button" aria-label="Thu gọn giai đoạn" aria-expanded="true">−</button>
             </div>
           )}
@@ -868,7 +913,7 @@ const AUGUSTINUS_PL_NOTES: Record<string, string> = {
             <!-- Left: Augustine -->
             <div class="tl-side tl-left">
               <div class="tl-branch-list">
-                {augEntries.map((row) => <p class="tl-text tl-text-aug"><span class="tl-en">{row.aug}</span><span class="tl-vi">{timelineVi(row.aug)}</span></p>)}
+                {augEntries.map((row) => <p class="tl-text tl-text-aug" data-timeline-id={row.id} data-timeline-side="aug" data-timeline-year={row.year} data-timeline-major={row.major ? 'true' : 'false'} data-timeline-era-en={row.era || ''} data-timeline-era-vi={row.eraVi || ''}><span class="tl-en">{row.aug}</span><span class="tl-vi">{row.augVi}</span></p>)}
               </div>
             </div>
 
@@ -881,7 +926,7 @@ const AUGUSTINUS_PL_NOTES: Record<string, string> = {
             <!-- Right: World -->
             <div class="tl-side tl-right">
               <div class="tl-branch-list">
-                {worldEntries.map((row) => <p class="tl-text tl-text-world"><span class="tl-en">{row.world}</span><span class="tl-vi">{timelineVi(row.world)}</span></p>)}
+                {worldEntries.map((row) => <p class="tl-text tl-text-world" data-timeline-id={row.id} data-timeline-side="world" data-timeline-year={row.year} data-timeline-major={row.major ? 'true' : 'false'} data-timeline-era-en={row.era || ''} data-timeline-era-vi={row.eraVi || ''}><span class="tl-en">{row.world}</span><span class="tl-vi">{row.worldVi}</span></p>)}
               </div>
             </div>
           </div>
@@ -894,6 +939,31 @@ const AUGUSTINUS_PL_NOTES: Record<string, string> = {
     Markus, Robert A. "Life, Culture, and Controversies of Augustine." In <em>Augustine through the Ages: An Encyclopedia</em>, edited by A. D. Fitzgerald, 498–504. Grand Rapids, MI: Eerdmans, 1999.
   </p>
 </div>
+
+<dialog class="timeline-inline-dialog" id="timelineInlineDialog" aria-labelledby="timelineInlineTitle">
+  <form method="dialog" class="timeline-inline-form" id="timelineInlineForm">
+    <header>
+      <div>
+        <small>Biên tập trực tiếp · Niên biểu</small>
+        <h2 id="timelineInlineTitle">Sự kiện</h2>
+      </div>
+      <button type="button" class="timeline-inline-close" id="timelineInlineClose" aria-label="Đóng">×</button>
+    </header>
+    <div class="timeline-inline-fields">
+      <label class="timeline-inline-year"><span>Năm</span><input id="timelineInlineYear" type="text" required /></label>
+      <label class="timeline-inline-major"><input id="timelineInlineMajor" type="checkbox" /><span>Sự kiện chính</span></label>
+      <label><span>Nội dung tiếng Việt</span><textarea id="timelineInlineVi" rows="4" required></textarea></label>
+      <label><span>Nội dung tiếng Anh</span><textarea id="timelineInlineEn" rows="4" required></textarea></label>
+      <label><span>Tên giai đoạn tiếng Việt</span><input id="timelineInlineEraVi" type="text" placeholder="Để trống nếu không bắt đầu giai đoạn mới" /></label>
+      <label><span>Tên giai đoạn tiếng Anh</span><input id="timelineInlineEraEn" type="text" placeholder="Để trống nếu không bắt đầu giai đoạn mới" /></label>
+    </div>
+    <footer>
+      <p id="timelineInlineMessage" role="status"></p>
+      <button type="button" class="timeline-inline-cancel" id="timelineInlineCancel">Hủy</button>
+      <button type="submit" class="timeline-inline-save">Lưu thay đổi</button>
+    </footer>
+  </form>
+</dialog>
 
 <!-- ── Panel 3: Tác phẩm ── -->
 <div class="aug-panel works-panel" id="panel-tac-pham" role="tabpanel" aria-labelledby="tab-tac-pham-btn" hidden>
@@ -948,22 +1018,6 @@ const AUGUSTINUS_PL_NOTES: Record<string, string> = {
 <div class="aug-panel" id="panel-bach-khoa" role="tabpanel" aria-labelledby="tab-bach-khoa-btn" hidden>
   <AugustineEncyclopedia />
 </div>
-
-  <!-- INLINE EDIT TOOLBAR -->
-  <div id="oe-bar" class="oe-bar" hidden>
-    <button id="oe-edit-btn" class="oe-bar-btn">
-      <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793z"/>
-        <path d="M11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
-      </svg>
-      Chỉnh sửa
-    </button>
-    <div id="oe-save-row" class="oe-save-row" hidden>
-      <span id="oe-msg" class="oe-msg"></span>
-      <button id="oe-cancel-btn" class="oe-bar-btn oe-bar-cancel">Huỷ</button>
-      <button id="oe-save-btn" class="oe-bar-btn oe-bar-save">Lưu</button>
-    </div>
-  </div>
 
 </BaseLayout>
 
@@ -2067,6 +2121,80 @@ html body.page-thanh-au-tinh .tl-row:not(.tl-major) .tl-text-aug .tl-vi {
   font-weight: 400;
 }
 html body.page-thanh-au-tinh .tl-source.citation-reference { margin-left: auto; margin-right: auto; overflow: visible; text-align: left; white-space: normal; }
+
+/* Inline timeline editor: only activated while the local Admin API is available. */
+.timeline-inline-trigger {
+  position: absolute;
+  z-index: 6;
+  top: .35rem;
+  right: .35rem;
+  width: 2.7rem;
+  height: 2.7rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(233,193,118,.5);
+  border-radius: 50%;
+  color: #e9c176;
+  background: #102118;
+  font: 600 1.15rem/1 var(--font-ui);
+  cursor: pointer;
+}
+.timeline-inline-trigger:hover,
+.timeline-inline-trigger:focus-visible { color: #102118; background: #e9c176; outline: 2px solid rgba(233,193,118,.28); outline-offset: 2px; }
+.timeline-inline-admin .tl-text[data-timeline-id] { padding-right: 3.5rem; }
+
+.timeline-inline-dialog {
+  width: min(72rem, calc(100vw - 2.4rem));
+  max-height: calc(100dvh - 2.4rem);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid rgba(233,193,118,.34);
+  border-radius: 12px;
+  color: var(--ink-cream);
+  background: #101c18;
+  box-shadow: 0 2rem 5rem rgba(0,0,0,.46);
+}
+.timeline-inline-dialog::backdrop { background: rgba(3,7,12,.72); backdrop-filter: blur(4px); }
+.timeline-inline-form > header,
+.timeline-inline-form > footer { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; }
+.timeline-inline-form > header { justify-content: space-between; border-bottom: 1px solid rgba(233,193,118,.18); }
+.timeline-inline-form > header small { display: block; margin-bottom: .25rem; color: #e9c176; font: 600 .9rem/1.4 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
+.timeline-inline-form > header h2 { margin: 0; color: var(--ink-cream); font: 600 1.9rem/1.25 var(--font-display); }
+.timeline-inline-close { width: 3rem; height: 3rem; padding: 0; border: 0; border-radius: 50%; color: var(--ink-cream-soft); background: transparent; font: 300 2.4rem/1 var(--font-ui); cursor: pointer; }
+.timeline-inline-close:hover { color: #e9c176; background: rgba(233,193,118,.1); }
+.timeline-inline-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; padding: 1.5rem; }
+.timeline-inline-fields label { min-width: 0; display: flex; flex-direction: column; gap: .45rem; }
+.timeline-inline-fields label > span { color: var(--ink-cream-soft); font: 500 1rem/1.35 var(--font-ui); }
+.timeline-inline-fields input[type="text"],
+.timeline-inline-fields textarea { width: 100%; border: 1px solid rgba(233,193,118,.26); border-radius: 7px; padding: .8rem .9rem; color: var(--ink-cream); background: #0b1612; font: 400 1.1rem/1.55 var(--font-ui); resize: vertical; }
+.timeline-inline-fields input:focus,
+.timeline-inline-fields textarea:focus { border-color: #e9c176; outline: 2px solid rgba(233,193,118,.16); }
+.timeline-inline-year { max-width: 15rem; }
+.timeline-inline-major { align-self: end; flex-direction: row !important; align-items: center; min-height: 3.7rem; }
+.timeline-inline-major input { width: 1.35rem; height: 1.35rem; accent-color: #c99a49; }
+.timeline-inline-form > footer { justify-content: flex-end; border-top: 1px solid rgba(233,193,118,.18); }
+.timeline-inline-form > footer p { flex: 1; margin: 0; color: var(--ink-cream-soft); font: 500 .95rem/1.4 var(--font-ui); }
+.timeline-inline-form > footer p.is-error { color: #ff9d91; }
+.timeline-inline-form > footer button:not(.timeline-inline-close) { min-height: 3.2rem; padding: .65rem 1rem; border: 1px solid rgba(233,193,118,.38); border-radius: 7px; color: var(--ink-cream); background: transparent; font: 600 1rem/1 var(--font-ui); cursor: pointer; }
+.timeline-inline-form > footer .timeline-inline-save { color: #102118; background: #e9c176; border-color: #e9c176; }
+.timeline-inline-form button:disabled { opacity: .5; cursor: wait; }
+html[data-theme="light"] .timeline-inline-dialog { color: #183e2c; background: #fffdf8; border-color: rgba(24,62,44,.26); }
+html[data-theme="light"] .timeline-inline-form > header,
+html[data-theme="light"] .timeline-inline-form > footer { border-color: rgba(24,62,44,.14); }
+html[data-theme="light"] .timeline-inline-form > header h2 { color: #183e2c; }
+html[data-theme="light"] .timeline-inline-fields label > span,
+html[data-theme="light"] .timeline-inline-form > footer p { color: #50685a; }
+html[data-theme="light"] .timeline-inline-fields input[type="text"],
+html[data-theme="light"] .timeline-inline-fields textarea { color: #183e2c; background: #fff; border-color: rgba(24,62,44,.24); }
+html[data-theme="light"] .timeline-inline-trigger { color: #fff; background: #27664c; border-color: #27664c; }
+@media (max-width: 640px) {
+  .timeline-inline-fields { grid-template-columns: 1fr; padding: 1.2rem; }
+  .timeline-inline-year { max-width: none; }
+  .timeline-inline-major { align-self: auto; }
+  .timeline-inline-form > footer { flex-wrap: wrap; padding: 1rem 1.2rem; }
+  .timeline-inline-form > footer p { flex-basis: 100%; }
+}
 </style>
 
 <script define:vars={{ phJson: taPh }}>
@@ -2260,8 +2388,107 @@ timelineLifeFilter?.addEventListener('click', () => {
   document.querySelectorAll('.tl-row[data-has-aug="false"]').forEach(item => item.toggleAttribute('hidden', lifeOnly));
 });
 
-const ADMIN = 'http://localhost:4322';
-const oeBar      = document.getElementById('oe-bar');
+const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+
+/* Inline editor for timeline events. */
+(() => {
+  const dialog = document.getElementById('timelineInlineDialog');
+  if (!dialog) return;
+
+  const form = document.getElementById('timelineInlineForm');
+  const title = document.getElementById('timelineInlineTitle');
+  const year = document.getElementById('timelineInlineYear');
+  const major = document.getElementById('timelineInlineMajor');
+  const eventVi = document.getElementById('timelineInlineVi');
+  const eventEn = document.getElementById('timelineInlineEn');
+  const eraVi = document.getElementById('timelineInlineEraVi');
+  const eraEn = document.getElementById('timelineInlineEraEn');
+  const message = document.getElementById('timelineInlineMessage');
+  const save = form?.querySelector('.timeline-inline-save');
+  let active = null;
+
+  const setMessage = (text = '', isError = false) => {
+    message.textContent = text;
+    message.classList.toggle('is-error', isError);
+  };
+  const closeEditor = () => { active = null; dialog.close(); };
+
+  const openEditor = text => {
+    const id = text.dataset.timelineId;
+    const side = text.dataset.timelineSide;
+    if (!id || !side) return;
+    active = { id, side };
+    title.textContent = side === 'aug' ? 'Sự kiện cuộc đời Thánh Augustinô' : 'Sự kiện đương thời';
+    year.value = text.dataset.timelineYear || '';
+    major.checked = text.dataset.timelineMajor === 'true';
+    eventEn.value = text.querySelector('.tl-en')?.textContent?.trim() || '';
+    eventVi.value = text.querySelector('.tl-vi')?.textContent?.trim() || '';
+    eraEn.value = text.dataset.timelineEraEn || '';
+    eraVi.value = text.dataset.timelineEraVi || '';
+    setMessage('');
+    dialog.showModal();
+    requestAnimationFrame(() => eventVi.focus());
+  };
+
+  const addTriggers = () => {
+    document.querySelectorAll('.tl-text[data-timeline-id]').forEach(text => {
+      if (text.querySelector('.timeline-inline-trigger')) return;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'timeline-inline-trigger';
+      button.setAttribute('aria-label', 'Sửa sự kiện này');
+      button.title = 'Sửa trực tiếp sự kiện';
+      button.textContent = '✎';
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        openEditor(text);
+      });
+      text.appendChild(button);
+    });
+  };
+
+  fetch(ADMIN + '/api/studio/timeline').then(response => {
+    if (!response.ok) throw new Error('Admin API unavailable');
+    document.body.classList.add('timeline-inline-admin');
+    addTriggers();
+  }).catch(() => dialog.remove());
+
+  form?.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!active || !form.reportValidity()) return;
+    save.disabled = true;
+    setMessage('Đang lưu…');
+    const patch = {
+      year: year.value.trim(),
+      major: major.checked,
+      eraEn: eraEn.value.trim(),
+      eraVi: eraVi.value.trim(),
+      [active.side === 'aug' ? 'augEn' : 'worldEn']: eventEn.value.trim(),
+      [active.side === 'aug' ? 'augVi' : 'worldVi']: eventVi.value.trim(),
+    };
+    try {
+      const response = await fetch(ADMIN + '/api/studio/timeline', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: active.id, patch }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+      setMessage('Đã lưu. Đang cập nhật niên biểu…');
+      setTimeout(() => location.reload(), 350);
+    } catch (error) {
+      save.disabled = false;
+      setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true);
+    }
+  });
+
+  document.getElementById('timelineInlineClose')?.addEventListener('click', closeEditor);
+  document.getElementById('timelineInlineCancel')?.addEventListener('click', closeEditor);
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeEditor(); });
+})();
+
+const oeBar      = null;
 const oeEditBtn  = document.getElementById('oe-edit-btn');
 const oeSaveRow  = document.getElementById('oe-save-row');
 const oeCancelBtn = document.getElementById('oe-cancel-btn');

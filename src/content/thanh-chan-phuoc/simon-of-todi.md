@@ -4,7 +4,7 @@ subtitle: "Linh mục"
 rank: "none"
 feastDay: 20
 feastMonth: 4
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/bl-simon-rinalducci.png"
 draft: false
 manualFill: false
 ---

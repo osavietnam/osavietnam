@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 4 Phục Sinh"
 order: 22
 ---
 
-*Trích Sách Chúa Thánh Thần của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích Sách Chúa Thánh Thần của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Chúa là Đấng ban cho ta sự sống, Người thiết lập cho chúng ta một giao ước, đó là bí tích Thánh Tẩy, hình ảnh tượng trưng cho cái chết và sự sống : nước là hình ảnh của cõi chết, Thần Khí là bảo chứng mang sự sống. Như vậy, ta thấy rõ điều ta tìm hiểu : tại sao nước và Thần Khí lại liên kết với nhau ? Thưa vì bí tích Thánh Tẩy nhắm hai mục tiêu ; một là loại bỏ con người làm nô lệ tội lỗi, để sau này nó khỏi sinh hoa trái đưa tới cái chết, hai là sống bởi Thần Khí và sinh hoa trái là được trở nên thánh thiện.
 

@@ -15,7 +15,7 @@ A-ga-ta là một thiếu nữ quê ở Xi-xi-li-a. Chị đã chịu tử đạ
 
 </div>
 
-*Trích bài giảng của thánh Mê-tô-đi-ô Xi-cu-li, giám mục, về thánh nữ A-ga-ta.*
+**Trích bài giảng của thánh Mê-tô-đi-ô Xi-cu-li, giám mục, về thánh nữ A-ga-ta.**
 
 Thưa anh chị em, những người đang nghe tôi nói, như anh chị em đã biết, hằng năm lễ kính nhớ thánh A-ga-ta tử đạo quy tụ tất cả chúng ta về nơi đây. Thánh nữ là vị tử đạo thời xưa và đứng hàng đầu nhờ cuộc chiến đấu lừng lẫy của người. Nhưng người cũng là vị tử đạo thời nay, bởi vì giờ đây, người vẫn còn chiến thắng nhờ những phép lạ khác thường làm thành vòng hoa mỗi ngày kết trên đầu người và tô điểm cho người nên xinh đẹp.
 

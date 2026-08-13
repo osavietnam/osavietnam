@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 2 Phục Sinh"
 order: 8
 ---
 
-*Trích bài giảng của một tác giả thời xưa về mầu nhiệm vượt qua.*
+**Trích bài giảng của một tác giả thời xưa về mầu nhiệm vượt qua.**
 
 Lễ Vượt Qua chúng ta cử hành hiện nay là căn nguyên phát sinh ơn cứu độ cho mọi người, bắt đầu từ người thứ nhất là A-đam, người vẫn được Thiên Chúa gìn giữ và làm cho sống mãi nơi mọi người.
 

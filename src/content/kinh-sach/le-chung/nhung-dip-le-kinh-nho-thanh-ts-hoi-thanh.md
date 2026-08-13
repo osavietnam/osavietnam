@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Ts. Hội Thánh"
 order: 13
 ---
 
-*Trích khảo luận Gương đức tin của viện phụ Ghi-lê-mô, đan viện thánh Tê-ô-đô-ri-cô.*
+**Trích khảo luận Gương đức tin của viện phụ Ghi-lê-mô, đan viện thánh Tê-ô-đô-ri-cô.**
 
 Hỡi bạn, hỡi linh hồn trung tín, khi bản tính tự nhiên của bạn do dự trước những mầu nhiệm quá thâm sâu của đức tin, bạn hãy mạnh dạn nói : “Những điều ấy xảy ra thế nào được ?”. Nói thế không phải để chống lại, nhưng để tin theo với tất cả lòng mến.
 

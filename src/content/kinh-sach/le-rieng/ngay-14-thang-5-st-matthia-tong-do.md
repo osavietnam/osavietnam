@@ -15,7 +15,7 @@ Thánh Mat-thi-a là người “đã theo Chúa Giê-su, kể từ khi Người
 
 </div>
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về sách Công Vụ Tông Đồ.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về sách Công Vụ Tông Đồ.**
 
 Trong những ngày ấy, ông Phê-rô đứng lên giữa các môn đệ mà nói. Vì ông là một con người nhiệt thành được Đức Ki-tô giao phó đoàn chiên và lại là người đứng đầu nhóm, nên bao giờ ông cũng lên tiếng trước tiên : Thưa anh em, phải chọn một người trong chúng ta. Ông để cho cộng đoàn cân nhắc ; như thế, ông vừa làm cho cộng đoàn kính nể những người họ đã chọn, vừa tránh được lòng ghen ghét có thể xảy ra. Quả thật, những việc lớn lao như thế thường dễ sinh ra tai hoạ.
 

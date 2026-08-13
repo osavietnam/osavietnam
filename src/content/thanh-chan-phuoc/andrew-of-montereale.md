@@ -4,7 +4,7 @@ subtitle: "Linh mục"
 rank: "none"
 feastDay: 18
 feastMonth: 4
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/Blessed_andrea_of_montereale.png"
 draft: false
 manualFill: false
 ---

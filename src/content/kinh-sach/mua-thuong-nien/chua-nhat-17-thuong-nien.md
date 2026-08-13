@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 17 Thường Niên"
 order: 113
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư thứ hai gửi tín hữu Cô-rin-tô.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư thứ hai gửi tín hữu Cô-rin-tô.**
 
 Một lần nữa, thánh Phao-lô lại nói về đức ái, nhưng đã bớt gay gắt trong lời khiển trách của người. Quả thế, sau khi kết tội và trách mắng người Cô-rin-tô đã không đền đáp tình người yêu thương, lại còn hùa theo phường ôn dịch, người bớt giọng trách mắng chua cay mà nói : Anh em hãy dành cho chúng tôi một chỗ trong lòng anh em, nghĩa là “anh em hãy thương chúng tôi”. Người xin họ một ân huệ không lớn lắm, nhưng có lợi cho người cho hơn là người nhận. Người không nói hãy thương, nhưng nói một cách gợi cảm hãy dành cho chúng tôi một chỗ trong lòng anh em.
 

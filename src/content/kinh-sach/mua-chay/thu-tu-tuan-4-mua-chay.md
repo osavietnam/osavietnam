@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 4 Mùa Chay"
 order: 33
 ---
 
-*Trích thư của thánh Mác-xi-mô Tuyên Giáo, viện phụ.*
+**Trích thư của thánh Mác-xi-mô Tuyên Giáo, viện phụ.**
 
 Những người rao giảng chân lý và những thừa tác viên phân phát ân sủng, từ khỏi đầu và mỗi người vào thời của mình cho đến ngày nay, tất cả đều giải thích cho chúng ta biết : Thiên Chúa muốn cứu độ chúng ta. Tất cả các vị đều nói đến cho chúng ta hiểu rằng Thiên Chúa không mong mỏi cũng chẳng yêu thích điều gì khác cho bằng con người thành tâm sám hối và trở về với Người.
 

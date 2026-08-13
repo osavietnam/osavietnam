@@ -9,7 +9,7 @@ rank: "opt-memorial"
 order: 163
 ---
 
-*Trích bài giảng của thánh Bê-na-đô, viện phụ.*
+**Trích bài giảng của thánh Bê-na-đô, viện phụ.**
 
 Vì Đấng Thánh từ lòng Bà sinh ra sẽ được gọi là Con Thiên Chúa. Ôi nguồn mạch của sự khôn ngoan ! Ôi Ngôi Lời của Chúa Cha trên chốn cửu trùng ! Lạy Đức Trinh Nữ thánh thiện, nhờ Mẹ làm trung gian, Ngôi Lời nay sẽ thành xác phàm, để Đấng nói : Thầy ở trong Cha và Cha ở trong Thầy, cũng nói : Thầy bởi Thiên Chúa mà ra và Thầy đã đến. Kinh Thánh viết : Lúc khởi đầu đã có Ngôi Lời. Suối đã vọt ra rồi nhưng chỉ nơi ở mình thôi. Ngôi Lời vẫn hướng về Thiên Chúa ngự trong ánh sáng siêu phàm.
 

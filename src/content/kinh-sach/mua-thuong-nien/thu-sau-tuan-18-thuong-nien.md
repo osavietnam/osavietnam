@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 18 Thường Niên"
 order: 125
 ---
 
-*Trích Bài ca thiêng liêng của thánh Gio-an Thánh Giá, linh mục.*
+**Trích Bài ca thiêng liêng của thánh Gio-an Thánh Giá, linh mục.**
 
 Linh hồn kết hợp với Thiên Chúa và được thần hoá thì, trong Thiên Chúa và hướng về Thiên Chúa, sẽ được hít thở hơi thở của thượng giới giống như hơi thở của Thiên Chúa. Và Thiên Chúa ở trong tâm hồn thì hít thở hơi thở của chính mình để làm mẫu cho linh hồn. Tôi nghĩ đó là điều thánh Phao-lô muốn nói khi người viết : Để chứng thực anh em là con cái, Thiên Chúa đã sai Thần Khí của Người đến ngự trong lòng anh em mà kêu lên : Áp-ba, Cha ơi ! Điều này đã được thực hiện nơi những người hoàn thiện.
 

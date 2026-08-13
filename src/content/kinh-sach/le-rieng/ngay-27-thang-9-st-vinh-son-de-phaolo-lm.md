@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1581 tại Gát-côn, nước Pháp. Người làm linh m
 
 </div>
 
-*Trích bút ký của thánh Vi-xen-tê Phao-lô cho các Nữ Tử Bác ái.*
+**Trích bút ký của thánh Vi-xen-tê Phao-lô cho các Nữ Tử Bác ái.**
 
 Chúng ta không được nhìn một nông dân nghèo hay một phụ nữ nghèo theo dáng vẻ bên ngoài của họ, hay cảm nghĩ của chúng ta về trình độ hiểu biết của những người ấy, nhất là nhiều khi hầu như họ không có bộ mặt và khối óc của những người được ăn học. Nhưng nếu nhìn những người đó dưới ánh sáng của đức tin, chị em sẽ thấy rằng họ là hiện thân của Con Thiên Chúa, Đấng đã muốn là người nghèo, Đấng chẳng còn dáng vẻ của một con người trong cuộc thương khó, Đấng đã bị lương dân coi là điên rồ, bị người Do-Thái coi là cớ vấp phạm ; với tất cả những điều đó, Người tự xưng là Đấng loan báo Tin Mừng cho kẻ nghèo : Đức Chúa đã sai tôi đi loan báo Tin Mừng cho kẻ nghèo hèn. Chính chúng ta cũng phải cảm nghiệm điều đó, và phải xử sự như Đức Ki-tô là quan tâm đến người nghèo túng, an ủi, giúp đỡ và bảo lãnh cho họ.
 

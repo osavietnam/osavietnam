@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 4 Thường Niên"
 order: 26
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Bất cứ hành động nào của Đức Ki-tô cũng thật là niềm hãnh diện cho Hội Thánh Công Giáo, và nềm hãnh diện lớn nhất chính là thập giá ; thánh Phao-lô hoàn toàn xác tín điều ấy nên đã nói : Ước chi tôi chẳng hãnh diện về điều gì, ngoài thập giá Đức Ki-tô.
 

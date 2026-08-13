@@ -16,7 +16,7 @@ Sinh năm 973 tại Ba-va-ri-a, Hen-ri-cô kế vị cha cai quản lãnh địa
 
 </div>
 
-*Trích hạnh thánh Hen-ri-cô của một tác giả xưa.* 
+**Trích hạnh thánh Hen-ri-cô của một tác giả xưa.**
 
  
 

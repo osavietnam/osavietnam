@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 14 Thường Niên"
 order: 97
 ---
 
-*Trích thư của thánh Cơ-lê-men-tê, giáo hoàng, gửi tín hữu Cô-rin-tô.*
+**Trích thư của thánh Cơ-lê-men-tê, giáo hoàng, gửi tín hữu Cô-rin-tô.**
 
 Anh em thân mến, anh em đã thấy đức ái thật lớn lao và lạ lùng. Sự trọn lành của đức ái thật khôn tả. Ai là người xứng hợp để sống trong đức ái, nếu không phải là những kẻ được Thiên Chúa làm cho xứng đáng ? Vậy chúng ta hãy cầu nguyện, xin Chúa thương ban cho ta sống tình bác ái thoát khỏi mọi xu hướng phàm tục, không bị ai trách cứ. Mọi thế hệ từ A-đam tới nay đã qua đi ; nhưng những ai thành toàn trong đức ái nhờ ơn Thiên Chúa, thì được ở nơi dành cho các thánh. Họ sẽ được xuất hiện trong Nước của Đức Ki-tô khi Người đến viếng thăm, vì Sách Thánh đã chép : Hãy đi vào phòng đóng cửa lại, hãy ẩn mình trong giây lát cho tới lúc trận lôi đình qua đi. Bấy giờ Ta sẽ nhớ đến ngày tốt lành mà đưa các ngươi lên khỏi huyệt.
 

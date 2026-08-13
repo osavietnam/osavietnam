@@ -8,7 +8,7 @@ liturgy: "Ngày 21 Tháng 12"
 order: 25
 ---
 
-*Trích bài diễn giải của thánh Am-rô-xi-ô, giám mục về Tin Mừng theo thánh Lu-ca.*
+**Trích bài diễn giải của thánh Am-rô-xi-ô, giám mục về Tin Mừng theo thánh Lu-ca.**
 
 Khi loan báo những điều huyền nhiệm cho Đức Trinh Nữ Ma-ri-a thì thần sứ cũng báo cho Người biết việc một phụ nữ cao niên và hiếm muộn đã thụ thai. Thần sứ dùng sự việc này như một ví dụ để minh xác rằng bất cứ điều gì Thiên Chúa muốn thì Người sẽ thực hiện.
 

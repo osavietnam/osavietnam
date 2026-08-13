@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 28 Thường Niên"
 order: 194
 ---
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
 Chẳng ai đến được với tôi, nếu Chúa Cha không lôi kéo người ấy. Bạn đừng nghĩ mình bị miễn cưỡng lôi kéo, vì linh hồn được lôi kéo bởi tình yêu. Chúng ta không phải sợ những kẻ cân nhắc lời nói mà không hiểu biết gì về những sự việc liên quan đến Thiên Chúa. Có khi họ trách rằng : “Tôi tự ý tin thế nào được, nếu tôi bị lôi kéo ?”. Tôi nói : “Tự ý một phần, nhưng bạn cũng được sự thích thú lôi kéo nữa”.
 

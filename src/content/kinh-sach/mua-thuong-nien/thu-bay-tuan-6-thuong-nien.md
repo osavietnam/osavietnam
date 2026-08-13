@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 6 Thường Niên"
 order: 42
 ---
 
-*Trích huấn từ của đức giáo hoàng Pi-ô XII dành cho những người mới lập gia đình.*
+**Trích huấn từ của đức giáo hoàng Pi-ô XII dành cho những người mới lập gia đình.**
 
 Gia đình được tươi sáng nhờ một mặt trời riêng, đó là người vợ. Kinh Thánh nói gì, nghĩ gì về gia đình, các con nghe đây : Vợ có duyên thì chồng hạnh phúc, vợ khôn khéo thì chồng được nở mặt nỏ mày. Phụ nữ nết na là ân phúc tuyệt vời ; không chi quý giá bằng người tiết hạnh. Người vợ hiền trong cửa nhà ngăn nắp đẹp như vầng hồng trên chốn cao xanh của Thiên Chúa.
 

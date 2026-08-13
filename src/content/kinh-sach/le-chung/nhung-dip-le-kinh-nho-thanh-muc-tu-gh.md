@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Mục Tử (Gh.)"
 order: 8
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, trong ngày kỷ niệm nhậm chức.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, trong ngày kỷ niệm nhậm chức.**
 
 Anh em rất thân mến, trong khi phải chu toàn việc phục vụ theo trách nhiệm của tôi, tôi thấy mình vừa yếu đuối vừa hèn nhát. Bởi vì khi tôi muốn làm điều gì một cách nhiệt thành và quả cảm, thì tôi lại trễ nải do thân phận mỏng giòn của tôi.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 19 Thường Niên"
 order: 130
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Chuyện xưa tai, nghe giờ đây mắt thấy. Ôi Mẹ Hội Thánh diễm phúc, có thời Mẹ đã nghe, có thời Mẹ đã thấy ! Xưa kia Hội Thánh đã nghe lời hứa, nay Hội Thánh đang thấy thực tại. Hội Thánh đã nghe lời hứa qua các ngôn sứ, và Hội Thánh đang chiêm ngắm thực tại trong Tin Mừng. Vì tất cả những gì được hoàn tất hiện nay, đều đã được các ngôn sứ báo trước. Xin Mẹ hãy đưa mắt nhìn ra khắp thế giới : Kìa dân Thiên Chúa là gia nghệp của Mẹ đã lan rộng đến tận cùng cõi đất. Kìa lời Thánh Vịnh dưới đây đã được hoàn thành : Mọi quân vương phủ phục trước bệ rồng, muôn dân nước thảy đều phụng sự, và lời sau đây cũng được hoàn tất : Lạy Thiên Chúa, xin biểu thị uy phong khắp cõi trời, và chiếu toả vinh quang đầy mặt đất. Hãy nhìn lên Đấng chân tay bị đóng đinh, xương cốt đếm được khi Người bị treo trên cây gỗ và áo xống bị đem ra rút thăm. Hãy xem : Đấng đang thống trị chính là Đấng thiên hạ thấy bị đóng đinh. Hãy xem Đấng đang ngự trên trời chính là Đấng bị thiên hạ khinh chê khi Người còn đi lại dưới đất. Hãy xem : thế là ứng nghiệm lời sau đây : Toàn thế giới muôn người nhớ lại và trở về cùng Chúa. Mọi dân tộc dưới trần phủ phục trước Tôn Nhan. Khi thấy thế, xin Mẹ Hội Thánh hãy vui mừng reo lên : Chuyện xưa tai nghe, giờ đây mắt thấy.
 

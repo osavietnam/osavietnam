@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 3 Mùa Chay"
 order: 23
 ---
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Anh em thân mến, có ba việc giúp cho đức tin được đứng vững, lòng đạo đức được chắc chắn và nhân đức được bền bỉ. Ba việc đó là cầu nguyện, ăn chay và làm phúc. Cầu nguyện là gõ cửa, ăn chay là được nhậm lời, làm phúc là nhận lãnh. Cầu nguyện, ăn chay, làm phúc : ba việc ấy chỉ là một và bổ túc lẫn cho nhau.
 

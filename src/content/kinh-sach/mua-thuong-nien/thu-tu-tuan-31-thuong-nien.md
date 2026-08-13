@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 31 Thường Niên"
 order: 214
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Về danh xưng, “đức tin” chỉ có một, nhưng về ý nghĩa lại có hai. Thực vậy, theo ý nghĩa thứ nhất, “đức tin” liên quan tới các tín điều, hàm ý đưa linh hồn chấp nhận một thực tại nào đó. Đức tin theo nghĩa này đem lợi ích cho linh hồn, như lời Chúa nói : Ai tin vào tôi và tin vào Đấng đã sai tôi, thì có sự sống đời đời và không bị xét xử ; và lời khác : Ai tin vào con của Người thì không bị lên án, nhưng từ cõi chết bước vào cõi sống.
 

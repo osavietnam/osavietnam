@@ -4,22 +4,32 @@ import { getImage, Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleHero from '../../components/ArticleHero.astro';
 import ArticleProseMeta from '../../components/ArticleProseMeta.astro';
+import ContentInlineEditor from '../../components/ContentInlineEditor.astro';
+import ArticleLanguageSwitch from '../../components/ArticleLanguageSwitch.astro';
 import { articleCategoryTone, articleCategoryVariant } from '../../utils/article-category';
+import articleTaxonomy from '../../data/article-taxonomy.json';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
+  const categories = new Set(articleTaxonomy.scholar.categories.map(({ label }) => label));
   const articles = await getCollection(
     'bai-viet',
-    ({ id, data }) =>
-      (id.startsWith('triet-hoc/') || id.startsWith('than-hoc/'))
-      && !data.draft,
+    ({ data }) =>
+      categories.has(data.category ?? '')
+      && !data.draft && !data.translationOf && data.language !== 'en',
   );
+  const allEntries = await getCollection('bai-viet');
 
   return articles.map((entry) => ({
     params: { slug: entry.id },
     props: {
       entry,
+      englishEntry: allEntries.find((article) =>
+        !article.data.draft
+        && article.data.language === 'en'
+        && (article.data.translationOf === entry.id || (!article.data.translationOf && article.id === `${entry.id}-en`)),
+      ),
       related: articles
         .filter((article) => article.id !== entry.id)
         .sort((a, b) => {
@@ -36,8 +46,9 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry, related } = Astro.props;
+const { entry, englishEntry, related } = Astro.props;
 const { Content } = await render(entry);
+const EnglishContent = englishEntry ? (await render(englishEntry)).Content : null;
 const d = entry.data;
 const cover = d.image ?? d.heroImage;
 const socialImage = cover
@@ -54,6 +65,8 @@ const domainKey = entry.id.split('/')[0];
   type="article"
   bodyClass="no-sidebar page-spirit-article page-scholar-article"
 >
+  <ContentInlineEditor entryId={entry.id} label={englishEntry ? 'Sửa bản VN' : 'Sửa bài viết'} kind="scholar" />
+  {englishEntry && <ContentInlineEditor entryId={englishEntry.id} label="Sửa bản EN" variant="en" kind="scholar" />}
   <main class="spirit-reader scholar-reader">
     <ArticleHero
       title={d.title}
@@ -77,12 +90,16 @@ const domainKey = entry.id.split('/')[0];
       </span>
     </nav>
 
-    <div class="article-shell spirit-reader-shell">
-      <article class="prose spirit-reader-prose">
+    <ArticleLanguageSwitch hasEnglish={Boolean(EnglishContent)}>
+      <Fragment slot="vi">
         <ArticleProseMeta author={d.author} />
         <Content />
-      </article>
-    </div>
+      </Fragment>
+      {EnglishContent && <Fragment slot="en">
+        <ArticleProseMeta author={englishEntry?.data.author ?? d.author} />
+        <EnglishContent />
+      </Fragment>}
+    </ArticleLanguageSwitch>
 
     {related.length > 0 && (
       <section class="spirit-related" aria-labelledby="spirit-related-title">

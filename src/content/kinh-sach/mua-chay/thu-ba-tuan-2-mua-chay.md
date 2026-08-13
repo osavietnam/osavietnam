@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 2 Mùa Chay"
 order: 14
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Lạy Chúa, con kêu lên cùng Chúa, xin lắng nghe lời con. Lời này, mọi người chúng ta đều có thể nói. Không phải tôi nói, mà là toàn thể mầu nhiệm Đức Ki-tô nói. Nhưng lời này chủ yếu được nói lên là nhân danh thân thể mầu nhiệm. Vì khi còn ở đời này, Người đã mang xác phàm của chúng ta mà cầu nguyện, và đã cầu nguyện cùng Chúa Cha, nhân danh thân thể mầu nhiệm, và khi Người cầu nguyện thì có những giọt máu từ toàn thân Người nhỏ xuống, như có lời chép trong Tin Mừng : Đức Giê-su khẩn khiết cầu xin và mồ hôi Người, như những giọt máu, rơi xuống. Máu từ toàn thân chảy ra là gì, nếu không phải là cuộc thương khó của các vị tử đạo thuộc toàn thể Hội Thánh ?
 

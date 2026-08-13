@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 5 Phục Sinh"
 order: 28
 ---
 
-*Trích bài giảng của thánh Mác-xi-mô, giám mục Tô-ri-nô.*
+**Trích bài giảng của thánh Mác-xi-mô, giám mục Tô-ri-nô.**
 
 Nhờ cuộc phục sinh của Đức Ki-tô, cửa Âm Phủ mở ra ; nhờ các tân tòng của Hội Thánh, trái đất được đổi mới ; nhờ Thánh Thần, trời được mở ra. Âm Phủ mở ra trả lại những người đã chết ; trái đất đổi mới cho mọc lên những con người phục sinh ; trời mở ra đón nhận những người đang đi lên.
 

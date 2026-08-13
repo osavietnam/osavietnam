@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 5 Mùa Chay"
 order: 44
 ---
 
-*Trích khảo luận của thánh Phun-gien-xi-ô, giám mục Rút-pê, bàn về đức tin.*
+**Trích khảo luận của thánh Phun-gien-xi-ô, giám mục Rút-pê, bàn về đức tin.**
 
 Chính Ba Ngôi chí thánh, Thiên Chúa duy nhất của Giao Ước mới và Giao Ước cũ, đã truyền dạy cha ông chúng ta phải tiến dâng thịt súc vật làm lễ tế. Những lễ tế này là hình ảnh báo trước lễ tế vô cùng đẹp ý Thiên Chúa mà chính Con độc nhất của Thiên Chúa sẽ hiến dâng vì chúng ta với tất cả lòng thương xót, khi Người tế lễ chính mình trong xác phàm.
 

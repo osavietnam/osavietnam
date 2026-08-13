@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 18 Thường Niên"
 order: 122
 ---
 
-*Trích thư được coi là của thánh Ba-na-ba.*
+**Trích thư được coi là của thánh Ba-na-ba.**
 
 Chúa đã bằng lòng hiến thân chịu chết cho chúng ta được tha tội và thánh hoá nhờ máu Người rảy trên chúng ta. Kinh Thánh nói với dân Ít-ra-en và với chúng ta về Người như sau : Người đã bị đâm vì chúng ta phạm tội, bị nghiền nát vì chúng ta lỗi lầm ; Người đã phải mang thương tích cho chúng ta được chữa lành. Người như chiên bị đem đi làm thịt, như cừu câm nín khi bị xén lông. Vậy chúng ta phải hết lòng tạ ơn Thiên Chúa, vì Người đã ban cho chúng ta am tường quá khứ, dạy chúng ta thông hiểu hiện tại ; còn tương lai, cũng không phải là chúng ta không được biết gì. Có lời chép : “Người ta giăng lưới bắt chim không phải là vô lý”. Nghĩa là : kẻ biết đường công chính mà lại quay sang đường tối tăm thì chết cũng đáng tội.
 

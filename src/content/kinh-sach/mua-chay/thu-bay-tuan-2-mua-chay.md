@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 2 Mùa Chay"
 order: 18
 ---
 
-*Trích khảo luận Xa tránh thế gian của thánh Am-rô-xi-ô, giám mục.*
+**Trích khảo luận Xa tránh thế gian của thánh Am-rô-xi-ô, giám mục.**
 
 Lòng người ở đâu, kho tàng ở đó. Thiên Chúa không quen từ chối ban điều tốt lành cho những kẻ cầu xin.
 

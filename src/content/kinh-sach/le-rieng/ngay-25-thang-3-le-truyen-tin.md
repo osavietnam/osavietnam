@@ -15,7 +15,7 @@ Chín tháng trước Lễ Giáng Sinh, chúng ta mừng ngày Con Thiên Chúa 
 
 </div>
 
-*Trích thư của thánh Lê-ô Cả, giáo hoàng.*
+**Trích thư của thánh Lê-ô Cả, giáo hoàng.**
 
 Đấng uy nghi đã nhận lấy thân phận thấp hèn, Đấng quyền năng nhận kiếp người yếu đuối, Đấng hằng hữu nhận xác phàm phải chết. Để trả món nợ mà những kẻ mang thân phận làm người như chúng ta mắc phải, bản tính bất khả tổn thương đã phối hợp với bản tính có thể chịu đau khổ. Như thế, vị trung gian duy nhất giữa Thiên Chúa và nhân loại, là con người Giê-su Ki-tô, vừa có thể chết, lại vừa không thể chết ; và đó chính là phương dược cứu chữa chúng ta.
 

@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Nam (tùy chọn)"
 order: 18
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Ai muốn theo tôi, phải từ bỏ chính mình, vác thập giá mình mà theo tôi. Điều Chúa truyền xem ra cứng cỏi, nặng nề quá : muốn theo Người, phải từ bỏ chính mình. Nhưng thật ra, điều Người truyền không cứng cỏi, cũng chẳng nặng nề, vì Người truyền điều chi, Người cũng giúp thực hiện điều đó.
 

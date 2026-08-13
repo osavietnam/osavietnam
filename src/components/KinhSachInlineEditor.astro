@@ -1,0 +1,258 @@
+---
+import InlineProseEditor from './InlineProseEditor.astro';
+
+interface Props {
+  entryId?: string;
+  triggerSelector?: string;
+  editBody?: boolean;
+}
+
+const {
+  entryId = '',
+  triggerSelector = '.ks-inline-page-trigger',
+  editBody = false,
+} = Astro.props;
+---
+
+<div class="ks-inline-editor-root" data-ks-inline-root>
+  {entryId && (
+    <button
+      type="button"
+      class="ks-inline-page-trigger"
+      data-entry-id={entryId}
+      aria-label="Sửa trực tiếp bài đọc này"
+      title="Sửa trực tiếp bài đọc"
+    ><span aria-hidden="true">✎</span><span>Sửa bài đọc</span></button>
+  )}
+
+  <dialog class="ks-inline-dialog" id="ksInlineDialog" aria-labelledby="ksInlineTitle">
+    <form method="dialog" class="ks-inline-form" id="ksInlineForm">
+      <header>
+        <div><small>Biên tập trực tiếp · Bài đọc Kinh Sách</small><h2 id="ksInlineTitle">Bài đọc</h2></div>
+        <button type="button" class="ks-inline-close" id="ksInlineClose" aria-label="Đóng">×</button>
+      </header>
+
+      <div class="ks-inline-fields">
+        <label class="ks-inline-full"><span>Tiêu đề</span><input id="ksInlineEntryTitle" type="text" required /></label>
+        <label><span>Mùa phụng vụ</span><input id="ksInlineSeason" type="text" /></label>
+        <label><span>Mã mùa</span>
+          <select id="ksInlineSeasonKey" required>
+            <option value="le-chung">Lễ Chung</option>
+            <option value="le-rieng">Lễ Riêng</option>
+            <option value="trong-kinh-chua">Lễ Trọng Kính Chúa</option>
+            <option value="mua-thuong-nien">Mùa Thường Niên</option>
+            <option value="mua-vong">Mùa Vọng</option>
+            <option value="mua-giang-sinh">Mùa Giáng Sinh</option>
+            <option value="mua-chay">Mùa Chay</option>
+            <option value="mua-phuc-sinh">Mùa Phục Sinh</option>
+          </select>
+        </label>
+        <label class="ks-inline-full"><span>Tác giả / nguồn</span><input id="ksInlineSource" type="text" /></label>
+        <label class="ks-inline-full"><span>Trích nguồn</span><input id="ksInlineExcerpt" type="text" /></label>
+        <label class="ks-inline-full"><span>Tên phụng vụ</span><input id="ksInlineLiturgy" type="text" /></label>
+        <label><span>Bậc lễ</span>
+          <select id="ksInlineRank">
+            <option value="">Không đặt</option><option value="solemn">Lễ Trọng</option>
+            <option value="feast">Lễ Kính</option><option value="memorial">Lễ Nhớ Buộc</option>
+            <option value="opt-memorial">Lễ Nhớ Tùy Chọn</option><option value="none">Không có bậc lễ</option>
+          </select>
+        </label>
+        <label><span>Thứ tự</span><input id="ksInlineOrder" type="number" step="1" /></label>
+        <div class="ks-inline-checks ks-inline-full">
+          <label><input id="ksInlineDraft" type="checkbox" /><span>Bản nháp</span></label>
+        </div>
+        <div class="ks-inline-full ks-inline-body-field">
+          <InlineProseEditor textareaId="ksInlineBody" label="Nội dung bài đọc" hidden={!editBody} />
+        </div>
+      </div>
+
+      <footer>
+        <p id="ksInlineMessage" role="status"></p>
+        <button type="button" class="ks-inline-cancel" id="ksInlineCancel">Hủy</button>
+        <button type="submit" class="ks-inline-save">Lưu thay đổi</button>
+      </footer>
+    </form>
+  </dialog>
+</div>
+
+<script define:vars={{ entryId, triggerSelector, editBody }}>
+(() => {
+  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const root = document.querySelector('[data-ks-inline-root]');
+  const dialog = root?.querySelector('#ksInlineDialog');
+  if (!root || !dialog) {
+    root?.remove();
+    return;
+  }
+
+  const form = root.querySelector('#ksInlineForm');
+  const fields = {
+    title: root.querySelector('#ksInlineEntryTitle'),
+    season: root.querySelector('#ksInlineSeason'),
+    seasonKey: root.querySelector('#ksInlineSeasonKey'),
+    source: root.querySelector('#ksInlineSource'),
+    excerpt: root.querySelector('#ksInlineExcerpt'),
+    liturgy: root.querySelector('#ksInlineLiturgy'),
+    rank: root.querySelector('#ksInlineRank'),
+    order: root.querySelector('#ksInlineOrder'),
+    draft: root.querySelector('#ksInlineDraft'),
+    body: root.querySelector('#ksInlineBody'),
+  };
+  const heading = root.querySelector('#ksInlineTitle');
+  const message = root.querySelector('#ksInlineMessage');
+  const save = root.querySelector('.ks-inline-save');
+  let active = null;
+
+  const request = async (url, options) => {
+    const response = await fetch(ADMIN + url, options);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    return data;
+  };
+  const setMessage = (text = '', error = false) => {
+    message.textContent = text;
+    message.classList.toggle('is-error', error);
+  };
+  const value = (field, fallback = '') => { field.value = fallback ?? ''; };
+
+  async function openEditor(id) {
+    if (!id) return;
+    dialog.showModal();
+    setMessage('Đang tải…');
+    save.disabled = true;
+    try {
+      active = await request(`/api/studio/item?collection=kinh-sach&id=${encodeURIComponent(id)}`);
+      const fm = active.fm || {};
+      heading.textContent = fm.title || id;
+      value(fields.title, fm.title);
+      value(fields.season, fm.season);
+      value(fields.seasonKey, fm.seasonKey || id.split('/')[0]);
+      value(fields.source, fm.source);
+      value(fields.excerpt, fm.excerpt);
+      value(fields.liturgy, fm.liturgy);
+      value(fields.rank, fm.rank);
+      value(fields.order, fm.order);
+      fields.draft.checked = fm.draft === true;
+      fields.body.value = active.body || '';
+      fields.body.closest('[data-inline-prose-editor]')?.dispatchEvent(new CustomEvent('inline-prose:set'));
+      save.disabled = false;
+      setMessage('');
+      requestAnimationFrame(() => fields.title.focus());
+    } catch (error) {
+      active = null;
+      setMessage(error instanceof Error ? error.message : 'Không thể tải bài đọc', true);
+    }
+  }
+
+  const closeEditor = () => { active = null; dialog.close(); };
+
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest(triggerSelector);
+    if (!trigger) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    openEditor(trigger.dataset.entryId || trigger.dataset.id || entryId);
+  }, true);
+
+  form?.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!active || !form.reportValidity()) return;
+    save.disabled = true;
+    setMessage('Đang lưu…');
+    const seasonKey = fields.seasonKey.value;
+    const slug = active.id.split('/').pop();
+    const nextId = `${seasonKey}/${slug}`;
+    const fm = {
+      ...active.fm,
+      title: fields.title.value.trim(),
+      season: fields.season.value.trim(),
+      seasonKey,
+      source: fields.source.value.trim(),
+      excerpt: fields.excerpt.value.trim(),
+      liturgy: fields.liturgy.value.trim(),
+      rank: fields.rank.value,
+      order: Number(fields.order.value || 0),
+      draft: fields.draft.checked,
+    };
+    try {
+      const result = await request('/api/studio/item', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collection: 'kinh-sach', id: nextId, originalId: active.id,
+          fm, body: editBody ? fields.body.value : active.body,
+          extension: active.extension, checksum: active.checksum,
+        }),
+      });
+      setMessage('Đã lưu. Đang cập nhật trang…');
+      const isDetail = Boolean(entryId);
+      setTimeout(() => {
+        if (isDetail && result.route) location.href = result.route;
+        else location.reload();
+      }, 400);
+    } catch (error) {
+      save.disabled = false;
+      setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true);
+    }
+  });
+
+  root.querySelector('#ksInlineClose')?.addEventListener('click', closeEditor);
+  root.querySelector('#ksInlineCancel')?.addEventListener('click', closeEditor);
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeEditor(); });
+
+  request('/api/studio/manifest').then(() => {
+    document.body.dataset.ksAdmin = '1';
+    document.body.dataset.ksInline = '1';
+    document.dispatchEvent(new CustomEvent('ks-inline-ready'));
+  }).catch(() => root.remove());
+})();
+</script>
+
+<style is:global>
+.ks-inline-page-trigger {
+  position:absolute; z-index:8; top:1.25rem; right:1.5rem;
+  min-height:3.2rem; display:none; align-items:center; gap:.5rem;
+  padding:.6rem .9rem; border:1px solid rgba(233,193,118,.5); border-radius:7px;
+  color:#e9c176; background:#102118; font:600 1rem/1 var(--font-ui); cursor:pointer;
+}
+body[data-ks-inline] .ks-inline-page-trigger { display:inline-flex; }
+.ks-inline-page-trigger:hover,.ks-inline-page-trigger:focus-visible { color:#102118; background:#e9c176; outline:2px solid rgba(233,193,118,.24); outline-offset:2px; }
+.ks-inline-dialog { width:min(82rem,calc(100vw - 2.4rem)); max-height:calc(100dvh - 2.4rem); padding:0; overflow:auto; border:1px solid rgba(233,193,118,.34); border-radius:12px; color:var(--ink-cream); background:#101c18; box-shadow:0 2rem 5rem rgba(0,0,0,.46); }
+.ks-inline-dialog::backdrop { background:rgba(3,7,12,.72); backdrop-filter:blur(4px); }
+.ks-inline-form>header,.ks-inline-form>footer { display:flex; align-items:center; gap:1rem; padding:1.25rem 1.5rem; }
+.ks-inline-form>header { justify-content:space-between; border-bottom:1px solid rgba(233,193,118,.18); }
+.ks-inline-form>header small { display:block; margin-bottom:.25rem; color:#e9c176; font:600 .9rem/1.4 var(--font-ui); letter-spacing:.1em; text-transform:uppercase; }
+.ks-inline-form>header h2 { margin:0; color:var(--ink-cream); font:600 1.9rem/1.25 var(--font-display); }
+.ks-inline-close { width:3rem; height:3rem; padding:0; border:0; border-radius:50%; color:var(--ink-cream-soft); background:transparent; font:300 2.4rem/1 var(--font-ui); cursor:pointer; }
+.ks-inline-fields { display:grid; grid-template-columns:1fr 1fr; gap:1.05rem; padding:1.5rem; }
+.ks-inline-fields label { min-width:0; display:flex; flex-direction:column; gap:.42rem; }
+.ks-inline-fields label>span { color:var(--ink-cream-soft); font:500 1rem/1.35 var(--font-ui); }
+.ks-inline-full { grid-column:1/-1; }
+.ks-inline-fields input[type="text"],.ks-inline-fields input[type="number"],.ks-inline-fields select,.ks-inline-fields textarea { width:100%; border:1px solid rgba(233,193,118,.26); border-radius:7px; padding:.78rem .9rem; color:var(--ink-cream); background:#0b1612; font:400 1.08rem/1.5 var(--font-ui); }
+.ks-inline-fields textarea { resize:vertical; }
+.ks-inline-body-field textarea { min-height:45vh; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:1rem; line-height:1.65; }
+.ks-inline-checks { display:flex; flex-wrap:wrap; gap:1.4rem; }
+.ks-inline-checks label { flex-direction:row; align-items:center; }
+.ks-inline-checks input { width:1.3rem; height:1.3rem; accent-color:#c99a49; }
+.ks-inline-form>footer { justify-content:flex-end; border-top:1px solid rgba(233,193,118,.18); }
+.ks-inline-form>footer p { flex:1; margin:0; color:var(--ink-cream-soft); font:500 .95rem/1.4 var(--font-ui); }
+.ks-inline-form>footer p.is-error { color:#ff9d91; }
+.ks-inline-form>footer button:not(.ks-inline-close) { min-height:3.2rem; padding:.65rem 1rem; border:1px solid rgba(233,193,118,.38); border-radius:7px; color:var(--ink-cream); background:transparent; font:600 1rem/1 var(--font-ui); cursor:pointer; }
+.ks-inline-form>footer .ks-inline-save { color:#102118; background:#e9c176; border-color:#e9c176; }
+.ks-inline-form button:disabled { opacity:.5; cursor:wait; }
+html[data-theme="light"] .ks-inline-dialog { color:#183e2c; background:#fffdf8; border-color:rgba(24,62,44,.26); }
+html[data-theme="light"] .ks-inline-form>header,html[data-theme="light"] .ks-inline-form>footer { border-color:rgba(24,62,44,.14); }
+html[data-theme="light"] .ks-inline-form>header h2 { color:#183e2c; }
+html[data-theme="light"] .ks-inline-fields label>span,html[data-theme="light"] .ks-inline-form>footer p { color:#50685a; }
+html[data-theme="light"] .ks-inline-fields input[type="text"],html[data-theme="light"] .ks-inline-fields input[type="number"],html[data-theme="light"] .ks-inline-fields select,html[data-theme="light"] .ks-inline-fields textarea { color:#183e2c; background:#fff; border-color:rgba(24,62,44,.24); }
+html[data-theme="light"] .ks-inline-page-trigger { color:#fff; background:#27664c; border-color:#27664c; }
+@media(max-width:640px){
+  .ks-inline-page-trigger { top:.8rem; right:.8rem; width:3rem; justify-content:center; padding:0; }
+  .ks-inline-page-trigger span:last-child { display:none; }
+  .ks-inline-fields { grid-template-columns:1fr; padding:1.15rem; }
+  .ks-inline-full { grid-column:auto; }
+  .ks-inline-form>footer { flex-wrap:wrap; padding:1rem 1.15rem; }
+  .ks-inline-form>footer p { flex-basis:100%; }
+}
+</style>

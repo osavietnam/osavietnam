@@ -15,7 +15,7 @@ Thánh nhân là một triết gia và là anh hùng tử đạo. Người sinh 
 
 </div>
 
-*Trích sử liệu về cuộc tử đạo của thánh Giú-ti-nô và các bạn.*
+**Trích sử liệu về cuộc tử đạo của thánh Giú-ti-nô và các bạn.**
 
 Sau khi bị bắt, các thánh được điệu tới tổng trấn Rô-ma, tên là Rút-ti-cô. Lúc các ngài ra trước toà án, tổng trấn Rút-ti-cô nói với thánh Giút-ti-nô : “Trước hết ngươi phải tin các thần minh và tôn kính hoàng đế”. Thánh Giút-ti-cô trả lời : “Các ông không thể tố cáo hay bắt giam chỉ vì chúng tôi tuân theo lệnh Đức Giê-su Ki-tô, Đấng cứu độ chúng tôi”.
 

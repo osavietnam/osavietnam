@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 3 Thường Niên"
 order: 17
 ---
 
-*Trích bản Giải thích tu luật của thánh Ba-xi-li-ô Cả, giám mục.*
+**Trích bản Giải thích tu luật của thánh Ba-xi-li-ô Cả, giám mục.**
 
 Lời lẽ nào diễn tả được cho cân xứng những hồng ân của Thiên Chúa. Những hồng ân ấy nhiều vô kể và cao cả vô cùng, đến nỗi chỉ một ơn thôi cũng đủ cho chúng ta phải tìm mọi cách mà đền đáp Thiên Chúa là Đấng thi ân.
 

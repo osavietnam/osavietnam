@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 9 Thường Niên"
 order: 63
 ---
 
-*Trích bài diễn giải của thánh Tô-ma A-qui-nô, linh mục, về Tin Mừng theo thánh Gio-an.*
+**Trích bài diễn giải của thánh Tô-ma A-qui-nô, linh mục, về Tin Mừng theo thánh Gio-an.**
 
 Con đường, chính là Dức Ki-tô, nên Người nói : Chính Thầy là con đường. Quả nhiên điều đó thật hữu lý, vì nhờ Người mà chúng ta đến cùng Chúa Cha.
 

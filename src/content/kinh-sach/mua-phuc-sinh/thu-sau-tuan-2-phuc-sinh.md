@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 2 Phục Sinh"
 order: 12
 ---
 
-*Trích bài giảng của thánh Thê-ô-đô-rô, viện phụ Tu-đi-ốt.*
+**Trích bài giảng của thánh Thê-ô-đô-rô, viện phụ Tu-đi-ốt.**
 
 Ôi thập giá, hồng ân vô cùng cao quý ! Ô, trông rực rỡ biết bao ! Vẻ đẹp của thập giá không pha trộn tốt xấu như cây kia trong vườn Ê-đen, nhưng nhìn thì thấy thật đẹp và ăn thì thấy thật ngon.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 3 Mùa Vọng"
 order: 17
 ---
 
-*Trích sách Gương Chúa Giê-su.*
+**Trích sách Gương Chúa Giê-su.**
 
 Bạn đừng bận tâm tìm hiểu xem ai là người ủng hộ hay phản đối bạn ; nhưng hãy lo sao cho có Thiên Chúa ở với bạn trong mọi việc bạn làm.
 

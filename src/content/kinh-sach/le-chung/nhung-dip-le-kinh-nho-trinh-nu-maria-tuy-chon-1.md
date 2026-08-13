@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Trinh Nữ Maria (tùy chọn 1)"
 order: 4
 ---
 
-*Trích bài giảng của thánh En-re-đô, viện phụ.*
+**Trích bài giảng của thánh En-re-đô, viện phụ.**
 
 Chúng ta hãy chạy đến cùng vị hôn thê của Thiên Chúa, cùng thân mẫu của Đức Giê-su, cùng nữ tỳ rất trung thành của Thiên Chúa. Tất cả các danh hiệu ấy đều nói về Đức Ma-ri-a.
 

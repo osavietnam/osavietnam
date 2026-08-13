@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 8 Thường Niên"
 order: 50
 ---
 
-*Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.*
+**Trích sách của thánh Ghê-gô-ri-ô Cả, giáo hoàng, bàn về những vấn đề luân lý trong sách Gióp.**
 
 Có những người đơn sơ mà không biết ngay thẳng là gì. Nhưng họ đã không để tâm đến sự trong trắng của tính đơn sơ đích thực, nên không đạt được đức ngay thẳng. Vì bao lâu họ không biết nhờ đức ngay thẳng mà ăn ở khôn ngoan thì không thể nhờ đơn sơ mà trong trắng mãi được.
 

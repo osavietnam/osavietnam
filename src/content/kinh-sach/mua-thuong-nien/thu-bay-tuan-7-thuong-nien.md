@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 7 Thường Niên"
 order: 49
 ---
 
-*Trích bài diễn giải của thánh Ghê-gô-ri-ô, giám mục A-ri-ghen-tô, về sách Giảng Viên.*
+**Trích bài diễn giải của thánh Ghê-gô-ri-ô, giám mục A-ri-ghen-tô, về sách Giảng Viên.**
 
 Giảng viên nói : Êm dịu thay ánh sáng này và mắt chúng ta được ngắm nhìn mặt trời xinh đẹp thì thú vị biết bao. Quả vậy, nêu cất ánh sáng đi thì thế gian không có hình dạng và đời sống cũng không có sự sống. Vì thế, người đã từng nhìn ngắm Thiên Chúa là ông Mô-sê xưa đã nói : Thiên Chúa thấy rằng ánh sáng tốt đẹp. Còn chúng ta, chúng ta nên nghĩ đến ánh sáng lớn lao, đích thực và vĩnh cửu, là ánh sáng chiếu soi mọi người đến trong thế gian này tức là Đức Ki-tô, Đấng giải thoát và cứu chuộc trần gian. Khi nhập thể, Người đã đi đến giới hạn cuối cùng của thân phận con người. Ngôn sứ Đa-vít đã nói về Người : Hãy hát mừng Thiên Chúa, đàn ca kính danh Người, hãy dọn đường cho Đấng ngự giá đằng vân. Danh Người là ĐỨC CHÚA ; trước Thánh Nhan, hãy vui mừng hớn hở.
 

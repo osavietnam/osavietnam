@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 29 Thường Niên"
 order: 199
 ---
 
-*Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba, về Kinh Lạy Cha.*
+**Trích thư của thánh Âu-tinh, giám mục, gửi cho Pơ-rô-ba, về Kinh Lạy Cha.**
 
 Lời nói cần cho chúng ta để nhắc nhở cho chúng ta thấy mình xin gì ; nhưng chúng ta hãy tin rằng không phải vì những lời đó mà chúng ta làm cho Chúa biết hay phải xiêu lòng.
 

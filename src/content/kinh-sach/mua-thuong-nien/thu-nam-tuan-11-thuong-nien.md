@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 11 Thường Niên"
 order: 75
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Chúng ta tiếp tục cầu nguyện và thưa lên : Xin cho chúng con lương thực hằng ngày. Có thể hiểu câu này vừa theo nghĩa thiêng liêng, vừa theo nghĩa đen, vì do ý định của Thiên Chúa, thì cả hai nghĩa đều hữu ích cho ơn cứu độ của chúng ta. Bởi chưng, bánh ban sự sống, chính là Đức Ki-tô, và bánh ấy không phải ai cũng được mà chỉ có chúng ta thôi. Và vì Người là Cha của những ai nhận biết và tin kính Người, nên chúng ta đọc kinh Lạy Cha chúng con thế nào, thì chúng ta cũng nói “lương thực của chúng con”. Như thế, vì Đức Ki-tô chính là bánh của những ai thuộc thân thể Người như chúng ta.
 

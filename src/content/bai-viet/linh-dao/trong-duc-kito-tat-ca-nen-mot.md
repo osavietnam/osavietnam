@@ -2,14 +2,20 @@
 title: "Trong Đức Kitô, Tất Cả Nên Một"
 subtitle: "In illo uno unum"
 author: "Thánh Augustinô"
+authorDetails:
 category: "Chú Giải Thánh Vịnh"
-date: 2026-07-28
 excerpt: "Nhiều Kitô hữu nhưng chỉ một Đức Kitô: Đầu và các chi thể kết hợp trong cùng một Thân Thể là Hội Thánh."
+date: "2026-07-28"
+tags:
+  - "Hiệp nhất"
+  - "Cộng đoàn"
+  - "Hội Thánh"
+  - "Thánh Vịnh 127"
 image: "../../../assets/linh-dao/trong-duc-kito-tat-ca-nen-mot-thumbnail.jpg"
 heroImage: "../../../assets/linh-dao/trong-duc-kito-tat-ca-nen-mot-hero.jpg"
-tags: ["Hiệp nhất", "Cộng đoàn", "Hội Thánh", "Thánh Vịnh 127"]
+language: "vi"
 featured: true
-draft: false
+draft: true
 ---
 Không ai thực sự kính sợ Chúa mà lại không thuộc các chi thể của con người duy nhất này. Dù chúng ta là nhiều người, nhưng chúng ta là một. Nhiều Kitô hữu, nhưng chỉ là một Đức Kitô. Tất cả các Kitô hữu, trong sự hiệp nhất với Đầu của mình là Đấng đã lên trời,  làm nên Đức Kitô duy nhất. Chẳng phải Ngài là một tách biệt khỏi chúng ta là nhiều, nhưng chúng ta tuy nhiều những chỉ là một trong Chúa, Đấng duy nhất. Đức Kitô, gồm Đầu và Thân Thể, là một.
 

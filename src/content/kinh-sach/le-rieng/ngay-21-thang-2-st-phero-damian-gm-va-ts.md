@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh Phê-rô Đa-mi-a-nô sinh tại Ra-ven-ne năm 1007. Người đã đến Phôn-tê A-ven-la-na sống đời ẩn sĩ trước khi trở thành người cộng tác với các Đức Giáo Hoàng để canh tân Hội Thánh. Làm hồng y - giám mục Ốt-xi-a năm 1057, nhiều lần lãnh trách nhiệm làm sứ giả trong nước I-ta-li-a, Pháp và Đức. Người hăng say tranh đấu cho hàng giáo sĩ được địa vị xứng đáng và cho hàng giáo sĩ được tự do (+ năm 1072). 
 
-Hãy vững lòng mong đợi niềm vui sau khi đã phải buồn phiền 
+*Hãy vững lòng mong đợi niềm vui sau khi đã phải buồn phiền*
 
-*Trích thư của thánh Phê-rô Đa-mi-a-nô, giám mục.*
+**Trích thư của thánh Phê-rô Đa-mi-a-nô, giám mục.**
 
  
 

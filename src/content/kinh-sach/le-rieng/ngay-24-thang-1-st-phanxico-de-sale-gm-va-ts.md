@@ -15,7 +15,7 @@ Thánh nhân sinh tại Xa-voa, nước Pháp, năm 1567. Sau khi làm linh mụ
 
 </div>
 
-*Trích sách Dẫn vào đời sống đạo đức của thánh Phan-xi-cô đờ Xan, giám mục.*
+**Trích sách Dẫn vào đời sống đạo đức của thánh Phan-xi-cô đờ Xan, giám mục.**
 
 Khi tạo thành vạn vật, Thiên Chúa, Đấng đã truyền cho cây nào sinh quả nấy theo từng loại. Cũng vậy, Người truyền cho các Ki-tô hữu là những cây sống động trong Hội Thánh của Người phải sinh hoa trái đạo đức tuỳ theo phẩm chất, tuỳ theo hoàn cảnh sống và ơn gọi của mỗi người.
 

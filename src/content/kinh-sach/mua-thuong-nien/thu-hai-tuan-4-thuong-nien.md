@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 4 Thường Niên"
 order: 23
 ---
 
-*Trích khảo luận của thánh Hi-la-ri-ô, giám mục về các Thánh Vịnh.*
+**Trích khảo luận của thánh Hi-la-ri-ô, giám mục về các Thánh Vịnh.**
 
 Ngọt ngào tốt đẹp lắm thay, anh em được sống vui vầy bên nhau ! Quả thật, anh em được sống vui vầy bên nhau thì ngọt ngào và tốt đẹp, bởi vì khi chung sống hoà hợp với nhau là quy tụ thành cộng đoàn Hội Thánh ; có sống ý hợp tâm đầu trong đức ái, thì mới gọi là anh em.
 

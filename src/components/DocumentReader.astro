@@ -4,7 +4,7 @@ import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from './PageHeader.astro';
 import TableOfContents from './TableOfContents.astro';
-import { withBase } from '../lib/site-path';
+import CollectionProseInlineEditor from './CollectionProseInlineEditor.astro';
 
 interface LangOption {
   label: string;
@@ -25,6 +25,9 @@ const d = entry.data;
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const hasToc = tocHeadings.length > 1;
 const shortLabels: Record<string, string> = { 'Tiếng Việt': 'VI', 'English': 'EN' };
+const translatorMatch = d.translator?.match(/^Bản\s+Dịch\s+bởi\s+(.+)$/i);
+const translatorLabel = translatorMatch ? 'Bản dịch bởi' : '';
+const translatorPerson = translatorMatch?.[1] ?? d.translator ?? '';
 
 // Tính hasToc cho từng lang để embed vào data-has-toc (dùng khi switch)
 const langTocMap: Record<string, boolean> = {};
@@ -45,9 +48,13 @@ await Promise.all(langs.map(async (l) => {
   type="article"
   bodyClass={`no-sidebar page-document-reader${banner === 'tu-luat' ? ' page-tu-luat' : ''}`}
 >
-  <div class="content-watermark" aria-hidden="true">
-    <img src="/images/emblem.svg" alt="" />
-  </div>
+  <CollectionProseInlineEditor
+    collection="documents"
+    entryId={entry.id}
+    activeSelector=".dls-tab.active"
+    activeAttribute="data-doc-id"
+    label="Sửa tài liệu"
+  />
   <PageHeader title={d.title} sub={d.docType} desc={d.subtitle} />
   <div class="doc-meta-row">
     <div class="doc-lang-bar" role="tablist" aria-label="Chọn ngôn ngữ">
@@ -58,7 +65,7 @@ await Promise.all(langs.map(async (l) => {
           class={`doc-lang-tab dls-tab ${l.current ? 'active' : ''}`}
           aria-selected={l.current ? 'true' : 'false'}
           data-doc-id={l.id}
-          data-href={withBase(l.href)}
+          data-href={l.href}
           data-has-toc={langTocMap[l.id] ? 'true' : 'false'}
         >{l.label}</button>
       ))}
@@ -66,7 +73,10 @@ await Promise.all(langs.map(async (l) => {
     <div class="doc-translator-slot">
       {d.translator && (
         <span class="translator">
-          <span class="translator-name">{d.translator}</span>
+          <span class="translator-name">
+            {translatorLabel && <span class="translator-label">{translatorLabel}</span>}
+            <span class="translator-person">{translatorPerson}</span>
+          </span>
           {d.translatorNote && <span class="translator-note" set:html={d.translatorNote} />}
         </span>
       )}
@@ -74,7 +84,12 @@ await Promise.all(langs.map(async (l) => {
   </div>
   <div class={`article-shell ${hasToc ? 'has-toc' : ''}`}>
     {hasToc && <TableOfContents headings={headings} langs={langs} />}
-    <article class="prose"><Content /></article>
+    <article class="prose">
+      <span class="document-prose-watermark" aria-hidden="true">
+        <img src="/images/emblem.svg" alt="" />
+      </span>
+      <Content />
+    </article>
   </div>
 </BaseLayout>
 
@@ -95,7 +110,7 @@ await Promise.all(langs.map(async (l) => {
           type="button"
           class={`dft-lang ${l.current ? 'current' : ''}`}
           data-doc-id={l.id}
-          data-href={withBase(l.href)}
+          data-href={l.href}
           data-has-toc={langTocMap[l.id] ? 'true' : 'false'}
         >{shortLabels[l.label] ?? l.label}</button>
       ))}
@@ -125,26 +140,48 @@ await Promise.all(langs.map(async (l) => {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin: -1.6rem auto 3rem;
+  margin: -1.6rem auto 0;
+  padding-bottom: 4.2rem;
   text-align: center;
 }
 .doc-meta-row .translator {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 1.4rem;
+  display: grid;
+  justify-items: center;
+  gap: .45rem;
+  width: min(100%, 108rem);
+  font-family: var(--font-ui);
   color: var(--ink-cream-soft);
 }
 .doc-meta-row .translator-name {
-  display: block;
-  color: var(--ink-cream);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: .55rem;
+  margin: 0;
+  line-height: 1.35;
+}
+.doc-meta-row .translator-label {
+  color: rgba(239, 231, 214, .62);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: .055em;
+}
+.doc-meta-row .translator-person {
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 1.48rem;
   font-weight: 600;
-  margin-bottom: .3rem;
+  letter-spacing: .01em;
 }
 .doc-meta-row .translator-note {
   display: block;
+  max-width: 104rem;
   font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.7;
+  font-family: var(--font-body);
+  font-size: 1.16rem;
+  line-height: 1.62;
+  color: rgba(201, 191, 169, .74);
 }
 .doc-meta-row .translator-note a {
   color: var(--gold);
@@ -153,6 +190,18 @@ await Promise.all(langs.map(async (l) => {
   transition: color .2s, border-bottom-color .2s;
 }
 .doc-meta-row .translator-note a:hover { color: #f2d78e; border-bottom-color: #f2d78e; }
+[data-theme="light"] .doc-meta-row .translator-label { color: #69766d; }
+[data-theme="light"] .doc-meta-row .translator-person { color: #1a5e3c; }
+[data-theme="light"] .doc-meta-row .translator-note { color: #687269; }
+
+@media (max-width: 640px) {
+  .doc-meta-row { padding-bottom: 3.4rem; }
+  .doc-meta-row .translator { width: min(100% - 1.2rem, 48rem); gap: .35rem; }
+  .doc-meta-row .translator-name { flex-direction: column; align-items: center; gap: .18rem; }
+  .doc-meta-row .translator-label { font-size: .98rem; }
+  .doc-meta-row .translator-person { font-size: 1.34rem; }
+  .doc-meta-row .translator-note { font-size: 1.06rem; line-height: 1.58; }
+}
 
 /* ---- Lang tab bar (kiểu ks-season-tab) ---- */
 .doc-lang-bar {
@@ -175,6 +224,19 @@ await Promise.all(langs.map(async (l) => {
 }
 .doc-lang-tab:hover { color: rgba(239, 231, 214, 0.9); }
 .doc-lang-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.prose [id^="tu-luat-"],
+.prose [id^="hien-phap-"],
+.prose [id^="ratio-"] { scroll-margin-top: 8.8rem; }
+.prose .document-anchor-target { animation:document-anchor-pulse 2.2s ease-out; }
+@keyframes document-anchor-pulse {
+  0%,24% { background:#614f23; box-shadow:0 0 0 .45rem #614f23; }
+  100% { background:transparent; box-shadow:0 0 0 0 transparent; }
+}
+[data-theme="light"] .prose .document-anchor-target { animation-name:document-anchor-pulse-light; }
+@keyframes document-anchor-pulse-light {
+  0%,24% { background:#e9ddb5; box-shadow:0 0 0 .45rem #e9ddb5; }
+  100% { background:transparent; box-shadow:0 0 0 0 transparent; }
+}
 /* light mode → overrides.css */
 
 /* ---- Lang row trong docFloatToc panel ---- */
@@ -208,14 +270,13 @@ await Promise.all(langs.map(async (l) => {
 </style>
 
 <script>
-import { withBase } from '../lib/site-path';
-
 // Ẩn #backBtn mặc định, dùng floating lang switcher thay thế
 document.getElementById('backBtn')?.remove();
+if (window.location.hash) document.body.dataset.noAutoscroll = '1';
 
-const FRAG_BASE = withBase('/documents/fragment/');
+const FRAG_BASE = '/documents/fragment/';
 
-const proseEl    = document.querySelector<HTMLElement>('.prose')!;
+const proseEl    = document.querySelector<HTMLElement>('.article-shell > article.prose')!;
 const mastheadEl = document.querySelector<HTMLElement>('.lib-masthead');
 const metaRowEl  = document.querySelector<HTMLElement>('.doc-meta-row');
 const dftLabel   = document.getElementById('dftLabel');
@@ -225,25 +286,66 @@ const cache = new Map<string, DocData>();
 const translatorSlot = document.querySelector<HTMLElement>('.doc-translator-slot');
 let currentId = document.querySelector<HTMLElement>('.dls-tab.active')?.dataset.docId ?? '';
 
+function ensureDocumentWatermark() {
+  if (proseEl.querySelector('.document-prose-watermark')) return;
+  const watermark = document.createElement('span');
+  watermark.className = 'document-prose-watermark';
+  watermark.setAttribute('aria-hidden', 'true');
+  watermark.innerHTML = '<img src="/images/emblem.svg" alt="">';
+  proseEl.prepend(watermark);
+}
+
 // ── Đánh số đoạn (N. ) đầu <p>, bỏ qua .footnotes ──
-function processArticleNums(container: Element) {
+function processArticleNums(container: Element, documentId = currentId) {
+  const anchorPrefix = documentId.replace(/-(?:vi|en)$/i, '');
   container.querySelectorAll<HTMLParagraphElement>('p').forEach((p) => {
     if (p.closest('.footnotes')) return;
     if (p.querySelector('.article-num')) return;
     const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
     const first = walker.nextNode() as Text | null;
     if (!first) return;
-    const m = first.textContent?.match(/^(\d+\.?\s)/);
+    const m = first.textContent?.match(/^(\d+\.?)(\s+|$)/);
     if (!m) return;
+    const number = m[1].replace(/\.$/, '');
+    if (!p.id && anchorPrefix) {
+      const expectedId = `${anchorPrefix}-${number}`;
+      const existing = document.getElementById(expectedId);
+      if (existing && existing !== p && existing.tagName === 'SPAN' && container.contains(existing)) existing.removeAttribute('id');
+      if (!document.getElementById(expectedId)) p.id = expectedId;
+    }
     const span = document.createElement('span');
     span.className = 'article-num';
-    span.textContent = m[1];
-    const rest = document.createTextNode((first.textContent ?? '').slice(m[1].length));
+    span.textContent = m[0];
+    const rest = document.createTextNode((first.textContent ?? '').slice(m[0].length));
     first.parentNode?.replaceChild(span, first);
     span.after(rest);
   });
 }
-processArticleNums(proseEl);
+function scrollToDocumentAnchor() {
+  if (!window.location.hash) return;
+  let anchor = window.location.hash.slice(1);
+  try { anchor = decodeURIComponent(anchor); } catch {}
+  if (currentId.startsWith('hien-phap-') && anchor.startsWith('hien-chuong-')) {
+    anchor = anchor.replace(/^hien-chuong-/, 'hien-phap-');
+    history.replaceState(history.state, '', `${window.location.pathname}${window.location.search}#${anchor}`);
+  }
+  const align = () => {
+    const target = document.getElementById(anchor);
+    if (!target) return;
+    const navbar = document.querySelector<HTMLElement>('.navbar');
+    const offset = Math.max(76, navbar?.getBoundingClientRect().bottom ?? 0) + 18;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'instant' as ScrollBehavior });
+    target.classList.add('document-anchor-target');
+    window.setTimeout(() => target.classList.remove('document-anchor-target'), 2200);
+  };
+  requestAnimationFrame(() => requestAnimationFrame(align));
+  window.setTimeout(align, 140);
+  window.setTimeout(align, 480);
+  document.fonts?.ready.then(align).catch(() => {});
+}
+processArticleNums(proseEl, currentId);
+scrollToDocumentAnchor();
 
 // Pre-cache nội dung ngôn ngữ hiện tại (đã có sẵn trong DOM)
 cache.set(currentId, {
@@ -333,11 +435,21 @@ function rebuildTocs() {
       // The initial server-rendered TOC gets its handler from
       // TableOfContents.astro. Rebuilt TOCs (e.g. Ratio after VN/EN switch)
       // need the same toggle handler attached here.
-      nav.querySelector<HTMLButtonElement>('.toc-trigger')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = shell.classList.toggle('toc-open');
-        (e.currentTarget as HTMLButtonElement).setAttribute('aria-expanded', String(open));
-      });
+      const rebuiltTrigger = nav.querySelector<HTMLButtonElement>('.toc-trigger');
+      if (rebuiltTrigger) {
+        rebuiltTrigger.dataset.tocToggleBound = 'true';
+        rebuiltTrigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const button = e.currentTarget as HTMLButtonElement;
+          const open = !shell.classList.contains('toc-open');
+          const stableToggle = (window as Window & { __setStableTocOpen?: (shell: HTMLElement, trigger: HTMLButtonElement, open: boolean) => void }).__setStableTocOpen;
+          if (stableToggle) stableToggle(shell, button, open);
+          else {
+            shell.classList.toggle('toc-open', open);
+            button.setAttribute('aria-expanded', String(open));
+          }
+        });
+      }
       sideNav = nav;
     }
     // Preserve the current state when switching language. A newly created
@@ -402,15 +514,14 @@ async function switchLang(id: string, href: string | null, push = true, _targetH
     } catch {
       proseEl.style.opacity = '';
       setActive(currentId);
-      // Static hosting fallback: navigate to the fully prerendered language page
-      // instead of leaving the control looking unresponsive.
-      if (push && href) window.location.assign(href);
       return;
     }
   }
   proseEl.innerHTML = data.contentHTML;
+  ensureDocumentWatermark();
   proseEl.style.opacity = '';
-  processArticleNums(proseEl);
+  processArticleNums(proseEl, id);
+  scrollToDocumentAnchor();
   updateHeader(data);
   rebuildTocs();
   currentId = id;

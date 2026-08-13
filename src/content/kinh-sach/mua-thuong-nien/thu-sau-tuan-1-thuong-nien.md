@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 1 Thường Niên"
 order: 6
 ---
 
-*Trích bài giảng Chống ngoại giáo của thánh A-tha-na-xi-ô, giám mục.*
+**Trích bài giảng Chống ngoại giáo của thánh A-tha-na-xi-ô, giám mục.**
 
 Trong vạn vật, không có gì hiện hữu và hình thành mà không được tác tạo và tồn tại nơi Ngôi Lời và nhờ Ngôi Lời, như nhà thần học Gio-an dạy rằng : Lúc khởi đâu đã có Ngôi Lời, Ngôi Lời hướng về Thiên Chúa và Ngôi Lời là Thiên Chúa. Nhờ Người muôn vật được tạo thành và không có Người, thì chẳng có gì được tạo thành.
 

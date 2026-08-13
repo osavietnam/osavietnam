@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 10 Thường Niên"
 order: 70
 ---
 
-*Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.*
+**Trích bài diễn giải Thánh Vịnh của thánh Am-rô-xi-ô, giám mục.**
 
 Còn gì thú vị hơn Thánh Vịnh ? Vì thế mà vua Đa-vít đã nói rất hay rằng : Hãy ca nợi Chúa đi ! Đàn hát mừng Thiên Chúa chúng ta, thú vị dường nào ! Được tán tụng Người, thoả tình biết mấy ! Đúng thế, Thánh Vịnh là lời chúc tụng của dân, là lời ngợi khen Thiên Chúa, là tiếng vỗ tay của muôn loài, là lời lẽ của vũ trụ, là tiếng nói của Hội Thánh, là lời tuyên tín vang lừng, là lòng sùng mộ đầy tràn và đích thực, là niềm hoan hỷ của con người tự do, là tiếng reo mừng, và là âm vang của niềm hoan hỷ. Thánh Vịnh làm nguôi cơn giận, giúp trút bỏ gánh âu lo, làm vượt nỗi ưu phiền. Thánh Vịnh là khí giới ban đêm, là thầy dạy ban ngày, là khiên che lúc sợ hãi, là lễ hội thánh thiện, là hình ảnh của yên tĩnh, là bảo chứng của bình an hoà thuận. Tựa cây huyền cầm, Thánh Vịnh tấu lên một ca khúc duy nhất gồm nhiều giọng khác nhau. Mặt trời ló rạng, tiếng Thánh Vịnh ngân lên. Mặt trời ngả bóng, tiếng Thánh Vịnh còn vang dội.
 

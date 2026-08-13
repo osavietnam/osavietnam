@@ -118,6 +118,7 @@ const formatDate = (date?: Date) => date
               {combinedArticles.map((article, articleIndex) => (
                 <article
                   class="spirit-gallery-card"
+                  data-article-entry={article.id}
                   data-spirit-card-category={article.category}
                   data-spirit-card-author={article.author ?? ''}
                 >
@@ -174,6 +175,7 @@ const formatDate = (date?: Date) => date
                       </span>
                     </span>
                   </a>
+                  <button type="button" class="article-inline-card-edit" data-article-inline-edit={article.id} aria-label={`Sửa ${article.title}`} title="Sửa bài viết">✎</button>
                 </article>
               ))}
             </div>
@@ -208,6 +210,7 @@ const formatDate = (date?: Date) => date
               {articles.map((article, articleIndex) => (
                 <article
                   class="spirit-gallery-card"
+                  data-article-entry={article.id}
                   data-spirit-card-category={category}
                   data-spirit-card-author={article.author ?? ''}
                 >
@@ -264,6 +267,7 @@ const formatDate = (date?: Date) => date
                       </span>
                     </span>
                   </a>
+                  <button type="button" class="article-inline-card-edit" data-article-inline-edit={article.id} aria-label={`Sửa ${article.title}`} title="Sửa bài viết">✎</button>
                 </article>
               ))}
             </div>

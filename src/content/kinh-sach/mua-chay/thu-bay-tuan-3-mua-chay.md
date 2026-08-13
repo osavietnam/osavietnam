@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 3 Mùa Chay"
 order: 27
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Na-di-en.**
 
 Kinh Thánh nói : Phúc thay ai xót thương người, vì họ sẽ được Thiên Chúa xót thương. Lòng thương xót không phải là mối phúc cuối cùng. Lại có câu : Phúc thay kẻ lưu tâm đến người nghèo khổ và Phúc thay người biết cảm thương và cho vay mượn, rồi Ngày ngày người công chính thông cảm và cho mượn cho vay. Chúng ta hãy chiếm lấy phúc lành ấy, hãy tỏ ra là người hiểu biết và đối xử nhân hậu.
 

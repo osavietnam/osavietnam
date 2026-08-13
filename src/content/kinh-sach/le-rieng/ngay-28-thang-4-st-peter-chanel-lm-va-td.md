@@ -5,16 +5,16 @@ seasonKey: "le-rieng"
 source: "Khuyết Danh"
 excerpt: "Eulogy for Peter Chanel"
 liturgy: "Ngày 28 Tháng 4: Thánh Peter Chanel, Lm. và Tđ."
-rank: ""
+rank: "opt-memorial"
 order: 49
 draft: false
 manualFill: true
 ---
 Thánh nhân sinh năm 1803 tại làng Quy-ê, nước Pháp. Người nhập hàng giáo sĩ và làm công tác mục được ít năm. Sau đó, người nhập tu hội Đức Ma-ri-a và đi loan báo Tin Mừng ở Úc châu. Tuy gặp nhiều khó khăn, người cũng giúp được một số người đón nhận đức tin. Vì thế, người bị một số người chống lại đức tin giết chết ở đảo Phu-tu-na năm 1841.
 
-Máu các vị tử đạo làm nảy sinh các Ki-tô hữu
+*Máu các vị tử đạo làm nảy sinh các Ki-tô hữu*
 
-*Bài ca ngợi thánh Phê-rô, linh mục, tử đạo.*
+**Bài ca ngợi thánh Phê-rô, linh mục, tử đạo.**
 
  
 

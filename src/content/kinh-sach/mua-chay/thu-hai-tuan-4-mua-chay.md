@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 4 Mùa Chay"
 order: 31
 ---
 
-*Trích bài giảng của linh mục O-ri-giê-nê về sách Lê-vi.*
+**Trích bài giảng của linh mục O-ri-giê-nê về sách Lê-vi.**
 
 Mỗi năm một lần, vị thượng tế để dân ở ngoài, một mình vào nơi có nắp xá tội, với hai Kê-ru-kim ở trên, có Hòm Bia Giao Ước và hương án, nơi không ai được vào, trừ một mình thượng tế.
 

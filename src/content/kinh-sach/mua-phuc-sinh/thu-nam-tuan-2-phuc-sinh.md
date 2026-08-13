@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 2 Phục Sinh"
 order: 11
 ---
 
-*Trích khảo luận của thánh Gau-đen-xi-ô, giám mục Bơ-rét-si-a.*
+**Trích khảo luận của thánh Gau-đen-xi-ô, giám mục Bơ-rét-si-a.**
 
 Lễ tế kỳ diệu do Đức Ki-tô thiết lập quả là gia bảo của Người trong giao ước mới. Gia bảo ấy, trong đêm bị trao nộp để chịu đóng đinh, Người đã để lại cho chúng ta làm bảo chứng về sự hiện diện của Người.
 

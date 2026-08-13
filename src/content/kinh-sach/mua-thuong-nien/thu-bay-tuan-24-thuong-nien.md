@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 24 Thường Niên"
 order: 168
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.*
+**Trích bài giảng của thánh Âu-tinh, giám mục, về các mục tử.**
 
 Kinh Thánh nói : Chúa có nhận ai làm con thì Người mới cho roi cho vọt. Hay bạn nói có lẽ bạn sẽ được miễn ? Nếu bạn được miễn không phải chịu đòn, thì bạn cũng sẽ được miễn khỏi ở trong số làm con. Bạn nói : Vậy con nào Chúa cũng đánh đòn sao ? Phải, con nào Người cũng đánh đòn như đã đánh đòn Người Con duy nhất. Người Con duy nhất ấy sinh bởi bản thể của Cha, cũng là Thiên Chúa như Cha, là Lời làm phát sinh vạn vật. Trước kia, Người không có thân xác để bị đánh đòn. Vì thế, Người đã mặc thân xác để có thể chịu đòn. Vậy Người Con duy nhất vô tội mà Cha còn đánh đòn, thì người con nuôi có tội, Cha lại tha chẳng đánh đòn sao ? Thánh tông đồ nói chúng ta được gọi làm nghĩa tử, để một khi đồng thừa tự với Người Con duy nhất, thì cũng được làm sản nghiệp của Người : Con cứ xin, rồi Cha ban tặng muôn dân nước làm sản nghiệp riêng. Người đã nêu gương cho chúng ta trong cuộc thương khó của Người.
 

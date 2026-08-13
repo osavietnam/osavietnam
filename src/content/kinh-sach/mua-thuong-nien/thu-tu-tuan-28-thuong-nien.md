@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 28 Thường Niên"
 order: 193
 ---
 
-*Trích sách Luận giải của thánh Mác-xi-mô Tuyên Giáo, viện phụ, gửi ông Tha-la-xi-ô.*
+**Trích sách Luận giải của thánh Mác-xi-mô Tuyên Giáo, viện phụ, gửi ông Tha-la-xi-ô.**
 
 Đèn đặt trên đế là ánh sáng của Chúa Cha, ánh sáng thật chiếu soi mọi người đến trong thế gian, đó là Đức Giê-su Ki-tô Chúa chúng ta, Đấng đã nhận lấy xác phàm của chúng ta để trở nên một người trong chúng ta ; từ đó, Người trở thành đèn, và cũng được người ta gọi là đèn. Nói cách khác, theo bản tính Người là sự khôn ngoan và Lời của Chúa Cha. Trong Hội Thánh của Thiên Chúa, Người được các tín hữu đạo đức rao giảng ; giữa muôn dân, Người được đề cao và rạng ngời vinh hiển qua đời sống của các tín hữu thực hành các nhân đức và tuân giữ những điều răn ; Người chiếu soi mọi người ở trong nhà (nghĩa là trong thế gian này), như chính Người là Thiên Chúa và là Lời nói ở đâu đó : Chẳng có ai thắp đèn rồi lấy thùng úp lại, nhưng đặt trên đế và nó soi sáng cho mọi người trong nhà. Rõ ràng Người tự gọi mình là đèn, vì Đấng theo bản tính là Thiên Chúa thì nay trở nên người phàm theo nhiệm cục cứu độ.
 

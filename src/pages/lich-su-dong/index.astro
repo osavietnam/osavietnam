@@ -27,11 +27,13 @@ const headings = [
 
   <section class="lsd-primary">
   <!-- ── Tab bar ── -->
-  <div class="lsd-tab-bar shared-tab-bar shared-tab-bar-compact" role="tablist" aria-label="Giai đoạn lịch sử">
-    <button class="lsd-tab-btn shared-tab-btn active" role="tab" id="tab-nguon-goc-btn"
-      aria-controls="panel-nguon-goc" aria-selected="true" data-tab="nguon-goc">
-      Thế kỷ IV – 1256
-    </button>
+  <div class="lsd-tab-sticky">
+    <div class="lsd-tab-bar shared-tab-bar shared-tab-bar-compact" role="tablist" aria-label="Giai đoạn lịch sử">
+      <button class="lsd-tab-btn shared-tab-btn active" role="tab" id="tab-nguon-goc-btn"
+        aria-controls="panel-nguon-goc" aria-selected="true" data-tab="nguon-goc">
+        Thế kỷ IV – 1256
+      </button>
+    </div>
   </div>
 
   <!-- ── Panel ── -->
@@ -61,15 +63,6 @@ const headings = [
 
   <AugustineLifeLibrary kind="history" />
 
-  <!-- OE toolbar -->
-  <div id="oe-bar" class="oe-bar" hidden>
-    <button id="oe-edit-btn" class="oe-bar-btn">✏ Chỉnh sửa</button>
-    <div id="oe-save-row" class="oe-save-row" hidden>
-      <span id="oe-msg" class="oe-msg"></span>
-      <button id="oe-cancel-btn" class="oe-bar-btn oe-bar-cancel">Huỷ</button>
-      <button id="oe-save-btn" class="oe-bar-btn oe-bar-save">Lưu</button>
-    </div>
-  </div>
 </BaseLayout>
 
 <style>
@@ -125,13 +118,22 @@ const headings = [
 }
 .lsd-emblem-light { display: none; }
 
-/* ── Tab bar — full width, sticky dưới navbar, đè lên TOC (z 60 > toc z 50) ── */
-.lsd-tab-bar {
-  --shared-tab-margin: 2rem auto 0;
+/* ── Sticky shell phủ đủ viewport; tab bên trong vẫn giữ chiều rộng dùng chung. ── */
+.lsd-tab-sticky {
   position: sticky;
   top: 6.58rem;
   z-index: 60;
+  width: 100vw;
+  margin: 2rem 0 0 calc(50% - 50vw);
   background: var(--bg-main, #101b33);
+}
+.lsd-tab-sticky .lsd-tab-bar.shared-tab-bar {
+  max-width: 112rem;
+  margin: 0 auto;
+  position: relative;
+  top: auto;
+  z-index: 1;
+  background: transparent;
 }
 .lsd-tab-btn {
   min-height: 4.4rem;
@@ -159,7 +161,7 @@ const headings = [
   margin-bottom: 8rem;
 }
 
-.lsd-panel #lsd-history-overview { margin-top: 0; }
+.lsd-panel #lsd-history-overview { margin-top: 2rem; }
 .lsd-panel .prose h2,
 .lsd-panel .prose h3,
 .lsd-panel .prose h4 {
@@ -173,8 +175,13 @@ const headings = [
 
 /* ── Light mode ── */
 :global([data-theme="light"]) .lsd-eyebrow { color: var(--gold-dim); }
-:global([data-theme="light"]) .lsd-tab-bar { background: var(--bg-main); }
+:global([data-theme="light"]) .lsd-tab-sticky {
+  background: var(--bg-main);
+}
 @media (max-width: 640px) {
+  .lsd-tab-sticky .lsd-tab-bar.shared-tab-bar {
+    width: calc(100% - 2 * var(--site-prose-gutter-mobile));
+  }
   .lsd-head { width:100%; padding:4.4rem 1.35rem 2.2rem; }
   .lsd-title { white-space:normal; overflow-wrap:anywhere; font-size:clamp(2.35rem, 9vw, 3.25rem); line-height:1.18; }
   .lsd-eyebrow { font-size:.9rem; letter-spacing:.14em; }
@@ -199,7 +206,7 @@ tabBtns.forEach(btn => {
 });
 
 // ── Inline editing ──
-const oeBar     = document.getElementById('oe-bar');
+const oeBar     = null;
 const oeEditBtn = document.getElementById('oe-edit-btn');
 const oeSaveRow = document.getElementById('oe-save-row');
 const oeSaveBtn = document.getElementById('oe-save-btn');
@@ -207,8 +214,8 @@ const oeCancelBtn = document.getElementById('oe-cancel-btn');
 const oeMsg     = document.getElementById('oe-msg');
 const oeFields  = document.querySelectorAll('[data-oe]');
 
-fetch('http://localhost:4322/api/page-headers')
-  .then(r => { if (r.ok) oeBar.removeAttribute('hidden'); })
+fetch(`${window.location.protocol}//${window.location.hostname}:4322/api/page-headers`)
+  .then(r => { if (r.ok) oeBar?.removeAttribute('hidden'); })
   .catch(() => {});
 
 let snapshot = {};
@@ -245,7 +252,7 @@ async function saveEdit() {
 
   oeMsg.textContent = 'Đang lưu…';
   try {
-    const res = await fetch('http://localhost:4322/api/page-headers/lich-su-dong', {
+    const res = await fetch(`${window.location.protocol}//${window.location.hostname}:4322/api/page-headers/lich-su-dong`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(ph),
@@ -262,7 +269,7 @@ async function saveEdit() {
   }
 }
 
-oeEditBtn.addEventListener('click', enterEdit);
-oeCancelBtn.addEventListener('click', cancelEdit);
-oeSaveBtn.addEventListener('click', saveEdit);
+oeEditBtn?.addEventListener('click', enterEdit);
+oeCancelBtn?.addEventListener('click', cancelEdit);
+oeSaveBtn?.addEventListener('click', saveEdit);
 </script>

@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 11 Thường Niên"
 order: 71
 ---
 
-*Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.*
+**Trích khảo luận của thánh Síp-ri-a-nô, giám mục, tử đạo, về Kinh Lạy Cha.**
 
 Khi cầu nguyện, lời lẽ cầu xin phải bình tĩnh, chừng mực và lễ độ. Nên nhớ là ta đang đứng trước tôn nhan Thiên Chúa. Từ cử chỉ, thái độ và lời ăn tiếng nói phải làm sao cho đẹp mắt Người. La lối om sòm sẽ khiếm nhã thế nào, thì ngược lại, khiêm tốn cầu xin sẽ đáng trọng như thế. Sau cùng, khi giảng dạy, Chúa đã truyền cho chúng ta phải cầu nguyện âm thầm, tại những nơi ẩn khuất và xa vắng, cả trong phòng riêng nữa. Làm như thế sẽ phù hợp với đức tin hơn, vì chúng ta biết rằng Thiên Chúa hiện diện khắp mọi nơi ; Người nghe thấy mọi người, nhìn thấy mọi người ; đầy quyền uy, Người thấu nhập cả những nơi ẩn khuất và kín đáo, như có lời chép rằng : Phải chăng Ta chỉ là Thiên Chúa khi ở gần, chứ không phải là Thiên Chúa khi ở xa ? Có ai ẩn mình trong nơi bí mật mà Ta lại không thấy ? Ta lại không làm cho trời đất đầy tràn hay sao ? Lại có lời khác rằng : Mắt ĐỨC CHÚA ở mọi nơi mọi chốn, hằng dõi theo kẻ dữ người lành.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 32 Thường Niên"
 order: 224
 ---
 
-*Trích bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Trích bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Chúng ta hãy đứng vào số những người tạ ơn, những người phụng sự Thiên Chúa, chứ đừng ở trong số những kẻ gian ác, những người bị kết án. Vì cả tôi, dù là người tội lỗi, chưa thoát khỏi cám dỗ và đang sống giữa những cạm bẫy của ma quỷ, nhưng tôi vẫn cố theo đuổi để có thể tiến gần đến sự công chính, vì sợ bị án phạt sau này.
 

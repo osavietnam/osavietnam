@@ -9,7 +9,7 @@ rank: "solemn"
 order: 6
 ---
 
-*Trích bài giáo huấn cho tân tòng tại Giê-ru-sa-lem.*
+**Trích bài giáo huấn cho tân tòng tại Giê-ru-sa-lem.**
 
 Trong đêm bị nộp, Đức Giê-su Ki-tô Chúa chúng ta cầm lấy bánh, dâng lời chúc tụng tạ ơn, rồi bẻ ra trao cho các môn đệ và nói : Anh em cầm lấy mà ăn, đây là Mình Thầy. Cũng thế, Người cầm lấy chén, dâng lời chúc tụng tạ ơn và nói : Anh em cầm lấy mà uống, đây là Máu Thầy. Vậy khi Chúa tuyên bố về bánh rằng : Đây là Mình Thầy, thì ai còn dám hồ nghi nữa ? Khi chính Người quả quyết rằng : Đây là Máu Thầy, thì ai còn nghi ngờ mà bảo rằng đây không phải là Máu của Chúa ?
 

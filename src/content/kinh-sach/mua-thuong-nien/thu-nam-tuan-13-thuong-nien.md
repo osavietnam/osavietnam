@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 13 Thường Niên"
 order: 89
 ---
 
-*Trích bài giảng của thánh Giê-rô-ni-mô, linh mục, giải thích Thánh Vịnh 41 cho tân tòng.*
+**Trích bài giảng của thánh Giê-rô-ni-mô, linh mục, giải thích Thánh Vịnh 41 cho tân tòng.**
 
 Như nai rừng mong mỏi tìm về suối nước trong, hồn con cũng trông mong được gần Ngài, lạy Chúa. Vậy như nai kia khát mong tới suối nước thế nào, thì nai của chúng ta (tức là tân tòng), sau khi đã rời khỏi Ai-cập và thế gian, đã dìm chết Pha-ra-ô trong biển và đã tiêu diệt cả đạo quân của ông trong phép rửa, nghĩa là sau khi đã giết chết tên quỷ rồi, cũng khát mong tới các mạch suối của Hội Thánh, Chúa Cha, Chúa Con và Chúa Thánh Thần như vậy.
 

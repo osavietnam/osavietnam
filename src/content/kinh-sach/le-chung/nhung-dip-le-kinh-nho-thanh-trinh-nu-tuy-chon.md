@@ -8,7 +8,7 @@ liturgy: "Những dịp Lễ Kính Nhớ Thánh Trình Nữ (tùy chọn)"
 order: 16
 ---
 
-*Trích sắc lệnh “Đức ái hoàn hảo” của công đồng Va-ti-ca-nô II, về sự canh tân thích hợp của đời tu.*
+**Trích sắc lệnh “Đức ái hoàn hảo” của công đồng Va-ti-ca-nô II, về sự canh tân thích hợp của đời tu.**
 
 Ngay từ lúc Hội Thánh khởi đầu, đã có những người nam cũng như người nữ muốn thực hành những lời khuyên Phúc Âm để theo Đức Ki-tô cách tự do hơn, noi gương Người cách chặt chẽ hơn, và dấn thân tận hiến cho Thiên Chúa mỗi người một kiểu. Nhiều người trong họ được Chúa Thánh Thần thúc đẩy, hoặc đã sống đời ẩn tu đơn độc, hoặc đã sáng lập các gia đình dòng tu. Hội Thánh đã lấy quyền mình mà đón nhận và phê chuẩn các hình thức này. Từ đó, do thánh ý Thiên Chúa, số các hội dòng đã gia tăng cách lạ lùng. Các hội dòng này đã đóng góp nhiều để Hội Thánh không những được trang bị làm mọi việc lành, được chuẩn bị để làm công việc phục vụ, là xây dựng thân thể Đức Ki-tô, mà còn được trang điểm bằng những ân huệ khác nhau của con cái, sẵn sàng như Tân Nương trang điểm để đón Tân Lang, khiến người ta nhận biết sự khôn ngoan thiên hình vạn trạng của Thiên Chúa.
 

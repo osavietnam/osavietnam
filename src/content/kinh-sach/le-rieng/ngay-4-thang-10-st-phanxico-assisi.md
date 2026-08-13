@@ -15,7 +15,7 @@ Thánh nhân sinh năm 1182, tại Át-xi-di. Từ ngày trở lại, gặp Chú
 
 </div>
 
-*Trích thư của thánh Phan-xi-cô Át-xi-di gửi cho mọi tín hữu.*
+**Trích thư của thánh Phan-xi-cô Át-xi-di gửi cho mọi tín hữu.**
 
 Chúa Cha cao cả trên trời đã sai tổng lãnh thiên thần Gáp-ri-en báo tin cho Đức Trinh Nữ Ma-ri-a thánh thiện và vinh hiển biết rằng Ngôi Lời rất đáng kính, thánh thiện và vinh hiển sẽ từ trời mà đến. Và từ cung lòng Đức Trinh Nữ, Ngôi Lời đã nhận lấy xác phàm hèn yếu của loài người chúng ta. Tuy rất mực giàu sang, nhưng chính Người đã muốn cùng với người mẹ diễm phúc của mình chọn nếp sống nghèo khó. Khi sắp chịu khổ hình, Người đã cử hành Lễ Vượt Qua với các môn đệ. Sau đó, Người đã cầu nguyện với Chúa Cha rằng : Lạy Cha, nếu có thể được, xin cất chén này khỏi con.
 

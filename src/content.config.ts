@@ -9,16 +9,18 @@ const baiViet = defineCollection({
       title: z.string(),
       subtitle: z.string().optional(),
       author: z.string().optional(),
-      authorDetails: z.array(z.string()).optional().default([]),
+      authorDetails: z.array(z.string()).nullish().transform((value) => value ?? []),
       category: z.string().optional(),
       subcategory: z.string().optional(),
       excerpt: z.string().optional(),
       date: z.coerce.date().optional(),
-      readings: z.array(z.string()).optional().default([]),
+      readings: z.array(z.string()).nullish().transform((value) => value ?? []),
       image: image().optional(),
       heroImage: image().optional(),
-      tags: z.array(z.string()).optional().default([]),
+      tags: z.array(z.string()).nullish().transform((value) => value ?? []),
       featured: z.boolean().default(false),
+      language: z.enum(['vi', 'en']).default('vi'),
+      translationOf: z.string().optional(),
       draft: z.boolean().default(false),
     }),
 });
@@ -88,7 +90,7 @@ const documents = defineCollection({
 });
 
 const tuThuat = defineCollection({
-  loader: glob({ pattern: '*.{md,mdx}', base: './src/content/tu-thuat' }),
+  loader: glob({ pattern: '*.md', base: './src/content/tu-thuat' }),
   schema: () =>
     z.object({
       title: z.string(),

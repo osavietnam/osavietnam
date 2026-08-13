@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 21 Thường Niên"
 order: 145
 ---
 
-*Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.*
+**Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.**
 
 Thưa anh em, chúng ta hãy bước theo ơn Thiên Chúa kêu gọi : sự sống kêu gọi chúng ta đến nguồn sự sống. Đây không phải chỉ là nguồn nước hằng sống, nhưng còn là nguồn mạch đem lại sự sống đời đời, là nguồn sáng rực rỡ. Tất cả phát xuất từ nguồn mạch đó : khôn ngoan, sự sống và ánh sáng vĩnh cửu. Đấng làm ra sự sống là nguồn sự sống. Đấng tạo thành ánh sáng là nguồn ánh sáng. Chúng ta hãy coi nhẹ những gì thấy được trước mặt, vượt ra cõi đời này và kiếm tìm trên trời cao cho thấy nguồn ánh sáng, nguồn sự sống, nguồn nước hằng sống như những con cá có lý trí và rất khôn ngoan, để chúng ta uống nơi nguồn mạch đó nước hằng sống, nước vọt lên đem lại sự sống đời đời.
 

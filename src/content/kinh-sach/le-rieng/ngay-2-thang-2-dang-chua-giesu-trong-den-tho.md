@@ -15,7 +15,7 @@ Dâng Chúa trong đền thánh, Chúa Ki-tô gặp gỡ dân thánh nơi con ng
 
 </div>
 
-*Trích bài giảng của thánh Xốp-rô-ni-ô, giám mục.*
+**Trích bài giảng của thánh Xốp-rô-ni-ô, giám mục.**
 
 Tất cả chúng ta là những kẻ đang sốt sắng kính thờ mầu nhiệm Đức Ki-tô, nào ta hãy nhiệt tâm ra đón Người. Đừng ai vắng mặt trong cuộc rước này, và mọi người hãy mang theo nến sáng.
 

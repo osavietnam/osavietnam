@@ -14,9 +14,9 @@ An-giê-la sinh năm 1470 tại Đê-xen-da-nô, miền Lom-bác-đi-a. Chị nh
 
 Tu luật của chị em không đặt nặng nội cấm, không lo làm nhiều việc đạo đức, nhưng tìm kiếm những mối tương quan, gặp gỡ con người trong tinh thần khôn ngoan và bác ái. Thánh nữ qua đời năm 1540.
 
-Người cai quản mọi loài thật tốt đẹp 
+*Người cai quản mọi loài thật tốt đẹp*
 
-*Trích chúc thư thiêng liêng của thánh An-giê-la, trinh nữ*
+**Trích chúc thư thiêng liêng của thánh An-giê-la, trinh nữ**
 
  
 

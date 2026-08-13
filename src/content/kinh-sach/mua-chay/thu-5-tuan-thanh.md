@@ -8,7 +8,7 @@ liturgy: "Thứ 5 Tuần Thánh"
 order: 50
 ---
 
-*Trích bài giảng của đức cha Mê-li-ton, giám mục Xác-đê, về mầu nhiệm vượt qua.*
+**Trích bài giảng của đức cha Mê-li-ton, giám mục Xác-đê, về mầu nhiệm vượt qua.**
 
 Các ngôn sứ đã nói trước nhiều điều về mầu nhiệm vượt qua là Đức Ki-tô. Xin tôn vinh Người đến muôn thuở muôn đời. A-men. Chính Người đã từ trời xuống thế vì con người đau khổ. Người đã mặc lấy con người đó trong lòng Đức Trinh Nữ và đã sinh ra làm người. Người đã hứng chịu những nỗi đau khổ của con người đau khổ trong thân xác phải đau khổ, và đã tiêu diệt những đau khổ của thân xác. Người đã lấy tinh thần không thể chết mà giết cái chết giết người.
 

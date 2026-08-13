@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 3 Phục Sinh"
 order: 14
 ---
 
-*Trích sách Minh giáo quyển thứ nhất của thánh Giút-ti-nô, tử đạo.*
+**Trích sách Minh giáo quyển thứ nhất của thánh Giút-ti-nô, tử đạo.**
 
 Không ai được quyền tham dự hy lễ tạ ơn, nếu không tin những điều chúng tôi dạy là chân thật, nếu không chịu thanh tẩy để được ơn tha tội và ơn tái sinh, đồng thời không sống theo giáo huấn Đức Ki-tô để lại.
 

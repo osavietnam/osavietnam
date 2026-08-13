@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân được tôn kính ngay từ thế kỷ thứ IV, tại Đi-ô-pô-li, xứ Pa-lét-tin. Một thánh đường đã được xây cất để kính người tại đây. Lòng tôn sùng người lan rộng khắp Đông phương và Tây phương ngay từ thời cổ.
 
-Thánh giá là cờ hiệu không gì thắng nổi
+*Thánh giá là cờ hiệu không gì thắng nổi*
 
-*Trích bài giảng của thánh Phê-rô Đa-mi-a-nô, giám mục.*
+**Trích bài giảng của thánh Phê-rô Đa-mi-a-nô, giám mục.**
 
  
 

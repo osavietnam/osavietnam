@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 14 Thường Niên"
 order: 98
 ---
 
-*Trích sách chú giải Thánh Vịnh của thánh Âu-tinh, giám mục.*
+**Trích sách chú giải Thánh Vịnh của thánh Âu-tinh, giám mục.**
 
 Vua Sa-lô-môn xưa đã xây một đền thờ cho Đức Chúa. Đó là khuôn mẫu và là hình bóng của Hội Thánh, thân mình của Chúa sau này. Vì thế, Đức Ki-tô đã nói trong Tin Mừng : Các ông cứ phá huỷ đến thờ này đi. Nội trong ba ngày, tôi sẽ xây dựng lại. Vua Sa-lô-môn xây đền thờ đó ; còn Đức Giê-su, Chúa chúng ta là Sa-lô-môn đích thực, là Bình An thực sự, đã xây một đền thờ cho mình. Tên của vua Sa-lô-môn có nghĩa là “Bình An”. Còn Đấng là bình an thực sự thì đã được thánh Phao-lô nói như sau : Chính Người là bình an của chúng ta. Người đã liên kết đôi bên thành một. Chính Người là bình an thực sự vì Người đã liên kết nơi bản thân mình hai bức tường từ hai phía khác nhau. Người trở thành tảng đá góc nối kết một bên là đoàn tín hữu thuộc giới cắt bì, với bên kia là đoàn tín hữu thuộc dân ngoại không cắt bì. Người đã làm cho đôi bên thành một Hội Thánh mà chính Người là tảng đá góc. Vì thế Người là bình an thực sự.
 

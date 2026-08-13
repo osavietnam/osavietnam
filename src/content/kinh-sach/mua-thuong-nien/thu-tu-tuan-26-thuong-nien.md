@@ -8,7 +8,7 @@ liturgy: "Thứ Tư, Tuần 26 Thường Niên"
 order: 179
 ---
 
-*Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.*
+**Trích thư của thánh Pô-li-ca-pô, giám mục, tử đạo, gửi tín hữu Phi-líp-phê.**
 
 Vậy tôi xin tất cả anh em hãy vâng nghe lời làm cho nên công chính, và hãy hết lòng luyện tập đức nhẫn nại mà anh em đã thấy tận mắt, chẳng những như các thánh I-nha-xi-ô, Do-xi-mô và Ru-phô, mà còn nơi các vị khác thuộc cộng đoàn anh em ; và nơi chính thánh Phao-lô cũng như nơi các thánh tông đồ khác. Anh em quá biết : tất cả những vị này đã không chạy vu vơ, nhưng chạy với lòng tin và ơn công chính ; các ngài được ở bên Chúa, nơi dành cho các ngài vì đã chịu khổ với Người. Quả vậy, các ngài đã không yêu thế gian, nhưng yêu mến Đấng đã chịu chết cho chúng ta và đã được Thiên Chúa cho sống lại vì chúng ta.
 

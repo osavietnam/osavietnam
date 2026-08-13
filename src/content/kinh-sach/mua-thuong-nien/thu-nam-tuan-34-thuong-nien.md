@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 34 Thường Niên"
 order: 236
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về Tin Mừng theo thánh Mát-thêu.**
 
 Bao lâu là chiên, bấy lâu ta thắng. Cho dù vô số sói dữ vây quanh, ta vẫn thắng. Nhưng nếu là sói, ta sẽ thua ; vì không còn được Đấng chăn chiên trợ giúp. Thực vậy, Chúa không chăn sói, chỉ chăn chiên. Người sẽ bỏ rơi và xa lánh bạn, vì bạn không để cho Người bày tỏ quyền năng.
 

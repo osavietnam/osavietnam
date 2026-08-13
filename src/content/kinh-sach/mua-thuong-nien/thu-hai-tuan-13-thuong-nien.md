@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 13 Thường Niên"
 order: 86
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Những lời chúng ta vừa hát diễn tả niềm tin của chúng ta : chúng ta là đoàn chiên của Thiên Chúa, vì chính Người là ĐỨC CHÚA, Thiên Chúa chúng ta, Đấng đã dựng nên chúng ta. Người là Thiên Chúa chúng ta, còn chúng ta là dân Người lãnh đạo, là đoàn chiên tay Người dẫn dắt. Nếu mục tử là người phàm, thì chiên họ có không phải chính họ đã làm ra, chiên họ chăn không phải chính họ đã tạo thành. Còn Chúa, Thiên Chúa chúng ta, vì Người vừa là Thiên Chúa vừa là Đấng sáng tạo, nên Người đã làm ra cho mình những con chiên Người có và những con chiên Người chăn. Không ai khác có thể tập hợp những con chiên mà chính Người chăn dắt, cũng không ai khác chăn dắt được những con chiên mà chính Người tập họp.
 

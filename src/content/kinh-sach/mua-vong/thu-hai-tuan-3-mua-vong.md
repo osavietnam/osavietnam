@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 3 Mùa Vọng"
 order: 16
 ---
 
-*Trích khảo luận Chiêm ngắm Thiên Chúa của viện phụ Ghi-lê-mô, đan viện thánh Thê-ô-đô-ri-cô.*
+**Trích khảo luận Chiêm ngắm Thiên Chúa của viện phụ Ghi-lê-mô, đan viện thánh Thê-ô-đô-ri-cô.**
 
 Lạy Chúa, thật chỉ có mình Ngài là Chúa. Chúa thống trị chúng con là cứu độ chúng con ; còn chúng con phục vụ Chúa, không khác gì hơn là được Chúa cứu độ.
 

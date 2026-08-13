@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh tại Pao-la, xứ Ca-la-bơ-ri-a, năm 1416. Người lập một tu hội sống đời ẩn tu, sau này đổi thành Dòng các tu sĩ rất hèn mọn. Toà Thánh đã phê chuẩn Dòng năm 1506. Người qua đời tại thánh phố Tua, nước Pháp, năm 1507.
 
-Anh em hãy thật lòng trở lại
+*Anh em hãy thật lòng trở lại*
 
-*Trích thư của thánh Phan-xi-cô Pao-la.*
+**Trích thư của thánh Phan-xi-cô Pao-la.**
 
  
 

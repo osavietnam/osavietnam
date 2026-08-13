@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 32 Thường Niên"
 order: 223
 ---
 
-*Trích bài giảng của một tác giả ở thế kỷ thứ hai.*
+**Trích bài giảng của một tác giả ở thế kỷ thứ hai.**
 
 Tôi không nghĩ rằng mình đã đưa ra lời khuyên không có giá trị về sự tiết chế đâu. Nếu ai sống theo lời khuyên ấy thì sẽ không phải hối tiếc ; nhưng vừa cứu được chính mình vừa cứu được cả tôi nữa, kẻ đã đưa ra lời khuyên. Vì đưa được một con người lầm lạc hoặc hư vong trở về đón nhận ơn cứu độ là việc có công không nhỏ. Thật vậy, chúng ta có thể đền đáp ơn Thiên Chúa, Đấng đã sáng tạo nên chúng ta, bằng cách cả kẻ nói lẫn người nghe đều lấy lòng tin và lòng mến mà nói hay nghe.
 

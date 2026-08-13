@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 16 Thường Niên"
 order: 112
 ---
 
-*Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư thứ hai gửi tín hữu Cô-rin-tô.*
+**Trích bài giảng của thánh Gio-an Kim Khẩu, giám mục, về thư thứ hai gửi tín hữu Cô-rin-tô.**
 
 Lòng chúng tôi rộng mở. Sức nóng thường làm cho một vật giãn nở thế nào, thì đức ái cũng làm cho lòng ta rộng mở như thế, vì đó là một sức nóng sôi sục. Đức ái cũng đã mở miệng thánh Phao-lô và làm cho lòng thánh nhân rộng mở. Người đã thốt lên : “Không phải tôi chỉ yêu ngoài môi miệng, nhưng cả lòng tôi cũng hoà nnhịp yêu thương. Vì thế, tôi đem hết cả miệng lưỡi và tâm trí mạnh dạn nói lên”. Thật vì không có gì rộng mở hơn tấm lòng của thánh Phao-lô. Người nhiệt tình yêu thương mọi tín hữu bằng mối tình không san sẻ hay suy yếu, nhưng khăn khít và trọn vẹn đối với từng người. Lạ lùng chi đâu khi thấy người có tâm tình như thế đối với các tín hữu, bởi vì lòng người ôm ấp cả vũ trụ, cả nhng người không tin.
 

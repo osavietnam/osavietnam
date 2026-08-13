@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 22 Thường Niên"
 order: 152
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.**
 
 Anh em thân mến, Đức Giê-su Ki-tô, Chúa chúng ta, đã rao giảng Tin Mừng Nước Trời. Người rảo khắp xứ Ga-li-lê, chữa mọi thứ bệnh tật. Các phép lạ Người làm gây tiếng vang trên toàn cõi xứ Xy-ri-a. Từ khắp miền Giu-đê, đông đảo quần chúng tìm đến vị lương y từ trời xuống. Quả vậy, những người ít học không vội tin những gì mình không thấy và hy vọng những điều mình không biết. Chính vì vậy mà để vững tin vào giáo huấn của Chúa, họ cần có những gì hữu ích cho thể xác, những dấu lạ mắt phàm thấy được. Khi cảm nghiệm quyền năng đem lại lợi ích như vậy, họ không còn hoài nghi là đạo lý của Chúa đưa người ta đến ơn cứu độ.
 

@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 22 Thường Niên"
 order: 154
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.*
+**Trích bài giảng của thánh Lê-ô Cả, giáo hoàng, về các mối phúc.**
 
 Sau khi giảng về đức khó nghèo, Chúa nói thêm : Phúc thay ai sầu khổ, vì họ sẽ được Thiên Chúa ủi an. Anh em thân mến, Chúa hứa ban niềm an ủi đời đời cho người sầu khổ ; sầu khổ ở đây không đồng nghĩa với cực khổ ở trần gian này. Những lời than vãn vọng lên từ những tiếng khóc của toàn thể nhân loại cũng chẳng làm cho ai được hạnh phúc. Người thánh thiện rên rỉ vì lý do khác. Người đạo đức buồn sầu khóc lóc tội người khác, hoặc tội mình. Người ấy không sầu khổ vì Chúa xét xử công minh, nhưng buồn vì loài người phạm tội. Ở đây người làm điều dữ thì đáng cho người ta than khóc hơn là người phải chịu sự dữ. Bởi vì sự gian ác của kẻ bất lương khiến nó bị phạt ; còn sự chịu đựng của người công chính đưa họ tới vinh quang.
 

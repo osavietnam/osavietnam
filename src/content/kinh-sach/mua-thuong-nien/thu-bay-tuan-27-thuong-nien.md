@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 27 Thường Niên"
 order: 189
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về Tin Mừng.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô Cả, giáo hoàng, về Tin Mừng.**
 
 Chúng ta hãy nghe lời Chúa nói khi sai các tông đồ đi rao giảng : Lúa chín đầy đồng mà thợ gặt lại ít. Vậy anh em hãy xin chủ mùa gặt sai thợ ra gặt lúa về. Số thợ quá ít, không đủ để gặt lúa đã chín đầy đồng : chúng tôi không thể nói tới điều đó mà không cảm thấy rất buồn, vì có những người muốn nghe điều hay điều tốt, nhưng lại thiếu kẻ nói cho họ nghe. Thế giới này đầy dẫy linh mục, nhưng hoạ lắm mới có người hoạt động trong cánh đồng của Thiên Chúa, vì chúng tôi lãnh nhận chức linh mục, nhưng lại không chu toàn trách nhiệm của chức vụ ấy.
 

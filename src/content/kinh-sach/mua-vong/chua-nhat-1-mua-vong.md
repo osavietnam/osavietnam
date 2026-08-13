@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 1 Mùa Vọng"
 order: 1
 ---
 
-*Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.*
+**Trích bài giáo huấn của thánh Sy-ri-lô, giám mục Giê-ru-sa-lem.**
 
 Chúng ta loan báo Đức Ki-tô giáng lâm. Người giáng lâm, không phải chỉ một lần, mà còn một lần khác nữa, huy hoàng hơn lần trước nhiều. Quả vậy, cuộc giáng lâm lần thứ nhất bao hàm ý nghĩa đau khổ ; còn lần thứ hai thì biểu lộ vương quyền của Thiên Chúa.
 

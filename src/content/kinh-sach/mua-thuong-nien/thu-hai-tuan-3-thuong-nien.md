@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 3 Thường Niên"
 order: 16
 ---
 
-*Trích Hiến chế Vui Mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.*
+**Trích Hiến chế Vui Mừng và Hy vọng của công đồng Va-ti-ca-nô II về Hội Thánh trong thế giới ngày nay.**
 
 Bởi giao ước hôn nhân, người nam và người nữ không còn là hai, nhưng chỉ là một xương một thịt. Họ phục vụ và giúp đỡ lẫn nhau bằng sự kết hợp mật thiết trong con người và hành động của họ. Họ cảm nghiệm và hiểu được sự hiệp nhất với nhau ngày một đầy đủ hơn. Sự kết hợp mật thiết ấy, vốn là sự tận hiến của hai người cho nhau, cũng như sự lợi ích của con cái đòi hỏi hai vợ chồng phải hoàn toàn trung tín và thúc b ách họ sống hiệp nhất bất khả phân ly.
 

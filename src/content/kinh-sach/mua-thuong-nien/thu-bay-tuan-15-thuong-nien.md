@@ -8,7 +8,7 @@ liturgy: "Thứ Bảy, Tuần 15 Thường Niên"
 order: 105
 ---
 
-*Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.*
+**Trích khảo luận của thánh Am-rô-xi-ô, giám mục, về các mầu nhiệm.**
 
 Chúng ta biết ân sủng tác động mạnh hơn tính tự nhiên. thế mà ta vẫn coi trọng lời cầu chúc của ngôn sứ trong Cứu Ước như là ân sủng. Nếu lời cầu chúc của con người có sức mạnh làm thay đổi tính tự nhiên, thì chúng ta phải nói gì về chính việc Thiên Chúa thánh hoá khi Người dùng lời của Chúa Ki-tô là Đấng Cứu Thế mà tác động ? Bởi lẽ lời Đức Ki-tô làm nên bí tích bạn lãnh nhận. Nếu lời của ngôn sứ Ê-li-a khiến được lửa từ trời xuống, thì lời của Đức Ki-tô không có sức biến đổi bản chất bánh rượu hay sao ? Trong công trình sáng tạo toàn thể vũ trụ, bạn đọc thấy những lời này : Vì Người đã phán, và muôn vật xuất hiện ; Người ra lệnh truyền, tất cả được dựng nên. Vậy lời của Đức Ki-tô vốn đã có thể tạo dựng từ không mà có, lại không thể biến vật này thành vật khác hay sao ? Quả vậy, sáng tạo ra các sự vật mới còn khó hơn biến đổi bản chất các sự vật.
 

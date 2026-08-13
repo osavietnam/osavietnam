@@ -1,0 +1,228 @@
+---
+import InlineProseEditor from './InlineProseEditor.astro';
+
+interface Props {
+  collection?: 'augustine-life' | 'augustine-works' | 'augnet-history' | 'augnet-community';
+  entryId?: string;
+  triggerSelector?: string;
+}
+
+const {
+  collection = 'augustine-life',
+  entryId = '',
+  triggerSelector = '[data-augnet-edit]',
+} = Astro.props;
+---
+
+<div class="augnet-inline-editor" data-augnet-editor-root data-default-collection={collection}>
+  {entryId && (
+    <button
+      type="button"
+      class="augnet-page-edit"
+      data-augnet-edit
+      data-collection={collection}
+      data-id={entryId}
+      aria-label="Sửa trực tiếp bài Augnet"
+      title="Sửa trực tiếp"
+    ><span aria-hidden="true">✎</span><span>Sửa bài</span></button>
+  )}
+
+  <dialog class="augnet-edit-dialog" aria-labelledby="augnetEditTitle">
+    <form method="dialog" class="augnet-edit-form">
+      <header>
+        <div><small>Biên tập trực tiếp · Augnet</small><h2 id="augnetEditTitle">Bài Augnet</h2></div>
+        <button type="button" class="augnet-edit-close" aria-label="Đóng">×</button>
+      </header>
+
+      <div class="augnet-edit-fields">
+        <label class="is-full"><span>Tiêu đề tiếng Việt</span><input data-field="titleVi" type="text" /></label>
+        <label class="is-full"><span>Tiêu đề tiếng Anh</span><input data-field="titleEn" type="text" /></label>
+        <label><span>Chuyên mục</span><input data-field="category" type="text" /></label>
+        <label><span>Trạng thái nội dung</span>
+          <select data-field="translationStatus">
+            <option value="placeholder">Chưa có nội dung</option>
+            <option value="draft">Bản nháp</option>
+            <option value="translated">Xuất bản</option>
+          </select>
+        </label>
+        <label class="is-full"><span>Liên kết nguồn Augnet</span><input data-field="sourceUrl" type="url" /></label>
+        <div class="is-full"><InlineProseEditor dataField="body" label="Nội dung bài Augnet" /></div>
+      </div>
+
+      <footer>
+        <p data-editor-message role="status"></p>
+        <button type="button" class="augnet-edit-cancel">Hủy</button>
+        <button type="submit" class="augnet-edit-save">Lưu thay đổi</button>
+      </footer>
+    </form>
+  </dialog>
+</div>
+
+<script define:vars={{ collection, entryId, triggerSelector }}>
+(() => {
+  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const root = document.querySelector('[data-augnet-editor-root]:not([data-ready])');
+  if (!root) return;
+  if (document.documentElement.dataset.augnetInlineEditorReady === 'true') {
+    root.remove();
+    return;
+  }
+  document.documentElement.dataset.augnetInlineEditorReady = 'true';
+  root.dataset.ready = 'true';
+  const dialog = root.querySelector('.augnet-edit-dialog');
+  const form = root.querySelector('.augnet-edit-form');
+  const heading = root.querySelector('#augnetEditTitle');
+  const message = root.querySelector('[data-editor-message]');
+  const saveButton = root.querySelector('.augnet-edit-save');
+  const fields = Object.fromEntries(
+    Array.from(root.querySelectorAll('[data-field]')).map((field) => [field.dataset.field, field]),
+  );
+  let active = null;
+  let activeCollection = collection;
+
+  const request = async (path, options) => {
+    const response = await fetch(ADMIN + path, options);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    return data;
+  };
+  const setMessage = (text = '', error = false) => {
+    message.textContent = text;
+    message.classList.toggle('is-error', error);
+  };
+  const setValue = (key, value = '') => { if (fields[key]) fields[key].value = value ?? ''; };
+
+  async function openEditor(id, nextCollection) {
+    if (!id) return;
+    activeCollection = nextCollection || collection;
+    dialog.showModal();
+    saveButton.disabled = true;
+    setMessage('Đang tải…');
+    try {
+      active = await request(`/api/studio/item?collection=${encodeURIComponent(activeCollection)}&id=${encodeURIComponent(id)}`);
+      const fm = active.fm || {};
+      heading.textContent = fm.titleVi || fm.titleEn || fm.title || id;
+      setValue('titleVi', fm.titleVi);
+      setValue('titleEn', fm.titleEn || fm.title);
+      setValue('category', fm.category);
+      setValue('sourceUrl', fm.sourceUrl);
+      setValue('translationStatus', fm.translationStatus || 'placeholder');
+      setValue('body', active.body);
+      fields.body.closest('[data-inline-prose-editor]')?.dispatchEvent(new CustomEvent('inline-prose:set'));
+      saveButton.disabled = false;
+      setMessage('');
+      requestAnimationFrame(() => fields.body?.focus());
+    } catch (error) {
+      active = null;
+      setMessage(error instanceof Error ? error.message : 'Không thể tải bài', true);
+    }
+  }
+
+  function closeEditor() {
+    active = null;
+    dialog.close();
+  }
+
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest(triggerSelector);
+    if (!trigger) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    openEditor(trigger.dataset.id || entryId, trigger.dataset.collection || collection);
+  }, true);
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!active || !form.reportValidity()) return;
+    saveButton.disabled = true;
+    setMessage('Đang lưu…');
+    const fm = {
+      ...active.fm,
+      titleVi: fields.titleVi.value.trim(),
+      titleEn: fields.titleEn.value.trim(),
+      category: fields.category.value.trim(),
+      sourceUrl: fields.sourceUrl.value.trim(),
+      translationStatus: fields.translationStatus.value,
+    };
+    try {
+      const result = await request('/api/studio/item', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collection: activeCollection,
+          id: active.id,
+          originalId: active.id,
+          fm,
+          body: fields.body.value,
+          extension: active.extension,
+          checksum: active.checksum,
+        }),
+      });
+      setMessage('Đã lưu. Đang cập nhật trang…');
+      setTimeout(() => {
+        if (entryId && result.route) location.href = result.route;
+        else location.reload();
+      }, 450);
+    } catch (error) {
+      saveButton.disabled = false;
+      setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true);
+    }
+  });
+
+  root.querySelector('.augnet-edit-close')?.addEventListener('click', closeEditor);
+  root.querySelector('.augnet-edit-cancel')?.addEventListener('click', closeEditor);
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeEditor(); });
+
+  request('/api/studio/manifest').then(() => {
+    document.body.dataset.augnetAdmin = 'true';
+    document.querySelectorAll('[data-augnet-admin-only][hidden]').forEach((node) => node.removeAttribute('hidden'));
+    document.dispatchEvent(new CustomEvent('augnet-admin-ready'));
+  }).catch(() => root.remove());
+})();
+</script>
+
+<style is:global>
+  .augnet-page-edit {
+    position:fixed; right:1.2rem; bottom:6rem; z-index:80; display:none; align-items:center; gap:.5rem;
+    min-height:3.3rem; padding:.65rem .9rem; border:1px solid #c99a49; border-radius:.45rem;
+    color:#102118; background:#e9c176; font:600 1rem/1 var(--font-ui); cursor:pointer;
+  }
+  body[data-augnet-admin="true"] .augnet-page-edit { display:inline-flex; }
+  .augnet-index-edit { display:none; width:3rem; height:3rem; padding:0; place-items:center; align-self:center; border:1px solid #c99a49; border-radius:.4rem; color:#e9c176; background:#17231e; cursor:pointer; }
+  body[data-augnet-admin="true"] .augnet-index-edit { display:grid; }
+  .augnet-index-edit:hover,.augnet-index-edit:focus-visible { color:#102118; background:#e9c176; outline:2px solid rgba(233,193,118,.25); outline-offset:2px; }
+  .augnet-edit-dialog { width:min(86rem,calc(100vw - 2.4rem)); max-height:calc(100dvh - 2.4rem); padding:0; overflow:auto; border:1px solid rgba(233,193,118,.34); border-radius:.75rem; color:var(--ink-cream); background:#101c18; box-shadow:0 2rem 5rem rgba(0,0,0,.46); }
+  .augnet-edit-dialog::backdrop { background:rgba(3,7,12,.72); backdrop-filter:blur(4px); }
+  .augnet-edit-form>header,.augnet-edit-form>footer { display:flex; align-items:center; gap:1rem; padding:1.25rem 1.5rem; }
+  .augnet-edit-form>header { justify-content:space-between; border-bottom:1px solid rgba(233,193,118,.18); }
+  .augnet-edit-form>header small { display:block; margin-bottom:.25rem; color:#e9c176; font:600 .9rem/1.4 var(--font-ui); letter-spacing:.1em; text-transform:uppercase; }
+  .augnet-edit-form>header h2 { margin:0; color:var(--ink-cream); font:600 1.9rem/1.25 var(--font-display); }
+  .augnet-edit-close { width:3rem; height:3rem; padding:0; border:0; border-radius:50%; color:var(--ink-cream-soft); background:transparent; font:300 2.4rem/1 var(--font-ui); cursor:pointer; }
+  .augnet-edit-fields { display:grid; grid-template-columns:1fr 1fr; gap:1.05rem; padding:1.5rem; }
+  .augnet-edit-fields label { display:flex; min-width:0; flex-direction:column; gap:.42rem; }
+  .augnet-edit-fields label>span { color:var(--ink-cream-soft); font:500 1rem/1.35 var(--font-ui); }
+  .augnet-edit-fields .is-full { grid-column:1/-1; }
+  .augnet-edit-fields input,.augnet-edit-fields select,.augnet-edit-fields textarea { width:100%; padding:.78rem .9rem; border:1px solid rgba(233,193,118,.26); border-radius:.45rem; color:var(--ink-cream); background:#0b1612; font:400 1.08rem/1.5 var(--font-ui); }
+  .augnet-edit-fields textarea { min-height:48vh; resize:vertical; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:1rem; line-height:1.65; }
+  .augnet-edit-form>footer { justify-content:flex-end; border-top:1px solid rgba(233,193,118,.18); }
+  .augnet-edit-form>footer p { flex:1; margin:0; color:var(--ink-cream-soft); font:500 .95rem/1.4 var(--font-ui); }
+  .augnet-edit-form>footer p.is-error { color:#ff9d91; }
+  .augnet-edit-form>footer button { min-height:3.2rem; padding:.65rem 1rem; border:1px solid rgba(233,193,118,.38); border-radius:.45rem; color:var(--ink-cream); background:transparent; font:600 1rem/1 var(--font-ui); cursor:pointer; }
+  .augnet-edit-form>footer .augnet-edit-save { color:#102118; background:#e9c176; border-color:#e9c176; }
+  .augnet-edit-form button:disabled { opacity:.5; cursor:wait; }
+  html[data-theme="light"] .augnet-edit-dialog { color:#183e2c; background:#fffdf8; border-color:rgba(24,62,44,.26); }
+  html[data-theme="light"] .augnet-edit-form>header,html[data-theme="light"] .augnet-edit-form>footer { border-color:rgba(24,62,44,.14); }
+  html[data-theme="light"] .augnet-edit-form>header h2 { color:#183e2c; }
+  html[data-theme="light"] .augnet-edit-fields label>span,html[data-theme="light"] .augnet-edit-form>footer p { color:#50685a; }
+  html[data-theme="light"] .augnet-edit-fields input,html[data-theme="light"] .augnet-edit-fields select,html[data-theme="light"] .augnet-edit-fields textarea { color:#183e2c; background:#fff; border-color:rgba(24,62,44,.24); }
+  html[data-theme="light"] .augnet-index-edit { color:#fff; background:#27664c; border-color:#27664c; }
+  @media(max-width:640px){
+    .augnet-page-edit { right:.8rem; bottom:5.4rem; width:3.2rem; justify-content:center; padding:0; }
+    .augnet-page-edit span:last-child { display:none; }
+    .augnet-edit-fields { grid-template-columns:1fr; padding:1.1rem; }
+    .augnet-edit-fields .is-full { grid-column:auto; }
+    .augnet-edit-form>footer { flex-wrap:wrap; padding:1rem 1.1rem; }
+    .augnet-edit-form>footer p { flex-basis:100%; }
+  }
+</style>

@@ -8,7 +8,7 @@ liturgy: "Thứ Hai, Tuần 5 Phục Sinh"
 order: 29
 ---
 
-*Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.*
+**Trích bài giảng của thánh Ghê-gô-ri-ô, giám mục Nít-xê.**
 
 Triều đại của sự sống tới thì vương quyền của sự chết tiêu tan. Thật thế, đã xuất hiện một cuộc sinh ra khác, một cuộc đời khác, một cách sống khác, một sự thay đổi chính bản tính của chúng ta. Vậy sinh ra thế nào ? Sinh ra không phải do khí huyết, cũng chẳng do ước muốn của nhục thể, hoặc do ước muốn của người đàn ông, nhưng do bởi Thiên Chúa.
 

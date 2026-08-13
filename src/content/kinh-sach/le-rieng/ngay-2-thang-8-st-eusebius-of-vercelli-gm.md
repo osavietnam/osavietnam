@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh khoảng đầu thế kỷ thứ IV tại Xác-đi-ni-a. Từ năm 345 đến 371, người làm giám mục Véc-se-li. Người đã bị đày sang Đông phương vì nhất định trung thành với tín điều Đức Giêsu là Thiên Chúa, tín điều đã được công đồng Ni-xê-a xác định. Khi lưu đày trở về (361), người đã quyết định sống chung với các giáo sĩ, chia sẻ hoạt động mục vụ. Người đi tiên phong về điểm này. Người qua đời ở Véc-se-li năm 371.
 
-Tôi đã chạy hết chặng đường, đã giữ vững đức tin.
+*Tôi đã chạy hết chặng đường, đã giữ vững đức tin.*
 
-*Trích thư của thánh Êu-xê-bi-ô, giám mục Véc-se-li.* 
+**Trích thư của thánh Êu-xê-bi-ô, giám mục Véc-se-li.**
 
  
 

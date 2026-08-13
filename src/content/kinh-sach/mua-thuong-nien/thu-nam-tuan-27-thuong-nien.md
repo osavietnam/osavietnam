@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 27 Thường Niên"
 order: 187
 ---
 
-*Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Phi-la-đen-phi-a.*
+**Trích thư của thánh I-nha-xi-ô An-ti-ô-khi-a, giám mục, tử đạo, gửi tín hữu Phi-la-đen-phi-a.**
 
 Tôi là I-nha-xi-ô cũng gọi là Thê-ô-phô-rô, kính gửi Hội Thánh của Thiên Chúa Cha và của Chúa Giê-su Ki-tô ở Phi-la-đen-phi-a thuộc miền A-xi-a. Hội Thánh này được Thiên Chúa xót thương, vẫn một lòng hoà hợp với Thiên Chúa, luôn hoan hỷ trong cuộc thương khó của Chúa chúng ta, và nhờ cuộc phục sinh của Người, được hiểu biết đầy đủ về lòng thương xót của Thiên Chúa. Tôi kính chào Hội Thánh Phi-la-den-phi-a trong máu Đức Giê-su Ki-tô. Hội Thánh này là niềm vui muôn đời và bền vững của tôi, nhất là khi các tín hữu hợp nhất với giám mục, với các linh mục và phó thế được chỉ định theo ý của Đức Ki-tô. Người đã củng cố vững vàng các vị ấy theo ý muốn của Người nhờ Thánh Thần.
 

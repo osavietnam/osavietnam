@@ -8,7 +8,7 @@ liturgy: "Thứ Ba, Tuần 28 Thường Niên"
 order: 192
 ---
 
-*Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.*
+**Trích bài huấn đức của thánh Cô-lum-ban, viện phụ.**
 
 Thật là hạnh phúc và sung sướng cho những đầy tớ mà khi chủ về gặp thấy vẫn còn tỉnh thức. Thật là cuộc canh thức hồng phúc, khi người ta canh thức đón chờ Thiên Chúa, Đấng sáng tạo muôn loài, hiện hữu trong vạn vật và vượt lên trên tất cả.
 

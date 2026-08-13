@@ -15,7 +15,7 @@ Thánh nữ sinh năm 1193 tại Át-xi-di. Năm 18 tuổi, chị xin thánh Pha
 
 </div>
 
-*Trích thư của thánh Cơ-la-ra, trinh nữ, gửi chân phước A-nê Pơ-ra-ga.*
+**Trích thư của thánh Cơ-la-ra, trinh nữ, gửi chân phước A-nê Pơ-ra-ga.**
 
 Hạnh phúc thay người được tham dự bàn tiệc thánh để được hết lòng kết hợp với Đức Ki-tô. Toàn thể thiên quốc không ngừng thán phục vẻ đẹp của Người. Yêu mến Người thì sẽ say mê, chiêm ngưỡng Người thì được thêm sức mạnh. Lòng nhân hậu của Người làm ta no thoả, sự dịu dàng của Người làm ta ngây ngất. Nhớ đến Người tựa như được ánh sáng êm dịu chiếu soi. Hương thơm của Người làm kẻ chết hồi sinh. Nhìn vinh quang của Người, mọi công dân thành Giê-ru-sa-lem thiên quốc được hạnh phúc. Vì Người là phản ánh vinh quang ngàn đời, là vẻ rực rỡ của ánh sáng vĩnh cửu, là tấm gương không chút tì ố. Thưa hoàng hậu, hiền thê của Đức Giê-su Ki-tô, xin bà hằng ngày hãy soi mình vào tấm gương ấy, và cũng hãy nhìn kỹ khuôn mặt của bà trong đó ; nhờ vậy, bà trang điểm cả bề trong lẫn bề ngoài bằng trang phục huy hoàng lộng lẫy, bằng vòng hoa và xiêm y nhân đức, xứng đáng là nữ tử và hiền thê của Đức Vua cao cả. Nhưng trong tấm gương ấy còn phản ảnh đức khó nghèo diễm phúc, đức khiêm nhường thánh thiện, và đức bác ái tuyệt vời. Nhờ ơn Thiên Chúa, qua tấm gương trọn vẹn này, bà có thể chiêm ngắm tất cả.
 

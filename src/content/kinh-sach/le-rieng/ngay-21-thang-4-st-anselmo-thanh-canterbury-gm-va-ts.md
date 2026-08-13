@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh năm 1033 tại A-ốt-ta, miền Pi-e-mông (nước Pháp). Người nhập Dòng thánh Biển-đức và sống tại đan viện Béc. Người dạy thần học cho anh em trong Dòng, sau đó người được thuyên chuyển sang Anh quốc và được chọn làm giám mục giáo phận Can-tơ-bơ-ri. Người can đảm tranh đấu cho quyền tự do của Hội Thánh nên hai lần bị lưu đày. Người viết nhiều tác phẩm danh tiếng về thần học tu đức. Người qua đời năm 1109.
 
-Xin cho con nhận biết và yêu mến Chúa, để con tìm được niềm vui trong Ngài
+*Xin cho con nhận biết và yêu mến Chúa, để con tìm được niềm vui trong Ngài*
 
-*Trích sách Minh giải của thánh An-xen-mô, giám mục.*
+**Trích sách Minh giải của thánh An-xen-mô, giám mục.**
 
  
 

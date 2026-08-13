@@ -15,7 +15,7 @@ order: 4
 
 </div>
 
-*Trích bài giảng của thánh Quất-vun-đê-ô, giám mục.*
+**Trích bài giảng của thánh Quất-vun-đê-ô, giám mục.**
 
 Một trẻ thơ mới chào đời : đó là Vua cao cả. Các nhà chiêm tinh từ miền xa xôi tới. Các ông đến thờ lạy Đấng lúc này đang nằm trong máng cỏ, nhưng lại là Vua trời đất. Khi nghe các nhà chiêm tinh báo tin có vị Vua cao cả đã chào đời, vua Hê-rô-đê dao động. Và để khỏi mất ngôi vua, ông đã muốn thủ tiêu Người. Giả như ông tin Người thì ở dưới thế này ông đã được sống yên ổn ; và trong cuộc sống mai sau, ông sẽ được hiển trị muôn đời.
 

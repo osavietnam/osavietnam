@@ -8,7 +8,7 @@ liturgy: "Từ ngày 2 Tháng 1 đến Lễ Hiển Linh, Thứ Năm"
 order: 12
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Ai trong loài người biết được hết kho tàng khôn ngoan và trí thức ẩn giấu trong Đức Ki-tô và chôn vùi trong tấm thân nghèo khó của Người ? Người vốn giàu sang phú quý, nhưng đã trở nên nghèo khó vì chúng ta, để nhờ cái nghèo của Người, chúng ta nên giàu có. Quả thật, vì Người chấp nhận thân phận phải chết và huỷ diệt sự chết, nên Người đã tỏ mình ra trong thân phận khó nghèo. Nhưng Người hứa ban của cải mai sau và Người không mất đi của cải Người đã tạm từ bỏ.
 

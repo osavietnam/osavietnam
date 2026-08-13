@@ -8,7 +8,7 @@ liturgy: "Thứ 6 Tuần Thánh"
 order: 51
 ---
 
-*Trích bài giáo huấn của thánh Gio-an Kim Khẩu, giám mục.*
+**Trích bài giáo huấn của thánh Gio-an Kim Khẩu, giám mục.**
 
 Bạn muốn nghe nói về giá trị của máu Đức Ki-tô ư ? Chúng ta hãy trở về với hình ảnh báo trước, nhớ lại máu cũ, cùng kể Iại chuyện xưa về máu.
 

@@ -15,7 +15,7 @@ Ngay từ giây phút đầu tiên trong đời, Đức Ma-ri-a đã được g�
 
 </div>
 
-*Trích bài giảng của thánh An-xen-mô, giám mục.*
+**Trích bài giảng của thánh An-xen-mô, giám mục.**
 
 Trời cao và tinh tú, đất thấp với sông ngòi, ngày lẫn đêm cùng bất cứ những gì thuộc quyền cai trị và sử dụng của con người đều hân hoan ; vì, lạy Mẹ Ma-ri-a là bà chúa, chính nhờ Mẹ mà tất cả đã được sống lại với vẻ đẹp nguyên thuỷ và được ban tặng một hồng ân mới, hồng ân khôn tả. Vì chưng mọi sự ra như đã chết khi đánh mất phẩm giá bẩm sinh của chúng, là được dựng nên cho những người ca tụng Thiên Chúa, để những người đó thống trị và hưởng dùng, nhưng chúng đã bị chà đạp và ra xấu xa vì bị những kẻ tôn thờ ngẫu tượng sử dụng sai trái. Chúng đã được dựng nên không phải cho những hạng người như thế. Nhưng nay chúng vui mừng như được sống lại, vì chúng được những người tuyên xưng Thiên Chúa điều khiển và sử dụng vào mục đích tốt đẹp.
 

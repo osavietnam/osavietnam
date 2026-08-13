@@ -5,8 +5,8 @@
       "label": "Về Dòng Augustinô",
       "title": "Hành Trình Tám Thế Kỷ",
       "paragraphs": [
-        "Dòng Ẩn Tu Thánh Augustinô (OSA) bắt nguồn từ lý tưởng cộng đoàn mà Thánh Augustinô xây dựng tại Bắc Phi thế kỷ IV, và được Giáo Hội chính thức thành lập qua sắc chỉ của Đức Giáo Hoàng Innocent IV năm 1243. Đại Liên Kết 1256 hợp nhất các cộng đoàn ẩn tu châu Âu, đặt nền móng cho hơn tám thế kỷ hiện diện trong Giáo Hội.",
-        "Nếu anh cảm nhận tiếng gọi sống thánh hiến — khao khát tìm kiếm Thiên Chúa trong tình huynh đệ và phục vụ — có thể Chúa đang mời anh vào con đường này."
+        "Dòng Thánh Augustinô (OSA) bắt nguồn từ lý tưởng cộng đoàn của Thánh Augustinô tại Bắc Phi thế kỷ IV, và được Giáo Hội chính thức thành lập qua sắc chỉ của Đức Giáo Hoàng Innocent IV năm 1243. Đại Liên Kết 1256 hợp nhất các cộng đoàn ẩn tu châu Âu, đặt nền móng cho hơn tám thế kỷ hiện diện trong Giáo Hội.",
+        ""
       ],
       "link": {
         "text": "Lịch sử Dòng →",
@@ -19,8 +19,8 @@
       "title": "Thánh Augustinô thành Hippô",
       "caption": "354 – 430\n· Giám Mục · Tiến Sĩ Hội Thánh",
       "paragraphs": [
-        "Sinh năm 354 tại Tagaste, Bắc Phi, Augustinô trải qua một cuộc đời tìm kiếm chân lý trước khi trở về với Thiên Chúa năm 387. Từ kinh nghiệm hoán cải sâu sắc đó, ngài xây dựng lý tưởng cộng đoàn tu trì: sống chung trong tình huynh đệ, cùng tìm kiếm Thiên Chúa bằng trí tuệ và trái tim.",
-        "Linh đạo Augustinô đặt tình yêu làm trung tâm — yêu Thiên Chúa hết lòng và yêu tha nhân như chính mình. Tu Luật ngài để lại vẫn là nền tảng sống còn của Dòng sau hơn tám thế kỷ."
+        "Sinh năm 354 tại Tagaste, Bắc Phi, Thánh Augustinô đã trải qua một hành trình tìm kiếm chân lý miệt mài trước khi chịu phép rửa năm 387. Từ kinh nghiệm hoán cải sâu sắc đó, ngài xây dựng lý tưởng cộng đoàn tu trì: sống chung trong tình huynh đệ, cùng tìm kiếm Thiên Chúa bằng trí tuệ và trái tim.",
+        "Linh đạo Augustinô đặt tình yêu làm trung tâm — yêu Thiên Chúa hết lòng và yêu tha nhân như chính mình."
       ],
       "link": {
         "text": "Khám phá cuộc đời Thánh Augustinô →",
@@ -33,7 +33,7 @@
       "title": "Cùng Nhau Tìm Thiên Chúa",
       "paragraphs": [
         "Cốt lõi đời Augustinô là sống với nhau — cùng bàn, cùng nguyện, cùng phục vụ. Tu Luật Thánh Augustinô đặt nền trên tình huynh đệ và sự tìm kiếm Thiên Chúa trong cộng đoàn.",
-        "Tại các cộng đoàn ở Việt Nam, đời sống diễn ra trong nhịp kinh thần vụ, học hỏi, mục vụ và chia sẻ huynh đệ — mỗi ngày là hành trình chung hướng về Thiên Chúa."
+        "Đời sống cộng đoàn mỗi ngày là hành trình chung hướng về Thiên Chúa."
       ]
     },
     {
@@ -46,7 +46,7 @@
           "desc": "Gặp gỡ cộng đoàn, tham dự các ngày tìm hiểu ơn gọi, tiếp xúc với đời sống Augustinô trước khi quyết định tiến xa hơn."
         },
         {
-          "name": "Giai đoạn Sống Thử",
+          "name": "Giai đoạn Come & See",
           "desc": "Ở lại với cộng đoàn một thời gian, tham gia đời sống hằng ngày để cùng phân định ơn gọi."
         },
         {
@@ -60,18 +60,46 @@
       ]
     }
   ],
+  "media": {
+    "banner": [
+      "/images/on-goi/Capture.PNG",
+      "/images/on-goi/demo-1.jpg",
+      "/images/on-goi/demo-2.jpg"
+    ],
+    "history": [
+      "/images/on-goi/demo-1.jpg",
+      "/images/on-goi/demo-3.jpg"
+    ],
+    "augustinePortrait": "/db/saints/images/st-augustine-of-hippo.jpg",
+    "community": [
+      "/images/on-goi/demo-2.jpg"
+    ],
+    "journey": [
+      "/images/on-goi/demo-2.jpg",
+      "/images/on-goi/demo-1.jpg"
+    ]
+  },
   "quotes": [
     {
       "text": "\"Anh em đừng sống theo kiểu riêng tư, nhưng hãy sống với nhau trong một nhà, cùng một tâm hồn và một trái tim hướng về Thiên Chúa.\"",
-      "cite": "— Thánh Augustinô · <em>Tu Luật</em>, 2"
+      "cite": "— Thánh Augustinô · <em>Tu Luật</em>, 2",
+      "source": {
+        "work": "manual"
+      }
     },
     {
       "text": "\"Tâm hồn chúng con khắc khoải cho tới khi được nghỉ ngơi trong Chúa.\"",
-      "cite": "— Thánh Augustinô · <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>"
+      "cite": "— Thánh Augustinô · <a href=\"/tu-thuat/?book=quyen-1#đoạn-i-con-người-muốn-ngợi-khen-thiên-chúa-nhưng-lại-lưỡng-lự-về-hình-thức-kinh-nguyện-của-mình\"><em>Tự Thuật</em>, I, 1</a>",
+      "source": {
+        "work": "manual"
+      }
     },
     {
       "text": "\"Hãy yêu mến Thiên Chúa và tha nhân — đó là điều răn chính yếu được ban cho chúng ta.\"",
-      "cite": "— Thánh Augustinô · <em>Tu Luật</em>, 1"
+      "cite": "— Thánh Augustinô · <em>Tu Luật</em>, 1",
+      "source": {
+        "work": "manual"
+      }
     }
   ]
 }

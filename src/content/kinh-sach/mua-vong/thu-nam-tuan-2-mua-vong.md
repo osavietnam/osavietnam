@@ -8,7 +8,7 @@ liturgy: "Thứ Năm, Tuần 2 Mùa Vọng"
 order: 12
 ---
 
-*Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.*
+**Trích bài giảng của thánh Phê-rô Kim Ngôn, giám mục.**
 
 Khi thấy thế gian chìm ngập trong sợ hãi, Thiên Chúa không ngừng hành động. Người lấy tình thương mà kêu gọi, lấy ân sủng mà thúc giục, lấy đức ái mà giữ gìn, và lấy sự dịu dàng mà ấp ủ.
 

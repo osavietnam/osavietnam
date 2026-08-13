@@ -14,7 +14,7 @@
         margin-left: 0;
         margin-right: 0;
     }
-
+    
     /* --- Typography Adjustments --- */
     h1 { font-size: 3.2rem; }
     h2 { font-size: 2.8rem; }
@@ -25,7 +25,7 @@
     #tocWrapper {
         /* This !important rule will force the TOC to be visible */
         display: block !important;
-
+        
         position: static;
         width: 100%;
         max-width: 100%;
@@ -73,7 +73,7 @@
         gap: 0.5rem; /* Tighter spacing for sub-items */
         border-left: 2px solid rgba(212, 173, 74, 0.1); /* Add visual indicator */
     }
-
+    
     /* Style for sub-list items */
     #tocWrapper .toc ul ul li a {
         font-size: 1.6rem; /* Slightly smaller font for sub-items */

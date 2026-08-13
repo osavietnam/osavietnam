@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 14 Thường Niên"
 order: 92
 ---
 
-*Trích bài giảng của thánh Âu-tinh, giám mục.*
+**Trích bài giảng của thánh Âu-tinh, giám mục.**
 
 Vua Đa-vít nói : Con biết tội mình đã phạm. Con đã nhận tội thì xin Chúa bỏ qua cho. Dù sống tốt lành, chúng ta cũng đừng tự phụ là mình không có tội. Hãy sống cho đẹp lòng Chúa để được Chúa thứ tha. Kẻ nào càng ít để ý đến tội mình, thì càng xoi mói tội của người khác : đó là những người không có niềm hy vọng. Họ không lo sửa sai mà chỉ lo cắn xé. Vì không thể chữa mình, nên họ sẵn sàng đổ lỗi cho người khác. Vua Đa-vít không xử sự như thế. Người đã nêu gương cho chúng ta phải biết cầu nguyện và làm đẹp lòng Thiên Chúa thế nào. Người nói : Con biết tội mình đã phạm, lỗi lầm cứ ám ảnh ngày đêm. Người không để ý đến tội kẻ khác. Người tự tố giác chứ không tâng bốc chính mình. Người đi vào nội tâm mà xuống sâu tận đáy lòng. Người không tự tha thứ, cũng không trơ trẽn đòi người ta phải tha thứ cho mình.
 

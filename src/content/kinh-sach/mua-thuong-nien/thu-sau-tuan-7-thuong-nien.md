@@ -8,7 +8,7 @@ liturgy: "Thứ Sáu, Tuần 7 Thường Niên"
 order: 48
 ---
 
-*Trích bài diễn giải của thánh Ghê-gô-ri-ô, giám mục A-ri-ghen-tô, về sách Giảng Viên.*
+**Trích bài diễn giải của thánh Ghê-gô-ri-ô, giám mục A-ri-ghen-tô, về sách Giảng Viên.**
 
 Hãy đến, hãy vui vẻ ăn bánh và hoan hỷ uống rượu, vì Thiên Chúa đã vui nhận những việc bạn làm.
 

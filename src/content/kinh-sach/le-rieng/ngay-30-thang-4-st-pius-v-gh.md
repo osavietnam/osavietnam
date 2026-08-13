@@ -12,9 +12,9 @@ manualFill: true
 ---
 Thánh nhân sinh năm 1504 tại Bốt-cô Ma-ren-gô, gần A-lê-xan-dri-a (I-ta-li-a). Người nhập Dòng Anh Em Thuyết Giáo và được giao nhiệm vụ dạy thần học. Người lần lượt làm giám mục, hồng y rồi cuối cùng làm giáo hoàng năm 1566. Trong sáu năm làm giáo hoàng, người ra sức thực hiện công cuộc canh tân theo các nghị quyết Công đồng Tren-tô đã ra. Người công bố sách Giáo Lý của Công đồng, Sách Nguyện và Sách Lễ Rô-ma. Sau cùng, Người quy định cách đọc và ra sức truyền bá kinh Mân Côi.
 
-Hội Thánh được xây dựng trên Đá Tảng là Đức Giê-su Ki-tô
+*Hội Thánh được xây dựng trên Đá Tảng là Đức Giê-su Ki-tô*
 
-*Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.*
+**Trích khảo luận của thánh Âu-tinh, giám mục, về Tin Mừng theo thánh Gio-an.**
 
  
 

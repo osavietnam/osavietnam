@@ -1,7 +1,7 @@
 ---
 title: "Thánh Anphôngsô de Orozco"
 subtitle: "Linh mục"
-rank: none
+rank: "memorial"
 feastDay: 19
 feastMonth: 9
 imageFile: "/db/saints/images/alfonso-de-orozco.webp"

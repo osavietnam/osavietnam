@@ -8,7 +8,7 @@ liturgy: "Chúa Nhật 3 Mùa Chay, Năm C"
 order: 21
 ---
 
-*Trích bài giảng của thánh Lê-ô Cả về cuộc Thương Khó.*
+**Trích bài giảng của thánh Lê-ô Cả về cuộc Thương Khó.**
 
 Chúa Giê-su nói : Tôi đến không phải để kêu gọi người công chính, nhưng để kêu gọi người tội lỗi. Vì thế, không một Ki-tô hữu nào được phép thù ghét bất cứ ai, bởi vì không ai được cứu thoát nếu không được thứ tha tội lỗi. Có những người xem ra là đáng khinh dễ nếu xét theo lẽ khôn ngoan thế gian, nhưng chúng ta không biết ân huệ Thần Khí có thể làm cho họ nên quý giá đến chừng nào.
 
