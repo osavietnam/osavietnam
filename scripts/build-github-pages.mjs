@@ -1,12 +1,11 @@
-import { cp, mkdtemp, rm } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { cp, rm } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
-const temporaryRoot = await mkdtemp(join(tmpdir(), 'augusinh-github-pages-'));
-const temporarySource = join(temporaryRoot, 'src');
+const temporaryRoot = resolve(projectRoot, 'temp_/github-pages-build');
+const temporarySource = resolve(temporaryRoot, 'src');
 const environment = {
   ...process.env,
   GITHUB_PAGES: 'true',
@@ -24,6 +23,7 @@ function runNode(script, args = []) {
 }
 
 try {
+  await rm(temporaryRoot, { recursive: true, force: true });
   await cp(resolve(projectRoot, 'src'), temporarySource, { recursive: true });
   runNode(resolve(projectRoot, 'scripts/prepare-github-pages.mjs'));
   runNode(resolve(projectRoot, 'node_modules/astro/astro.js'), [
