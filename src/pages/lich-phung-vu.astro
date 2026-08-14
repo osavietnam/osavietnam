@@ -1188,7 +1188,8 @@ async function loadYear(year) {
   if (calCache[year] !== undefined) return calCache[year];
   calCache[year] = null; // mark as attempted
   try {
-    const r = await fetch(`/data/calendar/${year}.json`);
+    const calendarUrl = window.__OSA_PATH__?.(`/data/calendar/${year}.json`) ?? `/data/calendar/${year}.json`;
+    const r = await fetch(calendarUrl);
     if (r.ok) calCache[year] = await r.json();
   } catch (_) {}
   return calCache[year];

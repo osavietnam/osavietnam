@@ -196,6 +196,7 @@ window.__BIO_SUBTITLES__=${JSON.stringify(bioSubtitles)};
 const DATA      = window.__SAINTS__;
 const BIO_SLUGS = new Set(window.__BIO_SLUGS__);
 const BIO_SUBTITLES = window.__BIO_SUBTITLES__;
+const saintSitePath = (value) => (window as any).__OSA_PATH__?.(String(value ?? '')) ?? String(value ?? '');
 function inferSubtitle(name) {
   const n = String(name || '').toLocaleLowerCase('vi');
   if (n.includes('giám mục')) return 'Giám mục';
@@ -222,9 +223,9 @@ function getBioSlug(bioFile) {
   return s && BIO_SLUGS.has(s) ? s : null;
 }
 function getBioHref(slug) {
-  return slug === 'st-augustine-of-hippo'
+  return saintSitePath(slug === 'st-augustine-of-hippo'
     ? '/thanh-au-tinh/#tieu-su'
-    : `/thanh-chan-phuoc/${slug}/`;
+    : `/thanh-chan-phuoc/${slug}/`);
 }
 function esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -267,7 +268,7 @@ function buildUpcoming() {
     const entryId  = s.bioFile?.split('/').pop()?.replace(/\.json$/, '') || '';
     const subtitle = slug ? (BIO_SUBTITLES[slug] || inferSubtitle(s.name)) : (s.subtitle || inferSubtitle(s.name));
     const imgOk    = s.imageFile && !s.imageFile.endsWith('/') && !s.imageFile.endsWith('.json');
-    const bgAttr   = imgOk ? ` style="--sc-bg:url('${s.imageFile}')"` : '';
+    const bgAttr   = imgOk ? ` style="--sc-bg:url('${saintSitePath(s.imageFile)}')"` : '';
     const badge    = RANK_LABEL[s.rank] || '';
     const mAbbr    = MONTH_ABBR[s.monthNumber - 1];
     const inner    = `

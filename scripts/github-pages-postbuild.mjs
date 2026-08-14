@@ -69,7 +69,7 @@ function rewriteSrcset(value) {
 }
 
 function rewriteHtmlMarkup(source) {
-  const urlAttributePattern = /\b(href|src|poster|action|formaction|data-href)\s*=\s*(["'])([^"']*)\2/gi;
+  const urlAttributePattern = /\b(href|src|poster|action|formaction|data-href|data-url|data-src|data-original-src)\s*=\s*(["'])([^"']*)\2/gi;
   let output = source.replace(urlAttributePattern, (full, name, quote, rawValue) => {
     let value = decodeHtmlAttribute(rawValue);
     if (String(name).toLowerCase() === 'href') value = rewriteServerOnlyNewsUrl(value);

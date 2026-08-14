@@ -826,7 +826,7 @@ const dailyQuoteGroups = [
     homeLiturgy.innerHTML = `<div class="home-liturgy-events">${generalEvent}${orderEvents}${orderEmpty}</div>`;
   };
 
-  fetch(`/data/calendar/${year}.json`)
+  fetch(window.__OSA_PATH__?.(`/data/calendar/${year}.json`) ?? `/data/calendar/${year}.json`)
     .then((response) => response.ok ? response.json() : Promise.reject(new Error('calendar unavailable')))
     .then((data) => {
       calendarInfo = data?.days?.[dateKey] ? { ...data.days[dateKey], cycle: data.cycle } : null;

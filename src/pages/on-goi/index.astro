@@ -779,6 +779,7 @@ document.querySelectorAll('.og-masthead-quote').forEach(el => {
 
 // ── Inline edit ───────────────────────────────────────────────────
 const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+const ogSitePath = window.__OSA_PATH__ || ((value) => value);
 const oeBar     = document.getElementById('og-inline-edit-tools');
 const oeEditBtn = document.getElementById('oe-edit-btn');
 const oeSaveRow = document.getElementById('oe-save-row');
@@ -817,12 +818,12 @@ function resetMediaInputs() {
     input.value = getNested(mediaJson, path) || '';
     input.closest('[data-article-image-picker]')?.dispatchEvent(new CustomEvent('article-image:refresh'));
     const target = Array.from(document.querySelectorAll('[data-og-media-target]')).find(node => node.dataset.ogMediaTarget === path);
-    if (target && input.value) target.src = input.value;
+    if (target && input.value) target.src = ogSitePath(input.value);
   });
 }
 mediaInputs.forEach(input => input.addEventListener('input', () => {
   const target = Array.from(document.querySelectorAll('[data-og-media-target]')).find(node => node.dataset.ogMediaTarget === input.dataset.field);
-  if (target && input.value.trim()) target.src = input.value.trim();
+  if (target && input.value.trim()) target.src = ogSitePath(input.value.trim());
 }));
 resetMediaInputs();
 

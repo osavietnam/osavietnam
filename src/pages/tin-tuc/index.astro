@@ -367,13 +367,14 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
     var provinceNewsFrame = document.querySelector('[data-province-news-frame]');
     var provinceNewsControls = document.querySelector('.journal-live-province .journal-frame-controls');
     var provinceNewsBack = document.querySelector('[data-province-news-frame-back]');
-    var provinceNewsGalleryUrl = '/api/province-news.html?theme=dark';
+    var newsSitePath = window.__OSA_PATH__ || function (value) { return value; };
+    var provinceNewsGalleryUrl = newsSitePath('/api/province-news.html?theme=dark');
     var provinceNewsLastHeight = 0;
     var provinceNewsViewingArticle = false;
     function provinceNewsUrl() {
       try {
         var frameUrl = new URL(provinceNewsFrame.contentWindow.location.href);
-        if (frameUrl.origin === window.location.origin && frameUrl.pathname.startsWith('/api/province-news')) return frameUrl;
+        if (frameUrl.origin === window.location.origin && frameUrl.pathname.includes('/api/province-news')) return frameUrl;
       }
       catch (error) { return new URL(provinceNewsFrame.getAttribute('src') || provinceNewsGalleryUrl, window.location.href); }
       return new URL(provinceNewsFrame.getAttribute('src') || provinceNewsGalleryUrl, window.location.href);
@@ -428,14 +429,14 @@ const newsCategoryGroups = NEWS_CATEGORIES.map((category) => ({
     var centralNewsFrame = document.querySelector('[data-central-news-frame]');
     var centralNewsControls = document.querySelector('.journal-live-central .journal-frame-controls');
     var centralNewsBack = document.querySelector('[data-news-frame-back]');
-    var centralNewsGalleryUrl = '/api/central-news.html?theme=dark';
+    var centralNewsGalleryUrl = newsSitePath('/api/central-news.html?theme=dark');
     var centralNewsLastHeight = 0;
     var centralNewsArticleHeightLocked = false;
     var centralNewsViewingArticle = false;
     function centralNewsUrl() {
       try {
         var frameUrl = new URL(centralNewsFrame.contentWindow.location.href);
-        if (frameUrl.origin === window.location.origin && frameUrl.pathname.startsWith('/api/central-news')) return frameUrl;
+        if (frameUrl.origin === window.location.origin && frameUrl.pathname.includes('/api/central-news')) return frameUrl;
       }
       catch (error) { return new URL(centralNewsFrame.getAttribute('src') || centralNewsGalleryUrl, window.location.href); }
       return new URL(centralNewsFrame.getAttribute('src') || centralNewsGalleryUrl, window.location.href);

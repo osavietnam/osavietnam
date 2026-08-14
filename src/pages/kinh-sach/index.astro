@@ -147,6 +147,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
     let weekFilter = 'all';
     let isAdmin = false;
     const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const sitePath = (value) => (window as any).__OSA_PATH__?.(String(value ?? '')) ?? String(value ?? '');
     // Bỏ phẩm trật/mô tả sau tên tác giả (Gm., Lm., Tđ., Ts. Hội Thánh, Giáo phụ, Vp....)
     // Tên = phần trước dấu phẩy đầu tiên; mọi thứ sau đó là danh hiệu → bỏ.
     const stripRankAbbr = (s) => String(s ?? '').replace(/\s*,[\s\S]*$/, '').trim();
@@ -253,7 +254,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
       for (const ly of [y, y+1, y-1]) {
         if (ly < 2020 || ly > 2100) continue;
         try {
-          const r = await fetch(`/data/calendar/${ly}.json`);
+          const r = await fetch(sitePath(`/data/calendar/${ly}.json`));
           if (!r.ok) continue;
           const data = await r.json();
           if (!data.days?.[key]) continue;
@@ -314,14 +315,14 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
       // Lễ riêng: từng hàng compact (chip + tên), tất cả lễ trong ngày
       let feastsHtml = '';
       const readings = [];
-      if (primaryUrl) readings.push({ label: displayLiturgyText, url: primaryUrl });
+      if (primaryUrl) readings.push({ label: displayLiturgyText, url: sitePath(primaryUrl) });
       for (const e of todayFeasts) {
         const ci = (e.liturgy || '').indexOf(':');
         const fname = ci >= 0 ? e.liturgy.slice(ci + 1).trim() : e.liturgy;
         const displayName = expandRanks(fname);
         const chip = RANK_CHIPS[e.rank];
         feastsHtml += `<div class="td-feast-row">${chip ? `<span class="${chip.cls}">${chip.label}</span>` : ''}<span class="td-feast-name">${esc(displayName)}</span></div>`;
-        readings.push({ label: (chip ? `[${chip.label}] ` : '') + displayName, url: e.url || '/kinh-sach/?category=le-rieng' });
+        readings.push({ label: (chip ? `[${chip.label}] ` : '') + displayName, url: sitePath(e.url || '/kinh-sach/?category=le-rieng') });
       }
 
       // Nút đọc — góc phải dưới
@@ -378,7 +379,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
           isAdmin && !r.filled ? 'row-unfilled' : '',
           rankCls.trim(),
         ].filter(Boolean).join(' ');
-        return `<tr data-url="${r.url}" data-id="${r.id}"${cls ? ` class="${cls}"` : ''} role="link" tabindex="0" title="Mở bài đọc — Ctrl/Cmd-click để mở tab mới">
+        return `<tr data-url="${esc(sitePath(r.url))}" data-id="${r.id}"${cls ? ` class="${cls}"` : ''} role="link" tabindex="0" title="Mở bài đọc — Ctrl/Cmd-click để mở tab mới">
           <td data-label="Tác giả"><span class="ks-author-txt">${esc(stripRankAbbr(r.author))}</span></td>
           <td data-label="Trích đoạn"><span class="ks-excerpt-txt">${esc(r.excerpt)}</span></td>
           <td data-label="Phụng vụ"><span class="ks-liturgy-txt">${esc(expandRanks(r.liturgy))}</span><button type="button" class="row-edit-btn" data-id="${r.id}" title="Sửa">✎</button></td>

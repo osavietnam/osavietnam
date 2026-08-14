@@ -14,6 +14,7 @@
     "admin": "node scripts/admin-server.mjs",
     "build": "astro build",
     "build:github": "node scripts/build-github-pages.mjs",
+    "test:github-runtime": "node scripts/github-pages-runtime-smoke.cjs",
     "start": "astro build && node ./dist/server/entry.mjs",
     "preview": "astro preview --host 0.0.0.0",
     "preview:github": "node scripts/local-preview.mjs"

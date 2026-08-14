@@ -732,7 +732,7 @@ function processArticleNums(container: Element, contentSlug = container.getAttri
   const sticky  = document.querySelector<HTMLElement>('.tt-book-sticky');
   if (!tabs.length || !content) return;
 
-  const BASE = '/tu-thuat/fragment/';
+  const BASE = (window as any).__OSA_PATH__?.('/tu-thuat/fragment/') ?? '/tu-thuat/fragment/';
   const cache = new Map<string, string>();
   // A horizontal drag on the book strip must not become a click that loads
   // another book and scrolls the document vertically when the finger lifts.

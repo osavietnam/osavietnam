@@ -57,7 +57,7 @@ for (const file of files) {
   if (extension === '.css') { await validateCssUrls(file, source); continue; }
 
   const htmlMarkup = source.replace(/(<script\b[^>]*>)[\s\S]*?<\/script>/gi, '$1</script>');
-  const attributePattern = /\b(?:href|src|poster|action|formaction|data-href)\s*=\s*["']([^"']+)["']/gi;
+  const attributePattern = /\b(?:href|src|poster|action|formaction|data-href|data-url|data-src|data-original-src)\s*=\s*["']([^"']+)["']/gi;
   for (const match of htmlMarkup.matchAll(attributePattern)) {
     if (!(await localTargetExists(file, match[1]))) missing.push(`${relative(dist, file)} -> ${match[1]}`);
   }

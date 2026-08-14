@@ -32,11 +32,104 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site) : undefined;
 const showVocationTail = title !== 'Admin';
 const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
+const siteBase = import.meta.env.BASE_URL || '/';
 ---
 <!doctype html>
-<html lang="vi" data-theme="light" data-public-build={publicStaticBuild ? 'true' : undefined}>
+<html
+  lang="vi"
+  data-theme="light"
+  data-public-build={publicStaticBuild ? 'true' : undefined}
+  data-site-base={siteBase}
+>
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Mọi URL runtime phải tôn trọng Astro base (đặc biệt /osavietnam/ trên
+      GitHub Pages). Markup tĩnh được Astro/postbuild xử lý, nhưng URL sinh ra
+      sau đó bởi fetch(), innerHTML hoặc trình biên tập cần cùng một resolver.
+    -->
+    <script is:inline define:vars={{ siteBase }}>
+      (function () {
+        var base = typeof siteBase === 'string' && siteBase ? siteBase : '/';
+        if (base.charAt(0) !== '/') base = '/' + base;
+        if (base.charAt(base.length - 1) !== '/') base += '/';
+        var prefix = base === '/' ? '' : base.slice(0, -1);
+
+        function withSiteBase(value) {
+          if (typeof value !== 'string' || !value) return value;
+          if (/^(?:data:|blob:|mailto:|tel:|javascript:|#|\?)/i.test(value)) return value;
+
+          if (value.charAt(0) === '/' && value.charAt(1) !== '/') {
+            if (!prefix || value === prefix || value.indexOf(prefix + '/') === 0) return value;
+            return prefix + value;
+          }
+
+          try {
+            var absolute = new URL(value, window.location.href);
+            if (prefix && absolute.origin === window.location.origin
+              && absolute.pathname !== prefix
+              && absolute.pathname.indexOf(prefix + '/') !== 0) {
+              absolute.pathname = prefix + (absolute.pathname.charAt(0) === '/' ? absolute.pathname : '/' + absolute.pathname);
+              return absolute.href;
+            }
+          } catch (error) {}
+          return value;
+        }
+
+        function withSiteBaseSrcset(value) {
+          return String(value || '').split(',').map(function (candidate) {
+            var match = candidate.trim().match(/^(\S+)([\s\S]*)$/);
+            if (!match) return candidate;
+            return withSiteBase(match[1]) + match[2];
+          }).join(', ');
+        }
+
+        var pathAttributes = ['href', 'src', 'poster', 'action', 'formaction', 'data-href', 'data-url', 'data-src', 'data-original-src'];
+        function rebaseElement(element) {
+          if (!(element instanceof Element)) return;
+          pathAttributes.forEach(function (name) {
+            var current = element.getAttribute(name);
+            if (!current) return;
+            var resolved = withSiteBase(current);
+            if (resolved !== current) element.setAttribute(name, resolved);
+          });
+          var srcset = element.getAttribute('srcset');
+          if (srcset) {
+            var resolvedSrcset = withSiteBaseSrcset(srcset);
+            if (resolvedSrcset !== srcset) element.setAttribute('srcset', resolvedSrcset);
+          }
+        }
+
+        function rebaseTree(root) {
+          if (!(root instanceof Element)) return;
+          rebaseElement(root);
+          root.querySelectorAll('[href],[src],[srcset],[poster],[action],[formaction],[data-href],[data-url],[data-src],[data-original-src]').forEach(rebaseElement);
+        }
+
+        window.__OSA_BASE_PATH__ = base;
+        window.__OSA_PATH__ = withSiteBase;
+        window.__OSA_REBASE_TREE__ = rebaseTree;
+
+        var observer = new MutationObserver(function (records) {
+          records.forEach(function (record) {
+            if (record.type === 'attributes') {
+              rebaseElement(record.target);
+              return;
+            }
+            record.addedNodes.forEach(function (node) {
+              if (node instanceof Element) rebaseTree(node);
+            });
+          });
+        });
+        observer.observe(document.documentElement, {
+          subtree: true,
+          childList: true,
+          attributes: true,
+          attributeFilter: pathAttributes.concat(['srcset'])
+        });
+        document.addEventListener('DOMContentLoaded', function () { rebaseTree(document.documentElement); }, { once: true });
+      }());
+    </script>
     <!-- Khởi tạo theme trước khi render để tránh flash (chạy đồng bộ) -->
     <script is:inline>
       (function () {
@@ -71,15 +164,21 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
 
           window.__OSA_PUBLIC_PREVIEW__ = true;
           var nativeFetch = window.fetch.bind(window);
+          var withSiteBase = window.__OSA_PATH__ || function (value) { return value; };
           window.fetch = function (input, init) {
             var rawUrl = input instanceof Request ? input.url : String(input);
+            var resolvedUrl = withSiteBase(rawUrl);
             try {
-              var url = new URL(rawUrl, window.location.href);
+              var url = new URL(resolvedUrl, window.location.href);
               var isLocalAdmin = url.port === '4322';
               if (isLocalAdmin) {
                 return Promise.reject(new TypeError('Admin API disabled in public preview'));
               }
             } catch (error) {}
+            if (input instanceof Request && resolvedUrl !== rawUrl) {
+              return nativeFetch(new Request(resolvedUrl, input), init);
+            }
+            if (resolvedUrl !== rawUrl) return nativeFetch(resolvedUrl, init);
             return nativeFetch(input, init);
           };
         } catch (error) {}
@@ -150,7 +249,9 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
         document.getElementById('newsBackToggle')?.classList.toggle('show', window.scrollY > 500);
       });
       topBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'auto' }));
-      document.getElementById('newsBackToggle')?.addEventListener('click', () => { window.location.href = '/tin-tuc/'; });
+      document.getElementById('newsBackToggle')?.addEventListener('click', () => {
+        window.location.href = (window as any).__OSA_PATH__?.('/tin-tuc/') ?? '/tin-tuc/';
+      });
     </script>
 
     <script>

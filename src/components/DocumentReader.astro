@@ -274,7 +274,7 @@ await Promise.all(langs.map(async (l) => {
 document.getElementById('backBtn')?.remove();
 if (window.location.hash) document.body.dataset.noAutoscroll = '1';
 
-const FRAG_BASE = '/documents/fragment/';
+const FRAG_BASE = (window as any).__OSA_PATH__?.('/documents/fragment/') ?? '/documents/fragment/';
 
 const proseEl    = document.querySelector<HTMLElement>('.article-shell > article.prose')!;
 const mastheadEl = document.querySelector<HTMLElement>('.lib-masthead');
@@ -291,7 +291,8 @@ function ensureDocumentWatermark() {
   const watermark = document.createElement('span');
   watermark.className = 'document-prose-watermark';
   watermark.setAttribute('aria-hidden', 'true');
-  watermark.innerHTML = '<img src="/images/emblem.svg" alt="">';
+  const emblem = (window as any).__OSA_PATH__?.('/images/emblem.svg') ?? '/images/emblem.svg';
+  watermark.innerHTML = `<img src="${emblem}" alt="">`;
   proseEl.prepend(watermark);
 }
 

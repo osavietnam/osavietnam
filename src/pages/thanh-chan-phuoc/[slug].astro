@@ -110,7 +110,7 @@ const feastStr  = feastDay && feastMonth
   });
 
   document.getElementById('saintBackToggle')?.addEventListener('click', () => {
-    window.location.href = '/thanh-chan-phuoc/';
+    window.location.href = (window as any).__OSA_PATH__?.('/thanh-chan-phuoc/') ?? '/thanh-chan-phuoc/';
   });
 </script>
 
