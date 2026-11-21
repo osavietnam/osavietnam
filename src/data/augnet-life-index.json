@@ -1,0 +1,482 @@
+{
+  "source": "https://augnet.osa.org.au/life-of-augustine/",
+  "indexedAt": "2026-07-28",
+  "categoryCount": 5,
+  "entryCount": 74,
+  "categories": [
+    {
+      "category": "Growing up",
+      "categorySlug": "growing-up",
+      "entries": [
+        {
+          "code": "1019",
+          "title": "Monica",
+          "fullTitle": "1019 Monica",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1019-monica/"
+        },
+        {
+          "code": "1021",
+          "title": "Monica and Augustine",
+          "fullTitle": "1021 Monica and Augustine",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1021-monica-and-augustine/"
+        },
+        {
+          "code": "1023",
+          "title": "Augustine’s childhood",
+          "fullTitle": "1023 Augustine’s childhood",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1023-augustines-childhood/"
+        },
+        {
+          "code": "1024",
+          "title": "The pear tree",
+          "fullTitle": "1024 The pear tree",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1024-the-pear-tree/"
+        },
+        {
+          "code": "1025",
+          "title": "Augustine’s education",
+          "fullTitle": "1025 Augustine’s education",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1025-augustines-education/"
+        },
+        {
+          "code": "1026",
+          "title": "Augustine’s adolescence",
+          "fullTitle": "1026 Augustine’s adolescence",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1026-augustines-adolescence/"
+        },
+        {
+          "code": "1027",
+          "title": "Augustine’s concubinage",
+          "fullTitle": "1027 Augustine’s concubinage",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1027-augustines-concubinage/"
+        },
+        {
+          "code": "1028",
+          "title": "Augustine at Carthage",
+          "fullTitle": "1028 Augustine at Carthage",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1028-augustine-at-carthage/"
+        },
+        {
+          "code": "1029",
+          "title": "Augustine’s father",
+          "fullTitle": "1029 Augustine’s father",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1029-augustines-father/"
+        },
+        {
+          "code": "1030",
+          "title": "Augustine the parent",
+          "fullTitle": "1030 Augustine the parent",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1030-augustine-the-parent/"
+        },
+        {
+          "code": "1031",
+          "title": "The Manichee",
+          "fullTitle": "1031 The Manichee",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1031-the-manichee/"
+        },
+        {
+          "code": "1032",
+          "title": "Return to Thagaste",
+          "fullTitle": "1032 Return to Thagaste",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1032-return-to-thagaste/"
+        },
+        {
+          "code": "1033",
+          "title": "Halley’s Comet",
+          "fullTitle": "1033 Halley’s Comet",
+          "url": "https://augnet.osa.org.au/life-of-augustine/growing-up/1033-halleys-comet/"
+        }
+      ]
+    },
+    {
+      "category": "In Italy",
+      "categorySlug": "in-italy",
+      "entries": [
+        {
+          "code": "1101",
+          "title": "In Rome",
+          "fullTitle": "1101 In Rome",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1101-in-rome/"
+        },
+        {
+          "code": "1102",
+          "title": "In Rome again later",
+          "fullTitle": "1102 In Rome again later",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1102-in-rome-again-later/"
+        },
+        {
+          "code": "1103",
+          "title": "In Milan",
+          "fullTitle": "1103 In Milan",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1103-in-milan/"
+        },
+        {
+          "code": "1104",
+          "title": "The sceptic",
+          "fullTitle": "1104 The sceptic",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1104-the-sceptic/"
+        },
+        {
+          "code": "1105",
+          "title": "Neo-Platonism",
+          "fullTitle": "1105 Neo-Platonism",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1105-neo-platonism/"
+        },
+        {
+          "code": "1106",
+          "title": "Intellectual conversion",
+          "fullTitle": "1106 Intellectual conversion",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1106-intellectual-conversion/"
+        },
+        {
+          "code": "1107",
+          "title": "At Cassiciacum",
+          "fullTitle": "1107 At Cassiciacum",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1107-at-cassiciacum/"
+        },
+        {
+          "code": "1108",
+          "title": "Conversion prelude",
+          "fullTitle": "1108 Conversion prelude",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1108-conversion-prelude/"
+        },
+        {
+          "code": "1109",
+          "title": "Moral conversion",
+          "fullTitle": "1109 Moral conversion",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1109-moral-conversion/"
+        },
+        {
+          "code": "1110",
+          "title": "Augustine’s baptism",
+          "fullTitle": "1110 Augustine’s baptism",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1110-augustines-baptism/"
+        },
+        {
+          "code": "1111",
+          "title": "To Ostia",
+          "fullTitle": "1111 To Ostia",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1111-to-ostia/"
+        },
+        {
+          "code": "1112",
+          "title": "Mystical experience",
+          "fullTitle": "1112 Mystical experience",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1112-mystical-experience/"
+        },
+        {
+          "code": "1113",
+          "title": "Monica’s death",
+          "fullTitle": "1113 Monica’s death",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-italy/1113-monicas-death/"
+        }
+      ]
+    },
+    {
+      "category": "In Africa again",
+      "categorySlug": "in-africa-again",
+      "entries": [
+        {
+          "code": "1201",
+          "title": "Thagaste community",
+          "fullTitle": "1201 Thagaste community",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1201-thagaste-community/"
+        },
+        {
+          "code": "1202",
+          "title": "Augustine the priest",
+          "fullTitle": "1202 Augustine the priest",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1202-augustine-the-priest/"
+        },
+        {
+          "code": "1203",
+          "title": "Hippo community",
+          "fullTitle": "1203 Hippo community",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1203-hippo-community/"
+        },
+        {
+          "code": "1205",
+          "title": "Augustine as bishop",
+          "fullTitle": "1205 Augustine as bishop",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1205-augustine-as-bishop/"
+        },
+        {
+          "code": "1206",
+          "title": "Fassula problem",
+          "fullTitle": "1206 Fassula problem",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1206-fassula-problem/"
+        },
+        {
+          "code": "1207",
+          "title": "Donatism",
+          "fullTitle": "1207 Donatism",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1207-donatism/"
+        },
+        {
+          "code": "1208",
+          "title": "Combating Donatism",
+          "fullTitle": "1208 Combating Donatism",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1208-combating-donatism/"
+        },
+        {
+          "code": "1209",
+          "title": "Political activist",
+          "fullTitle": "1209 Political activist",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1209-political-activist/"
+        },
+        {
+          "code": "1210",
+          "title": "Pelagianism",
+          "fullTitle": "1210 Pelagianism",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1210-pelagianism/"
+        },
+        {
+          "code": "1211",
+          "title": "Combating Pelagianism",
+          "fullTitle": "1211 Combating Pelagianism",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1211-combating-pelagianism/"
+        },
+        {
+          "code": "1212",
+          "title": "Augustine dies",
+          "fullTitle": "1212 Augustine dies",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1212-augustine-dies/"
+        },
+        {
+          "code": "1213",
+          "title": "Possidius and Eraclitus",
+          "fullTitle": "1213 Possidius and Eraclitus",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1213-possidius-and-eraclitus/"
+        },
+        {
+          "code": "1214",
+          "title": "Augustine’s tomb 01",
+          "fullTitle": "1214 Augustine’s tomb 01",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1214-augustines-tomb-01/"
+        },
+        {
+          "code": "1215",
+          "title": "Augustine’s tomb 02",
+          "fullTitle": "1215 Augustine’s tomb 02",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1215-augustines-tomb-02/"
+        },
+        {
+          "code": "1216",
+          "title": "Relics of Augustine",
+          "fullTitle": "1216 Relics of Augustine",
+          "url": "https://augnet.osa.org.au/life-of-augustine/in-africa-again/1216-relics-of-augustine/"
+        }
+      ]
+    },
+    {
+      "category": "Augustine in general",
+      "categorySlug": "augustine-in-general",
+      "entries": [
+        {
+          "code": "1301",
+          "title": "Teaching career",
+          "fullTitle": "1301 Teaching career",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1301-teaching-career/"
+        },
+        {
+          "code": "1302",
+          "title": "Augustine’s bible",
+          "fullTitle": "1302 Augustine’s bible",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1302-augustines-bible/"
+        },
+        {
+          "code": "1303",
+          "title": "Life review",
+          "fullTitle": "1303 Life review",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1303-life-review/"
+        },
+        {
+          "code": "1304",
+          "title": "Life – 25 dates",
+          "fullTitle": "1304 Life – 25 dates",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1304-life-25-dates/"
+        },
+        {
+          "code": "1305",
+          "title": "Life – 16 sentences",
+          "fullTitle": "1305 Life – 16 sentences",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1305-life-16-sentences/"
+        },
+        {
+          "code": "1306",
+          "title": "Life – 20 paragraphs",
+          "fullTitle": "1306 Life – 20 paragraphs",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1306-life-20-paragraphs/"
+        },
+        {
+          "code": "1307",
+          "title": "Augustine – Links",
+          "fullTitle": "1307 Augustine – Links",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1307-augustine-links/"
+        },
+        {
+          "code": "1308",
+          "title": "Many augustines",
+          "fullTitle": "1308 Many augustines",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1308-many-augustines/"
+        },
+        {
+          "code": "1309",
+          "title": "Augustine Quiz",
+          "fullTitle": "1309 Augustine Quiz",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1309-augustine-quiz/"
+        },
+        {
+          "code": "1310",
+          "title": "Augustine Quiz – answers",
+          "fullTitle": "1310 Augustine Quiz – answers",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1310-augustine-quiz-answers/"
+        },
+        {
+          "code": "1311",
+          "title": "Greek language",
+          "fullTitle": "1311 Greek language",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1311-greek-language/"
+        },
+        {
+          "code": "1312",
+          "title": "Cicero 01",
+          "fullTitle": "1312 Cicero 01",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1312-cicero-01/"
+        },
+        {
+          "code": "1313",
+          "title": "Cicero 02",
+          "fullTitle": "1313 Cicero 02",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1313-cicero-02/"
+        },
+        {
+          "code": "1314",
+          "title": "Close deaths",
+          "fullTitle": "1314 Close deaths",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1314-close-deaths/"
+        },
+        {
+          "code": "1315",
+          "title": "Magistrate",
+          "fullTitle": "1315 Magistrate",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1315-magistrate/"
+        },
+        {
+          "code": "1316",
+          "title": "Author",
+          "fullTitle": "1316 Author",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1316-author/"
+        },
+        {
+          "code": "1317",
+          "title": "Why unread today?",
+          "fullTitle": "1317 Why unread today?",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1317-why-unread-today/"
+        },
+        {
+          "code": "1318",
+          "title": "His character",
+          "fullTitle": "1318 His character",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1318-his-character/"
+        },
+        {
+          "code": "1319",
+          "title": "Realist or pessimist?",
+          "fullTitle": "1319 Realist or pessimist?",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1319-realist-or-pessimist/"
+        },
+        {
+          "code": "1320",
+          "title": "Augustine legends",
+          "fullTitle": "1320 Augustine legends",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1320-augustine-legends/"
+        },
+        {
+          "code": "1321",
+          "title": "Later Italian legends",
+          "fullTitle": "1321 Later Italian legends",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1321-later-italian-legends/"
+        },
+        {
+          "code": "1322",
+          "title": "His mission",
+          "fullTitle": "1322 His mission",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1322-his-mission/"
+        },
+        {
+          "code": "1323",
+          "title": "His legacy 01",
+          "fullTitle": "1323 His legacy 01",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1323-his-legacy-01/"
+        },
+        {
+          "code": "1324",
+          "title": "His legacy 02",
+          "fullTitle": "1324 His legacy 02",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1324-his-legacy-02/"
+        },
+        {
+          "code": "1325",
+          "title": "Bibliography 01",
+          "fullTitle": "1325 Bibliography 01",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1325-bibliography-01/"
+        },
+        {
+          "code": "1326",
+          "title": "Bibliography 02",
+          "fullTitle": "1326 Bibliography 02",
+          "url": "https://augnet.osa.org.au/life-of-augustine/augustine-in-general/1326-bibliography-02/"
+        }
+      ]
+    },
+    {
+      "category": "His era",
+      "categorySlug": "his-era",
+      "entries": [
+        {
+          "code": "1401",
+          "title": "North African Christianity",
+          "fullTitle": "1401 North African Christianity",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1401-north-african-christianity/"
+        },
+        {
+          "code": "1403",
+          "title": "Hippo basilica",
+          "fullTitle": "1403 Hippo basilica",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1403-hippo-basilica/"
+        },
+        {
+          "code": "1405",
+          "title": "Hippo congregation",
+          "fullTitle": "1405 Hippo congregation",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1405-hippo-congregation/"
+        },
+        {
+          "code": "1406",
+          "title": "His journeys",
+          "fullTitle": "1406 His journeys",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1406-his-journeys/"
+        },
+        {
+          "code": "1408",
+          "title": "About Hippo",
+          "fullTitle": "1408 About Hippo",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1408-about-hippo/"
+        },
+        {
+          "code": "1409",
+          "title": "About Ostia",
+          "fullTitle": "1409 About Ostia",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1409-about-ostia/"
+        },
+        {
+          "code": "1410",
+          "title": "About Thagaste",
+          "fullTitle": "1410 About Thagaste",
+          "url": "https://augnet.osa.org.au/life-of-augustine/his-era/1410-about-thagaste/"
+        }
+      ]
+    }
+  ]
+}

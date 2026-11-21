@@ -1,0 +1,462 @@
+---
+import ArticleImagePicker from './ArticleImagePicker.astro';
+
+interface Props {
+  textareaId?: string;
+  dataField?: string;
+  label?: string;
+  hidden?: boolean;
+}
+const { textareaId = '', dataField = '', label = 'Nội dung', hidden = false } = Astro.props;
+---
+
+<div class="inline-prose-editor" data-inline-prose-editor hidden={hidden}>
+  <div class="inline-prose-head">
+    <span>{label}</span>
+    <div class="inline-prose-mode" aria-label="Chế độ soạn thảo">
+      <button type="button" data-inline-prose-mode="visual" aria-pressed="true">Trực quan</button>
+      <button type="button" data-inline-prose-mode="markdown" aria-pressed="false">Markdown</button>
+    </div>
+  </div>
+  <div class="inline-prose-formatbar" aria-label="Định dạng nội dung">
+    <button type="button" data-command="bold" title="In đậm"><b>B</b></button>
+    <button type="button" data-command="italic" title="In nghiêng"><i>I</i></button>
+    <span aria-hidden="true"></span>
+    <button type="button" data-block="p" title="Đoạn văn">P</button>
+    <button type="button" data-block="h2" title="Tiêu đề cấp 2">H2</button>
+    <button type="button" data-block="h3" title="Tiêu đề cấp 3">H3</button>
+    <button type="button" data-block="blockquote" title="Trích dẫn đơn">❞</button>
+    <button type="button" data-quote-builder-open title="Chèn trích dẫn kèm nguồn">Nguồn</button>
+    <span aria-hidden="true"></span>
+    <button type="button" data-command="insertUnorderedList" title="Danh sách">•</button>
+    <button type="button" data-command="insertOrderedList" title="Danh sách đánh số">1.</button>
+    <button type="button" data-command="createLink" title="Thêm liên kết">↗</button>
+    <button type="button" data-command="unlink" title="Bỏ liên kết">⌁</button>
+    <button type="button" data-image-builder-open title="Chèn ảnh vào bài viết">Ảnh</button>
+    <span aria-hidden="true"></span>
+    <button type="button" data-command="undo" title="Hoàn tác">↶</button>
+    <button type="button" data-command="redo" title="Làm lại">↷</button>
+  </div>
+  <section class="inline-prose-quote-builder" data-quote-builder hidden>
+    <header><strong>Chèn trích dẫn</strong><button type="button" data-quote-builder-close aria-label="Đóng">×</button></header>
+    <label class="is-full"><span>Nội dung trích dẫn</span><textarea data-quote-text rows="3" placeholder="Chọn văn bản trước khi mở công cụ, hoặc nhập tại đây."></textarea></label>
+    <label><span>Nguồn</span><select data-quote-work><option value="manual">Nhập thủ công</option><option value="tu-luat-vi">Tu Luật</option><option value="hien-phap-vi">Hiến Pháp</option><option value="ratio-vi">Ratio Institutionis</option><option value="tu-thuat">Tự Thuật</option></select></label>
+    <div class="inline-quote-document" data-quote-document hidden><label><span>Số đoạn</span><select data-quote-number></select></label></div>
+    <div class="inline-quote-confessions" data-quote-confessions hidden>
+      <label><span>Quyển</span><select data-quote-book></select></label>
+      <label><span>Chương</span><select data-quote-chapter></select></label>
+      <label><span>Đoạn</span><select data-quote-paragraph></select></label>
+    </div>
+    <label class="is-full" data-quote-manual><span>Trích nguồn</span><input data-quote-citation type="text" placeholder="Tên tác giả, tác phẩm, số đoạn…" /></label>
+    <p class="inline-quote-preview" data-quote-preview>Chọn nguồn để tạo liên kết chính xác.</p>
+    <footer><button type="button" data-quote-builder-cancel>Hủy</button><button type="button" data-quote-builder-insert>Chèn trích dẫn</button></footer>
+  </section>
+  <section class="inline-prose-image-builder" data-image-builder hidden>
+    <header><strong>Chèn Ảnh</strong><button type="button" data-image-builder-close aria-label="Đóng">×</button></header>
+    <ArticleImagePicker dataField="inlineImage" label="Ảnh trong bài viết" />
+    <label><span>Mô tả ảnh <small>dùng cho khả năng tiếp cận</small></span><input data-image-alt type="text" placeholder="Mô tả ngắn nội dung ảnh" /></label>
+    <label><span>Chú thích ảnh <small>không bắt buộc</small></span><input data-image-caption type="text" placeholder="Chú thích hiển thị dưới ảnh" /></label>
+    <p data-image-message role="status"></p>
+    <footer><button type="button" data-image-builder-cancel>Hủy</button><button type="button" data-image-builder-insert>Chèn ảnh</button></footer>
+  </section>
+  <article class="inline-prose-visual prose" contenteditable="true" spellcheck="true"></article>
+  <textarea
+    class="inline-prose-markdown"
+    id={textareaId || undefined}
+    data-field={dataField || undefined}
+    rows="24"
+    spellcheck="true"
+    hidden
+  ></textarea>
+  <p class="inline-prose-note">Biên tập trực tiếp như prose trên trang. Chuyển sang Markdown khi cần chỉnh cú pháp chính xác.</p>
+</div>
+
+<script>
+  type InlineProseRoot = HTMLElement & { inlineProseController?: { setMarkdown: (value?: string) => void; getMarkdown: () => string } };
+
+  const escapeInlineProseHtml = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, (character) => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;',
+  })[character] ?? character);
+
+  const inlineProseImagePreviewUrl = (value: string) => {
+    const src = String(value || '').trim();
+    if (!src || src.startsWith('/') || /^https?:\/\//i.test(src) || /^data:/i.test(src)) return src;
+    const admin = `${window.location.protocol}//${window.location.hostname}:4322`;
+    return `${admin}/api/studio/image?scope=articles&value=${encodeURIComponent(src)}`;
+  };
+
+  const inlineProseSanitizeHtml = (value: string) => {
+    const template = document.createElement('template');
+    template.innerHTML = value;
+    const allowedTags = new Set(['P','BR','H1','H2','H3','H4','STRONG','B','EM','I','A','CODE','PRE','BLOCKQUOTE','UL','OL','LI','HR','IMG','SUP','SUB','CITE','MARK','TIME','SPAN','SECTION','ASIDE','TABLE','THEAD','TBODY','TFOOT','TR','TH','TD','FIGURE','FIGCAPTION','DETAILS','SUMMARY','DIV','SVG','G','PATH','LINE','POLYLINE','POLYGON','CIRCLE','ELLIPSE','RECT','TEXT']);
+    const allowedAttributes = new Set(['class','id','href','src','alt','title','aria-label','aria-hidden','role','data-footnote-ref','data-footnote-backref','data-footnotes','viewbox','width','height','fill','stroke','stroke-width','stroke-linecap','stroke-linejoin','d','x','y','x1','x2','y1','y2','cx','cy','r','rx','ry','points','colspan','rowspan','datetime']);
+    Array.from(template.content.querySelectorAll('*')).forEach((element) => {
+      if (!allowedTags.has(element.tagName)) {
+        element.replaceWith(document.createTextNode(element.textContent || ''));
+        return;
+      }
+      Array.from(element.attributes).forEach((attribute) => {
+        const name = attribute.name.toLowerCase();
+        if (!allowedAttributes.has(name) && !name.startsWith('data-prose-')) element.removeAttribute(attribute.name);
+      });
+      for (const name of ['href','src']) {
+        const raw = element.getAttribute(name);
+        if (!raw) continue;
+        const safe = raw.startsWith('#') || raw.startsWith('/') || raw.startsWith('./') || raw.startsWith('../') || /^https?:\/\//i.test(raw) || (name === 'href' && /^mailto:/i.test(raw));
+        if (!safe) element.removeAttribute(name);
+      }
+    });
+    return template.innerHTML;
+  };
+
+  const inlineProseInlineMarkdown = (value: string) => {
+    const code: string[] = [];
+    const html: string[] = [];
+    let output = String(value).replace(/<\/?[a-z][^>]*>/gi, (tag) => {
+      const token = `@@INLINE_PROSE_HTML_${html.length}@@`;
+      html.push(tag);
+      return token;
+    }).replace(/`([^`]+)`/g, (_, content) => {
+      const token = `@@INLINE_PROSE_CODE_${code.length}@@`;
+      code.push(`<code>${escapeInlineProseHtml(content)}</code>`);
+      return token;
+    });
+    output = escapeInlineProseHtml(output)
+      .replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;([^&]*)&quot;)?\)/g, (_, alt, src, title) => `<img src="${/^javascript:/i.test(src) ? '' : src}" alt="${alt}"${title ? ` title="${title}"` : ''}>`)
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, linkLabel, href) => `<a href="${/^javascript:/i.test(href) ? '#' : href}">${linkLabel}</a>`)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    return output
+      .replace(/@@INLINE_PROSE_CODE_(\d+)@@/g, (_, index) => code[Number(index)] || '')
+      .replace(/@@INLINE_PROSE_HTML_(\d+)@@/g, (_, index) => html[Number(index)] || '');
+  };
+
+  const inlineProseMarkdownToHtml = (markdown: string) => inlineProseSanitizeHtml(String(markdown || '')
+    .replace(/\r\n/g, '\n')
+    .split(/\n{2,}/)
+    .map((rawBlock) => {
+      const block = rawBlock.trim();
+      if (!block) return '';
+      if (/^<(?:section|aside|table|figure|details|div|svg)\b/i.test(block)) return block;
+      if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(block)) return '<hr>';
+      if (/^###\s/.test(block)) return `<h3>${inlineProseInlineMarkdown(block.replace(/^###\s/, ''))}</h3>`;
+      if (/^##\s/.test(block)) return `<h2>${inlineProseInlineMarkdown(block.replace(/^##\s/, ''))}</h2>`;
+      if (/^#\s/.test(block)) return `<h2>${inlineProseInlineMarkdown(block.replace(/^#\s/, ''))}</h2>`;
+      const lines = block.split('\n');
+      if (lines.every((line) => /^>\s?/.test(line))) return `<blockquote>${lines.map((line) => inlineProseInlineMarkdown(line.replace(/^>\s?/, ''))).join('<br>')}</blockquote>`;
+      if (lines.every((line) => /^[-*+]\s/.test(line))) return `<ul>${lines.map((line) => `<li>${inlineProseInlineMarkdown(line.replace(/^[-*+]\s/, ''))}</li>`).join('')}</ul>`;
+      if (lines.every((line) => /^\d+\.\s/.test(line))) return `<ol>${lines.map((line) => `<li>${inlineProseInlineMarkdown(line.replace(/^\d+\.\s/, ''))}</li>`).join('')}</ol>`;
+      return `<p>${inlineProseInlineMarkdown(block).replace(/\n/g, '<br>')}</p>`;
+    }).join(''));
+
+  const inlineProseVisualToMarkdown = (editor: HTMLElement) => {
+    const safeContainer = document.createElement('div');
+    safeContainer.innerHTML = inlineProseSanitizeHtml(editor.innerHTML);
+    safeContainer.querySelectorAll<HTMLImageElement>('img').forEach((image) => {
+      const source = image.dataset.proseSrc || image.getAttribute('src') || '';
+      image.setAttribute('src', source);
+      image.removeAttribute('data-prose-src');
+    });
+    const walk = (node: Node): string => {
+      if (node.nodeType === Node.TEXT_NODE) return node.textContent || '';
+      const element = node as HTMLElement;
+      const tag = node.nodeName.toLowerCase();
+      const children = Array.from(node.childNodes).map(walk).join('');
+      if (tag === 'strong' || tag === 'b') return `**${children}**`;
+      if (tag === 'em' || tag === 'i') return `*${children}*`;
+      if (tag === 'a') return `[${children}](${element.getAttribute('href') || ''})`;
+      if (tag === 'code') return `\`${children}\``;
+      if (tag === 'img') return `![${element.getAttribute('alt') || ''}](${element.getAttribute('src') || ''})`;
+      if (tag === 'sup' || tag === 'sub' || tag === 'cite' || tag === 'mark' || tag === 'time' || (tag === 'span' && element.attributes.length)) return element.outerHTML;
+      if (tag === 'section' || tag === 'aside' || tag === 'table' || tag === 'figure' || tag === 'details' || tag === 'svg') return `${element.outerHTML}\n\n`;
+      if (tag === 'h1') return `# ${children.trim()}\n\n`;
+      if (tag === 'h2') return `## ${children.trim()}\n\n`;
+      if (tag === 'h3') return `### ${children.trim()}\n\n`;
+      if (tag === 'h4') return `#### ${children.trim()}\n\n`;
+      if (tag === 'blockquote') return children.trim().split('\n').map((line) => `> ${line}`).join('\n') + '\n\n';
+      if (tag === 'ul') return Array.from(element.children).map((item) => `- ${walk(item).trim()}`).join('\n') + '\n\n';
+      if (tag === 'ol') return Array.from(element.children).map((item, index) => `${index + 1}. ${walk(item).trim()}`).join('\n') + '\n\n';
+      if (tag === 'li') return children;
+      if (tag === 'br') return '\n';
+      if (tag === 'hr') return '---\n\n';
+      if (tag === 'p' || tag === 'div') return `${children.trim()}\n\n`;
+      return children;
+    };
+    return Array.from(safeContainer.childNodes).map(walk).join('').replace(/\n{3,}/g, '\n\n').trim();
+  };
+
+  const initializeInlineProseEditors = () => {
+    document.querySelectorAll<InlineProseRoot>('[data-inline-prose-editor]:not([data-inline-prose-ready])').forEach((root) => {
+      root.dataset.inlineProseReady = 'true';
+      const visual = root.querySelector<HTMLElement>('.inline-prose-visual');
+      const markdown = root.querySelector<HTMLTextAreaElement>('.inline-prose-markdown');
+      const formatbar = root.querySelector<HTMLElement>('.inline-prose-formatbar');
+      const quoteBuilder = root.querySelector<HTMLElement>('[data-quote-builder]');
+      const quoteOpen = root.querySelector<HTMLButtonElement>('[data-quote-builder-open]');
+      const quoteClose = root.querySelector<HTMLButtonElement>('[data-quote-builder-close]');
+      const quoteCancel = root.querySelector<HTMLButtonElement>('[data-quote-builder-cancel]');
+      const quoteInsert = root.querySelector<HTMLButtonElement>('[data-quote-builder-insert]');
+      const quoteText = root.querySelector<HTMLTextAreaElement>('[data-quote-text]');
+      const quoteWork = root.querySelector<HTMLSelectElement>('[data-quote-work]');
+      const quoteDocument = root.querySelector<HTMLElement>('[data-quote-document]');
+      const quoteConfessions = root.querySelector<HTMLElement>('[data-quote-confessions]');
+      const quoteManual = root.querySelector<HTMLElement>('[data-quote-manual]');
+      const quoteNumber = root.querySelector<HTMLSelectElement>('[data-quote-number]');
+      const quoteBook = root.querySelector<HTMLSelectElement>('[data-quote-book]');
+      const quoteChapter = root.querySelector<HTMLSelectElement>('[data-quote-chapter]');
+      const quoteParagraph = root.querySelector<HTMLSelectElement>('[data-quote-paragraph]');
+      const quoteCitation = root.querySelector<HTMLInputElement>('[data-quote-citation]');
+      const quotePreview = root.querySelector<HTMLElement>('[data-quote-preview]');
+      const imageBuilder = root.querySelector<HTMLElement>('[data-image-builder]');
+      const imageOpen = root.querySelector<HTMLButtonElement>('[data-image-builder-open]');
+      const imageClose = root.querySelector<HTMLButtonElement>('[data-image-builder-close]');
+      const imageCancel = root.querySelector<HTMLButtonElement>('[data-image-builder-cancel]');
+      const imageInsert = root.querySelector<HTMLButtonElement>('[data-image-builder-insert]');
+      const imageInput = imageBuilder?.querySelector<HTMLInputElement>('[data-field="inlineImage"]');
+      const imageAlt = root.querySelector<HTMLInputElement>('[data-image-alt]');
+      const imageCaption = root.querySelector<HTMLInputElement>('[data-image-caption]');
+      const imageMessage = root.querySelector<HTMLElement>('[data-image-message]');
+      const modeButtons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-inline-prose-mode]'));
+      if (!visual || !markdown || !formatbar) return;
+      let mode: 'visual' | 'markdown' = 'visual';
+      let visualDirty = false;
+      let quoteCatalog: any = null;
+      let savedRange: Range | null = null;
+
+      const setOptions = (select: HTMLSelectElement | null, values: any[], value: (item:any) => string, label: (item:any) => string) => {
+        if (!select) return;
+        select.replaceChildren(...values.map((item) => new Option(label(item), value(item))));
+      };
+      const selectedDocument = () => quoteCatalog?.documents?.find((item:any) => item.id === quoteWork?.value);
+      const selectedBook = () => quoteCatalog?.confessions?.find((item:any) => String(item.number) === quoteBook?.value);
+      const selectedChapter = () => selectedBook()?.chapters?.find((item:any) => item.roman === quoteChapter?.value);
+      const selectedParagraph = () => selectedChapter()?.paragraphs?.find((item:any) => String(item.number) === quoteParagraph?.value);
+      const updateQuoteSource = () => {
+        const work = quoteWork?.value || 'manual';
+        if (quoteDocument) quoteDocument.hidden = work === 'manual' || work === 'tu-thuat';
+        if (quoteConfessions) quoteConfessions.hidden = work !== 'tu-thuat';
+        if (quoteManual) quoteManual.hidden = work !== 'manual';
+        if (work === 'manual') {
+          if (quotePreview) quotePreview.textContent = 'Nguồn sẽ được hiển thị theo nội dung nhập thủ công.';
+          return;
+        }
+        if (work === 'tu-thuat') {
+          const book = selectedBook(); const chapter = selectedChapter(); const paragraph = selectedParagraph();
+          if (!book || !chapter || !paragraph) return;
+          if (quotePreview) quotePreview.textContent = `Tự Thuật · Quyển ${book.roman} · Chương ${chapter.roman} · Đoạn ${paragraph.number}: ${paragraph.snippet}`;
+          return;
+        }
+        const documentSource = selectedDocument();
+        const entry = documentSource?.entries?.find((item:any) => String(item.number) === quoteNumber?.value);
+        if (quotePreview && documentSource && entry) quotePreview.textContent = `${documentSource.label} · ${entry.number}: ${entry.snippet}`;
+      };
+      const refreshQuoteParagraphs = () => {
+        setOptions(quoteParagraph, selectedChapter()?.paragraphs || [], (item) => String(item.number), (item) => `${item.number} — ${item.snippet}`);
+        updateQuoteSource();
+      };
+      const refreshQuoteChapters = () => {
+        setOptions(quoteChapter, selectedBook()?.chapters || [], (item) => item.roman, (item) => `Chương ${item.roman}${item.title ? ` — ${item.title}` : ''}`);
+        refreshQuoteParagraphs();
+      };
+      const refreshQuoteWork = () => {
+        const work = quoteWork?.value || 'manual';
+        if (work === 'tu-thuat') {
+          setOptions(quoteBook, quoteCatalog?.confessions || [], (item) => String(item.number), (item) => `Quyển ${item.roman}`);
+          refreshQuoteChapters();
+        } else if (work !== 'manual') {
+          const documentSource = selectedDocument();
+          setOptions(quoteNumber, documentSource?.entries || [], (item) => String(item.number), (item) => `${item.number} — ${item.snippet}`);
+        }
+        updateQuoteSource();
+      };
+      const openQuoteBuilder = async () => {
+        const selection = window.getSelection();
+        savedRange = selection?.rangeCount && visual.contains(selection.anchorNode) ? selection.getRangeAt(0).cloneRange() : null;
+        if (quoteText) quoteText.value = selection?.toString().trim() || '';
+        if (quoteBuilder) quoteBuilder.hidden = false;
+        try {
+          if (!quoteCatalog) {
+            const admin = `${window.location.protocol}//${window.location.hostname}:4322`;
+            const response = await fetch(`${admin}/api/studio/quote-sources`);
+            if (!response.ok) throw new Error('Không thể tải danh mục nguồn');
+            quoteCatalog = await response.json();
+          }
+          if (quoteWork) quoteWork.disabled = false;
+          refreshQuoteWork();
+        } catch (error) {
+          if (quotePreview) quotePreview.textContent = error instanceof Error ? error.message : 'Không thể tải danh mục nguồn. Bạn vẫn có thể nhập thủ công.';
+        }
+        quoteText?.focus();
+      };
+      const closeQuoteBuilder = () => { if (quoteBuilder) quoteBuilder.hidden = true; visual.focus(); };
+      const saveSelection = () => {
+        const selection = window.getSelection();
+        savedRange = selection?.rangeCount && visual.contains(selection.anchorNode) ? selection.getRangeAt(0).cloneRange() : null;
+      };
+      const openImageBuilder = () => {
+        saveSelection();
+        if (quoteBuilder) quoteBuilder.hidden = true;
+        if (imageBuilder) imageBuilder.hidden = false;
+        if (imageMessage) imageMessage.textContent = '';
+        imageBuilder?.querySelector<HTMLElement>('[data-article-image-picker]')
+          ?.dispatchEvent(new CustomEvent('article-image:refresh'));
+      };
+      const closeImageBuilder = () => { if (imageBuilder) imageBuilder.hidden = true; visual.focus(); };
+      const quoteCitationHtml = () => {
+        const work = quoteWork?.value || 'manual';
+        if (work === 'manual') return escapeInlineProseHtml(quoteCitation?.value.trim() || '');
+        if (work === 'tu-thuat') {
+          const book = selectedBook(); const chapter = selectedChapter(); const paragraph = selectedParagraph();
+          if (!book || !chapter || !paragraph) return '';
+          return `<a href="/tu-thuat/?book=quyen-${book.number}#conf-${book.number}-${paragraph.number}">Thánh Augustinô, <em>Tự Thuật</em>, ${book.roman}, ${chapter.roman}, ${paragraph.number}</a>`;
+        }
+        const documentSource = selectedDocument();
+        const entry = documentSource?.entries?.find((item:any) => String(item.number) === quoteNumber?.value);
+        if (!documentSource || !entry) return '';
+        const author = work === 'tu-luat-vi' ? 'Thánh Augustinô, ' : '';
+        const suffix = work === 'tu-luat-vi' ? entry.number : `số ${entry.number}`;
+        return `<a href="${documentSource.route}#${work.replace(/-vi$/, '')}-${entry.number}">${author}<em>${documentSource.label}</em>, ${suffix}</a>`;
+      };
+
+      const refreshVisualImages = () => {
+        visual.querySelectorAll<HTMLImageElement>('img').forEach((image) => {
+          const source = image.dataset.proseSrc || image.getAttribute('src') || '';
+          image.dataset.proseSrc = source;
+          image.src = inlineProseImagePreviewUrl(source);
+        });
+      };
+      const loadVisual = () => { visual.innerHTML = inlineProseMarkdownToHtml(markdown.value); refreshVisualImages(); visualDirty = false; };
+      const saveVisual = () => { markdown.value = inlineProseVisualToMarkdown(visual); };
+      const setMode = (nextMode: 'visual' | 'markdown') => {
+        mode = nextMode;
+        if (mode === 'visual') loadVisual();
+        else if (visualDirty) { saveVisual(); visualDirty = false; }
+        visual.hidden = mode !== 'visual';
+        markdown.hidden = mode !== 'markdown';
+        formatbar.hidden = mode !== 'visual';
+        modeButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.inlineProseMode === mode)));
+      };
+      const setMarkdown = (value = markdown.value) => { markdown.value = value; setMode('visual'); };
+      const getMarkdown = () => { if (mode === 'visual' && visualDirty) saveVisual(); return markdown.value; };
+      root.inlineProseController = { setMarkdown, getMarkdown };
+      root.addEventListener('inline-prose:set', () => setMarkdown(markdown.value));
+      root.addEventListener('inline-prose:sync', () => getMarkdown());
+      modeButtons.forEach((button) => button.addEventListener('click', () => setMode(button.dataset.inlineProseMode === 'markdown' ? 'markdown' : 'visual')));
+      visual.addEventListener('input', () => { visualDirty = true; saveVisual(); });
+      visual.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) event.preventDefault(); });
+      markdown.addEventListener('input', () => { visualDirty = false; });
+      quoteOpen?.addEventListener('click', openQuoteBuilder);
+      quoteClose?.addEventListener('click', closeQuoteBuilder);
+      quoteCancel?.addEventListener('click', closeQuoteBuilder);
+      imageOpen?.addEventListener('click', openImageBuilder);
+      imageClose?.addEventListener('click', closeImageBuilder);
+      imageCancel?.addEventListener('click', closeImageBuilder);
+      quoteWork?.addEventListener('change', refreshQuoteWork);
+      quoteNumber?.addEventListener('change', updateQuoteSource);
+      quoteBook?.addEventListener('change', refreshQuoteChapters);
+      quoteChapter?.addEventListener('change', refreshQuoteParagraphs);
+      quoteParagraph?.addEventListener('change', updateQuoteSource);
+      quoteInsert?.addEventListener('click', () => {
+        const text = quoteText?.value.trim() || '';
+        if (!text) {
+          if (quotePreview) quotePreview.textContent = 'Cần nhập nội dung trích dẫn.';
+          quoteText?.focus();
+          return;
+        }
+        const blockquote = document.createElement('blockquote');
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        blockquote.append(paragraph);
+        const citation = quoteCitationHtml();
+        if (citation) {
+          const cite = document.createElement('cite');
+          cite.innerHTML = inlineProseSanitizeHtml(citation);
+          blockquote.append(cite);
+        }
+        if (savedRange && visual.contains(savedRange.commonAncestorContainer)) {
+          savedRange.deleteContents();
+          savedRange.insertNode(blockquote);
+          savedRange.setStartAfter(blockquote);
+          savedRange.collapse(true);
+        } else visual.append(blockquote);
+        visualDirty = true;
+        saveVisual();
+        closeQuoteBuilder();
+      });
+      imageInsert?.addEventListener('click', () => {
+        const src = imageInput?.value.trim() || '';
+        if (!src) {
+          if (imageMessage) imageMessage.textContent = 'Hãy chọn hoặc tải lên một ảnh.';
+          return;
+        }
+        const figure = document.createElement('figure');
+        figure.className = 'prose-figure';
+        const image = document.createElement('img');
+        image.dataset.proseSrc = src;
+        image.src = inlineProseImagePreviewUrl(src);
+        image.alt = imageAlt?.value.trim() || '';
+        figure.append(image);
+        const caption = imageCaption?.value.trim() || '';
+        if (caption) {
+          const figcaption = document.createElement('figcaption');
+          figcaption.textContent = caption;
+          figure.append(figcaption);
+        }
+        let anchor: HTMLElement | null = savedRange?.startContainer instanceof HTMLElement
+          ? savedRange.startContainer
+          : savedRange?.startContainer.parentElement ?? null;
+        anchor = anchor?.closest('p,h1,h2,h3,h4,blockquote,ul,ol,figure,table') ?? null;
+        if (anchor && visual.contains(anchor) && anchor.parentElement) anchor.after(figure);
+        else visual.append(figure);
+        visualDirty = true;
+        saveVisual();
+        if (imageInput) imageInput.value = '';
+        if (imageAlt) imageAlt.value = '';
+        if (imageCaption) imageCaption.value = '';
+        imageBuilder?.querySelector<HTMLElement>('[data-article-image-picker]')
+          ?.dispatchEvent(new CustomEvent('article-image:refresh'));
+        closeImageBuilder();
+      });
+      formatbar.addEventListener('mousedown', (event) => event.preventDefault());
+      formatbar.addEventListener('click', (event) => {
+        const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
+        if (!button) return;
+        if (button.hasAttribute('data-quote-builder-open') || button.hasAttribute('data-image-builder-open')) return;
+        visual.focus();
+        if (button.dataset.block) document.execCommand('formatBlock', false, button.dataset.block);
+        else if (button.dataset.command === 'createLink') {
+          const href = window.prompt('Nhập địa chỉ liên kết (URL):', 'https://');
+          if (href && href !== 'https://') document.execCommand('createLink', false, href);
+        } else if (button.dataset.command) document.execCommand(button.dataset.command, false);
+        visualDirty = true;
+        saveVisual();
+      });
+      loadVisual();
+    });
+  };
+
+  initializeInlineProseEditors();
+  document.addEventListener('astro:page-load', initializeInlineProseEditors);
+</script>
+
+<style is:global>
+  .inline-prose-editor{min-width:0}.inline-prose-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.65rem}.inline-prose-head>span{color:var(--ink-cream-soft);font:500 1rem/1.35 var(--font-ui)}
+  .inline-prose-mode{display:inline-flex;gap:.2rem;padding:.2rem;border:1px solid rgba(233,193,118,.24);border-radius:.45rem;background:#0b1612}.inline-prose-mode button{min-height:2.15rem;padding:.35rem .7rem;border:0;border-radius:.32rem;color:var(--ink-cream-soft);background:transparent;font:600 .86rem/1 var(--font-ui);cursor:pointer}.inline-prose-mode button[aria-pressed="true"]{color:#102118;background:#e9c176}
+  .inline-prose-formatbar{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.55rem;padding:.45rem;border:1px solid rgba(233,193,118,.2);border-radius:.5rem;background:#0b1612}.inline-prose-formatbar>span{width:1px;height:1.65rem;margin:0 .2rem;background:rgba(233,193,118,.2)}.inline-prose-formatbar button{min-width:2.35rem;height:2.35rem;padding:0 .45rem;border:1px solid transparent;border-radius:.35rem;color:var(--ink-cream-soft);background:transparent;font:600 .88rem/1 var(--font-ui);cursor:pointer}.inline-prose-formatbar button:hover,.inline-prose-formatbar button:focus-visible{border-color:rgba(233,193,118,.36);color:#e9c176;background:#17231e;outline:0}
+  .inline-prose-quote-builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.75rem;margin:0 0 .7rem;padding:.9rem;border:1px solid #75613c;border-radius:.5rem;background:#101d18}.inline-prose-quote-builder[hidden]{display:none}.inline-prose-quote-builder>header,.inline-prose-quote-builder>.is-full,.inline-prose-quote-builder>footer,.inline-quote-preview{grid-column:1/-1}.inline-prose-quote-builder>header{display:flex;align-items:center;justify-content:space-between}.inline-prose-quote-builder>header strong{color:#e9c176;font:600 1.05rem/1.3 var(--font-display)}.inline-prose-quote-builder>header button{width:2rem;height:2rem;padding:0;border:0;color:var(--ink-cream-soft);background:transparent;font:300 1.65rem/1 var(--font-ui);cursor:pointer}.inline-prose-quote-builder label{display:grid;gap:.35rem;color:var(--ink-cream-soft);font:500 .84rem/1.3 var(--font-ui)}.inline-prose-quote-builder input,.inline-prose-quote-builder select,.inline-prose-quote-builder textarea{width:100%;box-sizing:border-box;padding:.62rem .7rem;border:1px solid #5f563f;border-radius:.35rem;color:var(--ink-cream);background:#08130f;font:400 .9rem/1.45 var(--font-ui)}.inline-quote-confessions{display:grid;grid-column:1/-1;grid-template-columns:.65fr 1fr 1.35fr;gap:.65rem}.inline-quote-document[hidden],.inline-quote-confessions[hidden],[data-quote-manual][hidden]{display:none}.inline-quote-preview{margin:0;color:#aaa493;font:400 .82rem/1.45 var(--font-ui)}.inline-prose-quote-builder>footer{display:flex;justify-content:flex-end;gap:.55rem}.inline-prose-quote-builder>footer button{min-height:2.5rem;padding:.5rem .75rem;border:1px solid #75613c;border-radius:.35rem;color:var(--ink-cream);background:transparent;font:600 .84rem/1 var(--font-ui);cursor:pointer}.inline-prose-quote-builder>footer button:last-child{color:#102118;background:#e9c176;border-color:#e9c176}
+  .inline-prose-image-builder{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin:0 0 .9rem;padding:1rem;border:1px solid #75613c;border-radius:.65rem;background:#101d18}.inline-prose-image-builder[hidden]{display:none}.inline-prose-image-builder>header,.inline-prose-image-builder>.article-image-field,.inline-prose-image-builder>p,.inline-prose-image-builder>footer{grid-column:1/-1}.inline-prose-image-builder>header{display:flex;align-items:center;justify-content:space-between}.inline-prose-image-builder>header strong{color:#e9c176;font:600 1.15rem/1.3 var(--font-display)}.inline-prose-image-builder>header button{width:2.4rem;height:2.4rem;padding:0;border:0;color:var(--ink-cream-soft);background:transparent;font:300 1.8rem/1 var(--font-ui);cursor:pointer}.inline-prose-image-builder>label{display:grid;gap:.4rem;color:var(--ink-cream-soft);font:500 .86rem/1.35 var(--font-ui)}.inline-prose-image-builder>label small{font-weight:400;opacity:.68}.inline-prose-image-builder>label input{width:100%;min-height:3.2rem;box-sizing:border-box;padding:.7rem .8rem;border:1px solid #5f563f;border-radius:.45rem;color:var(--ink-cream);background:#08130f;font:400 .95rem/1.4 var(--font-ui)}.inline-prose-image-builder>p{min-height:1.3em;margin:0;color:#efaa98;font:500 .85rem/1.4 var(--font-ui)}.inline-prose-image-builder>footer{display:flex;justify-content:flex-end;gap:.55rem}.inline-prose-image-builder>footer button{min-height:2.8rem;padding:.6rem .85rem;border:1px solid #75613c;border-radius:.42rem;color:var(--ink-cream);background:transparent;font:600 .88rem/1 var(--font-ui);cursor:pointer}.inline-prose-image-builder>footer button:last-child{color:#102118;background:#e9c176;border-color:#e9c176}
+  .inline-prose-visual{min-height:52vh;max-height:66vh;padding:clamp(1.3rem,3vw,2.6rem);overflow:auto;border:1px solid rgba(233,193,118,.26);border-radius:.5rem;outline:0;background:#0b1612;color:var(--ink-cream);font:400 1.12rem/1.82 var(--font-body)}.inline-prose-visual:focus{border-color:#c99a49}.inline-prose-visual p{margin:0 0 1.15em}.inline-prose-visual h2,.inline-prose-visual h3{margin:1.65em 0 .7em;color:#e9c176;font-family:var(--font-display)}.inline-prose-visual h2{font-size:1.75rem}.inline-prose-visual h3{font-size:1.42rem}.inline-prose-visual blockquote{margin:1.35rem 0;padding:.15rem 0 .15rem 1.1rem;border-left:3px solid #c99a49;color:var(--ink-cream-soft);font-style:italic}.inline-prose-visual ul,.inline-prose-visual ol{margin:1rem 0;padding-left:1.6rem}.inline-prose-visual a{color:#e9c176;text-decoration:none;border-bottom:1px solid currentColor}.inline-prose-visual figure{margin:1.5rem auto;text-align:center}.inline-prose-visual img{display:block;max-width:100%;height:auto;margin:1.3rem auto}.inline-prose-visual figure img{margin:0 auto}.inline-prose-visual figcaption{margin:.65rem auto 0;color:var(--ink-cream-soft);font:italic .9rem/1.5 var(--font-ui)}.inline-prose-markdown{width:100%;min-height:52vh;padding:1rem;border:1px solid rgba(233,193,118,.26);border-radius:.5rem;resize:vertical;color:var(--ink-cream);background:#0b1612;font:400 1rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.inline-prose-note{margin:.55rem .15rem 0;color:var(--ink-cream-soft);font:400 .88rem/1.45 var(--font-ui)}
+  html[data-theme="light"] .inline-prose-head>span,html[data-theme="light"] .inline-prose-note{color:#50685a}html[data-theme="light"] .inline-prose-mode,html[data-theme="light"] .inline-prose-formatbar,html[data-theme="light"] .inline-prose-visual,html[data-theme="light"] .inline-prose-markdown{background:#fff;border-color:rgba(24,62,44,.2)}html[data-theme="light"] .inline-prose-mode button,html[data-theme="light"] .inline-prose-formatbar button{color:#50685a}html[data-theme="light"] .inline-prose-mode button[aria-pressed="true"]{color:#fff;background:#27664c}html[data-theme="light"] .inline-prose-formatbar>span{background:rgba(24,62,44,.16)}html[data-theme="light"] .inline-prose-formatbar button:hover,html[data-theme="light"] .inline-prose-formatbar button:focus-visible{color:#183e2c;background:#edf4ee;border-color:rgba(24,62,44,.22)}html[data-theme="light"] .inline-prose-visual,html[data-theme="light"] .inline-prose-markdown{color:#273d31}html[data-theme="light"] .inline-prose-visual h2,html[data-theme="light"] .inline-prose-visual h3,html[data-theme="light"] .inline-prose-visual a{color:#1a5e3c}html[data-theme="light"] .inline-prose-visual blockquote{color:#53665a;border-left-color:#8f6129}
+  html[data-theme="light"] .inline-prose-quote-builder{background:#f5f8f5;border-color:#aebfb5}html[data-theme="light"] .inline-prose-quote-builder>header strong{color:#1a5e3c}html[data-theme="light"] .inline-prose-quote-builder label,html[data-theme="light"] .inline-quote-preview{color:#50685a}html[data-theme="light"] .inline-prose-quote-builder input,html[data-theme="light"] .inline-prose-quote-builder select,html[data-theme="light"] .inline-prose-quote-builder textarea{color:#183e2c;background:#fff;border-color:#aebfb5}html[data-theme="light"] .inline-prose-quote-builder>footer button{color:#183e2c;border-color:#91a79a}html[data-theme="light"] .inline-prose-quote-builder>footer button:last-child{color:#fff;background:#27664c;border-color:#27664c}
+  html[data-theme="light"] .inline-prose-image-builder{background:#f5f8f5;border-color:#aebfb5}html[data-theme="light"] .inline-prose-image-builder>header strong{color:#1a5e3c}html[data-theme="light"] .inline-prose-image-builder>label{color:#50685a}html[data-theme="light"] .inline-prose-image-builder>label input{color:#183e2c;background:#fff;border-color:#aebfb5}html[data-theme="light"] .inline-prose-image-builder>footer button{color:#183e2c;border-color:#91a79a}html[data-theme="light"] .inline-prose-image-builder>footer button:last-child{color:#fff;background:#27664c;border-color:#27664c}
+  @media(max-width:640px){.inline-prose-head{align-items:flex-start;flex-direction:column}.inline-prose-formatbar{gap:.22rem}.inline-prose-formatbar button{min-width:2.2rem}.inline-prose-quote-builder,.inline-prose-image-builder{grid-template-columns:1fr}.inline-prose-quote-builder>*,.inline-prose-image-builder>*{grid-column:1!important}.inline-quote-confessions{grid-template-columns:1fr}.inline-prose-visual{padding:1.15rem;min-height:48vh;font-size:1.04rem}}
+  .inline-prose-head{margin-bottom:.9rem}.inline-prose-head>span{font-size:1.25rem;font-weight:600}.inline-prose-mode{gap:.3rem;padding:.3rem;border-radius:.65rem}.inline-prose-mode button{min-height:3.4rem;padding:.7rem 1rem;border-radius:.48rem;font-size:1.15rem}
+  .inline-prose-formatbar{gap:.45rem;margin-bottom:.9rem;padding:.65rem;border-radius:.7rem}.inline-prose-formatbar>span{height:2.3rem}.inline-prose-formatbar button{min-width:3.4rem;height:3.4rem;padding:0 .7rem;border-radius:.5rem;font-size:1.15rem}
+  .inline-prose-visual{min-height:48vh;max-height:61vh;padding:clamp(1.8rem,3vw,3rem);border-radius:.75rem;font-size:1.48rem;line-height:1.82}.inline-prose-visual h2{font-size:2.25rem}.inline-prose-visual h3{font-size:1.85rem}.inline-prose-markdown{min-height:48vh;padding:1.5rem;border-radius:.75rem;font-size:1.3rem;line-height:1.7}.inline-prose-note{margin-top:.75rem;font-size:1.1rem}
+  .inline-prose-quote-builder{gap:1.1rem;margin-bottom:1rem;padding:1.3rem;border-radius:.75rem}.inline-prose-quote-builder>header strong{font-size:1.5rem}.inline-prose-quote-builder>header button{width:3rem;height:3rem;font-size:2.2rem}.inline-prose-quote-builder label{gap:.55rem;font-size:1.15rem}.inline-prose-quote-builder input,.inline-prose-quote-builder select,.inline-prose-quote-builder textarea{min-height:4.1rem;padding:.85rem 1rem;border-radius:.55rem;font-size:1.25rem}.inline-quote-preview{font-size:1.1rem}.inline-prose-quote-builder>footer button{min-height:3.7rem;padding:.8rem 1.1rem;border-radius:.55rem;font-size:1.1rem}
+  html[data-theme="dark"] .inline-prose-mode,html[data-theme="dark"] .inline-prose-formatbar,html[data-theme="dark"] .inline-prose-visual,html[data-theme="dark"] .inline-prose-markdown{background:#0d1914;border-color:#3d5147}html[data-theme="dark"] .inline-prose-formatbar button:hover,html[data-theme="dark"] .inline-prose-formatbar button:focus-visible{background:#1b3026}
+  html[data-theme="light"] .inline-prose-mode,html[data-theme="light"] .inline-prose-formatbar,html[data-theme="light"] .inline-prose-visual,html[data-theme="light"] .inline-prose-markdown{background:#fff;border-color:#b7c6bd}html[data-theme="light"] .inline-prose-quote-builder{background:#f2f6f3;border-color:#b7c6bd}
+  @media(max-width:640px){.inline-prose-head>span{font-size:1.15rem}.inline-prose-mode button{min-height:3.2rem;font-size:1.05rem}.inline-prose-formatbar button{min-width:3.2rem;height:3.2rem;font-size:1.05rem}.inline-prose-visual{padding:1.4rem;min-height:44vh;font-size:1.35rem}.inline-prose-markdown{min-height:44vh;font-size:1.2rem}}
+  .inline-prose-head>span{font-size:14px}.inline-prose-mode button,.inline-prose-formatbar button{font-size:13px}.inline-prose-visual{font-size:17px}.inline-prose-visual h2{font-size:25px}.inline-prose-visual h3{font-size:21px}.inline-prose-markdown{font-size:15px}.inline-prose-note{font-size:12px}.inline-prose-quote-builder label{font-size:13px}.inline-prose-quote-builder input,.inline-prose-quote-builder select,.inline-prose-quote-builder textarea{font-size:15px}.inline-quote-preview,.inline-prose-quote-builder>footer button{font-size:13px}
+  @media(max-width:640px){.inline-prose-visual{font-size:16px}.inline-prose-markdown{font-size:15px}.inline-prose-head>span{font-size:14px}.inline-prose-mode button,.inline-prose-formatbar button{font-size:13px}}
+</style>

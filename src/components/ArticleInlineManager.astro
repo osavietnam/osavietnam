@@ -1,0 +1,784 @@
+---
+import InlineProseEditor from './InlineProseEditor.astro';
+import ArticleImagePicker from './ArticleImagePicker.astro';
+
+interface Props {
+  kind: 'news' | 'scholar' | 'spirituality' | 'sermon';
+}
+
+const { kind } = Astro.props;
+const labels = {
+  news: 'Tin tức',
+  scholar: 'Triết – Thần',
+  spirituality: 'Linh đạo',
+  sermon: 'Bài giảng – Suy niệm',
+};
+---
+
+<div class="article-inline-manager" data-article-manager-root data-kind={kind}>
+  <button type="button" class="article-manager-trigger" aria-label={`Quản lý bài viết ${labels[kind]}`} title={`Quản lý bài viết ${labels[kind]}`}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6.5 16.5 17 6l1.5 1.5L8 18H6.5v-1.5Z"/><path d="m15.5 7.5 1 1"/></svg>
+    <span>Quản lý bài viết</span>
+  </button>
+
+  <dialog class="article-manager-dialog" aria-labelledby={`article-manager-title-${kind}`}>
+    <div class="article-manager-shell">
+      <header class="article-manager-head">
+        <div>
+          <small>Biên tập trực tiếp · {labels[kind]}</small>
+          <h2 id={`article-manager-title-${kind}`}>Bài viết</h2>
+        </div>
+        <div class="article-manager-head-actions">
+          <button type="button" class="article-manager-categories">Chuyên mục</button>
+          <button type="button" class="article-manager-new">+ Thêm bài</button>
+          <button type="button" class="article-manager-close" aria-label="Đóng">×</button>
+        </div>
+      </header>
+
+      <div class="article-manager-workspace">
+        <aside class="article-manager-index">
+          <div class="article-manager-search-deck">
+            <label class="article-manager-search">
+              <span class="sr-only">Tìm bài viết</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input type="search" placeholder="Tìm bài viết…" autocomplete="off" />
+            </label>
+            <label class="article-manager-category-filter-label">
+              <span class="sr-only">Lọc theo chuyên mục</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              <select class="article-manager-category-filter" aria-label="Lọc theo chuyên mục">
+                <option value="">Tất cả</option>
+              </select>
+            </label>
+          </div>
+          <div class="article-manager-list" role="list"></div>
+          <p class="article-manager-empty" hidden>Chưa có bài viết phù hợp.</p>
+        </aside>
+
+        <form class="article-manager-form">
+          <div class="article-manager-form-empty">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5zM8 8h8M8 12h8M8 16h5"/></svg>
+            <strong>Chọn một bài để biên tập</strong>
+            <span>Hoặc tạo bài mới ngay trên trang này.</span>
+          </div>
+
+          <div class="article-manager-fields" hidden>
+            <div class="article-manager-idline article-manager-full">
+              <label><span>Slug</span><input data-field="slug" type="text" required pattern="[a-z0-9-]+" /></label>
+              <code data-article-path></code>
+            </div>
+            <label><span>Ngôn ngữ</span><select data-field="language"><option value="vi">Tiếng Việt</option><option value="en">English</option></select></label>
+            <label data-translation-field hidden><span>Bản chính</span><input data-field="translationOf" type="text" readonly /></label>
+            <label class="article-manager-full"><span>Tiêu đề</span><input data-field="title" type="text" required /></label>
+            <label class="article-manager-full"><span>Phụ đề</span><input data-field="subtitle" type="text" /></label>
+            <label><span>Tác giả</span><input data-field="author" type="text" /></label>
+            <label><span>Ngày đăng</span><input data-field="date" type="date" /></label>
+            <label><span>Chuyên mục</span><select data-field="category" required></select></label>
+            <label data-subcategory-field><span>Chuyên mục con</span><select data-field="subcategory"></select></label>
+            <label class="article-manager-full"><span>Mô tả ngắn</span><textarea data-field="excerpt" rows="3"></textarea></label>
+            <label class="article-manager-full"><span>Thông tin tác giả <small>mỗi dòng một mục</small></span><textarea data-field="authorDetails" rows="3"></textarea></label>
+            <label class="article-manager-full"><span>Từ khóa <small>mỗi dòng một từ khóa</small></span><textarea data-field="tags" rows="3"></textarea></label>
+            <ArticleImagePicker dataField="image" label="Ảnh thumbnail" />
+            <ArticleImagePicker dataField="heroImage" label="Ảnh hero" />
+            <div class="article-manager-checks article-manager-full">
+              <label><input data-field="featured" type="checkbox" /><span>{kind === 'news' ? 'Hiển thị trên banner' : 'Bài nổi bật'}</span></label>
+              <label><input data-field="draft" type="checkbox" /><span>Chỉ hiển thị trong admin</span></label>
+            </div>
+            <div class="article-manager-full">
+              <InlineProseEditor dataField="body" label="Nội dung bài viết" />
+            </div>
+          </div>
+
+          <footer class="article-manager-footer" hidden>
+            <p class="article-manager-message" role="status"></p>
+            <button type="button" class="article-manager-translation" hidden>+ Bản EN</button>
+            <a class="article-manager-open" href="#" target="_blank" rel="noopener" hidden>Mở trang ↗</a>
+            <button type="button" class="article-manager-delete">Xóa bài</button>
+            <button type="submit" class="article-manager-save">Lưu bài viết</button>
+          </footer>
+        </form>
+
+        <section class="article-manager-taxonomy" hidden aria-label="Quản lý chuyên mục">
+          <header>
+            <div><small>Dùng chung trên trang công khai và Admin</small><h3>Chuyên mục</h3></div>
+            <button type="button" class="article-manager-taxonomy-back">Quay lại bài viết</button>
+          </header>
+          <div class="article-manager-taxonomy-list"></div>
+          <form class="article-manager-taxonomy-add">
+            <label><span>Tên chuyên mục mới</span><input type="text" required /></label>
+            <button type="submit">+ Thêm chuyên mục</button>
+          </form>
+          <p class="article-manager-taxonomy-message" role="status"></p>
+        </section>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  type StudioItem = {
+    id: string;
+    title: string;
+    category?: string;
+    subtitle?: string;
+    draft?: boolean;
+    status?: string;
+    route?: string;
+    updatedAt?: string;
+    language?: 'vi' | 'en';
+    translationOf?: string;
+    featured?: boolean;
+  };
+  type StudioEntry = {
+    id: string;
+    fm: Record<string, unknown>;
+    body: string;
+    extension: string;
+    checksum: string;
+    route?: string;
+  };
+  type ProseRoot = HTMLElement & { inlineProseController?: { setMarkdown: (value?: string) => void; getMarkdown: () => string } };
+  type TaxonomyCategory = { label: string; folder: string; tone?: string; subcategories?: string[] };
+
+  const articleManagerConfigs = {
+    news: {
+      folders: ['sinh-hoat-cong-doan'],
+      categories: [
+        { value: 'Cộng Đoàn', folder: 'sinh-hoat-cong-doan', subs: [] },
+        { value: 'Dòng', folder: 'sinh-hoat-cong-doan', subs: [] },
+        { value: 'Giáo Hội', folder: 'sinh-hoat-cong-doan', subs: [] },
+        { value: 'Giáo Phận', folder: 'sinh-hoat-cong-doan', subs: [] },
+      ],
+    },
+    scholar: {
+      folders: ['triet-hoc', 'than-hoc'],
+      categories: [
+        { value: 'Triết Học', folder: 'triet-hoc', subs: ['Tri Luận', 'Siêu Hình Học', 'Đạo Đức', 'Nhân Học'] },
+        { value: 'Thần Học', folder: 'than-hoc', subs: ['Kinh Thánh', 'Thần Học Nền Tảng', 'Luân Lý Kitô Giáo', 'Giáo Hội Học', 'Kitô Học'] },
+      ],
+    },
+    spirituality: {
+      folders: ['linh-dao'],
+      categories: [
+        { value: 'Chung', folder: 'linh-dao', subs: [] },
+        { value: 'Chú Giải Thánh Vịnh', folder: 'linh-dao', subs: [] },
+        { value: 'Bài Giảng', folder: 'linh-dao', subs: [] },
+      ],
+    },
+    sermon: {
+      folders: ['bai-giang-suy-niem'],
+      categories: [
+        { value: 'Mùa Vọng', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Mùa Giáng Sinh', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Mùa Chay', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Mùa Phục Sinh', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Mùa Thường Niên', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Lễ Trọng', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Lễ Kính', folder: 'bai-giang-suy-niem', subs: [] },
+        { value: 'Lễ Nhớ', folder: 'bai-giang-suy-niem', subs: [] },
+      ],
+    },
+  } as const;
+
+  const initArticleManagers = () => {
+    document.querySelectorAll<HTMLElement>('[data-article-manager-root]:not([data-article-manager-ready])').forEach((root) => {
+      root.dataset.articleManagerReady = 'true';
+      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const kind = (root.dataset.kind || 'news') as keyof typeof articleManagerConfigs;
+      const fallbackConfig = articleManagerConfigs[kind];
+      let categories: TaxonomyCategory[] = fallbackConfig.categories.map((category) => ({
+        label: category.value,
+        folder: category.folder,
+        subcategories: [...category.subs],
+      }));
+      const trigger = root.querySelector<HTMLButtonElement>('.article-manager-trigger');
+      const dialog = root.querySelector<HTMLDialogElement>('.article-manager-dialog');
+      const closeButton = root.querySelector<HTMLButtonElement>('.article-manager-close');
+      const newButton = root.querySelector<HTMLButtonElement>('.article-manager-new');
+      const categoriesButton = root.querySelector<HTMLButtonElement>('.article-manager-categories');
+      const search = root.querySelector<HTMLInputElement>('.article-manager-search input');
+      const categoryFilter = root.querySelector<HTMLSelectElement>('.article-manager-category-filter');
+      const list = root.querySelector<HTMLElement>('.article-manager-list');
+      const empty = root.querySelector<HTMLElement>('.article-manager-empty');
+      const form = root.querySelector<HTMLFormElement>('.article-manager-form');
+      const formEmpty = root.querySelector<HTMLElement>('.article-manager-form-empty');
+      const fieldsWrap = root.querySelector<HTMLElement>('.article-manager-fields');
+      const footer = root.querySelector<HTMLElement>('.article-manager-footer');
+      const message = root.querySelector<HTMLElement>('.article-manager-message');
+      const saveButton = root.querySelector<HTMLButtonElement>('.article-manager-save');
+      const deleteButton = root.querySelector<HTMLButtonElement>('.article-manager-delete');
+      const openLink = root.querySelector<HTMLAnchorElement>('.article-manager-open');
+      const pathLabel = root.querySelector<HTMLElement>('[data-article-path]');
+      const subcategoryField = root.querySelector<HTMLElement>('[data-subcategory-field]');
+      const proseRoot = root.querySelector<ProseRoot>('[data-inline-prose-editor]');
+      const translationField = root.querySelector<HTMLElement>('[data-translation-field]');
+      const translationButton = root.querySelector<HTMLButtonElement>('.article-manager-translation');
+      const workspace = root.querySelector<HTMLElement>('.article-manager-workspace');
+      const taxonomyPanel = root.querySelector<HTMLElement>('.article-manager-taxonomy');
+      const taxonomyList = root.querySelector<HTMLElement>('.article-manager-taxonomy-list');
+      const taxonomyBack = root.querySelector<HTMLButtonElement>('.article-manager-taxonomy-back');
+      const taxonomyAdd = root.querySelector<HTMLFormElement>('.article-manager-taxonomy-add');
+      const taxonomyInput = taxonomyAdd?.querySelector<HTMLInputElement>('input');
+      const taxonomyMessage = root.querySelector<HTMLElement>('.article-manager-taxonomy-message');
+      const field = <T extends HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(name: string) => root.querySelector<T>(`[data-field="${name}"]`);
+      let items: StudioItem[] = [];
+      let active: StudioEntry | null = null;
+      let isNew = false;
+      let taxonomyReloadTimer = 0;
+
+      if (!trigger || !dialog || !form || !list || !message || !saveButton || !deleteButton) {
+        root.remove();
+        return;
+      }
+
+      const request = async (path: string, options?: RequestInit) => {
+        const response = await fetch(ADMIN + path, options);
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        return data;
+      };
+      const setMessage = (value = '', error = false) => {
+        message.textContent = value;
+        message.classList.toggle('is-error', error);
+      };
+      const setValue = (name: string, value: unknown) => {
+        const input = field(name);
+        if (input) input.value = value == null ? '' : String(value);
+      };
+      const setListValue = (name: string, value: unknown) => setValue(name, Array.isArray(value) ? value.join('\n') : '');
+      const read = (name: string) => field(name)?.value.trim() || '';
+      const readList = (name: string) => read(name).split(/\r?\n/).map((value) => value.trim()).filter(Boolean);
+      const imageValue = (value: unknown) => {
+        if (typeof value === 'string') return value;
+        if (value && typeof value === 'object' && 'src' in value) return String((value as { src?: string }).src || '');
+        return '';
+      };
+      const slugify = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      const categoryConfig = (value = read('category')) => categories.find((category) => category.label === value) ?? categories[0];
+      const currentFolder = () => {
+        const translationOf = read('translationOf');
+        if (read('language') === 'en' && translationOf.includes('/')) return translationOf.split('/').slice(0, -1).join('/');
+        if (!isNew && active?.id.includes('/')) return active.id.split('/').slice(0, -1).join('/');
+        return categoryConfig()?.folder ?? fallbackConfig.folders[0];
+      };
+      const currentId = () => `${currentFolder()}/${read('slug')}`;
+      const formatDate = (value: unknown) => {
+        if (!value) return '';
+        const raw = String(value);
+        const parsed = new Date(raw);
+        return Number.isNaN(parsed.getTime()) ? raw.slice(0, 10) : parsed.toISOString().slice(0, 10);
+      };
+      const today = () => {
+        const date = new Date();
+        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+        return date.toISOString().slice(0, 10);
+      };
+
+      const fillCategorySelect = (selected = '') => {
+        const select = field<HTMLSelectElement>('category');
+        if (!select) return;
+        select.replaceChildren(...categories.map((category) => new Option(category.label, category.label)));
+        if (selected && !categories.some((category) => category.label === selected)) select.append(new Option(selected, selected));
+        select.value = selected || categories[0]?.label || '';
+      };
+      const fillCategoryFilter = () => {
+        if (!categoryFilter) return;
+        const selected = categoryFilter.value;
+        categoryFilter.replaceChildren(
+          new Option('Tất cả', ''),
+          ...categories.map((category) => new Option(category.label, category.label)),
+        );
+        categoryFilter.value = categories.some((category) => category.label === selected) ? selected : '';
+      };
+      const fillSubcategories = (selected = '') => {
+        const select = field<HTMLSelectElement>('subcategory');
+        if (!select || !subcategoryField) return;
+        const values = [...(categoryConfig()?.subcategories ?? [])];
+        if (selected && !values.includes(selected as never)) values.push(selected as never);
+        select.replaceChildren(new Option('Không chọn', ''), ...values.map((value) => new Option(value, value)));
+        select.value = selected;
+        subcategoryField.hidden = values.length === 0;
+        updatePath();
+      };
+      const updatePath = () => {
+        if (pathLabel) pathLabel.textContent = read('slug') ? `src/content/bai-viet/${currentId()}.md` : `src/content/bai-viet/${currentFolder()}/…`;
+      };
+
+      const itemInScope = (item: StudioItem) => categories.some(({ label, folder }) => item.category === label || item.id.startsWith(`${folder}/`))
+        || fallbackConfig.folders.some((folder) => item.id.startsWith(`${folder}/`));
+      const renderList = () => {
+        const query = (search?.value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        const selectedCategory = categoryFilter?.value || '';
+        const visible = items.filter(itemInScope)
+          .filter((item) => !selectedCategory || item.category === selectedCategory)
+          .filter((item) => `${item.title} ${item.id} ${item.category || ''}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(query));
+        list.replaceChildren(...visible.map((item) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'article-manager-list-item';
+          button.dataset.id = item.id;
+          button.setAttribute('role', 'listitem');
+          if (active?.id === item.id) button.classList.add('is-active');
+          const title = document.createElement('strong');
+          title.textContent = item.title;
+          const meta = document.createElement('span');
+          const id = document.createElement('code');
+          id.textContent = item.id;
+          const state = document.createElement('small');
+          const isTranslation = item.language === 'en' || Boolean(item.translationOf);
+          state.textContent = kind === 'news' && item.featured ? 'Banner' : isTranslation ? 'Bản EN' : item.draft ? 'Bản nháp' : 'Công khai';
+          state.className = kind === 'news' && item.featured ? 'is-featured' : isTranslation ? 'is-language' : item.draft ? 'is-draft' : 'is-public';
+          meta.append(id, state);
+          button.append(title, meta);
+          button.addEventListener('click', () => openEntry(item.id));
+          return button;
+        }));
+        if (empty) empty.hidden = visible.length !== 0;
+      };
+
+      const loadItems = async () => {
+        const result = await request('/api/studio/items?collection=bai-viet');
+        items = Array.isArray(result.items) ? result.items : [];
+        renderList();
+      };
+      const loadTaxonomy = async () => {
+        const result = await request(`/api/studio/article-taxonomy?kind=${encodeURIComponent(kind)}`);
+        if (Array.isArray(result.categories) && result.categories.length) categories = result.categories;
+        fillCategoryFilter();
+      };
+      const showFields = () => {
+        if (formEmpty) formEmpty.hidden = true;
+        if (fieldsWrap) fieldsWrap.hidden = false;
+        if (footer) footer.hidden = false;
+      };
+      const populate = (entry: StudioEntry | null, creating = false) => {
+        active = entry;
+        isNew = creating;
+        const fm = entry?.fm ?? {};
+        const currentSlug = entry?.id.split('/').at(-1) ?? '';
+        fillCategorySelect(String(fm.category || categories[0]?.label || ''));
+        setValue('slug', currentSlug);
+        setValue('language', fm.language || (String(entry?.id || '').endsWith('-en') ? 'en' : 'vi'));
+        setValue('translationOf', fm.translationOf || '');
+        setValue('title', fm.title);
+        setValue('subtitle', fm.subtitle);
+        setValue('author', fm.author);
+        setValue('date', formatDate(fm.date) || today());
+        fillSubcategories(String(fm.subcategory || ''));
+        setValue('excerpt', fm.excerpt);
+        setListValue('authorDetails', fm.authorDetails);
+        setListValue('tags', fm.tags);
+        setValue('image', imageValue(fm.image));
+        setValue('heroImage', imageValue(fm.heroImage));
+        root.querySelectorAll<HTMLElement>('[data-article-image-picker]').forEach((picker) => picker.dispatchEvent(new CustomEvent('article-image:refresh')));
+        const featured = field<HTMLInputElement>('featured');
+        const draft = field<HTMLInputElement>('draft');
+        if (featured) featured.checked = fm.featured === true;
+        const isTranslation = String(fm.language || '') === 'en' || Boolean(fm.translationOf);
+        if (draft) draft.checked = creating ? !isTranslation : fm.draft === true;
+        if (translationField) translationField.hidden = !isTranslation;
+        if (translationButton) {
+          translationButton.hidden = creating || isTranslation;
+          const translation = items.find((item) => item.translationOf === entry?.id || item.id === `${entry?.id}-en`);
+          translationButton.textContent = translation ? 'Sửa bản EN' : '+ Bản EN';
+          translationButton.dataset.translationId = translation?.id || '';
+        }
+        const body = field<HTMLTextAreaElement>('body');
+        if (body) body.value = entry?.body || '';
+        proseRoot?.inlineProseController?.setMarkdown(body?.value || '');
+        proseRoot?.dispatchEvent(new CustomEvent('inline-prose:set'));
+        deleteButton.hidden = creating;
+        if (openLink) {
+          const publicId = isTranslation ? String(fm.translationOf || '').trim() : entry?.id;
+          const publicItem = items.find((item) => item.id === publicId);
+          openLink.hidden = creating || fm.draft === true || (!entry?.route && !publicItem?.route);
+          openLink.href = publicItem?.route || entry?.route || '#';
+        }
+        showFields();
+        updatePath();
+        setMessage(creating ? 'Bài mới mặc định là bản nháp.' : '');
+        renderList();
+        requestAnimationFrame(() => field<HTMLInputElement>(creating ? 'title' : 'slug')?.focus());
+      };
+
+      const openEntry = async (id: string) => {
+        setMessage('Đang tải…');
+        saveButton.disabled = true;
+        try {
+          const entry = await request(`/api/studio/item?collection=bai-viet&id=${encodeURIComponent(id)}`) as StudioEntry;
+          populate(entry, false);
+        } catch (error) {
+          setMessage(error instanceof Error ? error.message : 'Không thể tải bài viết', true);
+        } finally {
+          saveButton.disabled = false;
+        }
+      };
+
+      const openManager = async (editId = '') => {
+        if (!dialog.open) dialog.showModal();
+        setMessage('Đang tải danh sách…');
+        try {
+          await Promise.all([loadTaxonomy(), loadItems()]);
+          setMessage('');
+          if (editId) await openEntry(editId);
+        } catch (error) {
+          setMessage(error instanceof Error ? error.message : 'Không thể tải danh sách bài viết', true);
+        }
+      };
+      const closeManager = () => dialog.close();
+
+      const setTaxonomyMessage = (value = '', error = false) => {
+        if (!taxonomyMessage) return;
+        taxonomyMessage.textContent = value;
+        taxonomyMessage.classList.toggle('is-error', error);
+      };
+      const taxonomyAction = async (payload: Record<string, unknown>) => {
+        const result = await request('/api/studio/article-taxonomy', {
+          method: 'PUT', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ kind, ...payload }),
+        });
+        if (Array.isArray(result.categories)) categories = result.categories;
+        await loadItems();
+        renderTaxonomy();
+        fillCategorySelect(read('category'));
+        fillSubcategories(read('subcategory'));
+        window.clearTimeout(taxonomyReloadTimer);
+        taxonomyReloadTimer = window.setTimeout(() => window.location.reload(), 850);
+      };
+      const renderTaxonomy = () => {
+        if (!taxonomyList) return;
+        taxonomyList.replaceChildren(...categories.map((category) => {
+          const row = document.createElement('div');
+          row.className = 'article-manager-taxonomy-row';
+          const copy = document.createElement('div');
+          copy.className = 'article-manager-taxonomy-copy';
+          const label = document.createElement('strong');
+          label.textContent = category.label;
+          const folder = document.createElement('code');
+          folder.textContent = category.folder;
+          copy.append(label, folder);
+          if (kind === 'scholar') {
+            const subcategories = document.createElement('div');
+            subcategories.className = 'article-manager-subtaxonomy';
+            const subheading = document.createElement('span');
+            subheading.className = 'article-manager-subtaxonomy-heading';
+            subheading.textContent = 'Chuyên mục con';
+            const sublist = document.createElement('div');
+            sublist.className = 'article-manager-subtaxonomy-list';
+            for (const subcategory of category.subcategories ?? []) {
+              const subrow = document.createElement('span');
+              subrow.className = 'article-manager-subtaxonomy-item';
+              const sublabel = document.createElement('b');
+              sublabel.textContent = subcategory;
+              const renameSubcategory = document.createElement('button');
+              renameSubcategory.type = 'button';
+              renameSubcategory.textContent = 'Đổi';
+              renameSubcategory.addEventListener('click', async () => {
+                const nextLabel = window.prompt('Tên chuyên mục con mới:', subcategory)?.trim();
+                if (!nextLabel || nextLabel === subcategory) return;
+                try {
+                  setTaxonomyMessage('Đang đổi tên chuyên mục con…');
+                  await taxonomyAction({ action: 'rename-subcategory', label: category.label, subcategory, nextLabel });
+                  setTaxonomyMessage('Đã đổi tên chuyên mục con và cập nhật các bài liên quan. Trang đang tải lại…');
+                } catch (error) { setTaxonomyMessage(error instanceof Error ? error.message : 'Không thể đổi tên chuyên mục con', true); }
+              });
+              const removeSubcategory = document.createElement('button');
+              removeSubcategory.type = 'button';
+              removeSubcategory.textContent = 'Xóa';
+              removeSubcategory.className = 'is-delete';
+              removeSubcategory.addEventListener('click', async () => {
+                const alternatives = (category.subcategories ?? []).filter((item) => item !== subcategory);
+                let replacement = '';
+                if (alternatives.length) {
+                  const response = window.prompt(`Chuyển các bài thuộc “${subcategory}” sang chuyên mục con nào? Để trống để chuyển về “${category.label}”.`, alternatives[0]);
+                  if (response === null) return;
+                  replacement = response.trim();
+                  if (replacement && !alternatives.includes(replacement)) return setTaxonomyMessage('Chuyên mục con nhận bài không tồn tại.', true);
+                } else if (!window.confirm(`Xóa chuyên mục con “${subcategory}”? Các bài hiện có sẽ chuyển về “${category.label}”.`)) return;
+                if (alternatives.length && !window.confirm(`Xóa chuyên mục con “${subcategory}” và cập nhật các bài liên quan?`)) return;
+                try {
+                  setTaxonomyMessage('Đang xóa chuyên mục con…');
+                  await taxonomyAction({ action: 'delete-subcategory', label: category.label, subcategory, replacement });
+                  setTaxonomyMessage('Đã xóa chuyên mục con an toàn. Trang đang tải lại…');
+                } catch (error) { setTaxonomyMessage(error instanceof Error ? error.message : 'Không thể xóa chuyên mục con', true); }
+              });
+              subrow.append(sublabel, renameSubcategory, removeSubcategory);
+              sublist.append(subrow);
+            }
+            const addSubcategory = document.createElement('button');
+            addSubcategory.type = 'button';
+            addSubcategory.className = 'article-manager-subtaxonomy-add';
+            addSubcategory.textContent = '+ Thêm chuyên mục con';
+            addSubcategory.addEventListener('click', async () => {
+              const subcategory = window.prompt(`Tên chuyên mục con mới thuộc “${category.label}”:`)?.trim();
+              if (!subcategory) return;
+              try {
+                setTaxonomyMessage('Đang thêm chuyên mục con…');
+                await taxonomyAction({ action: 'add-subcategory', label: category.label, subcategory });
+                setTaxonomyMessage('Đã thêm chuyên mục con. Trang đang tải lại…');
+              } catch (error) { setTaxonomyMessage(error instanceof Error ? error.message : 'Không thể thêm chuyên mục con', true); }
+            });
+            subcategories.append(subheading, sublist, addSubcategory);
+            copy.append(subcategories);
+          }
+          const actions = document.createElement('div');
+          const rename = document.createElement('button');
+          rename.type = 'button'; rename.textContent = 'Đổi tên';
+          rename.addEventListener('click', async () => {
+            const next = window.prompt('Tên chuyên mục mới:', category.label)?.trim();
+            if (!next || next === category.label) return;
+            try { setTaxonomyMessage('Đang đổi tên…'); await taxonomyAction({ action: 'rename', label: category.label, nextLabel: next }); setTaxonomyMessage('Đã đổi tên và cập nhật các bài liên quan. Trang đang tải lại…'); }
+            catch (error) { setTaxonomyMessage(error instanceof Error ? error.message : 'Không thể đổi tên chuyên mục', true); }
+          });
+          const remove = document.createElement('button');
+          remove.type = 'button'; remove.textContent = 'Xóa'; remove.className = 'is-delete';
+          remove.disabled = categories.length < 2;
+          remove.addEventListener('click', async () => {
+            const alternatives = categories.filter((item) => item.label !== category.label);
+            const suggested = alternatives[0]?.label || '';
+            const replacement = window.prompt(`Các bài thuộc “${category.label}” sẽ được chuyển sang chuyên mục nào?`, suggested)?.trim();
+            if (!replacement) return;
+            if (!alternatives.some((item) => item.label === replacement)) return setTaxonomyMessage('Chuyên mục nhận bài không tồn tại.', true);
+            if (!window.confirm(`Xóa chuyên mục “${category.label}” và chuyển các bài sang “${replacement}”?`)) return;
+            try { setTaxonomyMessage('Đang chuyển bài và xóa chuyên mục…'); await taxonomyAction({ action: 'delete', label: category.label, replacement }); setTaxonomyMessage('Đã xóa chuyên mục an toàn. Trang đang tải lại…'); }
+            catch (error) { setTaxonomyMessage(error instanceof Error ? error.message : 'Không thể xóa chuyên mục', true); }
+          });
+          actions.append(rename, remove); row.append(copy, actions); return row;
+        }));
+      };
+      const showTaxonomy = async () => {
+        try {
+          await loadTaxonomy(); renderTaxonomy(); setTaxonomyMessage('');
+          workspace?.classList.add('is-taxonomy');
+          if (taxonomyPanel) taxonomyPanel.hidden = false;
+        } catch (error) { setMessage(error instanceof Error ? error.message : 'Không thể tải chuyên mục', true); }
+      };
+      const hideTaxonomy = () => {
+        if (taxonomyPanel) taxonomyPanel.hidden = true;
+        workspace?.classList.remove('is-taxonomy');
+      };
+
+      trigger.addEventListener('click', () => openManager());
+      closeButton?.addEventListener('click', closeManager);
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) closeManager(); });
+      newButton?.addEventListener('click', () => populate(null, true));
+      categoriesButton?.addEventListener('click', showTaxonomy);
+      taxonomyBack?.addEventListener('click', hideTaxonomy);
+      taxonomyAdd?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const label = taxonomyInput?.value.trim() || '';
+        if (!label) return;
+        try {
+          setTaxonomyMessage('Đang thêm chuyên mục…');
+          await taxonomyAction({ action: 'add', label });
+          if (taxonomyInput) taxonomyInput.value = '';
+          setTaxonomyMessage('Đã thêm chuyên mục. Trang đang tải lại…');
+        } catch (error) { setTaxonomyMessage(error instanceof Error ? error.message : 'Không thể thêm chuyên mục', true); }
+      });
+      translationButton?.addEventListener('click', async () => {
+        if (!active || isNew) return;
+        const existingId = translationButton.dataset.translationId;
+        if (existingId) return openEntry(existingId);
+        const primary = active;
+        const primaryId = primary.id;
+        const primarySlug = primaryId.split('/').at(-1) || '';
+        const fm = {
+          ...primary.fm,
+          title: String(primary.fm.subtitle || ''),
+          subtitle: String(primary.fm.title || ''),
+          featured: false,
+          language: 'en',
+          translationOf: primaryId,
+          draft: false,
+        };
+        populate({ id: `${primaryId}-en`, fm, body: '', extension: '.md', checksum: '', route: primary.route }, true);
+        setValue('slug', `${primarySlug}-en`);
+        setMessage('Đang tạo bản EN công khai của bài này. Bản EN không phải là bài nháp độc lập.');
+      });
+      search?.addEventListener('input', renderList);
+      categoryFilter?.addEventListener('change', renderList);
+      field<HTMLSelectElement>('category')?.addEventListener('change', () => fillSubcategories());
+      field<HTMLSelectElement>('language')?.addEventListener('change', () => {
+        const isEnglish = read('language') === 'en';
+        if (translationField) translationField.hidden = !isEnglish;
+        if (!isEnglish) setValue('translationOf', '');
+      });
+      field<HTMLInputElement>('slug')?.addEventListener('input', updatePath);
+      field<HTMLInputElement>('title')?.addEventListener('input', () => {
+        if (isNew && !read('slug')) {
+          setValue('slug', slugify(read('title')));
+          updatePath();
+        }
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const slug = slugify(read('slug'));
+        setValue('slug', slug);
+        if (!slug) return setMessage('Cần nhập slug hợp lệ.', true);
+        proseRoot?.dispatchEvent(new CustomEvent('inline-prose:sync'));
+        const body = proseRoot?.inlineProseController?.getMarkdown() ?? field<HTMLTextAreaElement>('body')?.value ?? '';
+        const featured = field<HTMLInputElement>('featured');
+        const draft = field<HTMLInputElement>('draft');
+        const fm = {
+          ...(active?.fm || {}),
+          title: read('title'), subtitle: read('subtitle'), author: read('author'),
+          authorDetails: readList('authorDetails'), category: read('category'),
+          subcategory: read('subcategory'), excerpt: read('excerpt'), date: read('date'),
+          tags: readList('tags'), image: read('image'), heroImage: read('heroImage'),
+          language: read('language') || 'vi', translationOf: read('language') === 'en' ? read('translationOf') : '',
+          featured: featured?.checked === true, draft: draft?.checked === true,
+        };
+        saveButton.disabled = true;
+        deleteButton.disabled = true;
+        setMessage('Đang lưu…');
+        try {
+          const result = await request('/api/studio/item', {
+            method: isNew ? 'POST' : 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              collection: 'bai-viet', id: currentId(), originalId: active?.id || currentId(),
+              fm, body, extension: active?.extension || '.md', checksum: active?.checksum || '',
+            }),
+          });
+          setMessage('Đã lưu. Trang sẽ cập nhật sau hot reload…');
+          active = { id: result.id, fm, body, extension: '.md', checksum: result.checksum || '', route: result.route };
+          isNew = false;
+          window.setTimeout(() => location.reload(), 550);
+        } catch (error) {
+          setMessage(error instanceof Error ? error.message : 'Không thể lưu bài viết', true);
+          saveButton.disabled = false;
+          deleteButton.disabled = false;
+        }
+      });
+
+      deleteButton.addEventListener('click', async () => {
+        if (!active || isNew) return;
+        const title = String(active.fm.title || active.id);
+        if (!window.confirm(`Xóa “${title}”? File sẽ được chuyển vào thư mục khôi phục.`)) return;
+        saveButton.disabled = true;
+        deleteButton.disabled = true;
+        setMessage('Đang xóa…');
+        try {
+          await request(`/api/studio/item?collection=bai-viet&id=${encodeURIComponent(active.id)}`, { method: 'DELETE' });
+          setMessage('Đã chuyển bài vào thư mục khôi phục.');
+          window.setTimeout(() => location.reload(), 500);
+        } catch (error) {
+          setMessage(error instanceof Error ? error.message : 'Không thể xóa bài viết', true);
+          saveButton.disabled = false;
+          deleteButton.disabled = false;
+        }
+      });
+
+      root.addEventListener('click', (event) => {
+        const edit = (event.target as HTMLElement).closest<HTMLElement>('[data-article-inline-edit]');
+        if (!edit) return;
+        event.preventDefault();
+        event.stopPropagation();
+        openManager(edit.dataset.articleInlineEdit || '');
+      });
+      document.addEventListener('click', (event) => {
+        const edit = (event.target as HTMLElement).closest<HTMLElement>('[data-article-inline-edit]');
+        if (!edit || root.contains(edit)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        openManager(edit.dataset.articleInlineEdit || '');
+      }, true);
+
+      request('/api/studio/manifest').then(() => {
+        root.dataset.adminAvailable = 'true';
+        document.body.dataset.articleInline = '1';
+      }).catch(() => root.remove());
+    });
+  };
+
+  initArticleManagers();
+  document.addEventListener('astro:page-load', initArticleManagers);
+</script>
+
+<style is:global>
+  .article-inline-manager{position:relative}.article-manager-trigger{position:fixed;z-index:91;left:1.25rem;bottom:1.25rem;display:none;align-items:center;gap:.55rem;min-height:3.2rem;padding:.68rem .95rem;border:1px solid #d7ae60;border-radius:.5rem;color:#102118;background:#e9c176;font:650 .94rem/1 var(--font-ui);cursor:pointer;box-shadow:0 .45rem 1.35rem rgba(0,0,0,.22)}.article-inline-manager[data-admin-available="true"] .article-manager-trigger{display:inline-flex}.article-manager-trigger svg{width:1.2rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:1.8}.article-manager-trigger:hover,.article-manager-trigger:focus-visible{background:#f0cf8c;outline:2px solid rgba(233,193,118,.3);outline-offset:2px}
+  .article-manager-dialog{width:min(112rem,calc(100vw - 2rem));height:min(82rem,calc(100dvh - 2rem));max-width:none;max-height:none;padding:0;overflow:hidden;border:1px solid #75613c;border-radius:.75rem;color:#eee7d7;background:#101b17;box-shadow:0 2rem 5rem rgba(0,0,0,.52)}.article-manager-dialog::backdrop{background:rgba(2,8,5,.76);backdrop-filter:blur(3px)}.article-manager-shell{display:grid;grid-template-rows:auto minmax(0,1fr);height:100%}.article-manager-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.35rem;border-bottom:1px solid #51472f}.article-manager-head small{display:block;margin-bottom:.2rem;color:#e1b966;font:650 .78rem/1.3 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}.article-manager-head h2{margin:0;color:#f3eddf;font:600 1.7rem/1.2 var(--font-display)}.article-manager-head-actions{display:flex;align-items:center;gap:.65rem}.article-manager-head button{min-height:2.8rem;padding:.58rem .85rem;border:1px solid #806a3f;border-radius:.42rem;color:#efe7d5;background:transparent;font:650 .9rem/1 var(--font-ui);cursor:pointer}.article-manager-head .article-manager-new{color:#102118;background:#e9c176;border-color:#e9c176}.article-manager-head .article-manager-close{width:2.8rem;padding:0;border:0;font:300 2rem/1 var(--font-ui)}
+  .article-manager-workspace{display:grid;grid-template-columns:minmax(22rem,29rem) minmax(0,1fr);min-height:0}.article-manager-index{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0;padding:1rem;border-right:1px solid #51472f;background:#0b1512}.article-manager-search{display:flex;align-items:center;gap:.55rem;margin-bottom:.8rem;padding:0 .75rem;border:1px solid #5d543d;border-radius:.42rem;background:#08110e}.article-manager-search svg{width:1.15rem;fill:none;stroke:#cbaa65;stroke-width:1.8}.article-manager-search input{width:100%;min-width:0;padding:.72rem 0;border:0;outline:0;color:#eee7d7;background:transparent;font:500 .92rem var(--font-ui)}.article-manager-list{min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#806a3f transparent}.article-manager-list-item{display:grid;gap:.35rem;width:100%;padding:.8rem .7rem;border:0;border-bottom:1px solid #322e22;color:#dad4c6;background:transparent;text-align:left;cursor:pointer}.article-manager-list-item:hover,.article-manager-list-item.is-active{background:#18251f}.article-manager-list-item.is-active{box-shadow:inset 3px 0 #e0b765}.article-manager-list-item strong{overflow:hidden;font:600 .98rem/1.35 var(--font-ui);text-overflow:ellipsis;white-space:nowrap}.article-manager-list-item>span{display:flex;align-items:center;justify-content:space-between;gap:.5rem}.article-manager-list-item code{overflow:hidden;color:#918c80;font:.76rem/1.2 ui-monospace,monospace;text-overflow:ellipsis;white-space:nowrap}.article-manager-list-item small{flex:none;padding:.2rem .38rem;border-radius:.25rem;color:#fff;font:600 .68rem/1 var(--font-ui);text-transform:uppercase}.article-manager-list-item small.is-draft{background:#725923}.article-manager-list-item small.is-public{background:#286849}.article-manager-empty{margin:1rem;color:#aaa395;font:italic .9rem/1.5 var(--font-ui);text-align:center}
+  .article-manager-form{display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;min-height:0}.article-manager-form-empty{display:grid;place-content:center;justify-items:center;gap:.45rem;height:100%;color:#aaa395;text-align:center}.article-manager-form-empty svg{width:3rem;fill:none;stroke:#8d7950;stroke-width:1.35}.article-manager-form-empty strong{color:#ddd5c4;font:600 1.25rem var(--font-display)}.article-manager-form-empty span{font:400 .92rem var(--font-ui)}.article-manager-fields{display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:1rem;min-height:0;padding:1.25rem;overflow:auto}.article-manager-fields[hidden],.article-manager-footer[hidden],.article-manager-form-empty[hidden],.article-manager-fields [data-translation-field][hidden]{display:none}.article-manager-fields label{display:flex;min-width:0;flex-direction:column;gap:.38rem}.article-manager-fields label>span{color:#d4cbb8;font:500 .9rem/1.35 var(--font-ui)}.article-manager-fields label>span small{font-weight:400;opacity:.68}.article-manager-full{grid-column:1/-1}.article-manager-idline{display:grid;grid-template-columns:minmax(16rem,24rem) minmax(0,1fr);align-items:end;gap:1rem}.article-manager-idline code{overflow:hidden;padding:0 0 .78rem;color:#918c80;font:.78rem/1.2 ui-monospace,monospace;text-overflow:ellipsis;white-space:nowrap}.article-manager-fields input[type="text"],.article-manager-fields input[type="date"],.article-manager-fields textarea,.article-manager-fields select{width:100%;box-sizing:border-box;padding:.7rem .78rem;border:1px solid #61573f;border-radius:.4rem;outline:0;color:#f0e9d9;background:#09130f;font:400 .96rem/1.5 var(--font-ui)}.article-manager-fields textarea{resize:vertical}.article-manager-fields input:focus,.article-manager-fields textarea:focus,.article-manager-fields select:focus{border-color:#d7ae60;box-shadow:0 0 0 2px rgba(233,193,118,.14)}.article-manager-checks{display:flex;flex-wrap:wrap;gap:1.35rem}.article-manager-checks label{flex-direction:row;align-items:center}.article-manager-checks input{width:1.15rem;height:1.15rem;accent-color:#d7ae60}.article-manager-footer{display:flex;align-items:center;gap:.65rem;padding:1rem 1.25rem;border-top:1px solid #51472f}.article-manager-message{flex:1;margin:0;color:#cfc6b4;font:500 .86rem/1.4 var(--font-ui)}.article-manager-message.is-error{color:#ff9f91}.article-manager-footer button,.article-manager-open{min-height:2.8rem;box-sizing:border-box;padding:.58rem .85rem;border:1px solid #806a3f;border-radius:.4rem;color:#eee7d7;background:transparent;font:650 .88rem/1 var(--font-ui);text-decoration:none;cursor:pointer}.article-manager-footer .article-manager-delete{color:#ffb1a8;border-color:#874c45}.article-manager-footer .article-manager-save{color:#102118;background:#e9c176;border-color:#e9c176}.article-manager-footer button:disabled{opacity:.48;cursor:wait}
+  .article-manager-list-item small.is-language{background:#315f83}.article-manager-workspace.is-taxonomy{display:block;overflow:auto}.article-manager-workspace.is-taxonomy>.article-manager-index,.article-manager-workspace.is-taxonomy>.article-manager-form{display:none}.article-manager-taxonomy{width:min(100%,64rem);box-sizing:border-box;margin:0 auto;padding:clamp(1rem,3vw,2.2rem)}.article-manager-taxonomy[hidden]{display:none}.article-manager-taxonomy>header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.4rem}.article-manager-taxonomy small{color:#c6a45e;font:600 .78rem/1.3 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.article-manager-taxonomy h3{margin:.25rem 0 0;color:#f2ead9;font:600 1.65rem/1.2 var(--font-display)}.article-manager-taxonomy button{min-height:2.65rem;padding:.55rem .78rem;border:1px solid #75633f;border-radius:.4rem;color:#eee6d5;background:transparent;font:600 .86rem/1 var(--font-ui);cursor:pointer}.article-manager-taxonomy-list{border-top:1px solid #403927}.article-manager-taxonomy-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 0;border-bottom:1px solid #403927}.article-manager-taxonomy-row>div:first-child{display:grid;gap:.2rem}.article-manager-taxonomy-row strong{color:#eee6d5;font:600 1rem/1.3 var(--font-ui)}.article-manager-taxonomy-row code{color:#938b7b;font:.76rem/1.2 ui-monospace,monospace}.article-manager-taxonomy-row>div:last-child{display:flex;gap:.45rem}.article-manager-taxonomy-row .is-delete{color:#ffaaa0;border-color:#824840}.article-manager-taxonomy-add{display:flex;align-items:end;gap:.7rem;margin-top:1.4rem}.article-manager-taxonomy-add label{display:grid;flex:1;gap:.4rem;color:#d4cbb8;font:500 .9rem/1.3 var(--font-ui)}.article-manager-taxonomy-add input{width:100%;box-sizing:border-box;padding:.72rem .8rem;border:1px solid #61573f;border-radius:.4rem;color:#f0e9d9;background:#09130f;font:400 .96rem/1.4 var(--font-ui)}.article-manager-taxonomy-add button{color:#102118;background:#e9c176;border-color:#e9c176}.article-manager-taxonomy-message{min-height:1.4em;margin:.85rem 0 0;color:#cfc6b4;font:500 .86rem/1.4 var(--font-ui)}.article-manager-taxonomy-message.is-error{color:#ff9f91}
+  .article-manager-taxonomy-row{align-items:flex-start}.article-manager-taxonomy-copy{flex:1;min-width:0}.article-manager-subtaxonomy{display:grid;gap:.5rem;margin-top:.75rem}.article-manager-subtaxonomy-heading{color:var(--am-muted,#9ea89f);font:600 .72rem/1.2 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.article-manager-subtaxonomy-list{display:flex;flex-wrap:wrap;gap:.42rem}.article-manager-subtaxonomy-item{display:flex;align-items:center;gap:.25rem;padding:.28rem .32rem .28rem .55rem;border:1px solid var(--am-line-soft,#403927);border-radius:.38rem;background:var(--am-panel,#0b1512)}.article-manager-subtaxonomy-item b{color:var(--am-copy,#d4d7cf);font:500 .82rem/1.25 var(--font-ui)}.article-manager-taxonomy .article-manager-subtaxonomy-item button{min-height:1.75rem;padding:.28rem .4rem;border:0;font-size:.7rem}.article-manager-taxonomy .article-manager-subtaxonomy-add{justify-self:start;min-height:2rem;padding:.35rem .55rem;border-style:dashed;color:var(--am-accent,#dfbd73);font-size:.76rem}
+  body[data-article-inline="1"] .spirit-gallery-card{position:relative}body:not([data-article-inline="1"]) [data-article-inline-edit]{display:none!important}.article-inline-card-edit{position:absolute;z-index:8;top:.65rem;left:.65rem;display:grid;width:2.6rem;height:2.6rem;place-items:center;padding:0;border:1px solid #d7ae60;border-radius:50%;color:#102118;background:#e9c176;font:700 1rem/1 var(--font-ui);cursor:pointer;box-shadow:0 .3rem .8rem rgba(0,0,0,.25)}
+  html[data-theme="light"] .article-manager-dialog{color:#183e2c;background:#fffdf8;border-color:#8ca596}html[data-theme="light"] .article-manager-head,html[data-theme="light"] .article-manager-footer{border-color:#d5dfd8}html[data-theme="light"] .article-manager-head h2,html[data-theme="light"] .article-manager-form-empty strong,html[data-theme="light"] .article-manager-taxonomy h3,html[data-theme="light"] .article-manager-taxonomy-row strong{color:#183e2c}html[data-theme="light"] .article-manager-head small,html[data-theme="light"] .article-manager-taxonomy small{color:#27664c}html[data-theme="light"] .article-manager-index{background:#f3f6f3;border-color:#d5dfd8}html[data-theme="light"] .article-manager-search{background:#fff;border-color:#aebfb5}html[data-theme="light"] .article-manager-search input{color:#183e2c}html[data-theme="light"] .article-manager-list-item{color:#385344;border-color:#dce4de}html[data-theme="light"] .article-manager-list-item:hover,html[data-theme="light"] .article-manager-list-item.is-active{background:#e8f0ea}html[data-theme="light"] .article-manager-list-item.is-active{box-shadow:inset 3px 0 #27664c}html[data-theme="light"] .article-manager-fields label>span,html[data-theme="light"] .article-manager-message,html[data-theme="light"] .article-manager-taxonomy-add label,html[data-theme="light"] .article-manager-taxonomy-message{color:#50685a}html[data-theme="light"] .article-manager-fields input[type="text"],html[data-theme="light"] .article-manager-fields input[type="date"],html[data-theme="light"] .article-manager-fields textarea,html[data-theme="light"] .article-manager-fields select,html[data-theme="light"] .article-manager-taxonomy-add input{color:#183e2c;background:#fff;border-color:#aebfb5}html[data-theme="light"] .article-manager-fields input:focus,html[data-theme="light"] .article-manager-fields textarea:focus,html[data-theme="light"] .article-manager-fields select:focus{border-color:#27664c;box-shadow:0 0 0 2px rgba(39,102,76,.13)}html[data-theme="light"] .article-manager-idline code,html[data-theme="light"] .article-manager-taxonomy-row code{color:#65766c}html[data-theme="light"] .article-manager-taxonomy-list,html[data-theme="light"] .article-manager-taxonomy-row{border-color:#d5dfd8}html[data-theme="light"] .article-manager-taxonomy button{color:#183e2c;border-color:#91a79a}html[data-theme="light"] .article-manager-footer button,html[data-theme="light"] .article-manager-open{color:#183e2c;border-color:#91a79a}html[data-theme="light"] .article-manager-footer .article-manager-delete{color:#8b2f27;border-color:#c78c86}html[data-theme="light"] .article-manager-footer .article-manager-save{color:#fff;background:#27664c;border-color:#27664c}
+  .article-manager-dialog{--am-bg:#101915;--am-panel:#0b1310;--am-surface:#16231d;--am-field:#08110e;--am-line:#455347;--am-line-soft:#303b33;--am-text:#f0eadc;--am-copy:#d4d7cf;--am-muted:#9ea89f;--am-accent:#dfbd73;--am-accent-strong:#edca7e;--am-accent-ink:#142018;--am-active:#1d3127;--am-danger:#f0a097;--am-danger-line:#86514c;--am-public:#28714e;--am-draft:#856726;--am-language:#356b91;color-scheme:dark;color:var(--am-text);background:var(--am-bg);border-color:var(--am-line)}
+  .article-manager-head{background:var(--am-surface);border-color:var(--am-line)}.article-manager-head h2,.article-manager-form-empty strong,.article-manager-taxonomy h3,.article-manager-taxonomy-row strong{color:var(--am-text)}.article-manager-head small,.article-manager-taxonomy small{color:var(--am-accent)}.article-manager-head button,.article-manager-taxonomy button{color:var(--am-copy);background:var(--am-bg);border-color:var(--am-line)}.article-manager-head button:hover,.article-manager-taxonomy button:hover{color:var(--am-text);background:var(--am-active);border-color:var(--am-accent)}.article-manager-head .article-manager-new,.article-manager-taxonomy-add button{color:var(--am-accent-ink);background:var(--am-accent);border-color:var(--am-accent)}.article-manager-head .article-manager-new:hover,.article-manager-taxonomy-add button:hover{color:var(--am-accent-ink);background:var(--am-accent-strong)}
+  .article-manager-index{background:var(--am-panel);border-color:var(--am-line)}.article-manager-search{background:var(--am-field);border-color:var(--am-line)}.article-manager-search svg{stroke:var(--am-accent)}.article-manager-search input{color:var(--am-text)}.article-manager-search input::placeholder{color:var(--am-muted)}.article-manager-list{scrollbar-color:var(--am-accent) var(--am-panel)}.article-manager-list-item{color:var(--am-copy);border-color:var(--am-line-soft)}.article-manager-list-item:hover,.article-manager-list-item.is-active{background:var(--am-active)}.article-manager-list-item.is-active{box-shadow:inset 3px 0 var(--am-accent)}.article-manager-list-item code,.article-manager-idline code,.article-manager-taxonomy-row code{color:var(--am-muted)}.article-manager-list-item small.is-draft{background:var(--am-draft)}.article-manager-list-item small.is-public{background:var(--am-public)}.article-manager-list-item small.is-language{background:var(--am-language)}.article-manager-empty,.article-manager-form-empty,.article-manager-message,.article-manager-taxonomy-message,.inline-quote-preview{color:var(--am-muted)}
+  .article-manager-form{background:var(--am-bg)}.article-manager-fields label>span,.article-manager-taxonomy-add label{color:var(--am-copy)}.article-manager-fields input[type="text"],.article-manager-fields input[type="date"],.article-manager-fields textarea,.article-manager-fields select,.article-manager-taxonomy-add input{color:var(--am-text);background:var(--am-field);border-color:var(--am-line)}.article-manager-fields input:focus,.article-manager-fields textarea:focus,.article-manager-fields select:focus,.article-manager-taxonomy-add input:focus{border-color:var(--am-accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--am-accent) 20%,transparent)}.article-manager-fields input[readonly]{color:var(--am-muted);background:var(--am-panel)}.article-manager-footer{background:var(--am-surface);border-color:var(--am-line)}.article-manager-footer button,.article-manager-open{color:var(--am-copy);background:var(--am-bg);border-color:var(--am-line)}.article-manager-footer button:hover,.article-manager-open:hover{color:var(--am-text);background:var(--am-active);border-color:var(--am-accent)}.article-manager-footer .article-manager-translation{color:var(--am-text);border-color:var(--am-language)}.article-manager-footer .article-manager-delete,.article-manager-taxonomy-row .is-delete{color:var(--am-danger);border-color:var(--am-danger-line)}.article-manager-footer .article-manager-save{color:var(--am-accent-ink);background:var(--am-accent);border-color:var(--am-accent)}.article-manager-footer .article-manager-save:hover{color:var(--am-accent-ink);background:var(--am-accent-strong)}.article-manager-taxonomy-list,.article-manager-taxonomy-row{border-color:var(--am-line-soft)}
+  html[data-theme="light"] .article-manager-dialog{--am-bg:#fbfcf9;--am-panel:#eef4ef;--am-surface:#ffffff;--am-field:#ffffff;--am-line:#aebfb5;--am-line-soft:#d5dfd8;--am-text:#183e2c;--am-copy:#385746;--am-muted:#687a70;--am-accent:#27664c;--am-accent-strong:#1f583f;--am-accent-ink:#ffffff;--am-active:#dfece3;--am-danger:#97372f;--am-danger-line:#bf827c;--am-public:#28714e;--am-draft:#87691f;--am-language:#2f668e;color-scheme:light}.article-manager-trigger{color:#142018;background:#e5bf70;border-color:#e5bf70}.article-manager-trigger:hover,.article-manager-trigger:focus-visible{background:#f0cf8c}html[data-theme="light"] .article-manager-trigger{color:#fff;background:#27664c;border-color:#27664c;box-shadow:0 .35rem 1rem rgba(24,62,44,.2)}html[data-theme="light"] .article-manager-trigger:hover,html[data-theme="light"] .article-manager-trigger:focus-visible{background:#1f583f}
+  @media(max-width:760px){.article-manager-trigger{left:.8rem;bottom:.8rem;width:3.15rem;height:3.15rem;justify-content:center;padding:0}.article-manager-trigger span{display:none}.article-manager-dialog{width:calc(100vw - .8rem);height:calc(100dvh - .8rem)}.article-manager-head{padding:.85rem}.article-manager-head h2{font-size:1.4rem}.article-manager-head-actions{gap:.35rem}.article-manager-head button{padding:.5rem .6rem;font-size:.76rem}.article-manager-head .article-manager-new{font-size:.76rem}.article-manager-workspace{grid-template-columns:1fr;grid-template-rows:minmax(12rem,31vh) minmax(0,1fr)}.article-manager-index{border-right:0;border-bottom:1px solid #51472f;padding:.75rem}.article-manager-fields{grid-template-columns:1fr;padding:.9rem}.article-manager-full{grid-column:auto}.article-manager-idline{grid-template-columns:1fr}.article-manager-idline code{padding:0}.article-manager-footer{flex-wrap:wrap;padding:.8rem}.article-manager-message{flex-basis:100%;order:-1}.article-manager-footer button,.article-manager-open{flex:1;text-align:center}.article-manager-form-empty{padding:1rem}.article-inline-card-edit{top:.45rem;left:.45rem;width:2.4rem;height:2.4rem}.article-manager-taxonomy{padding:1rem}.article-manager-taxonomy>header,.article-manager-taxonomy-row,.article-manager-taxonomy-add{align-items:stretch;flex-direction:column}.article-manager-taxonomy-row>div:last-child{align-self:flex-end}.article-manager-taxonomy-add button{width:100%}.article-manager-subtaxonomy-list{display:grid}.article-manager-subtaxonomy-item{display:grid;grid-template-columns:minmax(0,1fr) auto auto}.article-manager-taxonomy .article-manager-subtaxonomy-add{width:auto}}
+
+  /* Article editor UI — flat, spacious and mode-specific. */
+  .article-manager-dialog{width:min(128rem,calc(100vw - 3.2rem));height:min(88rem,calc(100dvh - 3.2rem));border:1px solid var(--am-line);border-radius:1.2rem;background:var(--am-bg);box-shadow:0 2.4rem 7rem rgba(0,0,0,.46)}
+  .article-manager-dialog::backdrop{background:rgba(4,10,8,.72);backdrop-filter:blur(5px)}
+  .article-manager-head{min-height:7.2rem;box-sizing:border-box;padding:1.35rem 2rem;background:var(--am-surface);border-bottom:1px solid var(--am-line-soft)}
+  .article-manager-head small{margin-bottom:.35rem;font-size:1.05rem;line-height:1.25;letter-spacing:.105em}
+  .article-manager-head h2{font-size:2.45rem;line-height:1.15;font-weight:600}
+  .article-manager-head-actions{gap:.8rem}.article-manager-head button{min-height:4rem;padding:.9rem 1.25rem;border-radius:.65rem;font-size:1.25rem;font-weight:600}
+  .article-manager-head .article-manager-close{width:4rem;height:4rem;font-size:2.7rem}
+  .article-manager-workspace{grid-template-columns:minmax(30rem,34rem) minmax(0,1fr)}
+  .article-manager-index{padding:1.35rem;background:var(--am-panel);border-color:var(--am-line-soft)}
+  .article-manager-search{position:relative;min-height:4.5rem;box-sizing:border-box;margin:0 0 1.2rem;padding:0 1.15rem;border-radius:.7rem;background:var(--am-field);border-color:var(--am-line)}
+  .article-manager-search-deck .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+  .article-manager-search svg{width:1.65rem;height:1.65rem;flex:none}.article-manager-search input{padding:1rem 0;font-size:1.3rem;line-height:1.4}
+  .article-manager-list{padding-right:.35rem}.article-manager-list-item{gap:.6rem;padding:1.15rem 1rem;border:0;border-radius:.65rem;margin-bottom:.45rem}
+  .article-manager-list-item strong{font-size:1.35rem;line-height:1.4;font-weight:600}.article-manager-list-item code{font-size:1.05rem;line-height:1.3}.article-manager-list-item small{padding:.38rem .55rem;border-radius:.4rem;font-size:.9rem;letter-spacing:.035em}
+  .article-manager-form-empty{gap:.75rem}.article-manager-form-empty svg{width:4.4rem}.article-manager-form-empty strong{font-size:1.75rem}.article-manager-form-empty span{font-size:1.25rem}
+  .article-manager-fields{gap:1.4rem 1.6rem;padding:1.8rem 2rem}.article-manager-fields label{gap:.6rem}.article-manager-fields label>span{font-size:1.25rem;line-height:1.35;font-weight:600}
+  .article-manager-fields input[type="text"],.article-manager-fields input[type="date"],.article-manager-fields textarea,.article-manager-fields select{min-height:4.4rem;padding:.95rem 1.1rem;border-radius:.65rem;font-size:1.35rem;line-height:1.5}
+  .article-manager-fields textarea{min-height:8rem}.article-manager-idline code{padding-bottom:1.2rem;font-size:1.05rem}.article-manager-checks{gap:1.6rem}.article-manager-checks label>span{font-size:1.2rem}.article-manager-checks input{width:1.65rem;height:1.65rem}
+  .article-manager-footer{min-height:6.6rem;box-sizing:border-box;padding:1.2rem 2rem;gap:.85rem;background:var(--am-surface);border-color:var(--am-line-soft)}
+  .article-manager-message{font-size:1.15rem;line-height:1.45}.article-manager-footer button,.article-manager-open{min-height:4rem;padding:.9rem 1.25rem;border-radius:.65rem;font-size:1.2rem}
+  .article-manager-taxonomy{width:min(100%,78rem);padding:2.4rem}.article-manager-taxonomy>header{margin-bottom:2rem}.article-manager-taxonomy small{font-size:1rem}.article-manager-taxonomy h3{font-size:2.2rem}
+  .article-manager-taxonomy button{min-height:3.8rem;padding:.8rem 1rem;border-radius:.6rem;font-size:1.15rem}.article-manager-taxonomy-row{padding:1.35rem 0}.article-manager-taxonomy-row strong{font-size:1.4rem}.article-manager-taxonomy-row code{font-size:1.05rem}
+  .article-manager-subtaxonomy-heading{font-size:1rem}.article-manager-subtaxonomy-item{gap:.4rem;padding:.5rem .5rem .5rem .8rem;border-radius:.55rem}.article-manager-subtaxonomy-item b{font-size:1.15rem}.article-manager-taxonomy .article-manager-subtaxonomy-item button{min-height:2.7rem;font-size:.95rem}.article-manager-taxonomy .article-manager-subtaxonomy-add{min-height:3.2rem;font-size:1.05rem}
+  .article-manager-taxonomy-add{gap:1rem;margin-top:2rem}.article-manager-taxonomy-add label{gap:.55rem;font-size:1.2rem}.article-manager-taxonomy-add input{min-height:4.4rem;padding:.95rem 1.1rem;border-radius:.65rem;font-size:1.3rem}.article-manager-taxonomy-message{font-size:1.15rem}
+  html[data-theme="light"] .article-manager-dialog{--am-bg:#f7f9f7;--am-panel:#eef3ef;--am-surface:#ffffff;--am-field:#ffffff;--am-line:#9fb3a7;--am-line-soft:#d7e0da;--am-text:#173c2b;--am-copy:#355444;--am-muted:#66786e;--am-accent:#216247;--am-accent-strong:#184f39;--am-accent-ink:#ffffff;--am-active:#dfeae3;box-shadow:0 2.2rem 6rem rgba(17,43,31,.24)}
+  html[data-theme="light"] .article-manager-dialog::backdrop{background:rgba(18,32,25,.56)}
+  html[data-theme="light"] .article-manager-list-item:hover,html[data-theme="light"] .article-manager-list-item.is-active{background:#dfe9e2}
+  html[data-theme="light"] .article-manager-fields input[type="text"],html[data-theme="light"] .article-manager-fields input[type="date"],html[data-theme="light"] .article-manager-fields textarea,html[data-theme="light"] .article-manager-fields select,html[data-theme="light"] .article-manager-taxonomy-add input{box-shadow:0 1px 0 rgba(24,62,44,.03)}
+  html[data-theme="dark"] .article-manager-dialog{--am-bg:#0b1411;--am-panel:#0f1b16;--am-surface:#14231c;--am-field:#0d1914;--am-line:#465b50;--am-line-soft:#2b3c33;--am-text:#f2eee4;--am-copy:#d5d9d2;--am-muted:#9ba8a0;--am-accent:#dfbd73;--am-accent-strong:#edca7e;--am-accent-ink:#142018;--am-active:#1b3026}
+  @media(max-width:760px){.article-manager-dialog{width:calc(100vw - 1.2rem);height:calc(100dvh - 1.2rem);border-radius:.9rem}.article-manager-head{min-height:6.3rem;padding:1rem 1.15rem}.article-manager-head h2{font-size:2rem}.article-manager-head small{font-size:.9rem}.article-manager-head button{min-height:3.6rem;padding:.75rem .8rem;font-size:1.05rem}.article-manager-head .article-manager-close{width:3.6rem;height:3.6rem}.article-manager-workspace{grid-template-rows:minmax(16rem,34vh) minmax(0,1fr)}.article-manager-index{padding:1rem}.article-manager-fields{gap:1.2rem;padding:1.25rem}.article-manager-fields label>span{font-size:1.2rem}.article-manager-fields input[type="text"],.article-manager-fields input[type="date"],.article-manager-fields textarea,.article-manager-fields select{font-size:1.3rem}.article-manager-footer{min-height:auto;padding:1rem 1.2rem}.article-manager-footer button,.article-manager-open{font-size:1.1rem}.article-manager-taxonomy{padding:1.3rem}.article-manager-subtaxonomy-list{display:grid}}
+  /* Admin typography is pixel-based so the site's responsive root scale cannot make controls too small. */
+  .article-manager-head small{font-size:12px}.article-manager-head h2{font-size:28px}.article-manager-head button{font-size:14px}.article-manager-search input{font-size:15px}.article-manager-list-item strong{font-size:15px}.article-manager-list-item code{font-size:12px}.article-manager-list-item small{font-size:10px}.article-manager-fields label>span{font-size:14px}.article-manager-fields input[type="text"],.article-manager-fields input[type="date"],.article-manager-fields textarea,.article-manager-fields select{font-size:15px}.article-manager-checks label>span{font-size:14px}.article-manager-message,.article-manager-footer button,.article-manager-open{font-size:14px}.article-manager-taxonomy button,.article-manager-taxonomy-add input{font-size:14px}.article-manager-taxonomy-row strong{font-size:16px}.article-manager-subtaxonomy-item b{font-size:13px}
+  @media(max-width:760px){.article-manager-head h2{font-size:23px}.article-manager-head small{font-size:11px}.article-manager-head button{font-size:13px}.article-manager-fields label>span{font-size:14px}.article-manager-fields input[type="text"],.article-manager-fields input[type="date"],.article-manager-fields textarea,.article-manager-fields select{font-size:16px}.article-manager-footer button,.article-manager-open{font-size:13px}}
+  /* Search + category filter: one compact, stable control deck. */
+  .article-manager-workspace:not(.is-taxonomy){grid-template-columns:minmax(360px,400px) minmax(0,1fr)}
+  .article-manager-search-deck{display:grid;grid-template-columns:minmax(0,1fr) minmax(128px,42%);gap:8px;margin:0 0 18px;padding:7px;border:1px solid var(--am-line-soft);border-radius:14px;background:var(--am-surface)}
+  .article-manager-search-deck .article-manager-search{height:48px;min-height:48px;margin:0;padding:0 13px;border:1px solid transparent;border-radius:9px;background:var(--am-field);transition:border-color .18s ease,background .18s ease,box-shadow .18s ease}
+  .article-manager-search-deck .article-manager-search:focus-within{border-color:var(--am-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--am-accent) 16%,transparent)}
+  .article-manager-search-deck .article-manager-search svg{width:19px;height:19px;stroke:var(--am-muted);transition:stroke .18s ease}.article-manager-search-deck .article-manager-search:focus-within svg{stroke:var(--am-accent)}
+  .article-manager-search-deck .article-manager-search input{height:46px;padding:0;font:500 14px/1.3 var(--font-ui)}
+  .article-manager-category-filter-label{position:relative;display:flex;min-width:0;align-items:center;height:48px;border:1px solid transparent;border-radius:9px;background:var(--am-field);transition:border-color .18s ease,box-shadow .18s ease}
+  .article-manager-category-filter-label:focus-within{border-color:var(--am-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--am-accent) 16%,transparent)}
+  .article-manager-category-filter-label>svg{position:absolute;z-index:1;left:12px;width:18px;height:18px;fill:none;stroke:var(--am-muted);stroke-width:1.8;stroke-linecap:round;pointer-events:none}.article-manager-category-filter-label:focus-within>svg{stroke:var(--am-accent)}
+  .article-manager-category-filter-label::after{content:'';position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:1.7px solid var(--am-muted);border-bottom:1.7px solid var(--am-muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+  .article-manager-category-filter{width:100%;height:46px;box-sizing:border-box;padding:0 34px 0 39px;overflow:hidden;border:0;border-radius:8px;color:var(--am-text);background:transparent;font:600 13px/1.2 var(--font-ui);text-overflow:ellipsis;white-space:nowrap;cursor:pointer;outline:0;appearance:none}
+
+  /* Taxonomy manager: card rows and a clear add-category action. */
+  .article-manager-workspace.is-taxonomy{background:var(--am-panel)}
+  .article-manager-taxonomy{width:min(100%,920px);padding:32px}
+  .article-manager-taxonomy>header{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--am-line-soft)}
+  .article-manager-taxonomy>header small{font-size:11px}.article-manager-taxonomy>header h3{font-size:28px}
+  .article-manager-taxonomy-list{display:grid;gap:10px;border:0}
+  .article-manager-taxonomy-row{align-items:center;padding:16px 18px;border:1px solid var(--am-line-soft);border-radius:12px;background:var(--am-surface);transition:border-color .18s ease,transform .18s ease}
+  .article-manager-taxonomy-row:hover{border-color:var(--am-line);transform:translateY(-1px)}
+  .article-manager-taxonomy-row strong{font-size:16px}.article-manager-taxonomy-row code{display:inline-flex;width:fit-content;margin-top:4px;padding:3px 7px;border-radius:5px;color:var(--am-muted);background:var(--am-field);font-size:11px}
+  .article-manager-taxonomy-row>div:last-child{gap:7px}.article-manager-taxonomy-row>div:last-child>button{min-height:34px;padding:7px 11px;border-color:var(--am-line);background:var(--am-field);font-size:12px}
+  .article-manager-taxonomy-row>div:last-child>button:hover{border-color:var(--am-accent);background:var(--am-active)}
+  .article-manager-taxonomy-row .is-delete,.article-manager-taxonomy-row>div:last-child>.is-delete{border-color:#963d37!important;color:#fff!important;background:#963d37!important}.article-manager-taxonomy-row .is-delete:hover{filter:brightness(1.08)}
+  .article-manager-subtaxonomy{gap:8px;margin-top:12px}.article-manager-subtaxonomy-list{gap:7px}.article-manager-subtaxonomy-item{padding:5px 5px 5px 10px;border-color:var(--am-line-soft);border-radius:7px;background:var(--am-field)}
+  .article-manager-taxonomy .article-manager-subtaxonomy-add{min-height:32px;margin-top:1px;padding:6px 10px;border:1px dashed var(--am-accent);border-radius:7px;color:var(--am-accent);background:transparent;font-size:12px}
+  .article-manager-taxonomy-add{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px;margin-top:18px;padding:16px;border:1px solid var(--am-line);border-radius:12px;background:var(--am-surface)}
+  .article-manager-taxonomy-add label{gap:7px;font-size:13px;font-weight:650}.article-manager-taxonomy-add input{height:48px;min-height:48px;padding:0 14px;border-radius:8px;font-size:15px;outline:0}
+  .article-manager-taxonomy-add button{min-height:48px;padding:0 18px;border-radius:8px;color:var(--am-accent-ink);background:var(--am-accent);border-color:var(--am-accent);font-size:14px}.article-manager-taxonomy-add button:hover{color:var(--am-accent-ink);background:var(--am-accent-strong)}
+  .article-manager-taxonomy-message{margin:10px 2px 0;font-size:13px}
+  html[data-theme="light"] .article-manager-search-deck{background:#e8efea;border-color:#c8d5cd}html[data-theme="light"] .article-manager-taxonomy-row,html[data-theme="light"] .article-manager-taxonomy-add{background:#fff;border-color:#c8d5cd}html[data-theme="light"] .article-manager-taxonomy-row:hover{border-color:#7f9c8b}html[data-theme="light"] .article-manager-taxonomy-row .is-delete{border-color:#97372f!important;background:#97372f!important}
+  @media(max-width:760px){.article-manager-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;min-height:72px;padding:9px 10px}.article-manager-head small{display:none}.article-manager-head h2{font-size:22px;white-space:nowrap}.article-manager-head-actions{gap:4px}.article-manager-head button{min-height:38px;padding:0 9px;border-radius:7px;font-size:11px;white-space:nowrap}.article-manager-head .article-manager-new{font-size:11px}.article-manager-head .article-manager-close{width:36px;height:38px;font-size:22px}.article-manager-workspace:not(.is-taxonomy){grid-template-columns:1fr}.article-manager-search-deck{grid-template-columns:minmax(0,1fr) minmax(124px,42%);gap:6px;margin-bottom:12px;padding:5px;border-radius:11px}.article-manager-search-deck .article-manager-search,.article-manager-category-filter-label{height:44px;min-height:44px}.article-manager-search-deck .article-manager-search input,.article-manager-category-filter{height:42px;font-size:13px}.article-manager-category-filter{padding-left:34px;padding-right:28px}.article-manager-category-filter-label>svg{left:10px;width:16px}.article-manager-category-filter-label::after{right:11px}.article-manager-taxonomy{padding:18px 14px}.article-manager-taxonomy>header{align-items:flex-start;gap:12px}.article-manager-taxonomy-row{align-items:stretch;padding:14px}.article-manager-taxonomy-row:hover{transform:none}.article-manager-taxonomy-row>div:last-child{align-self:stretch;display:grid;grid-template-columns:1fr 1fr}.article-manager-taxonomy-add{grid-template-columns:1fr;padding:14px}.article-manager-taxonomy-add button{width:100%}}
+</style>

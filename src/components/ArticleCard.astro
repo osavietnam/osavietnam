@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import { isAugustineAuthor } from '../utils/article-category';
+const { href, title, category, excerpt, author, date, image } = Astro.props;
+const dateStr = date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : '';
+const CAT_SLUG = { 'Thần Học': 'than-hoc', 'Triết Học': 'triet-hoc', 'Linh Đạo': 'linh-dao' };
+const catSlug = category ? (CAT_SLUG[category] ?? '') : '';
+---
+<a href={href} class="article-card" data-cat={catSlug}>
+  {image && <Image src={image} alt={title} class="article-card-image" width={440} height={248} />}
+  <div class="article-card-content">
+    <div class="article-card-meta">
+      {category && <span class="article-card-category" data-cat={catSlug}>{category}</span>}
+      {dateStr && <time class="article-card-date">{dateStr}</time>}
+      {author && <span class="article-author-badge" data-author-filter-trigger data-author-augustine={isAugustineAuthor(author) ? '' : undefined}>{author}</span>}
+    </div>
+    <h3 class="article-card-title">{title}</h3>
+    {excerpt && <p class="article-card-summary">{excerpt}</p>}
+  </div>
+</a>

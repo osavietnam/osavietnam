@@ -1,0 +1,2408 @@
+{
+  "source": "https://augnet.osa.org.au/history/",
+  "indexedAt": "2026-07-28",
+  "crawledPageCount": 354,
+  "categoryCount": 4,
+  "entryCount": 338,
+  "duplicateCodes": [
+    "4213",
+    "4268",
+    "4389"
+  ],
+  "categories": [
+    {
+      "category": "General",
+      "categoryVi": "Lịch Sử Tổng Quát",
+      "categorySlug": "general",
+      "entries": [
+        {
+          "code": "4002",
+          "urlCode": "4002",
+          "title": "15th century",
+          "fullTitle": "4002 15th century",
+          "url": "https://augnet.osa.org.au/history/general/4002-15th-century/"
+        },
+        {
+          "code": "4003",
+          "urlCode": "4003",
+          "title": "15th century 01",
+          "fullTitle": "4003 15th century 01",
+          "url": "https://augnet.osa.org.au/history/general/4002-15th-century/4003-15th-century-01/"
+        },
+        {
+          "code": "4004",
+          "urlCode": "4004",
+          "title": "15th century 02",
+          "fullTitle": "4004 15th century 02",
+          "url": "https://augnet.osa.org.au/history/general/4002-15th-century/4004-15th-century-02/"
+        },
+        {
+          "code": "4005",
+          "urlCode": "4005",
+          "title": "15th century 03",
+          "fullTitle": "4005 15th century 03",
+          "url": "https://augnet.osa.org.au/history/general/4002-15th-century/4005-15th-century-03/"
+        },
+        {
+          "code": "4006",
+          "urlCode": "4006",
+          "title": "The Bible",
+          "fullTitle": "4006 The Bible",
+          "url": "https://augnet.osa.org.au/history/general/4006-the-bible/"
+        },
+        {
+          "code": "4007",
+          "urlCode": "4007",
+          "title": "Witchcraft",
+          "fullTitle": "4007 Witchcraft",
+          "url": "https://augnet.osa.org.au/history/general/4007-witchcraft/"
+        },
+        {
+          "code": "4008",
+          "urlCode": "4008",
+          "title": "Witchcraft 01",
+          "fullTitle": "4008 Witchcraft 01",
+          "url": "https://augnet.osa.org.au/history/general/4007-witchcraft/4008-witchcraft-01/"
+        },
+        {
+          "code": "4009",
+          "urlCode": "4009",
+          "title": "Witchcraft 02",
+          "fullTitle": "4009 Witchcraft 02",
+          "url": "https://augnet.osa.org.au/history/general/4007-witchcraft/4009-witchcraft-02/"
+        },
+        {
+          "code": "4010",
+          "urlCode": "4010",
+          "title": "Savanarola",
+          "fullTitle": "4010 Savanarola",
+          "url": "https://augnet.osa.org.au/history/general/4010-savanarola/"
+        },
+        {
+          "code": "4012",
+          "urlCode": "4012",
+          "title": "Later libraries",
+          "fullTitle": "4012 Later libraries",
+          "url": "https://augnet.osa.org.au/history/general/4012-later-libraries/"
+        },
+        {
+          "code": "4013",
+          "urlCode": "4013",
+          "title": "Later libraries 01",
+          "fullTitle": "4013 Later libraries 01",
+          "url": "https://augnet.osa.org.au/history/general/4012-later-libraries/4013-later-libraries-01/"
+        },
+        {
+          "code": "4014",
+          "urlCode": "4014",
+          "title": "Later libraries 02",
+          "fullTitle": "4014 Later libraries 02",
+          "url": "https://augnet.osa.org.au/history/general/4012-later-libraries/4014-later-libraries-02/"
+        },
+        {
+          "code": "4016",
+          "urlCode": "4016",
+          "title": "Reformation",
+          "fullTitle": "4016 Reformation",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/"
+        },
+        {
+          "code": "4017",
+          "urlCode": "4017",
+          "title": "Reformation 01",
+          "fullTitle": "4017 Reformation 01",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/4017-reformation-01/"
+        },
+        {
+          "code": "4018",
+          "urlCode": "4018",
+          "title": "Reformation 02",
+          "fullTitle": "4018 Reformation 02",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/4018-reformation-02/"
+        },
+        {
+          "code": "4019",
+          "urlCode": "4019",
+          "title": "Reformation 03",
+          "fullTitle": "4019 Reformation 03",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/4019-reformation-03/"
+        },
+        {
+          "code": "4020",
+          "urlCode": "4020",
+          "title": "Reformation 04",
+          "fullTitle": "4020 Reformation 04",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/4020-reformation-04/"
+        },
+        {
+          "code": "4021",
+          "urlCode": "4021",
+          "title": "Reformation 05",
+          "fullTitle": "4021 Reformation 05",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/4021-reformation-05/"
+        },
+        {
+          "code": "4024",
+          "urlCode": "4024",
+          "title": "Augustinian Statistics in 1517",
+          "fullTitle": "4024 Augustinian Statistics in 1517",
+          "url": "https://augnet.osa.org.au/history/general/4016-reformation/4024-augustinian-statistics-in-1517/"
+        },
+        {
+          "code": "4026",
+          "urlCode": "4026",
+          "title": "King Philip II",
+          "fullTitle": "4026 King Philip II",
+          "url": "https://augnet.osa.org.au/history/general/4026-king-philip-ii/"
+        },
+        {
+          "code": "4027",
+          "urlCode": "4027",
+          "title": "16th century New World",
+          "fullTitle": "4027 16th century New World",
+          "url": "https://augnet.osa.org.au/history/general/4027-16th-century-new-world/"
+        },
+        {
+          "code": "4028",
+          "urlCode": "4028",
+          "title": "16th century Pacific 01",
+          "fullTitle": "4028 16th century Pacific 01",
+          "url": "https://augnet.osa.org.au/history/general/4027-16th-century-new-world/4028-16th-century-pacific-01/"
+        },
+        {
+          "code": "4029",
+          "urlCode": "4029",
+          "title": "16th century Pacific 02",
+          "fullTitle": "4029 16th century Pacific 02",
+          "url": "https://augnet.osa.org.au/history/general/4027-16th-century-new-world/4029-16th-century-pacific-02/"
+        },
+        {
+          "code": "4030",
+          "urlCode": "4030",
+          "title": "16th century Pacific 03",
+          "fullTitle": "4030 16th century Pacific 03",
+          "url": "https://augnet.osa.org.au/history/general/4027-16th-century-new-world/4030-16th-century-pacific-03/"
+        },
+        {
+          "code": "4032",
+          "urlCode": "4032",
+          "title": "Circumnavigation",
+          "fullTitle": "4032 Circumnavigation",
+          "url": "https://augnet.osa.org.au/history/general/4027-16th-century-new-world/4032-circumnavigation/"
+        },
+        {
+          "code": "4034",
+          "urlCode": "4034",
+          "title": "17th-18th centuries",
+          "fullTitle": "4034 17th-18th centuries",
+          "url": "https://augnet.osa.org.au/history/general/4034-17th-18th-centuries/"
+        },
+        {
+          "code": "4035",
+          "urlCode": "4035",
+          "title": "17th-18th centuries 01",
+          "fullTitle": "4035 17th-18th centuries 01",
+          "url": "https://augnet.osa.org.au/history/general/4034-17th-18th-centuries/4035-17th-18th-centuries-01/"
+        },
+        {
+          "code": "4036",
+          "urlCode": "4036",
+          "title": "17th-18th centuries 02",
+          "fullTitle": "4036 17th-18th centuries 02",
+          "url": "https://augnet.osa.org.au/history/general/4034-17th-18th-centuries/4036-17th-18th-centuries-02/"
+        },
+        {
+          "code": "4037",
+          "urlCode": "4037",
+          "title": "19th Century",
+          "fullTitle": "4037 19th Century",
+          "url": "https://augnet.osa.org.au/history/general/4037-19th-century/"
+        },
+        {
+          "code": "4038",
+          "urlCode": "4038",
+          "title": "from 1800 to 1877",
+          "fullTitle": "4038 from 1800 to 1877",
+          "url": "https://augnet.osa.org.au/history/general/4037-19th-century/4038-from-1800-to-1877/"
+        },
+        {
+          "code": "4043",
+          "urlCode": "4043",
+          "title": "from 1878 to 1902 01",
+          "fullTitle": "4043 from 1878 to 1902 01",
+          "url": "https://augnet.osa.org.au/history/general/4037-19th-century/4043-from-1878-to-1902-01/"
+        },
+        {
+          "code": "4044",
+          "urlCode": "4044",
+          "title": "from 1878 to 1902 02",
+          "fullTitle": "4044 from 1878 to 1902 02",
+          "url": "https://augnet.osa.org.au/history/general/4037-19th-century/4044-from-1878-to-1902-02/"
+        },
+        {
+          "code": "4102",
+          "urlCode": "4102",
+          "title": "Priors General",
+          "fullTitle": "4102 Priors General",
+          "url": "https://augnet.osa.org.au/history/general/4102-priors-general/"
+        },
+        {
+          "code": "4103",
+          "urlCode": "4103",
+          "title": "Historical Bibliography",
+          "fullTitle": "4103 Historical Bibliography",
+          "url": "https://augnet.osa.org.au/history/general/4103-historical-bibliography/"
+        },
+        {
+          "code": "4104",
+          "urlCode": "4104",
+          "title": "A general overview 01",
+          "fullTitle": "4104 A general overview 01",
+          "url": "https://augnet.osa.org.au/history/general/4107-a-general-overview/4104-a-general-overview-01/"
+        },
+        {
+          "code": "4105",
+          "urlCode": "4105",
+          "title": "A general overview 02",
+          "fullTitle": "4105 A general overview 02",
+          "url": "https://augnet.osa.org.au/history/general/4107-a-general-overview/4105-a-general-overview-02/"
+        },
+        {
+          "code": "4106",
+          "urlCode": "4106",
+          "title": "Monastic prelude",
+          "fullTitle": "4106 Monastic prelude",
+          "url": "https://augnet.osa.org.au/history/general/4315-before-the-augustinians/4106-monastic-prelude/"
+        },
+        {
+          "code": "4107",
+          "urlCode": "4107",
+          "title": "A general overview",
+          "fullTitle": "4107 A general overview",
+          "url": "https://augnet.osa.org.au/history/general/4107-a-general-overview/"
+        },
+        {
+          "code": "4108",
+          "urlCode": "4108",
+          "title": "Canons begin",
+          "fullTitle": "4108 Canons begin",
+          "url": "https://augnet.osa.org.au/history/general/4315-before-the-augustinians/4108-canons-begin/"
+        },
+        {
+          "code": "4109",
+          "urlCode": "4109",
+          "title": "Augustinian Canons 01",
+          "fullTitle": "4109 Augustinian Canons 01",
+          "url": "https://augnet.osa.org.au/history/general/4315-before-the-augustinians/4109-augustinian-canons-01/"
+        },
+        {
+          "code": "4110",
+          "urlCode": "4110",
+          "title": "Augustinian Canons 02",
+          "fullTitle": "4110 Augustinian Canons 02",
+          "url": "https://augnet.osa.org.au/history/general/4315-before-the-augustinians/4110-augustinian-canons-02/"
+        },
+        {
+          "code": "4111",
+          "urlCode": "4111",
+          "title": "Via Francigena",
+          "fullTitle": "4111 Via Francigena",
+          "url": "https://augnet.osa.org.au/history/general/4111-via-francigena/"
+        },
+        {
+          "code": "4112",
+          "urlCode": "4112",
+          "title": "Via Francigena 01",
+          "fullTitle": "4112 Via Francigena 01",
+          "url": "https://augnet.osa.org.au/history/general/4111-via-francigena/4112-via-francigena-01/"
+        },
+        {
+          "code": "4113",
+          "urlCode": "4113",
+          "title": "Via Francigena 02",
+          "fullTitle": "4113 Via Francigena 02",
+          "url": "https://augnet.osa.org.au/history/general/4111-via-francigena/4113-via-francigena-02/"
+        },
+        {
+          "code": "4114",
+          "urlCode": "4114",
+          "title": "Via Francigena 03",
+          "fullTitle": "4114 Via Francigena 03",
+          "url": "https://augnet.osa.org.au/history/general/4111-via-francigena/4114-via-francigena-03/"
+        },
+        {
+          "code": "4115",
+          "urlCode": "4115",
+          "title": "Ancient hermitages",
+          "fullTitle": "4115 Ancient hermitages",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/"
+        },
+        {
+          "code": "4116",
+          "urlCode": "4116",
+          "title": "Hermitages overview",
+          "fullTitle": "4116 Hermitages overview",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/4116-hermitages-overview/"
+        },
+        {
+          "code": "4117",
+          "urlCode": "4117",
+          "title": "S Giorgo della Spelonca",
+          "fullTitle": "4117 S Giorgo della Spelonca",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/4117-s-giorgo-della-spelonca/"
+        },
+        {
+          "code": "4118",
+          "urlCode": "4118",
+          "title": "S. Maria di Lupocavo",
+          "fullTitle": "4118 S. Maria di Lupocavo",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/4118-s-maria-di-lupocavo-2/"
+        },
+        {
+          "code": "4119",
+          "urlCode": "4119",
+          "title": "S. Maria di Montespecchio",
+          "fullTitle": "4119 S. Maria di Montespecchio",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/4119-s-maria-di-montespecchio/"
+        },
+        {
+          "code": "4120",
+          "urlCode": "4120",
+          "title": "S. Gugliemlo a Malavalle",
+          "fullTitle": "4120 S. Gugliemlo a Malavalle",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/4120-s-gugliemlo-a-malavalle/"
+        },
+        {
+          "code": "4121",
+          "urlCode": "4121",
+          "title": "Centumcellae",
+          "fullTitle": "4121 Centumcellae",
+          "url": "https://augnet.osa.org.au/history/general/4115-ancient-hermitages/4121-centumcellae/"
+        },
+        {
+          "code": "4122",
+          "urlCode": "4122",
+          "title": "Mendicant movement",
+          "fullTitle": "4122 Mendicant movement",
+          "url": "https://augnet.osa.org.au/history/general/4122-mendicant-movement/"
+        },
+        {
+          "code": "4123",
+          "urlCode": "4123",
+          "title": "Mendicant movement 01",
+          "fullTitle": "4123 Mendicant movement 01",
+          "url": "https://augnet.osa.org.au/history/general/4122-mendicant-movement/4123-mendicant-movement-01/"
+        },
+        {
+          "code": "4124",
+          "urlCode": "4124",
+          "title": "Mendicant movement 02",
+          "fullTitle": "4124 Mendicant movement 02",
+          "url": "https://augnet.osa.org.au/history/general/4122-mendicant-movement/4124-mendicant-movement-02/"
+        },
+        {
+          "code": "4125",
+          "urlCode": "4125",
+          "title": "Mendicant movement 03",
+          "fullTitle": "4125 Mendicant movement 03",
+          "url": "https://augnet.osa.org.au/history/general/4122-mendicant-movement/4125-mendicant-movement-03/"
+        },
+        {
+          "code": "4126",
+          "urlCode": "4126",
+          "title": "Little Union",
+          "fullTitle": "4126 Little Union",
+          "url": "https://augnet.osa.org.au/history/general/4126-little-union/"
+        },
+        {
+          "code": "4127",
+          "urlCode": "4127",
+          "title": "Little Union 01",
+          "fullTitle": "4127 Little Union 01",
+          "url": "https://augnet.osa.org.au/history/general/4126-little-union/4127-little-union-01/"
+        },
+        {
+          "code": "4128",
+          "urlCode": "4128",
+          "title": "Little Union 02",
+          "fullTitle": "4128 Little Union 02",
+          "url": "https://augnet.osa.org.au/history/general/4126-little-union/4128-little-union-02/"
+        },
+        {
+          "code": "4129",
+          "urlCode": "4129",
+          "title": "Little Union 03",
+          "fullTitle": "4129 Little Union 03",
+          "url": "https://augnet.osa.org.au/history/general/4126-little-union/4129-little-union-03/"
+        },
+        {
+          "code": "4130",
+          "urlCode": "4130",
+          "title": "Grand Union",
+          "fullTitle": "4130 Grand Union",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/"
+        },
+        {
+          "code": "4131",
+          "urlCode": "4131",
+          "title": "Grand Union 01",
+          "fullTitle": "4131 Grand Union 01",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4131-grand-union-01/"
+        },
+        {
+          "code": "4132",
+          "urlCode": "4132",
+          "title": "Grand Union 02",
+          "fullTitle": "4132 Grand Union 02",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4132-grand-union-02/"
+        },
+        {
+          "code": "4133",
+          "urlCode": "4133",
+          "title": "Grand Union 03",
+          "fullTitle": "4133 Grand Union 03",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4133-grand-union-03/"
+        },
+        {
+          "code": "4134",
+          "urlCode": "4134",
+          "title": "Grand Union 04",
+          "fullTitle": "4134 Grand Union 04",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4134-grand-union-04/"
+        },
+        {
+          "code": "4136",
+          "urlCode": "4136",
+          "title": "Grand Union 05",
+          "fullTitle": "4136 Grand Union 05",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4136-grand-union-05/"
+        },
+        {
+          "code": "4137",
+          "urlCode": "4137",
+          "title": "Grand Union 06",
+          "fullTitle": "4137 Grand Union 06",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4137-grand-union-06/"
+        },
+        {
+          "code": "4138",
+          "urlCode": "4138",
+          "title": "Grand Union 07",
+          "fullTitle": "4138 Grand Union 07",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4138-grand-union-07/"
+        },
+        {
+          "code": "4139",
+          "urlCode": "4139",
+          "title": "Grand Union 08",
+          "fullTitle": "4139 Grand Union 08",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4139-grand-union-08/"
+        },
+        {
+          "code": "4140",
+          "urlCode": "4140",
+          "title": "Grand Union 09",
+          "fullTitle": "4140 Grand Union 09",
+          "url": "https://augnet.osa.org.au/history/general/4130-grand-union/4140-grand-union-09/"
+        },
+        {
+          "code": "4143",
+          "urlCode": "4143",
+          "title": "Opportunities",
+          "fullTitle": "4143 Opportunities",
+          "url": "https://augnet.osa.org.au/history/general/4143-opportunities/"
+        },
+        {
+          "code": "4144",
+          "urlCode": "4144",
+          "title": "Opportunities and dangers 01",
+          "fullTitle": "4144 Opportunities and dangers 01",
+          "url": "https://augnet.osa.org.au/history/general/4143-opportunities/4144-opportunities-and-dangers-01/"
+        },
+        {
+          "code": "4145",
+          "urlCode": "4145",
+          "title": "Opportunities and dangers 02",
+          "fullTitle": "4145 Opportunities and dangers 02",
+          "url": "https://augnet.osa.org.au/history/general/4143-opportunities/4145-opportunities-and-dangers-02/"
+        },
+        {
+          "code": "4146",
+          "urlCode": "4146",
+          "title": "Opportunities and dangers 03",
+          "fullTitle": "4146 Opportunities and dangers 03",
+          "url": "https://augnet.osa.org.au/history/general/4143-opportunities/4146-opportunities-and-dangers-03/"
+        },
+        {
+          "code": "4147",
+          "urlCode": "4147",
+          "title": "Opportunities and dangers 04",
+          "fullTitle": "4147 Opportunities and dangers 04",
+          "url": "https://augnet.osa.org.au/history/general/4143-opportunities/4147-opportunities-and-dangers-04/"
+        },
+        {
+          "code": "4148",
+          "urlCode": "4148",
+          "title": "Augustinian Identity",
+          "fullTitle": "4148 Augustinian Identity",
+          "url": "https://augnet.osa.org.au/history/general/4148-augustinian-identity/"
+        },
+        {
+          "code": "4149",
+          "urlCode": "4149",
+          "title": "Augustinian identity 01",
+          "fullTitle": "4149 Augustinian identity 01",
+          "url": "https://augnet.osa.org.au/history/general/4148-augustinian-identity/4149-augustinian-identity-01/"
+        },
+        {
+          "code": "4150",
+          "urlCode": "4150",
+          "title": "Augustinian identity 02",
+          "fullTitle": "4150 Augustinian identity 02",
+          "url": "https://augnet.osa.org.au/history/general/4148-augustinian-identity/4150-augustinian-identity-02/"
+        },
+        {
+          "code": "4151",
+          "urlCode": "4151",
+          "title": "Augustinian identity 03",
+          "fullTitle": "4151 Augustinian identity 03",
+          "url": "https://augnet.osa.org.au/history/general/4148-augustinian-identity/4151-augustinian-identity-03/"
+        },
+        {
+          "code": "4153",
+          "urlCode": "4153",
+          "title": "Early Leaders",
+          "fullTitle": "4153 Early Leaders",
+          "url": "https://augnet.osa.org.au/history/general/4153-early-leaders/"
+        },
+        {
+          "code": "4154",
+          "urlCode": "4154",
+          "title": "Early leaders 01",
+          "fullTitle": "4154 Early leaders 01",
+          "url": "https://augnet.osa.org.au/history/general/4153-early-leaders/4154-early-leaders-01/"
+        },
+        {
+          "code": "4155",
+          "urlCode": "4155",
+          "title": "Early leaders 02",
+          "fullTitle": "4155 Early leaders 02",
+          "url": "https://augnet.osa.org.au/history/general/4153-early-leaders/4155-early-leaders-02/"
+        },
+        {
+          "code": "4156",
+          "urlCode": "4156",
+          "title": "Learning",
+          "fullTitle": "4156 Learning",
+          "url": "https://augnet.osa.org.au/history/general/4156-learning/"
+        },
+        {
+          "code": "4157",
+          "urlCode": "4157",
+          "title": "Learning 01",
+          "fullTitle": "4157 Learning 01",
+          "url": "https://augnet.osa.org.au/history/general/4156-learning/4157-learning-01/"
+        },
+        {
+          "code": "4158",
+          "urlCode": "4158",
+          "title": "Learning 02",
+          "fullTitle": "4158 Learning 02",
+          "url": "https://augnet.osa.org.au/history/general/4156-learning/4158-learning-02/"
+        },
+        {
+          "code": "4159",
+          "urlCode": "4159",
+          "title": "Learning 03",
+          "fullTitle": "4159 Learning 03",
+          "url": "https://augnet.osa.org.au/history/general/4156-learning/4159-learning-03/"
+        },
+        {
+          "code": "4160",
+          "urlCode": "4160",
+          "title": "Early libraries",
+          "fullTitle": "4160 Early libraries",
+          "url": "https://augnet.osa.org.au/history/general/4160-early-libraries/"
+        },
+        {
+          "code": "4161",
+          "urlCode": "4161",
+          "title": "Early libraries 01",
+          "fullTitle": "4161 Early libraries 01",
+          "url": "https://augnet.osa.org.au/history/general/4160-early-libraries/4161-early-libraries-01/"
+        },
+        {
+          "code": "4162",
+          "urlCode": "4162",
+          "title": "Early Libraries 02",
+          "fullTitle": "4162 Early Libraries 02",
+          "url": "https://augnet.osa.org.au/history/general/4160-early-libraries/4162-early-libraries-02/"
+        },
+        {
+          "code": "4164",
+          "urlCode": "4164",
+          "title": "Religious poverty",
+          "fullTitle": "4164 Religious poverty",
+          "url": "https://augnet.osa.org.au/history/general/4164-religious-poverty/"
+        },
+        {
+          "code": "4165",
+          "urlCode": "4165",
+          "title": "Religious poverty 01",
+          "fullTitle": "4165 Religious poverty 01",
+          "url": "https://augnet.osa.org.au/history/general/4164-religious-poverty/4165-religious-poverty-01/"
+        },
+        {
+          "code": "4166",
+          "urlCode": "4166",
+          "title": "Religious poverty 02",
+          "fullTitle": "4166 Religious poverty 02",
+          "url": "https://augnet.osa.org.au/history/general/4164-religious-poverty/4166-religious-poverty-02/"
+        },
+        {
+          "code": "4167",
+          "urlCode": "4167",
+          "title": "Discipline",
+          "fullTitle": "4167 Discipline",
+          "url": "https://augnet.osa.org.au/history/general/4167-discipline/"
+        },
+        {
+          "code": "4168",
+          "urlCode": "4168",
+          "title": "Carmelites",
+          "fullTitle": "4168 Carmelites",
+          "url": "https://augnet.osa.org.au/history/general/4168-carmelites-2/"
+        },
+        {
+          "code": "4169",
+          "urlCode": "4169",
+          "title": "Assumptionists",
+          "fullTitle": "4169 Assumptionists",
+          "url": "https://augnet.osa.org.au/history/general/4169-assumptionists/"
+        },
+        {
+          "code": "4170",
+          "urlCode": "4170",
+          "title": "Augustinian Recollects",
+          "fullTitle": "4170 Augustinian Recollects",
+          "url": "https://augnet.osa.org.au/history/general/4170-augustinian-recollects/"
+        },
+        {
+          "code": "4171",
+          "urlCode": "4171",
+          "title": "Sack Friars",
+          "fullTitle": "4171 Sack Friars",
+          "url": "https://augnet.osa.org.au/history/general/4171-sack-friars/"
+        },
+        {
+          "code": "4172",
+          "urlCode": "4172",
+          "title": "Sack Friars 01",
+          "fullTitle": "4172 Sack Friars 01",
+          "url": "https://augnet.osa.org.au/history/general/4171-sack-friars/4172-sack-friars-01/"
+        },
+        {
+          "code": "4173",
+          "urlCode": "4173",
+          "title": "Sack Friars 02",
+          "fullTitle": "4173 Sack Friars 02",
+          "url": "https://augnet.osa.org.au/history/general/4171-sack-friars/4173-sack-friars-02/"
+        },
+        {
+          "code": "4174",
+          "urlCode": "4174",
+          "title": "Sack Friars 03",
+          "fullTitle": "4174 Sack Friars 03",
+          "url": "https://augnet.osa.org.au/history/general/4171-sack-friars/4174-sack-friars-03/"
+        },
+        {
+          "code": "4175",
+          "urlCode": "4175",
+          "title": "The Constitutions",
+          "fullTitle": "4175 The Constitutions",
+          "url": "https://augnet.osa.org.au/history/general/4175-the-constitutions/"
+        },
+        {
+          "code": "4176",
+          "urlCode": "4176",
+          "title": "Augustinian Constitutions 01",
+          "fullTitle": "4176 Augustinian Constitutions 01",
+          "url": "https://augnet.osa.org.au/history/general/4175-the-constitutions/4176-augustinian-constitutions-01/"
+        },
+        {
+          "code": "4177",
+          "urlCode": "4177",
+          "title": "Augustinian Constitutions 02",
+          "fullTitle": "4177 Augustinian Constitutions 02",
+          "url": "https://augnet.osa.org.au/history/general/4175-the-constitutions/4177-augustinian-constitutions-02/"
+        },
+        {
+          "code": "4179",
+          "urlCode": "4179",
+          "title": "Humanism",
+          "fullTitle": "4179 Humanism",
+          "url": "https://augnet.osa.org.au/history/general/4179-humanism/"
+        },
+        {
+          "code": "4180",
+          "urlCode": "4180",
+          "title": "Rennaissance",
+          "fullTitle": "4180 Rennaissance",
+          "url": "https://augnet.osa.org.au/history/general/4180-rennaissance/"
+        },
+        {
+          "code": "4181",
+          "urlCode": "4181",
+          "title": "Rennaissance 01",
+          "fullTitle": "4181 Rennaissance 01",
+          "url": "https://augnet.osa.org.au/history/general/4180-rennaissance/4181-rennaissance-01/"
+        },
+        {
+          "code": "4182",
+          "urlCode": "4182",
+          "title": "Rennaissance 02",
+          "fullTitle": "4182 Rennaissance 02",
+          "url": "https://augnet.osa.org.au/history/general/4180-rennaissance/4182-rennaissance-02/"
+        },
+        {
+          "code": "4183",
+          "urlCode": "4183",
+          "title": "Observant movement",
+          "fullTitle": "4183 Observant movement",
+          "url": "https://augnet.osa.org.au/history/general/4183-observant-movement-2/"
+        },
+        {
+          "code": "4184",
+          "urlCode": "4184",
+          "title": "Observant movement 01",
+          "fullTitle": "4184 Observant movement 01",
+          "url": "https://augnet.osa.org.au/history/general/4183-observant-movement-2/4184-observant-movement-01/"
+        },
+        {
+          "code": "4185",
+          "urlCode": "4185",
+          "title": "Observant movement 02",
+          "fullTitle": "4185 Observant movement 02",
+          "url": "https://augnet.osa.org.au/history/general/4183-observant-movement-2/4185-observant-movement-02/"
+        },
+        {
+          "code": "4186",
+          "urlCode": "4186",
+          "title": "Observant movement 03",
+          "fullTitle": "4186 Observant movement 03",
+          "url": "https://augnet.osa.org.au/history/general/4183-observant-movement-2/4186-observant-movement-03/"
+        },
+        {
+          "code": "4188",
+          "urlCode": "4188",
+          "title": "First 100 years",
+          "fullTitle": "4188 First 100 years",
+          "url": "https://augnet.osa.org.au/history/general/4188-first-100-years/"
+        },
+        {
+          "code": "4189",
+          "urlCode": "4189",
+          "title": "First Augustinian 100 years 01",
+          "fullTitle": "4189 First Augustinian 100 years 01",
+          "url": "https://augnet.osa.org.au/history/general/4188-first-100-years/4189-first-augustinian-100-years-01/"
+        },
+        {
+          "code": "4190",
+          "urlCode": "4190",
+          "title": "First Augustinian 100 years 02",
+          "fullTitle": "4190 First Augustinian 100 years 02",
+          "url": "https://augnet.osa.org.au/history/general/4188-first-100-years/4190-first-augustinian-100-years-02/"
+        },
+        {
+          "code": "4191",
+          "urlCode": "4191",
+          "title": "Constitutions Germany",
+          "fullTitle": "4191 Constitutions Germany",
+          "url": "https://augnet.osa.org.au/history/general/4191-constitutions-germany/"
+        },
+        {
+          "code": "4192",
+          "urlCode": "4192",
+          "title": "Black Death",
+          "fullTitle": "4192 Black Death",
+          "url": "https://augnet.osa.org.au/history/general/4192-black-death/"
+        },
+        {
+          "code": "4193",
+          "urlCode": "4193",
+          "title": "Great Western Schism",
+          "fullTitle": "4193 Great Western Schism",
+          "url": "https://augnet.osa.org.au/history/general/4193-great-western-schism/"
+        },
+        {
+          "code": "4194",
+          "urlCode": "4194",
+          "title": "14th century",
+          "fullTitle": "4194 14th century",
+          "url": "https://augnet.osa.org.au/history/general/4194-14th-century/"
+        },
+        {
+          "code": "4195",
+          "urlCode": "4195",
+          "title": "14th century 01",
+          "fullTitle": "4195 14th century 01",
+          "url": "https://augnet.osa.org.au/history/general/4194-14th-century/4195-14th-century-01/"
+        },
+        {
+          "code": "4196",
+          "urlCode": "4196",
+          "title": "14th century 02",
+          "fullTitle": "4196 14th century 02",
+          "url": "https://augnet.osa.org.au/history/general/4194-14th-century/4196-14th-century-02/"
+        },
+        {
+          "code": "4197",
+          "urlCode": "4197",
+          "title": "Papal chaplaincies",
+          "fullTitle": "4197 Papal chaplaincies",
+          "url": "https://augnet.osa.org.au/history/general/4197-papal-chaplaincies/"
+        },
+        {
+          "code": "4315",
+          "urlCode": "4315",
+          "title": "Before the Augustinians",
+          "fullTitle": "4315 Before the Augustinians",
+          "url": "https://augnet.osa.org.au/history/general/4315-before-the-augustinians/"
+        }
+      ]
+    },
+    {
+      "category": "Regional History",
+      "categoryVi": "Lịch Sử theo Khu Vực",
+      "categorySlug": "regional-history",
+      "entries": [
+        {
+          "code": "4802",
+          "urlCode": "4038",
+          "title": "Africa",
+          "fullTitle": "4802 Africa",
+          "url": "https://augnet.osa.org.au/history/regional-history/4038-from-1800-to-1877/"
+        },
+        {
+          "code": "4803",
+          "urlCode": "4803",
+          "title": "Asia-Pacific",
+          "fullTitle": "4803 Asia-Pacific",
+          "url": "https://augnet.osa.org.au/history/regional-history/4803-asia-pacific/"
+        },
+        {
+          "code": "4804",
+          "urlCode": "4804",
+          "title": "Algeria",
+          "fullTitle": "4804 Algeria",
+          "url": "https://augnet.osa.org.au/history/regional-history/4804-algeria/"
+        },
+        {
+          "code": "4805",
+          "urlCode": "4805",
+          "title": "Australia",
+          "fullTitle": "4805 Australia",
+          "url": "https://augnet.osa.org.au/history/regional-history/4805-australia/"
+        },
+        {
+          "code": "4806",
+          "urlCode": "4806",
+          "title": "Bangladesh",
+          "fullTitle": "4806 Bangladesh",
+          "url": "https://augnet.osa.org.au/history/regional-history/4806-bangladesh/"
+        },
+        {
+          "code": "4807",
+          "urlCode": "4807",
+          "title": "Belgium",
+          "fullTitle": "4807 Belgium",
+          "url": "https://augnet.osa.org.au/history/regional-history/4807-belgium/"
+        },
+        {
+          "code": "4808",
+          "urlCode": "4808",
+          "title": "Benin",
+          "fullTitle": "4808 Benin",
+          "url": "https://augnet.osa.org.au/history/regional-history/4808-benin/"
+        },
+        {
+          "code": "4809",
+          "urlCode": "4809",
+          "title": "Canada",
+          "fullTitle": "4809 Canada",
+          "url": "https://augnet.osa.org.au/history/regional-history/4809-canada/"
+        },
+        {
+          "code": "4810",
+          "urlCode": "4810",
+          "title": "Czech Republic",
+          "fullTitle": "4810 Czech Republic",
+          "url": "https://augnet.osa.org.au/history/regional-history/4810-czech-republic/"
+        },
+        {
+          "code": "4811",
+          "urlCode": "4811",
+          "title": "Czech Republic 01",
+          "fullTitle": "4811 Czech Republic 01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4810-czech-republic/4811-czech-republic-01/"
+        },
+        {
+          "code": "4812",
+          "urlCode": "4812",
+          "title": "Czech Republic 02",
+          "fullTitle": "4812 Czech Republic 02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4810-czech-republic/4812-czech-republic-02/"
+        },
+        {
+          "code": "4814",
+          "urlCode": "4814",
+          "title": "Congo",
+          "fullTitle": "4814 Congo",
+          "url": "https://augnet.osa.org.au/history/regional-history/4814-congo/"
+        },
+        {
+          "code": "4815",
+          "urlCode": "4815",
+          "title": "England",
+          "fullTitle": "4815 England",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/"
+        },
+        {
+          "code": "4816",
+          "urlCode": "4816",
+          "title": "england_01",
+          "fullTitle": "4816 england_01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4816-england_01/"
+        },
+        {
+          "code": "4817",
+          "urlCode": "4817",
+          "title": "England_02",
+          "fullTitle": "4817 England_02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4817-england_02/"
+        },
+        {
+          "code": "4818",
+          "urlCode": "4818",
+          "title": "England_03",
+          "fullTitle": "4818 England_03",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4818-england_03/"
+        },
+        {
+          "code": "4819",
+          "urlCode": "4819",
+          "title": "England_04",
+          "fullTitle": "4819 England_04",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4819-england_04/"
+        },
+        {
+          "code": "4820",
+          "urlCode": "4820",
+          "title": "England_05",
+          "fullTitle": "4820 England_05",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4820-england_05/"
+        },
+        {
+          "code": "4821",
+          "urlCode": "4821",
+          "title": "England_06",
+          "fullTitle": "4821 England_06",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4821-england_06/"
+        },
+        {
+          "code": "4822",
+          "urlCode": "4822",
+          "title": "England_07",
+          "fullTitle": "4822 England_07",
+          "url": "https://augnet.osa.org.au/history/regional-history/4815-england/4822-england_07/"
+        },
+        {
+          "code": "4823",
+          "urlCode": "4823",
+          "title": "France",
+          "fullTitle": "4823 France",
+          "url": "https://augnet.osa.org.au/history/regional-history/4823-france/"
+        },
+        {
+          "code": "4824",
+          "urlCode": "4824",
+          "title": "France 01",
+          "fullTitle": "4824 France 01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4823-france/4824-france-01/"
+        },
+        {
+          "code": "4825",
+          "urlCode": "4824",
+          "title": "France 02",
+          "fullTitle": "4825 France 02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4823-france/4824-france-01-2/"
+        },
+        {
+          "code": "4826",
+          "urlCode": "4826",
+          "title": "Germany",
+          "fullTitle": "4826 Germany",
+          "url": "https://augnet.osa.org.au/history/regional-history/4826-germany/"
+        },
+        {
+          "code": "4827",
+          "urlCode": "4827",
+          "title": "Hungary",
+          "fullTitle": "4827 Hungary",
+          "url": "https://augnet.osa.org.au/history/regional-history/4827-hungary/"
+        },
+        {
+          "code": "4828",
+          "urlCode": "4828",
+          "title": "India",
+          "fullTitle": "4828 India",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/"
+        },
+        {
+          "code": "4829",
+          "urlCode": "4829",
+          "title": "india_01",
+          "fullTitle": "4829 india_01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4829-india_01/"
+        },
+        {
+          "code": "4830",
+          "urlCode": "4830",
+          "title": "India_02",
+          "fullTitle": "4830 India_02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4830-india_02/"
+        },
+        {
+          "code": "4831",
+          "urlCode": "4831",
+          "title": "India_03",
+          "fullTitle": "4831 India_03",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4831-india_03/"
+        },
+        {
+          "code": "4832",
+          "urlCode": "4832",
+          "title": "India_04",
+          "fullTitle": "4832 India_04",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4832-india_04/"
+        },
+        {
+          "code": "4833",
+          "urlCode": "4833",
+          "title": "India_05",
+          "fullTitle": "4833 India_05",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4833-india_05/"
+        },
+        {
+          "code": "4834",
+          "urlCode": "4834",
+          "title": "India_06",
+          "fullTitle": "4834 India_06",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4834-india_06/"
+        },
+        {
+          "code": "4835",
+          "urlCode": "4835",
+          "title": "India_08",
+          "fullTitle": "4835 India_08",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4835-india_08/"
+        },
+        {
+          "code": "4836",
+          "urlCode": "4836",
+          "title": "India: Goa_01",
+          "fullTitle": "4836 India: Goa_01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4836-india-goa_01/"
+        },
+        {
+          "code": "4837",
+          "urlCode": "4837",
+          "title": "India: Goa_02",
+          "fullTitle": "4837 India: Goa_02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4837-india-goa_02/"
+        },
+        {
+          "code": "4838",
+          "urlCode": "4838",
+          "title": "India – 07",
+          "fullTitle": "4838 India – 07",
+          "url": "https://augnet.osa.org.au/history/regional-history/4828-india/4838-india-07/"
+        },
+        {
+          "code": "4839",
+          "urlCode": "4839",
+          "title": "Indonesia",
+          "fullTitle": "4839 Indonesia",
+          "url": "https://augnet.osa.org.au/history/regional-history/4839-indonesia/"
+        },
+        {
+          "code": "4840",
+          "urlCode": "4840",
+          "title": "Iran",
+          "fullTitle": "4840 Iran",
+          "url": "https://augnet.osa.org.au/history/regional-history/4840-iran/"
+        },
+        {
+          "code": "4841",
+          "urlCode": "4841",
+          "title": "Ireland",
+          "fullTitle": "4841 Ireland",
+          "url": "https://augnet.osa.org.au/history/regional-history/4841-ireland/"
+        },
+        {
+          "code": "4842",
+          "urlCode": "4842",
+          "title": "Ireland_01",
+          "fullTitle": "4842 Ireland_01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4841-ireland/4842-ireland_01/"
+        },
+        {
+          "code": "4843",
+          "urlCode": "4843",
+          "title": "ireland_02",
+          "fullTitle": "4843 ireland_02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4841-ireland/4843-ireland_02/"
+        },
+        {
+          "code": "4844",
+          "urlCode": "4844",
+          "title": "Ireland_03",
+          "fullTitle": "4844 Ireland_03",
+          "url": "https://augnet.osa.org.au/history/regional-history/4841-ireland/4844-ireland_03/"
+        },
+        {
+          "code": "4845",
+          "urlCode": "4845",
+          "title": "Ireland_04",
+          "fullTitle": "4845 Ireland_04",
+          "url": "https://augnet.osa.org.au/history/regional-history/4841-ireland/4845-ireland_04/"
+        },
+        {
+          "code": "4846",
+          "urlCode": "4846",
+          "title": "japan",
+          "fullTitle": "4846 japan",
+          "url": "https://augnet.osa.org.au/history/regional-history/4846-japan/"
+        },
+        {
+          "code": "4848",
+          "urlCode": "4848",
+          "title": "kenya",
+          "fullTitle": "4848 kenya",
+          "url": "https://augnet.osa.org.au/history/regional-history/4848-kenya/"
+        },
+        {
+          "code": "4851",
+          "urlCode": "4851",
+          "title": "Korea",
+          "fullTitle": "4851 Korea",
+          "url": "https://augnet.osa.org.au/history/regional-history/4851-korea/"
+        },
+        {
+          "code": "4852",
+          "urlCode": "4852",
+          "title": "Latin America",
+          "fullTitle": "4852 Latin America",
+          "url": "https://augnet.osa.org.au/history/regional-history/4852-latin-america/"
+        },
+        {
+          "code": "4853",
+          "urlCode": "4853",
+          "title": "Latin America_01",
+          "fullTitle": "4853 Latin America_01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4852-latin-america/4853-latin-america_01/"
+        },
+        {
+          "code": "4854",
+          "urlCode": "4852",
+          "title": "Latin America_02",
+          "fullTitle": "4854 Latin America_02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4852-latin-america/4852-latin-america-2/"
+        },
+        {
+          "code": "4855",
+          "urlCode": "4855",
+          "title": "Latin America_03",
+          "fullTitle": "4855 Latin America_03",
+          "url": "https://augnet.osa.org.au/history/regional-history/4852-latin-america/4855-latin-america_03/"
+        },
+        {
+          "code": "4856",
+          "urlCode": "4856",
+          "title": "Latin America_04",
+          "fullTitle": "4856 Latin America_04",
+          "url": "https://augnet.osa.org.au/history/regional-history/4852-latin-america/4856-latin-america_04/"
+        },
+        {
+          "code": "4857",
+          "urlCode": "4857",
+          "title": "Macau",
+          "fullTitle": "4857 Macau",
+          "url": "https://augnet.osa.org.au/history/regional-history/4857-macau/"
+        },
+        {
+          "code": "4858",
+          "urlCode": "4858",
+          "title": "Malta",
+          "fullTitle": "4858 Malta",
+          "url": "https://augnet.osa.org.au/history/regional-history/4858-malta/"
+        },
+        {
+          "code": "4859",
+          "urlCode": "4859",
+          "title": "Malta 01",
+          "fullTitle": "4859 Malta 01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4858-malta/4859-malta-01/"
+        },
+        {
+          "code": "4860",
+          "urlCode": "4860",
+          "title": "Malta 02",
+          "fullTitle": "4860 Malta 02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4858-malta/4860-malta-02/"
+        },
+        {
+          "code": "4861",
+          "urlCode": "4861",
+          "title": "mexico",
+          "fullTitle": "4861 mexico",
+          "url": "https://augnet.osa.org.au/history/regional-history/4861-mexico/"
+        },
+        {
+          "code": "4862",
+          "urlCode": "4862",
+          "title": "Netherlands",
+          "fullTitle": "4862 Netherlands",
+          "url": "https://augnet.osa.org.au/history/regional-history/4862-netherlands/"
+        },
+        {
+          "code": "4863",
+          "urlCode": "4863",
+          "title": "Nigeria",
+          "fullTitle": "4863 Nigeria",
+          "url": "https://augnet.osa.org.au/history/regional-history/4863-nigeria/"
+        },
+        {
+          "code": "4865",
+          "urlCode": "4865",
+          "title": "Philippines",
+          "fullTitle": "4865 Philippines",
+          "url": "https://augnet.osa.org.au/history/regional-history/4865-philippines/"
+        },
+        {
+          "code": "4866",
+          "urlCode": "4866",
+          "title": "philippines 01",
+          "fullTitle": "4866 philippines 01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4865-philippines/4866-philippines-01/"
+        },
+        {
+          "code": "4867",
+          "urlCode": "4867",
+          "title": "Philippines 02",
+          "fullTitle": "4867 Philippines 02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4865-philippines/4867-philippines-02/"
+        },
+        {
+          "code": "4868",
+          "urlCode": "4868",
+          "title": "Philippines 03",
+          "fullTitle": "4868 Philippines 03",
+          "url": "https://augnet.osa.org.au/history/regional-history/4865-philippines/4868-philippines-03/"
+        },
+        {
+          "code": "4869",
+          "urlCode": "4869",
+          "title": "Poland",
+          "fullTitle": "4869 Poland",
+          "url": "https://augnet.osa.org.au/history/regional-history/4869-poland/"
+        },
+        {
+          "code": "4870",
+          "urlCode": "4870",
+          "title": "Portugal",
+          "fullTitle": "4870 Portugal",
+          "url": "https://augnet.osa.org.au/history/regional-history/4870-portugal/"
+        },
+        {
+          "code": "4871",
+          "urlCode": "4871",
+          "title": "Slovakia",
+          "fullTitle": "4871 Slovakia",
+          "url": "https://augnet.osa.org.au/history/regional-history/4871-slovakia/"
+        },
+        {
+          "code": "4872",
+          "urlCode": "4872",
+          "title": "Spain",
+          "fullTitle": "4872 Spain",
+          "url": "https://augnet.osa.org.au/history/regional-history/4872-spain/"
+        },
+        {
+          "code": "4873",
+          "urlCode": "4873",
+          "title": "Spain 01",
+          "fullTitle": "4873 Spain 01",
+          "url": "https://augnet.osa.org.au/history/regional-history/4872-spain/4873-spain-01/"
+        },
+        {
+          "code": "4874",
+          "urlCode": "4874",
+          "title": "Spain 02",
+          "fullTitle": "4874 Spain 02",
+          "url": "https://augnet.osa.org.au/history/regional-history/4872-spain/4874-spain-02/"
+        },
+        {
+          "code": "4875",
+          "urlCode": "4875",
+          "title": "Sri Lanka",
+          "fullTitle": "4875 Sri Lanka",
+          "url": "https://augnet.osa.org.au/history/regional-history/4875-sri-lanka/"
+        },
+        {
+          "code": "4876",
+          "urlCode": "4876",
+          "title": "Tanzania",
+          "fullTitle": "4876 Tanzania",
+          "url": "https://augnet.osa.org.au/history/regional-history/4876-tanzania/"
+        },
+        {
+          "code": "4877",
+          "urlCode": "4877",
+          "title": "Wales & Scotland",
+          "fullTitle": "4877 Wales & Scotland",
+          "url": "https://augnet.osa.org.au/history/regional-history/4877-wales-scotland/"
+        },
+        {
+          "code": "4878",
+          "urlCode": "4878",
+          "title": "Middle East",
+          "fullTitle": "4878 Middle East",
+          "url": "https://augnet.osa.org.au/history/regional-history/4878-middle-east/"
+        }
+      ]
+    },
+    {
+      "category": "Places",
+      "categoryVi": "Địa Điểm",
+      "categorySlug": "places",
+      "entries": [
+        {
+          "code": "4201",
+          "urlCode": "4201",
+          "title": "Austria – Vienna",
+          "fullTitle": "4201 Austria – Vienna",
+          "url": "https://augnet.osa.org.au/history/places/4201-austria-vienna/"
+        },
+        {
+          "code": "4202",
+          "urlCode": "4202",
+          "title": "Czech Rep. – Brno",
+          "fullTitle": "4202 Czech Rep. – Brno",
+          "url": "https://augnet.osa.org.au/history/places/4202-czech-rep-brno/"
+        },
+        {
+          "code": "4203",
+          "urlCode": "4203",
+          "title": "Czech Rep. – Prague",
+          "fullTitle": "4203 Czech Rep. – Prague",
+          "url": "https://augnet.osa.org.au/history/places/4203-czech-rep-prague/"
+        },
+        {
+          "code": "4204",
+          "urlCode": "4204",
+          "title": "Ecuador – San Callo",
+          "fullTitle": "4204 Ecuador – San Callo",
+          "url": "https://augnet.osa.org.au/history/places/4204-ecuador-san-callo/"
+        },
+        {
+          "code": "4205",
+          "urlCode": "4205",
+          "title": "Ecuador – Quito",
+          "fullTitle": "4205 Ecuador – Quito",
+          "url": "https://augnet.osa.org.au/history/places/4205-ecuador-quito/"
+        },
+        {
+          "code": "4206",
+          "urlCode": "4206",
+          "title": "England – Atherstone",
+          "fullTitle": "4206 England – Atherstone",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4206-england-atherstone/"
+        },
+        {
+          "code": "4207",
+          "urlCode": "4207",
+          "title": "england cambridge",
+          "fullTitle": "4207 england cambridge",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4207-england-cambridge/"
+        },
+        {
+          "code": "4208",
+          "urlCode": "4208",
+          "title": "England – Clare",
+          "fullTitle": "4208 England – Clare",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4208-england-clare/"
+        },
+        {
+          "code": "4209",
+          "urlCode": "4209",
+          "title": "England – Hull",
+          "fullTitle": "4209 England – Hull",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4209-england-hull/"
+        },
+        {
+          "code": "4210",
+          "urlCode": "4210",
+          "title": "England – Leicester",
+          "fullTitle": "4210 England – Leicester",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4210-england-leicester/"
+        },
+        {
+          "code": "4211",
+          "urlCode": "4211",
+          "title": "England – London",
+          "fullTitle": "4211 England – London",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4211-england-london/"
+        },
+        {
+          "code": "4212",
+          "urlCode": "4212",
+          "title": "England – Oxford",
+          "fullTitle": "4212 England – Oxford",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4212-england-oxford/"
+        },
+        {
+          "code": "4213",
+          "urlCode": "4213",
+          "title": "England",
+          "fullTitle": "4213 England",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/"
+        },
+        {
+          "code": "4213",
+          "urlCode": "4213",
+          "title": "england oxford_01",
+          "fullTitle": "4213 england oxford_01",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4212-england-oxford/4213-england-oxford_01/"
+        },
+        {
+          "code": "4214",
+          "urlCode": "4214",
+          "title": "England – Rye",
+          "fullTitle": "4214 England – Rye",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4214-england-rye/"
+        },
+        {
+          "code": "4215",
+          "urlCode": "4215",
+          "title": "England – Winchester",
+          "fullTitle": "4215 England – Winchester",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4215-england-winchester/"
+        },
+        {
+          "code": "4216",
+          "urlCode": "4216",
+          "title": "france paris",
+          "fullTitle": "4216 france paris",
+          "url": "https://augnet.osa.org.au/history/places/4216-france-paris/"
+        },
+        {
+          "code": "4217",
+          "urlCode": "4217",
+          "title": "france toulouse",
+          "fullTitle": "4217 france toulouse",
+          "url": "https://augnet.osa.org.au/history/places/4217-france-toulouse/"
+        },
+        {
+          "code": "4218",
+          "urlCode": "4218",
+          "title": "germany erfurt",
+          "fullTitle": "4218 germany erfurt",
+          "url": "https://augnet.osa.org.au/history/places/4218-germany-erfurt/"
+        },
+        {
+          "code": "4219",
+          "urlCode": "4219",
+          "title": "Hungary – Buda",
+          "fullTitle": "4219 Hungary – Buda",
+          "url": "https://augnet.osa.org.au/history/places/4219-hungary-buda/"
+        },
+        {
+          "code": "4220",
+          "urlCode": "4220",
+          "title": "Indonesia – Ayawasi",
+          "fullTitle": "4220 Indonesia – Ayawasi",
+          "url": "https://augnet.osa.org.au/history/places/4220-indonesia-ayawasi/"
+        },
+        {
+          "code": "4221",
+          "urlCode": "4221",
+          "title": "Indonesia – Susweni",
+          "fullTitle": "4221 Indonesia – Susweni",
+          "url": "https://augnet.osa.org.au/history/places/4221-indonesia-susweni/"
+        },
+        {
+          "code": "4222",
+          "urlCode": "4222",
+          "title": "Ireland",
+          "fullTitle": "4222 Ireland",
+          "url": "https://augnet.osa.org.au/history/places/4222-ireland/"
+        },
+        {
+          "code": "4223",
+          "urlCode": "4223",
+          "title": "Ireland – Dublin",
+          "fullTitle": "4223 Ireland – Dublin",
+          "url": "https://augnet.osa.org.au/history/places/4222-ireland/4223-ireland-dublin/"
+        },
+        {
+          "code": "4224",
+          "urlCode": "4224",
+          "title": "Ireland – Dunmore",
+          "fullTitle": "4224 Ireland – Dunmore",
+          "url": "https://augnet.osa.org.au/history/places/4222-ireland/4224-ireland-dunmore/"
+        },
+        {
+          "code": "4225",
+          "urlCode": "4225",
+          "title": "Ireland – Murrisk",
+          "fullTitle": "4225 Ireland – Murrisk",
+          "url": "https://augnet.osa.org.au/history/places/4222-ireland/4225-ireland-murrisk/"
+        },
+        {
+          "code": "4226",
+          "urlCode": "4226",
+          "title": "italy angelica library",
+          "fullTitle": "4226 italy angelica library",
+          "url": "https://augnet.osa.org.au/history/places/4226-italy-angelica-library/"
+        },
+        {
+          "code": "4227",
+          "urlCode": "4227",
+          "title": "Italy – Cascia",
+          "fullTitle": "4227 Italy – Cascia",
+          "url": "https://augnet.osa.org.au/history/places/4227-italy-cascia/"
+        },
+        {
+          "code": "4228",
+          "urlCode": "4228",
+          "title": "italy florence",
+          "fullTitle": "4228 italy florence",
+          "url": "https://augnet.osa.org.au/history/places/4228-italy-florence/"
+        },
+        {
+          "code": "4229",
+          "urlCode": "4229",
+          "title": "Italy – Genazzano",
+          "fullTitle": "4229 Italy – Genazzano",
+          "url": "https://augnet.osa.org.au/history/places/4229-italy-genazzano/"
+        },
+        {
+          "code": "4230",
+          "urlCode": "4230",
+          "title": "Italy – Gubbio",
+          "fullTitle": "4230 Italy – Gubbio",
+          "url": "https://augnet.osa.org.au/history/places/4230-italy-gubbio/"
+        },
+        {
+          "code": "4231",
+          "urlCode": "4231",
+          "title": "italy lecceto",
+          "fullTitle": "4231 italy lecceto",
+          "url": "https://augnet.osa.org.au/history/places/4231-italy-lecceto/"
+        },
+        {
+          "code": "4232",
+          "urlCode": "4232",
+          "title": "italy maria del popolo",
+          "fullTitle": "4232 italy maria del popolo",
+          "url": "https://augnet.osa.org.au/history/places/4232-italy-maria-del-popolo/"
+        },
+        {
+          "code": "4233",
+          "urlCode": "4233",
+          "title": "Italy – Milan",
+          "fullTitle": "4233 Italy – Milan",
+          "url": "https://augnet.osa.org.au/history/places/4233-italy-milan/"
+        },
+        {
+          "code": "4234",
+          "urlCode": "4234",
+          "title": "italy curia osa",
+          "fullTitle": "4234 italy curia osa",
+          "url": "https://augnet.osa.org.au/history/places/4234-italy-curia-osa/"
+        },
+        {
+          "code": "4236",
+          "urlCode": "4236",
+          "title": "Italy – Pavia",
+          "fullTitle": "4236 Italy – Pavia",
+          "url": "https://augnet.osa.org.au/history/places/4236-italy-pavia/"
+        },
+        {
+          "code": "4237",
+          "urlCode": "4237",
+          "title": "italy rosia",
+          "fullTitle": "4237 italy rosia",
+          "url": "https://augnet.osa.org.au/history/places/4237-italy-rosia/"
+        },
+        {
+          "code": "4238",
+          "urlCode": "4238",
+          "title": "italy rome santagostino church",
+          "fullTitle": "4238 italy rome santagostino church",
+          "url": "https://augnet.osa.org.au/history/places/4238-italy-rome-santagostino-church/"
+        },
+        {
+          "code": "4238A",
+          "urlCode": "4238A",
+          "title": "italy rome convento santagostino",
+          "fullTitle": "4238A italy rome convento santagostino",
+          "url": "https://augnet.osa.org.au/history/places/4238a-italy-rome-convento-santagostino/"
+        },
+        {
+          "code": "4239",
+          "urlCode": "4239",
+          "title": "italy san gallo",
+          "fullTitle": "4239 italy san gallo",
+          "url": "https://augnet.osa.org.au/history/places/4239-italy-san-gallo/"
+        },
+        {
+          "code": "4240",
+          "urlCode": "4240",
+          "title": "italy san gimignano",
+          "fullTitle": "4240 italy san gimignano",
+          "url": "https://augnet.osa.org.au/history/places/4240-italy-san-gimignano/"
+        },
+        {
+          "code": "4241",
+          "urlCode": "4241",
+          "title": "italy san leonardo al lago",
+          "fullTitle": "4241 italy san leonardo al lago",
+          "url": "https://augnet.osa.org.au/history/places/4241-italy-san-leonardo-al-lago/"
+        },
+        {
+          "code": "4242",
+          "urlCode": "4242",
+          "title": "Italy – Rome – St Monica’s College",
+          "fullTitle": "4242 Italy – Rome – St Monica’s College",
+          "url": "https://augnet.osa.org.au/history/places/4242-italy-rome-st-monicas-college/"
+        },
+        {
+          "code": "4243",
+          "urlCode": "4243",
+          "title": "Italy – Rome – Santa Suzanna",
+          "fullTitle": "4243 Italy – Rome – Santa Suzanna",
+          "url": "https://augnet.osa.org.au/history/places/4243-italy-rome-santa-suzanna/"
+        },
+        {
+          "code": "4244",
+          "urlCode": "4244",
+          "title": "Italy – Siena",
+          "fullTitle": "4244 Italy – Siena",
+          "url": "https://augnet.osa.org.au/history/places/4244-italy-siena/"
+        },
+        {
+          "code": "4245",
+          "urlCode": "4245",
+          "title": "Italy – Tolentino",
+          "fullTitle": "4245 Italy – Tolentino",
+          "url": "https://augnet.osa.org.au/history/places/4245-italy-tolentino/"
+        },
+        {
+          "code": "4246",
+          "urlCode": "4246",
+          "title": "Japan – Nagasaki",
+          "fullTitle": "4246 Japan – Nagasaki",
+          "url": "https://augnet.osa.org.au/history/places/4246-japan-nagasaki/"
+        },
+        {
+          "code": "4248",
+          "urlCode": "4248",
+          "title": "Malta – Rabat",
+          "fullTitle": "4248 Malta – Rabat",
+          "url": "https://augnet.osa.org.au/history/places/4248-malta-rabat/"
+        },
+        {
+          "code": "4249",
+          "urlCode": "4249",
+          "title": "Mexico monasteries",
+          "fullTitle": "4249 Mexico monasteries",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4249-mexico-monasteries/"
+        },
+        {
+          "code": "4250",
+          "urlCode": "4250",
+          "title": "Mexico – Actopan",
+          "fullTitle": "4250 Mexico – Actopan",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4250-mexico-actopan/"
+        },
+        {
+          "code": "4251",
+          "urlCode": "4251",
+          "title": "Mexico – Morelia",
+          "fullTitle": "4251 Mexico – Morelia",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4251-mexico-morelia/"
+        },
+        {
+          "code": "4252",
+          "urlCode": "4252",
+          "title": "Mexico – Oaxaca",
+          "fullTitle": "4252 Mexico – Oaxaca",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4252-mexico-oaxaca/"
+        },
+        {
+          "code": "4253",
+          "urlCode": "4253",
+          "title": "Mexico – Queretaro",
+          "fullTitle": "4253 Mexico – Queretaro",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4253-mexico-queretaro/"
+        },
+        {
+          "code": "4254",
+          "urlCode": "4254",
+          "title": "Mexico – Salamanca",
+          "fullTitle": "4254 Mexico – Salamanca",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4254-mexico-salamanca/"
+        },
+        {
+          "code": "4255",
+          "urlCode": "4255",
+          "title": "Mexico – Yuriria",
+          "fullTitle": "4255 Mexico – Yuriria",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/4255-mexico-yuriria/"
+        },
+        {
+          "code": "4256",
+          "urlCode": "4256",
+          "title": "Peru – Lima",
+          "fullTitle": "4256 Peru – Lima",
+          "url": "https://augnet.osa.org.au/history/places/4256-peru-lima/"
+        },
+        {
+          "code": "4257",
+          "urlCode": "4257",
+          "title": "Philippines – Cebu",
+          "fullTitle": "4257 Philippines – Cebu",
+          "url": "https://augnet.osa.org.au/history/places/4257-philippines-cebu/"
+        },
+        {
+          "code": "4258",
+          "urlCode": "4258",
+          "title": "Philippines – Intramuros church",
+          "fullTitle": "4258 Philippines – Intramuros church",
+          "url": "https://augnet.osa.org.au/history/places/4258-philippines-intramuros-church/"
+        },
+        {
+          "code": "4259",
+          "urlCode": "4259",
+          "title": "Philippines – Intramuros museum",
+          "fullTitle": "4259 Philippines – Intramuros museum",
+          "url": "https://augnet.osa.org.au/history/places/4259-philippines-intramuros-museum/"
+        },
+        {
+          "code": "4260",
+          "urlCode": "4260",
+          "title": "Poland – Krakow",
+          "fullTitle": "4260 Poland – Krakow",
+          "url": "https://augnet.osa.org.au/history/places/4260-poland-krakow/"
+        },
+        {
+          "code": "4261",
+          "urlCode": "4261",
+          "title": "Spain – Escorial",
+          "fullTitle": "4261 Spain – Escorial",
+          "url": "https://augnet.osa.org.au/history/places/4261-spain-escorial/"
+        },
+        {
+          "code": "4263",
+          "urlCode": "4263",
+          "title": "Spain – La Vid",
+          "fullTitle": "4263 Spain – La Vid",
+          "url": "https://augnet.osa.org.au/history/places/4263-spain-la-vid/"
+        },
+        {
+          "code": "4264",
+          "urlCode": "4264",
+          "title": "Spain – Valladolid",
+          "fullTitle": "4264 Spain – Valladolid",
+          "url": "https://augnet.osa.org.au/history/places/4264-spain-valladolid/"
+        },
+        {
+          "code": "4265",
+          "urlCode": "4265",
+          "title": "USA – Philadelphia",
+          "fullTitle": "4265 USA – Philadelphia",
+          "url": "https://augnet.osa.org.au/history/places/4265-usa-philadelphia/"
+        },
+        {
+          "code": "4266",
+          "urlCode": "4266",
+          "title": "USA – Merrimack",
+          "fullTitle": "4266 USA – Merrimack",
+          "url": "https://augnet.osa.org.au/history/places/4266-usa-merrimack/"
+        },
+        {
+          "code": "4267",
+          "urlCode": "4267",
+          "title": "USA – Villanova",
+          "fullTitle": "4267 USA – Villanova",
+          "url": "https://augnet.osa.org.au/history/places/4267-usa-villanova/"
+        },
+        {
+          "code": "4268",
+          "urlCode": "4268",
+          "title": "Mexico",
+          "fullTitle": "4268 Mexico",
+          "url": "https://augnet.osa.org.au/history/places/4268-mexico/"
+        },
+        {
+          "code": "4268",
+          "urlCode": "4268",
+          "title": "England – Oxford_02",
+          "fullTitle": "4268 England – Oxford_02",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4212-england-oxford/4268-england-oxford_02/"
+        },
+        {
+          "code": "4269",
+          "urlCode": "4269",
+          "title": "England – Oxford_03",
+          "fullTitle": "4269 England – Oxford_03",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4212-england-oxford/4269-england-oxford_03/"
+        },
+        {
+          "code": "4270",
+          "urlCode": "4270",
+          "title": "England – Oxford_04",
+          "fullTitle": "4270 England – Oxford_04",
+          "url": "https://augnet.osa.org.au/history/places/4213-england/4212-england-oxford/4270-england-oxford_04/"
+        }
+      ]
+    },
+    {
+      "category": "People",
+      "categoryVi": "Nhân Vật",
+      "categorySlug": "people",
+      "entries": [
+        {
+          "code": "4301A",
+          "urlCode": "4301A",
+          "title": "Augustinian Saints",
+          "fullTitle": "4301A Augustinian Saints",
+          "url": "https://augnet.osa.org.au/history/people/4301a-augustinian-saints/"
+        },
+        {
+          "code": "4304",
+          "urlCode": "4304",
+          "title": "Bernard André",
+          "fullTitle": "4304 Bernard André",
+          "url": "https://augnet.osa.org.au/history/people/4304-bernard-andre/"
+        },
+        {
+          "code": "4305",
+          "urlCode": "4305",
+          "title": "Richard Annibaldi",
+          "fullTitle": "4305 Richard Annibaldi",
+          "url": "https://augnet.osa.org.au/history/people/4305-richard-annibaldi/"
+        },
+        {
+          "code": "4306",
+          "urlCode": "4306",
+          "title": "Anonymous Florentine",
+          "fullTitle": "4306 Anonymous Florentine",
+          "url": "https://augnet.osa.org.au/history/people/4306-anonymous-florentine/"
+        },
+        {
+          "code": "4308",
+          "urlCode": "4308",
+          "title": "Andrea Biglia",
+          "fullTitle": "4308 Andrea Biglia",
+          "url": "https://augnet.osa.org.au/history/people/4308-andrea-biglia/"
+        },
+        {
+          "code": "4309",
+          "urlCode": "4309",
+          "title": "Bartholomew of Urbino",
+          "fullTitle": "4309 Bartholomew of Urbino",
+          "url": "https://augnet.osa.org.au/history/people/4309-bartholomew-of-urbino/"
+        },
+        {
+          "code": "4310",
+          "urlCode": "4310",
+          "title": "Manuel Blanco",
+          "fullTitle": "4310 Manuel Blanco",
+          "url": "https://augnet.osa.org.au/history/people/4310-manuel-blanco/"
+        },
+        {
+          "code": "4311",
+          "urlCode": "4311",
+          "title": "Bonaventure Baduario",
+          "fullTitle": "4311 Bonaventure Baduario",
+          "url": "https://augnet.osa.org.au/history/people/4311-bonaventure-baduario/"
+        },
+        {
+          "code": "4313",
+          "urlCode": "4313",
+          "title": "Augustine of Canterbury",
+          "fullTitle": "4313 Augustine of Canterbury",
+          "url": "https://augnet.osa.org.au/history/people/4313-augustine-of-canterbury/"
+        },
+        {
+          "code": "4316",
+          "urlCode": "4316",
+          "title": "Osbern Bokenham",
+          "fullTitle": "4316 Osbern Bokenham",
+          "url": "https://augnet.osa.org.au/history/people/4316-osbern-bokenham/"
+        },
+        {
+          "code": "4317",
+          "urlCode": "4317",
+          "title": "John of Basel",
+          "fullTitle": "4317 John of Basel",
+          "url": "https://augnet.osa.org.au/history/people/4317-john-of-basel/"
+        },
+        {
+          "code": "4318",
+          "urlCode": "4318",
+          "title": "John Capgrave",
+          "fullTitle": "4318 John Capgrave",
+          "url": "https://augnet.osa.org.au/history/people/4318-john-capgrave/"
+        },
+        {
+          "code": "4319",
+          "urlCode": "4319",
+          "title": "Matthew Carr",
+          "fullTitle": "4319 Matthew Carr",
+          "url": "https://augnet.osa.org.au/history/people/4319-matthew-carr/"
+        },
+        {
+          "code": "4320",
+          "urlCode": "4320",
+          "title": "William Estouteville",
+          "fullTitle": "4320 William Estouteville",
+          "url": "https://augnet.osa.org.au/history/people/4320-william-estouteville/"
+        },
+        {
+          "code": "4321",
+          "urlCode": "4321",
+          "title": "Clement of Osimo",
+          "fullTitle": "4321 Clement of Osimo",
+          "url": "https://augnet.osa.org.au/history/people/4321-clement-of-osimo-2/"
+        },
+        {
+          "code": "4322",
+          "urlCode": "4322",
+          "title": "Filippo di Leonardo di Cola",
+          "fullTitle": "4322 Filippo di Leonardo di Cola",
+          "url": "https://augnet.osa.org.au/history/people/4322-filippo-di-leonardo-di-cola/"
+        },
+        {
+          "code": "4323",
+          "urlCode": "4323",
+          "title": "Pope Eugene IV",
+          "fullTitle": "4323 Pope Eugene IV",
+          "url": "https://augnet.osa.org.au/history/people/4323-pope-eugene-iv/"
+        },
+        {
+          "code": "4324",
+          "urlCode": "4324",
+          "title": "William Flete",
+          "fullTitle": "4324 William Flete",
+          "url": "https://augnet.osa.org.au/history/people/4324-william-flete/"
+        },
+        {
+          "code": "4325",
+          "urlCode": "4325",
+          "title": "Giles of Rome",
+          "fullTitle": "4325 Giles of Rome",
+          "url": "https://augnet.osa.org.au/history/people/4325-giles-of-rome/"
+        },
+        {
+          "code": "4326",
+          "urlCode": "4326",
+          "title": "giles of viterbo_01",
+          "fullTitle": "4326 giles of viterbo_01",
+          "url": "https://augnet.osa.org.au/history/people/4395-giles-of-viterbo/4326-giles-of-viterbo_01/"
+        },
+        {
+          "code": "4327",
+          "urlCode": "4327",
+          "title": "Henry of Friemar",
+          "fullTitle": "4327 Henry of Friemar",
+          "url": "https://augnet.osa.org.au/history/people/4327-henry-of-friemar/"
+        },
+        {
+          "code": "4328",
+          "urlCode": "4328",
+          "title": "Geoffrey Hardeby",
+          "fullTitle": "4328 Geoffrey Hardeby",
+          "url": "https://augnet.osa.org.au/history/people/4328-geoffrey-hardeby/"
+        },
+        {
+          "code": "4329",
+          "urlCode": "4329",
+          "title": "Diego de Herrera",
+          "fullTitle": "4329 Diego de Herrera",
+          "url": "https://augnet.osa.org.au/history/people/4329-diego-de-herrera/"
+        },
+        {
+          "code": "4330",
+          "urlCode": "4330",
+          "title": "thomas herrera",
+          "fullTitle": "4330 thomas herrera",
+          "url": "https://augnet.osa.org.au/history/people/4330-thomas-herrera/"
+        },
+        {
+          "code": "4333",
+          "urlCode": "4333",
+          "title": "Leos Janacek",
+          "fullTitle": "4333 Leos Janacek",
+          "url": "https://augnet.osa.org.au/history/people/4333-leos-janacek/"
+        },
+        {
+          "code": "4334",
+          "urlCode": "4334",
+          "title": "Jordan of Saxony",
+          "fullTitle": "4334 Jordan of Saxony",
+          "url": "https://augnet.osa.org.au/history/people/4334-jordan-of-saxony/"
+        },
+        {
+          "code": "4335",
+          "urlCode": "4335",
+          "title": "Jacques Legrand",
+          "fullTitle": "4335 Jacques Legrand",
+          "url": "https://augnet.osa.org.au/history/people/4335-jacques-legrand/"
+        },
+        {
+          "code": "4336",
+          "urlCode": "4336",
+          "title": "Pope Leo XIII",
+          "fullTitle": "4336 Pope Leo XIII",
+          "url": "https://augnet.osa.org.au/history/people/4336-pope-leo-xiii/"
+        },
+        {
+          "code": "4337",
+          "urlCode": "4337",
+          "title": "Luis de Leon",
+          "fullTitle": "4337 Luis de Leon",
+          "url": "https://augnet.osa.org.au/history/people/4337-luis-de-leon/"
+        },
+        {
+          "code": "4339",
+          "urlCode": "4339",
+          "title": "John Lowe",
+          "fullTitle": "4339 John Lowe",
+          "url": "https://augnet.osa.org.au/history/people/4339-john-lowe/"
+        },
+        {
+          "code": "4341",
+          "urlCode": "4341",
+          "title": "Martin Luther",
+          "fullTitle": "4341 Martin Luther",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/"
+        },
+        {
+          "code": "4343",
+          "urlCode": "4343",
+          "title": "luther in rome",
+          "fullTitle": "4343 luther in rome",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4343-luther-in-rome/"
+        },
+        {
+          "code": "4344",
+          "urlCode": "4344",
+          "title": "Luther and Augustine",
+          "fullTitle": "4344 Luther and Augustine",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4344-luther-and-augustine/"
+        },
+        {
+          "code": "4345",
+          "urlCode": "4345",
+          "title": "Nicholas of Alessandria",
+          "fullTitle": "4345 Nicholas of Alessandria",
+          "url": "https://augnet.osa.org.au/history/people/4345-nicholas-of-alessandria/"
+        },
+        {
+          "code": "4346",
+          "urlCode": "4346",
+          "title": "Sebastian Manrique",
+          "fullTitle": "4346 Sebastian Manrique",
+          "url": "https://augnet.osa.org.au/history/people/4346-sebastian-manrique/"
+        },
+        {
+          "code": "4347",
+          "urlCode": "4347",
+          "title": "Lukas Martinec",
+          "fullTitle": "4347 Lukas Martinec",
+          "url": "https://augnet.osa.org.au/history/people/4347-lukas-martinec/"
+        },
+        {
+          "code": "4348",
+          "urlCode": "4348",
+          "title": "Luigi Marsigli",
+          "fullTitle": "4348 Luigi Marsigli",
+          "url": "https://augnet.osa.org.au/history/people/4348-luigi-marsigli/"
+        },
+        {
+          "code": "4349",
+          "urlCode": "4349",
+          "title": "Ambrose Massari da Cori",
+          "fullTitle": "4349 Ambrose Massari da Cori",
+          "url": "https://augnet.osa.org.au/history/people/4349-ambrose-massari-da-cori/"
+        },
+        {
+          "code": "4350",
+          "urlCode": "4350",
+          "title": "Mariano de la Mata",
+          "fullTitle": "4350 Mariano de la Mata",
+          "url": "https://augnet.osa.org.au/history/people/4350-mariano-de-la-mata/"
+        },
+        {
+          "code": "4351",
+          "urlCode": "4351",
+          "title": "Nicholas Melo",
+          "fullTitle": "4351 Nicholas Melo",
+          "url": "https://augnet.osa.org.au/history/people/4351-nicholas-melo/"
+        },
+        {
+          "code": "4352",
+          "urlCode": "4352",
+          "title": "Gregor Mendel",
+          "fullTitle": "4352 Gregor Mendel",
+          "url": "https://augnet.osa.org.au/history/people/4352-gregor-mendel/"
+        },
+        {
+          "code": "4353",
+          "urlCode": "4353",
+          "title": "Juan Mendoza",
+          "fullTitle": "4353 Juan Mendoza",
+          "url": "https://augnet.osa.org.au/history/people/4353-juan-mendoza/"
+        },
+        {
+          "code": "4357",
+          "urlCode": "4357",
+          "title": "Pacifico Neno",
+          "fullTitle": "4357 Pacifico Neno",
+          "url": "https://augnet.osa.org.au/history/people/4357-pacifico-neno/"
+        },
+        {
+          "code": "4359",
+          "urlCode": "4359",
+          "title": "Jean Pasquerel",
+          "fullTitle": "4359 Jean Pasquerel",
+          "url": "https://augnet.osa.org.au/history/people/4359-jean-pasquerel/"
+        },
+        {
+          "code": "4360",
+          "urlCode": "4360",
+          "title": "Thomas Penketh",
+          "fullTitle": "4360 Thomas Penketh",
+          "url": "https://augnet.osa.org.au/history/people/4360-thomas-penketh/"
+        },
+        {
+          "code": "4361",
+          "urlCode": "4361",
+          "title": "Francesco Petrarch",
+          "fullTitle": "4361 Francesco Petrarch",
+          "url": "https://augnet.osa.org.au/history/people/4361-francesco-petrarch/"
+        },
+        {
+          "code": "4362",
+          "urlCode": "4362",
+          "title": "King Philip II of Spain",
+          "fullTitle": "4362 King Philip II of Spain",
+          "url": "https://augnet.osa.org.au/history/people/4362-king-philip-ii-of-spain/"
+        },
+        {
+          "code": "4364",
+          "urlCode": "4364",
+          "title": "Martin de Rada",
+          "fullTitle": "4364 Martin de Rada",
+          "url": "https://augnet.osa.org.au/history/people/4364-martin-de-rada/"
+        },
+        {
+          "code": "4367",
+          "urlCode": "4367",
+          "title": "Gregory of Rimini",
+          "fullTitle": "4367 Gregory of Rimini",
+          "url": "https://augnet.osa.org.au/history/people/4367-gregory-of-rimini/"
+        },
+        {
+          "code": "4368",
+          "urlCode": "4368",
+          "title": "Jerome Santisteban",
+          "fullTitle": "4368 Jerome Santisteban",
+          "url": "https://augnet.osa.org.au/history/people/4368-jerome-santisteban/"
+        },
+        {
+          "code": "4369",
+          "urlCode": "4369",
+          "title": "Dionigi di Borgo San Sepolcro",
+          "fullTitle": "4369 Dionigi di Borgo San Sepolcro",
+          "url": "https://augnet.osa.org.au/history/people/4369-dionigi-di-borgo-san-sepolcro/"
+        },
+        {
+          "code": "4370",
+          "urlCode": "4370",
+          "title": "Andrea del Sarto",
+          "fullTitle": "4370 Andrea del Sarto",
+          "url": "https://augnet.osa.org.au/history/people/4370-andrea-del-sarto/"
+        },
+        {
+          "code": "4371",
+          "urlCode": "4371",
+          "title": "girolamo seripando",
+          "fullTitle": "4371 girolamo seripando",
+          "url": "https://augnet.osa.org.au/history/people/4371-girolamo-seripando/"
+        },
+        {
+          "code": "4372",
+          "urlCode": "4372",
+          "title": "Diego Soria",
+          "fullTitle": "4372 Diego Soria",
+          "url": "https://augnet.osa.org.au/history/people/4372-diego-soria/"
+        },
+        {
+          "code": "4374",
+          "urlCode": "4374",
+          "title": "johann von staupitz",
+          "fullTitle": "4374 johann von staupitz",
+          "url": "https://augnet.osa.org.au/history/people/4374-johann-von-staupitz/"
+        },
+        {
+          "code": "4375",
+          "urlCode": "4375",
+          "title": "Robert Stokes",
+          "fullTitle": "4375 Robert Stokes",
+          "url": "https://augnet.osa.org.au/history/people/4375-robert-stokes/"
+        },
+        {
+          "code": "4377",
+          "urlCode": "4377",
+          "title": "Thomas of Strasburg",
+          "fullTitle": "4377 Thomas of Strasburg",
+          "url": "https://augnet.osa.org.au/history/people/4377-thomas-of-strasburg/"
+        },
+        {
+          "code": "4378",
+          "urlCode": "4378",
+          "title": "Augustine of Tarano",
+          "fullTitle": "4378 Augustine of Tarano",
+          "url": "https://augnet.osa.org.au/history/people/4378-augustine-of-tarano/"
+        },
+        {
+          "code": "4380",
+          "urlCode": "4380",
+          "title": "Andrés de Urdaneta",
+          "fullTitle": "4380 Andrés de Urdaneta",
+          "url": "https://augnet.osa.org.au/history/people/4380-andres-de-urdaneta/"
+        },
+        {
+          "code": "4381",
+          "urlCode": "4381",
+          "title": "Francisco Vazquez",
+          "fullTitle": "4381 Francisco Vazquez",
+          "url": "https://augnet.osa.org.au/history/people/4381-francisco-vazquez/"
+        },
+        {
+          "code": "4382",
+          "urlCode": "4382",
+          "title": "Alonso de la Vera Cruz",
+          "fullTitle": "4382 Alonso de la Vera Cruz",
+          "url": "https://augnet.osa.org.au/history/people/4382-alonso-de-la-vera-cruz/"
+        },
+        {
+          "code": "4384",
+          "urlCode": "4384",
+          "title": "Robert Waldeby",
+          "fullTitle": "4384 Robert Waldeby",
+          "url": "https://augnet.osa.org.au/history/people/4384-robert-waldeby/"
+        },
+        {
+          "code": "4385",
+          "urlCode": "4385",
+          "title": "Giles of Viterbo_02",
+          "fullTitle": "4385 Giles of Viterbo_02",
+          "url": "https://augnet.osa.org.au/history/people/4395-giles-of-viterbo/4385-giles-of-viterbo_02/"
+        },
+        {
+          "code": "4386",
+          "urlCode": "4386",
+          "title": "Giles of Viterbo_03",
+          "fullTitle": "4386 Giles of Viterbo_03",
+          "url": "https://augnet.osa.org.au/history/people/4395-giles-of-viterbo/4386-giles-of-viterbo_03/"
+        },
+        {
+          "code": "4387",
+          "urlCode": "4387",
+          "title": "Giles of Viterbo_04",
+          "fullTitle": "4387 Giles of Viterbo_04",
+          "url": "https://augnet.osa.org.au/history/people/4395-giles-of-viterbo/4387-giles-of-viterbo_04/"
+        },
+        {
+          "code": "4388",
+          "urlCode": "4388",
+          "title": "William of Cremona",
+          "fullTitle": "4388 William of Cremona",
+          "url": "https://augnet.osa.org.au/history/people/4388-william-of-cremona/"
+        },
+        {
+          "code": "4389",
+          "urlCode": "4389",
+          "title": "William of Monklane",
+          "fullTitle": "4389 William of Monklane",
+          "url": "https://augnet.osa.org.au/history/people/4389-william-of-monklane/"
+        },
+        {
+          "code": "4389",
+          "urlCode": "4389",
+          "title": "Biography – Erfurt",
+          "fullTitle": "4389 Biography – Erfurt",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4389-biography-erfurt/"
+        },
+        {
+          "code": "4390",
+          "urlCode": "4390",
+          "title": "Biography – Wittenberg",
+          "fullTitle": "4390 Biography – Wittenberg",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4390-biography-wittenberg/"
+        },
+        {
+          "code": "4391",
+          "urlCode": "4391",
+          "title": "Biography – pressures",
+          "fullTitle": "4391 Biography – pressures",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4391-biography-pressures/"
+        },
+        {
+          "code": "4392",
+          "urlCode": "4392",
+          "title": "Biography – 95 theses",
+          "fullTitle": "4392 Biography – 95 theses",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4392-biography-95-theses/"
+        },
+        {
+          "code": "4393",
+          "urlCode": "4393",
+          "title": "Biography – twilight",
+          "fullTitle": "4393 Biography – twilight",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4393-biography-twilight/"
+        },
+        {
+          "code": "4394",
+          "urlCode": "4394",
+          "title": "biography young man",
+          "fullTitle": "4394 biography young man",
+          "url": "https://augnet.osa.org.au/history/people/4341-martin-luther/4394-biography-young-man/"
+        },
+        {
+          "code": "4395",
+          "urlCode": "4395",
+          "title": "Giles of Viterbo",
+          "fullTitle": "4395 Giles of Viterbo",
+          "url": "https://augnet.osa.org.au/history/people/4395-giles-of-viterbo/"
+        }
+      ]
+    }
+  ]
+}

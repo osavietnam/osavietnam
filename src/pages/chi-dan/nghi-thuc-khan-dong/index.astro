@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LibraryMasthead from '../../../components/LibraryMasthead.astro';
+---
+
+<BaseLayout
+  title="Nghi Thức Khấn Dòng"
+  description="Chỉ dẫn và nghi thức khấn dòng trong Dòng Thánh Augustinô."
+  bodyClass="no-sidebar page-nghi-thuc-khan-dong"
+  banner="thu-vien"
+>
+  <main class="guide-placeholder">
+    <LibraryMasthead
+      eyebrow="Chỉ Dẫn"
+      title="Nghi Thức Khấn Dòng"
+    />
+    <p>Nội dung đang được biên soạn.</p>
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-placeholder {
+    width:min(100% - 3rem,86rem);
+    min-height:55vh;
+    margin:0 auto;
+    padding:4.5rem 0 7rem;
+  }
+  .guide-placeholder > p {
+    margin:4rem 0 0;
+    color:var(--ink-cream-soft);
+    font:400 1.45rem/1.7 var(--font-body);
+    text-align:center;
+  }
+  @media (max-width:760px) {
+    .guide-placeholder {
+      width:min(100% - 1.5rem,86rem);
+      padding-top:3rem;
+    }
+  }
+</style>

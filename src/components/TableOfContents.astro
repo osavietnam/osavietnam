@@ -1,0 +1,126 @@
+---
+interface LangOption {
+  label: string;
+  id: string;
+  href: string;
+  current: boolean;
+}
+interface Props {
+  headings?: { depth: number; slug: string; text: string }[];
+  langs?: LangOption[];
+}
+const { headings = [], langs = [] } = Astro.props;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const shortLabels: Record<string, string> = { 'Tiếng Việt': 'VI', 'English': 'EN' };
+---
+{toc.length > 0 && (
+  <nav class="toc" aria-label="Mục lục">
+    <button class="toc-trigger" type="button" aria-expanded="false" aria-label="Mục lục" title="Mục lục">
+      <svg class="toc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+    <div class="toc-drawer">
+      <div class="toc-drawer-head">
+        <p class="toc-title">Mục lục</p>
+        {langs.length > 0 && (
+          <div class="toc-lang-row">
+            {langs.map((l) => (
+              <button
+                type="button"
+                class={`toc-lang ${l.current ? 'current' : ''}`}
+                data-doc-id={l.id}
+                data-href={l.href}
+              >{shortLabels[l.label] ?? l.label}</button>
+            ))}
+          </div>
+        )}
+      </div>
+      <ul>
+        {toc.map((h) => (
+          <li class={`toc-depth-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+)}
+<script>
+  const nav = document.querySelector<HTMLElement>('.toc');
+  const trigger = nav?.querySelector<HTMLButtonElement>('.toc-trigger');
+  const shell = document.querySelector<HTMLElement>('.article-shell');
+
+  type StableTocWindow = Window & {
+    __setStableTocOpen?: (shell: HTMLElement, trigger: HTMLButtonElement, open: boolean) => void;
+  };
+
+  // Giữ nguyên vị trí đọc khi cột TOC làm prose đổi chiều rộng và reflow.
+  // Ưu tiên heading vừa được chọn qua URL hash; nếu không có, neo vào heading
+  // gần mép trên viewport nhất. Việc canh lại lặp qua vài frame để bao phủ cả
+  // thay đổi layout tức thời lẫn font/layout được hoàn tất trễ hơn một chút.
+  const setStableTocOpen = (targetShell: HTMLElement, targetTrigger: HTMLButtonElement, open: boolean) => {
+    const headings = Array.from(targetShell.querySelectorAll<HTMLElement>('h2[id], h3[id], h4[id]'));
+    let anchor: HTMLElement | null = null;
+    if (window.location.hash) {
+      try { anchor = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch {}
+    }
+    if (!anchor || !targetShell.contains(anchor)) {
+      const viewportOffset = 96;
+      anchor = headings.reduce<HTMLElement | null>((best, heading) => {
+        const top = heading.getBoundingClientRect().top;
+        if (top > window.innerHeight) return best;
+        if (!best) return heading;
+        const bestTop = best.getBoundingClientRect().top;
+        const score = Math.abs(top - viewportOffset);
+        const bestScore = Math.abs(bestTop - viewportOffset);
+        return score < bestScore ? heading : best;
+      }, null);
+    }
+
+    const anchorTop = anchor?.getBoundingClientRect().top ?? null;
+    targetShell.classList.toggle('toc-open', open);
+    targetTrigger.setAttribute('aria-expanded', String(open));
+
+    if (!anchor || anchorTop === null) return;
+    const restore = () => {
+      if (!anchor?.isConnected) return;
+      const delta = anchor.getBoundingClientRect().top - anchorTop;
+      if (Math.abs(delta) > .5) window.scrollBy({ top: delta, left: 0, behavior: 'instant' });
+    };
+    requestAnimationFrame(() => {
+      restore();
+      requestAnimationFrame(restore);
+    });
+    window.setTimeout(restore, 80);
+    window.setTimeout(restore, 180);
+  };
+  (window as StableTocWindow).__setStableTocOpen = setStableTocOpen;
+
+  // Mọi reader khởi tạo ở trạng thái thu gọn.
+  shell?.classList.remove('toc-open');
+  trigger?.setAttribute('aria-expanded', 'false');
+
+  // Click trigger → toggle open
+  if (trigger && shell && trigger.dataset.tocToggleBound !== 'true') {
+    trigger.dataset.tocToggleBound = 'true';
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setStableTocOpen(shell, trigger, !shell.classList.contains('toc-open'));
+    });
+  }
+
+  // IntersectionObserver — active link tracking
+  const links = Array.from(nav?.querySelectorAll<HTMLAnchorElement>('.toc a') ?? []);
+  if (links.length) {
+    const map = new Map<string, HTMLAnchorElement>();
+    links.forEach((l) => { const id = l.getAttribute('href')?.slice(1); if (id) map.set(id, l); });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          links.forEach((l) => l.classList.remove('active'));
+          map.get(e.target.id)?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    map.forEach((_, id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+  }
+</script>

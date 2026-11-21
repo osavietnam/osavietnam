@@ -1,0 +1,486 @@
+<div class="banner-editor-root" data-banner-editor-root>
+  <dialog class="banner-editor-dialog" aria-labelledby="bannerEditorTitle">
+    <form method="dialog" class="banner-editor-form">
+      <header>
+        <div><small>Biên tập trực tiếp</small><h2 id="bannerEditorTitle">Banner</h2></div>
+        <button type="button" class="banner-editor-close" aria-label="Đóng">×</button>
+      </header>
+
+      <div class="banner-editor-content">
+        <div class="banner-editor-preview"><img data-banner-preview alt="" /></div>
+        <div class="banner-editor-fields">
+          <label><span>Ảnh banner</span><input data-banner-image-url type="text" /></label>
+          <div class="banner-editor-upload-row">
+            <button type="button" data-banner-upload>Chọn và tải ảnh mới</button>
+            <input data-banner-file type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/svg+xml" hidden />
+            <small>JPG, PNG, WebP, AVIF, GIF hoặc SVG · tối đa 8 MB</small>
+          </div>
+          <label><span>Mô tả ảnh</span><input data-banner-alt type="text" /></label>
+          <div class="banner-quote-combo" data-banner-text-control>
+            <div class="banner-quote-combo-head">
+              <strong data-banner-quote-position>Trích dẫn 1 / 1</strong>
+              <div class="banner-quote-combo-nav">
+                <button type="button" data-banner-quote-prev aria-label="Trích dẫn trước" title="Trích dẫn trước">‹</button>
+                <button type="button" data-banner-quote-next aria-label="Trích dẫn tiếp" title="Trích dẫn tiếp">›</button>
+              </div>
+            </div>
+            <div class="banner-quote-combo-actions">
+              <button type="button" data-banner-quote-add>+ Thêm trích dẫn</button>
+              <button type="button" data-banner-quote-remove>Xóa trích dẫn này</button>
+            </div>
+          </div>
+          <label data-banner-text-control><span>Trích dẫn</span><textarea data-banner-quote rows="4"></textarea></label>
+          <fieldset class="banner-source-builder" data-banner-text-control>
+            <legend>Nguồn có sẵn</legend>
+            <label><span>Tác phẩm</span>
+              <select data-banner-source-work disabled>
+                <option value="manual">Nhập nguồn thủ công</option>
+                <option value="tu-luat-vi">Tu Luật</option>
+                <option value="hien-phap-vi">Hiến Pháp</option>
+                <option value="ratio-vi">Ratio Institutionis</option>
+                <option value="tu-thuat">Tự Thuật</option>
+              </select>
+            </label>
+            <div class="banner-source-document" data-banner-source-document hidden>
+              <label><span>Số đoạn</span><select data-banner-source-number></select></label>
+            </div>
+            <div class="banner-source-confessions" data-banner-source-confessions hidden>
+              <label><span>Quyển</span><select data-banner-source-book></select></label>
+              <label><span>Chương</span><select data-banner-source-chapter></select></label>
+              <label><span>Đoạn</span><select data-banner-source-paragraph></select></label>
+            </div>
+            <p data-banner-source-preview>Chọn một nguồn để tự động tạo trích dẫn và liên kết chính xác.</p>
+          </fieldset>
+          <label data-banner-text-control><span>Nguồn trích dẫn <small>có thể dùng HTML cho liên kết và chữ nghiêng</small></span><textarea data-banner-cite rows="3"></textarea></label>
+        </div>
+      </div>
+
+      <footer>
+        <p data-banner-message role="status"></p>
+        <button type="button" class="banner-editor-cancel">Hủy</button>
+        <button type="submit" class="banner-editor-save">Lưu banner</button>
+      </footer>
+    </form>
+  </dialog>
+</div>
+
+<script>
+(() => {
+  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const root = document.querySelector<HTMLElement>('[data-banner-editor-root]');
+  const container = document.querySelector<HTMLElement>('.banner-container[data-banner-key], [data-banner-editor-container][data-banner-key]');
+  const trigger = container?.querySelector<HTMLButtonElement>('[data-banner-inline-edit]');
+  const dialog = root?.querySelector<HTMLDialogElement>('.banner-editor-dialog');
+  if (!root || !container || !trigger || !dialog) {
+    root?.remove();
+    return;
+  }
+  root.toggleAttribute('data-image-only', container.hasAttribute('data-banner-image-only'));
+
+  const form = root.querySelector<HTMLFormElement>('.banner-editor-form');
+  const title = root.querySelector<HTMLElement>('#bannerEditorTitle');
+  const preview = root.querySelector<HTMLImageElement>('[data-banner-preview]');
+  const imageUrl = root.querySelector<HTMLInputElement>('[data-banner-image-url]');
+  const alt = root.querySelector<HTMLInputElement>('[data-banner-alt]');
+  const quote = root.querySelector<HTMLTextAreaElement>('[data-banner-quote]');
+  const cite = root.querySelector<HTMLTextAreaElement>('[data-banner-cite]');
+  const sourceWork = root.querySelector<HTMLSelectElement>('[data-banner-source-work]');
+  const sourceDocument = root.querySelector<HTMLElement>('[data-banner-source-document]');
+  const sourceConfessions = root.querySelector<HTMLElement>('[data-banner-source-confessions]');
+  const sourceNumber = root.querySelector<HTMLSelectElement>('[data-banner-source-number]');
+  const sourceBook = root.querySelector<HTMLSelectElement>('[data-banner-source-book]');
+  const sourceChapter = root.querySelector<HTMLSelectElement>('[data-banner-source-chapter]');
+  const sourceParagraph = root.querySelector<HTMLSelectElement>('[data-banner-source-paragraph]');
+  const sourcePreview = root.querySelector<HTMLElement>('[data-banner-source-preview]');
+  const file = root.querySelector<HTMLInputElement>('[data-banner-file]');
+  const upload = root.querySelector<HTMLButtonElement>('[data-banner-upload]');
+  const save = root.querySelector<HTMLButtonElement>('.banner-editor-save');
+  const message = root.querySelector<HTMLElement>('[data-banner-message]');
+  const quotePosition = root.querySelector<HTMLElement>('[data-banner-quote-position]');
+  const quotePrev = root.querySelector<HTMLButtonElement>('[data-banner-quote-prev]');
+  const quoteNext = root.querySelector<HTMLButtonElement>('[data-banner-quote-next]');
+  const quoteAdd = root.querySelector<HTMLButtonElement>('[data-banner-quote-add]');
+  const quoteRemove = root.querySelector<HTMLButtonElement>('[data-banner-quote-remove]');
+  let active: any = null;
+  let bannerItems: any[] = [];
+  let sourceCatalog: any = null;
+
+  const request = async (path: string, options?: RequestInit) => {
+    const response = await fetch(ADMIN + path, options);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    return data;
+  };
+  const setMessage = (text = '', error = false) => {
+    if (!message) return;
+    message.textContent = text;
+    message.classList.toggle('is-error', error);
+  };
+  const currentBannerId = () => {
+    const key = container.dataset.bannerKey || '';
+    const variants = Array.from(container.querySelectorAll<HTMLElement>('.banner-variant'));
+    const current = variants.find((variant) => variant.hasAttribute('data-default')) ?? variants[0];
+    const index = Number(current?.dataset.vi || 0);
+    return variants.length > 1 ? `${key}.${index + 1}` : key;
+  };
+  const bannerKey = () => container.dataset.bannerKey || '';
+  const bannerItemIndex = () => Math.max(0, bannerItems.findIndex((item) => item.id === active?.id));
+  const updateQuoteCombo = () => {
+    const index = bannerItemIndex();
+    const count = Math.max(1, bannerItems.length);
+    if (quotePosition) quotePosition.textContent = `Trích dẫn ${index + 1} / ${count}`;
+    if (quotePrev) quotePrev.disabled = count < 2;
+    if (quoteNext) quoteNext.disabled = count < 2;
+    if (quoteRemove) quoteRemove.disabled = count < 2;
+  };
+  const updatePreview = () => {
+    if (preview && imageUrl) preview.src = imageUrl.value.trim();
+  };
+  const fileAsDataUrl = (selected: File) => new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ''));
+    reader.onerror = () => reject(new Error('Không thể đọc ảnh'));
+    reader.readAsDataURL(selected);
+  });
+
+  const setOptions = (select: HTMLSelectElement | null, values: any[], getValue: (item:any) => string, getLabel: (item:any) => string) => {
+    if (!select) return;
+    select.replaceChildren(...values.map((item) => new Option(getLabel(item), getValue(item))));
+  };
+  const selectedDocument = () => sourceCatalog?.documents?.find((item:any) => item.id === sourceWork?.value);
+  const selectedBook = () => sourceCatalog?.confessions?.find((item:any) => String(item.number) === sourceBook?.value);
+  const selectedChapter = () => selectedBook()?.chapters?.find((item:any) => item.roman === sourceChapter?.value);
+  const selectedParagraph = () => selectedChapter()?.paragraphs?.find((item:any) => String(item.number) === sourceParagraph?.value);
+
+  const refreshDocumentNumbers = (preferred = '') => {
+    const documentSource = selectedDocument();
+    setOptions(sourceNumber, documentSource?.entries || [], (item) => String(item.number), (item) => `${item.number} — ${item.snippet}`);
+    if (sourceNumber && preferred && Array.from(sourceNumber.options).some((item) => item.value === preferred)) sourceNumber.value = preferred;
+  };
+  const refreshConfessionParagraphs = (preferred = '') => {
+    const chapter = selectedChapter();
+    setOptions(sourceParagraph, chapter?.paragraphs || [], (item) => String(item.number), (item) => `${item.number} — ${item.snippet}`);
+    if (sourceParagraph && preferred && Array.from(sourceParagraph.options).some((item) => item.value === preferred)) sourceParagraph.value = preferred;
+  };
+  const refreshConfessionChapters = (preferredChapter = '', preferredParagraph = '') => {
+    const book = selectedBook();
+    setOptions(sourceChapter, book?.chapters || [], (item) => item.roman, (item) => `Chương ${item.roman}${item.title ? ` — ${item.title}` : ''}`);
+    if (sourceChapter && preferredChapter && Array.from(sourceChapter.options).some((item) => item.value === preferredChapter)) sourceChapter.value = preferredChapter;
+    refreshConfessionParagraphs(preferredParagraph);
+  };
+  const showSourceMode = () => {
+    const work = sourceWork?.value || 'manual';
+    if (sourceDocument) sourceDocument.hidden = work === 'manual' || work === 'tu-thuat';
+    if (sourceConfessions) sourceConfessions.hidden = work !== 'tu-thuat';
+  };
+  const applySourceCitation = () => {
+    if (!cite || !sourceWork) return;
+    const work = sourceWork.value;
+    if (work === 'manual') {
+      if (sourcePreview) sourcePreview.textContent = 'Nguồn đang được nhập thủ công.';
+      return;
+    }
+    if (work === 'tu-thuat') {
+      const book = selectedBook();
+      const chapter = selectedChapter();
+      const paragraph = selectedParagraph();
+      if (!book || !chapter || !paragraph) return;
+      cite.value = `— Thánh Augustinô, <a href="/tu-thuat/?book=quyen-${book.number}#conf-${book.number}-${paragraph.number}"><em>Tự Thuật</em>, ${book.roman}, ${chapter.roman}, ${paragraph.number}</a>`;
+      if (sourcePreview) sourcePreview.textContent = `Tự Thuật · Quyển ${book.roman} · Chương ${chapter.roman} · Đoạn ${paragraph.number}: ${paragraph.snippet}`;
+      return;
+    }
+    const documentSource = selectedDocument();
+    const entry = documentSource?.entries?.find((item:any) => String(item.number) === sourceNumber?.value);
+    if (!documentSource || !entry) return;
+    const author = work === 'tu-luat-vi' ? 'Thánh Augustinô, ' : '';
+    const suffix = work === 'tu-luat-vi' ? entry.number : `số ${entry.number}`;
+    cite.value = `— ${author}<a href="${documentSource.route}#${work.replace(/-vi$/, '')}-${entry.number}"><em>${documentSource.label}</em>, ${suffix}</a>`;
+    if (sourcePreview) sourcePreview.textContent = `${documentSource.label} · ${suffix}: ${entry.snippet}`;
+  };
+  const inferSource = (raw = '') => {
+    if (!sourceWork || !sourceCatalog) return;
+    sourceWork.value = 'manual';
+    const documentMatch = raw.match(/\/(tu-luat|hien-phap|ratio)\/#(?:tu-luat|hien-phap|ratio)-(\d+)/i);
+    if (documentMatch) {
+      sourceWork.value = `${documentMatch[1]}-vi`;
+      refreshDocumentNumbers(documentMatch[2]);
+      showSourceMode();
+      applySourceCitation();
+      return;
+    }
+    const confessionBook = raw.match(/[?&]book=quyen-(\d+)/i)?.[1];
+    const confessionParagraph = raw.match(/#conf-\d+-(\d+)/i)?.[1]
+      || raw.match(/<em>Tự Thuật<\/em>\s*,\s*[IVXLCDM]+(?:\s*,\s*[IVXLCDM]+)?\s*,?\s*(\d+)/iu)?.[1];
+    if (confessionBook && confessionParagraph) {
+      sourceWork.value = 'tu-thuat';
+      if (sourceBook) sourceBook.value = confessionBook;
+      const book = selectedBook();
+      const chapter = book?.chapters?.find((item:any) => item.paragraphs?.some((paragraph:any) => String(paragraph.number) === confessionParagraph));
+      refreshConfessionChapters(chapter?.roman || '', confessionParagraph);
+      showSourceMode();
+      applySourceCitation();
+      return;
+    }
+    showSourceMode();
+    if (sourcePreview) sourcePreview.textContent = 'Nguồn hiện tại được giữ ở chế độ nhập thủ công.';
+  };
+  const loadSourceCatalog = async () => {
+    if (!sourceCatalog) sourceCatalog = await request('/api/studio/quote-sources');
+    setOptions(sourceBook, sourceCatalog.confessions || [], (item) => String(item.number), (item) => `Quyển ${item.roman}`);
+  };
+
+  const refreshBannerItems = async () => {
+    const result = await request('/api/studio/items?collection=banners');
+    const key = bannerKey();
+    bannerItems = (result.items || []).filter((item:any) => item.id === key || item.id.startsWith(`${key}.`));
+    bannerItems.sort((a:any, b:any) => {
+      const ai = Number(a.id.split('.').at(-1)) || 1;
+      const bi = Number(b.id.split('.').at(-1)) || 1;
+      return ai - bi;
+    });
+  };
+
+  const loadBannerItem = async (id: string) => {
+    if (!id) return;
+    if (save) save.disabled = true;
+    if (sourceWork) sourceWork.disabled = true;
+    setMessage('Đang tải…');
+    active = await request(`/api/studio/item?collection=banners&id=${encodeURIComponent(id)}`);
+    const fm = active.fm || {};
+    if (title) title.textContent = `${root.hasAttribute('data-image-only') ? 'Ảnh banner' : 'Banner'} · ${bannerKey()}`;
+    if (imageUrl) imageUrl.value = fm.imageUrl || '';
+    if (alt) alt.value = fm.altText || '';
+    if (quote) quote.value = fm.quoteText || '';
+    if (cite) cite.value = fm.quoteCite || '';
+    await loadSourceCatalog();
+    inferSource(cite?.value || '');
+    if (sourceWork) sourceWork.disabled = false;
+    updatePreview();
+    updateQuoteCombo();
+    if (save) save.disabled = false;
+    setMessage('');
+  };
+
+  async function openEditor() {
+    const requestedId = currentBannerId();
+    if (!requestedId) return;
+    dialog.showModal();
+    try {
+      await refreshBannerItems();
+      const id = bannerItems.some((item:any) => item.id === requestedId) ? requestedId : bannerItems[0]?.id;
+      await loadBannerItem(id);
+    } catch (error) {
+      active = null;
+      if (sourceWork) sourceWork.disabled = true;
+      setMessage(error instanceof Error ? error.message : 'Không thể tải banner', true);
+    }
+  }
+
+  function closeEditor() {
+    active = null;
+    dialog.close();
+  }
+
+  upload?.addEventListener('click', () => file?.click());
+  file?.addEventListener('change', async () => {
+    const selected = file.files?.[0];
+    if (!selected) return;
+    if (selected.size > 8 * 1024 * 1024) {
+      setMessage('Ảnh vượt quá 8 MB', true);
+      file.value = '';
+      return;
+    }
+    upload.disabled = true;
+    setMessage('Đang tải ảnh…');
+    try {
+      const data = await fileAsDataUrl(selected);
+      const result = await request('/api/studio/images', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scope: 'banners', filename: selected.name, data }),
+      });
+      if (imageUrl) imageUrl.value = result.url || '';
+      updatePreview();
+      setMessage('Ảnh đã tải lên. Nhấn “Lưu banner” để áp dụng.');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Không thể tải ảnh', true);
+    } finally {
+      upload.disabled = false;
+      file.value = '';
+    }
+  });
+  imageUrl?.addEventListener('input', updatePreview);
+  sourceWork?.addEventListener('change', () => {
+    showSourceMode();
+    if (sourceWork.value === 'tu-thuat') refreshConfessionChapters();
+    else if (sourceWork.value !== 'manual') refreshDocumentNumbers();
+    applySourceCitation();
+  });
+  sourceNumber?.addEventListener('change', applySourceCitation);
+  sourceBook?.addEventListener('change', () => { refreshConfessionChapters(); applySourceCitation(); });
+  sourceChapter?.addEventListener('change', () => { refreshConfessionParagraphs(); applySourceCitation(); });
+  sourceParagraph?.addEventListener('change', applySourceCitation);
+
+  const hasUnsavedQuoteChanges = () => {
+    const fm = active?.fm || {};
+    return (imageUrl?.value.trim() || '') !== (fm.imageUrl || '')
+      || (alt?.value.trim() || '') !== (fm.altText || '')
+      || (quote?.value.trim() || '') !== (fm.quoteText || '')
+      || (cite?.value.trim() || '') !== (fm.quoteCite || '');
+  };
+  const switchQuote = async (direction: number) => {
+    if (bannerItems.length < 2 || !active) return;
+    if (hasUnsavedQuoteChanges() && !window.confirm('Thay đổi hiện tại chưa được lưu. Chuyển sang trích dẫn khác?')) return;
+    const index = bannerItemIndex();
+    const next = (index + direction + bannerItems.length) % bannerItems.length;
+    try { await loadBannerItem(bannerItems[next].id); }
+    catch (error) { setMessage(error instanceof Error ? error.message : 'Không thể chuyển trích dẫn', true); }
+  };
+  quotePrev?.addEventListener('click', () => switchQuote(-1));
+  quoteNext?.addEventListener('click', () => switchQuote(1));
+  quoteAdd?.addEventListener('click', async () => {
+    if (!active) return;
+    if (hasUnsavedQuoteChanges() && !window.confirm('Thay đổi hiện tại chưa được lưu. Vẫn thêm trích dẫn mới?')) return;
+    quoteAdd.disabled = true;
+    setMessage('Đang thêm trích dẫn…');
+    try {
+      const result = await request('/api/studio/item', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collection: 'banners', id: bannerKey(), bannerKey: bannerKey(), checksum: active.checksum,
+          fm: { imageUrl: imageUrl?.value.trim() || '', altText: alt?.value.trim() || '', quoteText: '', quoteCite: '' },
+        }),
+      });
+      await refreshBannerItems();
+      await loadBannerItem(result.id);
+      setMessage('Đã thêm. Nhập nội dung rồi lưu banner.');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Không thể thêm trích dẫn', true);
+    } finally { quoteAdd.disabled = false; }
+  });
+  quoteRemove?.addEventListener('click', async () => {
+    if (!active || bannerItems.length <= 1) return;
+    if (!window.confirm('Xóa trích dẫn đang chọn khỏi banner?')) return;
+    quoteRemove.disabled = true;
+    setMessage('Đang xóa trích dẫn…');
+    try {
+      const result = await request('/api/studio/item', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ collection: 'banners', id: active.id, action: 'delete', checksum: active.checksum }),
+      });
+      await refreshBannerItems();
+      await loadBannerItem(result.id || bannerItems[0]?.id);
+      setMessage('Đã xóa trích dẫn.');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Không thể xóa trích dẫn', true);
+    } finally { quoteRemove.disabled = bannerItems.length <= 1; }
+  });
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!active || !form.reportValidity()) return;
+    if (save) save.disabled = true;
+    setMessage('Đang lưu…');
+    try {
+      await request('/api/studio/item', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collection: 'banners',
+          id: active.id,
+          originalId: active.id,
+          fm: {
+            imageUrl: imageUrl?.value.trim() || '',
+            altText: alt?.value.trim() || '',
+            quoteText: quote?.value.trim() || '',
+            quoteCite: cite?.value.trim() || '',
+          },
+          checksum: active.checksum,
+        }),
+      });
+      setMessage('Đã lưu. Đang cập nhật trang…');
+      setTimeout(() => location.reload(), 350);
+    } catch (error) {
+      if (save) save.disabled = false;
+      setMessage(error instanceof Error ? error.message : 'Không thể lưu banner', true);
+    }
+  });
+
+  trigger.addEventListener('click', openEditor);
+  root.querySelector('.banner-editor-close')?.addEventListener('click', closeEditor);
+  root.querySelector('.banner-editor-cancel')?.addEventListener('click', closeEditor);
+  dialog.addEventListener('click', (event) => { if (event.target === dialog) closeEditor(); });
+
+  request('/api/studio/manifest').then(() => trigger.removeAttribute('hidden')).catch(() => root.remove());
+})();
+</script>
+
+<style is:global>
+  .banner-editor-dialog { width:min(78rem,calc(100vw - 2.4rem)); max-height:calc(100dvh - 2.4rem); padding:0; overflow:auto; border:1px solid rgba(233,193,118,.34); border-radius:.75rem; color:var(--ink-cream); background:#101c18; box-shadow:0 2rem 5rem rgba(0,0,0,.46); }
+  .banner-editor-dialog::backdrop { background:rgba(3,7,12,.72); backdrop-filter:blur(4px); }
+  .banner-editor-form>header,.banner-editor-form>footer { display:flex; align-items:center; gap:1rem; padding:1.2rem 1.4rem; }
+  .banner-editor-form>header { justify-content:space-between; border-bottom:1px solid rgba(233,193,118,.18); }
+  .banner-editor-form>header small { display:block; margin-bottom:.25rem; color:#e9c176; font:600 .86rem/1.4 var(--font-ui); letter-spacing:.1em; text-transform:uppercase; }
+  .banner-editor-form>header h2 { margin:0; color:var(--ink-cream); font:600 1.85rem/1.25 var(--font-display); }
+  .banner-editor-close { width:3rem; height:3rem; padding:0; border:0; border-radius:50%; color:var(--ink-cream-soft); background:transparent; font:300 2.4rem/1 var(--font-ui); cursor:pointer; }
+  .banner-editor-content { display:grid; grid-template-columns:minmax(20rem, .8fr) minmax(0,1.2fr); gap:1.3rem; padding:1.4rem; }
+  .banner-editor-preview { position:sticky; top:1rem; align-self:start; overflow:hidden; border-radius:.6rem; background:#08110e; aspect-ratio:16/9; }
+  .banner-editor-preview img { width:100%; height:100%; object-fit:cover; }
+  .banner-editor-fields { display:grid; gap:1rem; }
+  .banner-editor-root[data-image-only] [data-banner-text-control] { display:none; }
+  .banner-editor-fields label { display:grid; gap:.4rem; }
+  .banner-editor-fields label>span { color:var(--ink-cream-soft); font:500 1rem/1.35 var(--font-ui); }
+  .banner-editor-fields label>span small { font-weight:400; opacity:.72; }
+  .banner-editor-fields input,.banner-editor-fields textarea,.banner-editor-fields select { width:100%; padding:.75rem .85rem; border:1px solid rgba(233,193,118,.26); border-radius:.45rem; color:var(--ink-cream); background:#0b1612; font:400 1.04rem/1.55 var(--font-ui); }
+  .banner-editor-fields textarea { resize:vertical; }
+  .banner-editor-fields select { min-height:3.2rem; padding-right:2.5rem; cursor:pointer; }
+  .banner-quote-combo { display:grid; gap:.7rem; padding:.85rem; border:1px solid rgba(233,193,118,.24); border-radius:.55rem; background:#0d1915; }
+  .banner-quote-combo-head,.banner-quote-combo-actions,.banner-quote-combo-nav { display:flex; align-items:center; gap:.55rem; }
+  .banner-quote-combo-head { justify-content:space-between; }
+  .banner-quote-combo-head strong { color:#e9c176; font:650 .86rem/1.3 var(--font-ui); letter-spacing:.06em; text-transform:uppercase; }
+  .banner-quote-combo button { min-height:2.65rem; padding:.55rem .78rem; border:1px solid rgba(233,193,118,.34); border-radius:.38rem; color:var(--ink-cream); background:transparent; font:600 .9rem/1 var(--font-ui); cursor:pointer; }
+  .banner-quote-combo-nav button { width:2.65rem; padding:0; font-size:1.55rem; }
+  .banner-quote-combo-actions { flex-wrap:wrap; }
+  .banner-quote-combo-actions button:first-child { color:#102118; background:#e9c176; border-color:#e9c176; }
+  .banner-quote-combo-actions button:last-child { color:#eba59d; border-color:rgba(235,165,157,.38); }
+  .banner-quote-combo button:hover:not(:disabled),.banner-quote-combo button:focus-visible { border-color:#e9c176; }
+  .banner-quote-combo button:disabled { opacity:.38; cursor:not-allowed; }
+  .banner-source-builder { min-width:0; display:grid; gap:.85rem; margin:0; padding:1rem; border:1px solid rgba(233,193,118,.28); border-radius:.55rem; background:#0d1915; }
+  .banner-source-builder legend { padding:0 .45rem; color:#e9c176; font:650 .82rem/1.3 var(--font-ui); letter-spacing:.09em; text-transform:uppercase; }
+  .banner-source-document { display:grid; gap:.75rem; }
+  .banner-source-confessions { display:grid; grid-template-columns:minmax(7rem,.65fr) minmax(9rem,.85fr) minmax(13rem,1.5fr); gap:.75rem; }
+  .banner-source-document[hidden],.banner-source-confessions[hidden] { display:none; }
+  .banner-source-builder>p { margin:0; padding:.7rem .8rem; border-radius:.38rem; color:#c8d0ca; background:#101f1a; font:400 .88rem/1.5 var(--font-ui); }
+  .banner-editor-upload-row { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; }
+  .banner-editor-upload-row button { min-height:3rem; padding:.6rem .85rem; border:1px solid #c99a49; border-radius:.4rem; color:#102118; background:#e9c176; font:600 .96rem/1 var(--font-ui); cursor:pointer; }
+  .banner-editor-upload-row small { color:var(--ink-cream-soft); font:400 .85rem/1.4 var(--font-ui); }
+  .banner-editor-form>footer { justify-content:flex-end; border-top:1px solid rgba(233,193,118,.18); }
+  .banner-editor-form>footer p { flex:1; margin:0; color:var(--ink-cream-soft); font:500 .92rem/1.4 var(--font-ui); }
+  .banner-editor-form>footer p.is-error { color:#ff9d91; }
+  .banner-editor-form>footer button { min-height:3.1rem; padding:.65rem 1rem; border:1px solid rgba(233,193,118,.38); border-radius:.45rem; color:var(--ink-cream); background:transparent; font:600 .98rem/1 var(--font-ui); cursor:pointer; }
+  .banner-editor-form>footer .banner-editor-save { color:#102118; background:#e9c176; border-color:#e9c176; }
+  .banner-editor-form button:disabled { opacity:.5; cursor:wait; }
+  html[data-theme="light"] .banner-editor-dialog { color:#183e2c; background:#fffdf8; border-color:rgba(24,62,44,.26); }
+  html[data-theme="light"] .banner-editor-form>header,html[data-theme="light"] .banner-editor-form>footer { border-color:rgba(24,62,44,.14); }
+  html[data-theme="light"] .banner-editor-form>header h2 { color:#183e2c; }
+  html[data-theme="light"] .banner-editor-fields label>span,html[data-theme="light"] .banner-editor-upload-row small,html[data-theme="light"] .banner-editor-form>footer p { color:#50685a; }
+  html[data-theme="light"] .banner-editor-fields input,html[data-theme="light"] .banner-editor-fields textarea,html[data-theme="light"] .banner-editor-fields select { color:#183e2c; background:#fff; border-color:rgba(24,62,44,.24); }
+  html[data-theme="light"] .banner-source-builder { border-color:rgba(24,62,44,.2); background:#f8f6ef; }
+  html[data-theme="light"] .banner-quote-combo { border-color:rgba(24,62,44,.2); background:#f8f6ef; }
+  html[data-theme="light"] .banner-quote-combo-head strong { color:#705218; }
+  html[data-theme="light"] .banner-quote-combo button { color:#234735; border-color:rgba(24,62,44,.28); }
+  html[data-theme="light"] .banner-quote-combo-actions button:first-child { color:#fff; background:#27664c; border-color:#27664c; }
+  html[data-theme="light"] .banner-quote-combo-actions button:last-child { color:#8c332b; border-color:rgba(140,51,43,.36); }
+  html[data-theme="light"] .banner-source-builder legend { color:#83611f; }
+  html[data-theme="light"] .banner-source-builder>p { color:#425c4e; background:#eeece4; }
+  @media(max-width:700px){
+    .banner-editor-content { grid-template-columns:1fr; padding:1rem; }
+    .banner-editor-preview { position:relative; top:auto; }
+    .banner-source-confessions { grid-template-columns:1fr; }
+    .banner-source-builder { padding:.85rem; }
+    .banner-editor-form>footer { flex-wrap:wrap; padding:1rem; }
+    .banner-editor-form>footer p { flex-basis:100%; }
+  }
+</style>

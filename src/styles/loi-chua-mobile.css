@@ -1,0 +1,53 @@
+/* ===================================================================
+ * # LOI CHUA BAI GIANG PAGE - MOBILE OPTIMIZATIONS
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* --- 1. Featured Reading Cards --- */
+    #todays-weekday-container .article-card
+     {
+        /* Stack the image on top of the text content */
+        flex-direction: column;
+        max-width: 95%; /* Allow card to fill the width */
+    }
+    
+    #next-sunday-container .article-card {
+        /* Stack the image on top of the text content */
+        flex-direction: column;
+        max-width: 85%; /* 
+        Allow card to fill the width */
+        
+    }
+    #todays-weekday-container .article-card-image,
+    #next-sunday-container .article-card-image {
+        /* Make the image full-width */
+        max-width: 100%;
+        width: 100%;
+        aspect-ratio: 16 / 9; /* Maintain a nice aspect ratio */
+
+        /* Adjust border-radius for the new vertical layout */
+        border-radius: 8px 8px 0 0;
+    }
+
+    #todays-weekday-container .article-card-content,
+    #next-sunday-container .article-card-content {
+        padding: 1.5rem;
+    }
+
+    /* --- 2. Typography for Featured Section Titles --- */
+    #todays-reading-section .home-welcome h2 {
+        font-size: 3rem;
+    }
+
+    #todays-reading-section .home-welcome h4 {
+        font-size: 1.6rem;
+    }
+
+    .featured-container-shifted {
+   
+    margin-bottom: 0;
+    
+    
+}
+}

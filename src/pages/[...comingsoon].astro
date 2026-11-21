@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+// Trang tạm cho các mục chưa migrate. Khi tạo route thật cùng slug → tự thay.
+const PENDING: Record<string, string> = {
+  'nien-bieu':          'Niên Biểu',
+  'luu-tru':            'Lưu Trữ',
+  'encyclopedia':       'Encyclopedia',
+};
+
+export function getStaticPaths() {
+  return Object.keys({
+    'nien-bieu': 1, 'luu-tru': 1, 'encyclopedia': 1,
+  }).map((slug) => ({ params: { comingsoon: slug } }));
+}
+
+const { comingsoon } = Astro.params;
+const label = PENDING[comingsoon as string] ?? comingsoon;
+---
+<BaseLayout title={label} bodyClass="no-sidebar" banner={null}>
+  <div class="cs-wrap">
+    <div class="cs-emblem-wrap">
+      <img src="/images/emblem.svg" alt="" class="cs-emblem cs-emblem-dark" data-emblem />
+      <img src="/images/emblem-color-transparent.png" alt="" class="cs-emblem cs-emblem-light" data-emblem />
+    </div>
+
+    <div class="cs-ornament">
+      <span class="cs-line"></span>
+      <span class="cs-star">✦</span>
+      <span class="cs-line"></span>
+    </div>
+
+    <h1 class="cs-title">{label}</h1>
+    <p class="cs-badge">Đang được biên soạn</p>
+    <a href="/" class="cs-home-link">← Về trang chủ</a>
+  </div>
+</BaseLayout>
+
+<style is:global>
+.cs-wrap {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 58vh; padding: 5rem 2rem 8rem; text-align: center;
+}
+
+.cs-emblem-wrap {
+  margin-bottom: 2.8rem;
+  position: relative;
+}
+.cs-emblem-wrap::after {
+  content: '';
+  position: absolute; inset: -1.8rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,193,118,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cs-emblem {
+  width: 8.71rem; height: 8.71rem;
+  object-fit: contain;
+  opacity: 0.72;
+  filter: drop-shadow(0 0 1.6rem rgba(233,193,118,0.22));
+  position: relative; z-index: 1;
+}
+
+.cs-ornament {
+  display: flex; align-items: center; gap: 1.2rem;
+  margin-bottom: 2.4rem; width: 22rem;
+}
+.cs-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(233,193,118,0.4));
+}
+.cs-ornament .cs-line:last-child {
+  background: linear-gradient(to left, transparent, rgba(233,193,118,0.4));
+}
+.cs-star {
+  color: var(--gold); font-size: 1rem; opacity: 0.75;
+  flex-shrink: 0;
+}
+
+.cs-title {
+  font-family: 'Noto Serif', 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 1.6rem + 2.5vw, 3.8rem);
+  color: var(--gold); margin: 0 0 1rem; letter-spacing: 0.02em; line-height: 1.2;
+}
+
+.cs-badge {
+  font-family: 'Be Vietnam Pro', 'Manrope', system-ui, sans-serif;
+  font-size: 1.15rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: rgba(239,231,214,0.38); margin: 0 0 2.8rem;
+}
+
+.cs-msg {
+  font-family: 'Merriweather', serif;
+  font-size: 1.55rem; line-height: 1.9; font-style: italic;
+  color: var(--ink-cream-soft); max-width: 46rem; margin: 0 auto 3.2rem;
+}
+
+.cs-home-link {
+  font-family: 'Be Vietnam Pro', 'Manrope', system-ui, sans-serif;
+  font-size: 1.35rem; font-weight: 500; letter-spacing: 0.05em;
+  padding: 0.8rem 2.2rem; border-radius: 8px;
+  border: 1px solid rgba(233,193,118,0.32);
+  color: var(--gold); text-decoration: none;
+  transition: background 0.18s, border-color 0.18s;
+}
+.cs-home-link:hover { background: rgba(233,193,118,0.09); border-color: rgba(233,193,118,0.6); }
+
+/* Light mode */
+[data-theme="light"] .cs-emblem {
+  opacity: 1;
+}
+[data-theme="light"] .cs-emblem-wrap::after {
+  background: radial-gradient(circle, rgba(26,94,60,0.1) 0%, transparent 68%);
+}
+[data-theme="light"] .cs-ornament .cs-line { background: linear-gradient(to right, transparent, rgba(26,94,60,0.3)); }
+[data-theme="light"] .cs-ornament .cs-line:last-child { background: linear-gradient(to left, transparent, rgba(26,94,60,0.3)); }
+[data-theme="light"] .cs-star { color: var(--gold-dim); }
+[data-theme="light"] .cs-badge { color: rgba(28,26,18,0.38); }
+[data-theme="light"] .cs-home-link { border-color: rgba(26,94,60,0.3); color: var(--accent); }
+[data-theme="light"] .cs-home-link:hover { background: rgba(26,94,60,0.07); border-color: rgba(26,94,60,0.55); }
+</style>

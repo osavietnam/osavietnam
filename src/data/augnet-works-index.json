@@ -1,0 +1,1026 @@
+{
+  "source": "https://augnet.osa.org.au/works-of-augustine/",
+  "indexedAt": "2026-07-28",
+  "categoryCount": 4,
+  "entryCount": 110,
+  "categories": [
+    {
+      "category": "Writings of Augustine",
+      "categoryVi": "Tác Phẩm của Thánh Augustinô",
+      "categorySlug": "writings-of-augustine",
+      "entries": [
+        {
+          "code": "2100",
+          "title": "His works",
+          "fullTitle": "2100 His works",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2100-his-works/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2103",
+          "title": "Finding Augustine",
+          "fullTitle": "2103 Finding Augustine",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2103-finding-augustine/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2109",
+          "title": "His writing method",
+          "fullTitle": "2109 His writing method",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2109-his-writing-method/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2110",
+          "title": "Augustine published",
+          "fullTitle": "2110 Augustine published",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2110-augustine-published/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2111",
+          "title": "The beautiful and the apt",
+          "fullTitle": "2111 The beautiful and the apt",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2111-the-beautiful-and-the-apt/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2112",
+          "title": "His earliest writings",
+          "fullTitle": "2112 His earliest writings",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2112-his-earliest-writings/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2113",
+          "title": "Dialogues",
+          "fullTitle": "2113 Dialogues",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2113-dialogues/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2114",
+          "title": "On the teacher",
+          "fullTitle": "2114 On the teacher",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2114-on-the-teacher/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2115",
+          "title": "On holy virginity",
+          "fullTitle": "2115 On holy virginity",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2115-on-holy-virginity/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2116",
+          "title": "On the good of marriage",
+          "fullTitle": "2116 On the good of marriage",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2116-on-the-good-of-marriage/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2117",
+          "title": "On the work of monks",
+          "fullTitle": "2117 On the work of monks",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2117-on-the-work-of-monks/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2118",
+          "title": "On the good of widowhood",
+          "fullTitle": "2118 On the good of widowhood",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2118-on-the-good-of-widowhood/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2119",
+          "title": "On true religion",
+          "fullTitle": "2119 On true religion",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2119-on-true-religion/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2120",
+          "title": "Enarrationes in Psalmos",
+          "fullTitle": "2120 Enarrationes in Psalmos",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2120-enarrationes-in-psalmos/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2121A",
+          "title": "Eighty-three questions",
+          "fullTitle": "2121A Eighty-three questions",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2121a-eighty-three-questions/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2121B",
+          "title": "Question 71",
+          "fullTitle": "2121B Question 71",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2121b-question-71/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2123",
+          "title": "Introduction",
+          "fullTitle": "2123 Introduction",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2123-introduction/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2124",
+          "title": "Synopsis",
+          "fullTitle": "2124 Synopsis",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2124-synopsis/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2125",
+          "title": "Philosophy and the City of God",
+          "fullTitle": "2125 Philosophy and the City of God",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2125-philosophy-and-the-city-of-god/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2126",
+          "title": "Its reputation",
+          "fullTitle": "2126 Its reputation",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2126-its-reputation/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2127",
+          "title": "its psychology",
+          "fullTitle": "2127 its psychology",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2127-its-psychology/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2128",
+          "title": "The sack of Rome",
+          "fullTitle": "2128 The sack of Rome",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2128-the-sack-of-rome/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2130",
+          "title": "Its contents",
+          "fullTitle": "2130 Its contents",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2130-its-contents/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2131",
+          "title": "Its theme",
+          "fullTitle": "2131 Its theme",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2131-its-theme-2/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2132",
+          "title": "City of God – in English",
+          "fullTitle": "2132 City of God – in English",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/city-of-god/2132-city-of-god-in-english/",
+          "section": "City of God",
+          "sectionVi": "Thành Đô Thiên Chúa",
+          "sectionSlug": "city-of-god"
+        },
+        {
+          "code": "2133",
+          "title": "On Christian Doctrine",
+          "fullTitle": "2133 On Christian Doctrine",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2133-on-christian-doctrine/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2135",
+          "title": "On the Trinity",
+          "fullTitle": "2135 On the Trinity",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2135-on-the-trinity/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2137",
+          "title": "An introduction",
+          "fullTitle": "2137 An introduction",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/confessions/2137-an-introduction/",
+          "section": "Confessions",
+          "sectionVi": "Tự Thuật",
+          "sectionSlug": "confessions"
+        },
+        {
+          "code": "2138",
+          "title": "Why written?",
+          "fullTitle": "2138 Why written?",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/confessions/2138-why-written/",
+          "section": "Confessions",
+          "sectionVi": "Tự Thuật",
+          "sectionSlug": "confessions"
+        },
+        {
+          "code": "2139",
+          "title": "Its title and contents",
+          "fullTitle": "2139 Its title and contents",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/confessions/2139-its-title-and-contents/",
+          "section": "Confessions",
+          "sectionVi": "Tự Thuật",
+          "sectionSlug": "confessions"
+        },
+        {
+          "code": "2140",
+          "title": "Chapter outlines",
+          "fullTitle": "2140 Chapter outlines",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/confessions/2140-chapter-outlines/",
+          "section": "Confessions",
+          "sectionVi": "Tự Thuật",
+          "sectionSlug": "confessions"
+        },
+        {
+          "code": "2141",
+          "title": "For the reader",
+          "fullTitle": "2141 For the reader",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/confessions/2141-for-the-reader/",
+          "section": "Confessions",
+          "sectionVi": "Tự Thuật",
+          "sectionSlug": "confessions"
+        },
+        {
+          "code": "2142",
+          "title": "Confessions – links",
+          "fullTitle": "2142 Confessions – links",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/confessions/2142-confessions-links/",
+          "section": "Confessions",
+          "sectionVi": "Tự Thuật",
+          "sectionSlug": "confessions"
+        },
+        {
+          "code": "2143",
+          "title": "Teaching the Unlearned",
+          "fullTitle": "2143 Teaching the Unlearned",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2143-teaching-the-unlearned/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2144",
+          "title": "Rule of Augustine",
+          "fullTitle": "2144 Rule of Augustine",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2144-rule-of-augustine/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2145",
+          "title": "On the Epistle of John",
+          "fullTitle": "2145 On the Epistle of John",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2145-on-the-epistle-of-john/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2146",
+          "title": "On the Gospel of John",
+          "fullTitle": "2146 On the Gospel of John",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2146-on-the-gospel-of-john/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2147",
+          "title": "The Enchridion",
+          "fullTitle": "2147 The Enchridion",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2147-the-enchridion/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2148",
+          "title": "The Retractions",
+          "fullTitle": "2148 The Retractions",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/2148-the-retractions/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2150",
+          "title": "About his sermons",
+          "fullTitle": "2150 About his sermons",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-sermons/2150-about-his-sermons/",
+          "section": "His Sermons",
+          "sectionVi": "Các Bài Giảng",
+          "sectionSlug": "his-sermons"
+        },
+        {
+          "code": "2151",
+          "title": "Lost Sermons",
+          "fullTitle": "2151 Lost Sermons",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-sermons/2151-lost-sermons/",
+          "section": "His Sermons",
+          "sectionVi": "Các Bài Giảng",
+          "sectionSlug": "his-sermons"
+        },
+        {
+          "code": "2152",
+          "title": "False Sermons",
+          "fullTitle": "2152 False Sermons",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-sermons/2152-false-sermons/",
+          "section": "His Sermons",
+          "sectionVi": "Các Bài Giảng",
+          "sectionSlug": "his-sermons"
+        },
+        {
+          "code": "2153",
+          "title": "Letters",
+          "fullTitle": "2153 Letters",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-letters/2153-letters/",
+          "section": "His Letters",
+          "sectionVi": "Thư Từ",
+          "sectionSlug": "his-letters"
+        },
+        {
+          "code": "2154",
+          "title": "To Proba",
+          "fullTitle": "2154 To Proba",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-letters/2154-to-proba/",
+          "section": "His Letters",
+          "sectionVi": "Thư Từ",
+          "sectionSlug": "his-letters"
+        },
+        {
+          "code": "2155",
+          "title": "Letters with Jerome_01",
+          "fullTitle": "2155 Letters with Jerome_01",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-letters/2155-letters-with-jerome_01/",
+          "section": "His Letters",
+          "sectionVi": "Thư Từ",
+          "sectionSlug": "his-letters"
+        },
+        {
+          "code": "2156",
+          "title": "Letters with Jerome_02",
+          "fullTitle": "2156 Letters with Jerome_02",
+          "url": "https://augnet.osa.org.au/works-of-augustine/writings-of-augustine/his-letters/2156-letters-with-jerome_02/",
+          "section": "His Letters",
+          "sectionVi": "Thư Từ",
+          "sectionSlug": "his-letters"
+        }
+      ]
+    },
+    {
+      "category": "His Spiritual Tradition",
+      "categoryVi": "Truyền Thống Linh Đạo",
+      "categorySlug": "his-spiritual-tradition",
+      "entries": [
+        {
+          "code": "2201",
+          "title": "Spirituality introduction",
+          "fullTitle": "2201 Spirituality introduction",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2201-spirituality-introduction/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2235",
+          "title": "The Jerusalem Ideal",
+          "fullTitle": "2235 The Jerusalem Ideal",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2235-the-jerusalem-ideal/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2236",
+          "title": "Spiritual discernment",
+          "fullTitle": "2236 Spiritual discernment",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2236-spiritual-discernment/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2237",
+          "title": "Spiritual unease",
+          "fullTitle": "2237 Spiritual unease",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2237-spiritual-unease/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2238",
+          "title": "Interiority",
+          "fullTitle": "2238 Interiority",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2238-interiority/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2240",
+          "title": "Otium",
+          "fullTitle": "2240 Otium",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2240-otium/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2241",
+          "title": "Spiritual love",
+          "fullTitle": "2241 Spiritual love",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2241-spiritual-love/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2242",
+          "title": "Spiritual elements",
+          "fullTitle": "2242 Spiritual elements",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2242-spiritual-elements/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2243",
+          "title": "Spiritual heart",
+          "fullTitle": "2243 Spiritual heart",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2243-spiritual-heart/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2244",
+          "title": "His spiritual ideas",
+          "fullTitle": "2244 His spiritual ideas",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2244-his-spiritual-ideas/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2245",
+          "title": "His mysticism",
+          "fullTitle": "2245 His mysticism",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2245-his-mysticism/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2246",
+          "title": "Spiritual direction",
+          "fullTitle": "2246 Spiritual direction",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2246-spiritual-direction/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2247",
+          "title": "Prayer",
+          "fullTitle": "2247 Prayer",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2247-prayer/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2248",
+          "title": "Lord’s Prayer",
+          "fullTitle": "2248 Lord’s Prayer",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2248-lords-prayer/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2250",
+          "title": "Divine providence",
+          "fullTitle": "2250 Divine providence",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2250-divine-providence/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2252",
+          "title": "Augustinian Spirituality",
+          "fullTitle": "2252 Augustinian Spirituality",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2252-augustinian-spirituality/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2254",
+          "title": "Spiritual aspects",
+          "fullTitle": "2254 Spiritual aspects",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-spiritual-tradition/2254-spiritual-aspects/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        }
+      ]
+    },
+    {
+      "category": "His Ideas",
+      "categoryVi": "Tư Tưởng của Thánh Augustinô",
+      "categorySlug": "his-ideas",
+      "entries": [
+        {
+          "code": "2302",
+          "title": "Anthropology",
+          "fullTitle": "2302 Anthropology",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2302-anthropology/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2303",
+          "title": "Burial rites",
+          "fullTitle": "2303 Burial rites",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2303-burial-rites/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2304",
+          "title": "Christian life",
+          "fullTitle": "2304 Christian life",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2304-christian-life/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2305",
+          "title": "Conversion",
+          "fullTitle": "2305 Conversion",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2305-conversion/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2306",
+          "title": "Evil",
+          "fullTitle": "2306 Evil",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2306-evil/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2308",
+          "title": "Friendship",
+          "fullTitle": "2308 Friendship",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2308-friendship/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2309",
+          "title": "Homily on friendship",
+          "fullTitle": "2309 Homily on friendship",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2309-homily-on-friendship/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2311",
+          "title": "Augustine on friendship",
+          "fullTitle": "2311 Augustine on friendship",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2311-augustine-on-friendship/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2312",
+          "title": "Role of history",
+          "fullTitle": "2312 Role of history",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2312-role-of-history/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2313",
+          "title": "Humility",
+          "fullTitle": "2313 Humility",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2313-humility/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2314",
+          "title": "Hunger",
+          "fullTitle": "2314 Hunger",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2314-hunger/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2315",
+          "title": "Poverty and hunger",
+          "fullTitle": "2315 Poverty and hunger",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2315-poverty-and-hunger/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2317",
+          "title": "Justice",
+          "fullTitle": "2317 Justice",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2317-justice/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2318",
+          "title": "Justice and Peace",
+          "fullTitle": "2318 Justice and Peace",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2318-justice-and-peace/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2319",
+          "title": "Limbo",
+          "fullTitle": "2319 Limbo",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2319-limbo/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2320",
+          "title": "Love",
+          "fullTitle": "2320 Love",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2320-love/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2321",
+          "title": "The marginalised",
+          "fullTitle": "2321 The marginalised",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2321-the-marginalised/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2322",
+          "title": "Martyrs",
+          "fullTitle": "2322 Martyrs",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2322-martyrs/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2323",
+          "title": "Mary",
+          "fullTitle": "2323 Mary",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2323-mary/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2324",
+          "title": "Miracles",
+          "fullTitle": "2324 Miracles",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2324-miracles/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2325",
+          "title": "The poor",
+          "fullTitle": "2325 The poor",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2325-the-poor/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2328",
+          "title": "Pride",
+          "fullTitle": "2328 Pride",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2328-pride/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2329",
+          "title": "Providence",
+          "fullTitle": "2329 Providence",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2329-providence/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2330",
+          "title": "Relics",
+          "fullTitle": "2330 Relics",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2330-relics/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2331",
+          "title": "Sexism",
+          "fullTitle": "2331 Sexism",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2331-sexism/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2332",
+          "title": "Sexuality",
+          "fullTitle": "2332 Sexuality",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2332-sexuality/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2333",
+          "title": "Society",
+          "fullTitle": "2333 Society",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/2333-society/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2337",
+          "title": "Theology – introduction",
+          "fullTitle": "2337 Theology – introduction",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2337-theology-introduction/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2338",
+          "title": "Thomas Aquinas",
+          "fullTitle": "2338 Thomas Aquinas",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2338-thomas-aquinas/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2339",
+          "title": "Eucharist",
+          "fullTitle": "2339 Eucharist",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2339-eucharist/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2340",
+          "title": "Grace",
+          "fullTitle": "2340 Grace",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2340-grace/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2341",
+          "title": "Predestination",
+          "fullTitle": "2341 Predestination",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2341-predestination/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2342",
+          "title": "War",
+          "fullTitle": "2342 War",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2342-war/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2343",
+          "title": "Totus Christus",
+          "fullTitle": "2343 Totus Christus",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2343-totus-christus/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        },
+        {
+          "code": "2347",
+          "title": "World view",
+          "fullTitle": "2347 World view",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-ideas/theology/2347-world-view/",
+          "section": "Theology",
+          "sectionVi": "Thần Học",
+          "sectionSlug": "theology"
+        }
+      ]
+    },
+    {
+      "category": "His Impact",
+      "categoryVi": "Ảnh Hưởng của Thánh Augustinô",
+      "categorySlug": "his-impact",
+      "entries": [
+        {
+          "code": "2402",
+          "title": "Education",
+          "fullTitle": "2402 Education",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2402-education/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2403",
+          "title": "Government",
+          "fullTitle": "2403 Government",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2403-government/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2404",
+          "title": "Liberal arts",
+          "fullTitle": "2404 Liberal arts",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2404-liberal-arts/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2405",
+          "title": "Monasticism",
+          "fullTitle": "2405 Monasticism",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2405-monasticism/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2407",
+          "title": "Philosophy",
+          "fullTitle": "2407 Philosophy",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2407-philosophy/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2408",
+          "title": "Politics",
+          "fullTitle": "2408 Politics",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2408-politics/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2411",
+          "title": "Preaching",
+          "fullTitle": "2411 Preaching",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2411-preaching/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2430",
+          "title": "Psychology",
+          "fullTitle": "2430 Psychology",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2430-psychology/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2431",
+          "title": "Catechetics",
+          "fullTitle": "2431 Catechetics",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2431-catechetics/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2435",
+          "title": "Rhetoric",
+          "fullTitle": "2435 Rhetoric",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2435-rhetoric/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2436",
+          "title": "Singing",
+          "fullTitle": "2436 Singing",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2436-singing/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        },
+        {
+          "code": "2437",
+          "title": "Slavery",
+          "fullTitle": "2437 Slavery",
+          "url": "https://augnet.osa.org.au/works-of-augustine/his-impact/2437-slavery/",
+          "section": "",
+          "sectionVi": "",
+          "sectionSlug": ""
+        }
+      ]
+    }
+  ]
+}

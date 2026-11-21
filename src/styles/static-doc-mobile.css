@@ -1,0 +1,97 @@
+/* ===================================================================
+ * # Static Document Mobile Optimizations (Optimized TOC)
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* --- General Layout & Spacing --- */
+    main.content {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .section-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    /* --- Typography Adjustments --- */
+    h1 { font-size: 3.2rem; }
+    h2 { font-size: 2.8rem; }
+    h3 { font-size: 2.2rem; }
+    p, .subpara { font-size: 1.6rem; }
+
+    /* --- TOC Styling (as a static block) --- */
+    #tocWrapper {
+        /* This !important rule will force the TOC to be visible */
+        display: block !important;
+        
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        padding: 2.5rem 2rem; /* Increased padding for better spacing */
+        margin-bottom: 4rem;
+        background-color: #112230; /* Added from components.css for context */
+        border-radius: 8px; /* Added from components.css for context */
+    }
+
+    #tocWrapper .toc h3 {
+        /* Reduced font size for a more balanced title */
+        font-size: 2.4rem;
+        margin-bottom: 2.5rem;
+    }
+
+    /* Use a single-column flex layout for better readability on narrow screens */
+    #tocWrapper .toc ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Space between main items */
+    }
+
+    /* Style for main TOC items */
+    #tocWrapper .toc > ul > li {
+        text-align: center;
+        border-bottom: 1px solid rgba(212, 173, 74, 0.1); /* Add a subtle separator */
+        padding-bottom: 1rem;
+    }
+    #tocWrapper .toc > ul > li:last-child {
+        border-bottom: none; /* Remove separator from the last item */
+    }
+
+    /* Unified link styling for easier tapping */
+    #tocWrapper .toc a {
+        font-size: 1.7rem; /* Standardized font size */
+        padding: 0.8rem; /* Add padding to make links easier to tap */
+    }
+
+    /* Style for nested sub-lists */
+    #tocWrapper .toc ul ul {
+        margin-top: 1rem;
+        padding-left: 1rem; /* Indent sub-items */
+        display: flex; /* Ensure sub-list also uses flex layout */
+        flex-direction: column;
+        gap: 0.5rem; /* Tighter spacing for sub-items */
+        border-left: 2px solid rgba(212, 173, 74, 0.1); /* Add visual indicator */
+    }
+    
+    /* Style for sub-list items */
+    #tocWrapper .toc ul ul li a {
+        font-size: 1.6rem; /* Slightly smaller font for sub-items */
+        color: #b0a89a; /* Less emphasis as in the original design */
+    }
+    .toc {
+    text-align: left;
+}
+.toc-item-wrapper {
+    display: flex;
+    align-items: center;
+    /* This pushes the link to the far left and the button (if it exists) to the far right */
+    justify-content: space-between;
+}
+/* 3. Ensure the link itself always has left-aligned text
+      and expands to fill the available space. */
+.toc-item-wrapper a {
+    flex-grow: 1; /* This is the key for items WITHOUT a button */
+    text-align: left;
+}
+}

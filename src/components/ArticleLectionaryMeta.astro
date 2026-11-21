@@ -1,0 +1,56 @@
+---
+interface Props {
+  readings?: string[];
+}
+
+const readings = Astro.props.readings ?? [];
+---
+
+{readings.length > 0 && (
+  <aside class="article-lectionary" aria-label="Các bài đọc phụng vụ">
+    <span class="article-lectionary-label">Bài đọc:</span>
+    <span class="article-lectionary-values">{readings.join('; ')}</span>
+  </aside>
+)}
+
+<style>
+  .article-lectionary {
+    display:flex;
+    width:100%;
+    align-items:baseline;
+    gap:.55rem;
+    margin:0 0 2.8rem;
+    padding:0;
+    color:var(--ink-cream-soft);
+    background:transparent;
+    font-family:var(--font-ui);
+    line-height:1.55;
+  }
+  .article-lectionary-label {
+    flex:0 0 auto;
+    color:var(--gold-dim);
+    font-size:1rem;
+    font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+  }
+  .article-lectionary-values {
+    color:var(--ink-cream-soft);
+    font-size:1.16rem;
+    font-weight:400;
+  }
+  :global(html[data-theme='light']) .article-lectionary-label { color:#72531f; }
+  :global(html[data-theme='light']) .article-lectionary-values { color:#526158; }
+  @media (max-width:640px) {
+    .article-lectionary {
+      display:block;
+      margin-bottom:2.3rem;
+    }
+    .article-lectionary-label {
+      display:block;
+      margin-bottom:.25rem;
+      font-size:.94rem;
+    }
+    .article-lectionary-values { font-size:1.06rem; }
+  }
+</style>

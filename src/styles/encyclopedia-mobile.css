@@ -1,0 +1,89 @@
+/* ===================================================================
+ * # Encyclopedia Page (Mobile Optimizations)
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+/* --- Main Layout: Stack Panels Vertically --- */
+.encyclopedia-layout {
+grid-template-columns: 1fr; /* Single column layout */
+gap: 3rem;
+margin: 0 0rem; /* Reduce side margins */
+}
+
+/* --- Controls: Make them more compact --- */
+#encyclopedia-controls {
+padding: 1.5rem;
+width: 95%;
+margin-bottom: 3rem;
+}
+
+#search-bar {
+font-size: 1.6rem;
+padding: 1.2rem 1.5rem;
+}
+
+#az-nav-container {
+        display: flex;
+        flex-wrap: nowrap; /* 1. Prevents buttons from wrapping to the next line */
+        overflow-x: auto;  /* 2. Enables horizontal scrolling */
+        justify-content: flex-start; /* Align buttons to the left */
+        
+        /* 3. Hides the scrollbar for a cleaner look */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;     /* Firefox */
+    }
+
+    /* 4. Hides the scrollbar for Safari and Chrome */
+    #az-nav-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .az-nav-button {
+        flex-shrink: 0; /* Prevents buttons from shrinking */
+        font-size: 1.4rem;
+        padding: 0.8rem 1.2rem; /* Give buttons slightly more horizontal space */
+    }
+
+/* --- Panels: Reset sticky behavior and sizing --- */
+#entry-index-panel,
+#entry-preview-panel {
+position: static; /* Remove sticky positioning */
+height: auto;
+max-height: none; /* Allow panels to have natural height */
+overflow-y: visible; /* Reset overflow */
+margin-left: 0.5rem;
+margin-right: 0.5rem;
+}
+
+#entry-index-panel {
+padding: 0;
+background: transparent;
+border: none;
+}
+
+#entry-preview-panel {
+padding: 1rem;
+}
+
+/* --- Typography and Spacing Adjustments --- */
+.index-letter-title {
+font-size: 1.8rem;
+}
+
+.preview-term {
+font-size: 2.6rem;
+}
+
+.preview-summary {
+font-size: 1.6rem;
+}
+
+.full-entry-content {
+    margin: 0;
+    padding: 0;
+}
+    .full-entry-content h3 {
+        font-size: 2.4rem;
+    }
+}

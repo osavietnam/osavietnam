@@ -1,0 +1,95 @@
+/* ===================================================================
+ * # BAI DOC KINH SACH PAGE - MOBILE OPTIMIZATIONS
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* --- 1. Global Scaling & Layout --- */
+  
+
+    main.content {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .home-welcome h2 {
+        font-size: 3rem;
+    }
+
+    /* --- 2. Category Selector --- */
+    .category-selector {
+        gap: 0.8rem; /* Reduce the gap between buttons */
+    }
+
+    .category-card {
+        /* Make buttons slightly smaller */
+        font-size: 1.4rem;
+        padding: 1rem 1.2rem;
+    }
+
+    /* --- 3. Table Layout --- */
+  
+
+
+    .table-scroll-wrapper {
+        /* This is the key change: allow the table to scroll horizontally */
+        overflow-x: auto;
+        
+        /* Add a subtle shadow to indicate scrollable content */
+        -webkit-box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.2); 
+        box-shadow: inset -10px 0px 8px -8px rgba(0,0,0,0.2);
+    }
+
+    .readings-table {
+        /* Ensure the table has enough space, forcing a scroll if needed */
+        min-width: 600px;
+    }
+
+    .readings-table th,
+    .readings-table td {
+        /* Reduce padding to make the table more compact */
+        padding: 0.8rem 1rem;
+        font-size: 1.5rem;
+        /* Prevent text from wrapping awkwardly */
+        white-space: normal; /* Allow some wrapping but will rely on min-width */
+    }
+
+    /* Remove fixed percentage widths to allow for more natural column sizing */
+    .readings-table th:nth-child(1), .readings-table td:nth-child(1),
+    .readings-table th:nth-child(2), .readings-table td:nth-child(2),
+    .readings-table th:nth-child(3), .readings-table td:nth-child(3) {
+        width: auto;
+    }
+
+    .table-footnote {
+        text-align: left;
+        padding-left: 1rem;
+    }
+
+    /* --- 4. Reading Content Display (Previously Empty) --- */
+    /* THIS IS THE NEWLY ADDED SECTION */
+    #reading-content-wrapper .section-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #reading-content-wrapper .section-container {
+        padding: 2rem 1.5rem;
+    }
+
+    #reading-content-wrapper h3 {
+        font-size: 2.2rem;
+    }
+
+    #reading-content-wrapper .paragraph-title { /* h4 */
+        font-size: 1.5rem;
+    }
+
+    #reading-content-wrapper .subparagraph-title { /* h5 */
+        font-size: 1.6rem;
+    }
+
+    #reading-content-wrapper .subpara {
+        font-size: 1.8rem;
+    }
+}

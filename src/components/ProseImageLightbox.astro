@@ -1,0 +1,103 @@
+<script>
+  const initializeProseImageLightbox = () => {
+    document.querySelectorAll<HTMLImageElement>('.prose img:not([data-no-lightbox])').forEach((source) => {
+      if (source.dataset.proseLightboxReady === 'true') return;
+      source.dataset.proseLightboxReady = 'true';
+      source.classList.add('is-prose-zoomable');
+
+      const sourceUrl = source.currentSrc || source.src;
+      const isSvg = /\.svg(?:[?#]|$)/i.test(sourceUrl);
+      if (isSvg) {
+        source.classList.add('is-prose-svg');
+        source.dataset.originalSrc ||= sourceUrl;
+
+        // Mobile browsers may create an external SVG image document while it is
+        // still off-screen and throttle its internal CSS animation. Give the SVG
+        // a fresh document instance as it enters the reading viewport.
+        const activateSvg = () => {
+          if (source.dataset.proseSvgActive === 'true') return;
+          source.dataset.proseSvgActive = 'true';
+          const animatedUrl = new URL(source.dataset.originalSrc || source.src, window.location.href);
+          animatedUrl.searchParams.set('prose-svg-active', '1');
+          source.src = animatedUrl.href;
+        };
+
+        if (window.matchMedia('(max-width: 768px)').matches && 'IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            observer.disconnect();
+            activateSvg();
+          }, { rootMargin: '120px 0px' });
+          observer.observe(source);
+        } else if (window.matchMedia('(max-width: 768px)').matches) {
+          activateSvg();
+        }
+      }
+
+      source.tabIndex = 0;
+      source.setAttribute('role', 'button');
+      source.setAttribute('aria-label', `${source.alt || 'Ảnh minh họa'}. Mở ảnh phóng lớn`);
+
+      const openLightbox = () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'img-lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Xem ảnh phóng lớn');
+
+        const inner = document.createElement('div');
+        inner.className = 'img-lightbox-inner';
+
+        const viewer = document.createElement('img');
+        viewer.src = source.dataset.originalSrc
+          || source.dataset.original
+          || source.currentSrc
+          || source.src;
+        viewer.alt = source.alt;
+        viewer.className = 'img-lightbox-image';
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'img-lightbox-close';
+        closeButton.type = 'button';
+        closeButton.setAttribute('aria-label', 'Đóng ảnh');
+        closeButton.textContent = '×';
+
+        inner.append(viewer, closeButton);
+        overlay.append(inner);
+        document.body.append(overlay);
+        document.documentElement.classList.add('has-prose-lightbox');
+        closeButton.focus();
+
+        const closeLightbox = () => {
+          document.documentElement.classList.remove('has-prose-lightbox');
+          overlay.remove();
+          source.focus({ preventScroll: true });
+          document.removeEventListener('keydown', onKeydown);
+        };
+        const onKeydown = (event: KeyboardEvent) => {
+          if (event.key === 'Escape') closeLightbox();
+        };
+
+        overlay.addEventListener('click', (event) => {
+          if (event.target === overlay) closeLightbox();
+        });
+        closeButton.addEventListener('click', closeLightbox);
+        viewer.addEventListener('click', () => {
+          inner.classList.toggle('is-zoomed');
+          if (!inner.classList.contains('is-zoomed')) inner.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        });
+        document.addEventListener('keydown', onKeydown);
+      };
+
+      source.addEventListener('click', openLightbox);
+      source.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openLightbox();
+      });
+    });
+  };
+
+  initializeProseImageLightbox();
+  document.addEventListener('astro:page-load', initializeProseImageLightbox);
+</script>

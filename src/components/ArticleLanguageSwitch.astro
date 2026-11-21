@@ -1,0 +1,60 @@
+---
+interface Props {
+  hasEnglish?: boolean;
+  readerClass?: string;
+  articleClass?: string;
+}
+
+const {
+  hasEnglish = false,
+  readerClass = 'article-shell spirit-reader-shell',
+  articleClass = 'prose spirit-reader-prose',
+} = Astro.props;
+---
+
+<div class="article-language-unit" data-article-language-unit>
+  {hasEnglish && (
+    <div class="article-language-switch" data-article-language-switch aria-label="Chọn ngôn ngữ bài viết">
+      <button type="button" data-article-language="vi" aria-pressed="true">VN</button>
+      <button type="button" data-article-language="en" aria-pressed="false">EN</button>
+    </div>
+  )}
+  <div class={readerClass} data-article-language-reader>
+    <article class={articleClass} data-article-language-panel="vi" lang="vi">
+      <slot name="vi" />
+    </article>
+    {hasEnglish && (
+      <article class={articleClass} data-article-language-panel="en" lang="en" hidden>
+        <slot name="en" />
+      </article>
+    )}
+  </div>
+</div>
+
+<script>
+  const initializeArticleLanguageSwitches = () => {
+    document.querySelectorAll<HTMLElement>('[data-article-language-unit]:not([data-language-ready])').forEach((root) => {
+      root.dataset.languageReady = 'true';
+      const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-article-language]'));
+      const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-article-language-panel]'));
+      buttons.forEach((button) => button.addEventListener('click', () => {
+        const language = button.dataset.articleLanguage;
+        buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        panels.forEach((panel) => { panel.hidden = panel.dataset.articleLanguagePanel !== language; });
+      }));
+    });
+  };
+  initializeArticleLanguageSwitches();
+  document.addEventListener('astro:page-load', initializeArticleLanguageSwitches);
+</script>
+
+<style is:global>
+  .article-language-switch{display:flex;width:fit-content;margin:0 auto 1.5rem;padding:.25rem;border:1px solid rgba(201,191,169,.22);border-radius:999px;background:#14231d}
+  .article-language-switch button{min-width:4.2rem;min-height:2.7rem;padding:.45rem .8rem;border:0;border-radius:999px;color:var(--ink-cream-soft);background:transparent;font:600 1rem/1 var(--font-ui);cursor:pointer}
+  .article-language-switch button[aria-pressed='true']{color:#16241d;background:var(--gold)}
+  [data-article-language-panel][hidden]{display:none!important}
+  html[data-theme='light'] .article-language-switch{border-color:rgba(45,112,87,.25);background:#edf4ef}
+  html[data-theme='light'] .article-language-switch button{color:#416253}
+  html[data-theme='light'] .article-language-switch button[aria-pressed='true']{color:#fff;background:#2d7057}
+  @media(max-width:700px){.article-language-switch{margin-bottom:1rem}.article-language-switch button{min-width:3.7rem;min-height:2.45rem;font-size:.9rem}}
+</style>

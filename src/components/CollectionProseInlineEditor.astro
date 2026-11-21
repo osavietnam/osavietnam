@@ -1,0 +1,191 @@
+---
+import InlineProseEditor from './InlineProseEditor.astro';
+
+type EditableCollection = 'documents' | 'tu-thuat' | 'lich-su-dong' | 'thanh-chan-phuoc';
+
+interface Props {
+  collection: EditableCollection;
+  entryId: string;
+  activeSelector?: string;
+  activeAttribute?: string;
+  label?: string;
+}
+
+const {
+  collection,
+  entryId,
+  activeSelector = '',
+  activeAttribute = '',
+  label = 'Sửa nội dung',
+} = Astro.props;
+---
+
+<div
+  class="collection-prose-editor"
+  data-collection-prose-root
+  data-collection={collection}
+  data-entry-id={entryId}
+  data-active-selector={activeSelector}
+  data-active-attribute={activeAttribute}
+>
+  <button type="button" class="collection-prose-trigger" title={label} aria-label={label}>
+    <span aria-hidden="true">✎</span><span>{label}</span>
+  </button>
+
+  <dialog class="collection-prose-dialog" aria-labelledby="collectionProseTitle">
+    <form method="dialog" class="collection-prose-form">
+      <header>
+        <div><small>Biên tập trực tiếp</small><h2 id="collectionProseTitle">{label}</h2></div>
+        <button type="button" class="collection-prose-close" aria-label="Đóng">×</button>
+      </header>
+
+      <div class="collection-prose-fields">
+        <label class="is-full"><span>Tiêu đề</span><input data-field="title" type="text" required /></label>
+
+        {collection === 'documents' && (
+          <>
+            <label class="is-full"><span>Phụ đề</span><input data-field="subtitle" type="text" /></label>
+            <label><span>Loại tài liệu</span><input data-field="docType" type="text" /></label>
+            <label><span>Ngôn ngữ</span><select data-field="lang"><option value="vi">Tiếng Việt</option><option value="en">English</option></select></label>
+            <label class="is-full"><span>Dịch giả</span><input data-field="translator" type="text" /></label>
+            <label class="is-full"><span>Ghi chú dịch thuật</span><textarea data-field="translatorNote" rows="3"></textarea></label>
+          </>
+        )}
+
+        {collection === 'tu-thuat' && (
+          <label><span>Thứ tự quyển</span><input data-field="order" type="number" step="1" /></label>
+        )}
+
+        {collection === 'lich-su-dong' && (
+          <>
+            <label class="is-full"><span>Phụ đề</span><input data-field="subtitle" type="text" /></label>
+            <label><span>Thời kỳ</span><input data-field="period" type="text" /></label>
+            <label><span>Thứ tự</span><input data-field="order" type="number" step="1" /></label>
+            <label class="is-full"><span>Mô tả ngắn</span><textarea data-field="excerpt" rows="3"></textarea></label>
+            <label class="is-full"><span>Ghi chú nguồn</span><textarea data-field="sourceNote" rows="3"></textarea></label>
+          </>
+        )}
+
+        {collection === 'thanh-chan-phuoc' && (
+          <>
+            <label class="is-full"><span>Phụ đề</span><input data-field="subtitle" type="text" /></label>
+            <label><span>Bậc lễ</span><select data-field="rank"><option value="none">Không đặt</option><option value="solemn">Lễ Trọng</option><option value="feast">Lễ Kính</option><option value="memorial">Lễ Nhớ</option></select></label>
+            <label><span>Ngày lễ</span><input data-field="feastDay" type="number" min="1" max="31" /></label>
+            <label><span>Tháng lễ</span><input data-field="feastMonth" type="number" min="1" max="12" /></label>
+            <label class="is-full"><span>Ảnh thẻ thánh</span><input data-field="imageFile" type="text" /></label>
+          </>
+        )}
+
+        <label class="collection-prose-draft"><input data-field="draft" type="checkbox" /><span>Bản nháp</span></label>
+        <div class="is-full"><InlineProseEditor dataField="body" label="Nội dung prose" /></div>
+      </div>
+
+      <footer>
+        <p class="collection-prose-message" role="status"></p>
+        <button type="button" class="collection-prose-cancel">Hủy</button>
+        <button type="submit" class="collection-prose-save">Lưu thay đổi</button>
+      </footer>
+    </form>
+  </dialog>
+</div>
+
+<script>
+  type EditorItem = { id:string; fm:Record<string, unknown>; body:string; extension:string; checksum:string; route?:string };
+
+  const initializeCollectionProseEditors = () => {
+    document.querySelectorAll<HTMLElement>('[data-collection-prose-root]:not([data-collection-prose-ready])').forEach((root) => {
+      root.dataset.collectionProseReady = 'true';
+      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const collection = root.dataset.collection || '';
+      const initialId = root.dataset.entryId || '';
+      const activeSelector = root.dataset.activeSelector || '';
+      const activeAttribute = root.dataset.activeAttribute || '';
+      const trigger = root.querySelector<HTMLButtonElement>('.collection-prose-trigger');
+      const dialog = root.querySelector<HTMLDialogElement>('.collection-prose-dialog');
+      const form = root.querySelector<HTMLFormElement>('.collection-prose-form');
+      const heading = root.querySelector<HTMLElement>('#collectionProseTitle');
+      const message = root.querySelector<HTMLElement>('.collection-prose-message');
+      const save = root.querySelector<HTMLButtonElement>('.collection-prose-save');
+      const prose = root.querySelector<HTMLElement>('[data-inline-prose-editor]');
+      let active: EditorItem | null = null;
+
+      if (!collection || !initialId || !trigger || !dialog || !form || !message || !save) { root.remove(); return; }
+      const field = (name:string) => root.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[data-field="${name}"]`);
+      const currentId = () => {
+        if (!activeSelector || !activeAttribute) return initialId;
+        return document.querySelector<HTMLElement>(activeSelector)?.getAttribute(activeAttribute) || initialId;
+      };
+      const request = async (path:string, options?:RequestInit) => {
+        const response = await fetch(ADMIN + path, options);
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        return data;
+      };
+      const setMessage = (text = '', error = false) => { message.textContent = text; message.classList.toggle('is-error', error); };
+      const set = (name:string, value:unknown) => { const input = field(name); if (input) input.value = value == null ? '' : String(value); };
+      const numberValue = (name:string) => { const raw = field(name)?.value || ''; return raw === '' ? undefined : Number(raw); };
+
+      const close = () => { active = null; dialog.close(); };
+      const open = async () => {
+        const id = currentId();
+        dialog.showModal(); save.disabled = true; setMessage('Đang tải…');
+        try {
+          active = await request(`/api/studio/item?collection=${encodeURIComponent(collection)}&id=${encodeURIComponent(id)}`) as EditorItem;
+          const fm = active.fm || {};
+          if (heading) heading.textContent = String(fm.title || id);
+          ['title','subtitle','docType','lang','translator','translatorNote','order','period','excerpt','sourceNote','rank','feastDay','feastMonth','imageFile'].forEach((name) => set(name, fm[name]));
+          const draft = field('draft') as HTMLInputElement | null;
+          if (draft) draft.checked = fm.draft === true;
+          const body = field('body') as HTMLTextAreaElement | null;
+          if (body) body.value = active.body || '';
+          prose?.dispatchEvent(new CustomEvent('inline-prose:set'));
+          save.disabled = false; setMessage('');
+          requestAnimationFrame(() => field('title')?.focus());
+        } catch (error) {
+          active = null;
+          setMessage(error instanceof Error ? error.message : 'Không thể tải nội dung', true);
+        }
+      };
+
+      trigger.addEventListener('click', open);
+      root.querySelector('.collection-prose-close')?.addEventListener('click', close);
+      root.querySelector('.collection-prose-cancel')?.addEventListener('click', close);
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) close(); });
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!active || !form.reportValidity()) return;
+        prose?.dispatchEvent(new CustomEvent('inline-prose:sync'));
+        save.disabled = true; setMessage('Đang lưu…');
+        const value = (name:string) => field(name)?.value.trim() || '';
+        const next = { ...active.fm, title:value('title'), draft:(field('draft') as HTMLInputElement | null)?.checked === true };
+        if (collection === 'documents') Object.assign(next, { subtitle:value('subtitle'), docType:value('docType'), lang:value('lang'), translator:value('translator'), translatorNote:value('translatorNote') });
+        if (collection === 'tu-thuat') Object.assign(next, { order:numberValue('order') ?? 0 });
+        if (collection === 'lich-su-dong') Object.assign(next, { subtitle:value('subtitle'), period:value('period'), order:numberValue('order'), excerpt:value('excerpt'), sourceNote:value('sourceNote') });
+        if (collection === 'thanh-chan-phuoc') Object.assign(next, { subtitle:value('subtitle'), rank:value('rank') || 'none', feastDay:numberValue('feastDay'), feastMonth:numberValue('feastMonth'), imageFile:value('imageFile') });
+        try {
+          const result = await request('/api/studio/item', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ collection, id:active.id, originalId:active.id, fm:next, body:(field('body') as HTMLTextAreaElement | null)?.value || active.body, extension:active.extension, checksum:active.checksum }) });
+          setMessage('Đã lưu. Đang cập nhật trang…');
+          window.setTimeout(() => {
+            if (collection === 'tu-thuat' && result.route) location.href = result.route;
+            else location.reload();
+          }, 350);
+        } catch (error) {
+          save.disabled = false;
+          setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true);
+        }
+      });
+
+      request('/api/studio/manifest').then(() => { root.dataset.adminAvailable = 'true'; }).catch(() => root.remove());
+    });
+  };
+  initializeCollectionProseEditors();
+  document.addEventListener('astro:page-load', initializeCollectionProseEditors);
+</script>
+
+<style is:global>
+  .collection-prose-trigger{position:fixed;z-index:92;left:1.25rem;bottom:1.25rem;display:none;align-items:center;gap:.48rem;min-height:3rem;padding:.62rem .88rem;border:1px solid #d7ae60;border-radius:.48rem;color:#102118;background:#e9c176;font:600 .92rem/1 var(--font-ui);cursor:pointer;box-shadow:0 .4rem 1.2rem rgba(0,0,0,.2)}.collection-prose-editor[data-admin-available="true"] .collection-prose-trigger{display:inline-flex}.collection-prose-trigger:hover,.collection-prose-trigger:focus-visible{background:#f0cf8c;outline:2px solid rgba(233,193,118,.28);outline-offset:2px}
+  .collection-prose-dialog{width:min(84rem,calc(100vw - 2.4rem));max-height:calc(100dvh - 2.4rem);padding:0;overflow:auto;border:1px solid #826b3f;border-radius:.7rem;color:#f1ead8;background:#101c18;box-shadow:0 2rem 5rem rgba(0,0,0,.5)}.collection-prose-dialog::backdrop{background:rgba(2,8,5,.74);backdrop-filter:blur(3px)}.collection-prose-form>header,.collection-prose-form>footer{display:flex;align-items:center;gap:1rem;padding:1.15rem 1.4rem}.collection-prose-form>header{justify-content:space-between;border-bottom:1px solid #574d34}.collection-prose-form>header small{display:block;margin-bottom:.25rem;color:#e9c176;font:600 .82rem/1.4 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}.collection-prose-form>header h2{margin:0;color:#f1ead8;font:600 1.75rem/1.25 var(--font-display)}.collection-prose-close{width:2.8rem;height:2.8rem;padding:0;border:0;border-radius:50%;color:#f1ead8;background:transparent;font:300 2.2rem/1 var(--font-ui);cursor:pointer}
+  .collection-prose-fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1.4rem}.collection-prose-fields label{min-width:0;display:flex;flex-direction:column;gap:.4rem}.collection-prose-fields label>span{color:#d8cfbb;font:500 .96rem/1.35 var(--font-ui)}.collection-prose-fields .is-full{grid-column:1/-1}.collection-prose-fields input[type="text"],.collection-prose-fields input[type="number"],.collection-prose-fields select,.collection-prose-fields textarea{width:100%;box-sizing:border-box;border:1px solid #665b42;border-radius:.4rem;padding:.74rem .84rem;color:#f1ead8;background:#09140f;font:400 1rem/1.5 var(--font-ui)}.collection-prose-fields textarea{resize:vertical}.collection-prose-fields input:focus,.collection-prose-fields textarea:focus,.collection-prose-fields select:focus{border-color:#d7ae60;outline:2px solid rgba(233,193,118,.18);outline-offset:1px}.collection-prose-fields .collection-prose-draft{flex-direction:row;align-items:center}.collection-prose-draft input{width:1.2rem;height:1.2rem;accent-color:#d7ae60}.collection-prose-form>footer{justify-content:flex-end;border-top:1px solid #574d34}.collection-prose-message{flex:1;margin:0;color:#d8cfbb;font:500 .9rem/1.4 var(--font-ui)}.collection-prose-message.is-error{color:#ff9e92}.collection-prose-form>footer button{min-height:3rem;padding:.62rem .92rem;border:1px solid #826b3f;border-radius:.42rem;color:#f1ead8;background:transparent;font:600 .94rem/1 var(--font-ui);cursor:pointer}.collection-prose-form>footer .collection-prose-save{color:#102118;background:#e9c176;border-color:#e9c176}.collection-prose-form button:disabled{opacity:.5;cursor:wait}
+  html[data-theme="light"] .collection-prose-dialog{color:#183e2c;background:#fffdf8;border-color:#8ba495}html[data-theme="light"] .collection-prose-form>header,html[data-theme="light"] .collection-prose-form>footer{border-color:#d7e0da}html[data-theme="light"] .collection-prose-form>header h2,html[data-theme="light"] .collection-prose-close{color:#183e2c}html[data-theme="light"] .collection-prose-form>header small{color:#27664c}html[data-theme="light"] .collection-prose-fields label>span,html[data-theme="light"] .collection-prose-message{color:#50685a}html[data-theme="light"] .collection-prose-fields input[type="text"],html[data-theme="light"] .collection-prose-fields input[type="number"],html[data-theme="light"] .collection-prose-fields select,html[data-theme="light"] .collection-prose-fields textarea{color:#183e2c;background:#fff;border-color:#aebfb5}html[data-theme="light"] .collection-prose-form>footer button{color:#183e2c;border-color:#91a79a}html[data-theme="light"] .collection-prose-form>footer .collection-prose-save{color:#fff;background:#27664c;border-color:#27664c}
+  @media(max-width:640px){.collection-prose-trigger{left:.8rem;bottom:.8rem;width:3rem;height:3rem;justify-content:center;padding:0}.collection-prose-trigger span:last-child{display:none}.collection-prose-dialog{width:calc(100vw - 1rem);max-height:calc(100dvh - 1rem)}.collection-prose-fields{grid-template-columns:1fr;padding:1rem}.collection-prose-fields .is-full{grid-column:auto}.collection-prose-form>header{padding:1rem}.collection-prose-form>header h2{font-size:1.45rem}.collection-prose-form>footer{flex-wrap:wrap;padding:1rem}.collection-prose-message{flex-basis:100%}}
+</style>

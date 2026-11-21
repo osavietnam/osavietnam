@@ -1,0 +1,191 @@
+---
+interface Props {
+  dataField: string;
+  label: string;
+  scope?: 'articles' | 'vocation' | 'banners';
+}
+
+const { dataField, label, scope = 'articles' } = Astro.props;
+---
+
+<div class="article-image-field" data-article-image-picker data-image-scope={scope}>
+  <span class="article-image-label">{label}</span>
+  <div class="article-image-control">
+    <input data-field={dataField} type="text" placeholder="Đường dẫn ảnh" aria-label={label} />
+    <button type="button" class="article-image-library-button">Chọn ảnh</button>
+    <label class="article-image-upload-button">
+      <span>Tải lên</span>
+      <input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/svg+xml" />
+    </label>
+  </div>
+  <div class="article-image-preview" hidden>
+    <img src="" alt="" />
+    <span></span>
+    <button type="button" aria-label={`Bỏ ${label.toLowerCase()}`} title="Bỏ ảnh">×</button>
+  </div>
+
+  <section class="article-image-library" hidden aria-label={`Thư viện ${label.toLowerCase()}`}>
+    <div class="article-image-library-backdrop" data-image-library-close></div>
+    <div class="article-image-library-panel" role="dialog" aria-modal="true">
+      <header>
+        <div>
+          <small>Thư viện ảnh bài viết</small>
+          <h3>Chọn {label.toLowerCase()}</h3>
+        </div>
+        <button type="button" class="article-image-library-close" data-image-library-close aria-label="Đóng">×</button>
+      </header>
+      <div class="article-image-library-tools">
+        <input type="search" placeholder="Tìm theo tên ảnh…" autocomplete="off" aria-label="Tìm ảnh" />
+        <label class="article-image-upload-button is-primary">
+          <span>+ Tải ảnh mới</span>
+          <input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/svg+xml" />
+        </label>
+      </div>
+      <div class="article-image-library-grid"></div>
+      <p class="article-image-library-empty" hidden>Không tìm thấy ảnh phù hợp.</p>
+      <p class="article-image-library-status" role="status"></p>
+    </div>
+  </section>
+</div>
+
+<script>
+  type ImageLibraryResult = { files?: string[]; url?: string; error?: string };
+
+  const initializeArticleImagePickers = () => {
+    document.querySelectorAll<HTMLElement>('[data-article-image-picker]:not([data-image-picker-ready])').forEach((root) => {
+      root.dataset.imagePickerReady = 'true';
+      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const scope = root.dataset.imageScope || 'articles';
+      const input = root.querySelector<HTMLInputElement>(':scope > .article-image-control > input[data-field]');
+      const libraryButton = root.querySelector<HTMLButtonElement>('.article-image-library-button');
+      const uploadInputs = [...root.querySelectorAll<HTMLInputElement>('.article-image-upload-button input[type="file"]')];
+      const preview = root.querySelector<HTMLElement>('.article-image-preview');
+      const previewImage = preview?.querySelector<HTMLImageElement>('img');
+      const previewName = preview?.querySelector<HTMLElement>('span');
+      const clearButton = preview?.querySelector<HTMLButtonElement>('button');
+      const library = root.querySelector<HTMLElement>('.article-image-library');
+      const grid = root.querySelector<HTMLElement>('.article-image-library-grid');
+      const search = root.querySelector<HTMLInputElement>('.article-image-library-tools input[type="search"]');
+      const empty = root.querySelector<HTMLElement>('.article-image-library-empty');
+      const status = root.querySelector<HTMLElement>('.article-image-library-status');
+      let files: string[] = [];
+
+      if (!input || !library || !grid) return;
+
+      const request = async (path: string, options?: RequestInit) => {
+        const response = await fetch(ADMIN + path, options);
+        const result = await response.json().catch(() => ({})) as ImageLibraryResult;
+        if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+        return result;
+      };
+      const imageName = (value: string) => decodeURIComponent(value.split('/').at(-1) || value);
+      const previewUrl = (value: string) => value.startsWith('/')
+        ? value
+        : `${ADMIN}/api/studio/image?scope=${encodeURIComponent(scope)}&value=${encodeURIComponent(value)}`;
+      const updatePreview = () => {
+        const value = input.value.trim();
+        if (preview) preview.hidden = !value;
+        if (previewImage) {
+          previewImage.src = value ? previewUrl(value) : '';
+          previewImage.alt = value ? `Xem trước ${imageName(value)}` : '';
+        }
+        if (previewName) previewName.textContent = value ? imageName(value) : '';
+      };
+      const choose = (value: string) => {
+        input.value = value;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        updatePreview();
+        closeLibrary();
+      };
+      const render = () => {
+        const query = (search?.value || '').trim().toLocaleLowerCase('vi');
+        const visible = files.filter((value) => imageName(value).toLocaleLowerCase('vi').includes(query));
+        grid.replaceChildren(...visible.map((value) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'article-image-library-item';
+          if (input.value.trim() === value) button.classList.add('is-selected');
+          const image = document.createElement('img');
+          image.src = previewUrl(value);
+          image.alt = '';
+          image.loading = 'lazy';
+          const name = document.createElement('span');
+          name.textContent = imageName(value);
+          button.append(image, name);
+          button.addEventListener('click', () => choose(value));
+          return button;
+        }));
+        if (empty) empty.hidden = visible.length !== 0;
+      };
+      const loadLibrary = async () => {
+        if (status) status.textContent = 'Đang tải thư viện ảnh…';
+        try {
+          const result = await request(`/api/studio/images?scope=${encodeURIComponent(scope)}`);
+          files = Array.isArray(result.files) ? result.files : [];
+          render();
+          if (status) status.textContent = `${files.length} ảnh có sẵn`;
+        } catch (error) {
+          if (status) status.textContent = error instanceof Error ? error.message : 'Không thể tải thư viện ảnh';
+        }
+      };
+      const openLibrary = () => {
+        library.hidden = false;
+        document.documentElement.classList.add('article-image-library-open');
+        void loadLibrary();
+        requestAnimationFrame(() => search?.focus());
+      };
+      const closeLibrary = () => {
+        library.hidden = true;
+        document.documentElement.classList.remove('article-image-library-open');
+      };
+      const upload = async (file: File) => {
+        if (file.size > 8 * 1024 * 1024) {
+          if (status) status.textContent = 'Ảnh vượt quá giới hạn 8 MB.';
+          return;
+        }
+        if (status) status.textContent = 'Đang tải ảnh lên…';
+        const data = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result || ''));
+          reader.onerror = () => reject(new Error('Không thể đọc file ảnh'));
+          reader.readAsDataURL(file);
+        });
+        const result = await request('/api/studio/images', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ scope, filename: file.name, data }),
+        });
+        if (!result.url) throw new Error('API không trả về đường dẫn ảnh');
+        if (!files.includes(result.url)) files.unshift(result.url);
+        choose(result.url);
+      };
+
+      libraryButton?.addEventListener('click', openLibrary);
+      root.querySelectorAll<HTMLElement>('[data-image-library-close]').forEach((button) => button.addEventListener('click', closeLibrary));
+      search?.addEventListener('input', render);
+      input.addEventListener('input', updatePreview);
+      root.addEventListener('article-image:refresh', updatePreview);
+      clearButton?.addEventListener('click', () => choose(''));
+      uploadInputs.forEach((fileInput) => fileInput.addEventListener('change', async () => {
+        const file = fileInput.files?.[0];
+        if (!file) return;
+        try { await upload(file); }
+        catch (error) { if (status) status.textContent = error instanceof Error ? error.message : 'Không thể tải ảnh'; }
+        finally { fileInput.value = ''; }
+      }));
+      updatePreview();
+    });
+  };
+
+  initializeArticleImagePickers();
+  document.addEventListener('astro:page-load', initializeArticleImagePickers);
+</script>
+
+<style is:global>
+  .article-image-field{display:flex;min-width:0;flex-direction:column;gap:.6rem}.article-image-label{color:var(--am-copy,var(--cie-copy,#d4d7cf));font:600 1.2rem/1.35 var(--font-ui)}.article-image-control{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.55rem}.article-image-control>input{min-width:0}.article-image-control button,.article-image-upload-button{display:inline-flex;align-items:center;justify-content:center;min-height:4rem;box-sizing:border-box;padding:.82rem 1rem;border:1px solid var(--am-line,var(--cie-line,#465b50));border-radius:.65rem;color:var(--am-copy,var(--cie-copy,#d4d7cf));background:var(--am-panel,var(--cie-surface,#14231c));font:650 1.05rem/1 var(--font-ui);cursor:pointer;white-space:nowrap}.article-image-upload-button input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.article-image-control button:hover,.article-image-upload-button:hover{border-color:var(--am-accent,var(--cie-accent,#dfbd73));color:var(--am-text,var(--cie-text,#f2eee4))}.article-image-preview{display:grid;grid-template-columns:5.5rem minmax(0,1fr) 2.5rem;align-items:center;gap:.8rem;padding:.55rem;border:1px solid var(--am-line-soft,var(--cie-line,#465b50));border-radius:.65rem;background:var(--am-panel,var(--cie-surface,#14231c))}.article-image-preview[hidden]{display:none}.article-image-preview img{width:5.5rem;aspect-ratio:16/9;object-fit:cover;border-radius:.4rem;background:#09110e}.article-image-preview span{overflow:hidden;color:var(--am-muted,var(--cie-muted,#9ba8a0));font:500 .95rem/1.3 var(--font-ui);text-overflow:ellipsis;white-space:nowrap}.article-image-preview button{width:2.4rem;height:2.4rem;padding:0;border:0;border-radius:.4rem;color:var(--am-muted,var(--cie-muted,#9ba8a0));background:transparent;font:400 1.5rem/1 var(--font-ui);cursor:pointer}.article-image-preview button:hover{color:#ef9c93;background:rgba(140,57,49,.18)}
+  .article-image-library[hidden]{display:none}.article-image-library{position:fixed;z-index:260;inset:0;display:grid;place-items:center;padding:1.2rem}.article-image-library-backdrop{position:absolute;inset:0;background:rgba(2,8,5,.78);backdrop-filter:blur(5px)}.article-image-library-panel{position:relative;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;width:min(76rem,calc(100vw - 2.4rem));height:min(58rem,calc(100dvh - 2.4rem));overflow:hidden;border:1px solid var(--am-line,var(--cie-line,#465b50));border-radius:1rem;color:var(--am-text,var(--cie-text,#f2eee4));background:var(--am-bg,var(--cie-bg,#0b1411));box-shadow:0 2rem 6rem rgba(0,0,0,.5)}.article-image-library-panel>header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 1.4rem;border-bottom:1px solid var(--am-line,var(--cie-line,#465b50));background:var(--am-panel,var(--cie-surface,#14231c))}.article-image-library-panel header small{color:var(--am-accent,var(--cie-accent,#dfbd73));font:700 .82rem/1.2 var(--font-ui);letter-spacing:.09em;text-transform:uppercase}.article-image-library-panel h3{margin:.25rem 0 0;color:inherit;font:600 1.7rem/1.2 var(--font-display)}.article-image-library-close{width:3rem;height:3rem;padding:0;border:0;border-radius:.5rem;color:inherit;background:transparent;font:400 2rem/1 var(--font-ui);cursor:pointer}.article-image-library-tools{display:flex;gap:.7rem;padding:1rem 1.4rem;border-bottom:1px solid var(--am-line-soft,var(--cie-line,#465b50))}.article-image-library-tools input{flex:1;min-width:0;min-height:3.8rem;box-sizing:border-box;padding:.75rem 1rem;border:1px solid var(--am-line,var(--cie-line,#465b50));border-radius:.65rem;color:inherit;background:var(--am-field,var(--cie-field,#0d1914));font:500 1.1rem/1.4 var(--font-ui)}.article-image-upload-button.is-primary{color:var(--am-accent-ink,var(--cie-accent-ink,#142018));background:var(--am-accent,var(--cie-accent,#dfbd73));border-color:var(--am-accent,var(--cie-accent,#dfbd73))}.article-image-library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));align-content:start;gap:.85rem;min-height:0;padding:1.2rem 1.4rem;overflow:auto}.article-image-library-item{display:grid;grid-template-rows:auto minmax(2.6rem,auto);gap:.5rem;padding:.45rem;border:1px solid var(--am-line-soft,var(--cie-line,#465b50));border-radius:.7rem;color:var(--am-copy,var(--cie-copy,#d4d7cf));background:var(--am-panel,var(--cie-surface,#14231c));text-align:left;cursor:pointer}.article-image-library-item:hover,.article-image-library-item.is-selected{border-color:var(--am-accent,var(--cie-accent,#dfbd73))}.article-image-library-item.is-selected{box-shadow:inset 0 0 0 2px var(--am-accent,var(--cie-accent,#dfbd73))}.article-image-library-item img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:.45rem;background:#08100d}.article-image-library-item span{overflow:hidden;padding:.1rem .2rem;color:inherit;font:550 .9rem/1.3 var(--font-ui);text-overflow:ellipsis;white-space:nowrap}.article-image-library-empty{align-self:center;margin:0;padding:2rem;text-align:center}.article-image-library-status{min-height:1.3em;margin:0;padding:.8rem 1.4rem;border-top:1px solid var(--am-line-soft,var(--cie-line,#465b50));color:var(--am-muted,var(--cie-muted,#9ba8a0));font:500 .9rem/1.3 var(--font-ui)}html.article-image-library-open{overflow:hidden}
+  html[data-theme="light"] .article-image-library-backdrop{background:rgba(18,32,25,.58)}html[data-theme="light"] .article-image-library-panel{background:#f7f9f7;box-shadow:0 2rem 6rem rgba(17,43,31,.24)}html[data-theme="light"] .article-image-preview img,html[data-theme="light"] .article-image-library-item img{background:#e8eeea}
+  @media(max-width:760px){.article-image-control{grid-template-columns:minmax(0,1fr) auto}.article-image-control>.article-image-upload-button{grid-column:1/-1}.article-image-library{padding:.5rem}.article-image-library-panel{width:calc(100vw - 1rem);height:calc(100dvh - 1rem);border-radius:.8rem}.article-image-library-tools{padding:.85rem;flex-wrap:wrap}.article-image-library-tools input{flex-basis:100%}.article-image-library-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;padding:.85rem}.article-image-label{font-size:1.15rem}.article-image-control button,.article-image-upload-button{font-size:1rem}}
+  .article-image-label{font-size:14px}.article-image-control button,.article-image-upload-button{font-size:13px}.article-image-preview span{font-size:12px}.article-image-library-panel header small{font-size:11px}.article-image-library-panel h3{font-size:21px}.article-image-library-tools input{font-size:15px}.article-image-library-item span,.article-image-library-status{font-size:12px}
+  @media(max-width:760px){.article-image-label{font-size:14px}.article-image-control button,.article-image-upload-button{font-size:13px}.article-image-library-tools input{font-size:16px}.article-image-library-item span{font-size:12px}}
+</style>

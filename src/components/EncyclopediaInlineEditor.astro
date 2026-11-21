@@ -1,0 +1,129 @@
+---
+import InlineProseEditor from './InlineProseEditor.astro';
+
+interface Props { entryId?: string; }
+const { entryId = '' } = Astro.props;
+---
+
+<div class="ency-inline-editor" data-ency-editor-root>
+  {entryId && (
+    <button type="button" class="ency-page-edit" data-ency-edit data-id={entryId} aria-label="Sửa trực tiếp mục từ bách khoa" title="Sửa trực tiếp">
+      <span aria-hidden="true">✎</span><span>Sửa mục từ</span>
+    </button>
+  )}
+  <dialog class="ency-edit-dialog" aria-labelledby="encyEditTitle">
+    <form method="dialog" class="ency-edit-form">
+      <header>
+        <div><small>Biên tập trực tiếp · Bách khoa toàn thư</small><h2 id="encyEditTitle">Mục từ</h2></div>
+        <button type="button" class="ency-edit-close" aria-label="Đóng">×</button>
+      </header>
+      <div class="ency-edit-fields">
+        <label class="is-full"><span>Tiêu đề tiếng Việt</span><input data-field="titleVi" type="text" /></label>
+        <label class="is-full"><span>Tiêu đề tiếng Anh</span><input data-field="title" type="text" required /></label>
+        <label><span>Tác giả</span><input data-field="author" type="text" /></label>
+        <label><span>Loại mục từ</span><select data-field="entryType"><option value="article">Bài viết</option><option value="cross-reference">Mục dẫn chiếu</option></select></label>
+        <label><span>Trạng thái nội dung</span><select data-field="translationStatus"><option value="placeholder">Chưa có nội dung</option><option value="draft">Bản nháp</option><option value="translated">Xuất bản</option></select></label>
+        <label class="is-full"><span>Dẫn chiếu — mỗi mục một dòng</span><textarea class="is-compact" data-field="seeAlso" rows="4"></textarea></label>
+        <label class="is-full"><span>Thư mục — mỗi tài liệu một dòng</span><textarea class="is-compact" data-field="bibliography" rows="6"></textarea></label>
+        <label class="is-full"><span>Trang / ghi chú nguồn</span><input data-field="sourcePages" type="text" /></label>
+        <div class="is-full"><InlineProseEditor dataField="body" label="Nội dung mục từ" /></div>
+      </div>
+      <footer>
+        <p data-editor-message role="status"></p>
+        <button type="button" class="ency-edit-cancel">Hủy</button>
+        <button type="submit" class="ency-edit-save">Lưu thay đổi</button>
+      </footer>
+    </form>
+  </dialog>
+</div>
+
+<script define:vars={{ entryId }}>
+(() => {
+  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const COLLECTION = 'augustine-encyclopedia';
+  const root = document.querySelector('[data-ency-editor-root]:not([data-ready])');
+  if (!root) return;
+  if (document.documentElement.dataset.encyInlineEditorReady === 'true') { root.remove(); return; }
+  document.documentElement.dataset.encyInlineEditorReady = 'true';
+  root.dataset.ready = 'true';
+  const dialog = root.querySelector('.ency-edit-dialog');
+  const form = root.querySelector('.ency-edit-form');
+  const heading = root.querySelector('#encyEditTitle');
+  const message = root.querySelector('[data-editor-message]');
+  const saveButton = root.querySelector('.ency-edit-save');
+  const fields = Object.fromEntries(Array.from(root.querySelectorAll('[data-field]')).map((field) => [field.dataset.field, field]));
+  let active = null;
+  const request = async (path, options) => {
+    const response = await fetch(ADMIN + path, options);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    return data;
+  };
+  const setMessage = (text = '', error = false) => { message.textContent = text; message.classList.toggle('is-error', error); };
+  const setValue = (key, value = '') => { if (fields[key]) fields[key].value = value ?? ''; };
+  const listValue = (value) => Array.isArray(value) ? value.join('\n') : '';
+  const parseList = (value) => value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+
+  async function openEditor(id) {
+    if (!id) return;
+    dialog.showModal(); saveButton.disabled = true; setMessage('Đang tải…');
+    try {
+      active = await request(`/api/studio/item?collection=${COLLECTION}&id=${encodeURIComponent(id)}`);
+      const fm = active.fm || {};
+      heading.textContent = fm.titleVi || fm.title || id;
+      setValue('titleVi', fm.titleVi); setValue('title', fm.title); setValue('author', fm.author);
+      setValue('entryType', fm.entryType || 'article'); setValue('translationStatus', fm.translationStatus || 'placeholder');
+      setValue('seeAlso', listValue(fm.seeAlso)); setValue('bibliography', listValue(fm.bibliography)); setValue('sourcePages', fm.sourcePages); setValue('body', active.body);
+      fields.body.closest('[data-inline-prose-editor]')?.dispatchEvent(new CustomEvent('inline-prose:set'));
+      saveButton.disabled = false; setMessage(''); requestAnimationFrame(() => root.querySelector('.inline-prose-visual')?.focus());
+    } catch (error) { active = null; setMessage(error instanceof Error ? error.message : 'Không thể tải mục từ', true); }
+  }
+  function closeEditor() { active = null; dialog.close(); }
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-ency-edit]');
+    if (!trigger) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    openEditor(trigger.dataset.id || entryId);
+  }, true);
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!active || !form.reportValidity()) return;
+    saveButton.disabled = true; setMessage('Đang lưu…');
+    const title = fields.title.value.trim();
+    const letter = title.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().match(/[A-Z]/)?.[0] || 'Z';
+    const fm = { ...active.fm, titleVi: fields.titleVi.value.trim(), title, author: fields.author.value.trim(), letter, entryType: fields.entryType.value, translationStatus: fields.translationStatus.value, seeAlso: parseList(fields.seeAlso.value), bibliography: parseList(fields.bibliography.value), sourcePages: fields.sourcePages.value.trim() };
+    try {
+      const result = await request('/api/studio/item', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ collection:COLLECTION, id:active.id, originalId:active.id, fm, body:fields.body.value, extension:active.extension, checksum:active.checksum }) });
+      setMessage('Đã lưu. Đang cập nhật trang…');
+      setTimeout(() => { if (entryId && result.route) location.href = result.route; else location.reload(); }, 450);
+    } catch (error) { saveButton.disabled = false; setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true); }
+  });
+  root.querySelector('.ency-edit-close')?.addEventListener('click', closeEditor);
+  root.querySelector('.ency-edit-cancel')?.addEventListener('click', closeEditor);
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeEditor(); });
+  request('/api/studio/manifest').then(() => { document.body.dataset.encyAdmin = 'true'; }).catch(() => root.remove());
+})();
+</script>
+
+<style is:global>
+  .ency-page-edit{position:fixed;right:1.2rem;bottom:6rem;z-index:80;display:none;align-items:center;gap:.5rem;min-height:3.3rem;padding:.65rem .9rem;border:1px solid #c99a49;border-radius:.45rem;color:#102118;background:#e9c176;font:600 1rem/1 var(--font-ui);cursor:pointer}
+  body[data-ency-admin="true"] .ency-page-edit{display:inline-flex}
+  .ency-index-edit{display:none;width:3rem;height:3rem;padding:0;place-items:center;align-self:center;border:1px solid #c99a49;border-radius:.4rem;color:#e9c176;background:#17231e;cursor:pointer}
+  body[data-ency-admin="true"] .ency-index-edit{display:grid}
+  .ency-index-edit:hover,.ency-index-edit:focus-visible{color:#102118;background:#e9c176;outline:2px solid rgba(233,193,118,.25);outline-offset:2px}
+  .ency-edit-dialog{width:min(86rem,calc(100vw - 2.4rem));max-height:calc(100dvh - 2.4rem);padding:0;overflow:auto;border:1px solid rgba(233,193,118,.34);border-radius:.75rem;color:var(--ink-cream);background:#101c18;box-shadow:0 2rem 5rem rgba(0,0,0,.46)}
+  .ency-edit-dialog::backdrop{background:rgba(3,7,12,.72);backdrop-filter:blur(4px)}
+  .ency-edit-form>header,.ency-edit-form>footer{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem}.ency-edit-form>header{justify-content:space-between;border-bottom:1px solid rgba(233,193,118,.18)}
+  .ency-edit-form>header small{display:block;margin-bottom:.25rem;color:#e9c176;font:600 .9rem/1.4 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}.ency-edit-form>header h2{margin:0;color:var(--ink-cream);font:600 1.9rem/1.25 var(--font-display)}
+  .ency-edit-close{width:3rem;height:3rem;padding:0;border:0;border-radius:50%;color:var(--ink-cream-soft);background:transparent;font:300 2.4rem/1 var(--font-ui);cursor:pointer}
+  .ency-edit-fields{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(10rem,.35fr);gap:1.05rem;padding:1.5rem}.ency-edit-fields label{display:flex;min-width:0;flex-direction:column;gap:.42rem}.ency-edit-fields label>span{color:var(--ink-cream-soft);font:500 1rem/1.35 var(--font-ui)}.ency-edit-fields .is-full{grid-column:1/-1}
+  .ency-edit-fields input,.ency-edit-fields select,.ency-edit-fields textarea{width:100%;padding:.78rem .9rem;border:1px solid rgba(233,193,118,.26);border-radius:.45rem;color:var(--ink-cream);background:#0b1612;font:400 1.08rem/1.5 var(--font-ui)}.ency-edit-fields textarea{min-height:48vh;resize:vertical;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:1rem;line-height:1.65}.ency-edit-fields textarea.is-compact{min-height:8rem}
+  .ency-prose-editor{min-width:0}.ency-prose-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.65rem}.ency-prose-head>span{color:var(--ink-cream-soft);font:500 1rem/1.35 var(--font-ui)}
+  .ency-editor-mode{display:inline-flex;gap:.2rem;padding:.2rem;border:1px solid rgba(233,193,118,.24);border-radius:.45rem;background:#0b1612}.ency-editor-mode button{min-height:2.15rem;padding:.35rem .7rem;border:0;border-radius:.32rem;color:var(--ink-cream-soft);background:transparent;font:600 .86rem/1 var(--font-ui);cursor:pointer}.ency-editor-mode button[aria-pressed="true"]{color:#102118;background:#e9c176}
+  .ency-formatbar{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.55rem;padding:.45rem;border:1px solid rgba(233,193,118,.2);border-radius:.5rem;background:#0b1612}.ency-formatbar>span{width:1px;height:1.65rem;margin:0 .2rem;background:rgba(233,193,118,.2)}.ency-formatbar button{min-width:2.35rem;height:2.35rem;padding:0 .45rem;border:1px solid transparent;border-radius:.35rem;color:var(--ink-cream-soft);background:transparent;font:600 .88rem/1 var(--font-ui);cursor:pointer}.ency-formatbar button:hover,.ency-formatbar button:focus-visible{border-color:rgba(233,193,118,.36);color:#e9c176;background:#17231e;outline:0}
+  .ency-visual-editor{min-height:52vh;max-height:66vh;padding:clamp(1.3rem,3vw,2.6rem);overflow:auto;border:1px solid rgba(233,193,118,.26);border-radius:.5rem;outline:0;background:#0b1612;color:var(--ink-cream);font:400 1.12rem/1.82 var(--font-body)}.ency-visual-editor:focus{border-color:#c99a49}.ency-visual-editor p{margin:0 0 1.15em}.ency-visual-editor h2,.ency-visual-editor h3{margin:1.65em 0 .7em;color:#e9c176;font-family:var(--font-display)}.ency-visual-editor h2{font-size:1.75rem}.ency-visual-editor h3{font-size:1.42rem}.ency-visual-editor blockquote{margin:1.35rem 0;padding:.15rem 0 .15rem 1.1rem;border-left:3px solid #c99a49;color:var(--ink-cream-soft);font-style:italic}.ency-visual-editor ul,.ency-visual-editor ol{margin:1rem 0;padding-left:1.6rem}.ency-visual-editor a{color:#e9c176;text-decoration:none;border-bottom:1px solid currentColor}.ency-visual-editor img{display:block;max-width:100%;height:auto;margin:1.3rem auto}.ency-editor-note{margin:.55rem .15rem 0;color:var(--ink-cream-soft);font:400 .88rem/1.45 var(--font-ui)}
+  .ency-edit-form>footer{justify-content:flex-end;border-top:1px solid rgba(233,193,118,.18)}.ency-edit-form>footer p{flex:1;margin:0;color:var(--ink-cream-soft);font:500 .95rem/1.4 var(--font-ui)}.ency-edit-form>footer p.is-error{color:#ff9d91}.ency-edit-form>footer button{min-height:3.2rem;padding:.65rem 1rem;border:1px solid rgba(233,193,118,.38);border-radius:.45rem;color:var(--ink-cream);background:transparent;font:600 1rem/1 var(--font-ui);cursor:pointer}.ency-edit-form>footer .ency-edit-save{color:#102118;background:#e9c176;border-color:#e9c176}.ency-edit-form button:disabled{opacity:.5;cursor:wait}
+  html[data-theme="light"] .ency-edit-dialog{color:#183e2c;background:#fffdf8;border-color:rgba(24,62,44,.26)}html[data-theme="light"] .ency-edit-form>header,html[data-theme="light"] .ency-edit-form>footer{border-color:rgba(24,62,44,.14)}html[data-theme="light"] .ency-edit-form>header h2{color:#183e2c}html[data-theme="light"] .ency-edit-fields label>span,html[data-theme="light"] .ency-edit-form>footer p{color:#50685a}html[data-theme="light"] .ency-edit-fields input,html[data-theme="light"] .ency-edit-fields select,html[data-theme="light"] .ency-edit-fields textarea{color:#183e2c;background:#fff;border-color:rgba(24,62,44,.24)}html[data-theme="light"] .ency-index-edit{color:#fff;background:#27664c;border-color:#27664c}
+  html[data-theme="light"] .ency-prose-head>span,html[data-theme="light"] .ency-editor-note{color:#50685a}html[data-theme="light"] .ency-editor-mode,html[data-theme="light"] .ency-formatbar,html[data-theme="light"] .ency-visual-editor{background:#fff;border-color:rgba(24,62,44,.2)}html[data-theme="light"] .ency-editor-mode button,html[data-theme="light"] .ency-formatbar button{color:#50685a}html[data-theme="light"] .ency-editor-mode button[aria-pressed="true"]{color:#fff;background:#27664c}html[data-theme="light"] .ency-formatbar>span{background:rgba(24,62,44,.16)}html[data-theme="light"] .ency-formatbar button:hover,html[data-theme="light"] .ency-formatbar button:focus-visible{color:#183e2c;background:#edf4ee;border-color:rgba(24,62,44,.22)}html[data-theme="light"] .ency-visual-editor{color:#273d31}html[data-theme="light"] .ency-visual-editor h2,html[data-theme="light"] .ency-visual-editor h3,html[data-theme="light"] .ency-visual-editor a{color:#1a5e3c}html[data-theme="light"] .ency-visual-editor blockquote{color:#53665a;border-left-color:#8f6129}
+  @media(max-width:640px){.ency-page-edit{right:.8rem;bottom:5.4rem;width:3.2rem;justify-content:center;padding:0}.ency-page-edit span:last-child{display:none}.ency-edit-fields{grid-template-columns:1fr;padding:1.1rem}.ency-edit-fields .is-full{grid-column:auto}.ency-edit-form>footer{flex-wrap:wrap;padding:1rem 1.1rem}.ency-edit-form>footer p{flex-basis:100%}}
+</style>

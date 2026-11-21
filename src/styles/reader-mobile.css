@@ -1,0 +1,105 @@
+/* ===================================================================
+ * # BOOK READER - MOBILE OPTIMIZATIONS
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    html {
+        font-size: 52%;
+    }
+
+    /* --- 1. General Layout & Typography --- */
+    main.content {
+        /* Reduce side padding on mobile */
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .home-welcome h2,
+    .featured-books-title {
+        /* Make titles slightly smaller on mobile */
+        font-size: 3rem;
+    }
+
+    /* --- 2. Controls (Selectors & Search) --- */
+    .book-controls-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+        ;
+    }
+    
+    .book-selector {
+        /* Stack the dropdowns vertically for easier use on mobile */
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        margin-bottom: 0; /* Margin is now on the wrapper */
+    }
+
+    .book-selector label {
+        /* Ensure labels are nicely aligned */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .book-selector select {
+        width: 50%; /* Make select boxes full-width */
+        
+    }
+
+    .search-container {
+        margin: 0 auto; /* Center the container */
+        width: 100%;
+        max-width: 400px; /* Give the search bar a max-width */
+    }
+
+    /* --- 3. Featured Books Grid --- */
+    #featuredBooks .featured-books-grid { /* Corrected selector */
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.5rem;
+    }
+    .book-card {
+    margin: 0;
+}
+    /* --- 4. Table of Contents (TOC) --- */
+    #tocWrapper {
+        /* Convert TOC to a static, full-width block like on other pages */
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        padding: 2.5rem 2rem;
+    }
+
+    #tocWrapper .toc > ul {
+        /* Stack the main TOC items vertically */
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    #tocWrapper .toc > ul > li {
+        border-bottom: 1px solid rgba(212, 173, 74, 0.1);
+        padding-bottom: 1rem;
+    }
+
+    #tocWrapper .toc > ul > li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    /* --- 5. Book Content --- */
+    #booksContainer .section-wrapper {
+        /* Remove side margins for content sections */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #booksContainer .subpara {
+        /* Standardize font size for readability */
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,97 @@
+{
+  "source": "https://augnet.osa.org.au/order-of-st-augustine/community/",
+  "indexedAt": "2026-07-28",
+  "crawledPageCount": 11,
+  "categoryCount": 4,
+  "entryCount": 10,
+  "categories": [
+    {
+      "category": "Community Life",
+      "categoryVi": "Đời Sống Cộng Đoàn",
+      "categorySlug": "community",
+      "entries": [
+        {
+          "code": "3103",
+          "title": "Community aspects",
+          "fullTitle": "3103 Community aspects",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3103-community-aspects/"
+        },
+        {
+          "code": "3104",
+          "title": "Community and apostolate",
+          "fullTitle": "3104 Community and apostolate",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3104-community-and-apostolate/"
+        },
+        {
+          "code": "3112",
+          "title": "Augustinian life",
+          "fullTitle": "3112 Augustinian life",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3112-augustinian-life/"
+        }
+      ]
+    },
+    {
+      "category": "Augustinian Charism",
+      "categoryVi": "Đặc Sủng",
+      "categorySlug": "charism",
+      "entries": [
+        {
+          "code": "3106",
+          "title": "Charism",
+          "fullTitle": "3106 Charism",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3106-charism/"
+        },
+        {
+          "code": "3113",
+          "title": "Augustine and Benedict",
+          "fullTitle": "3113 Augustine and Benedict",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3113-augustine-and-benedict/"
+        }
+      ]
+    },
+    {
+      "category": "Religious Vows",
+      "categoryVi": "Các Lời Khấn",
+      "categorySlug": "vows",
+      "entries": [
+        {
+          "code": "3108",
+          "title": "Three vows",
+          "fullTitle": "3108 Three vows",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3108-three-vows/"
+        },
+        {
+          "code": "3109",
+          "title": "Poverty",
+          "fullTitle": "3109 Poverty",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3109-poverty/"
+        },
+        {
+          "code": "3110",
+          "title": "Chastity",
+          "fullTitle": "3110 Chastity",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3110-chastity/"
+        },
+        {
+          "code": "3111",
+          "title": "Obedience",
+          "fullTitle": "3111 Obedience",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3111-obedience/"
+        }
+      ]
+    },
+    {
+      "category": "Vocation and Membership",
+      "categoryVi": "Ơn Gọi và Gia Nhập Dòng",
+      "categorySlug": "vocation",
+      "entries": [
+        {
+          "code": "3115",
+          "title": "Joining the Augustinians",
+          "fullTitle": "3115 Joining the Augustinians",
+          "url": "https://augnet.osa.org.au/order-of-st-augustine/community/3115-joining-the-augustinians/"
+        }
+      ]
+    }
+  ]
+}

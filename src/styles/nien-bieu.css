@@ -1,0 +1,188 @@
+/* --- CSS for Augustine Timeline (with Connector Lines) --- */
+
+@keyframes pulse {
+  0% { transform: scale(1.1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+  70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+  100% { transform: scale(1.1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+.timeline-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.control-button {
+    background-color: transparent;
+    border: 1px solid #d4ad4a;
+    border-radius: 20px;
+    color: #d4ad4a;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.control-button:hover {
+    background-color: #d4ad4a;
+    color: #0d1f2b;
+}
+
+.timeline-slider-wrapper {
+    position: relative;
+    padding: 0 4rem;
+    box-sizing: border-box;
+    cursor: grab;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.timeline-slider-wrapper.active {
+    cursor: grabbing;
+}
+
+.timeline-viewport {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    user-select: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.timeline-viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-track {
+    position: relative;
+    height: 40rem;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: rgba(212, 173, 74, 0.5);
+    transform: translateY(-50%);
+}
+
+.timeline-entry {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
+}
+
+.timeline-entry.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.timeline-node {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+.type-augustine .timeline-node { background-color: #9e8136; }
+.type-history .timeline-node { background-color: #8cb1d0; }
+.is-major .timeline-node {
+    transform: scale(1.5);
+    background-color: #e4b233;
+    animation: pulse 2s infinite;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+/* --- Connector Line --- */
+.timeline-node::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background-color: rgba(212, 173, 74, 0.3);
+}
+.event-content.pos-above ~ .timeline-node::before {
+    bottom: 50%;
+    height: 8rem;
+}
+.event-content.pos-below ~ .timeline-node::before {
+    top: 50%;
+    height: 8rem;
+}
+/* --- END of Connector Line Section --- */
+
+
+.year-label {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.9rem;
+    font-weight: bold;
+    font-style: normal;
+    color: #fcefdc;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+}
+.pos-above.year-label {
+    top: -4rem;
+}
+.pos-below.year-label {
+    bottom: -4rem;
+}
+
+.event-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 240px;
+    text-align: center;
+}
+.pos-above.event-content {
+    bottom: 4rem;
+    margin-bottom: 6rem; 
+}
+.pos-below.event-content {
+    top: 4rem;
+    margin-top: 6rem;
+}
+
+.event-desc {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.7rem;
+    line-height: 1.6;
+    font-weight: 300;
+    font-style: normal;
+}
+.type-augustine .event-desc { color: #fcefdc; }
+.type-history .event-desc { color: #b0c4de; }
+
+/* Navigation Buttons */
+.timeline-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: rgba(31, 39, 48, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.timeline-nav-btn:hover { background: rgba(212, 173, 74, 0.5); }
+.timeline-nav-btn.left { left: 0; }
+.timeline-nav-btn.right { right: 0; }

@@ -1,0 +1,268 @@
+/* ============================================================================
+   articles.css — thiết kế lại trang Danh Sách Bài Viết
+   Dịch từ thiết kế Tailwind (Noto Serif + Manrope, navy #08122a + gold #e9c176)
+   sang CSS thuần, khớp hệ màu hiện có. Giữ function: tìm, lọc, phân trang.
+   ============================================================================ */
+
+.articles-page {
+  --a-surface-low: #16223d;
+  --a-surface-high: #1f2942;
+  --a-gold: #e9c176;
+  --a-gold-dim: #c5a059;
+  --a-ink: #d9e2ff;
+  --a-ink-variant: #d1c5b4;
+  --a-secondary: #b9c7e4;
+  --a-tertiary: #b6c6ed;
+
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ---------- Hero ---------- */
+.articles-hero { text-align: center; margin: 1rem 0 5rem; }
+.articles-hero h1 {
+  font-family: 'Noto Serif', 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 2.2rem + 2vw, 3.6rem);
+  font-weight: 600;
+  color: var(--a-gold);
+  text-shadow: 0 0 10px rgba(233, 193, 118, 0.4);
+  margin: 0 0 1.4rem;
+  text-align: center;
+  background: none;
+  -webkit-text-fill-color: var(--a-gold);
+}
+.articles-hero .divider {
+  height: 1px; width: 9rem; margin: 0 auto 1.4rem;
+  background: linear-gradient(90deg, transparent, rgba(233,193,118,0.5), transparent);
+}
+.articles-hero .quote {
+  font-family: 'Noto Serif', serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  line-height: 1.6;
+  color: var(--a-ink-variant);
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+/* ---------- Toolbar tìm + lọc ---------- */
+.articles-toolbar {
+  background: var(--a-surface-low);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 14px;
+  padding: 2.4rem;
+  margin-bottom: 4rem;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.articles-toolbar:hover {
+  box-shadow: 0 0 15px rgba(233, 193, 118, 0.18);
+  border-color: rgba(233, 193, 118, 0.6);
+}
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-end;
+}
+.toolbar-field { flex: 1 1 24rem; }
+.toolbar-field.narrow { flex: 0 1 20rem; }
+.toolbar-field label {
+  display: block;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: var(--a-gold);
+  margin-bottom: 0.8rem;
+}
+.toolbar-search {
+  position: relative;
+}
+.toolbar-search input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(233, 193, 118, 0.3);
+  color: var(--a-ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.6rem;
+  padding: 0.8rem 2.6rem 0.8rem 0;
+  transition: border-color 0.2s ease;
+}
+.toolbar-search input::placeholder { color: rgba(209, 197, 180, 0.5); }
+.toolbar-search input:focus { outline: none; border-bottom-color: var(--a-gold); }
+.toolbar-search .icon {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  color: rgba(233, 193, 118, 0.55);
+  pointer-events: none;
+}
+.toolbar-field select {
+  width: 100%;
+  background: var(--a-surface-high);
+  border: 1px solid rgba(233, 193, 118, 0.3);
+  border-radius: 6px;
+  color: var(--a-ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.toolbar-field select:focus { outline: none; border-color: var(--a-gold); }
+
+/* số kết quả */
+.articles-count {
+  text-align: center;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.3rem;
+  color: var(--a-ink-variant);
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+
+/* ---------- Lưới thẻ ---------- */
+.articles-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.2rem;
+  margin-bottom: 4rem;
+}
+@media (min-width: 768px)  { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .articles-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.a-card {
+  background: var(--a-surface-low);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: box-shadow 0.5s ease, border-color 0.5s ease, transform 0.3s ease;
+}
+.a-card:hover {
+  box-shadow: 0 0 15px rgba(233, 193, 118, 0.25);
+  border-color: rgba(233, 193, 118, 0.7);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+.a-card-img {
+  height: 19rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--a-surface-high);
+}
+.a-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.a-card:hover .a-card-img img { opacity: 1; transform: scale(1.05); }
+.a-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--a-surface-low), transparent 60%);
+  opacity: 0.6;
+}
+.a-card-body {
+  padding: 2.2rem;
+  display: flex; flex-direction: column; flex: 1;
+}
+.a-card-badge {
+  display: inline-block;
+  align-self: flex-start;
+  border: 1px solid rgba(182, 198, 237, 0.35);
+  color: var(--a-tertiary);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 5px;
+  margin-bottom: 1.4rem;
+}
+.a-card-title {
+  font-family: 'Noto Serif', 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--a-gold);
+  margin: 0 0 0.6rem;
+  transition: text-shadow 0.3s ease;
+}
+.a-card:hover .a-card-title { text-shadow: 0 0 10px rgba(233,193,118,0.45); }
+.a-card-author {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.35rem;
+  color: var(--a-secondary);
+  margin: 0 0 1.4rem;
+}
+.a-card-excerpt {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: var(--a-ink-variant);
+  margin: 0 0 2rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.a-card-more {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.3rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1rem;
+  color: var(--a-gold);
+  margin-top: auto;
+}
+.a-card-more .more-icon { transition: transform 0.3s ease; }
+.a-card:hover .a-card-more .more-icon { transform: translateX(4px); }
+
+/* trạng thái rỗng */
+.articles-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5rem 1rem;
+  color: var(--a-ink-variant);
+  font-family: 'Noto Serif', serif;
+  font-style: italic;
+  font-size: 1.7rem;
+}
+
+/* ---------- Phân trang ---------- */
+.articles-pagination {
+  display: flex; justify-content: center; align-items: center; gap: 0.6rem;
+  margin-bottom: 4rem;
+}
+.page-btn {
+  width: 4rem; height: 4rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  background: transparent;
+  color: var(--a-ink-variant);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.page-btn:hover:not(:disabled) { color: var(--a-gold); border-color: rgba(233,193,118,0.5); }
+.page-btn.active {
+  border-color: var(--a-gold);
+  background: rgba(233, 193, 118, 0.1);
+  color: var(--a-gold);
+}
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.page-btn svg { display: block; }
+.page-ellipsis { color: var(--a-ink-variant); padding: 0 0.4rem; }
+
+@media (max-width: 640px) {
+  .articles-page { padding: 1.5rem 1.2rem; }
+  .articles-toolbar { padding: 1.6rem; }
+  .toolbar-row { flex-direction: column; align-items: stretch; }
+  .toolbar-field, .toolbar-field.narrow { flex: 1 1 auto; }
+}

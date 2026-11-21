@@ -1,0 +1,309 @@
+---
+import InlineProseEditor from './InlineProseEditor.astro';
+import ArticleImagePicker from './ArticleImagePicker.astro';
+
+interface Props {
+  entryId: string;
+  label?: string;
+  variant?: 'primary' | 'en';
+  kind?: 'news' | 'scholar' | 'spirituality' | 'sermon';
+}
+
+const { entryId, label = 'Sửa bài viết', variant = 'primary', kind = 'scholar' } = Astro.props;
+---
+
+<div class="content-inline-editor" data-content-inline-root data-entry-id={entryId} data-content-inline-variant={variant} data-article-kind={kind}>
+  <button
+    type="button"
+    class="content-inline-trigger"
+    aria-label={label}
+    title={label}
+  >
+    <span aria-hidden="true">✎</span><span>{label}</span>
+  </button>
+
+  <dialog class="content-inline-dialog" aria-labelledby="contentInlineTitle">
+    <form method="dialog" class="content-inline-form">
+      <header>
+        <div>
+          <small>Biên tập trực tiếp · Bài viết</small>
+          <h2 id="contentInlineTitle">{label}</h2>
+        </div>
+        <button type="button" class="content-inline-close" aria-label="Đóng">×</button>
+      </header>
+
+      <div class="content-inline-fields">
+        <label class="content-inline-full"><span>Tiêu đề</span><input data-field="title" type="text" required /></label>
+        <label class="content-inline-full"><span>Phụ đề</span><input data-field="subtitle" type="text" /></label>
+        <label><span>Tác giả</span><input data-field="author" type="text" /></label>
+        <label><span>Ngày đăng</span><input data-field="date" type="date" /></label>
+        <label><span>Chuyên mục</span><select data-field="category"></select></label>
+        <label data-subcategory-field><span>Chuyên mục con</span><select data-field="subcategory"></select></label>
+        <label class="content-inline-full"><span>Mô tả ngắn</span><textarea data-field="excerpt" rows="3"></textarea></label>
+        <label class="content-inline-full"><span>Thông tin tác giả <small>mỗi dòng một mục</small></span><textarea data-field="authorDetails" rows="3"></textarea></label>
+        <label class="content-inline-full"><span>Bài đọc phụng vụ <small>mỗi dòng một bài</small></span><textarea data-field="readings" rows="3"></textarea></label>
+        <label class="content-inline-full"><span>Từ khóa <small>mỗi dòng một từ khóa</small></span><textarea data-field="tags" rows="3"></textarea></label>
+        <ArticleImagePicker dataField="image" label="Ảnh thumbnail" />
+        <ArticleImagePicker dataField="heroImage" label="Ảnh hero" />
+        <div class="content-inline-checks content-inline-full">
+          <label><input data-field="featured" type="checkbox" /><span>Bài nổi bật</span></label>
+          <label><input data-field="draft" type="checkbox" /><span>Bản nháp</span></label>
+        </div>
+        <div class="content-inline-full">
+          <InlineProseEditor dataField="body" label="Nội dung bài viết" />
+        </div>
+      </div>
+
+      <footer>
+        <p class="content-inline-message" role="status"></p>
+        <button type="button" class="content-inline-delete">Xóa bài</button>
+        <button type="button" class="content-inline-cancel">Hủy</button>
+        <button type="submit" class="content-inline-save">Lưu thay đổi</button>
+      </footer>
+    </form>
+  </dialog>
+</div>
+
+<script>
+  type Item = {
+    id: string;
+    fm: Record<string, unknown>;
+    body: string;
+    extension: string;
+    checksum: string;
+    route?: string;
+  };
+  type TaxonomyCategory = { label: string; folder: string; subcategories?: string[] };
+
+  const initializeContentInlineEditors = () => {
+    document.querySelectorAll<HTMLElement>('[data-content-inline-root]:not([data-content-inline-ready])').forEach((root) => {
+      root.dataset.contentInlineReady = 'true';
+      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const entryId = root.dataset.entryId || '';
+      const articleKind = root.dataset.articleKind || 'scholar';
+      const trigger = root.querySelector<HTMLButtonElement>('.content-inline-trigger');
+      const dialog = root.querySelector<HTMLDialogElement>('.content-inline-dialog');
+      const form = root.querySelector<HTMLFormElement>('.content-inline-form');
+      const title = root.querySelector<HTMLElement>('#contentInlineTitle');
+      const message = root.querySelector<HTMLElement>('.content-inline-message');
+      const save = root.querySelector<HTMLButtonElement>('.content-inline-save');
+      const deleteButton = root.querySelector<HTMLButtonElement>('.content-inline-delete');
+      const proseRoot = root.querySelector<HTMLElement>('[data-inline-prose-editor]');
+      const subcategoryField = root.querySelector<HTMLElement>('[data-subcategory-field]');
+      const field = <T extends HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(name: string) => root.querySelector<T>(`[data-field="${name}"]`);
+      let active: Item | null = null;
+      let categories: TaxonomyCategory[] = [];
+
+      if (!entryId || !trigger || !dialog || !form || !message || !save) {
+        root.remove();
+        return;
+      }
+
+      const request = async (path: string, options?: RequestInit) => {
+        const response = await fetch(ADMIN + path, options);
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        return data;
+      };
+      const setMessage = (value = '', isError = false) => {
+        message.textContent = value;
+        message.classList.toggle('is-error', isError);
+      };
+      const textValue = (name: string, value: unknown) => {
+        const input = field(name);
+        if (input) input.value = value == null ? '' : String(value);
+      };
+      const listValue = (name: string, value: unknown) => textValue(name, Array.isArray(value) ? value.join('\n') : '');
+      const splitList = (name: string) => (field<HTMLTextAreaElement>(name)?.value || '')
+        .split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+      const imageValue = (value: unknown) => {
+        if (typeof value === 'string') return value;
+        if (value && typeof value === 'object' && 'src' in value) return String((value as { src?: string }).src || '');
+        return '';
+      };
+      const fillCategorySelect = (selected = '') => {
+        const select = field<HTMLSelectElement>('category');
+        if (!select) return;
+        const values = [...categories];
+        if (selected && !values.some((category) => category.label === selected)) {
+          values.push({ label: selected, folder: entryId.split('/')[0] || '' });
+        }
+        select.replaceChildren(...values.map((category) => new Option(category.label, category.label)));
+        select.value = selected || values[0]?.label || '';
+      };
+      const fillSubcategorySelect = (selected = '') => {
+        const select = field<HTMLSelectElement>('subcategory');
+        if (!select) return;
+        const currentCategory = field<HTMLSelectElement>('category')?.value || '';
+        const category = categories.find((item) => item.label === currentCategory);
+        const values = [...(category?.subcategories || [])];
+        if (selected && !values.includes(selected)) values.push(selected);
+        select.replaceChildren(new Option('Không chọn', ''), ...values.map((value) => new Option(value, value)));
+        select.value = selected;
+        if (subcategoryField) subcategoryField.hidden = values.length === 0;
+      };
+
+      const close = () => {
+        active = null;
+        dialog.close();
+      };
+
+      const open = async () => {
+        dialog.showModal();
+        setMessage('Đang tải…');
+        save.disabled = true;
+        try {
+          const [entry, taxonomy] = await Promise.all([
+            request(`/api/studio/item?collection=bai-viet&id=${encodeURIComponent(entryId)}`),
+            request(`/api/studio/article-taxonomy?kind=${encodeURIComponent(articleKind)}`),
+          ]);
+          active = entry as Item;
+          categories = Array.isArray(taxonomy.categories) ? taxonomy.categories : [];
+          const fm = active.fm || {};
+          if (title) title.textContent = String(fm.title || entryId);
+          textValue('title', fm.title);
+          textValue('subtitle', fm.subtitle);
+          textValue('author', fm.author);
+          textValue('date', String(fm.date || '').slice(0, 10));
+          fillCategorySelect(String(fm.category || ''));
+          fillSubcategorySelect(String(fm.subcategory || ''));
+          textValue('excerpt', fm.excerpt);
+          listValue('authorDetails', fm.authorDetails);
+          listValue('readings', fm.readings);
+          listValue('tags', fm.tags);
+          textValue('image', imageValue(fm.image));
+          textValue('heroImage', imageValue(fm.heroImage));
+          root.querySelectorAll<HTMLElement>('[data-article-image-picker]').forEach((picker) => picker.dispatchEvent(new CustomEvent('article-image:refresh')));
+          const featured = field<HTMLInputElement>('featured');
+          const draft = field<HTMLInputElement>('draft');
+          if (featured) featured.checked = fm.featured === true;
+          if (draft) draft.checked = fm.draft === true;
+          const body = field<HTMLTextAreaElement>('body');
+          if (body) body.value = active.body || '';
+          proseRoot?.dispatchEvent(new CustomEvent('inline-prose:set'));
+          save.disabled = false;
+          setMessage('');
+          requestAnimationFrame(() => field<HTMLInputElement>('title')?.focus());
+        } catch (error) {
+          active = null;
+          setMessage(error instanceof Error ? error.message : 'Không thể tải bài viết', true);
+        }
+      };
+
+      trigger.addEventListener('click', open);
+      field<HTMLSelectElement>('category')?.addEventListener('change', () => fillSubcategorySelect(''));
+      root.querySelector('.content-inline-close')?.addEventListener('click', close);
+      root.querySelector('.content-inline-cancel')?.addEventListener('click', close);
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) close(); });
+
+      deleteButton?.addEventListener('click', async () => {
+        if (!active) return;
+        const articleTitle = String(active.fm?.title || active.id);
+        if (!window.confirm(`Xóa “${articleTitle}”? File sẽ được chuyển vào thư mục khôi phục.`)) return;
+        deleteButton.disabled = true;
+        save.disabled = true;
+        setMessage('Đang xóa…');
+        try {
+          await request(`/api/studio/item?collection=bai-viet&id=${encodeURIComponent(active.id)}`, { method: 'DELETE' });
+          setMessage('Đã chuyển bài vào thư mục khôi phục…');
+          const folder = active.id.split('/')[0];
+          const route = folder === 'linh-dao' ? '/linh-dao/'
+            : folder === 'sinh-hoat-cong-doan' ? '/tin-tuc/'
+            : folder === 'bai-giang-suy-niem' ? '/bai-giang-suy-niem/'
+            : '/bai-viet/';
+          window.setTimeout(() => { location.href = route; }, 350);
+        } catch (error) {
+          deleteButton.disabled = false;
+          save.disabled = false;
+          setMessage(error instanceof Error ? error.message : 'Không thể xóa bài viết', true);
+        }
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!active || !form.reportValidity()) return;
+        proseRoot?.dispatchEvent(new CustomEvent('inline-prose:sync'));
+        save.disabled = true;
+        setMessage('Đang lưu…');
+        const read = (name: string) => field(name)?.value.trim() || '';
+        const featured = field<HTMLInputElement>('featured');
+        const draft = field<HTMLInputElement>('draft');
+        const fm = {
+          ...active.fm,
+          title: read('title'),
+          subtitle: read('subtitle'),
+          author: read('author'),
+          authorDetails: splitList('authorDetails'),
+          category: read('category'),
+          subcategory: read('subcategory'),
+          excerpt: read('excerpt'),
+          date: read('date'),
+          readings: splitList('readings'),
+          tags: splitList('tags'),
+          image: read('image'),
+          heroImage: read('heroImage'),
+          featured: featured?.checked === true,
+          draft: draft?.checked === true,
+        };
+        try {
+          const result = await request('/api/studio/item', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              collection: 'bai-viet', id: active.id, originalId: active.id,
+              fm, body: field<HTMLTextAreaElement>('body')?.value || active.body,
+              extension: active.extension, checksum: active.checksum,
+            }),
+          });
+          setMessage('Đã lưu. Đang cập nhật trang…');
+          window.setTimeout(() => {
+            const route = typeof result.route === 'string' ? result.route : location.href;
+            location.href = route;
+          }, 350);
+        } catch (error) {
+          save.disabled = false;
+          setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true);
+        }
+      });
+
+      request('/api/studio/manifest').then(() => {
+        root.dataset.adminAvailable = 'true';
+        document.body.dataset.contentInline = '1';
+      }).catch(() => root.remove());
+    });
+  };
+
+  initializeContentInlineEditors();
+  document.addEventListener('astro:page-load', initializeContentInlineEditors);
+</script>
+
+<style is:global>
+  .content-inline-editor{position:relative}.content-inline-trigger{position:fixed;z-index:92;left:1.25rem;bottom:1.25rem;display:none;align-items:center;gap:.48rem;min-height:3rem;padding:.62rem .88rem;border:1px solid #d7ae60;border-radius:.48rem;color:#102118;background:#e9c176;font:600 .92rem/1 var(--font-ui);cursor:pointer;box-shadow:0 .4rem 1.2rem rgba(0,0,0,.2)}.content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger{bottom:4.75rem}
+  [data-content-inline][data-theme] .content-inline-trigger,.content-inline-editor[data-admin-available="true"] .content-inline-trigger{display:inline-flex}.content-inline-trigger:hover,.content-inline-trigger:focus-visible{background:#f0cf8c;outline:2px solid rgba(233,193,118,.28);outline-offset:2px}
+  .content-inline-dialog{width:min(84rem,calc(100vw - 2.4rem));max-height:calc(100dvh - 2.4rem);padding:0;overflow:auto;border:1px solid #826b3f;border-radius:.7rem;color:#f1ead8;background:#101c18;box-shadow:0 2rem 5rem rgba(0,0,0,.5)}.content-inline-dialog::backdrop{background:rgba(2,8,5,.74);backdrop-filter:blur(3px)}
+  .content-inline-form>header,.content-inline-form>footer{display:flex;align-items:center;gap:1rem;padding:1.15rem 1.4rem}.content-inline-form>header{justify-content:space-between;border-bottom:1px solid #574d34}.content-inline-form>header small{display:block;margin-bottom:.25rem;color:#e9c176;font:600 .82rem/1.4 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}.content-inline-form>header h2{margin:0;color:#f1ead8;font:600 1.75rem/1.25 var(--font-display)}
+  .content-inline-close{width:2.8rem;height:2.8rem;padding:0;border:0;border-radius:50%;color:#f1ead8;background:transparent;font:300 2.2rem/1 var(--font-ui);cursor:pointer}.content-inline-fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1.4rem}.content-inline-fields label{min-width:0;display:flex;flex-direction:column;gap:.4rem}.content-inline-fields label>span{color:#d8cfbb;font:500 .96rem/1.35 var(--font-ui)}.content-inline-fields label>span small{font-weight:400;opacity:.7}.content-inline-full{grid-column:1/-1}
+  .content-inline-fields input[type="text"],.content-inline-fields input[type="date"],.content-inline-fields textarea{width:100%;box-sizing:border-box;border:1px solid #665b42;border-radius:.4rem;padding:.74rem .84rem;color:#f1ead8;background:#09140f;font:400 1rem/1.5 var(--font-ui)}.content-inline-fields textarea{resize:vertical}.content-inline-fields input:focus,.content-inline-fields textarea:focus{border-color:#d7ae60;outline:2px solid rgba(233,193,118,.18);outline-offset:1px}
+  .content-inline-checks{display:flex;flex-wrap:wrap;gap:1.4rem}.content-inline-checks label{flex-direction:row;align-items:center}.content-inline-checks input{width:1.2rem;height:1.2rem;accent-color:#d7ae60}.content-inline-form>footer{justify-content:flex-end;border-top:1px solid #574d34}.content-inline-message{flex:1;margin:0;color:#d8cfbb;font:500 .9rem/1.4 var(--font-ui)}.content-inline-message.is-error{color:#ff9e92}.content-inline-form>footer button{min-height:3rem;padding:.62rem .92rem;border:1px solid #826b3f;border-radius:.42rem;color:#f1ead8;background:transparent;font:600 .94rem/1 var(--font-ui);cursor:pointer}.content-inline-form>footer .content-inline-save{color:#102118;background:#e9c176;border-color:#e9c176}.content-inline-form button:disabled{opacity:.5;cursor:wait}
+  html[data-theme="light"] .content-inline-dialog{color:#183e2c;background:#fffdf8;border-color:#8ba495}html[data-theme="light"] .content-inline-form>header,html[data-theme="light"] .content-inline-form>footer{border-color:#d7e0da}html[data-theme="light"] .content-inline-form>header h2{color:#183e2c}html[data-theme="light"] .content-inline-form>header small{color:#27664c}html[data-theme="light"] .content-inline-close{color:#183e2c}html[data-theme="light"] .content-inline-fields label>span,html[data-theme="light"] .content-inline-message{color:#50685a}html[data-theme="light"] .content-inline-fields input[type="text"],html[data-theme="light"] .content-inline-fields input[type="date"],html[data-theme="light"] .content-inline-fields textarea{color:#183e2c;background:#fff;border-color:#aebfb5}html[data-theme="light"] .content-inline-fields input:focus,html[data-theme="light"] .content-inline-fields textarea:focus{border-color:#27664c;outline-color:rgba(39,102,76,.15)}html[data-theme="light"] .content-inline-form>footer button{color:#183e2c;border-color:#91a79a}html[data-theme="light"] .content-inline-form>footer .content-inline-save{color:#fff;background:#27664c;border-color:#27664c}
+  .content-inline-form>footer .content-inline-delete{margin-right:auto;color:#ffb1a8;border-color:#874c45}html[data-theme="light"] .content-inline-form>footer .content-inline-delete{color:#8b2f27;border-color:#c78c86}
+  .content-inline-dialog{--cie-bg:#101915;--cie-surface:#16231d;--cie-field:#08110e;--cie-line:#455347;--cie-text:#f0eadc;--cie-copy:#d4d7cf;--cie-muted:#9ea89f;--cie-accent:#dfbd73;--cie-accent-hover:#edca7e;--cie-accent-ink:#142018;--cie-danger:#f0a097;--cie-danger-line:#86514c;color-scheme:dark;color:var(--cie-text);background:var(--cie-bg);border-color:var(--cie-line)}.content-inline-form>header,.content-inline-form>footer{background:var(--cie-surface);border-color:var(--cie-line)}.content-inline-form>header h2,.content-inline-close{color:var(--cie-text)}.content-inline-form>header small{color:var(--cie-accent)}.content-inline-fields label>span,.content-inline-message{color:var(--cie-copy)}.content-inline-fields input[type="text"],.content-inline-fields input[type="date"],.content-inline-fields textarea{color:var(--cie-text);background:var(--cie-field);border-color:var(--cie-line)}.content-inline-fields input:focus,.content-inline-fields textarea:focus{border-color:var(--cie-accent);outline-color:color-mix(in srgb,var(--cie-accent) 22%,transparent)}.content-inline-form>footer button{color:var(--cie-copy);background:var(--cie-bg);border-color:var(--cie-line)}.content-inline-form>footer button:hover{color:var(--cie-text);border-color:var(--cie-accent);background:#1d3127}.content-inline-form>footer .content-inline-save{color:var(--cie-accent-ink);background:var(--cie-accent);border-color:var(--cie-accent)}.content-inline-form>footer .content-inline-save:hover{color:var(--cie-accent-ink);background:var(--cie-accent-hover)}.content-inline-form>footer .content-inline-delete{color:var(--cie-danger);border-color:var(--cie-danger-line)}
+  .content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger{color:#fff;background:#356b91;border-color:#356b91}.content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger:hover,.content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger:focus-visible{background:#285878;outline-color:rgba(53,107,145,.3)}
+  html[data-theme="light"] .content-inline-dialog{--cie-bg:#fbfcf9;--cie-surface:#ffffff;--cie-field:#ffffff;--cie-line:#aebfb5;--cie-text:#183e2c;--cie-copy:#385746;--cie-muted:#687a70;--cie-accent:#27664c;--cie-accent-hover:#1f583f;--cie-accent-ink:#ffffff;--cie-danger:#97372f;--cie-danger-line:#bf827c;color-scheme:light}html[data-theme="light"] .content-inline-trigger{color:#fff;background:#27664c;border-color:#27664c;box-shadow:0 .35rem 1rem rgba(24,62,44,.2)}html[data-theme="light"] .content-inline-trigger:hover,html[data-theme="light"] .content-inline-trigger:focus-visible{background:#1f583f}html[data-theme="light"] .content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger{color:#fff;background:#2f668e;border-color:#2f668e}html[data-theme="light"] .content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger:hover,html[data-theme="light"] .content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger:focus-visible{background:#285878}
+  @media(max-width:640px){.content-inline-trigger{left:.8rem;bottom:.8rem;width:3rem;height:3rem;justify-content:center;padding:0}.content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger{bottom:4.15rem}.content-inline-trigger span{display:none}.content-inline-trigger::after{content:'VN';font:700 .74rem/1 var(--font-ui);letter-spacing:.04em}.content-inline-editor[data-content-inline-variant="en"] .content-inline-trigger::after{content:'EN'}.content-inline-dialog{width:calc(100vw - 1rem);max-height:calc(100dvh - 1rem)}.content-inline-fields{grid-template-columns:1fr;padding:1rem}.content-inline-full{grid-column:auto}.content-inline-form>header{padding:1rem}.content-inline-form>header h2{font-size:1.45rem}.content-inline-form>footer{flex-wrap:wrap;padding:1rem}.content-inline-message{flex-basis:100%}}
+
+  /* Direct article editor uses the same flat design language as Article Manager. */
+  .content-inline-dialog{width:min(104rem,calc(100vw - 3.2rem));max-height:calc(100dvh - 3.2rem);border:1px solid var(--cie-line);border-radius:1.2rem;background:var(--cie-bg);box-shadow:0 2.4rem 7rem rgba(0,0,0,.46)}
+  .content-inline-dialog::backdrop{background:rgba(4,10,8,.72);backdrop-filter:blur(5px)}
+  .content-inline-form>header{min-height:7rem;box-sizing:border-box;padding:1.35rem 2rem;background:var(--cie-surface);border-color:var(--cie-line)}.content-inline-form>header small{margin-bottom:.35rem;font-size:1.05rem;line-height:1.25}.content-inline-form>header h2{font-size:2.35rem;line-height:1.18}.content-inline-close{width:4rem;height:4rem;font-size:2.7rem}
+  .content-inline-fields{gap:1.4rem 1.6rem;padding:1.8rem 2rem}.content-inline-fields label{gap:.6rem}.content-inline-fields label>span{font-size:1.25rem;line-height:1.35;font-weight:600}
+  .content-inline-fields input[type="text"],.content-inline-fields input[type="date"],.content-inline-fields textarea{min-height:4.4rem;padding:.95rem 1.1rem;border-radius:.65rem;font-size:1.35rem;line-height:1.5}.content-inline-fields textarea{min-height:8rem}.content-inline-checks{gap:1.7rem}.content-inline-checks label>span{font-size:1.2rem}.content-inline-checks input{width:1.65rem;height:1.65rem}
+  .content-inline-form>footer{min-height:6.6rem;box-sizing:border-box;padding:1.2rem 2rem;gap:.85rem;background:var(--cie-surface);border-color:var(--cie-line)}.content-inline-message{font-size:1.15rem}.content-inline-form>footer button{min-height:4rem;padding:.9rem 1.25rem;border-radius:.65rem;font-size:1.2rem}
+  html[data-theme="light"] .content-inline-dialog{--cie-bg:#f7f9f7;--cie-surface:#ffffff;--cie-field:#ffffff;--cie-line:#9fb3a7;--cie-text:#173c2b;--cie-copy:#355444;--cie-muted:#66786e;--cie-accent:#216247;--cie-accent-hover:#184f39;--cie-accent-ink:#ffffff;--cie-danger:#963b34;--cie-danger-line:#c58b85;box-shadow:0 2.2rem 6rem rgba(17,43,31,.24)}html[data-theme="light"] .content-inline-dialog::backdrop{background:rgba(18,32,25,.56)}
+  html[data-theme="dark"] .content-inline-dialog{--cie-bg:#0b1411;--cie-surface:#14231c;--cie-field:#0d1914;--cie-line:#465b50;--cie-text:#f2eee4;--cie-copy:#d5d9d2;--cie-muted:#9ba8a0;--cie-accent:#dfbd73;--cie-accent-hover:#edca7e;--cie-accent-ink:#142018;--cie-danger:#f0a097;--cie-danger-line:#86514c}
+  @media(max-width:640px){.content-inline-dialog{width:calc(100vw - 1.2rem);max-height:calc(100dvh - 1.2rem);border-radius:.9rem}.content-inline-form>header{min-height:6.2rem;padding:1rem 1.2rem}.content-inline-form>header h2{font-size:1.9rem}.content-inline-form>header small{font-size:.9rem}.content-inline-fields{gap:1.2rem;padding:1.25rem}.content-inline-fields label>span{font-size:1.2rem}.content-inline-fields input[type="text"],.content-inline-fields input[type="date"],.content-inline-fields textarea{font-size:1.3rem}.content-inline-form>footer{min-height:auto;padding:1rem 1.2rem}.content-inline-form>footer button{font-size:1.1rem}}
+  .content-inline-form>header small{font-size:12px}.content-inline-form>header h2{font-size:28px}.content-inline-fields label>span{font-size:14px}.content-inline-fields input[type="text"],.content-inline-fields input[type="date"],.content-inline-fields textarea{font-size:15px}.content-inline-message,.content-inline-form>footer button{font-size:14px}
+  @media(max-width:640px){.content-inline-form>header h2{font-size:23px}.content-inline-form>header small{font-size:11px}.content-inline-fields label>span{font-size:14px}.content-inline-fields input[type="text"],.content-inline-fields input[type="date"],.content-inline-fields textarea{font-size:16px}.content-inline-form>footer button{font-size:13px}}
+  .content-inline-fields select{width:100%;min-height:4.4rem;box-sizing:border-box;padding:.95rem 2.4rem .95rem 1.1rem;border:1px solid var(--cie-line);border-radius:.65rem;outline:0;color:var(--cie-text);background:var(--cie-field);font:400 15px/1.5 var(--font-ui)}.content-inline-fields select:focus{border-color:var(--cie-accent);outline:2px solid color-mix(in srgb,var(--cie-accent) 20%,transparent);outline-offset:1px}.content-inline-fields [data-subcategory-field][hidden]{display:none}
+  @media(max-width:640px){.content-inline-fields select{font-size:16px}}
+</style>

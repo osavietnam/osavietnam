@@ -1,0 +1,110 @@
+<section class="site-vocation-tail" aria-label="Liên hệ Ơn gọi">
+  <section class="site-cta">
+    <div class="site-cta-band">
+      <div class="site-cta-seal">
+        <img src="/images/emblem.svg" alt="" class="site-cta-emblem site-cta-emblem--dark" aria-hidden="true" />
+        <img src="/images/emblem.svg" alt="" class="site-cta-emblem site-cta-emblem--light" aria-hidden="true" />
+        <p>OSA Việt Nam</p>
+      </div>
+      <span class="site-cta-vline" aria-hidden="true"></span>
+      <div class="site-cta-contact">
+        <p class="og-cta-contact-label">Liên Hệ Ơn Gọi</p>
+        <a href="mailto:ongoi@osavietnam.org" class="site-cta-btn">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+          Gửi email
+        </a>
+        <a href="mailto:ongoi@osavietnam.org" class="site-cta-email">ongoi@osavietnam.org</a>
+      </div>
+      <span class="site-cta-vline" aria-hidden="true"></span>
+      <div class="site-cta-links">
+        <p class="og-cta-contact-label">Tìm Hiểu Thêm</p>
+        <a href="https://www.augustinianorder.org/" target="_blank" rel="noopener noreferrer"><strong>Trung Ương Dòng</strong><span>augustinianorder.org ↗</span></a>
+        <a href="https://www.osa.org.au/" target="_blank" rel="noopener noreferrer"><strong>Tỉnh Dòng Úc Châu</strong><span>osa.org.au ↗</span></a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<style>
+  .site-vocation-tail { position: relative; isolation: isolate; display: flex; flex-direction: column; overflow: hidden; }
+  .site-vocation-tail::before { content: ''; position: absolute; z-index: -1; inset: 0; background: transparent; }
+  .site-cta { order: 1; text-align: center; }
+  .site-cta-band { display:flex; align-items:center; justify-content:center; max-width:86rem; margin:0 auto; padding:1.9rem 4rem; }
+  .site-cta-seal { display:flex; flex:0 0 12rem; flex-direction:column; align-items:center; gap:.7rem; }
+  .site-cta-emblem { width:11rem; height:11rem; flex:none; object-fit:fill; }
+  .site-cta-emblem--dark { opacity:.72; filter:brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(5deg) brightness(.82); }
+  .site-cta-emblem--light { display:none; border-radius:6px; }
+  .site-cta-seal p { margin:0; color:var(--label-color); font:600 1.05rem var(--font-ui); letter-spacing:.18em; text-transform:uppercase; }
+  .site-cta-vline { width:1px; align-self:stretch; flex-shrink:0; margin:0 4.8rem; background:var(--border-accent); }
+  .site-cta-contact, .site-cta-links { display:flex; flex:0 0 auto; flex-direction:column; align-items:flex-start; gap:1.1rem; }
+  .site-cta-links { gap:1.6rem; min-width:18rem; }
+  .site-cta-contact .og-cta-contact-label,
+  .site-cta-links .og-cta-contact-label { margin:0 0 .15rem; display:flex; align-items:center; gap:.55rem; color:var(--gold-dim); font:600 .88rem/1.35 var(--font-ui); letter-spacing:.16em; text-transform:uppercase; opacity:.9; }
+  .site-cta-contact .og-cta-contact-label::before,
+  .site-cta-links .og-cta-contact-label::before { width:1.25rem; height:1px; opacity:.55; }
+  .site-cta-btn { display:inline-flex; align-items:center; gap:.6rem; padding:.85rem 2.4rem; border:1.5px solid rgba(233,193,118,.55); border-radius:100px; color:var(--gold); font:600 1.2rem var(--font-ui); letter-spacing:.05em; text-decoration:none; }
+  .site-cta-email { padding-bottom:.1rem; border-bottom:1px solid var(--border-subtle); color:var(--ink-cream); font:500 1.2rem var(--font-ui); letter-spacing:.03em; text-decoration:none; }
+  .site-cta-links a { display:flex; flex-direction:column; gap:.25rem; text-decoration:none; transition:transform .25s cubic-bezier(.22,1,.36,1); }
+  .site-cta-links strong { color:var(--ink-cream-soft); font:500 1.85rem/1.3 var(--font-display); transition:color .25s ease; }
+  .site-cta-links span { padding-bottom:.05rem; border-bottom:1px solid var(--border-subtle); color:var(--gold-dim); font:500 1.1rem var(--font-ui); letter-spacing:.02em; opacity:.85; transition:color .25s ease, opacity .25s ease, border-color .25s ease; }
+  @media (hover:hover) and (pointer:fine) { .site-cta-links a:hover { transform:translateX(.45rem); } .site-cta-links a:hover strong { color:var(--gold); } .site-cta-links a:hover span { border-color:var(--border-accent); color:var(--accent); opacity:1; } }
+  :global([data-theme="light"]) .site-cta-emblem--dark { display:none; }
+  :global([data-theme="light"]) .site-cta-emblem--light { display:block; }
+  :global([data-theme="light"]) .site-cta-seal p,
+  :global([data-theme="light"]) .site-cta-contact :global(.og-cta-contact-label),
+  :global([data-theme="light"]) .site-cta-links :global(.og-cta-contact-label) { color:rgba(255,255,255,.76); }
+  :global([data-theme="light"]) .site-cta-seal p { color:#e9c176; }
+  :global([data-theme="light"]) .site-cta-btn { border-color:rgba(233,193,118,.62); color:#e9c176; }
+  :global([data-theme="light"]) .site-cta-email { border-color:rgba(255,255,255,.3); color:#f4eee2; }
+  :global([data-theme="light"]) .site-cta-links strong { color:#f4eee2; }
+  :global([data-theme="light"]) .site-cta-links span { border-color:rgba(233,193,118,.3); color:#e9c176; opacity:.9; }
+  @media (hover:hover) and (pointer:fine) { :global([data-theme="light"]) .site-cta-btn:hover { background:#e9c176; border-color:#e9c176; color:#0f3d24; } :global([data-theme="light"]) .site-cta-email:hover { border-color:#e9c176; color:#e9c176; } :global([data-theme="light"]) .site-cta-links a:hover strong { color:#e9c176; } :global([data-theme="light"]) .site-cta-links a:hover span { border-color:#e9c176; color:#f4eee2; } }
+  @media (max-width:900px) { .site-cta-band { padding:1.8rem 3.2rem; flex-wrap:wrap; gap:1.4rem; } .site-cta-vline { display:none; } .site-cta-seal { flex:0 0 100%; flex-direction:row; justify-content:center; gap:1.2rem; } }
+  @media (max-width:600px) {
+    .site-vocation-tail, .site-cta { width:100%; max-width:100%; overflow:clip; }
+    .site-cta-band { width:100%; max-width:100%; display:grid; grid-template-columns:7.4rem minmax(0, 1fr); grid-template-areas:'seal contact' 'seal links'; align-items:start; gap:1.5rem 1.35rem; padding:1.75rem 1.35rem 2rem; }
+    .site-cta-seal { grid-area:seal; flex:unset; width:7.4rem; flex-direction:column; justify-content:flex-start; gap:.35rem; }
+    .site-cta-emblem { width:7rem; height:7rem; }
+    .site-cta-seal p { font-size:.74rem; line-height:1.3; letter-spacing:.1em; }
+    .site-cta-contact { grid-area:contact; }
+    .site-cta-links { grid-area:links; gap:.75rem; }
+    .site-cta-contact, .site-cta-links { width:100%; min-width:0; align-items:flex-start; text-align:left; }
+    .site-cta-contact .og-cta-contact-label, .site-cta-links .og-cta-contact-label { font-size:.8rem; margin-bottom:0; }
+    .site-cta-contact { gap:.65rem; }
+    .site-cta-btn { min-height:3.9rem; padding:.65rem 1.3rem; }
+    .site-cta-email, .site-cta-links a { max-width:100%; overflow-wrap:anywhere; }
+    .site-cta-links a {
+      display:flex;
+      flex-direction:column;
+      row-gap:.2rem;
+      width:100%;
+      padding:.2rem 0;
+    }
+    .site-cta-links strong {
+      color:var(--gold);
+      font-size:1.38rem;
+      font-weight:700;
+      text-decoration:underline;
+      text-decoration-color:rgba(233,193,118,.52);
+      text-decoration-thickness:1px;
+      text-underline-offset:.22em;
+    }
+    .site-cta-links span {
+      display:block;
+      padding:0;
+      border:0;
+      color:var(--ink-cream);
+      font-size:1rem;
+      opacity:.82;
+      text-decoration:underline;
+      text-decoration-color:rgba(233,193,118,.52);
+      text-underline-offset:.18em;
+    }
+  }
+  @media (max-width:360px) {
+    .site-cta-band { grid-template-columns:1fr; grid-template-areas:'seal' 'contact' 'links'; }
+    .site-cta-seal { width:100%; flex-direction:row; align-items:center; justify-content:center; }
+    .site-cta-contact, .site-cta-links { align-items:center; text-align:center; }
+    .site-cta-links a { align-items:center; }
+  }
+</style>

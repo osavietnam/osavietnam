@@ -1,0 +1,80 @@
+---
+import type { ImageMetadata } from 'astro';
+import FeaturedLatestArticles from './FeaturedLatestArticles.astro';
+import LibraryMasthead from './LibraryMasthead.astro';
+
+interface ArticlePreview {
+  id: string;
+  title: string;
+  href: string;
+  category?: string;
+  excerpt?: string;
+  author?: string;
+  date?: Date;
+  image?: ImageMetadata | string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  labelledBy: string;
+  featured?: ArticlePreview;
+  tabs?: ArticlePreview[];
+  latest?: ArticlePreview[];
+  showTitles?: boolean;
+  showLatestTitles?: boolean;
+  showCategories?: boolean;
+  showAuthors?: boolean;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  labelledBy,
+  featured,
+  tabs = [],
+  latest = [],
+  showTitles = false,
+  showLatestTitles = false,
+  showCategories = true,
+  showAuthors = true,
+  class: className,
+} = Astro.props;
+---
+
+<main class:list={['article-library-index', className]}>
+  <LibraryMasthead
+    class="article-library-heading"
+    {eyebrow}
+    {title}
+    {labelledBy}
+  />
+
+  <FeaturedLatestArticles
+    {featured}
+    {tabs}
+    {latest}
+    {showTitles}
+    {showLatestTitles}
+    {showCategories}
+    {showAuthors}
+  />
+
+  <slot />
+</main>
+
+<style>
+  .article-library-index {
+    min-height:65vh;
+    padding:4.5rem 0 6rem;
+  }
+  :global(.article-library-heading) {
+    max-width:86rem;
+    margin:0 auto 3.5rem;
+  }
+  @media (max-width:760px) {
+    .article-library-index { padding-top:3rem; }
+    :global(.article-library-heading) { margin-bottom:2.5rem; }
+  }
+</style>

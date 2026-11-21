@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  labelledBy?: string;
+  level?: 1 | 2;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  labelledBy,
+  level = 1,
+  class: className,
+} = Astro.props;
+---
+
+<header class:list={['lib-masthead', className]}>
+  {eyebrow && <p class="lib-masthead-sub">{eyebrow}</p>}
+  {level === 1
+    ? <h1 class="lib-masthead-title" id={labelledBy}>{title}</h1>
+    : <h2 class="lib-masthead-title" id={labelledBy}>{title}</h2>}
+  {description && <p class="lib-masthead-desc">{description}</p>}
+  <div class="lib-masthead-rule" aria-hidden="true">
+    <span class="lib-masthead-ornament">✦</span>
+  </div>
+</header>

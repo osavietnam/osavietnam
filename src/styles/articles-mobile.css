@@ -1,0 +1,168 @@
+/* ===================================================================
+ * # ARTICLES PAGE - MOBILE OPTIMIZATIONS (COMPLETE & CONSOLIDATED)
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* --- 1. Global Scaling & Layout Stability --- */
+    
+    body.page-articles {
+        overflow-x: hidden;
+    }
+    .site-wrapper {
+        width: 100%;
+    }
+
+    /* --- 2. Article List View Adjustments --- */
+    .page-articles .content {
+        padding: 2.5rem 1.2rem;
+    }
+    .featured-books-title {
+        font-size: 2.8rem;
+    }
+    .article-card-grid,
+    .related-articles-grid {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        gap: 2rem;
+        
+    }
+
+    /* --- 3. Single Article View Optimizations --- */
+    /* Hero Section */
+    .article-hero-section {
+        max-height: 55vh;
+    }
+    
+    .article-hero-image {
+        max-height: 50vh;
+    }
+
+    .article-hero-content {
+        justify-content: flex-end;
+        padding-bottom: 2rem;
+    }
+
+    .article-hero-category {
+        margin-bottom: 1rem;
+        font-size: 1.0rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .article-hero-title {
+        font-size: 2.2rem;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+    }
+    
+    .article-hero-meta {
+        font-size: 1.2rem;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+        padding-bottom: 1.2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .share-button {
+        font-size: 1.2rem;
+        padding: 0.6rem 1.8rem;
+        border-width: 1px;
+    }
+    
+    /* Main Content Area */
+   
+    .breadcrumb {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        
+    }
+  
+    /* Article Body Typography and Spacing */
+    /* ADDED: New rule to give article text more space */
+    .article-body-content .section-container {
+        margin: 0;
+    }
+      .article-body-content .section-container h3 { 
+    
+    font-size: 2.2rem; 
+    margin:0rem;
+    
+    }
+    main.content .emphasis-block h3 {
+    font-size: 2rem;
+}
+    .article-body-content h3 {
+        font-size: 2.2rem;
+    }
+    .article-body-content .paragraph-title {
+        font-size: 2rem;
+    }
+    .article-body-content .subparagraph-title {
+        font-size: 1.6rem;
+    }
+    .article-body-content .subpara {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+    .article-body-content .subpara:first-of-type::first-letter {
+        font-size: 2.8rem;
+        padding-right: 0.2rem;
+        
+        margin: 0;
+        
+    }
+    .article-blockquote {
+        margin-left: 1rem;
+        padding-left: 1.2rem;
+        
+    }
+    
+  
+    .related-articles-title {
+        font-size: 2.8rem;
+    }
+
+    /* --- 4. Horizontal Scroller Fix & Optimization --- */
+    .article-grid-section {
+        overflow: hidden;
+    }
+    .featured-scroller {
+        max-width: 100%;
+    }
+    .featured-nav-btn {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    .featured-nav-btn.left {
+        left: 0.2rem;
+    }
+    .featured-nav-btn.right {
+        right: 0.2rem;
+    }
+    .featured-container-shifted .article-card:nth-child(odd),
+    .featured-container-shifted .article-card:nth-child(even) {
+        transform: none;
+    }
+    .featured-container-shifted {
+        padding-left: 0;
+        padding-right: 0;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+    }
+    .featured-container-shifted .article-card {
+        flex-basis: 270px;
+    }
+    .featured-container-shifted .article-card:first-child {
+        margin-left: 1.2rem;
+    }
+    .featured-container-shifted .article-card:last-child {
+        margin-right: 1.2rem;
+    }
+    /* Main Content Area */
+    .article-main-content {
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+

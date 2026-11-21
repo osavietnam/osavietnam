@@ -1,0 +1,114 @@
+/* ===================================================================
+ * # SAINTS & BLESSEDS PAGE - MOBILE OPTIMIZATIONS
+ * =================================================================== */
+
+@media screen and (max-width: 768px) {
+
+   
+
+    main.content {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* --- 2. Typography --- */
+    .home-welcome h2 {
+        font-size: 3rem;
+    }
+    .month-title {
+        font-size: 2.4rem;
+    }
+    .saint-card-date {
+        font-size: 2.4rem;
+    }
+    .saint-card-name {
+        font-size: 1.4rem;
+    }
+
+    /* --- 3. Upcoming Saints Scroller --- */
+    #next-saint-container {
+        width: 100%;
+        overflow-x: hidden; /* This prevents the container from creating a page scrollbar */
+    }
+    #next-saint-container .featured-wrapper {
+        max-width: 100%; /* Ensures the wrapper fits the screen */
+    }
+
+    #next-saint-container .featured-container-shifted {
+        gap: 1.5rem;
+        padding: 1rem 0; /* Remove horizontal padding to use full width */
+    }
+
+   
+    
+    #next-saint-container .featured-container-shifted .saint-card:first-child {
+        margin-left: 1.5rem;
+    }
+    #next-saint-container .featured-container-shifted .saint-card:last-child {
+        margin-right: 1.5rem;
+    }
+
+    
+    #next-saint-container .featured-nav-btn.left {
+        left: 0.5rem;
+    }
+    #next-saint-container .featured-nav-btn.right {
+        right: 0.5rem;
+    }
+
+    /* --- 4. Main Calendar Grid --- */
+    .month-group {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .saints-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1.5rem;
+    }
+
+    /* --- 5. Biography Modal (Further Optimized for Space) --- */
+    .bio-modal-overlay {
+        padding: 0;
+    }
+
+    .bio-modal {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .bio-modal > h3 {
+        font-size: 2.4rem; /* Slightly smaller title */
+        /* Reduced top, bottom, and side padding */
+        padding: 1.2rem 4.5rem 1.2rem 1.2rem; 
+    }
+
+    .bio-modal-close {
+        /* Moved closer to the corner */
+        top: 0.6rem;
+        right: 0.6rem;
+    }
+
+    #bio-modal-content-container {
+        padding: 0;
+    }
+
+    .bio-content-body {
+        /* Reduced side padding */
+        padding: 0 1.2rem 3rem 1.2rem;
+    }
+
+    .bio-modal-image {
+        max-height: 200px; /* Further reduced image height */
+        margin-bottom: 1.5rem; /* Reduced space below the image */
+    }
+
+    .bio-content-body h3 {
+        font-size: 2.2rem;
+    }
+    .bio-content-body .subpara {
+        font-size: 1.6rem;
+    }
+}
