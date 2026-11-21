@@ -12,7 +12,15 @@ export default defineConfig({
   compressHTML: true,
   srcDir: process.env.GITHUB_SRC_DIR || './src',
   output: 'static',
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+        return !pathname.startsWith('/admin') && !pathname.startsWith('/api/');
+      },
+    }),
+  ],
   markdown: {
     remarkRehype: {
       footnoteLabel: 'Chú thích',

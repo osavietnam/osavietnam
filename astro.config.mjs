@@ -13,7 +13,15 @@ export default defineConfig({
   adapter: node({ mode: 'standalone' }),
   server: { host: true, port: 4321 },
   preview: { host: true, port: 4321 },
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+        return !pathname.startsWith('/admin') && !pathname.startsWith('/api/');
+      },
+    }),
+  ],
   markdown: {
     remarkRehype: {
       footnoteLabel: 'Chú thích',
