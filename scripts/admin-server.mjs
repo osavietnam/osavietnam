@@ -10,7 +10,14 @@ import { fileURLToPath } from 'url';
 
 const MODULE_FILE   = fileURLToPath(import.meta.url);
 const IS_DIRECT     = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(MODULE_FILE);
-const ROOT          = path.resolve(process.env.STUDIO_ROOT || process.cwd());
+const WORK_ROOT     = path.resolve(process.env.STUDIO_ROOT || process.cwd());
+const ROOT          = process.env.STUDIO_ROOT
+  ? WORK_ROOT
+  : fs.existsSync(path.join(WORK_ROOT, 'src'))
+    ? WORK_ROOT
+    : fs.existsSync(path.join(WORK_ROOT, 'dist', 'src'))
+      ? path.join(WORK_ROOT, 'dist')
+      : WORK_ROOT;
 try { process.loadEnvFile(path.join(ROOT, '.env.local')); } catch (error) {
   if (error?.code !== 'ENOENT') console.warn('Không thể đọc .env.local:', error.message);
 }
