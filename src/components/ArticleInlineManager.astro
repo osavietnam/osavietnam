@@ -662,7 +662,7 @@ const labels = {
         deleteButton.disabled = true;
         setMessage('Đang xóa…');
         try {
-          await request(`/api/studio/item?collection=bai-viet&id=${encodeURIComponent(active.id)}`, { method: 'DELETE' });
+          await request(`/api/studio/item?collection=bai-viet&id=${encodeURIComponent(active.id)}&_method=DELETE`, { method: 'POST' });
           setMessage('Đã chuyển bài vào thư mục khôi phục.');
           window.setTimeout(() => location.reload(), 500);
         } catch (error) {

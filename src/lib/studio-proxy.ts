@@ -128,7 +128,7 @@ async function forward(request: Request, upstreamPath: string, body?: ArrayBuffe
   const nodeRequest = Readable.from(body && body.byteLength ? [Buffer.from(body)] : []) as Readable & {
     method: string; url: string; headers: Record<string, string>;
   };
-  nodeRequest.method = request.method;
+  nodeRequest.method = request.method === 'POST' && sourceUrl.searchParams.get('_method') === 'DELETE' ? 'DELETE' : request.method;
   nodeRequest.url = `${upstreamPath}${sourceUrl.search}`;
   nodeRequest.headers = Object.fromEntries([...request.headers.entries()].map(([name, value]) => [name.toLowerCase(), value]));
   const nodeResponse = new StudioResponse();
