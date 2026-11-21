@@ -4,7 +4,7 @@ subtitle: "Tu huynh"
 rank: "none"
 feastDay: 29
 feastMonth: 11
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/the-holy-communion-of-bl-frederickof-regensburg.webp"
 draft: false
 manualFill: false
 ---
