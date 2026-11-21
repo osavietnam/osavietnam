@@ -1,0 +1,83 @@
+---
+import { readAdminSession } from '../../lib/admin-auth';
+
+export const prerender = false;
+const authenticated = Boolean(readAdminSession(Astro.request));
+Astro.response.headers.set('Cache-Control', 'no-store, private');
+Astro.response.headers.set('X-Frame-Options', 'DENY');
+Astro.response.headers.set('Referrer-Policy', 'same-origin');
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <title>Quản trị | OSA Việt Nam</title>
+    <style>
+      :root{font-family:Inter,system-ui,sans-serif;color:#14251c;background:#f4f0e7}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}.shell{min-height:100vh}.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;color:#fff;background:#10261c}.brand{display:flex;align-items:center;gap:.8rem}.brand img{width:2.4rem;height:2.4rem}.brand strong{display:block}.brand small{color:#d4c398}.btn{border:0;border-radius:.5rem;padding:.7rem 1rem;font-weight:700;cursor:pointer}.btn-primary{color:#10261c;background:#e5bd68}.btn-muted{color:#fff;background:#385247}.btn-danger{color:#8b1f1f;background:#f6d4d0}.login{width:min(27rem,calc(100% - 2rem));margin:12vh auto;padding:2rem;border:1px solid #d7cdb8;border-radius:1rem;background:#fff;box-shadow:0 1rem 3rem #23392b1a}.login h1{margin:.4rem 0 1.5rem}.field{display:grid;gap:.4rem;margin-bottom:1rem}.field label{font-size:.85rem;font-weight:700;color:#496054}.field input,.field textarea,.field select{width:100%;border:1px solid #bdb7aa;border-radius:.5rem;padding:.7rem;background:#fff}.field textarea{resize:vertical;min-height:7rem}.message{min-height:1.4rem;color:#9d2525}.workspace{display:grid;grid-template-columns:minmax(18rem,32rem) 1fr;gap:1.5rem;padding:1.5rem}.panel{padding:1.25rem;border:1px solid #d7cdb8;border-radius:.8rem;background:#fff}.panel h1,.panel h2{margin-top:0}.form-actions,.list-head,.post-row{display:flex;align-items:center;justify-content:space-between;gap:.7rem}.post-list{display:grid;gap:.75rem}.post-row{padding:.85rem;border:1px solid #e2dacb;border-radius:.55rem}.post-row h3{margin:0 0 .2rem;font-size:1rem}.post-row small{color:#627268}.status{display:inline-block;border-radius:999px;padding:.15rem .5rem;font-size:.72rem;font-weight:800;background:#eee}.status.published{color:#145b35;background:#d9f0e1}.row-actions{display:flex;gap:.4rem}.row-actions button{padding:.45rem .65rem}.empty{padding:2rem;text-align:center;color:#6f786f}.notice{padding:.75rem;border-radius:.5rem;color:#31543f;background:#edf6ef}@media(max-width:850px){.workspace{grid-template-columns:1fr}.topbar{padding:.85rem 1rem}}
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand"><img src="/images/emblem.svg" alt="" /><div><strong>OSA Việt Nam</strong><small>Trung tâm quản trị</small></div></div>
+        {authenticated && <button class="btn btn-muted" id="logout" type="button">Đăng xuất</button>}
+      </header>
+
+      {!authenticated ? (
+        <form class="login" id="login-form">
+          <p>Quản trị nội dung</p><h1>Đăng nhập</h1>
+          <div class="field"><label for="username">Tên đăng nhập</label><input id="username" name="username" autocomplete="username" required /></div>
+          <div class="field"><label for="password">Mật khẩu</label><input id="password" name="password" type="password" autocomplete="current-password" required /></div>
+          <p class="message" id="login-message" role="alert"></p>
+          <button class="btn btn-primary" type="submit">Đăng nhập</button>
+        </form>
+      ) : (
+        <div class="workspace">
+          <section class="panel">
+            <h1 id="editor-title">Tạo bài viết</h1>
+            <form id="post-form">
+              <input type="hidden" id="post-id" />
+              <div class="field"><label for="title">Tiêu đề</label><input id="title" required maxlength="255" /></div>
+              <div class="field"><label for="slug">Đường dẫn</label><input id="slug" maxlength="180" placeholder="tự tạo từ tiêu đề" /></div>
+              <div class="field"><label for="author">Tác giả</label><input id="author" maxlength="160" /></div>
+              <div class="field"><label for="excerpt">Mô tả ngắn</label><textarea id="excerpt" rows="3"></textarea></div>
+              <div class="field"><label for="body">Nội dung</label><textarea id="body" rows="14" required></textarea></div>
+              <div class="field"><label for="status">Trạng thái</label><select id="status"><option value="draft">Bản nháp</option><option value="published">Xuất bản ngay</option></select></div>
+              <p class="message" id="post-message" role="alert"></p>
+              <div class="form-actions"><button class="btn btn-muted" id="reset" type="button">Tạo mới</button><button class="btn btn-primary" type="submit">Lưu bài</button></div>
+            </form>
+          </section>
+          <section class="panel">
+            <div class="list-head"><div><h2>Bài viết quản trị</h2><p class="notice">Bài xuất bản hiển thị ngay trên trang Tin tức, không cần deploy.</p></div><button class="btn btn-muted" id="refresh" type="button">Tải lại</button></div>
+            <div class="post-list" id="post-list"><p class="empty">Đang tải…</p></div>
+          </section>
+        </div>
+      )}
+    </main>
+    <script is:inline define:vars={{ authenticated }}>
+      const request = async (url, options = {}) => {
+        const response = await fetch(url, { ...options, headers: { 'content-type':'application/json', ...(options.headers || {}) } });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || 'Có lỗi xảy ra.');
+        return data;
+      };
+      if (!authenticated) {
+        document.querySelector('#login-form')?.addEventListener('submit', async (event) => {
+          event.preventDefault(); const message = document.querySelector('#login-message'); message.textContent = '';
+          try { await request('/api/admin/session', { method:'POST', body:JSON.stringify({ username:document.querySelector('#username').value, password:document.querySelector('#password').value }) }); location.reload(); }
+          catch (error) { message.textContent = error.message; }
+        });
+      } else {
+        let posts = [];
+        const fields = Object.fromEntries(['post-id','title','slug','author','excerpt','body','status'].map(id => [id, document.getElementById(id)]));
+        const reset = () => { document.querySelector('#post-form').reset(); fields['post-id'].value=''; document.querySelector('#editor-title').textContent='Tạo bài viết'; document.querySelector('#post-message').textContent=''; };
+        const load = async () => { const list=document.querySelector('#post-list'); list.innerHTML='<p class="empty">Đang tải…</p>'; try { posts=(await request('/api/admin/posts')).posts; render(); } catch(error) { list.innerHTML=`<p class="message"></p>`; list.firstElementChild.textContent=error.message; } };
+        const render = () => { const list=document.querySelector('#post-list'); list.replaceChildren(); if(!posts.length){list.innerHTML='<p class="empty">Chưa có bài viết.</p>';return;} posts.forEach(post=>{const row=document.createElement('article');row.className='post-row';const info=document.createElement('div');const title=document.createElement('h3');title.textContent=post.title;const meta=document.createElement('small');meta.textContent=`${post.author||'OSA Việt Nam'} · ${new Date(post.updatedAt).toLocaleString('vi-VN')}`;const badge=document.createElement('span');badge.className=`status ${post.status}`;badge.textContent=post.status==='published'?'Đã xuất bản':'Bản nháp';info.append(title,meta,document.createElement('br'),badge);const actions=document.createElement('div');actions.className='row-actions';const edit=document.createElement('button');edit.className='btn btn-muted';edit.textContent='Sửa';edit.onclick=()=>{Object.entries({title:post.title,slug:post.slug,author:post.author,excerpt:post.excerpt,body:post.body,status:post.status}).forEach(([key,value])=>fields[key].value=value||'');fields['post-id'].value=post.id;document.querySelector('#editor-title').textContent='Sửa bài viết';scrollTo({top:0,behavior:'smooth'});};const remove=document.createElement('button');remove.className='btn btn-danger';remove.textContent='Xóa';remove.onclick=async()=>{if(!confirm(`Xóa “${post.title}”?`))return;await request(`/api/admin/posts/${post.id}`,{method:'DELETE'});await load();};actions.append(edit,remove);row.append(info,actions);list.append(row);}); };
+        document.querySelector('#post-form').addEventListener('submit',async(event)=>{event.preventDefault();const message=document.querySelector('#post-message');message.textContent='';const id=fields['post-id'].value;const data={title:fields.title.value,slug:fields.slug.value,author:fields.author.value,excerpt:fields.excerpt.value,body:fields.body.value,status:fields.status.value};try{await request(id?`/api/admin/posts/${id}`:'/api/admin/posts',{method:id?'PUT':'POST',body:JSON.stringify(data)});reset();await load();}catch(error){message.textContent=error.message;}});
+        document.querySelector('#reset').onclick=reset; document.querySelector('#refresh').onclick=load; document.querySelector('#logout').onclick=async()=>{await request('/api/admin/session',{method:'DELETE'});location.reload();}; load();
+      }
+    </script>
+  </body>
+</html>

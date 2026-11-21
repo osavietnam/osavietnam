@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { findPublishedPost } from '../../../lib/admin-db';
+
+export const prerender = false;
+const post = await findPublishedPost(Astro.params.slug ?? '');
+if (!post) Astro.response.status = 404;
+const paragraphs = post?.body.split(/\r?\n\s*\r?\n/).map((value) => value.trim()).filter(Boolean) ?? [];
+const formatDate = (value: string | null) => value ? new Intl.DateTimeFormat('vi-VN', { dateStyle:'long' }).format(new Date(value)) : '';
+---
+<BaseLayout title={post?.title ?? 'Không tìm thấy bài viết'} bodyClass="no-sidebar">
+  <main class="managed-article">
+    {post ? <>
+      <p class="managed-eyebrow">Bản tin OSA Việt Nam</p>
+      <h1>{post.title}</h1>
+      <p class="managed-meta">{post.author || 'OSA Việt Nam'}{post.publishedAt && <> · <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time></>}</p>
+      {post.excerpt && <p class="managed-lead">{post.excerpt}</p>}
+      <div class="managed-body">{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+    </> : <><h1>Không tìm thấy bài viết</h1><p>Bài viết không tồn tại hoặc chưa được xuất bản.</p></>}
+  </main>
+</BaseLayout>
+<style>
+  .managed-article{width:min(52rem,calc(100% - 2rem));margin:4rem auto 7rem}.managed-eyebrow{color:#9c722a;font:700 .8rem/1.2 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}.managed-article h1{font:700 clamp(2rem,5vw,4rem)/1.08 var(--font-display);color:var(--ink-cream);margin:.6rem 0 1rem}.managed-meta{color:#b8b6aa}.managed-lead{font-size:1.25rem;line-height:1.65;color:#d8c594;border-left:3px solid #c49b4a;padding-left:1rem}.managed-body{font-size:1.08rem;line-height:1.85;color:var(--ink-cream-soft)}.managed-body p{margin:1.2rem 0}:global(html[data-theme='light']) .managed-article h1,:global(html[data-theme='light']) .managed-body{color:#24271f}:global(html[data-theme='light']) .managed-meta{color:#657067}
+</style>
+
