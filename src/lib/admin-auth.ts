@@ -56,6 +56,15 @@ export function clearSessionCookie() {
 export function requestIsSameOrigin(request: Request) {
   const origin = request.headers.get('origin');
   if (!origin) return false;
-  return origin === new URL(request.url).origin;
+  try {
+    const source = new URL(origin);
+    const requestUrl = new URL(request.url);
+    const forwardedHost = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim();
+    const host = request.headers.get('host')?.trim();
+    const allowedHosts = new Set([requestUrl.host, forwardedHost, host].filter(Boolean));
+    const secureOrigin = source.protocol === 'https:' || (source.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(source.hostname));
+    return secureOrigin && allowedHosts.has(source.host);
+  } catch {
+    return false;
+  }
 }
-
