@@ -164,7 +164,7 @@ const {
         if (collection === 'thanh-chan-phuoc') Object.assign(next, { subtitle:value('subtitle'), rank:value('rank') || 'none', feastDay:numberValue('feastDay'), feastMonth:numberValue('feastMonth'), imageFile:value('imageFile') });
         try {
           const result = await request('/api/studio/item', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ collection, id:active.id, originalId:active.id, fm:next, body:(field('body') as HTMLTextAreaElement | null)?.value || active.body, extension:active.extension, checksum:active.checksum }) });
-          setMessage('Đã lưu. Đang cập nhật trang…');
+          setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
           window.setTimeout(() => {
             if (collection === 'tu-thuat' && result.route) location.href = result.route;
             else location.reload();

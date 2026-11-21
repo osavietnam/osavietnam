@@ -17,6 +17,7 @@ export type ManagedPost = {
 let pool: mysql.Pool | undefined;
 let schemaReady: Promise<void> | undefined;
 let settingsReady: Promise<void> | undefined;
+let pendingChangesReady: Promise<void> | undefined;
 
 function database() {
   if (pool) return pool;
@@ -156,4 +157,75 @@ export async function getStudioGithubToken() {
   const [rows] = await database().execute('SELECT setting_value FROM studio_settings WHERE setting_key=? LIMIT 1', ['github_token']);
   const encrypted = (rows as any[])[0]?.setting_value;
   return encrypted ? decryptSetting(String(encrypted)) : '';
+}
+
+export type StudioPendingChange = {
+  path: string;
+  content: Buffer | null;
+  deleted: boolean;
+  originalContent: Buffer | null;
+  originalDeleted: boolean;
+  updatedAt: string;
+};
+
+async function ensureStudioPendingChangesSchema() {
+  pendingChangesReady ??= database().execute(`
+    CREATE TABLE IF NOT EXISTS studio_pending_changes (
+      path VARCHAR(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+      content LONGBLOB NULL,
+      deleted TINYINT(1) NOT NULL DEFAULT 0,
+      original_content LONGBLOB NULL,
+      original_deleted TINYINT(1) NOT NULL DEFAULT 0,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (path)
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `).then(() => undefined);
+  return pendingChangesReady;
+}
+
+const mapPendingChange = (row: any): StudioPendingChange => ({
+  path: String(row.path),
+  content: row.content == null ? null : Buffer.from(row.content),
+  deleted: Boolean(row.deleted),
+  originalContent: row.original_content == null ? null : Buffer.from(row.original_content),
+  originalDeleted: Boolean(row.original_deleted),
+  updatedAt: new Date(row.updated_at).toISOString(),
+});
+
+export async function listStudioPendingChanges() {
+  await ensureStudioPendingChangesSchema();
+  const [rows] = await database().query('SELECT * FROM studio_pending_changes ORDER BY updated_at ASC, path ASC');
+  return (rows as any[]).map(mapPendingChange);
+}
+
+export async function getStudioPendingChange(filePath: string) {
+  await ensureStudioPendingChangesSchema();
+  const [rows] = await database().execute('SELECT * FROM studio_pending_changes WHERE path=? LIMIT 1', [filePath]);
+  return (rows as any[])[0] ? mapPendingChange((rows as any[])[0]) : null;
+}
+
+export async function stageStudioPendingChange(input: {
+  path: string;
+  content: Buffer | null;
+  deleted: boolean;
+  originalContent: Buffer | null;
+  originalDeleted: boolean;
+}) {
+  await ensureStudioPendingChangesSchema();
+  await database().execute(
+    `INSERT INTO studio_pending_changes (path,content,deleted,original_content,original_deleted)
+      VALUES (?,?,?,?,?)
+      ON DUPLICATE KEY UPDATE content=VALUES(content),deleted=VALUES(deleted),updated_at=CURRENT_TIMESTAMP`,
+    [input.path, input.content, input.deleted ? 1 : 0, input.originalContent, input.originalDeleted ? 1 : 0],
+  );
+}
+
+export async function clearStudioPendingChanges() {
+  await ensureStudioPendingChangesSchema();
+  await database().execute('DELETE FROM studio_pending_changes');
+}
+
+export async function deleteStudioPendingChange(filePath: string) {
+  await ensureStudioPendingChangesSchema();
+  await database().execute('DELETE FROM studio_pending_changes WHERE path=?', [filePath]);
 }

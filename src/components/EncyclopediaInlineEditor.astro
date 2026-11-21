@@ -94,7 +94,7 @@ const { entryId = '' } = Astro.props;
     const fm = { ...active.fm, titleVi: fields.titleVi.value.trim(), title, author: fields.author.value.trim(), letter, entryType: fields.entryType.value, translationStatus: fields.translationStatus.value, seeAlso: parseList(fields.seeAlso.value), bibliography: parseList(fields.bibliography.value), sourcePages: fields.sourcePages.value.trim() };
     try {
       const result = await request('/api/studio/item', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ collection:COLLECTION, id:active.id, originalId:active.id, fm, body:fields.body.value, extension:active.extension, checksum:active.checksum }) });
-      setMessage('Đã lưu. Đang cập nhật trang…');
+      setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
       setTimeout(() => { if (entryId && result.route) location.href = result.route; else location.reload(); }, 450);
     } catch (error) { saveButton.disabled = false; setMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi', true); }
   });

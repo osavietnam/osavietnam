@@ -643,7 +643,7 @@ const labels = {
               fm, body, extension: active?.extension || '.md', checksum: active?.checksum || '',
             }),
           });
-          setMessage('Đã lưu. Trang sẽ cập nhật sau hot reload…');
+          setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
           active = { id: result.id, fm, body, extension: '.md', checksum: result.checksum || '', route: result.route };
           isNew = false;
           window.setTimeout(() => location.reload(), 550);

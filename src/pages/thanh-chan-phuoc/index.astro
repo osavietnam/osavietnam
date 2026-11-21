@@ -519,7 +519,7 @@ requestAnimationFrame(() => {
         method:'PUT', headers:{'Content-Type':'application/json'},
         body:JSON.stringify({ collection:'thanh-chan-phuoc', id:active.id, originalId:active.id, fm, body:active.body, extension:active.extension, checksum:active.checksum }),
       });
-      setMessage('Đã lưu. Đang cập nhật thẻ…');
+      setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
       setTimeout(() => location.reload(), 450);
     } catch (error) {
       save.disabled = false;

@@ -255,7 +255,7 @@ const { entryId, label = 'Sửa bài viết', variant = 'primary', kind = 'schol
               extension: active.extension, checksum: active.checksum,
             }),
           });
-          setMessage('Đã lưu. Đang cập nhật trang…');
+          setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
           window.setTimeout(() => {
             const route = typeof result.route === 'string' ? result.route : location.href;
             location.href = route;

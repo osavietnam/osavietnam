@@ -1,5 +1,6 @@
 ---
 import { readAdminSession } from '../../lib/admin-auth';
+import StudioPublishBar from '../../components/StudioPublishBar.astro';
 
 export const prerender = false;
 const authenticated = Boolean(readAdminSession(Astro.request));
@@ -76,4 +77,5 @@ Astro.response.headers.set('Referrer-Policy', 'same-origin');
     byId('delete-post').onclick=async()=>{const id=fields['post-id'].value;if(!id||!confirm(`Xóa “${fields.title.value}”?`))return;try{await request(`/api/admin/posts/${id}`,{method:'POST',body:JSON.stringify({action:'delete'})});closeEditor();await load()}catch(error){message.textContent=error.message}};byId('new-post').onclick=()=>showEditor();byId('cancel-edit').onclick=closeEditor;byId('search').oninput=render;byId('status-filter').onchange=render;byId('logout').onclick=async()=>{await request('/api/admin/session',{method:'POST',body:JSON.stringify({action:'logout'})});location.reload()};load();
   }
 </script>
+<StudioPublishBar />
 </body></html>

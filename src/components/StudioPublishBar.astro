@@ -1,0 +1,71 @@
+<aside class="studio-publish" data-studio-publish hidden aria-live="polite">
+  <div class="studio-publish__summary">
+    <strong><span data-studio-count>0</span> thay đổi đang chờ</strong>
+    <span data-studio-message>Bạn có thể tiếp tục sửa nhiều nội dung rồi xuất bản một lần.</span>
+    <details>
+      <summary>Xem các tệp đã thay đổi</summary>
+      <ul data-studio-files></ul>
+    </details>
+  </div>
+  <div class="studio-publish__actions">
+    <button type="button" class="studio-discard" data-studio-discard>Hủy thay đổi</button>
+    <button type="button" class="studio-publish-button" data-studio-submit>Xuất bản tất cả</button>
+  </div>
+</aside>
+
+<style>
+  .studio-publish{position:fixed;z-index:2147483000;right:1rem;bottom:1rem;width:min(39rem,calc(100vw - 2rem));display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border:1px solid #c9b06b;border-radius:12px;color:#183f2c;background:#fffdf6;box-shadow:0 12px 38px #10291f40;font-family:"Be Vietnam Pro",Inter,system-ui,sans-serif}.studio-publish[hidden]{display:none}.studio-publish__summary{min-width:0;display:grid;gap:.2rem}.studio-publish__summary strong{font-size:.92rem}.studio-publish__summary>span,.studio-publish summary,.studio-publish li{font-size:.72rem;color:#627269}.studio-publish details{margin-top:.12rem}.studio-publish summary{cursor:pointer}.studio-publish ul{max-height:7rem;margin:.35rem 0 0;padding-left:1.25rem;overflow:auto}.studio-publish__actions{display:flex;flex:0 0 auto;gap:.45rem}.studio-publish button{border:1px solid #aebfb4;border-radius:8px;padding:.62rem .78rem;font:inherit;font-size:.75rem;font-weight:800;cursor:pointer}.studio-discard{color:#7d3838;background:#fff}.studio-publish-button{color:#fff;border-color:#176143!important;background:#176143}.studio-publish button:disabled{cursor:wait;opacity:.6}@media(max-width:600px){.studio-publish{align-items:stretch;flex-direction:column}.studio-publish__actions{justify-content:flex-end}.studio-publish button{flex:1}}
+</style>
+
+<script>
+  const bar = document.querySelector('[data-studio-publish]');
+  if (bar instanceof HTMLElement && !bar.dataset.ready) {
+    bar.dataset.ready = 'true';
+    const countNode = bar.querySelector('[data-studio-count]');
+    const filesNode = bar.querySelector('[data-studio-files]');
+    const messageNode = bar.querySelector('[data-studio-message]');
+    const submit = bar.querySelector('[data-studio-submit]');
+    const discard = bar.querySelector('[data-studio-discard]');
+
+    const request = async (options) => {
+      const response = await fetch('/api/admin/studio-publish', options);
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || 'Không thể kết nối Content Studio.');
+      return payload;
+    };
+    const render = ({ count = 0, files = [] }) => {
+      countNode.textContent = String(count);
+      filesNode.replaceChildren(...files.map((file) => {
+        const item = document.createElement('li');
+        item.textContent = `${file.deleted ? 'Xóa: ' : ''}${file.path}`;
+        return item;
+      }));
+      bar.hidden = count === 0;
+    };
+    const refresh = async () => {
+      try { render(await request()); } catch (error) { if (!String(error).includes('đăng nhập')) bar.hidden = true; }
+    };
+    const busy = (value) => { submit.disabled = value; discard.disabled = value; };
+
+    submit.addEventListener('click', async () => {
+      if (!confirm('Xuất bản toàn bộ thay đổi đang chờ lên website?')) return;
+      busy(true); messageNode.textContent = 'Đang tạo một commit và gửi Hostinger deploy…';
+      try {
+        const result = await request({ method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'publish' }) });
+        render({ count: 0, files: [] });
+        alert(`Đã xuất bản ${result.count} tệp trong một commit. Hostinger sẽ cập nhật website sau khoảng 1–3 phút.`);
+      } catch (error) { messageNode.textContent = error.message; }
+      finally { busy(false); }
+    });
+    discard.addEventListener('click', async () => {
+      if (!confirm('Hủy toàn bộ thay đổi đang chờ và khôi phục nội dung hiện tại?')) return;
+      busy(true); messageNode.textContent = 'Đang khôi phục…';
+      try {
+        await request({ method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'discard' }) });
+        render({ count: 0, files: [] }); location.reload();
+      } catch (error) { messageNode.textContent = error.message; busy(false); }
+    });
+    refresh();
+    window.setInterval(refresh, 5000);
+  }
+</script>

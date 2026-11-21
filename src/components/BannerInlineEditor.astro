@@ -400,7 +400,7 @@
           checksum: active.checksum,
         }),
       });
-      setMessage('Đã lưu. Đang cập nhật trang…');
+      setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
       setTimeout(() => location.reload(), 350);
     } catch (error) {
       if (save) save.disabled = false;

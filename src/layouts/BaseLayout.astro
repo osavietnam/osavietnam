@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import Banner from '../components/Banner.astro';
 import ProseImageLightbox from '../components/ProseImageLightbox.astro';
 import BannerInlineEditor from '../components/BannerInlineEditor.astro';
+import StudioPublishBar from '../components/StudioPublishBar.astro';
 
 // Nạp NGUYÊN BẢN css gốc để giữ đúng thiết kế cũ
 import '../styles/base.css';
@@ -461,5 +462,6 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
         });
       })();
     </script>
+    <StudioPublishBar />
   </body>
 </html>

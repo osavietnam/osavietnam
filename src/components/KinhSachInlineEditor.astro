@@ -185,7 +185,7 @@ const {
           extension: active.extension, checksum: active.checksum,
         }),
       });
-      setMessage('Đã lưu. Đang cập nhật trang…');
+      setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
       const isDetail = Boolean(entryId);
       setTimeout(() => {
         if (isDetail && result.route) location.href = result.route;

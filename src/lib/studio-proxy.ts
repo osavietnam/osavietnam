@@ -3,7 +3,14 @@ import path from 'node:path';
 import { Readable, Writable } from 'node:stream';
 import { finished } from 'node:stream/promises';
 import { readAdminSession, requestIsSameOrigin } from './admin-auth';
-import { getStudioGithubToken } from './admin-db';
+import {
+  clearStudioPendingChanges,
+  deleteStudioPendingChange,
+  getStudioGithubToken,
+  getStudioPendingChange,
+  listStudioPendingChanges,
+  stageStudioPendingChange,
+} from './admin-db';
 // The local Content Studio server is reused behind an authenticated same-origin proxy.
 // @ts-ignore The implementation is an ESM script shared with `npm run admin`.
 import { studioRequestHandler } from '../../scripts/admin-server.mjs';
@@ -59,6 +66,34 @@ function changedFiles(before: Map<string, FileState>, after: Map<string, FileSta
   });
 }
 
+function trackedFile(file: string) {
+  return trackedRoots.some(root => file === root || file.startsWith(`${root}/`));
+}
+
+function studioFile(file: string) {
+  if (!trackedFile(file)) throw new Error(`Đường dẫn Content Studio không hợp lệ: ${file}`);
+  const absolute = path.resolve(studioRoot, ...file.split('/'));
+  const prefix = `${path.resolve(studioRoot)}${path.sep}`;
+  if (!absolute.startsWith(prefix)) throw new Error(`Đường dẫn Content Studio không hợp lệ: ${file}`);
+  return absolute;
+}
+
+function writeStudioFile(file: string, content: Buffer | null, deleted: boolean) {
+  const absolute = studioFile(file);
+  if (deleted) {
+    fs.rmSync(absolute, { force: true });
+    return;
+  }
+  fs.mkdirSync(path.dirname(absolute), { recursive: true });
+  fs.writeFileSync(absolute, content || Buffer.alloc(0));
+}
+
+async function applyPendingChanges() {
+  const pending = await listStudioPendingChanges();
+  for (const change of pending) writeStudioFile(change.path, change.content, change.deleted);
+  return pending;
+}
+
 async function githubJson(url: string, init: RequestInit, token: string) {
   const response = await fetch(url, {
     ...init,
@@ -74,6 +109,46 @@ async function githubJson(url: string, init: RequestInit, token: string) {
   const data = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(data.message || `GitHub HTTP ${response.status}`);
   return data;
+}
+
+async function githubFile(file: string, token: string) {
+  const repository = process.env.STUDIO_GITHUB_REPO || '';
+  const branch = process.env.STUDIO_GITHUB_BRANCH || 'main';
+  const encodedPath = file.split('/').map(encodeURIComponent).join('/');
+  const response = await fetch(`https://api.github.com/repos/${repository}/contents/${encodedPath}?ref=${encodeURIComponent(branch)}`, {
+    headers: {
+      accept: 'application/vnd.github+json',
+      authorization: `Bearer ${token}`,
+      'user-agent': 'osa-vietnam-content-studio',
+      'x-github-api-version': '2022-11-28',
+    },
+  });
+  if (response.status === 404) return { content: null, deleted: true };
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.message || `GitHub HTTP ${response.status}`);
+  if (data.type !== 'file' || !data.sha) throw new Error(`Không thể đọc file gốc từ GitHub: ${file}`);
+  if (data.encoding === 'base64' && data.content) {
+    return { content: Buffer.from(String(data.content).replace(/\s/g, ''), 'base64'), deleted: false };
+  }
+  const blob = await githubJson(`https://api.github.com/repos/${repository}/git/blobs/${data.sha}`, { method: 'GET' }, token);
+  return { content: Buffer.from(String(blob.content || '').replace(/\s/g, ''), 'base64'), deleted: false };
+}
+
+async function stageChanges(files: string[], token: string) {
+  for (const file of files) {
+    const existing = await getStudioPendingChange(file);
+    const original = existing || await githubFile(file, token);
+    const absolute = studioFile(file);
+    const deleted = !fs.existsSync(absolute);
+    const content = deleted ? null : fs.readFileSync(absolute);
+    const originalContent = existing ? existing.originalContent : original.content;
+    const originalDeleted = existing ? existing.originalDeleted : original.deleted;
+    const reverted = deleted === originalDeleted
+      && (deleted || Buffer.compare(content || Buffer.alloc(0), originalContent || Buffer.alloc(0)) === 0);
+    if (reverted) await deleteStudioPendingChange(file);
+    else await stageStudioPendingChange({ path: file, content, deleted, originalContent, originalDeleted });
+  }
+  return listStudioPendingChanges();
 }
 
 async function commitChanges(files: string[], message: string, token: string) {
@@ -160,14 +235,64 @@ async function handleMutation(request: Request, upstreamPath: string) {
   const after = snapshot();
   const changes = changedFiles(before, after);
   try {
-    const commit = await commitChanges(changes, `content: update from Studio (${upstreamPath})`, token);
+    const pending = await stageChanges(changes, token);
     const headers = new Headers(response.headers);
-    if (commit) headers.set('x-studio-commit', commit);
+    headers.set('x-studio-staged', String(pending.length));
     return new Response(responseBody, { status: response.status, headers });
   } catch (error) {
-    console.error('[studio] GitHub sync failed:', error);
+    console.error('[studio] staging failed:', error);
     return json({ error: error instanceof Error ? error.message : 'Không thể đồng bộ GitHub.' }, 502);
   }
+}
+
+function queueMutation<T>(operation: () => Promise<T>) {
+  const task = mutationQueue.then(operation, operation);
+  mutationQueue = task.then(() => undefined, () => undefined);
+  return task;
+}
+
+export async function studioPendingStatus() {
+  const pending = await listStudioPendingChanges();
+  return {
+    count: pending.length,
+    files: pending.map((change) => ({
+      path: change.path,
+      deleted: change.deleted,
+      size: change.content?.byteLength ?? 0,
+      updatedAt: change.updatedAt,
+    })),
+  };
+}
+
+export function publishStudioPendingChanges() {
+  return queueMutation(async () => {
+    const token = await getStudioGithubToken();
+    if (!token) throw new Error('Chưa cấu hình GitHub token.');
+
+    process.env.STUDIO_GITHUB_REPO ||= 'osavietnam/osavietnam';
+    process.env.STUDIO_GITHUB_BRANCH ||= 'main';
+    const pending = await applyPendingChanges();
+    if (pending.length === 0) return { count: 0, commit: null };
+
+    const commit = await commitChanges(
+      pending.map((change) => change.path),
+      `content: publish ${pending.length} staged change${pending.length === 1 ? '' : 's'}`,
+      token,
+    );
+    await clearStudioPendingChanges();
+    return { count: pending.length, commit };
+  });
+}
+
+export function discardStudioPendingChanges() {
+  return queueMutation(async () => {
+    const pending = await listStudioPendingChanges();
+    for (const change of pending) {
+      await writeStudioFile(change.path, change.originalContent, change.originalDeleted);
+    }
+    await clearStudioPendingChanges();
+    return { count: pending.length };
+  });
 }
 
 export async function proxyStudio(request: Request, upstreamPath: string) {
@@ -178,11 +303,10 @@ export async function proxyStudio(request: Request, upstreamPath: string) {
   process.env.STUDIO_GITHUB_BRANCH ||= 'main';
   const mutation = !['GET', 'HEAD', 'OPTIONS'].includes(request.method.toUpperCase());
   if (mutation && !requestIsSameOrigin(request)) return json({ error: 'Yêu cầu không hợp lệ.' }, 403);
+  await applyPendingChanges();
   if (!mutation) {
     const { response, responseBody } = await forward(request, upstreamPath);
     return new Response(responseBody, { status: response.status, headers: response.headers });
   }
-  const task = mutationQueue.then(() => handleMutation(request, upstreamPath), () => handleMutation(request, upstreamPath));
-  mutationQueue = task.then(() => undefined, () => undefined);
-  return task as Promise<Response>;
+  return queueMutation(() => handleMutation(request, upstreamPath));
 }

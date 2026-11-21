@@ -2475,7 +2475,7 @@ const ADMIN = window.location.origin;
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
-      setMessage('Đã lưu. Đang cập nhật niên biểu…');
+      setMessage('Đã lưu vào vùng chờ. Hãy bấm “Xuất bản tất cả” khi hoàn tất.');
       setTimeout(() => location.reload(), 350);
     } catch (error) {
       save.disabled = false;
