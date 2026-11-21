@@ -1,13 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { Readable, Writable } from 'node:stream';
+import { finished } from 'node:stream/promises';
 import { readAdminSession, requestIsSameOrigin } from './admin-auth';
 import { getStudioGithubToken } from './admin-db';
 // The local Content Studio server is reused behind an authenticated same-origin proxy.
 // @ts-ignore The implementation is an ESM script shared with `npm run admin`.
-import { startStudioServer } from '../../scripts/admin-server.mjs';
+import { studioRequestHandler } from '../../scripts/admin-server.mjs';
 
 const studioRoot = path.resolve(process.env.STUDIO_ROOT || process.cwd());
-const studioPort = Number(process.env.STUDIO_PORT || 4323);
 const trackedRoots = [
   'src/content',
   'src/data',
@@ -105,21 +106,39 @@ async function commitChanges(files: string[], message: string, token: string) {
   return commit.sha as string;
 }
 
+class StudioResponse extends Writable {
+  statusCode = 200;
+  headers = new Headers();
+  chunks: Buffer[] = [];
+  setHeader(name: string, value: string) { this.headers.set(name, value); return this; }
+  getHeader(name: string) { return this.headers.get(name) || undefined; }
+  writeHead(status: number, headers?: Record<string, string>) {
+    this.statusCode = status;
+    if (headers) for (const [name, value] of Object.entries(headers)) this.headers.set(name, value);
+    return this;
+  }
+  _write(chunk: Buffer | string, encoding: BufferEncoding, callback: (error?: Error | null) => void) {
+    this.chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, encoding));
+    callback();
+  }
+}
+
 async function forward(request: Request, upstreamPath: string, body?: ArrayBuffer) {
-  await startStudioServer();
   const sourceUrl = new URL(request.url);
-  const upstream = new URL(`http://127.0.0.1:${studioPort}${upstreamPath}`);
-  upstream.search = sourceUrl.search;
-  const headers = new Headers(request.headers);
-  for (const name of ['host', 'connection', 'content-length', 'cookie', 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto']) headers.delete(name);
-  const response = await fetch(upstream, {
-    method: request.method,
-    headers,
-    body: body && body.byteLength ? body : undefined,
-    redirect: 'manual',
-  });
-  const responseBody = await response.arrayBuffer();
-  return { response, responseBody };
+  const nodeRequest = Readable.from(body && body.byteLength ? [Buffer.from(body)] : []) as Readable & {
+    method: string; url: string; headers: Record<string, string>;
+  };
+  nodeRequest.method = request.method;
+  nodeRequest.url = `${upstreamPath}${sourceUrl.search}`;
+  nodeRequest.headers = Object.fromEntries([...request.headers.entries()].map(([name, value]) => [name.toLowerCase(), value]));
+  const nodeResponse = new StudioResponse();
+  const completed = finished(nodeResponse);
+  await studioRequestHandler(nodeRequest, nodeResponse);
+  await completed;
+  return {
+    response: { ok: nodeResponse.statusCode >= 200 && nodeResponse.statusCode < 300, status: nodeResponse.statusCode, headers: nodeResponse.headers },
+    responseBody: Buffer.concat(nodeResponse.chunks),
+  };
 }
 
 async function handleMutation(request: Request, upstreamPath: string) {

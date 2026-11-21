@@ -595,7 +595,7 @@ function readBody(req) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+export async function studioRequestHandler(req, res) {
   const requestOrigin = req.headers.origin || '';
   if (/^http:\/\/(?:localhost|127\.0\.0\.1|10(?:\.\d{1,3}){3}|192\.168(?:\.\d{1,3}){2}|172\.(?:1[6-9]|2\d|3[01])(?:\.\d{1,3}){2}):4321$/.test(requestOrigin)) {
     res.setHeader('Access-Control-Allow-Origin', requestOrigin);
@@ -1264,7 +1264,9 @@ const server = http.createServer(async (req, res) => {
     console.error(e);
     err(e.message, 500);
   }
-});
+}
+
+const server = http.createServer(studioRequestHandler);
 
 syncAllSaintIndexEntries();
 
