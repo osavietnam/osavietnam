@@ -16,7 +16,7 @@ image: "../../../assets/plato.webp"
 heroImage: "../../../assets/plato-hero.png"
 language: "vi"
 featured: true
-draft: false
+draft: true
 ---
 
 Để hiểu *Ý thể Cái Thiện* (*Form of the Good*), trước hết cần hiểu khái niệm *Ý thể* nơi Plato. *Giả thiết Ý thể* (*Theory of Forms*) — đôi khi còn được gọi bằng một tên dễ gây nhầm lẫn là *Giả thiết Ý niệm* (*Theory of Ideas*) — có thể được xem là tư tưởng nổi tiếng nhất trong lịch sử triết học, đồng thời là trái tim của toàn bộ triết học Plato.

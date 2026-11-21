@@ -8,7 +8,14 @@ import { getStudioGithubToken } from './admin-db';
 // @ts-ignore The implementation is an ESM script shared with `npm run admin`.
 import { studioRequestHandler } from '../../scripts/admin-server.mjs';
 
-const studioRoot = path.resolve(process.env.STUDIO_ROOT || process.cwd());
+const workRoot = path.resolve(process.env.STUDIO_ROOT || process.cwd());
+const studioRoot = process.env.STUDIO_ROOT
+  ? workRoot
+  : fs.existsSync(path.join(workRoot, 'src'))
+    ? workRoot
+    : fs.existsSync(path.join(workRoot, 'dist', 'src'))
+      ? path.join(workRoot, 'dist')
+      : workRoot;
 const trackedRoots = [
   'src/content',
   'src/data',
