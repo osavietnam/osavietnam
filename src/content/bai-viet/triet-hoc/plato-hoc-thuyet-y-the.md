@@ -4,7 +4,7 @@ author: "Prof. Peter Kreeft"
 authorDetails:
 category: "Triết Học"
 subcategory: "Siêu Hình Học"
-excerpt: "Giả thiết Ý thể là một trong những tư tưởng nổi tiếng nhất của Plato, đồng thời là trung tâm của toàn bộ triết học Plato. [kiểm tra tự động xuất bản]"
+excerpt: "Giả thiết Ý thể là một trong những tư tưởng nổi tiếng nhất của Plato, đồng thời là trung tâm của toàn bộ triết học Plato."
 date: "2025-09-02"
 readings:
 tags:
