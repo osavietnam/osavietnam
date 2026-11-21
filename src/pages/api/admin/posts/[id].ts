@@ -22,3 +22,11 @@ export const DELETE: APIRoute = async ({ request, params }) => {
   await deletePost(id); return json({ ok: true });
 };
 
+export const POST: APIRoute = async ({ request, params }) => {
+  if (!readAdminSession(request)) return json({ error: 'Chưa đăng nhập.' }, 401);
+  if (!requestIsSameOrigin(request)) return json({ error: 'Yêu cầu không hợp lệ.' }, 403);
+  const body = await request.json().catch(() => ({}));
+  if (body.action !== 'delete') return json({ error: 'Hành động không hợp lệ.' }, 422);
+  const id = Number(params.id); if (!id) return json({ error: 'ID không hợp lệ.' }, 422);
+  await deletePost(id); return json({ ok: true });
+};

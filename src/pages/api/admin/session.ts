@@ -12,12 +12,13 @@ export const GET: APIRoute = ({ request }) => json({ authenticated: Boolean(read
 
 export const POST: APIRoute = async ({ request }) => {
   if (!requestIsSameOrigin(request)) return json({ error: 'Yêu cầu không hợp lệ.' }, 403);
+  const body = await request.json().catch(() => ({}));
+  if (body.action === 'logout') return json({ ok: true }, 200, { 'set-cookie': clearSessionCookie() });
   const client = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   const now = Date.now();
   const current = attempts.get(client);
   if (current && current.reset > now && current.count >= MAX_ATTEMPTS) return json({ error: 'Đăng nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút.' }, 429);
   if (!current || current.reset <= now) attempts.set(client, { count: 0, reset: now + WINDOW_MS });
-  const body = await request.json().catch(() => ({}));
   const username = String(body.username ?? '');
   const password = String(body.password ?? '');
   if (!verifyAdminPassword(username, password)) {
