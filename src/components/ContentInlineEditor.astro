@@ -78,7 +78,7 @@ const { entryId, label = 'Sửa bài viết', variant = 'primary', kind = 'schol
   const initializeContentInlineEditors = () => {
     document.querySelectorAll<HTMLElement>('[data-content-inline-root]:not([data-content-inline-ready])').forEach((root) => {
       root.dataset.contentInlineReady = 'true';
-      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const ADMIN = window.location.origin;
       const entryId = root.dataset.entryId || '';
       const articleKind = root.dataset.articleKind || 'scholar';
       const trigger = root.querySelector<HTMLButtonElement>('.content-inline-trigger');

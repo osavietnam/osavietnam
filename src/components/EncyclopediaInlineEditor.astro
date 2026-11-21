@@ -39,7 +39,7 @@ const { entryId = '' } = Astro.props;
 
 <script define:vars={{ entryId }}>
 (() => {
-  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const ADMIN = window.location.origin;
   const COLLECTION = 'augustine-encyclopedia';
   const root = document.querySelector('[data-ency-editor-root]:not([data-ready])');
   if (!root) return;

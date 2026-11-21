@@ -392,7 +392,7 @@ requestAnimationFrame(() => {
   const dialog = document.getElementById('saintInlineDialog') as HTMLDialogElement | null;
   if (!dialog) return;
 
-  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const ADMIN = window.location.origin;
   const form = document.getElementById('saintInlineForm') as HTMLFormElement;
   const title = document.getElementById('saintInlineTitle') as HTMLElement;
   const name = document.getElementById('saintInlineName') as HTMLInputElement;

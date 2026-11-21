@@ -95,7 +95,7 @@ const {
   const initializeCollectionProseEditors = () => {
     document.querySelectorAll<HTMLElement>('[data-collection-prose-root]:not([data-collection-prose-ready])').forEach((root) => {
       root.dataset.collectionProseReady = 'true';
-      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const ADMIN = window.location.origin;
       const collection = root.dataset.collection || '';
       const initialId = root.dataset.entryId || '';
       const activeSelector = root.dataset.activeSelector || '';

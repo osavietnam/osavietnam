@@ -77,7 +77,7 @@ const {
 
 <script define:vars={{ entryId, triggerSelector, editBody }}>
 (() => {
-  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const ADMIN = window.location.origin;
   const root = document.querySelector('[data-ks-inline-root]');
   const dialog = root?.querySelector('#ksInlineDialog');
   if (!root || !dialog) {

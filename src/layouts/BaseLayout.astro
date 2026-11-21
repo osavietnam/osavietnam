@@ -337,7 +337,7 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
     <script>
     (function () {
       if (document.querySelector('[data-banner-editor-root]')) return;
-      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const ADMIN = window.location.origin;
       const bar = null;
       const editBtn = null;
       const actions = null;

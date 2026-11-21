@@ -60,7 +60,7 @@ const {
 
 <script define:vars={{ collection, entryId, triggerSelector }}>
 (() => {
-  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const ADMIN = window.location.origin;
   const root = document.querySelector('[data-augnet-editor-root]:not([data-ready])');
   if (!root) return;
   if (document.documentElement.dataset.augnetInlineEditorReady === 'true') {

@@ -1,4 +1,5 @@
 import mysql from 'mysql2/promise';
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
 
 export type ManagedPost = {
   id: number;
@@ -15,6 +16,7 @@ export type ManagedPost = {
 
 let pool: mysql.Pool | undefined;
 let schemaReady: Promise<void> | undefined;
+let settingsReady: Promise<void> | undefined;
 
 function database() {
   if (pool) return pool;
@@ -105,4 +107,53 @@ export async function updatePost(id: number, input: Omit<ManagedPost, 'id' | 'cr
 export async function deletePost(id: number) {
   await ensureAdminSchema();
   await database().execute('DELETE FROM admin_posts WHERE id=?', [id]);
+}
+
+async function ensureStudioSettingsSchema() {
+  settingsReady ??= database().execute(`
+    CREATE TABLE IF NOT EXISTS studio_settings (
+      setting_key VARCHAR(100) NOT NULL,
+      setting_value LONGTEXT NOT NULL,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (setting_key)
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `).then(() => undefined);
+  return settingsReady;
+}
+
+function settingsKey() {
+  const secret = process.env.ADMIN_SESSION_SECRET || '';
+  if (!secret) throw new Error('ADMIN_SESSION_SECRET is not configured');
+  return createHash('sha256').update(`osa-studio:${secret}`).digest();
+}
+
+function encryptSetting(value: string) {
+  const iv = randomBytes(12);
+  const cipher = createCipheriv('aes-256-gcm', settingsKey(), iv);
+  const encrypted = Buffer.concat([cipher.update(value, 'utf8'), cipher.final()]);
+  return ['v1', iv.toString('base64url'), cipher.getAuthTag().toString('base64url'), encrypted.toString('base64url')].join(':');
+}
+
+function decryptSetting(value: string) {
+  const [version, iv, tag, encrypted] = value.split(':');
+  if (version !== 'v1' || !iv || !tag || !encrypted) throw new Error('Invalid encrypted setting');
+  const decipher = createDecipheriv('aes-256-gcm', settingsKey(), Buffer.from(iv, 'base64url'));
+  decipher.setAuthTag(Buffer.from(tag, 'base64url'));
+  return Buffer.concat([decipher.update(Buffer.from(encrypted, 'base64url')), decipher.final()]).toString('utf8');
+}
+
+export async function setStudioGithubToken(token: string) {
+  await ensureStudioSettingsSchema();
+  await database().execute(
+    'INSERT INTO studio_settings (setting_key,setting_value) VALUES (?,?) ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value)',
+    ['github_token', encryptSetting(token)],
+  );
+}
+
+export async function getStudioGithubToken() {
+  if (process.env.STUDIO_GITHUB_TOKEN) return process.env.STUDIO_GITHUB_TOKEN;
+  await ensureStudioSettingsSchema();
+  const [rows] = await database().execute('SELECT setting_value FROM studio_settings WHERE setting_key=? LIMIT 1', ['github_token']);
+  const encrypted = (rows as any[])[0]?.setting_value;
+  return encrypted ? decryptSetting(String(encrypted)) : '';
 }

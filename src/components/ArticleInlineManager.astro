@@ -183,7 +183,7 @@ const labels = {
   const initArticleManagers = () => {
     document.querySelectorAll<HTMLElement>('[data-article-manager-root]:not([data-article-manager-ready])').forEach((root) => {
       root.dataset.articleManagerReady = 'true';
-      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const ADMIN = window.location.origin;
       const kind = (root.dataset.kind || 'news') as keyof typeof articleManagerConfigs;
       const fallbackConfig = articleManagerConfigs[kind];
       let categories: TaxonomyCategory[] = fallbackConfig.categories.map((category) => ({

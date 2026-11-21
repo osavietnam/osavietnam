@@ -81,7 +81,7 @@ const { textareaId = '', dataField = '', label = 'Nội dung', hidden = false } 
   const inlineProseImagePreviewUrl = (value: string) => {
     const src = String(value || '').trim();
     if (!src || src.startsWith('/') || /^https?:\/\//i.test(src) || /^data:/i.test(src)) return src;
-    const admin = `${window.location.protocol}//${window.location.hostname}:4322`;
+    const admin = window.location.origin;
     return `${admin}/api/studio/image?scope=articles&value=${encodeURIComponent(src)}`;
   };
 
@@ -276,7 +276,7 @@ const { textareaId = '', dataField = '', label = 'Nội dung', hidden = false } 
         if (quoteBuilder) quoteBuilder.hidden = false;
         try {
           if (!quoteCatalog) {
-            const admin = `${window.location.protocol}//${window.location.hostname}:4322`;
+            const admin = window.location.origin;
             const response = await fetch(`${admin}/api/studio/quote-sources`);
             if (!response.ok) throw new Error('Không thể tải danh mục nguồn');
             quoteCatalog = await response.json();

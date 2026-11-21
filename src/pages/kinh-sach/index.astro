@@ -529,7 +529,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
     });
 
     // Tự bật biên tập khi Admin API local sẵn sàng.
-    fetch(`${window.location.protocol}//${window.location.hostname}:4322/api/studio/manifest`, { signal: AbortSignal.timeout(2000) })
+    fetch('/api/studio/manifest', { signal: AbortSignal.timeout(2000) })
       .then((r) => {
         if (r.ok) {
           isAdmin = true;

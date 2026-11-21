@@ -2388,7 +2388,7 @@ timelineLifeFilter?.addEventListener('click', () => {
   document.querySelectorAll('.tl-row[data-has-aug="false"]').forEach(item => item.toggleAttribute('hidden', lifeOnly));
 });
 
-const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+const ADMIN = window.location.origin;
 
 /* Inline editor for timeline events. */
 (() => {

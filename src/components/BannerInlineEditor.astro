@@ -66,7 +66,7 @@
 
 <script>
 (() => {
-  const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+  const ADMIN = window.location.origin;
   const root = document.querySelector<HTMLElement>('[data-banner-editor-root]');
   const container = document.querySelector<HTMLElement>('.banner-container[data-banner-key], [data-banner-editor-container][data-banner-key]');
   const trigger = container?.querySelector<HTMLButtonElement>('[data-banner-inline-edit]');

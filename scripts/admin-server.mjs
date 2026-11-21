@@ -8,7 +8,9 @@ import path from 'path';
 import { createHash } from 'crypto';
 import { fileURLToPath } from 'url';
 
-const ROOT          = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const MODULE_FILE   = fileURLToPath(import.meta.url);
+const IS_DIRECT     = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(MODULE_FILE);
+const ROOT          = path.resolve(process.env.STUDIO_ROOT || process.cwd());
 try { process.loadEnvFile(path.join(ROOT, '.env.local')); } catch (error) {
   if (error?.code !== 'ENOENT') console.warn('Không thể đọc .env.local:', error.message);
 }
@@ -27,7 +29,7 @@ const VOCATION_IMG = path.join(ROOT, 'public/images/on-goi');
 const SAINT_INDEX   = path.join(ROOT, 'src/data/saint-index.json');
 const TIMELINE_OVERRIDES_PATH = path.join(ROOT, 'src/data/augustine-timeline-overrides.json');
 const ARTICLE_TAXONOMY_PATH = path.join(ROOT, 'src/data/article-taxonomy.json');
-const PORT          = 4322;
+const PORT          = Number(process.env.STUDIO_PORT || (IS_DIRECT ? 4322 : 4323));
 const UTF8          = { encoding: 'utf8' };
 
 const STUDIO_TRASH = path.join(ROOT, 'temp_', 'studio-trash');
@@ -1266,7 +1268,21 @@ const server = http.createServer(async (req, res) => {
 
 syncAllSaintIndexEntries();
 
-server.listen(PORT, '0.0.0.0', () => {
+let startPromise;
+export function startStudioServer() {
+  if (server.listening) return Promise.resolve(PORT);
+  if (startPromise) return startPromise;
+  startPromise = new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(PORT, IS_DIRECT ? '0.0.0.0' : '127.0.0.1', () => {
+      server.off('error', reject);
+      resolve(PORT);
+    });
+  });
+  return startPromise;
+}
+
+if (IS_DIRECT) startStudioServer().then(() => {
   console.log('\n╔══════════════════════════════════════════╗');
   console.log(`║  Admin API  →  http://localhost:${PORT}     ║`);
   console.log('║  Inline edit is active directly on local pages  ║');

@@ -778,7 +778,7 @@ document.querySelectorAll('.og-masthead-quote').forEach(el => {
 });
 
 // ── Inline edit ───────────────────────────────────────────────────
-const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+const ADMIN = window.location.origin;
 const oeBar     = document.getElementById('og-inline-edit-tools');
 const oeEditBtn = document.getElementById('oe-edit-btn');
 const oeSaveRow = document.getElementById('oe-save-row');

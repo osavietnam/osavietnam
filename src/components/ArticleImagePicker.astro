@@ -54,7 +54,7 @@ const { dataField, label, scope = 'articles' } = Astro.props;
   const initializeArticleImagePickers = () => {
     document.querySelectorAll<HTMLElement>('[data-article-image-picker]:not([data-image-picker-ready])').forEach((root) => {
       root.dataset.imagePickerReady = 'true';
-      const ADMIN = `${window.location.protocol}//${window.location.hostname}:4322`;
+      const ADMIN = window.location.origin;
       const scope = root.dataset.imageScope || 'articles';
       const input = root.querySelector<HTMLInputElement>(':scope > .article-image-control > input[data-field]');
       const libraryButton = root.querySelector<HTMLButtonElement>('.article-image-library-button');
