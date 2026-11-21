@@ -355,6 +355,21 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
     const _todayReady = renderTodayCard(); // giữ promise để scroll đợi layout ổn định
 
     // ---- Bảng index ----
+    function ensureRowEditButtons() {
+      if (!isAdmin) return;
+      els.body.querySelectorAll('tr[data-id]').forEach((row) => {
+        if (row.querySelector('.row-edit-btn')) return;
+        const cell = row.querySelector('td:last-child');
+        if (!cell) return;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'row-edit-btn';
+        button.dataset.id = row.dataset.id || '';
+        button.title = 'Sửa';
+        button.textContent = '✎';
+        cell.append(button);
+      });
+    }
     function render(rows) {
       if (!rows.length) {
         els.body.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:3rem;color:var(--ink-cream-soft);font-style:italic;">Không tìm thấy bài nào phù hợp.</td></tr>';
@@ -384,6 +399,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
           <td data-label="Phụng vụ"><span class="ks-liturgy-txt">${esc(expandRanks(r.liturgy))}</span><button type="button" class="row-edit-btn" data-id="${r.id}" title="Sửa">✎</button></td>
         </tr>`;
       }).join('');
+      ensureRowEditButtons();
     }
     function populateAuthors(rows) {
       const authors = [...new Set(rows.map((r) => stripRankAbbr(r.author)).filter(Boolean))].sort();
@@ -535,6 +551,7 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
           isAdmin = true;
           document.body.dataset.ksAdmin = '1';
           if (current) apply();
+          else ensureRowEditButtons();
         }
       })
       .catch(() => {});
