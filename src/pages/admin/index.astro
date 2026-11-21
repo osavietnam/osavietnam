@@ -9,75 +9,68 @@ Astro.response.headers.set('Referrer-Policy', 'same-origin');
 ---
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="robots" content="noindex,nofollow,noarchive" />
-    <title>Quản trị | OSA Việt Nam</title>
-    <style>
-      :root{font-family:Inter,system-ui,sans-serif;color:#14251c;background:#f4f0e7}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}.shell{min-height:100vh}.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;color:#fff;background:#10261c}.brand{display:flex;align-items:center;gap:.8rem}.brand img{width:2.4rem;height:2.4rem}.brand strong{display:block}.brand small{color:#d4c398}.btn{border:0;border-radius:.5rem;padding:.7rem 1rem;font-weight:700;cursor:pointer}.btn-primary{color:#10261c;background:#e5bd68}.btn-muted{color:#fff;background:#385247}.btn-danger{color:#8b1f1f;background:#f6d4d0}.login{width:min(27rem,calc(100% - 2rem));margin:12vh auto;padding:2rem;border:1px solid #d7cdb8;border-radius:1rem;background:#fff;box-shadow:0 1rem 3rem #23392b1a}.login h1{margin:.4rem 0 1.5rem}.field{display:grid;gap:.4rem;margin-bottom:1rem}.field label{font-size:.85rem;font-weight:700;color:#496054}.field input,.field textarea,.field select{width:100%;border:1px solid #bdb7aa;border-radius:.5rem;padding:.7rem;background:#fff}.field textarea{resize:vertical;min-height:7rem}.message{min-height:1.4rem;color:#9d2525}.workspace{display:grid;grid-template-columns:minmax(18rem,32rem) 1fr;gap:1.5rem;padding:1.5rem}.panel{padding:1.25rem;border:1px solid #d7cdb8;border-radius:.8rem;background:#fff}.panel h1,.panel h2{margin-top:0}.form-actions,.list-head,.post-row{display:flex;align-items:center;justify-content:space-between;gap:.7rem}.post-list{display:grid;gap:.75rem}.post-row{padding:.85rem;border:1px solid #e2dacb;border-radius:.55rem}.post-row h3{margin:0 0 .2rem;font-size:1rem}.post-row small{color:#627268}.status{display:inline-block;border-radius:999px;padding:.15rem .5rem;font-size:.72rem;font-weight:800;background:#eee}.status.published{color:#145b35;background:#d9f0e1}.row-actions{display:flex;gap:.4rem}.row-actions button{padding:.45rem .65rem}.empty{padding:2rem;text-align:center;color:#6f786f}.notice{padding:.75rem;border-radius:.5rem;color:#31543f;background:#edf6ef}@media(max-width:850px){.workspace{grid-template-columns:1fr}.topbar{padding:.85rem 1rem}}
-    </style>
-  </head>
-  <body>
-    <main class="shell">
-      <header class="topbar">
-        <div class="brand"><img src="/images/emblem.svg" alt="" /><div><strong>OSA Việt Nam</strong><small>Trung tâm quản trị</small></div></div>
-        {authenticated && <button class="btn btn-muted" id="logout" type="button">Đăng xuất</button>}
-      </header>
-
-      {!authenticated ? (
-        <form class="login" id="login-form">
-          <p>Quản trị nội dung</p><h1>Đăng nhập</h1>
-          <div class="field"><label for="username">Tên đăng nhập</label><input id="username" name="username" autocomplete="username" required /></div>
-          <div class="field"><label for="password">Mật khẩu</label><input id="password" name="password" type="password" autocomplete="current-password" required /></div>
-          <p class="message" id="login-message" role="alert"></p>
-          <button class="btn btn-primary" type="submit">Đăng nhập</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Content Studio | OSA Việt Nam</title>
+  <style>
+    :root{font-family:"Be Vietnam Pro",Inter,system-ui,sans-serif;color:#183f2c;background:#123c2a;--green:#176143;--soft:#edf4ef;--gold:#9c7b3f;--ink:#183f2c;--muted:#65786e;--line:#d3dfd7;--paper:#fbfcfa;--danger:#9c3535}*{box-sizing:border-box}body{margin:0;min-width:320px}button,input,textarea,select{font:inherit}button{cursor:pointer}[hidden]{display:none!important}
+    .page{min-height:100vh;padding:clamp(.75rem,2vw,2rem);background:radial-gradient(circle at 80% 10%,rgba(214,190,122,.18),transparent 28rem),linear-gradient(145deg,rgba(9,52,35,.96),rgba(23,83,57,.9)),url('/images/emblem-color-transparent.png') center/28rem no-repeat}.studio{width:min(1480px,100%);min-height:calc(100vh - clamp(1.5rem,4vw,4rem));margin:auto;overflow:hidden;border:1px solid #ffffff40;border-radius:16px;background:var(--paper);box-shadow:0 28px 80px #00000047}
+    .studio-head{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.5rem 1rem 4.75rem;border-bottom:1px solid var(--line);position:relative}.emblem{position:absolute;left:1.4rem;width:2.55rem;height:2.55rem;object-fit:contain}.eyebrow{margin:0 0 .15rem;color:var(--green);font-size:.74rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}h1,h2,h3{font-family:Georgia,"Noto Serif",serif}.studio-head h1{margin:0;font-size:clamp(1.45rem,2vw,2rem);font-weight:600}.head-actions,.editor-actions{display:flex;align-items:center;gap:.55rem}
+    .btn{border:1px solid #b8cbbf;border-radius:8px;padding:.68rem 1rem;color:var(--ink);background:#fff;font-weight:750;line-height:1.1;text-decoration:none}.btn:hover{border-color:var(--green);background:#f4f8f5}.btn-primary{color:#fff;border-color:var(--green);background:var(--green)}.btn-primary:hover{color:#fff;background:#0f5137}.btn-danger{color:var(--danger);border-color:#e5c5c5;background:#fffafa}.btn-icon{width:2.65rem;height:2.65rem;padding:0;font-size:1.15rem}
+    .workspace{display:grid;grid-template-columns:minmax(18rem,27rem) minmax(0,1fr);min-height:calc(100vh - 7.1rem)}.index{border-right:1px solid var(--line);background:#f6f9f6;display:flex;flex-direction:column;min-height:0}.search-deck{display:grid;grid-template-columns:1fr 8rem;gap:.5rem;padding:.85rem;border-bottom:1px solid var(--line);background:var(--soft)}.control{position:relative}.control span{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:#60766a}.control input,.control select{width:100%;height:3rem;border:1px solid #b8cbbf;border-radius:9px;color:var(--ink);background:white;outline:none}.control input{padding:0 .8rem 0 2.35rem}.control select{padding:0 .65rem}.control input:focus,.control select:focus,.field input:focus,.field textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #1761431c}
+    .post-list{overflow:auto;flex:1}.post-row{width:100%;display:block;padding:1rem 1.2rem;text-align:left;border:0;border-bottom:1px solid #e0e8e2;background:transparent}.post-row:hover,.post-row.is-active{background:#fff;box-shadow:inset 3px 0 var(--green)}.post-row h3{margin:0 0 .35rem;font-family:inherit;font-size:.94rem;line-height:1.45}.post-meta{display:flex;justify-content:space-between;align-items:center;gap:.75rem;color:var(--muted);font-size:.73rem}.status{border-radius:999px;padding:.12rem .45rem;font-size:.64rem;font-weight:800;text-transform:uppercase;white-space:nowrap}.status.published{color:#176143;background:#dceee3}.status.draft{color:#8a6a2f;background:#f3ead3}.empty{padding:3rem 1.5rem;color:var(--muted);text-align:center}
+    .editor{min-width:0;background:#fff}.editor-empty{min-height:70vh;display:grid;place-content:center;gap:.5rem;color:var(--muted);text-align:center}.doc-icon{color:var(--gold);font-size:2.2rem}.editor-empty strong{color:var(--ink);font-family:Georgia,serif;font-size:1.15rem}.editor-form{height:100%;display:flex;flex-direction:column}.editor-titlebar{padding:1.25rem 1.5rem .6rem}.editor-titlebar h2{margin:.15rem 0;font-size:1.45rem}.editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding:.8rem 1.5rem 1.5rem;overflow:auto}.field{display:grid;gap:.38rem}.field.full{grid-column:1/-1}.field label{color:#3f5a4b;font-size:.78rem;font-weight:800}.field input,.field textarea{width:100%;border:1px solid #c4d0c8;border-radius:7px;padding:.72rem .78rem;color:#203d2e;background:#fff;outline:none}.field textarea{resize:vertical;line-height:1.65}.body-field textarea{min-height:18rem;font-family:Georgia,"Noto Serif",serif;font-size:1rem}.publish-card{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;border:1px solid var(--line);border-radius:8px;background:#f7faf8}.publish-card select{border:1px solid #b8cbbf;border-radius:7px;padding:.55rem .7rem;background:white}.editor-footer{margin-top:auto;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1.5rem;border-top:1px solid var(--line);background:#fbfcfb}.message{margin:.5rem 0;color:var(--danger);font-size:.83rem;min-height:1.2rem}.message.ok{color:var(--green)}
+    .login-wrap{min-height:calc(100vh - 7rem);display:grid;place-content:center;padding:2rem}.login-card{width:min(27rem,90vw);padding:2.25rem;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 18px 60px #082a231f}.login-emblem{display:block;width:4.5rem;height:4.5rem;margin:0 auto 1.25rem}.login-card h1{margin:0 0 .4rem;text-align:center}.login-card>p{margin:0 0 1.6rem;color:var(--muted);text-align:center}.login-card .field{margin-top:.9rem}.login-card .btn-primary{width:100%;margin-top:.4rem;padding:.85rem}
+    @media(max-width:820px){.page{padding:0}.studio{min-height:100vh;border-radius:0}.studio-head{padding-left:1rem}.studio-head .emblem,.head-label .eyebrow{display:none}.head-actions .btn:first-child{display:none}.workspace{grid-template-columns:1fr}.index{border-right:0}.index.has-selection{display:none}.editor:not(.has-selection){display:none}.editor-fields{grid-template-columns:1fr}.field.full{grid-column:auto}.editor-footer{align-items:stretch;flex-direction:column}.editor-actions{justify-content:flex-end}}
+  </style>
+</head>
+<body>
+<main class="page"><section class="studio">
+  {authenticated ? <>
+    <header class="studio-head">
+      <img class="emblem" src="/images/emblem-color-transparent.png" alt="" />
+      <div class="head-label"><p class="eyebrow">Biên tập trực tiếp · Tin tức</p><h1>Bài viết</h1></div>
+      <div class="head-actions"><a class="btn" href="/tin-tuc/" target="_blank" rel="noopener">Xem trang ↗</a><button class="btn btn-primary" id="new-post" type="button">+ Thêm bài</button><button class="btn btn-icon" id="logout" type="button" aria-label="Đăng xuất" title="Đăng xuất">×</button></div>
+    </header>
+    <div class="workspace">
+      <aside class="index" id="index-panel">
+        <div class="search-deck"><label class="control"><span>⌕</span><input id="search" type="search" placeholder="Tìm bài viết…" /></label><label class="control"><select id="status-filter" aria-label="Lọc trạng thái"><option value="">Tất cả</option><option value="published">Đã đăng</option><option value="draft">Bản nháp</option></select></label></div>
+        <div class="post-list" id="post-list"><p class="empty">Đang tải…</p></div>
+      </aside>
+      <section class="editor" id="editor-panel">
+        <div class="editor-empty" id="editor-empty"><span class="doc-icon">▤</span><strong>Chọn một bài để biên tập</strong><span>Hoặc tạo bài mới ngay trên trang này.</span></div>
+        <form class="editor-form" id="post-form" hidden>
+          <input type="hidden" id="post-id" />
+          <div class="editor-titlebar"><p class="eyebrow">Nội dung bài viết</p><h2 id="editor-title">Tạo bài viết</h2></div>
+          <div class="editor-fields">
+            <div class="field full"><label for="title">Tiêu đề</label><input id="title" required maxlength="255" /></div>
+            <div class="field"><label for="slug">Slug</label><input id="slug" maxlength="180" placeholder="tự tạo từ tiêu đề" pattern="[a-z0-9-]*" /></div>
+            <div class="field"><label for="author">Tác giả</label><input id="author" maxlength="160" /></div>
+            <div class="field full"><label for="excerpt">Mô tả ngắn</label><textarea id="excerpt" rows="3"></textarea></div>
+            <div class="field full body-field"><label for="body">Nội dung bài viết</label><textarea id="body" rows="14" required></textarea></div>
+            <div class="field full"><div class="publish-card"><label for="status">Trạng thái xuất bản</label><select id="status"><option value="draft">Bản nháp</option><option value="published">Xuất bản ngay</option></select></div></div>
+          </div>
+          <footer class="editor-footer"><p class="message" id="post-message" role="status"></p><div class="editor-actions"><button class="btn btn-danger" id="delete-post" type="button" hidden>Xóa bài</button><button class="btn" id="cancel-edit" type="button">Hủy</button><button class="btn btn-primary" id="save-post" type="submit">Lưu bài viết</button></div></footer>
         </form>
-      ) : (
-        <div class="workspace">
-          <section class="panel">
-            <h1 id="editor-title">Tạo bài viết</h1>
-            <form id="post-form">
-              <input type="hidden" id="post-id" />
-              <div class="field"><label for="title">Tiêu đề</label><input id="title" required maxlength="255" /></div>
-              <div class="field"><label for="slug">Đường dẫn</label><input id="slug" maxlength="180" placeholder="tự tạo từ tiêu đề" /></div>
-              <div class="field"><label for="author">Tác giả</label><input id="author" maxlength="160" /></div>
-              <div class="field"><label for="excerpt">Mô tả ngắn</label><textarea id="excerpt" rows="3"></textarea></div>
-              <div class="field"><label for="body">Nội dung</label><textarea id="body" rows="14" required></textarea></div>
-              <div class="field"><label for="status">Trạng thái</label><select id="status"><option value="draft">Bản nháp</option><option value="published">Xuất bản ngay</option></select></div>
-              <p class="message" id="post-message" role="alert"></p>
-              <div class="form-actions"><button class="btn btn-muted" id="reset" type="button">Tạo mới</button><button class="btn btn-primary" type="submit">Lưu bài</button></div>
-            </form>
-          </section>
-          <section class="panel">
-            <div class="list-head"><div><h2>Bài viết quản trị</h2><p class="notice">Bài xuất bản hiển thị ngay trên trang Tin tức, không cần deploy.</p></div><button class="btn btn-muted" id="refresh" type="button">Tải lại</button></div>
-            <div class="post-list" id="post-list"><p class="empty">Đang tải…</p></div>
-          </section>
-        </div>
-      )}
-    </main>
-    <script is:inline define:vars={{ authenticated }}>
-      const request = async (url, options = {}) => {
-        const response = await fetch(url, { ...options, headers: { 'content-type':'application/json', ...(options.headers || {}) } });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.error || 'Có lỗi xảy ra.');
-        return data;
-      };
-      if (!authenticated) {
-        document.querySelector('#login-form')?.addEventListener('submit', async (event) => {
-          event.preventDefault(); const message = document.querySelector('#login-message'); message.textContent = '';
-          try { await request('/api/admin/session', { method:'POST', body:JSON.stringify({ username:document.querySelector('#username').value, password:document.querySelector('#password').value }) }); location.reload(); }
-          catch (error) { message.textContent = error.message; }
-        });
-      } else {
-        let posts = [];
-        const fields = Object.fromEntries(['post-id','title','slug','author','excerpt','body','status'].map(id => [id, document.getElementById(id)]));
-        const reset = () => { document.querySelector('#post-form').reset(); fields['post-id'].value=''; document.querySelector('#editor-title').textContent='Tạo bài viết'; document.querySelector('#post-message').textContent=''; };
-        const load = async () => { const list=document.querySelector('#post-list'); list.innerHTML='<p class="empty">Đang tải…</p>'; try { posts=(await request('/api/admin/posts')).posts; render(); } catch(error) { list.innerHTML=`<p class="message"></p>`; list.firstElementChild.textContent=error.message; } };
-        const render = () => { const list=document.querySelector('#post-list'); list.replaceChildren(); if(!posts.length){list.innerHTML='<p class="empty">Chưa có bài viết.</p>';return;} posts.forEach(post=>{const row=document.createElement('article');row.className='post-row';const info=document.createElement('div');const title=document.createElement('h3');title.textContent=post.title;const meta=document.createElement('small');meta.textContent=`${post.author||'OSA Việt Nam'} · ${new Date(post.updatedAt).toLocaleString('vi-VN')}`;const badge=document.createElement('span');badge.className=`status ${post.status}`;badge.textContent=post.status==='published'?'Đã xuất bản':'Bản nháp';info.append(title,meta,document.createElement('br'),badge);const actions=document.createElement('div');actions.className='row-actions';const edit=document.createElement('button');edit.className='btn btn-muted';edit.textContent='Sửa';edit.onclick=()=>{Object.entries({title:post.title,slug:post.slug,author:post.author,excerpt:post.excerpt,body:post.body,status:post.status}).forEach(([key,value])=>fields[key].value=value||'');fields['post-id'].value=post.id;document.querySelector('#editor-title').textContent='Sửa bài viết';scrollTo({top:0,behavior:'smooth'});};const remove=document.createElement('button');remove.className='btn btn-danger';remove.textContent='Xóa';remove.onclick=async()=>{if(!confirm(`Xóa “${post.title}”?`))return;await request(`/api/admin/posts/${post.id}`,{method:'POST',body:JSON.stringify({action:'delete'})});await load();};actions.append(edit,remove);row.append(info,actions);list.append(row);}); };
-        document.querySelector('#post-form').addEventListener('submit',async(event)=>{event.preventDefault();const message=document.querySelector('#post-message');message.textContent='';const id=fields['post-id'].value;const data={title:fields.title.value,slug:fields.slug.value,author:fields.author.value,excerpt:fields.excerpt.value,body:fields.body.value,status:fields.status.value};try{await request(id?`/api/admin/posts/${id}`:'/api/admin/posts',{method:id?'PUT':'POST',body:JSON.stringify(data)});reset();await load();}catch(error){message.textContent=error.message;}});
-        document.querySelector('#reset').onclick=reset; document.querySelector('#refresh').onclick=load; document.querySelector('#logout').onclick=async()=>{await request('/api/admin/session',{method:'POST',body:JSON.stringify({action:'logout'})});location.reload();}; load();
-      }
-    </script>
-  </body>
-</html>
+      </section>
+    </div>
+  </> :
+    <div class="login-wrap"><form class="login-card" id="login-form"><img class="login-emblem" src="/images/emblem-color-transparent.png" alt="" /><h1>Content Studio</h1><p>Đăng nhập để quản trị nội dung OSA Việt Nam</p><div class="field"><label for="username">Tên đăng nhập</label><input id="username" name="username" autocomplete="username" required autofocus /></div><div class="field"><label for="password">Mật khẩu</label><input id="password" name="password" type="password" autocomplete="current-password" required /></div><p class="message" id="login-message" role="alert"></p><button class="btn btn-primary" type="submit">Đăng nhập</button></form></div>
+  }
+</section></main>
+<script is:inline define:vars={{ authenticated }}>
+  const request=async(url,options={})=>{const response=await fetch(url,{...options,headers:{'content-type':'application/json',...(options.headers||{})}});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'Có lỗi xảy ra.');return data};
+  if(!authenticated){document.querySelector('#login-form')?.addEventListener('submit',async event=>{event.preventDefault();const message=document.querySelector('#login-message'),submit=event.currentTarget.querySelector('button[type="submit"]');message.textContent='';submit.disabled=true;try{await request('/api/admin/session',{method:'POST',body:JSON.stringify({username:document.querySelector('#username').value,password:document.querySelector('#password').value})});location.reload()}catch(error){message.textContent=error.message;submit.disabled=false}})}else{
+    let posts=[],activeId='';const byId=id=>document.getElementById(id);const fields=Object.fromEntries(['post-id','title','slug','author','excerpt','body','status'].map(id=>[id,byId(id)]));const form=byId('post-form'),empty=byId('editor-empty'),list=byId('post-list'),indexPanel=byId('index-panel'),editorPanel=byId('editor-panel'),message=byId('post-message');
+    const showEditor=(post=null)=>{activeId=post?.id||'';fields['post-id'].value=activeId;fields.title.value=post?.title||'';fields.slug.value=post?.slug||'';fields.author.value=post?.author||'';fields.excerpt.value=post?.excerpt||'';fields.body.value=post?.body||'';fields.status.value=post?.status||'draft';byId('editor-title').textContent=post?post.title:'Tạo bài viết';byId('delete-post').hidden=!post;message.textContent='';message.classList.remove('ok');empty.hidden=true;form.hidden=false;indexPanel.classList.add('has-selection');editorPanel.classList.add('has-selection');render();requestAnimationFrame(()=>fields.title.focus())};
+    const closeEditor=()=>{activeId='';form.reset();form.hidden=true;empty.hidden=false;indexPanel.classList.remove('has-selection');editorPanel.classList.remove('has-selection');render()};
+    const filteredPosts=()=>{const query=byId('search').value.trim().toLocaleLowerCase('vi'),status=byId('status-filter').value;return posts.filter(post=>(!status||post.status===status)&&(!query||`${post.title} ${post.author||''}`.toLocaleLowerCase('vi').includes(query)))};
+    const render=()=>{list.replaceChildren();const visible=filteredPosts();if(!visible.length){const node=document.createElement('p');node.className='empty';node.textContent=posts.length?'Không tìm thấy bài phù hợp.':'Chưa có bài viết.';list.append(node);return}visible.forEach(post=>{const row=document.createElement('button');row.type='button';row.className=`post-row${String(post.id)===String(activeId)?' is-active':''}`;const title=document.createElement('h3');title.textContent=post.title;const meta=document.createElement('div');meta.className='post-meta';const author=document.createElement('span');author.textContent=post.author||'OSA Việt Nam';const badge=document.createElement('span');badge.className=`status ${post.status}`;badge.textContent=post.status==='published'?'Đã đăng':'Bản nháp';meta.append(author,badge);row.append(title,meta);row.onclick=()=>showEditor(post);list.append(row)})};
+    const load=async(selectId='')=>{list.innerHTML='<p class="empty">Đang tải…</p>';try{posts=(await request('/api/admin/posts')).posts;render();if(selectId){const selected=posts.find(post=>String(post.id)===String(selectId));if(selected)showEditor(selected)}}catch(error){list.innerHTML='';const node=document.createElement('p');node.className='empty message';node.textContent=error.message;list.append(node)}};
+    form.addEventListener('submit',async event=>{event.preventDefault();if(!form.reportValidity())return;const save=byId('save-post');save.disabled=true;message.textContent='Đang lưu…';message.classList.remove('ok');const id=fields['post-id'].value,data={title:fields.title.value,slug:fields.slug.value,author:fields.author.value,excerpt:fields.excerpt.value,body:fields.body.value,status:fields.status.value};try{const result=await request(id?`/api/admin/posts/${id}`:'/api/admin/posts',{method:id?'PUT':'POST',body:JSON.stringify(data)});message.textContent=fields.status.value==='published'?'Đã lưu và xuất bản.':'Đã lưu bản nháp.';message.classList.add('ok');await load(result.post?.id||id)}catch(error){message.textContent=error.message}finally{save.disabled=false}});
+    byId('delete-post').onclick=async()=>{const id=fields['post-id'].value;if(!id||!confirm(`Xóa “${fields.title.value}”?`))return;try{await request(`/api/admin/posts/${id}`,{method:'POST',body:JSON.stringify({action:'delete'})});closeEditor();await load()}catch(error){message.textContent=error.message}};byId('new-post').onclick=()=>showEditor();byId('cancel-edit').onclick=closeEditor;byId('search').oninput=render;byId('status-filter').onchange=render;byId('logout').onclick=async()=>{await request('/api/admin/session',{method:'POST',body:JSON.stringify({action:'logout'})});location.reload()};load();
+  }
+</script>
+</body></html>
