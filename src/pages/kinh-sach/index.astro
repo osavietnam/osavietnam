@@ -914,6 +914,11 @@ body.page-kinh-sach .season-filter {
   margin: 0 auto 1.25rem;
   padding: .3rem 2rem .15rem;
 }
+/* Center the season tabs only while they fit. Auto margins collapse to zero
+   when the row overflows, keeping the first and last labels reachable by scroll. */
+body.page-kinh-sach .ks-season-bar.shared-tab-bar { justify-content: flex-start; }
+body.page-kinh-sach .ks-season-bar.shared-tab-bar > .ks-season-tab:first-child { margin-left: auto; }
+body.page-kinh-sach .ks-season-bar.shared-tab-bar > .ks-season-tab:last-child { margin-right: auto; }
 body.page-kinh-sach .listing-toolbar.shared-filter-bar {
   --shared-filter-justify: center;
   justify-content: center;
