@@ -81,10 +81,11 @@
   },
   "quotes": [
     {
-      "text": "\"Anh em đừng sống theo kiểu riêng tư, nhưng hãy sống với nhau trong một nhà, cùng một tâm hồn và một trái tim hướng về Thiên Chúa.\"",
-      "cite": "— Thánh Augustinô · <em>Tu Luật</em>, 2",
+      "text": "\"Đừng coi bất cứ thứ gì là của riêng, nhưng hãy để mọi sự anh em có là của chung.\"",
+      "cite": "— Thánh Augustinô · <a href=\"/tu-luat/#tu-luat-4\"><em>Tu Luật</em>, 4</a>",
       "source": {
-        "work": "manual"
+        "work": "tu-luat-vi",
+        "number": "4"
       }
     },
     {
