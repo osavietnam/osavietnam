@@ -3,6 +3,12 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import node from '@astrojs/node';
 
+function isTopLevelIndexable(pathname) {
+  const segments = pathname.split('/').filter(Boolean);
+  const excludedTopLevelRoutes = new Set(['admin', 'api', '404', 'hien-chuong']);
+  return segments.length <= 1 && !excludedTopLevelRoutes.has(segments[0]);
+}
+
 export default defineConfig({
   // Domain production (dùng cho canonical URL và sitemap).
   site: 'https://osavietnam.org',
@@ -16,12 +22,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => {
-        const pathname = new URL(page).pathname;
-        return !pathname.startsWith('/hien-chuong')
-          && !pathname.startsWith('/admin')
-          && !pathname.startsWith('/api/');
-      },
+      filter: (page) => isTopLevelIndexable(new URL(page).pathname),
     }),
   ],
   markdown: {

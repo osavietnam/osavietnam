@@ -36,6 +36,10 @@ const sectionPath = Astro.url.pathname === '/' || Astro.url.pathname.endsWith('/
 const description = sectionMeta[sectionPath] ?? suppliedDescription ?? defaultDescription;
 const pageTitle = title ? `OSA Việt Nam | ${title}` : 'OSA Việt Nam | Trang Chủ';
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const excludedTopLevelRoutes = new Set(['admin', 'api', '404', 'hien-chuong']);
+const indexableByGoogle = pathSegments.length <= 1 && !excludedTopLevelRoutes.has(pathSegments[0]);
+const robotsContent = indexableByGoogle ? 'index,follow' : 'noindex,follow';
 const ogImage = image ? new URL(image, Astro.site) : undefined;
 const showVocationTail = title !== 'Admin';
 const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
@@ -95,6 +99,7 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
     <link rel="canonical" href={canonical} />
 
     <!-- ====== SEO: Open Graph + Twitter (mới thêm) ====== -->

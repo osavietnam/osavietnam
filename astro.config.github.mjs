@@ -5,6 +5,15 @@ import { githubPagesEnvironment } from './scripts/github-pages-env.mjs';
 
 const { site, base } = githubPagesEnvironment();
 
+function isTopLevelIndexable(pathname) {
+  const routePath = base && (pathname === base || pathname.startsWith(`${base}/`))
+    ? pathname.slice(base.length) || '/'
+    : pathname;
+  const segments = routePath.split('/').filter(Boolean);
+  const excludedTopLevelRoutes = new Set(['admin', 'api', '404', 'hien-chuong']);
+  return segments.length <= 1 && !excludedTopLevelRoutes.has(segments[0]);
+}
+
 export default defineConfig({
   site,
   ...(base ? { base } : {}),
@@ -15,12 +24,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => {
-        const pathname = new URL(page).pathname;
-        return !pathname.startsWith('/hien-chuong')
-          && !pathname.startsWith('/admin')
-          && !pathname.startsWith('/api/');
-      },
+      filter: (page) => isTopLevelIndexable(new URL(page).pathname),
     }),
   ],
   markdown: {
