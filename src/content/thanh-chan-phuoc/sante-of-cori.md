@@ -4,7 +4,7 @@ subtitle: "Linh mục"
 rank: "none"
 feastDay: 5
 feastMonth: 10
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/Sante-da-Cori.jfif"
 draft: false
 manualFill: false
 ---
