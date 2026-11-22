@@ -5,6 +5,7 @@ import Banner from '../components/Banner.astro';
 import ProseImageLightbox from '../components/ProseImageLightbox.astro';
 import BannerInlineEditor from '../components/BannerInlineEditor.astro';
 import StudioPublishBar from '../components/StudioPublishBar.astro';
+import sectionMeta from '../data/section-meta';
 
 // Nạp NGUYÊN BẢN css gốc để giữ đúng thiết kế cũ
 import '../styles/base.css';
@@ -21,13 +22,18 @@ import '../styles/overrides.css';
 
 const {
   title,
-  description = 'Thư viện số về Thánh Augustinô và Dòng Augustinian — sách, bài viết thần học, triết học và linh đạo Công giáo.',
+  description: suppliedDescription,
   image,
   type = 'website',
   bodyClass = 'no-sidebar',
   banner = null,
 } = Astro.props;
 
+const defaultDescription = 'Thư viện số về Thánh Augustinô và Dòng Augustinian — sách, bài viết thần học, triết học và linh đạo Công giáo.';
+const sectionPath = Astro.url.pathname === '/' || Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const description = sectionMeta[sectionPath] ?? suppliedDescription ?? defaultDescription;
 const pageTitle = title ? `OSA Việt Nam | ${title}` : 'OSA Việt Nam | Trang Chủ';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site) : undefined;
