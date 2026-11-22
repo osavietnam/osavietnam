@@ -262,7 +262,7 @@ def generate_liturgical_year(year):
                 season = "trong-kinh-chua"
                 entry["liturgy"] = "Lễ Trái Tim Vô Nhiễm Đức Mẹ Maria"
             else:
-                season = "mua-thuong-nien"
+                season = "trong-kinh-chua" if current_date == dates["christ_the_king"] else "mua-thuong-nien"
                 
                 # --- CORRECTED WEEK CALCULATION ---
                 # The last day of the liturgical year is the Saturday before the First Sunday of Advent.

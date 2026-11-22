@@ -258,9 +258,23 @@ const SEASON_LABELS = Object.fromEntries(SEASONS.map((s) => [s.key, s.label]));
           const data = await r.json();
           if (!data.days?.[key]) continue;
           const dayData = data.days[key];
-          // Exact match bằng liturgy text
-          const entry = LIT_MAP[dayData.s]?.[dayData.l];
-          return { entry: entry || null, season: dayData.s, liturgy: dayData.l, cycle: data.cycle };
+          // Most days match exactly inside their calendar season. Some solemnities
+          // retain a Sunday prefix in the calendar (for example: "Chúa Nhật 34… -")
+          // while the reading index stores only the proper feast name.
+          let entry = LIT_MAP[dayData.s]?.[dayData.l] || null;
+          let entrySeason = dayData.s;
+          if (!entry) {
+            outer: for (const [seasonKey, entries] of Object.entries(INDEX)) {
+              for (const candidate of entries) {
+                if (dayData.l === candidate.liturgy || dayData.l.endsWith(` - ${candidate.liturgy}`)) {
+                  entry = candidate;
+                  entrySeason = seasonKey;
+                  break outer;
+                }
+              }
+            }
+          }
+          return { entry, season: entrySeason, liturgy: dayData.l, cycle: data.cycle };
         } catch { continue; }
       }
       return null;
