@@ -4,7 +4,7 @@ subtitle: "Linh mục"
 rank: "none"
 feastDay: 16
 feastMonth: 12
-imageFile: "/db/saints/images/Emblem.jfif"
+imageFile: "/db/saints/images/Cherubim-Testa-Avigliana.jfif"
 draft: false
 manualFill: false
 ---
