@@ -65,7 +65,21 @@
         render({ count: 0, files: [] }); location.reload();
       } catch (error) { messageNode.textContent = error.message; busy(false); }
     });
-    refresh();
-    window.setInterval(refresh, 5000);
+    const studioWindow = window as typeof window & { __OSA_ADMIN_SESSION__?: Promise<boolean> };
+    const sessionReady = studioWindow.__OSA_ADMIN_SESSION__ ?? fetch('/api/admin/session', {
+      credentials: 'same-origin',
+      cache: 'no-store',
+    }).then((response) => response.ok ? response.json() : {})
+      .then((payload) => Boolean(payload.authenticated))
+      .catch(() => false);
+
+    sessionReady.then((authenticated) => {
+      if (!authenticated) {
+        bar.remove();
+        return;
+      }
+      refresh();
+      window.setInterval(refresh, 5000);
+    });
   }
 </script>

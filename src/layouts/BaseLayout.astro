@@ -77,22 +77,46 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
 
           var publicPreview = document.documentElement.dataset.publicBuild === 'true'
             || sessionStorage.getItem('osa-preview-mode') === 'public';
-          document.documentElement.dataset.previewMode = publicPreview ? 'public' : 'admin';
-          if (!publicPreview) return;
-
-          window.__OSA_PUBLIC_PREVIEW__ = true;
           var nativeFetch = window.fetch.bind(window);
+          var adminSession = publicPreview
+            ? Promise.resolve(false)
+            : nativeFetch('/api/admin/session', { credentials: 'same-origin', cache: 'no-store' })
+                .then(function (response) { return response.ok ? response.json() : {}; })
+                .then(function (payload) { return Boolean(payload.authenticated); })
+                .catch(function () { return false; });
+
+          window.__OSA_ADMIN_SESSION__ = adminSession;
+          document.documentElement.dataset.previewMode = publicPreview ? 'public' : 'auto';
+          if (publicPreview) window.__OSA_PUBLIC_PREVIEW__ = true;
+
           window.fetch = function (input, init) {
             var rawUrl = input instanceof Request ? input.url : String(input);
             try {
               var url = new URL(rawUrl, window.location.href);
               var isLocalAdmin = url.port === '4322';
-              if (isLocalAdmin) {
+              if (publicPreview && isLocalAdmin) {
                 return Promise.reject(new TypeError('Admin API disabled in public preview'));
+              }
+              var isProtectedStudioApi = url.origin === window.location.origin
+                && (url.pathname.startsWith('/api/studio/')
+                  || url.pathname.startsWith('/api/admin/studio-'));
+              if (isProtectedStudioApi) {
+                return adminSession.then(function (authenticated) {
+                  if (authenticated) return nativeFetch(input, init);
+                  return new Response(JSON.stringify({ error: 'Chưa đăng nhập.' }), {
+                    status: 401,
+                    headers: { 'content-type': 'application/json; charset=utf-8' },
+                  });
+                });
               }
             } catch (error) {}
             return nativeFetch(input, init);
           };
+
+          adminSession.then(function (authenticated) {
+            document.documentElement.dataset.previewMode = authenticated ? 'admin' : 'public';
+            if (!authenticated) window.__OSA_PUBLIC_PREVIEW__ = true;
+          });
         } catch (error) {}
       }());
     </script>
