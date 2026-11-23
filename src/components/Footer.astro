@@ -7,8 +7,37 @@ const currentYear = new Date().getFullYear();
 ---
 <footer class="main-footer">
   {showVocationTail && <VocationTail />}
+  <nav class="footer-sitelinks" aria-label="Các chuyên mục chính">
+    <a href="/kinh-sach/">Kinh Sách</a>
+    <a href="/lich-phung-vu/">Lịch Phụng Vụ</a>
+    <a href="/thanh-au-tinh/">Thánh Augustinô</a>
+    <a href="/linh-dao/">Linh Đạo</a>
+    <a href="/tu-thuat/">Tự Thuật</a>
+    <a href="/tin-tuc/">Tin Tức</a>
+  </nav>
   <div class="footer-content">
     <p class="footer-copyright">&copy; Augusinh {currentYear} — Nhân dịp Lễ Đức Mẹ Chỉ Bảo Đàng Lành 2024</p>
     <p class="footer-quote">Yêu <span class="highlight-word">Chúa</span>, rồi làm điều bạn muốn.</p>
   </div>
 </footer>
+
+<style>
+  .footer-sitelinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .55rem 1.25rem;
+    max-width: 78rem;
+    margin: 0 auto .35rem;
+    font-family: var(--font-ui);
+  }
+  .footer-sitelinks a {
+    color: var(--ink-cream-soft);
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-decoration: none;
+  }
+  .footer-sitelinks a:hover,
+  .footer-sitelinks a:focus-visible { color: var(--gold); }
+</style>

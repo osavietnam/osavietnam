@@ -43,6 +43,91 @@ const robotsContent = indexableByGoogle ? 'index,follow' : 'noindex,follow';
 const ogImage = image ? new URL(image, Astro.site) : undefined;
 const showVocationTail = title !== 'Admin';
 const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
+const siteRoot = new URL('/', Astro.site).toString();
+const organizationId = `${siteRoot}#organization`;
+const websiteId = `${siteRoot}#website`;
+const webpageId = `${canonical.toString()}#webpage`;
+const sectionLabels: Record<string, string> = {
+  'bai-giang-suy-niem': 'Bài Giảng – Suy Niệm',
+  'bai-viet': 'Bài Viết Triết – Thần',
+  'chi-muc': 'Chỉ Mục',
+  'encyclopedia': 'Bách Khoa Toàn Thư',
+  'hien-phap': 'Hiến Pháp',
+  'kinh-sach': 'Bài Đọc Kinh Sách',
+  'lich-phung-vu': 'Lịch Phụng Vụ',
+  'lich-su-dong': 'Lịch Sử Dòng',
+  'linh-dao': 'Linh Đạo',
+  'luu-tru': 'Lưu Trữ',
+  'nien-bieu': 'Niên Biểu',
+  'on-goi': 'Ơn Gọi',
+  'ratio': 'Ratio Institutionis',
+  'thanh-au-tinh': 'Thánh Augustinô',
+  'thanh-chan-phuoc': 'Các Thánh và Chân Phước',
+  'tin-tuc': 'Tin Tức',
+  'tu-luat': 'Tu Luật',
+  'tu-thuat': 'Tự Thuật',
+};
+const sectionSegment = pathSegments[0];
+const sectionLabel = sectionLabels[sectionSegment] ?? sectionSegment?.replace(/-/g, ' ');
+const breadcrumbItems = pathSegments.length === 0 ? [] : [
+  { '@type': 'ListItem', position: 1, name: 'OSA Việt Nam', item: siteRoot },
+  {
+    '@type': 'ListItem',
+    position: 2,
+    name: sectionLabel,
+    item: new URL(`/${sectionSegment}/`, Astro.site).toString(),
+  },
+  ...(pathSegments.length > 1 ? [{
+    '@type': 'ListItem',
+    position: 3,
+    name: title ?? pageTitle,
+    item: canonical.toString(),
+  }] : []),
+];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: 'Dòng Thánh Augustinô (OSA) - Tỉnh Dòng Úc Châu - Cộng Đoàn Việt Nam',
+      alternateName: ['OSA Việt Nam', 'Augustinians Vietnam'],
+      url: siteRoot,
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL('/images/emblem-color.png', Astro.site).toString(),
+        width: 441,
+        height: 453,
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteRoot,
+      name: 'OSA Việt Nam',
+      alternateName: 'Dòng Thánh Augustinô Việt Nam',
+      inLanguage: 'vi',
+      publisher: { '@id': organizationId },
+    },
+    {
+      '@type': type === 'article' ? 'Article' : 'WebPage',
+      '@id': webpageId,
+      url: canonical.toString(),
+      name: pageTitle,
+      headline: title ?? 'OSA Việt Nam',
+      description,
+      inLanguage: 'vi',
+      isPartOf: { '@id': websiteId },
+      ...(type === 'article' ? { publisher: { '@id': organizationId } } : {}),
+      ...(ogImage ? { image: ogImage.toString() } : {}),
+    },
+    ...(breadcrumbItems.length ? [{
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical.toString()}#breadcrumb`,
+      itemListElement: breadcrumbItems,
+    }] : []),
+  ],
+};
 ---
 <!doctype html>
 <html lang="vi" data-theme="light" data-public-build={publicStaticBuild ? 'true' : undefined}>
@@ -137,16 +222,7 @@ const publicStaticBuild = process.env.GITHUB_PAGES === 'true';
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
 
     <!-- ====== SEO: dữ liệu có cấu trúc JSON-LD ====== -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': type === 'article' ? 'Article' : 'WebSite',
-      name: pageTitle,
-      headline: title ?? 'OSA Việt Nam',
-      description,
-      url: canonical.toString(),
-      inLanguage: 'vi',
-      ...(ogImage ? { image: ogImage.toString() } : {}),
-    })} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <!-- ====== Font ======
          Be Vietnam Pro  → CHỈ dùng ở thanh menu
