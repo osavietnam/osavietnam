@@ -17,6 +17,12 @@ export default defineConfig({
   // The Central News iframe is fetched from its source at request time.
   output: 'server',
   adapter: node({ mode: 'standalone' }),
+  security: {
+    allowedDomains: [
+      { hostname: 'osavietnam.org' },
+      { hostname: 'www.osavietnam.org' },
+    ],
+  },
   server: { host: true, port: 4321 },
   preview: { host: true, port: 4321 },
   integrations: [

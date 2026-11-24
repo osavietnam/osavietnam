@@ -34,7 +34,7 @@ const sectionPath = Astro.url.pathname === '/' || Astro.url.pathname.endsWith('/
   ? Astro.url.pathname
   : `${Astro.url.pathname}/`;
 const description = sectionMeta[sectionPath] ?? suppliedDescription ?? defaultDescription;
-const pageTitle = title ? `OSA Việt Nam | ${title}` : 'OSA Việt Nam | Trang Chủ';
+const pageTitle = title ? `${title} | OSA Việt Nam` : 'Dòng Thánh Augustinô Việt Nam | OSA Việt Nam';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
 const excludedTopLevelRoutes = new Set(['admin', 'api', '404', 'hien-chuong']);
